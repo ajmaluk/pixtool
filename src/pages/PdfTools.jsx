@@ -1,0 +1,701 @@
+import { useState, useEffect, useRef } from 'react'
+import { useParams, useNavigate, Link } from 'react-router-dom'
+import { FileText, Upload, Download, Loader, X, ChevronDown, Share2 } from 'lucide-react'
+import SEO from '../components/SEO'
+import ToolContent from '../components/ToolContent'
+import AdSpace from '../components/AdSpace'
+import Breadcrumbs from '../components/Breadcrumbs'
+import ShareTool from '../components/ShareTool'
+import { useFileDrop } from '../hooks/useFileDrop'
+import { PDF_TOOLS } from '../data/tools'
+import { PDF_SEO_CONTENT, PDF_RELATED_TOOLS, PDF_READ_NEXT } from '../data/pdfToolsData'
+import ComingSoon from '../components/ComingSoon'
+import { mergePdfs, splitPdf, watermarkPdf, compressPdf, downloadBlob } from '../utils/pdfUtils'
+import { SITE_URL, SITE_NAME } from '../data/constants'
+
+const tools = PDF_TOOLS;
+
+export default function PdfTools() {
+  const { toolId } = useParams()
+  const navigate = useNavigate()
+  const initialTool = tools.find(t => t.id === toolId)?.id || 'merge'
+  const [activeTool, setActiveTool] = useState(initialTool)
+  const { files, setFiles, handleFiles, removeFile, moveFile } = useFileDrop(['application/pdf'])
+  const [processing, setProcessing] = useState(false)
+  const [showMobileSettings, setShowMobileSettings] = useState(false)
+  const [settings, setSettings] = useState({
+    quality: 'medium',
+    startPage: 1,
+    endPage: 1,
+    outputFormat: 'png',
+    compressionLevel: 'recommended',
+    password: '',
+    confirmPassword: '',
+    pdfWatermarkText: 'CONFIDENTIAL',
+    pdfWatermarkSize: 48,
+    pdfWatermarkOpacity: 30
+  })
+  const fileInputRef = useRef(null)
+
+  useEffect(() => {
+    if (toolId) {
+      const validTool = tools.find(t => t.id === toolId)
+      if (validTool) {
+        setActiveTool(validTool.id)
+      } else {
+        navigate('/pdf-tools', { replace: true })
+      }
+    } else {
+      setActiveTool(null)
+    }
+  }, [toolId, navigate])
+
+  const handleFileSelect = (e) => {
+    if (e.target.files.length > 0) {
+      handleFiles(Array.from(e.target.files))
+    }
+  }
+
+  const sortFiles = (criterion) => {
+    setFiles(prev => {
+      const newFiles = [...prev];
+      if (criterion === 'name') {
+        newFiles.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (criterion === 'size') {
+        newFiles.sort((a, b) => a.size - b.size);
+      }
+      return newFiles;
+    });
+  };
+
+  const processPdf = async () => {
+    if (files.length === 0) return;
+    setProcessing(true);
+    try {
+      if (activeTool === 'merge') {
+        const pdfBytes = await mergePdfs(files);
+        downloadBlob(new Blob([pdfBytes], { type: 'application/pdf' }), 'merged-dailytools.pdf');
+      } else if (activeTool === 'split') {
+        const pdfBytes = await splitPdf(files[0], settings.startPage, settings.endPage);
+        downloadBlob(new Blob([pdfBytes], { type: 'application/pdf' }), `split-${files[0].name}`);
+      } else if (activeTool === 'watermark') {
+        for (const file of files) {
+          const pdfBytes = await watermarkPdf(file, settings.pdfWatermarkText, settings.pdfWatermarkSize, settings.pdfWatermarkOpacity);
+          downloadBlob(new Blob([pdfBytes], { type: 'application/pdf' }), `watermarked-${file.name}`);
+        }
+      } else if (activeTool === 'compress') {
+        for (const file of files) {
+          const pdfBytes = await compressPdf(file, settings.compressionLevel);
+          downloadBlob(new Blob([pdfBytes], { type: 'application/pdf' }), `compressed-${file.name}`);
+        }
+      }
+    } catch (err) {
+      console.error('PDF Error:', err);
+      alert('Error processing PDF: ' + err.message);
+    } finally {
+      setProcessing(false);
+    }
+  }
+
+  const activeToolData = activeTool ? tools.find(t => t.id === activeTool) : null
+
+  const seoContentMap = PDF_SEO_CONTENT;
+  const seoContent = activeTool ? seoContentMap[activeTool] : null;
+
+  const pageTitle = activeToolData ? `Free Online ${activeToolData.title} Tool | DailyTools` : "Professional Online PDF Tools | Merge, Split, Compress, Convert, Protect, Watermark, Reorder"
+  const pageDescription = activeToolData ?
+    seoContentMap[activeTool]?.description :
+    "Professional suite of 100% private online PDF tools. Merge, split, compress, and convert PDF documents instantly in your browser. No server uploads, military-grade encryption. Best free alternative to Adobe Acrobat for secure document handling."
+  const pageKeywords = activeToolData ?
+    seoContentMap[activeTool]?.keywords :
+    "free pdf tools online, merge pdf without uploading, split pdf browser pro, compress pdf high quality, convert pdf to image fast, protect pdf password, watermark pdf online free, reorder pdf pages drag-and-drop, best free adobe acrobat alternative, secure pdf editor, browser-based pdf processing"
+  const canonicalPath = activeTool ? `/pdf-tools/${activeTool}` : "/pdf-tools"
+
+  const renderSidebarSettings = () => (
+    <div className="sidebar-settings-content">
+      <div className="settings-header">
+        <h2 className="settings-title">
+          {activeToolData?.title} Settings
+        </h2>
+        <p className="settings-subtitle">
+          Configure your PDF processing options.
+        </p>
+      </div>
+
+      <div className="settings-group" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        {activeTool === 'merge' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div className="input-group">
+              <label className="input-label">Sort Files</label>
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <button
+                  className="btn btn-secondary"
+                  style={{ flex: 1, fontSize: '0.8rem', padding: '0.5rem' }}
+                  onClick={() => sortFiles('name')}
+                >
+                  Name (A-Z)
+                </button>
+                <button
+                  className="btn btn-secondary"
+                  style={{ flex: 1, fontSize: '0.8rem', padding: '0.5rem' }}
+                  onClick={() => sortFiles('size')}
+                >
+                  Size
+                </button>
+              </div>
+            </div>
+
+            <button
+              className="btn btn-secondary"
+              style={{ width: '100%', color: '#ef4444', borderColor: '#fee2e2' }}
+              onClick={() => setFiles([])}
+            >
+              Clear All Files
+            </button>
+
+            <div style={{ background: 'var(--bg-secondary)', padding: '1.25rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>
+                <strong>Tip:</strong> Files will be merged in the order they appear. Use the arrows on cards to reorder manually.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {activeTool === 'compress' && (
+          <div className="input-group">
+            <label className="input-label">Compression Level</label>
+            <select
+              className="select"
+              value={settings.compressionLevel}
+              onChange={(e) => setSettings({ ...settings, compressionLevel: e.target.value })}
+            >
+              <option value="extreme">Extreme (Smallest size, lower quality)</option>
+              <option value="recommended">Recommended (Good size, high quality)</option>
+              <option value="less">Less (High size, best quality)</option>
+            </select>
+          </div>
+        )}
+
+        {activeTool === 'split' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div className="input-group">
+              <label className="input-label">Start Page</label>
+              <input
+                type="number"
+                className="input"
+                min={1}
+                value={settings.startPage}
+                onChange={(e) => setSettings(s => ({ ...s, startPage: parseInt(e.target.value) || 1 }))}
+              />
+            </div>
+            <div className="input-group">
+              <label className="input-label">End Page</label>
+              <input
+                type="number"
+                className="input"
+                min={1}
+                value={settings.endPage}
+                onChange={(e) => setSettings(s => ({ ...s, endPage: parseInt(e.target.value) || 1 }))}
+              />
+            </div>
+          </div>
+        )}
+
+        {activeTool === 'convert' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="input-group">
+                <label className="input-label">Output Format</label>
+                <select
+                  className="select"
+                  value={settings.outputFormat}
+                  onChange={(e) => setSettings(s => ({ ...s, outputFormat: e.target.value }))}
+                >
+                  <option value="png">PNG</option>
+                  <option value="jpg">JPG</option>
+                  <option value="webp">WebP</option>
+                </select>
+              </div>
+              <div className="input-group">
+                <label className="input-label">Image Quality</label>
+                <select
+                  className="select"
+                  value={settings.quality}
+                  onChange={(e) => setSettings(s => ({ ...s, quality: e.target.value }))}
+                >
+                  <option value="high">High (300 DPI)</option>
+                  <option value="medium">Medium (200 DPI)</option>
+                  <option value="low">Low (72 DPI)</option>
+                </select>
+              </div>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="input-group">
+                <label className="input-label">Start Page</label>
+                <input
+                  type="number"
+                  className="input"
+                  min={1}
+                  value={settings.startPage}
+                  onChange={(e) => setSettings(s => ({ ...s, startPage: parseInt(e.target.value) || 1 }))}
+                />
+              </div>
+              <div className="input-group">
+                <label className="input-label">End Page</label>
+                <input
+                  type="number"
+                  className="input"
+                  min={1}
+                  value={settings.endPage}
+                  onChange={(e) => setSettings(s => ({ ...s, endPage: parseInt(e.target.value) || 1 }))}
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTool === 'protect' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div className="input-group">
+              <label className="input-label">Password</label>
+              <input
+                type="password"
+                className="input"
+                value={settings.password}
+                onChange={(e) => setSettings(s => ({ ...s, password: e.target.value }))}
+                placeholder="Enter password"
+              />
+            </div>
+            <div className="input-group">
+              <label className="input-label">Confirm Password</label>
+              <input
+                type="password"
+                className="input"
+                value={settings.confirmPassword}
+                onChange={(e) => setSettings(s => ({ ...s, confirmPassword: e.target.value }))}
+                placeholder="Confirm password"
+              />
+            </div>
+            {settings.password && settings.confirmPassword && settings.password !== settings.confirmPassword && (
+              <p style={{ color: '#ef4444', fontSize: '0.8rem' }}>Passwords do not match</p>
+            )}
+          </div>
+        )}
+
+        {activeTool === 'watermark' && (
+          <>
+            <div className="input-group">
+              <label className="input-label">Watermark Text</label>
+              <input
+                type="text"
+                className="input"
+                value={settings.pdfWatermarkText}
+                onChange={(e) => setSettings(s => ({ ...s, pdfWatermarkText: e.target.value }))}
+                placeholder="e.g., CONFIDENTIAL"
+              />
+            </div>
+            <div className="input-group">
+              <label className="input-label">Font Size: {settings.pdfWatermarkSize}px</label>
+              <input
+                type="range"
+                min={12}
+                max={120}
+                value={settings.pdfWatermarkSize}
+                onChange={(e) => setSettings(s => ({ ...s, pdfWatermarkSize: parseInt(e.target.value) }))}
+                style={{ width: '100%', cursor: 'pointer' }}
+              />
+            </div>
+            <div className="input-group">
+              <label className="input-label">Opacity: {settings.pdfWatermarkOpacity}%</label>
+              <input
+                type="range"
+                min={10}
+                max={100}
+                value={settings.pdfWatermarkOpacity}
+                onChange={(e) => setSettings(s => ({ ...s, pdfWatermarkOpacity: parseInt(e.target.value) }))}
+                style={{ width: '100%', cursor: 'pointer' }}
+              />
+            </div>
+          </>
+        )}
+
+        {activeTool === 'reorder' && (
+          <div style={{ background: 'var(--bg-secondary)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+              Upload your PDF and drag page thumbnails in the preview area to reorder them as you wish.
+            </p>
+          </div>
+        )}
+      </div>
+
+      <button className="btn btn-primary" style={{ width: '100%', marginTop: 'auto', background: 'var(--accent-blue)', borderColor: 'var(--accent-blue)' }} onClick={processPdf}>
+        {processing ? <Loader size={18} className="spinning" /> : <Download size={18} />}
+        {processing ? 'Processing...' : `${activeToolData?.title} Now`}
+      </button>
+    </div>
+  )
+
+  return (
+    <>
+      <SEO
+        title={pageTitle}
+        description={pageDescription}
+        keywords={pageKeywords}
+        path={canonicalPath}
+        toolName={activeToolData?.title}
+        toolSteps={seoContent?.howTo}
+        faqs={seoContent?.faq}
+        breadcrumbs={[
+          { name: 'PDF Tools', item: '/pdf-tools' },
+          activeToolData && { name: activeToolData.title, item: `/pdf-tools/${activeTool}` }
+        ].filter(Boolean)}
+      />
+
+      <div className="page-container" style={{ maxWidth: '100%', padding: (files.length > 0) ? '0' : '2rem' }}>
+        {activeTool && (
+          <div style={{ padding: (files.length > 0) ? '1rem 2rem 0' : '0' }}>
+            <Breadcrumbs items={[
+              { name: 'PDF Tools', item: '/pdf-tools' },
+              { name: activeToolData.title, item: `/pdf-tools/${activeTool}` }
+            ]} />
+          </div>
+        )}
+
+        {activeToolData?.status === 'coming-soon' ? (
+          <>
+            <ComingSoon 
+              toolName={activeToolData.title} 
+              description={activeToolData.description} 
+            />
+            <div style={{ marginTop: '5rem', padding: '0 2rem' }}>
+              {seoContent ? (
+                <ToolContent
+                  title={activeToolData?.title || 'PDF Tool'}
+                  description={seoContent.description}
+                  benefits={seoContent.benefits}
+                  howTo={seoContent.howTo}
+                  faq={seoContent.faq}
+                  tips={seoContent.tips}
+                  useCases={seoContent.useCases}
+                  relatedTools={PDF_RELATED_TOOLS[activeTool] || []}
+                  readNext={PDF_READ_NEXT[activeTool] || []}
+                  alternativeTo={seoContent.alternativeTo || []}
+                />
+              ) : (
+                <ToolContent
+                  title={activeToolData?.title || 'PDF Tool'}
+                  description={`Our ${activeToolData?.title || 'PDF Tool'} is an upcoming powerful browser-based utility for professional document management.`}
+                  benefits={["100% Privacy — files never leave your device", "No registration or signup required", "Secure local processing", "Free for professional use"]}
+                  howTo={["Wait for the tool to be released", "Upload your PDF documents", "Apply professional edits", "Download secured files"]}
+                  relatedTools={[
+                    { name: 'All PDF Tools', path: '/pdf-tools' },
+                    { name: 'Image Tools', path: '/image-tools' }
+                  ]}
+                />
+              )}
+            </div>
+          </>
+        ) : !activeTool ? (
+          /* CATEGORY HUB MODE */
+          <div className="landing-layout">
+            <AdSpace type="side" className="desktop-only" />
+
+            <div className="landing-center">
+              <div className="page-hero">
+                <div className="page-hero-content">
+                  <h1 className="page-title">PDF <span style={{ color: 'var(--accent-blue)' }}>Suite</span></h1>
+                  <p className="page-subtitle">
+                    The most efficient way to manage your PDF workflows. Merge, split, compress, and convert documents locally for ultimate security.
+                  </p>
+                </div>
+              </div>
+
+              <div className="tools-grid" style={{ marginBottom: '6rem' }}>
+                {tools.map(tool => (
+                  <Link
+                    key={tool.id}
+                    to={`/pdf-tools/${tool.id}`}
+                    className="tool-card"
+                    style={{ border: '1px solid var(--border-color)', height: '100%', textDecoration: 'none', padding: 0, overflow: 'hidden' }}
+                  >
+                    <div style={{ aspectRatio: '16/9', background: 'var(--bg-secondary)', overflow: 'hidden', borderBottom: '1px solid var(--border-color)' }}>
+                      <img 
+                        src={`/screenshots/${tool.screenshot}`} 
+                        alt={`${tool.title} interface preview - Professional browser-based PDF ${tool.id} tool by DailyTools`}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.parentElement.style.background = `${tool.color}10`;
+                          e.target.parentElement.innerHTML = `<div style="height: 100%; display: flex; align-items: center; justify-content: center; color: ${tool.color}"><div style="padding: 1.5rem; background: ${tool.color}15; border-radius: 20px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg></div></div>`;
+                        }}
+                      />
+                    </div>
+                    <div style={{ padding: '1.5rem' }}>
+                      <div className="tool-card-header">
+                        <div className="tool-card-icon" style={{ background: `${tool.color}15`, color: tool.color }}>
+                          <tool.icon size={22} />
+                        </div>
+                        <div className="tool-card-title-group">
+                          <h3 className="tool-card-title">{tool.title}</h3>
+                        </div>
+                      </div>
+                      <p className="tool-card-description">{tool.description}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2.5rem', marginTop: '5rem' }}>
+                {[
+                  { icon: FileText, title: 'Secure & Private', desc: 'Files are processed in your browser. No server uploads.' },
+                  { icon: Upload, title: 'No Limits', desc: 'Upload and process multiple PDF files at once, completely free.' },
+                  { icon: Loader, title: 'Lightning Fast', desc: 'Native browser processing ensures high-speed execution.' }
+                ].map((feat, i) => (
+                  <div key={i} style={{ textAlign: 'center' }}>
+                    <div style={{ color: 'var(--accent-blue)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}>
+                      <feat.icon size={36} />
+                    </div>
+                    <h4 style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.1rem' }}>{feat.title}</h4>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>{feat.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ marginTop: '5rem' }}>
+                <ToolContent
+                  title="PDF DailyTools"
+                  description="Our PDF suite offers military-grade security by processing all your sensitive documents directly in your browser. No files are ever uploaded or stored on any server."
+                  benefits={["Offline Processing", "High Performance", "Multi-file Support", "100% Free Forever"]}
+                  howTo={["Pick a PDF tool from the list", "Upload your documents", "Set your preferences", "Save the result instantly"]}
+                />
+              </div>
+            </div>
+
+            <AdSpace type="side" className="desktop-only" />
+          </div>
+        ) : files.length === 0 ? (
+          /* LANDING MODE */
+          <div className="landing-layout">
+            <AdSpace type="side" className="desktop-only" />
+
+            <div className="landing-center">
+              <div className="page-hero">
+                <div className="page-hero-content">
+                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
+                    <ShareTool title={`Free Online ${activeToolData.title} | DailyTools`} />
+                  </div>
+                  <h1 className="page-title">{activeToolData.title}</h1>
+                  <p className="page-subtitle">
+                    {activeToolData.description}
+                  </p>
+                </div>
+              </div>
+
+              <div
+                className="tool-panel"
+                style={{
+                  height: '350px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '2px dashed var(--accent-blue)',
+                  background: 'var(--bg-secondary)',
+                  cursor: 'pointer',
+                  transition: 'var(--transition)',
+                  textAlign: 'center'
+                }}
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={(e) => {
+                  e.preventDefault()
+                  handleFiles(e.dataTransfer.files)
+                }}
+                onClick={() => fileInputRef.current?.click()}
+                onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--accent-primary)'}
+                onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--accent-blue)'}
+              >
+                <div className="tool-card-icon" style={{ background: 'var(--accent-blue-50)', color: 'var(--accent-blue)', width: '80px', height: '80px', borderRadius: '24px', marginBottom: '2rem' }}>
+                  <Upload size={32} />
+                </div>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '0.5rem' }}>Select or Drop PDF Files</h3>
+                <p style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>Works in your browser. Maximum privacy.</p>
+                <button className="btn btn-primary" style={{ marginTop: '2rem', padding: '1rem 2.5rem' }}>
+                  Browse Files
+                </button>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2.5rem', marginTop: '5rem' }}>
+                {[
+                  { icon: FileText, title: 'Secure & Private', desc: 'Files are processed in your browser. No server uploads.' },
+                  { icon: Upload, title: 'No Limits', desc: 'Upload and process multiple PDF files at once, completely free.' },
+                  { icon: Loader, title: 'Lightning Fast', desc: 'Native browser processing ensures high-speed execution.' }
+                ].map((feat, i) => (
+                  <div key={i} style={{ textAlign: 'center' }}>
+                    <div style={{ color: 'var(--accent-blue)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}>
+                      <feat.icon size={36} />
+                    </div>
+                    <h4 style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.1rem' }}>{feat.title}</h4>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>{feat.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <div style={{ marginTop: '8rem' }}>
+                {seoContent && (
+                  <ToolContent
+                    title={activeToolData?.title || 'PDF Tool'}
+                    description={seoContent.description}
+                    benefits={seoContent.benefits}
+                    howTo={seoContent.howTo}
+                    faq={seoContent.faq}
+                    tips={seoContent.tips}
+                    useCases={seoContent.useCases}
+                    relatedTools={PDF_RELATED_TOOLS[activeTool] || []}
+                    readNext={PDF_READ_NEXT[activeTool] || []}
+                    alternativeTo={seoContent.alternativeTo || []}
+                  />
+                )}
+              </div>
+              <AdSpace type="bottom" />
+            </div>
+            <AdSpace type="side" className="desktop-only" />
+          </div>
+        ) : (
+          /* EDITOR MODE */
+          <div className="sidebar-layout">
+            <aside className="sidebar-settings tool-panel">
+              <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem' }}>
+                <button className="btn btn-secondary" style={{ padding: '0.75rem' }} onClick={() => fileInputRef.current.click()}>
+                  <Upload size={20} />
+                </button>
+                <button className="btn btn-secondary" style={{ padding: '0.75rem', marginLeft: 'auto' }} onClick={() => setFiles([])}>
+                  <X size={20} />
+                </button>
+              </div>
+
+              {renderSidebarSettings()}
+            </aside>
+
+            <main className="preview-main">
+              <div className="tool-container">
+                <AdSpace type="top" />
+
+                <div className="tool-panel">
+                  <div className="tool-panel-content">
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+                      <h3 style={{ fontSize: '1.25rem', fontWeight: 900, margin: 0 }}>
+                        Files ({files.length})
+                      </h3>
+                      <div style={{ display: 'flex', gap: '0.75rem' }}>
+                        <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.6rem 1.25rem' }}>
+                          <Upload size={18} /> Add More
+                        </button>
+                        <button className="btn btn-primary" onClick={processPdf} style={{ padding: '0.6rem 2rem' }}>
+                          <Download size={18} /> {processing ? 'Processing...' : `${activeToolData?.title} Now`}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1.5rem' }}>
+                      {files.map((file, idx) => (
+                        <div key={idx} className="tool-card" style={{ padding: '1.5rem', position: 'relative', textAlign: 'center' }}>
+                          <button
+                            onClick={() => removeFile(idx)}
+                            className="btn-icon"
+                            style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', padding: '0.4rem', background: 'var(--bg-glass)', borderRadius: '8px', zIndex: 5 }}
+                          >
+                            <X size={14} />
+                          </button>
+
+                          {activeTool === 'merge' && (
+                            <div style={{ position: 'absolute', top: '0.5rem', left: '0.5rem', display: 'flex', gap: '0.25rem', zIndex: 5 }}>
+                              <button
+                                onClick={() => moveFile(idx, 'left')}
+                                disabled={idx === 0}
+                                className="btn-icon"
+                                style={{ padding: '0.4rem', background: 'var(--bg-glass)', borderRadius: '8px', opacity: idx === 0 ? 0.3 : 1 }}
+                              >
+                                <ChevronDown size={14} style={{ transform: 'rotate(90deg)' }} />
+                              </button>
+                              <button
+                                onClick={() => moveFile(idx, 'right')}
+                                disabled={idx === files.length - 1}
+                                className="btn-icon"
+                                style={{ padding: '0.4rem', background: 'var(--bg-glass)', borderRadius: '8px', opacity: idx === files.length - 1 ? 0.3 : 1 }}
+                              >
+                                <ChevronDown size={14} style={{ transform: 'rotate(-90deg)' }} />
+                              </button>
+                            </div>
+                          )}
+
+                          <div style={{ color: 'var(--accent-blue)', marginBottom: '1.25rem', display: 'flex', justifyContent: 'center' }}>
+                            <div style={{ padding: '0.75rem', background: 'rgba(59, 130, 246, 0.05)', borderRadius: '12px' }}>
+                              <FileText size={40} />
+                            </div>
+                          </div>
+                          <p style={{ fontWeight: 700, fontSize: '0.85rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', margin: 0 }}>
+                            {file.name}
+                          </p>
+                          <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', margin: '0.25rem 0 0' }}>
+                            {(file.size / 1024).toFixed(1)} KB
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <AdSpace type="bottom" />
+              </div>
+            </main>
+            <AdSpace type="side" className="desktop-only" />
+          </div>
+        )}
+
+        {/* Mobile Settings Modal */}
+        {
+          showMobileSettings && (
+            <div className="settings-modal-overlay" onClick={() => setShowMobileSettings(false)}>
+              <div className="settings-modal-content" onClick={e => e.stopPropagation()}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
+                  <h3 style={{ fontSize: '1.5rem', fontWeight: 800 }}>Settings</h3>
+                  <button className="btn-icon" onClick={() => setShowMobileSettings(false)} style={{ background: 'var(--bg-secondary)' }}><X /></button>
+                </div>
+                {renderSidebarSettings()}
+              </div>
+            </div>
+          )
+        }
+
+        {
+          processing && (
+            <div className="processing-overlay">
+              <div className="processing-loader"></div>
+              <p className="processing-text">Processing your PDF...</p>
+            </div>
+          )
+        }
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="application/pdf"
+          multiple
+          onChange={handleFileSelect}
+          style={{ display: 'none' }}
+        />
+
+        <style dangerouslySetInnerHTML={{
+          __html: `
+          .remove-file-btn:hover {
+            transform: scale(1.1);
+            background: #ffffff !important;
+            box-shadow: 0 6px 16px rgba(239, 68, 68, 0.2) !important;
+            color: #dc2626 !important;
+          }
+          .remove-file-btn:active {
+            transform: scale(0.95);
+          }
+        `}} />
+      </div >
+    </>
+  )
+}

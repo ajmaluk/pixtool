@@ -1,0 +1,89 @@
+
+> dailytools@0.0.0 lint
+> eslint .
+
+
+/Users/uk/Development/dailytools/src/pages/ImageTools.jsx
+  37:7   error  Error: Cannot access variable before it is declared
+
+`handleFiles` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+  35 |     const droppedFiles = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'))
+  36 |     if (droppedFiles.length > 0) {
+> 37 |       handleFiles(droppedFiles)
+     |       ^^^^^^^^^^^ `handleFiles` accessed before it is declared
+  38 |     }
+  39 |   }, [])
+  40 |
+
+  39 |   }, [])
+  40 |
+> 41 |   const handleFiles = (newFiles) => {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 42 |     const validFiles = newFiles.filter(f => f.type.startsWith('image/'))
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 43 |     setFiles(prev => [...prev, ...validFiles])
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 44 |     if (validFiles.length > 0) {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 45 |       const reader = new FileReader()
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 46 |       reader.onload = (e) => setPreview(e.target.result)
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 47 |       reader.readAsDataURL(validFiles[0])
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 48 |     }
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 49 |   }
+     | ^^^^ `handleFiles` is declared here
+  50 |
+  51 |   const handleFileSelect = (e) => {
+  52 |     if (e.target.files.length > 0) {  react-hooks/immutability
+  84:13  error  'rad' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            no-unused-vars
+
+/Users/uk/Development/dailytools/src/pages/QrGenerator.jsx
+  103:16  error  'e' is defined but never used  no-unused-vars
+
+/Users/uk/Development/dailytools/src/pages/QrScanner.jsx
+  10:9   error  'scannerRef' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  51:16  error  'e' is defined but never used                                                               no-unused-vars
+  51:19  error  Empty block statement                                                                       no-empty
+
+/Users/uk/Development/dailytools/src/pages/TempMail.jsx
+   16:12  error  '_' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           no-unused-vars
+  159:5   error  Error: Cannot access variable before it is declared
+
+`initEmail` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+  157 |
+  158 |   useEffect(() => {
+> 159 |     initEmail()
+      |     ^^^^^^^^^ `initEmail` accessed before it is declared
+  160 |   }, [])
+  161 |
+  162 |   useEffect(() => {
+
+  170 |   }, [email])
+  171 |
+> 172 |   const initEmail = async () => {
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 173 |     setLoading(true)
+      | ^^^^^^^^^^^^^^^^^^^^
+> 174 |     const newEmail = await tempMailRef.current.generateEmail()
+      | ^^^^^^^^^^^^^^^^^^^^
+> 175 |     if (newEmail) {
+      | ^^^^^^^^^^^^^^^^^^^^
+> 176 |       setEmail(newEmail)
+      | ^^^^^^^^^^^^^^^^^^^^
+> 177 |     }
+      | ^^^^^^^^^^^^^^^^^^^^
+> 178 |     setLoading(false)
+      | ^^^^^^^^^^^^^^^^^^^^
+> 179 |   }
+      | ^^^^ `initEmail` is declared here
+  180 |
+  181 |   const showToast = (message, type = 'success') => {
+  182 |     setToast({ show: true, message, type })  react-hooks/immutability
+
+✖ 8 problems (8 errors, 0 warnings)
+
