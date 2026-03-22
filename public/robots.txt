@@ -1,0 +1,32 @@
+User-agent: *
+Allow: /
+
+# AI & LLM Crawlers (Generative AI Engine Optimization)
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: Claude-bot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: CCBot
+Allow: /
+User-agent: YandexBot
+Allow: /
+User-agent: Baiduspider
+Allow: /
+User-agent: BingPreview
+Allow: /
+
+# Sitemap
+Sitemap: https://dailytools.toolpix.in/sitemap.xml
+Sitemap: https://dailytools.toolpix.in/llms.txt
+
+# Media Crawlers
+User-agent: Googlebot-Image
+Allow: /public/screenshots/
+Allow: /og-image.png
+Allow: /logo.png

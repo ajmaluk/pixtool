@@ -1,0 +1,114 @@
+213:            </div>
+227:              </div>
+272:                    </div>
+304:                        </div>
+306:                          <div style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text-primary)' }}>{tool.title}</div>
+307:                          <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '2px', opacity: 0.8 }}>{tool.description.substring(0, 60)}...</div>
+308:                        </div>
+316:                        }}>→</div>
+322:            </div>
+327:              </div>
+330:              </div>
+333:              </div>
+334:            </div>
+336:        </div>
+346:                </div>
+354:              </div>
+375:                          </div>
+381:                          </div>
+382:                        </div>
+387:                </div>
+390:                  <div style={{ marginBottom: '2rem', color: 'var(--text-muted)' }}><Search size={80} style={{ opacity: 0.1 }} /></div>
+398:                </div>
+400:            </div>
+406:                </div>
+408:              </div>
+427:                        </div>
+430:                        </div>
+431:                      </div>
+436:              </div>
+441:                </div>
+443:              </div>
+462:                        </div>
+465:                        </div>
+466:                      </div>
+471:              </div>
+476:                </div>
+478:              </div>
+497:                        </div>
+500:                        </div>
+501:                      </div>
+506:              </div>
+509:        </div>
+523:              </div>
+533:              </div>
+543:              </div>
+544:            </div>
+550:              </div>
+554:              </div>
+558:              </div>
+562:              </div>
+563:            </div>
+564:          </div>
+575:            </div>
+629:                  <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>{useCase.icon}</div>
+638:                  </div>
+641:            </div>
+642:          </div>
+660:              </div>
+662:          </div>
+679:                  </div>
+681:                </div>
+689:                </div>
+690:              </div>
+696:                  </div>
+698:                </div>
+706:                </div>
+707:              </div>
+713:                  </div>
+715:                </div>
+723:                </div>
+724:              </div>
+725:            </div>
+729:              <div style={{ position: 'absolute', top: '-100px', right: '-100px', width: '300px', height: '300px', background: 'var(--accent-primary)', filter: 'blur(150px)', opacity: 0.2 }}></div>
+744:                  </div>
+756:                  </div>
+757:                </div>
+759:                  <div style={{ padding: '0.75rem 1.5rem', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', fontSize: '0.9rem' }}><b>Adobe Acrobat</b> Alternative</div>
+760:                  <div style={{ padding: '0.75rem 1.5rem', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', fontSize: '0.9rem' }}><b>TinyPNG</b> Power-User rival</div>
+761:                  <div style={{ padding: '0.75rem 1.5rem', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', fontSize: '0.9rem' }}><b>Guerrilla Mail</b> Pro-Grade upgrade</div>
+762:                </div>
+763:              </div>
+764:            </div>
+769:                <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-primary)' }}>18+</div>
+770:                <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Free Tools</div>
+771:              </div>
+773:                <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-primary)' }}>0</div>
+774:                <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Files Uploaded</div>
+775:              </div>
+777:                <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-primary)' }}>100%</div>
+778:                <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Browser Based</div>
+779:              </div>
+781:                <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-primary)' }}>∞</div>
+782:                <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Privacy Guaranteed</div>
+783:              </div>
+784:            </div>
+793:              </div>
+799:                  </div>
+804:                </div>
+809:                  </div>
+814:                </div>
+819:                  </div>
+824:                </div>
+825:              </div>
+826:            </div>
+835:              </div>
+854:                    </div>
+859:                      </div>
+867:                    </div>
+870:              </div>
+876:              </div>
+877:            </div>
+879:        </div>
+880:      </div>
+882:    </div>
