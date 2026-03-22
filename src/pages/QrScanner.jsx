@@ -83,8 +83,8 @@ export default function QrScanner() {
     "applicationCategory": "UtilitiesApplication",
     "applicationSubCategory": "QR Scanner",
     "operatingSystem": "All (Web Browser)",
-    "url": "https://pixtool.toolpix.in/qr-scanner",
-    "image": "https://pixtool.toolpix.in/logo.png",
+    "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/qr-scanner`,
+    "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`,
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -110,11 +110,11 @@ export default function QrScanner() {
     "@type": "HowTo",
     "name": "How to Scan a QR Code Online for Free",
     "description": "Learn how to scan QR codes using your device camera or by uploading an image in your browser.",
-    "image": "https://pixtool.toolpix.in/logo.png",
+    "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`,
     "step": [
-      { "@type": "HowToStep", "name": "Open Scanner", "text": "Click 'Start Scanning' to activate your device camera.", "image": "https://pixtool.toolpix.in/logo.png" },
-      { "@type": "HowToStep", "name": "Point Camera", "text": "Point your camera at the QR code you want to scan.", "image": "https://pixtool.toolpix.in/logo.png" },
-      { "@type": "HowToStep", "name": "View Result", "text": "The scanned content will appear on screen. Click to open links or copy text.", "image": "https://pixtool.toolpix.in/logo.png" }
+      { "@type": "HowToStep", "name": "Open Scanner", "text": "Click 'Start Scanning' to activate your device camera.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` },
+      { "@type": "HowToStep", "name": "Point Camera", "text": "Point your camera at the QR code you want to scan.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` },
+      { "@type": "HowToStep", "name": "View Result", "text": "The scanned content will appear on screen. Click to open links or copy text.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` }
     ],
     "totalTime": "PT20S"
   }
@@ -135,9 +135,9 @@ export default function QrScanner() {
   return (
     <>
       <SEO
-        title="Free Online QR Code Scanner | Browser Camera - PixTool"
-        description="Scan any QR code instantly using your device camera or by uploading an image. 100% free, private, and secure browser-based scanner. Works on mobile and desktop. Best free QR reader online."
-        keywords="QR code scanner free, scan QR code online, QR reader, QR code reader camera, free QR scanner no app, online QR code scanner, scan QR code from image"
+        title="Free QR Code Scanner Online | Scan from Image - PixTool"
+        description="Scan any QR code online for free using your device camera or by uploading an image. 100% free, private, and secure browser-based scanner."
+        keywords="qr code scanner online free, qr code scanner online, scan qr code online, online qr code scanner, scan qr code online from image, scan qr online, scanner online, free qr code scanner, scan qr code from image, qr scanner online, qr code scanner free, scan qr code online without app, qr scanner online free"
         path="/qr-scanner"
         schema={[scannerSchema, howToSchema]}
         breadcrumbs={[
@@ -160,9 +160,6 @@ export default function QrScanner() {
 
             <div className="page-hero">
               <div className="page-hero-content">
-                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-                  <ShareTool title="Free Online QR Code Scanner | Browser Camera - PixTool" />
-                </div>
                 <h1 className="page-title">QR Scanner</h1>
                 <p className="page-subtitle">
                   Scan any QR code instantly using your device camera or by uploading an image. 100% secure.
@@ -301,6 +298,7 @@ export default function QrScanner() {
           {toast.message}
         </div>
       </div>
+      <ShareTool title="Free Online QR Code Scanner | Browser Camera - PixTool" />
     </>
   )
 }

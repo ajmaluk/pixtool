@@ -35,13 +35,13 @@ export default function Documentation() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://pixtool.toolpix.in/"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Documentation",
-                    "item": "https://pixtool.toolpix.in/documentation"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/documentation`
                 }
             ]
         }

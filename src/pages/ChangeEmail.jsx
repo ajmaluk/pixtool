@@ -5,8 +5,8 @@ export default function ChangeEmail() {
     <TempMail
       seoPath="/temp-mail/change-email"
       seoTitle="🔄 Get New Temporary Email - Change/Regenerate Inbox | PixTool"
-      seoDescription="Need a fresh temp mail? Generate a new disposable email instantly. Keep your signups private & spam-free. 1-click email rotation - 100% free!"
-      seoKeywords="change email address temp mail, new temporary email, regenerate disposable email, anonymous email generator"
+      seoDescription="Need a fresh temp mail? Generate a new disposable email address instantly with 1-click rotation. Keep your signups private, avoid spam, and stay anonymous online. Unlimited free email changes."
+      seoKeywords="new temp mail, new temp mail 2026, change email address temp mail, new temporary email, regenerate disposable email, new burner email, best temp mail 2026, rotate temp mail, fresh disposable inbox, swap temp email, get another temp mail, instant email change"
       storageNamespace="change-mail"
       breadcrumbs={[
         { name: 'Utility Tools', item: '/utility-tools' },

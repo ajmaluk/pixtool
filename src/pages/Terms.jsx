@@ -12,13 +12,13 @@ export default function Terms() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://pixtool.toolpix.in/"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Terms of Service",
-                    "item": "https://pixtool.toolpix.in/terms-of-service"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/terms-of-service`
                 }
             ]
         }

@@ -102,13 +102,13 @@ export default function Services() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://pixtool.toolpix.in/"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Services",
-                    "item": "https://pixtool.toolpix.in/services"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/services`
                 }
             ]
         }

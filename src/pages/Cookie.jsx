@@ -12,13 +12,13 @@ export default function Cookie() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://pixtool.toolpix.in/"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Cookie Policy",
-                    "item": "https://pixtool.toolpix.in/cookie-policy"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/cookie-policy`
                 }
             ]
         }

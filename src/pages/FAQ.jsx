@@ -94,7 +94,7 @@ export default function FAQ() {
             "mainEntity": faqData.flatMap((cat, catIdx) => cat.questions.map((q, qIdx) => ({
                 "@type": "Question",
                 "name": q.q,
-                "url": `https://pixtool.toolpix.in/faq#q-${catIdx}-${qIdx}`,
+                "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/faq#q-${catIdx}-${qIdx}`,
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": q.a
@@ -109,13 +109,13 @@ export default function FAQ() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://pixtool.toolpix.in/"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "FAQ",
-                    "item": "https://pixtool.toolpix.in/faq"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/faq`
                 }
             ]
         }

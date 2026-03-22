@@ -103,13 +103,13 @@ export default function PdfTools() {
   const seoContentMap = PDF_SEO_CONTENT;
   const seoContent = activeTool ? seoContentMap[activeTool] : null;
 
-  const pageTitle = activeToolData ? `Free Online ${activeToolData.title} Tool | PixTool` : "Professional Online PDF Tools | Merge, Split, Compress, Convert, Protect, Watermark, Reorder"
+  const pageTitle = activeToolData ? `Free Online ${activeToolData.title} Tool | PixTool` : "Free PDF Merger & Splitter Online | Secure PDF Tools"
   const pageDescription = activeToolData ?
     seoContentMap[activeTool]?.description :
-    "Professional suite of 100% private online PDF tools. Merge, split, compress, and convert PDF documents instantly in your browser. No server uploads, military-grade encryption. Best free alternative to Adobe Acrobat for secure document handling."
+    "Free online PDF tools to merge PDFs, split pages, and compress PDF securely. No upload required, absolutely zero privacy risk."
   const pageKeywords = activeToolData ?
     seoContentMap[activeTool]?.keywords :
-    "free pdf tools online, merge pdf without uploading, split pdf browser pro, compress pdf high quality, convert pdf to image fast, protect pdf password, watermark pdf online free, reorder pdf pages drag-and-drop, best free adobe acrobat alternative, secure pdf editor, browser-based pdf processing"
+    "free pdf merger online, split pdf without upload, compress pdf securely, online pdf tools free, merge pdf files, secure pdf editor"
   const canonicalPath = activeTool ? `/pdf-tools/${activeTool}` : "/pdf-tools"
 
   const renderSidebarSettings = () => (
@@ -453,9 +453,6 @@ export default function PdfTools() {
                 <>
                   <div className="page-hero">
                     <div className="page-hero-content">
-                      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-                        <ShareTool title={`Free Online ${activeToolData.title} | PixTool`} />
-                      </div>
                       <h1 className="page-title">{activeToolData.title}</h1>
                       <p className="page-subtitle">
                         {activeToolData.description}
@@ -669,6 +666,7 @@ export default function PdfTools() {
           }
         `}} />
       </div >
+      <ShareTool title={`Free Online ${activeToolData?.title || 'PDF Tools'} | PixTool`} />
     </>
   )
 }

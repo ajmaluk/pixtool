@@ -135,7 +135,7 @@ export default function TypingTest() {
       "applicationCategory": "UtilitiesApplication",
       "applicationSubCategory": "Typing Test",
       "operatingSystem": "Web Browser",
-      "url": "https://pixtool.toolpix.in/typing-test",
+      "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/typing-test`,
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
     },
     {
@@ -155,9 +155,9 @@ export default function TypingTest() {
   return (
     <>
       <SEO
-        title="Typing Speed Test | Online WPM Test like MonkeyType - PixTool"
-        description="Free online typing test like MonkeyType. Practice with random words and track WPM, accuracy, and correct words. Fast, distraction-free, privacy-first."
-        keywords="typing test, online typing speed test, WPM test, MonkeyType alternative, typing practice, free typing test"
+        title="Free Online Typing Test | Check WPM Speed (MonkeyType Alternative)"
+        description="Take our free online typing test to check your WPM (Words Per Minute). A fast, privacy-first MonkeyType alternative with distraction-free typing practice."
+        keywords="online typing test, free typing test online, wpm test run, typing speed test, MonkeyType alternative, typing practice"
         path="/typing-test"
         schema={typingSchema}
         breadcrumbs={[
@@ -180,9 +180,6 @@ export default function TypingTest() {
 
             <div className="page-hero">
               <div className="page-hero-content">
-                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-                  <ShareTool title="Free Typing Test | MonkeyType Alternative - PixTool" />
-                </div>
                 <h1 className="page-title">Typing Test</h1>
                 <p className="page-subtitle">
                   Practice typing like a pro. Track your speed (WPM) and accuracy in real-time. Completely free.
@@ -383,6 +380,7 @@ export default function TypingTest() {
           <AdSpace type="side" className="desktop-only" />
         </div>
       </div>
+      <ShareTool title="Free Typing Test | MonkeyType Alternative - PixTool" />
     </>
   )
 }

@@ -12,9 +12,9 @@ export default function UtilityTools() {
     const seoContentMap = UTILITY_SEO_CONTENT;
     const activeTool = null; // Category hub mode
     const seoContent = activeTool ? seoContentMap[activeTool] : {
-        title: "Free Utility Tools | Productivity & Security Suite - PixTool",
-        description: "Handy free online utility tools for daily productivity, security, and communication. Includes temporary email, QR code generator, and QR scanner.",
-        keywords: "utility tools, temp mail, qr scanner, qr generator, typing test, online tools free"
+        title: "Free Utility Tools | Temp Mail, Typing Test & QR Generator - PixTool",
+        description: "Handy free online utility tools for daily productivity and security. Generate temp mail online, take a free typing test online, or use our custom QR code generator.",
+        keywords: "free typing test online, temp mail online, qr code generator, online tools free, disposable email, utility tools"
     };
 
     return (

@@ -12,13 +12,13 @@ export default function Sponsor() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://pixtool.toolpix.in/"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Sponsor",
-                    "item": "https://pixtool.toolpix.in/sponsor"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/sponsor`
                 }
             ]
         }

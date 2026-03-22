@@ -12,13 +12,13 @@ export default function Refund() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://pixtool.toolpix.in/"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Refund Policy",
-                    "item": "https://pixtool.toolpix.in/refund-policy"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/refund-policy`
                 }
             ]
         }

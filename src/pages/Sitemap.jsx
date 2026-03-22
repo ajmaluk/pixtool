@@ -122,25 +122,25 @@ export default function Sitemap() {
         "@type": "CollectionPage",
         "name": "Sitemap - All PixTool",
         "description": "Complete directory of all free online tools at PixTool. Find image editors, PDF processors, temp mail, and QR tools in one easy-to-navigate sitemap.",
-        "url": "https://pixtool.toolpix.in/sitemap",
+        "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/sitemap`,
         "mainEntity": {
             "@type": "ItemList",
             "name": "All PixTool Pages",
             "description": "Complete list of all pages and tools available on PixTool",
             "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Home", "url": "https://pixtool.toolpix.in/" },
-                { "@type": "ListItem", "position": 2, "name": "Image Tools", "url": "https://pixtool.toolpix.in/image-tools" },
-                { "@type": "ListItem", "position": 3, "name": "PDF Tools", "url": "https://pixtool.toolpix.in/pdf-tools" },
-                { "@type": "ListItem", "position": 4, "name": "Utility Tools", "url": "https://pixtool.toolpix.in/utility-tools" },
-                { "@type": "ListItem", "position": 5, "name": "Temporary Email", "url": "https://pixtool.toolpix.in/temp-mail" },
-                { "@type": "ListItem", "position": 6, "name": "10 Minute Mail", "url": "https://pixtool.toolpix.in/temp-mail/10-minute-mail" },
-                { "@type": "ListItem", "position": 7, "name": "Change Temporary Email", "url": "https://pixtool.toolpix.in/temp-mail/change-email" },
-                { "@type": "ListItem", "position": 8, "name": "Typing Speed Test", "url": "https://pixtool.toolpix.in/typing-test" },
-                { "@type": "ListItem", "position": 9, "name": "QR Code Generator", "url": "https://pixtool.toolpix.in/qr-generator" },
-                { "@type": "ListItem", "position": 10, "name": "QR Code Scanner", "url": "https://pixtool.toolpix.in/qr-scanner" },
-                { "@type": "ListItem", "position": 11, "name": "About Us", "url": "https://pixtool.toolpix.in/about" },
-                { "@type": "ListItem", "position": 12, "name": "Contact", "url": "https://pixtool.toolpix.in/contact" },
-                { "@type": "ListItem", "position": 13, "name": "Privacy Policy", "url": "https://pixtool.toolpix.in/privacy-policy" }
+                { "@type": "ListItem", "position": 1, "name": "Home", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/` },
+                { "@type": "ListItem", "position": 2, "name": "Image Tools", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/image-tools` },
+                { "@type": "ListItem", "position": 3, "name": "PDF Tools", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/pdf-tools` },
+                { "@type": "ListItem", "position": 4, "name": "Utility Tools", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/utility-tools` },
+                { "@type": "ListItem", "position": 5, "name": "Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/temp-mail` },
+                { "@type": "ListItem", "position": 6, "name": "10 Minute Mail", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/temp-mail/10-minute-mail` },
+                { "@type": "ListItem", "position": 7, "name": "Change Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/temp-mail/change-email` },
+                { "@type": "ListItem", "position": 8, "name": "Typing Speed Test", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/typing-test` },
+                { "@type": "ListItem", "position": 9, "name": "QR Code Generator", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/qr-generator` },
+                { "@type": "ListItem", "position": 10, "name": "QR Code Scanner", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/qr-scanner` },
+                { "@type": "ListItem", "position": 11, "name": "About Us", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/about` },
+                { "@type": "ListItem", "position": 12, "name": "Contact", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/contact` },
+                { "@type": "ListItem", "position": 13, "name": "Privacy Policy", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/privacy-policy` }
             ]
         }
     }

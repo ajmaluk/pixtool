@@ -95,13 +95,13 @@ export default function ImageTools() {
   const seoContent = activeTool ? seoContentMap[activeTool] : null;
 
   // Dynamic SEO descriptions - enhanced for better SEO
-  const pageTitle = activeToolData ? `Free Online ${activeToolData.title} Tool | PixTool` : "Professional Online Image Tools | Resize, Crop, Rotate, Compress, Convert, Watermark, Flip, Grayscale"
+  const pageTitle = activeToolData ? `Free Online ${activeToolData.title} Tool | PixTool` : "Free Image Resizer & Photo Editor Online | PixTool"
   const pageDescription = activeToolData ?
     seoContentMap[activeTool]?.description :
-    "Professional suite of 100% private online image tools. Resize, crop, rotate, compress, and convert images instantly in your browser. No server uploads, military-grade privacy. Best free alternative to Photoshop and Squoosh for batch processing."
+    "Free online image tools including image resizer, photo cropper, and compressor. No upload required, 100% browser-based and secure."
   const pageKeywords = activeToolData ?
     seoContentMap[activeTool]?.keywords :
-    "free image tools online, resize image high quality, crop photo online pro, rotate image no loss, compress image for web, convert image format webp, add watermark batch, flip image mirror, professional grayscale converter, sepia filter online, browser-based image editor, free Photoshop alternative, batch image processing"
+    "free image resizer, online photo editor, compress image, resize image free, image compression online, photo cropper"
   const canonicalPath = activeTool ? `/image-tools/${activeTool}` : "/image-tools"
 
 
@@ -526,9 +526,6 @@ export default function ImageTools() {
                   <>
                     <div className="page-hero">
                       <div className="page-hero-content">
-                        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-                          <ShareTool title={pageTitle} />
-                        </div>
                         <h1 className="page-title">{activeToolData.title}</h1>
                         <p className="page-subtitle">
                           {activeToolData.description}
@@ -719,6 +716,7 @@ export default function ImageTools() {
           style={{ display: 'none' }}
         />
       </div >
+      <ShareTool title={pageTitle} />
     </>
   )
 }

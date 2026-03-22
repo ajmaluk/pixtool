@@ -13,16 +13,16 @@ export default function Blog() {
             "@type": "Blog",
             "name": "PixTool Tech & Productivity Blog",
             "description": "Expert insights, tutorials, and updates on AI, web development, browser-based tools, and digital productivity. Learn how to use free online tools effectively.",
-            "url": "https://pixtool.toolpix.in/blog",
+            "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/blog`,
             "publisher": {
                 "@type": "Organization",
                 "name": "PixTool by UTHAKKAN",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "https://pixtool.toolpix.in/logo.png"
+                    "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`
                 }
             },
-            "image": "https://pixtool.toolpix.in/logo.png",
+            "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`,
             "keywords": "productivity, AI tools, web development, online tools, tutorials"
         },
         {
@@ -33,13 +33,13 @@ export default function Blog() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://pixtool.toolpix.in/"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Blog",
-                    "item": "https://pixtool.toolpix.in/blog"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/blog`
                 }
             ]
         }

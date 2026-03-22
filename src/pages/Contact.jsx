@@ -38,11 +38,11 @@ export default function Contact() {
             "@type": "ContactPage",
             "name": "Contact PixTool Support & UTHAKKAN",
             "description": "Get in touch with the PixTool team for technical support, tool suggestions, custom development services, or business inquiries.",
-            "url": "https://pixtool.toolpix.in/contact",
+            "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/contact`,
             "mainEntity": {
                 "@type": "Organization",
                 "name": "UTHAKKAN Digital",
-                "url": "https://pixtool.toolpix.in",
+                "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}`,
                 "email": "contact.uthakkan@gmail.com",
                 "contactPoint": {
                     "@type": "ContactPoint",
@@ -60,13 +60,13 @@ export default function Contact() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://pixtool.toolpix.in/"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Contact",
-                    "item": "https://pixtool.toolpix.in/contact"
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/contact`
                 }
             ]
         }

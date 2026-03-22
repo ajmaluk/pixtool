@@ -164,15 +164,15 @@ class TempMailReceiver {
 
 export default function TempMail({
   seoPath = "/temp-mail",
-  seoTitle = "🔥 Free Temp Mail - Disposable Email in 1 Click | PixTool",
-  seoDescription = "Get instant free temporary email. No registration required - copy in 1 tap. Best alternative to 10MinuteMail & Guerrilla Mail. 100% free, private & anonymous.",
-  seoKeywords = "temporary email, disposable email, temp mail free, anonymous email, fake email generator, throwaway email, free temporary email address, Guerrilla Mail alternative, 10 minute mail alternative, temp-mail.org alternative, spam free email",
+  seoTitle = "🔥 Free Temp Mail with Password - Temporary Email & OTP | PixTool",
+  seoDescription = "Get instant free temp mail with password. Temporary email and password for login, OTP verification, Facebook & Instagram signups. Best tempmail alternative to 10MinuteMail & Guerrilla Mail. No registration, 100% anonymous.",
+  seoKeywords = "temp mail, temporary email, tempmail, temp email, temp mail with password, temporary email and password, temporary email and password free, temp mail free, temp mail for facebook, 10 minute mail, fake email generator, throwaway email, free temporary email, temp mail generator, temp gmail, temp mail otp, burner email, disposable email, temp inbox, anonymous email, temp mail india, email generator, fake email and password, temp mail gmail, best temp mail, one time email, temp email with password, temp mail for instagram, temp mail for discord, temporary mail, free temp mail",
   breadcrumbs: customBreadcrumbs = [
     { name: 'Utility Tools', item: '/utility-tools' },
     { name: 'Temp Mail', item: '/temp-mail' }
   ],
   heroTitle = "Temp Mail — Temporary Email",
-  heroSubtitle = "Get a free, anonymous disposable email address instantly. Protect your privacy from spam, tracking, and data breaches with our secure, browser-based temporary mail service.",
+  heroSubtitle = "Free temporary email with password for instant login, OTP verification, and anonymous signups. No registration — best alternative to 10MinuteMail, Guerrilla Mail & Temp-Mail.org.",
   heroBadge = null,
   storageNamespace = 'temp-mail',
   rotateTrigger = null
@@ -223,8 +223,8 @@ export default function TempMail({
     "applicationCategory": "CommunicationApplication",
     "applicationSubCategory": "Privacy Tool",
     "operatingSystem": "All (Web Browser)",
-    "url": `https://pixtool.toolpix.in${seoPath}`,
-    "image": "https://pixtool.toolpix.in/logo.png",
+    "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}${seoPath}`,
+    "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`,
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -263,12 +263,12 @@ export default function TempMail({
     "@type": "HowTo",
     "name": "How to Use Free Temporary Email",
     "description": "Learn how to generate and use a free temporary email address for privacy protection.",
-    "image": "https://pixtool.toolpix.in/logo.png",
+    "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`,
     "step": [
-      { "@type": "HowToStep", "name": "Get Email", "text": "Visit the page - a temporary email address is generated automatically.", "image": "https://pixtool.toolpix.in/logo.png" },
-      { "@type": "HowToStep", "name": "Copy Email", "text": "Click on the email address or Copy button to copy it to your clipboard.", "image": "https://pixtool.toolpix.in/logo.png" },
-      { "@type": "HowToStep", "name": "Use Email", "text": "Paste the email wherever you need to sign up or verify.", "image": "https://pixtool.toolpix.in/logo.png" },
-      { "@type": "HowToStep", "name": "Check Inbox", "text": "Return to this page to see incoming messages - inbox refreshes automatically.", "image": "https://pixtool.toolpix.in/logo.png" }
+      { "@type": "HowToStep", "name": "Get Email", "text": "Visit the page - a temporary email address is generated automatically.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` },
+      { "@type": "HowToStep", "name": "Copy Email", "text": "Click on the email address or Copy button to copy it to your clipboard.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` },
+      { "@type": "HowToStep", "name": "Use Email", "text": "Paste the email wherever you need to sign up or verify.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` },
+      { "@type": "HowToStep", "name": "Check Inbox", "text": "Return to this page to see incoming messages - inbox refreshes automatically.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` }
     ],
     "totalTime": "PT30S"
   }
@@ -278,9 +278,9 @@ export default function TempMail({
     "@type": "ItemList",
     "name": "Temporary Email Variants",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Free Temporary Email", "url": "https://pixtool.toolpix.in/temp-mail" },
-      { "@type": "ListItem", "position": 2, "name": "10 Minute Mail", "url": "https://pixtool.toolpix.in/temp-mail/10-minute-mail" },
-      { "@type": "ListItem", "position": 3, "name": "Change Temporary Email", "url": "https://pixtool.toolpix.in/temp-mail/change-email" }
+      { "@type": "ListItem", "position": 1, "name": "Free Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/temp-mail` },
+      { "@type": "ListItem", "position": 2, "name": "10 Minute Mail", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/temp-mail/10-minute-mail` },
+      { "@type": "ListItem", "position": 3, "name": "Change Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/temp-mail/change-email` }
     ]
   }
 
@@ -617,14 +617,8 @@ export default function TempMail({
                     </>
                   ) : heroTitle}
                 </h1>
-                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-                  <ShareTool title={seoTitle} />
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
-                  <a href="#free-temp-mail" className="link-standard" style={{ fontWeight: 700 }}>Free Temp Mail</a>
-                  <a href="#random-email" className="link-standard" style={{ fontWeight: 700 }}>Random Address</a>
-                  <a href="#no-registration" className="link-standard" style={{ fontWeight: 700 }}>No Registration</a>
-                </div>
+                <p className="page-subtitle">{heroSubtitle}</p>
+                {heroBadge}
               </div>
             </div>
 
@@ -839,7 +833,7 @@ export default function TempMail({
               )}
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2rem', marginBottom: '4rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2rem', marginTop: '4rem', marginBottom: '4rem' }}>
               {[
                 { icon: Shield, title: 'Privacy First', desc: 'No personal data required. No tracking or logging.', color: 'var(--accent-emerald)' },
                 { icon: Zap, title: 'Instant Setup', desc: 'Get a working email in under 2 seconds. Zero config.', color: 'var(--accent-orange)' },
@@ -875,22 +869,26 @@ export default function TempMail({
                   "Global Reach — receive emails from any sender worldwide instantly"
                 ]}
                 howTo={[
-                  "Visit this page to instantly receive a unique temporary email address",
-                  "Click the email address or 'Copy Email' button to copy it to your clipboard",
-                  "Paste the email wherever you need to sign up or verify",
-                  "Return here to see incoming messages — inbox refreshes automatically",
-                  "Click 'New Email' anytime to generate a fresh address"
+                  "Open the Temp Mail page — a unique email address is generated automatically",
+                  "Click the email address or tap 'Copy Email' to copy it to your clipboard",
+                  "Paste the address into any signup form, download gate, or verification page",
+                  "Return to this page to see incoming messages — the inbox auto-refreshes every 5 seconds",
+                  "Click 'New Email' to generate a fresh address whenever you need one"
                 ]}
                 tips={[
-                  "Use temporary mail for one-time downloads or accessing content hidden behind a 'SignUp' wall.",
-                  "Avoid using temp mail for primary accounts like banking or key social media, as you cannot recover the inbox once closed.",
-                  "If a website blocks one domain, click 'New Email' to get a fresh address from a different domain extension.",
-                  "Keep the tab open until you receive your verification code—closing the tab will reset your session for privacy."
+                  "Keep the tab open until you receive your verification code — closing it will end your session for maximum privacy.",
+                  "If a website blocks one disposable email domain, click 'New Email' for a fresh address on a different domain.",
+                  "Use temp mail for free trial signups, software downloads, and accessing gated content behind email walls.",
+                  "Avoid using temporary email for critical accounts like banking or primary social media — use a permanent email for those.",
+                  "Bookmark this page so you can generate a new temp inbox instantly whenever you need one."
                 ]}
                 useCases={[
-                  { title: "Verifying Software Downloads", description: "Get the download link for a free trial or whitepaper without subscribing to marketing spam for the next six months." },
-                  { title: "Testing App Features", description: "Create multiple test accounts for your own application or service to verify the onboarding flow as a fresh user." },
-                  { title: "Secure Public WiFi Access", description: "Use a disposable email to sign into public hotel or airport WiFi networks that require an email for connection." }
+                  { title: "Website Signups & Free Trials", description: "Register for free trials, SaaS products, and online services without giving away your personal email. Avoid post-trial spam forever." },
+                  { title: "Online Shopping & Coupons", description: "Sign up for discount codes and special offers from e-commerce sites without flooding your real inbox with daily promotional emails." },
+                  { title: "Public WiFi & Hotspot Access", description: "Use a disposable email to log into airport, hotel, and café WiFi captive portals without exposing your real email to unknown networks." },
+                  { title: "Forum & Community Registration", description: "Join forums, Reddit-style communities, and discussion boards anonymously without linking your real identity." },
+                  { title: "App Testing & QA", description: "Create multiple test accounts for your own applications to verify email notifications, onboarding flows, and user registration." },
+                  { title: "Newsletter Previews", description: "Subscribe to newsletters you're curious about but not committed to. Read the first few issues and decide if it's worth your real email." }
                 ]}
                 faq={tempMailFaqs}
                 relatedTools={[
@@ -902,11 +900,8 @@ export default function TempMail({
                   { name: 'Image Tools', path: '/image-tools' },
                   { name: 'Code Diff', path: '/code-diff' }
                 ]}
-                readNext={[
-                  { title: 'Why Browser-Based Tools are Better for Privacy', path: '/blog/browser-based-privacy' },
-                  { title: 'PDF Security 101: Passwords & Encryption', path: '/blog/pdf-security-101-passwords-encryption-sharing' }
-                ]}
-                alternativeTo={["10MinuteMail", "Temp-Mail.org", "Guerrilla Mail", "Mailinator"]}
+                readNext={UTILITY_READ_NEXT['temp-mail']}
+                alternativeTo={["10MinuteMail", "Temp-Mail.org", "Guerrilla Mail", "Mailinator", "ThrowAwayMail", "YOPmail"]}
               />
             </div>
 
@@ -983,13 +978,18 @@ export default function TempMail({
         </div>
 
         <div className="tool-panel" style={{ marginTop: '3rem', marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '2.5rem', textAlign: 'center' }}>Why Use Temporary Email?</h2>
+          <h2 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '1rem', textAlign: 'center' }}>Why Use Temporary Email?</h2>
+          <p style={{ textAlign: 'center', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
+            Disposable email addresses are an essential privacy tool in today's digital landscape. Protect yourself from spam, phishing, and data harvesting.
+          </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
             {[
-              { title: 'Avoid Spam', desc: 'Keep your primary inbox clean by using disposable emails for newsletter signups and one-time purchases.' },
-              { title: 'Protect Privacy', desc: 'Don\'t reveal your real email address to websites you don\'t trust. Stay anonymous online.' },
-              { title: 'Prevent Data Breaches', desc: 'If a website gets hacked, your real email won\'t be exposed. Add an extra layer of security.' },
-              { title: 'Quick Verifications', desc: 'Get verification codes and OTPs instantly without creating yet another account.' }
+              { title: 'Avoid Spam & Junk Mail', desc: 'Keep your primary inbox clean by using disposable emails for newsletter signups, free trials, and one-time purchases. Never get unwanted marketing emails again.' },
+              { title: 'Protect Your Privacy', desc: 'Don\'t reveal your real email address to websites you don\'t trust. Stay fully anonymous online and prevent companies from building a profile on you.' },
+              { title: 'Prevent Data Breaches', desc: 'If a website gets hacked, your real email won\'t be exposed. Add an extra layer of security to your digital footprint with throwaway addresses.' },
+              { title: 'Quick Verifications & OTPs', desc: 'Get verification codes, OTPs, and confirmation links instantly without creating yet another permanent account on a service you may never use again.' },
+              { title: 'Test Apps & Services', desc: 'Developers and QA testers can create multiple test accounts quickly to verify signup flows, email notifications, and onboarding sequences.' },
+              { title: 'Bypass Email Walls', desc: 'Access gated content, free downloads, whitepapers, and educational resources hidden behind email registration forms without compromising your real inbox.' }
             ].map((item, i) => (
               <div key={i} style={{ padding: '2rem', background: 'var(--bg-secondary)', borderRadius: '20px', border: '1px solid var(--border-color)' }}>
                 <h3 style={{ fontWeight: 800, marginBottom: '1rem', color: 'var(--accent-pink)' }}>{item.title}</h3>
@@ -1247,27 +1247,8 @@ export default function TempMail({
           {toast.message}
         </div>
 
-        <ToolContent
-          title="Temp Mail & Digital Privacy"
-          description="Disposable emails are more than just a way to avoid spam. They are a critical layer in your personal cybersecurity stack, preventing tracking and protecting your primary inbox from data breaches."
-          benefits={[
-            "Instantly bypass registration walls",
-            "Protect your identity from trackers",
-            "Prevent spam from polluting your real inbox",
-            "100% private and automated refreshing",
-            "High-speed delivery for verification codes",
-            "No logs, no tracking, complete anonymity",
-            "The best alternative to 10MinuteMail and Guerrilla Mail"
-          ]}
-          faq={tempMailFaqs}
-          relatedTools={[
-            { name: 'QR Scanner', path: '/qr-scanner' },
-            { name: 'Image Compressor', path: '/image-tools/compress' },
-            { name: 'PDF Protector', path: '/pdf-tools/protect' }
-          ]}
-          readNext={UTILITY_READ_NEXT['temp-mail']}
-        />
       </div>
+      <ShareTool title={seoTitle} />
     </>
   )
 }

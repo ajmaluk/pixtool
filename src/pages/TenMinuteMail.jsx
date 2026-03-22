@@ -28,9 +28,9 @@ export default function TenMinuteMail() {
   return (
     <TempMail
       seoPath="/temp-mail/10-minute-mail"
-      seoTitle="🔥 10 Minute Mail - Auto-Exp disposable Email | PixTool"
-      seoDescription="Free 10 minute mail - disposable inbox that auto-expires. Get verification codes & OTPs instantly. No signup needed. Best 10MinuteMail alternative!"
-      seoKeywords="10 minute mail, disposable email, throwaway email, temp mail 10 minutes, one-time email, anonymous email"
+      seoTitle="🔥 10 Minute Mail - Auto-Expiring Disposable Email | PixTool"
+      seoDescription="Free 10 minute mail with auto-expiring disposable inbox. Get verification codes, OTPs, and confirmation emails instantly. No signup needed. Best 10MinuteMail, 10minutemail & Guerrilla Mail alternative."
+      seoKeywords="10 minute mail, 10minutemail, 10 minute email, 10 minutes mail, 10 min mail, 5 minute mail, 10min mail, 10 minute mail with password, disposable email 10 minutes, throwaway email, temp mail 10 minutes, one-time email, auto expiring email, timed temporary email"
       storageNamespace="tenmin-mail"
       rotateTrigger={rotateCount}
       breadcrumbs={[

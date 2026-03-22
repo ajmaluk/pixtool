@@ -1,6 +1,6 @@
 import { Suspense, lazy, Component } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Routes, Route, Outlet, useLocation, Link } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
+import { Routes, Route, Outlet, useLocation, Link, Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -169,6 +169,7 @@ const MainLayout = () => {
       
       if (!Array.isArray(saved)) {
         localStorage.setItem('dt_recent_tools', '[]')
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setRecentTools([])
         return
       }
@@ -379,9 +380,19 @@ function App() {
         <Route path="/fake-email" element={<FakeEmail />} />
         <Route path="/disposable-email" element={<DisposableEmail />} />
         <Route path="/throwaway-email" element={<ThrowawayEmail />} />
+        <Route path="/image-tools" element={<ImageTools />} />
+        <Route path="/pdf-tools" element={<PdfTools />} />
+        <Route path="/qr-scanner" element={<QrScanner />} />
+        <Route path="/qr-generator" element={<QrGenerator />} />
         <Route path="/typing-test" element={<TypingTest />} />
         <Route path="/utility-tools" element={<UtilityTools />} />
         <Route path="/about" element={<About />} />
+
+        {/* Legacy SEO Redirects */}
+        <Route path="/convert-qr-to-url-online" element={<Navigate to="/qr-scanner" replace />} />
+        <Route path="/free-online-qr-code-scanner" element={<Navigate to="/qr-scanner" replace />} />
+        <Route path="/free-qr-code-scanner" element={<Navigate to="/qr-scanner" replace />} />
+        <Route path="/convert-url-to-qr-code-online" element={<Navigate to="/qr-generator" replace />} />
         <Route path="/founder" element={<Founder />} />
         <Route path="/developer" element={<Developer />} />
         <Route path="/services" element={<Services />} />

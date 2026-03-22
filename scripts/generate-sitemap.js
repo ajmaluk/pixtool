@@ -6,7 +6,7 @@ import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS } from '../src/data/tools.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SITE_URL = 'https://pixtool.toolpix.in';
+const SITE_URL = process.env.VITE_SITE_URL || 'https://pixtool.in';
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 const SITEMAP_PATH = path.join(PUBLIC_DIR, 'sitemap.xml');
 

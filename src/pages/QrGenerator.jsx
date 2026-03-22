@@ -122,8 +122,8 @@ export default function QrGenerator() {
     "applicationCategory": "UtilitiesApplication",
     "applicationSubCategory": "QR Generator",
     "operatingSystem": "All (Web Browser)",
-    "url": "https://pixtool.toolpix.in/qr-generator",
-    "image": "https://pixtool.toolpix.in/logo.png",
+    "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/qr-generator`,
+    "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`,
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -149,12 +149,12 @@ export default function QrGenerator() {
     "@type": "HowTo",
     "name": "How to Generate a QR Code for Free",
     "description": "Learn how to create custom QR codes for any purpose using our free online generator.",
-    "image": "https://pixtool.toolpix.in/logo.png",
+    "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`,
     "step": [
-      { "@type": "HowToStep", "name": "Select Type", "text": "Choose the data type: URL, WiFi, Email, Phone, or Plain Text.", "image": "https://pixtool.toolpix.in/logo.png" },
-      { "@type": "HowToStep", "name": "Enter Data", "text": "Input the information you want to encode into the QR code.", "image": "https://pixtool.toolpix.in/logo.png" },
-      { "@type": "HowToStep", "name": "Customize", "text": "Adjust size, foreground/background colors, and error correction levels.", "image": "https://pixtool.toolpix.in/logo.png" },
-      { "@type": "HowToStep", "name": "Download", "text": "Click 'Download PNG' to save your high-resolution QR code.", "image": "https://pixtool.toolpix.in/logo.png" }
+      { "@type": "HowToStep", "name": "Select Type", "text": "Choose the data type: URL, WiFi, Email, Phone, or Plain Text.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` },
+      { "@type": "HowToStep", "name": "Enter Data", "text": "Input the information you want to encode into the QR code.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` },
+      { "@type": "HowToStep", "name": "Customize", "text": "Adjust size, foreground/background colors, and error correction levels.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` },
+      { "@type": "HowToStep", "name": "Download", "text": "Click 'Download PNG' to save your high-resolution QR code.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` }
     ],
     "totalTime": "PT45S"
   }
@@ -225,9 +225,9 @@ export default function QrGenerator() {
   return (
     <>
       <SEO
-        title="Free QR Code Generator | Custom QR Maker - PixTool"
-        description="Create high-quality, professional QR codes for free. Generate QR codes for URLs, WiFi, emails, phone numbers, and text. High-resolution PNG output. 100% private and browser-based."
-        keywords="qr code generator, free qr maker, create qr code online, wifi qr code generator, url to qr code, high resolution qr code, dynamic qr code alternative, custom qr code free, QR Code Monkey alternative"
+        title="Free QR Code to Link Converter & Generator - PixTool"
+        description="Convert any link to a QR code for free. Professional QR code to link generator for URLs, WiFi, emails, and text. High-resolution PNG output. 100% private."
+        keywords="qr code to link, qr to link, convert qr code to link, qr code to url, qr to link converter, qr code to link converter online free, qrcode to link, qr to url, convert qr to link, qr to link generator, qr code to url converter, qr code to link generator, qrcode to url, url from qr code, extract link from qr code, qr code generator, free qr maker"
         path="/qr-generator"
         schema={[qrSchema, qrHowToSchema]}
         breadcrumbs={[
@@ -250,9 +250,6 @@ export default function QrGenerator() {
 
             <div className="page-hero">
               <div className="page-hero-content">
-                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-                  <ShareTool title="Free QR Code Generator | Custom QR Maker - PixTool" />
-                </div>
                 <h1 className="page-title">QR Generator</h1>
                 <p className="page-subtitle">
                   Create professional, high-resolution QR codes for links, WiFi, vCards, and more instantly.
@@ -474,6 +471,7 @@ export default function QrGenerator() {
           {toast.message}
         </div>
       </div>
+      <ShareTool title="Free QR Code Generator | Custom QR Maker - PixTool" />
     </>
   )
 }

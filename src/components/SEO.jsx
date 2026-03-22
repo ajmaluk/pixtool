@@ -21,7 +21,7 @@ export default function SEO({
     toolSteps = null,
     lastModified = null
 }) {
-    const siteUrl = 'https://pixtool.toolpix.in'
+    const siteUrl = import.meta.env.VITE_SITE_URL || 'https://pixtool.in'
     const siteName = 'PixTool by UTHAKKAN'
     const fullUrl = path === '/' ? siteUrl : `${siteUrl}${path.startsWith('/') ? path : `/${path}`}`
 
@@ -334,7 +334,7 @@ export default function SEO({
         if (breadcrumbItems.length === 0 && path !== '/') {
             const parts = path.split('/').filter(Boolean)
             let currentPath = ''
-            parts.forEach((part, idx) => {
+            parts.forEach((part) => {
                 currentPath += `/${part}`
                 const name = part.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
                 breadcrumbItems.push({ name, item: currentPath })
@@ -544,7 +544,7 @@ export default function SEO({
         })
 
         return schemasToInject
-    }, [title, description, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, articleSection, breadcrumbs, faqs, toolName, toolSteps, articleTags, type])
+    }, [title, description, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, articleSection, breadcrumbs, faqs, toolName, toolSteps, articleTags, type, lastModified])
 
     useEffect(() => {
         const brandTitle = title.includes('PixTool') ? title : `${title} | PixTool`
