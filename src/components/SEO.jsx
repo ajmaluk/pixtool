@@ -297,13 +297,20 @@ export default function SEO({
                 "@context": "https://schema.org",
                 "@type": "SocialMediaPosting",
                 "headline": title,
+                "datePublished": articlePublishedTime || '2026-03-01T00:00:00Z',
+                "dateModified": lastModified || new Date().toISOString(),
                 "author": {
                     "@type": "Person",
-                    "name": "Ajmal U K"
+                    "name": "Ajmal U K",
+                    "url": `${siteUrl}/founder`
                 },
                 "publisher": {
                     "@type": "Organization",
-                    "name": "UTHAKKAN"
+                    "name": "UTHAKKAN",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": `${siteUrl}/logo.png`
+                    }
                 },
                 "url": fullUrl,
                 "image": ogImage
