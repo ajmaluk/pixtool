@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
+// eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from 'framer-motion'
 import SEO from '../components/SEO'
 import {
@@ -63,6 +64,14 @@ export default function Home() {
 
   const allTools = [...imageTools, ...pdfTools, ...communicationTools]
 
+  // Interleave tools from different categories to mix them one after one
+  const mixedTools = [];
+  const maxLen = Math.max(imageTools.length, pdfTools.length, communicationTools.length);
+  for (let i = 0; i < maxLen; i++) {
+    if (i < imageTools.length) mixedTools.push({ ...imageTools[i], typeLabel: 'Image Tool' });
+    if (i < pdfTools.length) mixedTools.push({ ...pdfTools[i], typeLabel: 'PDF Tool' });
+    if (i < communicationTools.length) mixedTools.push({ ...communicationTools[i], typeLabel: 'Utility' });
+  }
   const filteredTools = allTools.filter(tool =>
     tool.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     tool.description.toLowerCase().includes(searchTerm.toLowerCase())
@@ -116,30 +125,30 @@ export default function Home() {
       "@type": "ItemList",
       "name": "Free Online Tools",
       "description": "Complete list of free online tools available at PixTool",
-      "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/sitemap`,
+      "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/sitemap`,
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Resize Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/image-tools/resize`, "description": "Change image dimensions by pixels or percentage" },
-        { "@type": "ListItem", "position": 2, "name": "Crop Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/image-tools/crop`, "description": "Crop images to any size or aspect ratio" },
-        { "@type": "ListItem", "position": 3, "name": "Rotate Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/image-tools/rotate`, "description": "Rotate and flip images" },
-        { "@type": "ListItem", "position": 4, "name": "Compress Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/image-tools/compress`, "description": "Reduce image file size" },
-        { "@type": "ListItem", "position": 5, "name": "Merge PDF", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/pdf-tools/merge`, "description": "Combine multiple PDFs into one" },
-        { "@type": "ListItem", "position": 6, "name": "Split PDF", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/pdf-tools/split`, "description": "Extract pages from PDF" },
-        { "@type": "ListItem", "position": 7, "name": "Compress PDF", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/pdf-tools/compress`, "description": "Reduce PDF file size" },
-        { "@type": "ListItem", "position": 8, "name": "PDF to Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/pdf-tools/convert`, "description": "Convert PDF to images" },
-        { "@type": "ListItem", "position": 9, "name": "Convert Image Format", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/image-tools/convert`, "description": "Convert between JPEG, PNG, WebP, GIF" },
-        { "@type": "ListItem", "position": 10, "name": "Add Watermark", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/image-tools/watermark`, "description": "Add text watermarks to images" },
-        { "@type": "ListItem", "position": 11, "name": "Flip Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/image-tools/flip`, "description": "Flip images horizontally or vertically" },
-        { "@type": "ListItem", "position": 12, "name": "Grayscale Converter", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/image-tools/grayscale`, "description": "Convert to black & white, sepia, or invert" },
-        { "@type": "ListItem", "position": 13, "name": "Protect PDF", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/pdf-tools/protect`, "description": "Add password protection to PDF" },
-        { "@type": "ListItem", "position": 14, "name": "Watermark PDF", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/pdf-tools/watermark`, "description": "Add text watermarks to PDF pages" },
-        { "@type": "ListItem", "position": 15, "name": "Reorder PDF Pages", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/pdf-tools/reorder`, "description": "Rearrange PDF pages" },
-        { "@type": "ListItem", "position": 16, "name": "Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/temp-mail`, "description": "Free disposable email address" },
-        { "@type": "ListItem", "position": 17, "name": "QR Code Generator", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/qr-generator`, "description": "Create QR codes" },
-        { "@type": "ListItem", "position": 18, "name": "QR Scanner", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/qr-scanner`, "description": "Scan QR codes" }
+        { "@type": "ListItem", "position": 1, "name": "Resize Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools/resize`, "description": "Change image dimensions by pixels or percentage" },
+        { "@type": "ListItem", "position": 2, "name": "Crop Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools/crop`, "description": "Crop images to any size or aspect ratio" },
+        { "@type": "ListItem", "position": 3, "name": "Rotate Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools/rotate`, "description": "Rotate and flip images" },
+        { "@type": "ListItem", "position": 4, "name": "Compress Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools/compress`, "description": "Reduce image file size" },
+        { "@type": "ListItem", "position": 5, "name": "Merge PDF", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools/merge`, "description": "Combine multiple PDFs into one" },
+        { "@type": "ListItem", "position": 6, "name": "Split PDF", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools/split`, "description": "Extract pages from PDF" },
+        { "@type": "ListItem", "position": 7, "name": "Compress PDF", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools/compress`, "description": "Reduce PDF file size" },
+        { "@type": "ListItem", "position": 8, "name": "PDF to Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools/convert`, "description": "Convert PDF to images" },
+        { "@type": "ListItem", "position": 9, "name": "Convert Image Format", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools/convert`, "description": "Convert between JPEG, PNG, WebP, GIF" },
+        { "@type": "ListItem", "position": 10, "name": "Add Watermark", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools/watermark`, "description": "Add text watermarks to images" },
+        { "@type": "ListItem", "position": 11, "name": "Flip Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools/flip`, "description": "Flip images horizontally or vertically" },
+        { "@type": "ListItem", "position": 12, "name": "Grayscale Converter", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools/grayscale`, "description": "Convert to black & white, sepia, or invert" },
+        { "@type": "ListItem", "position": 13, "name": "Protect PDF", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools/protect`, "description": "Add password protection to PDF" },
+        { "@type": "ListItem", "position": 14, "name": "Watermark PDF", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools/watermark`, "description": "Add text watermarks to PDF pages" },
+        { "@type": "ListItem", "position": 15, "name": "Reorder PDF Pages", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools/reorder`, "description": "Rearrange PDF pages" },
+        { "@type": "ListItem", "position": 16, "name": "Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail`, "description": "Free disposable email address" },
+        { "@type": "ListItem", "position": 17, "name": "QR Code Generator", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/qr-generator`, "description": "Create QR codes" },
+        { "@type": "ListItem", "position": 18, "name": "QR Scanner", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/qr-scanner`, "description": "Scan QR codes" }
       ].concat([
-        { "@type": "ListItem", "position": 19, "name": "10 Minute Mail", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/temp-mail/10-minute-mail`, "description": "Auto-expiring disposable email" },
-        { "@type": "ListItem", "position": 20, "name": "Change Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/temp-mail/change-email`, "description": "Generate a new temp email" },
-        { "@type": "ListItem", "position": 21, "name": "Typing Test", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/typing-test`, "description": "Online typing speed test (WPM)" }
+        { "@type": "ListItem", "position": 19, "name": "10 Minute Mail", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail/10-minute-mail`, "description": "Auto-expiring disposable email" },
+        { "@type": "ListItem", "position": 20, "name": "Change Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail/change-email`, "description": "Generate a new temp email" },
+        { "@type": "ListItem", "position": 21, "name": "Typing Test", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/typing-test`, "description": "Online typing speed test (WPM)" }
       ])
     },
     {
@@ -147,12 +156,12 @@ export default function Home() {
       "@type": "CollectionPage",
       "name": "Free Image Tools Collection",
       "description": "Complete suite of free online image editing tools including resize, crop, rotate, compress, convert, watermark, flip, and grayscale.",
-      "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/image-tools`,
+      "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools`,
       "hasPart": imageTools.map(t => ({
         "@type": "SoftwareApplication",
         "name": t.title,
         "description": t.description,
-        "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}${t.path}`,
+        "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}${t.path}`,
         "applicationCategory": "MultimediaApplication"
       }))
     },
@@ -161,12 +170,12 @@ export default function Home() {
       "@type": "CollectionPage",
       "name": "Free PDF Tools Collection",
       "description": "Complete suite of free online PDF tools including merge, split, compress, convert, protect, watermark, and reorder.",
-      "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/pdf-tools`,
+      "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools`,
       "hasPart": pdfTools.map(t => ({
         "@type": "SoftwareApplication",
         "name": t.title,
         "description": t.description,
-        "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}${t.path}`,
+        "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}${t.path}`,
         "applicationCategory": "BusinessApplication"
       }))
     }
@@ -190,12 +199,9 @@ export default function Home() {
       <div className="category-hub">
         <div className="hub-hero" style={{ 
           textAlign: 'center', 
-          padding: '6rem 2rem', 
-          marginBottom: '4rem', 
-          background: 'linear-gradient(135deg, var(--accent-glow) 0%, transparent 100%)', 
-          borderRadius: '48px',
-          position: 'relative',
-          overflow: 'hidden'
+          padding: 'clamp(2rem, 10vh, 4rem) 1.5rem', 
+          marginBottom: 'clamp(2rem, 5vw, 4rem)', 
+          position: 'relative'
         }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -315,7 +321,7 @@ export default function Home() {
               </AnimatePresence>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', opacity: 0.7, marginTop: '3rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1.5rem', opacity: 0.7, marginTop: 'clamp(1.5rem, 5vw, 3rem)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
                 <Shield size={18} style={{ color: 'var(--accent-green)' }} /> 100% Private
               </div>
@@ -329,11 +335,11 @@ export default function Home() {
           </motion.div>
         </div>
 
-      <section className="content-section" style={{ paddingBottom: '10rem' }}>
+      <section className="content-section" style={{ paddingBottom: 'clamp(4rem, 10vw, 10rem)' }}>
         <div className="container-pro">
           {isSearching ? (
             <div className="search-results" style={{ minHeight: '60vh' }}>
-              <div className="section-header" style={{ marginBottom: '3rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-secondary)', padding: '1.5rem 2rem', borderRadius: '20px', border: '1px solid var(--border-color)' }}>
+              <div className="section-header" style={{ marginBottom: '3rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-secondary)', padding: '1.5rem 1.5rem', borderRadius: '20px', border: '1px solid var(--border-color)' }}>
                 <div>
                   <h2 style={{ fontSize: '1.8rem', fontWeight: 900, marginBottom: '0.25rem' }}>Search Results</h2>
                   <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Found {filteredTools.length} professional tools for "{searchTerm}"</p>
@@ -369,38 +375,14 @@ export default function Home() {
             </div>
           ) : (
             <>
-              <div style={{ marginBottom: '2.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ padding: '0.6rem', background: 'rgba(168, 85, 247, 0.08)', borderRadius: '12px', color: 'var(--accent-purple)' }}>
-                  <Image size={24} />
+              <div style={{ marginBottom: 'clamp(1.5rem, 5vw, 2.5rem)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <div style={{ padding: '0.6rem', background: 'rgba(99, 102, 241, 0.08)', borderRadius: '12px', color: 'var(--accent-primary)' }}>
+                  <Zap size={24} />
                 </div>
-                <h2 style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '-0.02em' }}>Image Mastery</h2>
-              </div>
-              <div className="tools-grid" style={{ marginBottom: '4rem' }}>
-                {imageTools.map((tool) => (
-                  <ToolCard key={tool.path} tool={tool} />
-                ))}
-              </div>
-
-              <div style={{ marginBottom: '2.5rem', display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '6rem' }}>
-                <div style={{ padding: '0.6rem', background: 'rgba(59, 130, 246, 0.08)', borderRadius: '12px', color: 'var(--accent-cyan)' }}>
-                  <FileText size={24} />
-                </div>
-                <h2 style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '-0.02em' }}>PDF Powerhouse</h2>
-              </div>
-              <div className="tools-grid" style={{ marginBottom: '4rem' }}>
-                {pdfTools.map((tool) => (
-                  <ToolCard key={tool.path} tool={tool} />
-                ))}
-              </div>
-
-              <div style={{ marginBottom: '2.5rem', display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '6rem' }}>
-                <div style={{ padding: '0.6rem', background: 'rgba(16, 185, 129, 0.08)', borderRadius: '12px', color: 'var(--accent-green)' }}>
-                  <Wifi size={24} />
-                </div>
-                <h2 style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '-0.02em' }}>Daily Tools</h2>
+                <h2 style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '-0.02em' }}>Professional Tools Suite</h2>
               </div>
               <div className="tools-grid">
-                {communicationTools.map((tool) => (
+                {mixedTools.map((tool) => (
                   <ToolCard key={tool.path} tool={tool} />
                 ))}
               </div>
@@ -408,7 +390,7 @@ export default function Home() {
           )}
         </div>
 
-          <div className="container-pro" style={{ marginTop: '8rem', padding: '4rem', background: 'var(--bg-secondary)', borderRadius: '32px', textAlign: 'left' }}>
+          <div className="container-pro" style={{ marginTop: 'clamp(4rem, 10vw, 8rem)', padding: 'clamp(2rem, 5vw, 4rem) 1.5rem', background: 'var(--bg-secondary)', borderRadius: '32px', textAlign: 'left' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '4rem' }}>
               <div>
                 <h2 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '1.5rem' }}>Why Choose PixTool?</h2>
@@ -474,7 +456,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+            <div className="use-case-grid">
               {[
                 {
                   title: 'For Remote Professionals',
@@ -511,6 +493,18 @@ export default function Home() {
                   description: 'Create WiFi QR codes for customers, keep invoices organized by merging PDFs, and protect brand assets with watermarks.',
                   icon: '💼',
                   tools: ['WiFi QR', 'Merge PDF', 'Watermark']
+                },
+                {
+                  title: 'For Graphic Designers',
+                  description: 'Convert heavy client assets to optimized formats instantly and watermark your portfolio pieces before sharing them securely.',
+                  icon: '🎨',
+                  tools: ['Format Convert', 'Watermark', 'Crop Tool']
+                },
+                {
+                  title: 'For Sales Teams',
+                  description: 'Merge personalized sales decks with confidential pricing sheets instantly, all without uploading prospect data to the cloud.',
+                  icon: '📈',
+                  tools: ['Merge PDF', 'Split PDF', 'Protect PDF']
                 }
               ].map((useCase, idx) => (
                 <motion.div
@@ -542,7 +536,7 @@ export default function Home() {
           </div>
 
           {/* Extended SEO Content — FAQ Section */}
-          <div className="container-pro" style={{ marginTop: '6rem', maxWidth: '1000px', margin: '6rem auto 0' }}>
+          <div className="container-pro" style={{ marginTop: '6rem', maxWidth: '100%', margin: '6rem auto 0' }}>
             <h2 style={{ fontSize: '2.5rem', fontWeight: 900, textAlign: 'center', marginBottom: '1rem' }}>Frequently Asked Questions</h2>
             <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginBottom: '3rem', fontSize: '1.1rem' }}>Everything you need to know about PixTool</p>
 
@@ -563,73 +557,73 @@ export default function Home() {
 
           {/* Additional SEO paragraph - Expanded for Maximum Ranking */}
           <div className="container-pro" style={{ marginTop: '5rem', textAlign: 'center' }}>
-            <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 900, marginBottom: '2rem', letterSpacing: '-0.04em', lineHeight: 1.1 }}>
+            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
               The Professional All-In-One <br /><span style={{ color: 'var(--accent-primary)' }}>Online Productivity Suite</span>
             </h2>
-            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.2rem', maxWidth: '800px', margin: '0 auto 4rem' }}>
+            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, fontSize: '1.05rem', maxWidth: '800px', margin: '0 auto 3rem' }}>
               PixTool is the premier high-performance platform for <b>free online image editing</b>,
               <b>advanced PDF management</b>, and <b>secure web utilities</b> — architected for professionals who demand <b>industry-standard quality</b> without the compromise of server uploads.
             </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem', marginBottom: '5rem', textAlign: 'left' }}>
-              <div style={{ padding: '3rem', background: 'var(--bg-glass)', borderRadius: '32px', border: '1px solid var(--border-color)', backdropFilter: 'blur(20px)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                  <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: 'rgba(168, 85, 247, 0.1)', color: '#a855f7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '4rem', textAlign: 'left' }}>
+              <div style={{ padding: '2rem', background: 'var(--bg-glass)', borderRadius: '24px', border: '1px solid var(--border-color)', backdropFilter: 'blur(20px)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                  <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(168, 85, 247, 0.1)', color: '#a855f7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Image size={24} />
                   </div>
-                  <h3 style={{ fontSize: '1.5rem', fontWeight: 800 }}>Image Mastery</h3>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0 }}>Image Mastery</h3>
                 </div>
-                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, fontSize: '0.95rem', marginBottom: '1.5rem' }}>
                   Looking for <b>free image resize online</b>? Our browser-based engine lets you <Link to="/image-tools/resize" style={{ color: 'inherit', textDecoration: 'underline' }}><b>resize images for Etsy</b></Link>, <Link to="/image-tools/compress" style={{ color: 'inherit', textDecoration: 'underline' }}><b>compress photos for WordPress</b></Link>, and <Link to="/image-tools/convert" style={{ color: 'inherit', textDecoration: 'underline' }}><b>convert to WebP</b></Link> without any quality loss. It's the ultimate <b>Squoosh alternative</b> for batch processing.
                 </p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
                   {['Lossless Compression', 'Batch Resize', 'Magic Crop', 'Format Conversion'].map(tag => (
-                    <span key={tag} style={{ padding: '0.4rem 0.8rem', background: 'var(--bg-primary)', borderRadius: '100px', fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', border: '1px solid var(--border-color)' }}>{tag}</span>
+                    <span key={tag} style={{ padding: '0.3rem 0.6rem', background: 'var(--bg-primary)', borderRadius: '100px', fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', border: '1px solid var(--border-color)' }}>{tag}</span>
                   ))}
                 </div>
               </div>
 
-              <div style={{ padding: '3rem', background: 'var(--bg-glass)', borderRadius: '32px', border: '1px solid var(--border-color)', backdropFilter: 'blur(20px)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                  <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ padding: '2rem', background: 'var(--bg-glass)', borderRadius: '24px', border: '1px solid var(--border-color)', backdropFilter: 'blur(20px)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                  <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <FileText size={24} />
                   </div>
-                  <h3 style={{ fontSize: '1.5rem', fontWeight: 800 }}>PDF Powerhouse</h3>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0 }}>PDF Powerhouse</h3>
                 </div>
-                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, fontSize: '0.95rem', marginBottom: '1.5rem' }}>
                   The <b>best free alternative to Adobe Acrobat Pro</b>. Easily <Link to="/pdf-tools/merge" style={{ color: 'inherit', textDecoration: 'underline' }}><b>merge PDFs without uploading</b></Link>, <Link to="/pdf-tools/compress" style={{ color: 'inherit', textDecoration: 'underline' }}><b>compress PDF online free</b></Link>, and <b>protect documents</b> with military-grade encryption. Perfect for <b>splitting legal documents</b> and <b>merging invoices</b> securely.
                 </p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
                   {['PDF Merge', 'Secure Split', 'Smart Compress', 'Password Protect'].map(tag => (
-                    <span key={tag} style={{ padding: '0.4rem 0.8rem', background: 'var(--bg-primary)', borderRadius: '100px', fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', border: '1px solid var(--border-color)' }}>{tag}</span>
+                    <span key={tag} style={{ padding: '0.3rem 0.6rem', background: 'var(--bg-primary)', borderRadius: '100px', fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', border: '1px solid var(--border-color)' }}>{tag}</span>
                   ))}
                 </div>
               </div>
 
-              <div style={{ padding: '3rem', background: 'var(--bg-glass)', borderRadius: '32px', border: '1px solid var(--border-color)', backdropFilter: 'blur(20px)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                  <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ padding: '2rem', background: 'var(--bg-glass)', borderRadius: '24px', border: '1px solid var(--border-color)', backdropFilter: 'blur(20px)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                  <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Shield size={24} />
                   </div>
-                  <h3 style={{ fontSize: '1.5rem', fontWeight: 800 }}>Privacy Utilities</h3>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0 }}>Privacy Utilities</h3>
                 </div>
-                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, fontSize: '0.95rem', marginBottom: '1.5rem' }}>
                   Our <b>free temp mail generator</b> is the leading <b>secure email alternative</b> for privacy advocates. Generate <Link to="/qr-generator" style={{ color: 'inherit', textDecoration: 'underline' }}><b>WiFi QR codes</b></Link>, <Link to="/qr-scanner" style={{ color: 'inherit', textDecoration: 'underline' }}><b>scan codes instantly</b></Link>, or use <Link to="/temp-mail" style={{ color: 'inherit', textDecoration: 'underline' }}><b>disposable email for business</b></Link>. Everything operates 100% <b>offline after initial load</b> for zero-leak privacy.
                 </p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
                   {['Disposable Mail', 'QR Scanner', 'QR Generator', 'Typing Speed'].map(tag => (
-                    <span key={tag} style={{ padding: '0.4rem 0.8rem', background: 'var(--bg-primary)', borderRadius: '100px', fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', border: '1px solid var(--border-color)' }}>{tag}</span>
+                    <span key={tag} style={{ padding: '0.3rem 0.6rem', background: 'var(--bg-primary)', borderRadius: '100px', fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', border: '1px solid var(--border-color)' }}>{tag}</span>
                   ))}
                 </div>
               </div>
             </div>
 
             {/* Comparison Table / Benchmarks */}
-            <div className="container-pro" style={{ padding: '4rem', background: 'var(--text-primary)', color: 'var(--bg-primary)', borderRadius: '40px', marginBottom: '6rem', textAlign: 'left', position: 'relative', overflow: 'hidden' }}>
+            <div className="container-pro" style={{ padding: 'clamp(2rem, 5vw, 4rem) 1.5rem', background: 'var(--text-primary)', color: 'var(--bg-primary)', borderRadius: '40px', marginBottom: 'clamp(3rem, 8vw, 6rem)', textAlign: 'left', position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'absolute', top: '-100px', right: '-100px', width: '300px', height: '300px', background: 'var(--accent-primary)', filter: 'blur(150px)', opacity: 0.2 }}></div>
               <div style={{ maxWidth: '800px' }}>
                 <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.03em' }}>Why Professionals Switch to PixTool</h2>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'clamp(1.5rem, 5vw, 3rem)' }}>
                   <div>
                     <h4 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       <span style={{ color: '#ef4444' }}>✕</span> Other Online Tools
@@ -684,7 +678,7 @@ export default function Home() {
             </div>
 
             {/* Technical Authority Section - High-Value E-E-A-T Content */}
-            <div className="container-pro" style={{ marginTop: '6rem', padding: '4rem 2rem', background: 'var(--bg-secondary)', borderRadius: '40px', border: '1px solid var(--border-color)', textAlign: 'center' }}>
+            <div className="container-pro" style={{ marginTop: 'clamp(3rem, 8vw, 6rem)', padding: 'clamp(2rem, 5vw, 4rem) 1.5rem', background: 'var(--bg-secondary)', borderRadius: '40px', border: '1px solid var(--border-color)', textAlign: 'center' }}>
               <div style={{ marginBottom: '3rem' }}>
                 <h2 style={{ fontSize: '2.8rem', fontWeight: 900, marginBottom: '1rem', letterSpacing: '-0.02em' }}>Technical <span style={{ color: 'var(--accent-primary)' }}>Authority</span></h2>
                 <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto' }}>
@@ -734,34 +728,26 @@ export default function Home() {
                 </p>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', textAlign: 'left' }}>
-                {posts.slice(0, 3).map((post) => (
+              <div className="blog-grid">
+                {posts.slice(0, 4).map((post) => (
                   <motion.div
                     key={post.slug}
                     whileHover={{ y: -10 }}
-                    style={{
-                      background: 'var(--bg-glass)',
-                      borderRadius: '32px',
-                      border: '1px solid var(--border-color)',
-                      overflow: 'hidden',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      transition: 'all 0.3s ease'
-                    }}
+                    className="blog-card"
                   >
-                    <div style={{ height: '200px', overflow: 'hidden' }}>
+                    <div className="blog-card-img-container">
                       <img src={post.image} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
-                    <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{post.category}</span>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{post.date}</span>
+                    <div className="blog-card-content">
+                      <div className="blog-card-meta">
+                        <span className="blog-card-category">{post.category}</span>
+                        <span className="blog-card-date">{post.date}</span>
                       </div>
-                      <h3 style={{ fontSize: '1.3rem', fontWeight: 800, marginBottom: '1rem', lineHeight: 1.4, color: 'var(--text-primary)' }}>{post.title}</h3>
-                      <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '2rem', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                      <h3 className="blog-card-title">{post.title}</h3>
+                      <p className="blog-card-excerpt">
                         {post.excerpt}
                       </p>
-                      <Link to={`/blog/${post.slug}`} style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 700, fontSize: '0.95rem' }}>
+                      <Link to={`/blog/${post.slug}`} className="blog-card-link">
                         Read Article <Navigation size={16} style={{ transform: 'rotate(90deg)' }} />
                       </Link>
                     </div>

@@ -22,8 +22,8 @@ User-agent: BingPreview
 Allow: /
 
 # Sitemap
-Sitemap: https://pixtool.toolpix.in/sitemap.xml
-Sitemap: https://pixtool.toolpix.in/llms.txt
+Sitemap: https://www.pixtool.in/sitemap.xml
+Sitemap: https://www.pixtool.in/llms.txt
 
 # Media Crawlers
 User-agent: Googlebot-Image

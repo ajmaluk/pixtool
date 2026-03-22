@@ -120,19 +120,19 @@ export default function BlogPost() {
                 "author": {
                     "@type": "Person",
                     "name": post.author,
-                    "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/founder`
+                    "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/founder`
                 },
                 "publisher": {
                     "@type": "Organization",
                     "name": "PixTool by UTHAKKAN",
                     "logo": {
                         "@type": "ImageObject",
-                        "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`
+                        "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`
                     }
                 },
                 "mainEntityOfPage": {
                     "@type": "WebPage",
-                    "@id": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/blog/${post.slug}`
+                    "@id": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/blog/${post.slug}`
                 },
                 "wordCount": post.excerpt.split(' ').length * 10,
                 "articleSection": "Technology",
@@ -154,19 +154,19 @@ export default function BlogPost() {
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                        "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                     },
                     {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Blog",
-                        "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/blog`
+                        "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/blog`
                     },
                     {
                         "@type": "ListItem",
                         "position": 3,
                         "name": post.title,
-                        "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/blog/${post.slug}`
+                        "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/blog/${post.slug}`
                     }
                 ]
             }
@@ -376,7 +376,7 @@ export default function BlogPost() {
                                 className="btn btn-primary"
                                 style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
                                 onClick={() => {
-                                    const shareUrl = `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/blog/${post.slug}`;
+                                    const shareUrl = `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/blog/${post.slug}`;
                                     if (navigator.share) {
                                         navigator.share({
                                             title: post.title,

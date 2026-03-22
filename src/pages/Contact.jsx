@@ -38,15 +38,15 @@ export default function Contact() {
             "@type": "ContactPage",
             "name": "Contact PixTool Support & UTHAKKAN",
             "description": "Get in touch with the PixTool team for technical support, tool suggestions, custom development services, or business inquiries.",
-            "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/contact`,
+            "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/contact`,
             "mainEntity": {
                 "@type": "Organization",
                 "name": "UTHAKKAN Digital",
-                "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}`,
-                "email": "contact.uthakkan@gmail.com",
+                "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}`,
+                "email": "contact@uthakkan.com",
                 "contactPoint": {
                     "@type": "ContactPoint",
-                    "email": "contact.uthakkan@gmail.com",
+                    "email": "contact@uthakkan.com",
                     "contactType": "customer service",
                     "availableLanguage": "English"
                 }
@@ -60,13 +60,13 @@ export default function Contact() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Contact",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/contact`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/contact`
                 }
             ]
         }
@@ -105,7 +105,7 @@ export default function Contact() {
                                     </div>
                                     <div>
                                         <h3 style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--text-primary)' }}>Email Us</h3>
-                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>contact.uthakkan@gmail.com</p>
+                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>contact@uthakkan.com</p>
                                     </div>
                                 </div>
                             </div>

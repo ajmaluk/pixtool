@@ -21,7 +21,7 @@ export default function SEO({
     toolSteps = null,
     lastModified = null
 }) {
-    const siteUrl = import.meta.env.VITE_SITE_URL || 'https://pixtool.in'
+    const siteUrl = import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'
     const siteName = 'PixTool by UTHAKKAN'
     const fullUrl = path === '/' ? siteUrl : `${siteUrl}${path.startsWith('/') ? path : `/${path}`}`
 
@@ -116,7 +116,7 @@ export default function SEO({
                 ],
                 "contactPoint": {
                     "@type": "ContactPoint",
-                    "email": "contact.uthakkan@gmail.com",
+                    "email": "contact@uthakkan.com",
                     "contactType": "customer service",
                     "availableLanguage": ["English"]
                 },

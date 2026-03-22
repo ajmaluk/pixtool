@@ -122,8 +122,8 @@ export default function QrGenerator() {
     "applicationCategory": "UtilitiesApplication",
     "applicationSubCategory": "QR Generator",
     "operatingSystem": "All (Web Browser)",
-    "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/qr-generator`,
-    "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`,
+    "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/qr-generator`,
+    "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -149,12 +149,12 @@ export default function QrGenerator() {
     "@type": "HowTo",
     "name": "How to Generate a QR Code for Free",
     "description": "Learn how to create custom QR codes for any purpose using our free online generator.",
-    "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`,
+    "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
     "step": [
-      { "@type": "HowToStep", "name": "Select Type", "text": "Choose the data type: URL, WiFi, Email, Phone, or Plain Text.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` },
-      { "@type": "HowToStep", "name": "Enter Data", "text": "Input the information you want to encode into the QR code.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` },
-      { "@type": "HowToStep", "name": "Customize", "text": "Adjust size, foreground/background colors, and error correction levels.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` },
-      { "@type": "HowToStep", "name": "Download", "text": "Click 'Download PNG' to save your high-resolution QR code.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` }
+      { "@type": "HowToStep", "name": "Select Type", "text": "Choose the data type: URL, WiFi, Email, Phone, or Plain Text.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` },
+      { "@type": "HowToStep", "name": "Enter Data", "text": "Input the information you want to encode into the QR code.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` },
+      { "@type": "HowToStep", "name": "Customize", "text": "Adjust size, foreground/background colors, and error correction levels.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` },
+      { "@type": "HowToStep", "name": "Download", "text": "Click 'Download PNG' to save your high-resolution QR code.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` }
     ],
     "totalTime": "PT45S"
   }

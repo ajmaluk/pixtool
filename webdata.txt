@@ -3,11 +3,11 @@
 ================================================================================
 
 WEBSITE NAME:       PixTool
-DOMAIN:             https://pixtool.toolpix.in
+DOMAIN:             https://www.pixtool.in
 TAGLINE:            Free Online Image & PDF Tools | No Uploads Required
 TECHNOLOGY:         Vite + React (SPA), JavaScript, CSS
 FONT:               Inter (Google Fonts)
-LOGO:               https://pixtool.toolpix.in/logo.png
+LOGO:               https://www.pixtool.in/logo.png
 PWA:                Yes (mobile-web-app-capable)
 
 ================================================================================
@@ -251,7 +251,7 @@ Processing:         100% client-side (Canvas API for images)
                        LAST UPDATED
 ================================================================================
 
-Date:               2026-02-25
+Date:               2026-03-23
 Total Pages:        48 URLs
 Total Tools:        18 (8 image + 7 PDF + 3 utility)
 Blog Posts:         5

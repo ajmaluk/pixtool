@@ -16,8 +16,8 @@ export default function About() {
                 "@type": "Organization",
                 "name": "Uthakkan",
                 "url": "https://www.uthakkan.in",
-                "logo": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`,
-                "email": "contact.uthakkan@gmail.com",
+                "logo": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
+                "email": "contact@uthakkan.com",
                 "foundingDate": "2025",
                 "founder": {
                     "@type": "Person",
@@ -44,13 +44,13 @@ export default function About() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "About",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/about`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/about`
                 }
             ]
         }

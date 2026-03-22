@@ -33,13 +33,13 @@ export default function CaseStudies() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Case Studies",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/case-studies`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/case-studies`
                 }
             ]
         }

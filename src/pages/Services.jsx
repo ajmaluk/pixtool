@@ -102,13 +102,13 @@ export default function Services() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Services",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/services`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/services`
                 }
             ]
         }
@@ -252,7 +252,7 @@ export default function Services() {
                             <Motion.a
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                href="mailto:contact.uthakkan@gmail.com"
+                                href="mailto:contact@uthakkan.com"
                                 className="btn"
                                 style={{
                                     background: 'white',

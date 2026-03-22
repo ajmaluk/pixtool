@@ -112,6 +112,30 @@ export default function PdfTools() {
     "free pdf merger online, split pdf without upload, compress pdf securely, online pdf tools free, merge pdf files, secure pdf editor"
   const canonicalPath = activeTool ? `/pdf-tools/${activeTool}` : "/pdf-tools"
 
+  const pdfHubSchema = activeTool ? null : [
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Free Secure PDF Tools - PixTool",
+        "description": pageDescription,
+        "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools`
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": tools.map((tool, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "item": {
+                "@type": "SoftwareApplication",
+                "name": tool.title,
+                "description": tool.description,
+                "applicationCategory": "BusinessApplication"
+            }
+        }))
+    }
+  ];
+
   const renderSidebarSettings = () => (
     <div className="sidebar-settings-content">
       <div className="settings-header">
@@ -343,6 +367,7 @@ export default function PdfTools() {
         description={pageDescription}
         keywords={pageKeywords}
         path={canonicalPath}
+        schema={pdfHubSchema}
         toolName={activeToolData?.title}
         toolSteps={seoContent?.howTo}
         faqs={seoContent?.faq}

@@ -83,8 +83,8 @@ export default function QrScanner() {
     "applicationCategory": "UtilitiesApplication",
     "applicationSubCategory": "QR Scanner",
     "operatingSystem": "All (Web Browser)",
-    "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/qr-scanner`,
-    "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`,
+    "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/qr-scanner`,
+    "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -110,11 +110,11 @@ export default function QrScanner() {
     "@type": "HowTo",
     "name": "How to Scan a QR Code Online for Free",
     "description": "Learn how to scan QR codes using your device camera or by uploading an image in your browser.",
-    "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`,
+    "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
     "step": [
-      { "@type": "HowToStep", "name": "Open Scanner", "text": "Click 'Start Scanning' to activate your device camera.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` },
-      { "@type": "HowToStep", "name": "Point Camera", "text": "Point your camera at the QR code you want to scan.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` },
-      { "@type": "HowToStep", "name": "View Result", "text": "The scanned content will appear on screen. Click to open links or copy text.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` }
+      { "@type": "HowToStep", "name": "Open Scanner", "text": "Click 'Start Scanning' to activate your device camera.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` },
+      { "@type": "HowToStep", "name": "Point Camera", "text": "Point your camera at the QR code you want to scan.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` },
+      { "@type": "HowToStep", "name": "View Result", "text": "The scanned content will appear on screen. Click to open links or copy text.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` }
     ],
     "totalTime": "PT20S"
   }

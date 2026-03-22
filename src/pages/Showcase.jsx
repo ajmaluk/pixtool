@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ExternalLink, Camera, Image, FileText, Settings } from 'lucide-react';
+import { ExternalLink, Camera, Image as ImageIcon, FileText, Settings, ArrowRight } from 'lucide-react';
 import SEO from '../components/SEO';
-import Breadcrumbs from '../components/Breadcrumbs';
 
 const SCREENSHOTS = [
   // Hubs
@@ -43,132 +43,146 @@ const SCREENSHOTS = [
   { id: 'typing-test', title: 'Typing Test', category: 'Utility', path: '/typing-test', img: '/screenshots/professional-typing-speed-test-online.png' },
 ];
 
+const ShowcaseCard = ({ item, index }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.05, duration: 0.5 }}
+    >
+      <div style={{ position: 'relative', height: '100%' }}>
+        <Link
+          to={item.path}
+          className="blog-card"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+            textDecoration: 'none',
+            color: 'inherit',
+            background: 'var(--bg-card)',
+            borderRadius: '32px',
+            border: '1px solid var(--border-color)',
+            overflow: 'hidden',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            boxShadow: 'var(--shadow-sm)'
+          }}
+        >
+          <div style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
+            <img
+              src={item.img}
+              alt={item.title}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
+              className="blog-image"
+            />
+            <div style={{ position: 'absolute', top: '1rem', left: '1rem' }}>
+              <span className="blog-card-category" style={{
+                background: 'rgba(255, 255, 255, 0.9)',
+                backdropFilter: 'blur(10px)',
+                color: '#000',
+                padding: '4px 12px',
+                borderRadius: '100px',
+                fontSize: '0.7rem',
+                fontWeight: 800,
+                textTransform: 'uppercase'
+              }}>
+                {item.category}
+              </span>
+            </div>
+          </div>
+          <div style={{ padding: 'clamp(1rem, 3vw, 2rem)', display: 'flex', flexDirection: 'column', flex: 1 }}>
+            <h3 className="blog-card-title" style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.75rem', lineHeight: 1.3 }}>{item.title}</h3>
+            <p className="blog-card-excerpt" style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '1.5rem', flex: 1 }}>
+              Professional UI preview for the {item.title}. Engineered for speed and 100% browser-based local processing.
+            </p>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              color: 'var(--accent-primary)',
+              fontWeight: 800,
+              fontSize: '0.9rem'
+            }} className="read-article">
+              Open Tool <ArrowRight size={16} className="arrow" />
+            </div>
+          </div>
+        </Link>
+      </div>
+    </motion.div>
+  );
+};
+
 export default function Showcase() {
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  
+  const categories = Array.from(new Set(SCREENSHOTS.map(s => s.category)));
+  const filtered = selectedCategory 
+    ? SCREENSHOTS.filter(s => s.category === selectedCategory) 
+    : SCREENSHOTS;
+
   return (
     <div className="showcase-page">
       <SEO 
         title="Visual Showcase & Tool Previews | PixTool"
         description="Explore the full visual library of PixTool. Preview our Image Studio, PDF Expert, and Utility Suite interfaces before you use them. 100% private and professional."
-        keywords="pixtool showcase, tool previews, image studio gallery, pdf suite screenshots, utility tool interfaces, web tool visual library"
         path="/showcase"
-        toolName="Visual Showcase"
       />
 
-      <div className="container-pro" style={{ padding: '4rem 2rem' }}>
-        <Breadcrumbs items={[{ name: 'Showcase', item: '/showcase' }]} />
-        
-        <header style={{ marginBottom: '4rem', textAlign: 'center' }}>
+      <section className="hero" style={{ padding: 'clamp(5rem, 15vh, 8rem) 1.5rem 5rem', background: 'var(--bg-secondary)', marginBottom: '4rem' }}>
+        <div style={{ maxWidth: '100%', margin: '0 auto', textAlign: 'center' }}>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="page-hero-content"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
           >
-            <h1 className="page-title" style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>
-              Visual <span style={{ color: 'var(--accent-primary)' }}>Showcase</span>
-            </h1>
-            <p className="page-subtitle" style={{ maxWidth: '800px', margin: '0 auto' }}>
-              A comprehensive gallery of our professional tool interfaces. Each tool is designed for maximum efficiency, 
-              running 100% locally in your browser for ultimate privacy and speed.
+            <div className="status-badge" style={{ margin: '0 auto 1.5rem', width: 'fit-content', background: 'var(--accent-glow)', color: 'var(--accent-primary)', fontWeight: 700 }}>
+              VISUAL GALLERY
+            </div>
+            <h1 className="hero-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>Visual Showcase</h1>
+            <p className="hero-subtitle" style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
+              A comprehensive gallery of our professional tool interfaces, engineered for efficiency and privacy.
             </p>
           </motion.div>
-        </header>
-
-        <div className="showcase-grid" style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
-          gap: '2.5rem'
-        }}>
-          {SCREENSHOTS.map((item, index) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.05 }}
-              whileHover={{ y: -8 }}
-              className="tool-card"
-              style={{
-                padding: 0,
-                overflow: 'hidden',
-                background: 'var(--bg-glass)',
-                border: '1px solid var(--border-color)',
-                borderRadius: '24px',
-                display: 'flex',
-                flexDirection: 'column'
-              }}
-            >
-              <div style={{
-                aspectRatio: '16/9',
-                overflow: 'hidden',
-                background: 'var(--bg-secondary)',
-                position: 'relative'
-              }}>
-                <img 
-                  src={item.img} 
-                  alt={`${item.title} interface preview - PixTool ${item.category} category`} 
-                  loading="lazy"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    transition: 'transform 0.5s ease'
-                  }}
-                  onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
-                  onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
-                />
-                <div style={{
-                  position: 'absolute',
-                  top: '1rem',
-                  right: '1rem',
-                  padding: '0.5rem 1rem',
-                  background: 'var(--bg-glass)',
-                  backdropFilter: 'blur(12px)',
-                  borderRadius: '12px',
-                  fontSize: '0.75rem',
-                  fontWeight: 800,
-                  color: 'var(--accent-primary)',
-                  border: '1px solid var(--accent-primary)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em'
-                }}>
-                  {item.category}
-                </div>
-              </div>
-              
-              <div style={{ padding: '2rem' }}>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 900, marginBottom: '0.5rem' }}>{item.title}</h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-                  Professional UI preview for the {item.title}. Engineered for speed and 100% browser-based processing.
-                </p>
-                <Link 
-                  to={item.path}
-                  className="btn btn-primary"
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.75rem',
-                    textDecoration: 'none'
-                  }}
-                >
-                  <ExternalLink size={18} /> Open Tool
-                </Link>
-              </div>
-            </motion.div>
-          ))}
         </div>
+      </section>
 
-        <section style={{ marginTop: '8rem', textAlign: 'center' }}>
-          <div style={{
-            background: 'linear-gradient(135deg, var(--bg-glass) 0%, rgba(99, 102, 241, 0.05) 100%)',
-            padding: '4rem',
-            borderRadius: '40px',
-            border: '1px solid var(--border-color)',
-            maxWidth: '1000px',
-            margin: '0 auto'
-          }}>
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1.5rem' }}>Professional Quality, Guaranteed</h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '3rem' }}>
+      <section style={{ padding: '0 1.5rem 10rem', width: '100%', overflowX: 'hidden' }}>
+        <div style={{ width: '100%' }}>
+          <div className="blog-tags-scroll" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'nowrap', overflowX: 'auto', paddingBottom: '1rem', marginBottom: '1.5rem', WebkitOverflowScrolling: 'touch' }}>
+            {[null, ...categories].map(cat => (
+              <button
+                key={cat || 'all'}
+                className={`btn ${selectedCategory === cat ? 'btn-primary' : 'btn-secondary'}`}
+                style={{ padding: '0.4rem 1.25rem', fontSize: '0.85rem', flexShrink: 0, whiteSpace: 'nowrap', borderRadius: '100px', ...(selectedCategory === cat ? { background: 'var(--accent-primary)', borderColor: 'var(--accent-primary)', color: 'white' } : {}) }}
+                onClick={() => setSelectedCategory(cat)}
+              >
+                {cat || 'All Tools'}
+              </button>
+            ))}
+          </div>
+
+          <div className="blog-grid">
+            {filtered.map((item, index) => (
+              <ShowcaseCard key={item.id} item={item} index={index} />
+            ))}
+          </div>
+
+          <section style={{ marginTop: '8rem', textAlign: 'center', padding: '5rem 2rem', background: 'var(--bg-secondary)', borderRadius: '48px', border: '1px solid var(--border-color)' }}>
+            <div style={{
+              width: '80px',
+              height: '80px',
+              background: 'var(--bg-card)',
+              borderRadius: '24px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 2rem',
+              boxShadow: 'var(--shadow-md)'
+            }}>
+              <ImageIcon size={32} style={{ color: 'var(--accent-primary)' }} />
+            </div>
+            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.01em' }}>Professional Quality, Guaranteed</h2>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '3rem', maxWidth: '700px', margin: '0 auto 3rem', fontSize: '1.1rem', lineHeight: 1.8 }}>
               All PixTool are built with a focus on performance, security, and user experience. 
               Our interfaces are responsive, accessible, and designed to make your daily digital tasks effortless.
             </p>
@@ -178,7 +192,7 @@ export default function Showcase() {
                 <div style={{ fontWeight: 800 }}>High Res</div>
               </div>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ color: 'var(--accent-primary)', marginBottom: '1rem' }}><Image size={32} /></div>
+                <div style={{ color: 'var(--accent-primary)', marginBottom: '1rem' }}><ImageIcon size={32} /></div>
                 <div style={{ fontWeight: 800 }}>Optimized</div>
               </div>
               <div style={{ textAlign: 'center' }}>
@@ -190,9 +204,42 @@ export default function Showcase() {
                 <div style={{ fontWeight: 800 }}>Pro Tools</div>
               </div>
             </div>
-          </div>
-        </section>
-      </div>
+          </section>
+        </div>
+      </section>
+
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        .blog-card:hover { transform: translateY(-10px); border-color: var(--accent-primary); box-shadow: 0 30px 60px rgba(59, 130, 246, 0.1); }
+        .blog-card:hover .blog-image { transform: scale(1.1); }
+        .blog-card:hover .read-article { gap: 12px; }
+        .blog-card:hover .arrow { transform: translateX(5px); }
+        .read-article { transition: all 0.3s ease; }
+        .arrow { transition: all 0.3s ease; }
+        .blog-tags-scroll::-webkit-scrollbar { display: none; }
+        .blog-tags-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .blog-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+        @media (max-width: 1200px) {
+            .blog-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        }
+        @media (max-width: 992px) {
+            .blog-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 1rem !important; }
+        }
+        @media (max-width: 768px) {
+            .blog-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.75rem !important; }
+            .blog-card-excerpt { display: none !important; }
+            .blog-card-category { font-size: 0.6rem !important; padding: 3px 10px !important; }
+            .blog-card-title { font-size: 0.95rem !important; margin-bottom: 0.4rem !important; }
+            .read-article { font-size: 0.75rem !important; }
+            .blog-card { border-radius: 16px !important; }
+            .blog-image { height: 160px !important; }
+        }
+        @media (max-width: 480px) {
+            .blog-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.5rem !important; }
+            .blog-card-title { font-size: 0.85rem !important; line-height: 1.2 !important; }
+        }
+      `}} />
     </div>
   );
 }

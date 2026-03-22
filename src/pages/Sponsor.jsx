@@ -12,13 +12,13 @@ export default function Sponsor() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Sponsor",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/sponsor`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/sponsor`
                 }
             ]
         }
@@ -70,7 +70,7 @@ export default function Sponsor() {
                             <Globe size={40} style={{ color: '#10b981', marginBottom: '1.5rem', margin: '0 auto 1.5rem' }} />
                             <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1rem' }}>Corporate</h3>
                             <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Does your team use our tools? Consider a corporate sponsorship.</p>
-                            <a href="mailto:contact.uthakkan@gmail.com" className="btn btn-secondary" style={{ width: '100%' }}>Contact Us</a>
+                            <a href="mailto:contact@uthakkan.com" className="btn btn-secondary" style={{ width: '100%' }}>Contact Us</a>
                         </div>
                     </div>
 

@@ -10,8 +10,8 @@ export default function Founder() {
             "@type": "Person",
             "name": "Muhammed Ajmal U K",
             "alternateName": "Ajmal U K",
-            "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/founder`,
-            "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/ajmaluk.png`,
+            "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/founder`,
+            "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/ajmaluk.png`,
             "jobTitle": "Founder & Senior Full Stack Developer",
             "address": {
                 "@type": "PostalAddress",
@@ -39,13 +39,13 @@ export default function Founder() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Founder",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/founder`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/founder`
                 }
             ]
         }

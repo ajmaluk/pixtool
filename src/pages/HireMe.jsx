@@ -12,13 +12,13 @@ export default function HireMe() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Hire Me",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/hire-me`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/hire-me`
                 }
             ]
         }
@@ -128,7 +128,7 @@ export default function HireMe() {
                             <div style={{ marginTop: '2rem', textAlign: 'center' }}>
                                 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
                                     Or email directly at <br />
-                                    <a href="mailto:contact.uthakkan@gmail.com" style={{ color: 'var(--accent-primary)', fontWeight: 700, textDecoration: 'none' }}>contact.uthakkan@gmail.com</a>
+                                    <a href="mailto:contact@uthakkan.com" style={{ color: 'var(--accent-primary)', fontWeight: 700, textDecoration: 'none' }}>contact@uthakkan.com</a>
                                 </p>
                             </div>
                         </div>

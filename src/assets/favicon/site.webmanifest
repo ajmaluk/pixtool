@@ -1,6 +1,6 @@
 {
-  "name": "Daily Tools",
-  "short_name": "DTools",
+  "name": "PixTool - All in One Platform",
+  "short_name": "PixTool",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -16,6 +16,6 @@
     }
   ],
   "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "background_color": "#d34d4d",
   "display": "standalone"
 }

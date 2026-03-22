@@ -39,13 +39,13 @@ export default function Testimonials() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Testimonials",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/testimonials`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/testimonials`
                 }
             ]
         }

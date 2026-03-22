@@ -12,13 +12,13 @@ export default function Privacy() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Privacy Policy",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/privacy-policy`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/privacy-policy`
                 }
             ]
         }
@@ -85,7 +85,7 @@ export default function Privacy() {
 
                         <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>4. Contact</h2>
                         <p style={{ color: 'var(--text-secondary)' }}>
-                            If you have any questions about our privacy practices, please contact us at <a href="mailto:contact.uthakkan@gmail.com" style={{ color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 600 }}>contact.uthakkan@gmail.com</a>.
+                            If you have any questions about our privacy practices, please contact us at <a href="mailto:contact@uthakkan.com" style={{ color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 600 }}>contact@uthakkan.com</a>.
                         </p>
                     </div>
                 </div>

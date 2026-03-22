@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
 
 import { ArrowUpRight } from 'lucide-react'
@@ -40,8 +41,7 @@ export default function ToolCard({ tool }) {
         </div>
 
         <div className="tool-card-footer">
-          <div className="tool-tag">Free</div>
-          <div className="tool-tag">Browser-Based</div>
+          {tool.typeLabel && <div className="tool-tag type-tag">{tool.typeLabel}</div>}
         </div>
       </Link>
     </motion.div>

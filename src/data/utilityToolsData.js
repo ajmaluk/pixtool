@@ -40,13 +40,16 @@ export const UTILITY_SEO_CONTENT = {
       ]
     },
     '10-minute-mail': {
-      title: "10 Minute Mail | High-Speed Temporary Email Generator - PixTool",
-      keywords: "10 minute mail, fast temp mail, secure email generator, quick burner email, prevent spam, registration-free inbox, anonymous email session",
-      description: "Create a precision-timed 10 minute mail address. Perfect for rapid account activations where privacy is paramount. Works 100% in your browser with zero data retention.",
-      benefits: ["Precise 10-minute session management", "Instant activation", "Zero log policy", "Encrypted mailbox", "Mobile-optimized", "Spam-proof inbox", "One-click refresh"],
-      alternativeTo: ["10minutemail.com", "MinuteMail", "Maildrop"],
-      howTo: ["Click 'Get Address'", "Copy the 10-minute burner", "Submit for verification", "Read arrival in real-time", "Auto-expires after use"],
-      faq: [{ q: "Can I extend the 10 minutes?", a: "Yes, you can refresh the timer to extend your session whenever needed." }]
+      title: "10 Minute Mail | Free Disposable Temporary Email Generator - PixTool",
+      keywords: "10 minute mail, free disposable email, temporary email address, burner email, anonymous inbox service, protect from spam, secure temp mail, fake email for signups",
+      description: "Generate a secure 10 minute mail address instantly. Perfect for protecting your identity and bypassing spam filters with a free, disposable temporary email inbox. No registration required, 100% private and secure.",
+      benefits: ["Precise 10-minute session management", "Instant anonymous activation", "Zero log policy", "Encrypted mailbox backend", "Mobile-optimized for rapid signups", "Military-grade spam protection", "Real-time inbox updates"],
+      alternativeTo: ["10minutemail.com", "GuerrillaMail", "Maildrop", "Nada"],
+      howTo: ["Click 'Get Address' to see your 10 minute mail", "Copy the burner address to your clipboard", "Paste into any signup or verification form", "Read incoming messages in the live dashboard", "Timer expires automatically after use for privacy"],
+      faq: [
+        { q: "How long does a 10 minute mail last?", a: "The address is active for 10 minutes, but you can refresh the timer to extend your session indefinitely." },
+        { q: "Is it really anonymous?", a: "Yes. PixTool uses a zero-knowledge approach, ensuring your temporary inbox is private and never linked to your identity." }
+      ]
     },
     'change-email': {
       title: "Change Temp Email | Generate New Anonymous Inboxes - PixTool",

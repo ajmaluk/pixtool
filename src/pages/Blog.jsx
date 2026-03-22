@@ -13,16 +13,16 @@ export default function Blog() {
             "@type": "Blog",
             "name": "PixTool Tech & Productivity Blog",
             "description": "Expert insights, tutorials, and updates on AI, web development, browser-based tools, and digital productivity. Learn how to use free online tools effectively.",
-            "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/blog`,
+            "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/blog`,
             "publisher": {
                 "@type": "Organization",
                 "name": "PixTool by UTHAKKAN",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`
+                    "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`
                 }
             },
-            "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`,
+            "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
             "keywords": "productivity, AI tools, web development, online tools, tutorials"
         },
         {
@@ -33,13 +33,13 @@ export default function Blog() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Blog",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/blog`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/blog`
                 }
             ]
         }
@@ -70,6 +70,156 @@ export default function Blog() {
         } catch (e) { void e; return d; }
     };
 
+    const BlogCard = ({ post, index, humanizeDate }) => {
+        const [showMoreTags, setShowMoreTags] = useState(false);
+        const tags = post.tags || [];
+
+        return (
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+            >
+                <div style={{ position: 'relative', height: '100%' }}>
+                    <Link
+                        to={`/blog/${post.slug}`}
+                        className="blog-card"
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            height: '100%',
+                            textDecoration: 'none',
+                            color: 'inherit',
+                            background: 'var(--bg-card)',
+                            borderRadius: '32px',
+                            border: '1px solid var(--border-color)',
+                            overflow: 'hidden',
+                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                            boxShadow: 'var(--shadow-sm)'
+                        }}
+                    >
+                        <div style={{ height: '200px', overflow: 'hidden', position: 'relative' }}>
+                            <img
+                                src={post.image}
+                                alt={post.title}
+                                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
+                                className="blog-image"
+                            />
+                            <div style={{ position: 'absolute', top: '1rem', left: '1rem' }}>
+                                <span className="blog-card-category" style={{
+                                    background: 'rgba(255, 255, 255, 0.9)',
+                                    backdropFilter: 'blur(10px)',
+                                    color: '#000',
+                                    padding: '4px 12px',
+                                    borderRadius: '100px',
+                                    fontSize: '0.7rem',
+                                    fontWeight: 800,
+                                    textTransform: 'uppercase'
+                                }}>
+                                    {post.category}
+                                </span>
+                            </div>
+                        </div>
+                        <div style={{ padding: 'clamp(1rem, 3vw, 2rem)', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                            <div className="blog-card-meta" style={{ 
+                                display: 'flex', 
+                                alignItems: 'center', 
+                                gap: '0.5rem', 
+                                fontSize: '0.75rem', 
+                                color: 'var(--text-muted)', 
+                                fontWeight: 600, 
+                                marginBottom: '1rem',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden'
+                            }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
+                                    <Calendar size={12} className="meta-icon" /> {post.date}
+                                </div>
+                                <span className="meta-dot">•</span>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
+                                    <Clock size={12} className="meta-icon" /> 5m
+                                </div>
+                                <span className="meta-dot mobile-hide">•</span>
+                                <div className="mobile-hide" style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
+                                    Upd: {humanizeDate(post.dateISO || post.date)}
+                                </div>
+                            </div>
+
+                            {!!tags.length && (
+                                <div className="blog-card-tags" style={{ display: 'flex', flexWrap: 'nowrap', alignItems: 'center', gap: '6px', marginBottom: '0.75rem' }}>
+                                    <span key={tags[0]} style={{ fontSize: '0.7rem', fontWeight: 700, background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', color: 'var(--text-secondary)', padding: '3px 8px', borderRadius: '100px', whiteSpace: 'nowrap' }}>
+                                        {tags[0]}
+                                    </span>
+                                    {tags.length > 1 && (
+                                        <button 
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                setShowMoreTags(!showMoreTags);
+                                            }}
+                                            style={{ 
+                                                fontSize: '0.7rem', 
+                                                fontWeight: 800, 
+                                                background: 'var(--accent-glow)', 
+                                                color: 'var(--accent-primary)', 
+                                                padding: '3px 8px', 
+                                                borderRadius: '100px', 
+                                                border: 'none',
+                                                cursor: 'pointer'
+                                            }}
+                                        >
+                                            +{tags.length - 1}
+                                        </button>
+                                    )}
+                                </div>
+                            )}
+
+                            {showMoreTags && (
+                                <div 
+                                    style={{ 
+                                        position: 'absolute', 
+                                        bottom: '4rem', 
+                                        left: '1rem', 
+                                        right: '1rem', 
+                                        background: 'var(--bg-card)', 
+                                        border: '1px solid var(--border-color)', 
+                                        borderRadius: '16px', 
+                                        padding: '1rem', 
+                                        zIndex: 10,
+                                        boxShadow: 'var(--shadow-lg)',
+                                        display: 'flex',
+                                        flexWrap: 'wrap',
+                                        gap: '6px'
+                                    }}
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    {tags.slice(1).map(tag => (
+                                        <span key={tag} style={{ fontSize: '0.7rem', fontWeight: 700, background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', color: 'var(--text-secondary)', padding: '3px 8px', borderRadius: '100px' }}>
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
+
+                            <h2 className="blog-card-title" style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.75rem', lineHeight: 1.3 }}>{post.title}</h2>
+                            <p className="blog-card-excerpt" style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '1.5rem', flex: 1 }}>{post.excerpt}</p>
+                            <div style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '6px',
+                                color: 'var(--accent-primary)',
+                                fontWeight: 800,
+                                fontSize: '0.9rem'
+                            }} className="read-article">
+                                Read Article <ArrowRight size={16} className="arrow" />
+                            </div>
+                        </div>
+                    </Link>
+                </div>
+            </motion.div>
+        );
+    };
+
     return (
         <div className="blog-page">
             <SEO
@@ -79,7 +229,7 @@ export default function Blog() {
                 schema={blogSchema}
             />
 
-            <section className="hero" style={{ padding: '8rem 2rem 5rem', background: 'var(--bg-secondary)', marginBottom: '4rem' }}>
+            <section className="hero" style={{ padding: 'clamp(5rem, 15vh, 8rem) 1.5rem 5rem', background: 'var(--bg-secondary)', marginBottom: '4rem' }}>
                 <div style={{ maxWidth: '100%', margin: '0 auto', textAlign: 'center' }}>
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
@@ -97,14 +247,14 @@ export default function Blog() {
                 </div>
             </section>
 
-            <section style={{ padding: '0 2rem 10rem' }}>
-                <div style={{ maxWidth: '100%', margin: '0 2rem' }}>
-                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
+            <section style={{ padding: '0 1.5rem 10rem', width: '100%', overflowX: 'hidden' }}>
+                <div style={{ width: '100%', boxSizing: 'border-box' }}>
+                    <div className="blog-tags-scroll" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'nowrap', overflowX: 'auto', paddingBottom: '1rem', marginBottom: '1.5rem', WebkitOverflowScrolling: 'touch' }}>
                         {[null, ...allTags].slice(0, 10).map(tag => (
                             <button
                                 key={tag || 'all'}
                                 className={`btn ${selectedTag === tag ? 'btn-primary' : 'btn-secondary'}`}
-                                style={{ padding: '0.4rem 1rem', fontSize: '0.85rem', ...(selectedTag === tag ? { background: 'var(--accent-primary)', borderColor: 'var(--accent-primary)' } : {}) }}
+                                style={{ padding: '0.4rem 1.25rem', fontSize: '0.85rem', flexShrink: 0, whiteSpace: 'nowrap', borderRadius: '100px', ...(selectedTag === tag ? { background: 'var(--accent-primary)', borderColor: 'var(--accent-primary)', color: 'white' } : {}) }}
                                 onClick={() => setSelectedTag(tag)}
                             >
                                 {tag ? tag : 'All'}
@@ -113,93 +263,10 @@ export default function Blog() {
                     </div>
                     <div className="blog-grid" style={{
                         display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
-                        gap: '3rem'
+                        gap: '2rem'
                     }}>
                         {filtered.map((post, index) => (
-                            <motion.div
-                                key={post.slug}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1, duration: 0.5 }}
-                            >
-                                <Link
-                                    to={`/blog/${post.slug}`}
-                                    className="blog-card"
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        height: '100%',
-                                        textDecoration: 'none',
-                                        color: 'inherit',
-                                        background: 'var(--bg-card)',
-                                        borderRadius: '32px',
-                                        border: '1px solid var(--border-color)',
-                                        overflow: 'hidden',
-                                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                        boxShadow: 'var(--shadow-sm)'
-                                    }}
-                                >
-                                    <div style={{ height: '240px', overflow: 'hidden', position: 'relative' }}>
-                                        <img
-                                            src={post.image}
-                                            alt={post.title}
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
-                                            className="blog-image"
-                                        />
-                                        <div style={{ position: 'absolute', top: '1.5rem', left: '1.5rem' }}>
-                                            <span style={{
-                                                background: 'rgba(255, 255, 255, 0.9)',
-                                                backdropFilter: 'blur(10px)',
-                                                color: '#000',
-                                                padding: '6px 14px',
-                                                borderRadius: '100px',
-                                                fontSize: '0.75rem',
-                                                fontWeight: 800,
-                                                textTransform: 'uppercase'
-                                            }}>
-                                                {post.category}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div style={{ padding: 'clamp(1.5rem, 4vw, 2.5rem)', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem 1rem', fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600, marginBottom: '1.25rem' }}>
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                                <Calendar size={14} /> {post.date}
-                                            </div>
-                                            <span style={{ display: 'flex', alignItems: 'center' }}>•</span>
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                                <Clock size={14} /> 5 min read
-                                            </div>
-                                            <span style={{ display: 'flex', alignItems: 'center' }}>•</span>
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                                Updated {humanizeDate(post.dateISO || post.date)}
-                                            </div>
-                                        </div>
-                                        {!!(post.tags && post.tags.length) && (
-                                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '0.75rem' }}>
-                                                {post.tags.slice(0, 4).map(tag => (
-                                                    <span key={tag} style={{ fontSize: '0.75rem', fontWeight: 700, background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', color: 'var(--text-secondary)', padding: '4px 10px', borderRadius: '100px' }}>
-                                                        {tag}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        )}
-                                        <h2 style={{ fontSize: 'clamp(1.2rem, 3vw, 1.5rem)', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '1rem', lineHeight: 1.3 }}>{post.title}</h2>
-                                        <p style={{ color: 'var(--text-secondary)', fontSize: 'clamp(0.9rem, 2vw, 1rem)', lineHeight: 1.6, marginBottom: '2rem', flex: 1 }}>{post.excerpt}</p>
-                                        <div style={{
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            gap: '8px',
-                                            color: 'var(--accent-primary)',
-                                            fontWeight: 800,
-                                            fontSize: '0.95rem'
-                                        }} className="read-article">
-                                            Read Article <ArrowRight size={18} className="arrow" />
-                                        </div>
-                                    </div>
-                                </Link>
-                            </motion.div>
+                            <BlogCard key={post.slug} post={post} index={index} humanizeDate={humanizeDate} />
                         ))}
                     </div>
 
@@ -291,7 +358,7 @@ export default function Blog() {
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '2.5rem', maxWidth: '500px', margin: '0 auto 2.5rem', fontSize: '1.1rem' }}>
                             We're always looking for guest writers who are passionate about tech, productivity, and modern user experience.
                         </p>
-                        <a href="mailto:contact.uthakkan@gmail.com" className="btn btn-primary" style={{ padding: '1rem 2.5rem' }}>Get in Touch</a>
+                        <a href="mailto:contact@uthakkan.com" className="btn btn-primary" style={{ padding: '1rem 2.5rem' }}>Get in Touch</a>
                     </div>
                 </div>
             </section>
@@ -304,9 +371,35 @@ export default function Blog() {
                 .blog-card:hover .arrow { transform: translateX(5px); }
                 .read-article { transition: all 0.3s ease; }
                 .arrow { transition: all 0.3s ease; }
-                @media (max-width: 768px) {
-                    .blog-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+                .blog-tags-scroll::-webkit-scrollbar { display: none; }
+                .blog-tags-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+                           .blog-grid { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+                @media (max-width: 1200px) {
+                    .blog-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
                 }
+                @media (max-width: 992px) {
+                    .blog-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 1rem !important; }
+                }
+                @media (max-width: 768px) {
+                    .blog-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.75rem !important; }
+                    .blog-card-excerpt { display: none !important; }
+                    .blog-card-category { font-size: 0.6rem !important; padding: 3px 10px !important; }
+                    .blog-card-meta { font-size: 0.6rem !important; margin-bottom: 0.5rem !important; gap: 0.3rem !important; flex-wrap: nowrap !important; }
+                    .blog-card-title { font-size: 0.95rem !important; margin-bottom: 0.4rem !important; }
+                    .blog-card-tags { gap: 4px !important; margin-bottom: 0.4rem !important; }
+                    .blog-card-tags span { font-size: 0.6rem !important; padding: 2px 6px !important; }
+                    .read-article { font-size: 0.75rem !important; }
+                    .blog-card { border-radius: 16px !important; }
+                    .meta-icon { width: 10px !important; height: 10px !important; }
+                    .blog-image { height: 160px !important; }
+                    .mobile-hide { display: none !important; }
+                    .meta-dot { font-size: 0.5rem; }
+                }
+                @media (max-width: 480px) {
+                    .blog-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.5rem !important; }
+                    .blog-card-title { font-size: 0.85rem !important; line-height: 1.2 !important; }
+                }
+    }
             `}} />
         </div>
     );

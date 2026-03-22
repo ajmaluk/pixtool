@@ -10,8 +10,8 @@ export default function Developer() {
             "@type": "Person",
             "name": "Muhammed Ajmal U K",
             "alternateName": "Ajmal U K",
-            "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/developer`,
-            "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/ajmaluk.png`,
+            "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/developer`,
+            "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/ajmaluk.png`,
             "jobTitle": "Full Stack Developer & Founder",
             "worksFor": {
                 "@type": "Organization",
@@ -32,13 +32,13 @@ export default function Developer() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Developer",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/developer`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/developer`
                 }
             ]
         }

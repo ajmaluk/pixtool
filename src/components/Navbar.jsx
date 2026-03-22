@@ -1,6 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { Menu, X, Moon, Sun, Share2, Search } from 'lucide-react'
+import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom'
+import { 
+  Menu, X, Moon, Sun, Share2, Search, ChevronDown, 
+  Sparkles, BookOpen, Shield, FileText, HelpCircle, 
+  Mail, User, Code, Briefcase, DollarSign, Cookie as CookieIcon, 
+  MessageSquare, FileCode, Newspaper, Users, Info, 
+  ShoppingBag, Star, Zap, GraduationCap, Microscope, Rocket, Gift
+} from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS } from '../data/tools'
 
 const allTools = [
@@ -14,8 +21,20 @@ export default function Navbar() {
   const [searchValue, setSearchValue] = useState('')
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [isDark, setIsDark] = useState(false)
+  const [showMore, setShowMore] = useState(false)
   const navigate = useNavigate()
+  const location = useLocation()
   const searchRef = useRef(null)
+  const moreRef = useRef(null)
+
+  const morePaths = [
+    '/showcase', '/blog', '/privacy-policy', '/terms-of-service', 
+    '/cookie-policy', '/refund-policy', '/faq', '/contact', 
+    '/documentation', '/testimonials', '/founder', '/developer',
+    '/services', '/products', '/articles', '/news', '/case-studies',
+    '/sponsor', '/promotions', '/hire-me', '/careers', '/thank-you', '/sitemap'
+  ]
+  const isMoreActive = morePaths.includes(location.pathname) || location.pathname.startsWith('/blog/')
 
   const suggestions = searchValue.trim()
     ? allTools.filter(t =>
@@ -44,6 +63,9 @@ export default function Navbar() {
       if (searchRef.current && !searchRef.current.contains(e.target)) {
         setShowSuggestions(false)
       }
+      if (moreRef.current && !moreRef.current.contains(e.target)) {
+        setShowMore(false)
+      }
     }
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
@@ -53,7 +75,6 @@ export default function Navbar() {
     const savedTheme = localStorage.getItem('theme')
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
     if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsDark(true)
       document.documentElement.classList.add('dark')
     }
@@ -102,13 +123,113 @@ export default function Navbar() {
         </Link>
 
         <div className="navbar-links">
-          <Link to="/" className="navbar-link" title="PixTool Home - Free Online Productivity Suite">Home</Link>
-          <Link to="/pdf-tools" className="navbar-link" title="Professional PDF Tools - Merge, Split, Compress, Protect">PDF</Link>
-          <Link to="/image-tools" className="navbar-link" title="Image Studio - Resize, Crop, Optimize, Convert">Image</Link>
-          <Link to="/utility-tools" className="navbar-link" title="Smart Utilities - Temp Mail, QR Scanner, Typing Test">Utility</Link>
-          <Link to="/about" className="navbar-link" title="About PixTool - Mission, Privacy & Security">About</Link>
-          <Link to="/showcase" className="navbar-link" title="Visual Showcase - Gallery of All Tool Interfaces">Showcase</Link>
-          <Link to="/blog" className="navbar-link" title="PixTool Blog - In-depth Productivity Guides & Tutorials">Blog</Link>
+          <NavLink to="/" className="navbar-link" end>Home</NavLink>
+          <NavLink to="/pdf-tools" className="navbar-link">PDF</NavLink>
+          <NavLink to="/image-tools" className="navbar-link">Image</NavLink>
+          <NavLink to="/utility-tools" className="navbar-link">Utility</NavLink>
+          <NavLink to="/about" className="navbar-link">About</NavLink>
+          
+          <div className="nav-dropdown" ref={moreRef}>
+            <button 
+              className={`nav-dropdown-trigger ${isMoreActive ? 'nav-more-active' : ''}`}
+              onClick={() => setShowMore(!showMore)}
+            >
+              More <ChevronDown size={14} style={{ transform: showMore ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.3s ease' }} />
+            </button>
+
+            <AnimatePresence>
+              {showMore && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 15, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 15, scale: 0.95 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  className="nav-dropdown-menu expanded"
+                  style={{ width: 'min(900px, 90vw)', right: '-150px', padding: '1.5rem' }}
+                >
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
+                    {/* Resources Column */}
+                    <div>
+                      <div className="dropdown-section-title">Resources</div>
+                      <NavLink to="/showcase" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <Sparkles size={16} /> Showcase
+                      </NavLink>
+                      <NavLink to="/blog" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <BookOpen size={16} /> Blog
+                      </NavLink>
+                      <NavLink to="/news" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <Newspaper size={16} /> News
+                      </NavLink>
+                      <NavLink to="/documentation" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <FileCode size={16} /> Docs
+                      </NavLink>
+                      <NavLink to="/case-studies" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <Microscope size={16} /> Case Studies
+                      </NavLink>
+                    </div>
+
+                    {/* Company Column */}
+                    <div>
+                      <div className="dropdown-section-title">Company</div>
+                      <NavLink to="/founder" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <User size={16} /> Founder
+                      </NavLink>
+                      <NavLink to="/developer" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <Code size={16} /> Developer
+                      </NavLink>
+                      <NavLink to="/services" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <Zap size={16} /> Services
+                      </NavLink>
+                      <NavLink to="/products" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <ShoppingBag size={16} /> Products
+                      </NavLink>
+                      <NavLink to="/careers" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <GraduationCap size={16} /> Careers
+                      </NavLink>
+                      <NavLink to="/testimonials" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <MessageSquare size={16} /> Reviews
+                      </NavLink>
+                    </div>
+
+                    {/* Support Column */}
+                    <div>
+                      <div className="dropdown-section-title">Support & Legal</div>
+                      <NavLink to="/faq" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <HelpCircle size={16} /> FAQ
+                      </NavLink>
+                      <NavLink to="/contact" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <Mail size={16} /> Contact
+                      </NavLink>
+                      <NavLink to="/privacy-policy" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <Shield size={16} /> Privacy
+                      </NavLink>
+                      <NavLink to="/terms-of-service" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <FileText size={16} /> Terms
+                      </NavLink>
+                      <NavLink to="/cookie-policy" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <CookieIcon size={16} /> Cookies
+                      </NavLink>
+                      <NavLink to="/refund-policy" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <DollarSign size={16} /> Refund
+                      </NavLink>
+                    </div>
+                  </div>
+
+                  <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid var(--border-color)', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+                     <NavLink to="/promotions" className="dropdown-item dense" onClick={() => setShowMore(false)}>
+                        <Gift size={15} /> Promotions
+                      </NavLink>
+                      <NavLink to="/sponsor" className="dropdown-item dense" onClick={() => setShowMore(false)}>
+                        <Rocket size={15} /> Sponsor
+                      </NavLink>
+                      <NavLink to="/hire-me" className="dropdown-item dense" onClick={() => setShowMore(false)}>
+                        <Star size={15} /> Hire Us
+                      </NavLink>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
         <div className="navbar-actions">
@@ -125,14 +246,13 @@ export default function Navbar() {
               <input
                 type="text"
                 placeholder="Search tools..."
-                aria-label="Search across all 18+ tools"
+                aria-label="Search across all tools"
                 value={searchValue}
                 onChange={(e) => { setSearchValue(e.target.value); setShowSuggestions(true) }}
                 onFocus={() => setShowSuggestions(true)}
               />
             </form>
 
-            {/* Live suggestions dropdown */}
             {showSuggestions && (
               <div className="search-suggestions">
                 {suggestions.length > 0 ? suggestions.map(tool => (
@@ -161,7 +281,7 @@ export default function Navbar() {
           <button
             className="navbar-mobile-toggle"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
+            aria-label={mobileOpen ? "Close Menu" : "Open Menu"}
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -176,22 +296,76 @@ export default function Navbar() {
         <button className="mobile-menu-close" onClick={() => setMobileOpen(false)} aria-label="Close Menu">
           <X size={20} />
         </button>
-        <Link to="/" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Home</Link>
-        <Link to="/pdf-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>PDF Tools</Link>
-        <Link to="/image-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Image Tools</Link>
-        <Link to="/utility-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Utility Tools</Link>
-        <Link to="/showcase" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Visual Showcase</Link>
-        <div style={{ padding: '0.5rem 2rem', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '1rem' }}>Company</div>
-        <Link to="/about" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>About Us</Link>
-        <Link to="/founder" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Meet the Founder</Link>
-        <Link to="/services" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Services</Link>
-        <Link to="/products" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Products</Link>
-        <Link to="/developer" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Developer</Link>
-        <div style={{ padding: '0.5rem 2rem', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '1rem' }}>Support</div>
-        <Link to="/blog" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Blog</Link>
-        <Link to="/faq" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>FAQ</Link>
-        <Link to="/contact" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Contact</Link>
+        <div className="mobile-menu-content" style={{ padding: '1rem 0', maxHeight: '100vh', overflowY: 'auto', paddingBottom: '4rem' }}>
+          <NavLink to="/" className="mobile-menu-link" onClick={() => setMobileOpen(false)} end>Home</NavLink>
+          <NavLink to="/pdf-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>PDF Tools</NavLink>
+          <NavLink to="/image-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Image Tools</NavLink>
+          <NavLink to="/utility-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Utility Tools</NavLink>
+          
+          <div className="mobile-section-title">Resources</div>
+          <NavLink to="/showcase" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Visual Showcase</NavLink>
+          <NavLink to="/blog" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Blog & Tutorials</NavLink>
+          <NavLink to="/news" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Latest News</NavLink>
+          <NavLink to="/documentation" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Documentation</NavLink>
+          
+          <div className="mobile-section-title">Company</div>
+          <NavLink to="/about" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>About Us</NavLink>
+          <NavLink to="/founder" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Meet the Founder</NavLink>
+          <NavLink to="/developer" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Developer</NavLink>
+          <NavLink to="/services" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Services</NavLink>
+          <NavLink to="/products" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Products</NavLink>
+          <NavLink to="/careers" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Careers</NavLink>
+          <NavLink to="/testimonials" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Reviews</NavLink>
+          
+          <div className="mobile-section-title">Support & Legal</div>
+          <NavLink to="/contact" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Contact Support</NavLink>
+          <NavLink to="/faq" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>FAQ</NavLink>
+          <NavLink to="/privacy-policy" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Privacy Policy</NavLink>
+          <NavLink to="/terms-of-service" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Terms of Service</NavLink>
+          <NavLink to="/cookie-policy" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Cookie Policy</NavLink>
+          <NavLink to="/refund-policy" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Refund Policy</NavLink>
+        </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        .mobile-menu-link.active {
+          color: var(--accent-primary) !important;
+          background: var(--accent-glow);
+          border-left: 4px solid var(--accent-primary);
+        }
+        .mobile-menu-link {
+          padding: 0.85rem 2rem;
+          display: block;
+          text-decoration: none;
+          color: var(--text-primary);
+          font-weight: 600;
+          font-size: 0.95rem;
+          transition: all 0.2s ease;
+          border-left: 4px solid transparent;
+        }
+        .mobile-section-title {
+          padding: 1.5rem 2rem 0.5rem;
+          font-size: 0.7rem;
+          fontWeight: 900;
+          color: var(--text-muted);
+          text-transform: uppercase;
+          letterSpacing: 0.1em;
+          opacity: 0.8;
+        }
+        .dropdown-section-title {
+          font-size: 0.75rem;
+          font-weight: 900;
+          color: var(--text-muted);
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          margin-bottom: 0.75rem;
+          padding-left: 14px;
+        }
+        .dropdown-item.dense {
+          padding: 6px 14px;
+          font-size: 0.85rem;
+        }
+      `}} />
     </>
   )
 }

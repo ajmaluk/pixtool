@@ -223,8 +223,8 @@ export default function TempMail({
     "applicationCategory": "CommunicationApplication",
     "applicationSubCategory": "Privacy Tool",
     "operatingSystem": "All (Web Browser)",
-    "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}${seoPath}`,
-    "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`,
+    "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}${seoPath}`,
+    "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -263,12 +263,12 @@ export default function TempMail({
     "@type": "HowTo",
     "name": "How to Use Free Temporary Email",
     "description": "Learn how to generate and use a free temporary email address for privacy protection.",
-    "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png`,
+    "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
     "step": [
-      { "@type": "HowToStep", "name": "Get Email", "text": "Visit the page - a temporary email address is generated automatically.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` },
-      { "@type": "HowToStep", "name": "Copy Email", "text": "Click on the email address or Copy button to copy it to your clipboard.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` },
-      { "@type": "HowToStep", "name": "Use Email", "text": "Paste the email wherever you need to sign up or verify.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` },
-      { "@type": "HowToStep", "name": "Check Inbox", "text": "Return to this page to see incoming messages - inbox refreshes automatically.", "image": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/logo.png` }
+      { "@type": "HowToStep", "name": "Get Email", "text": "Visit the page - a temporary email address is generated automatically.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` },
+      { "@type": "HowToStep", "name": "Copy Email", "text": "Click on the email address or Copy button to copy it to your clipboard.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` },
+      { "@type": "HowToStep", "name": "Use Email", "text": "Paste the email wherever you need to sign up or verify.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` },
+      { "@type": "HowToStep", "name": "Check Inbox", "text": "Return to this page to see incoming messages - inbox refreshes automatically.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` }
     ],
     "totalTime": "PT30S"
   }
@@ -278,9 +278,9 @@ export default function TempMail({
     "@type": "ItemList",
     "name": "Temporary Email Variants",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Free Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/temp-mail` },
-      { "@type": "ListItem", "position": 2, "name": "10 Minute Mail", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/temp-mail/10-minute-mail` },
-      { "@type": "ListItem", "position": 3, "name": "Change Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/temp-mail/change-email` }
+      { "@type": "ListItem", "position": 1, "name": "Free Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail` },
+      { "@type": "ListItem", "position": 2, "name": "10 Minute Mail", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail/10-minute-mail` },
+      { "@type": "ListItem", "position": 3, "name": "Change Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail/change-email` }
     ]
   }
 

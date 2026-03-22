@@ -1,36 +1,7 @@
 {
-  "name": "PixTool - Free Online Image & PDF Tools",
+  "name": "PixTool - All in One Platform",
   "short_name": "PixTool",
-  "description": "Free online image and PDF tools with privacy-first browser-based processing. No uploads, no registration, completely free.",
-  "start_url": "/",
-  "id": "/",
-  "scope": "/",
-  "display": "standalone",
-  "orientation": "portrait-primary",
-  "theme_color": "#6366f1",
-  "background_color": "#ffffff",
-  "categories": [
-    "utilities",
-    "productivity"
-  ],
-  "lang": "en",
-  "dir": "ltr",
   "icons": [
-    {
-      "src": "/favicon-16x16.png",
-      "sizes": "16x16",
-      "type": "image/png"
-    },
-    {
-      "src": "/favicon-32x32.png",
-      "sizes": "32x32",
-      "type": "image/png"
-    },
-    {
-      "src": "/favicon-96x96.png",
-      "sizes": "96x96",
-      "type": "image/png"
-    },
     {
       "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
@@ -42,12 +13,9 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
-    },
-    {
-      "src": "/web-app-manifest-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
     }
-  ]
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#d34d4d",
+  "display": "standalone"
 }

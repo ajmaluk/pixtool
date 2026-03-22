@@ -9,8 +9,8 @@ export default function NotFound() {
       "@type": "WebPage",
       "name": "Page Not Found",
       "description": "The page you are looking for does not exist.",
-      "isPartOf": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`,
-      "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/404`
+      "isPartOf": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`,
+      "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/404`
     }
   ]
 

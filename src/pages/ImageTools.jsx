@@ -104,6 +104,29 @@ export default function ImageTools() {
     "free image resizer, online photo editor, compress image, resize image free, image compression online, photo cropper"
   const canonicalPath = activeTool ? `/image-tools/${activeTool}` : "/image-tools"
 
+  const imageHubSchema = activeTool ? null : [
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Free Online Image Studio - PixTool",
+        "description": pageDescription,
+        "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools`
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": tools.map((tool, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "item": {
+                "@type": "SoftwareApplication",
+                "name": tool.title,
+                "description": tool.description,
+                "applicationCategory": "MultimediaApplication"
+            }
+        }))
+    }
+  ];
 
   const renderSidebarSettings = () => (
     <div className="sidebar-settings-content">
@@ -401,6 +424,7 @@ export default function ImageTools() {
         description={pageDescription}
         keywords={pageKeywords}
         path={canonicalPath}
+        schema={imageHubSchema}
         toolName={activeToolData?.title}
         toolSteps={seoContent?.howTo}
         breadcrumbs={[

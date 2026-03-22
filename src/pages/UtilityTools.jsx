@@ -17,6 +17,30 @@ export default function UtilityTools() {
         keywords: "free typing test online, temp mail online, qr code generator, online tools free, disposable email, utility tools"
     };
 
+    const utilitySchema = [
+        {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": "Free Web Utility Tools - PixTool",
+            "description": seoContent.description,
+            "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/utility-tools`
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "itemListElement": tools.map((tool, index) => ({
+                "@type": "ListItem",
+                "position": index + 1,
+                "item": {
+                    "@type": "SoftwareApplication",
+                    "name": tool.name,
+                    "description": tool.description,
+                    "applicationCategory": "UtilitiesApplication"
+                }
+            }))
+        }
+    ];
+
     return (
         <>
             <SEO
@@ -24,6 +48,7 @@ export default function UtilityTools() {
                 description={seoContent.description}
                 keywords={seoContent.keywords}
                 path="/utility-tools"
+                schema={utilitySchema}
                 breadcrumbs={[
                     { name: 'Utility Tools', item: '/utility-tools' }
                 ]}

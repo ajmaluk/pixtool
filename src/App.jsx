@@ -1,4 +1,5 @@
 import { Suspense, lazy, Component } from 'react'
+// eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from 'framer-motion'
 import { Routes, Route, Outlet, useLocation, Link, Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'

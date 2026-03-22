@@ -6,7 +6,7 @@ import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS } from '../src/data/tools.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SITE_URL = process.env.VITE_SITE_URL || 'https://pixtool.in';
+const SITE_URL = process.env.VITE_SITE_URL || 'https://www.pixtool.in';
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 const SITEMAP_PATH = path.join(PUBLIC_DIR, 'sitemap.xml');
 
@@ -55,18 +55,18 @@ function generateSitemap() {
   addUrl('/showcase', '0.9', 'weekly', '/screenshots/home.png', 'PixTool Visual Showcase');
 
   // Image Tools
-  IMAGE_TOOLS.forEach(tool => {
-    addUrl(tool.path, '0.8', 'weekly', `/screenshots/image-tools-${tool.id}.png`, `${tool.title} interface - Free PixTool`);
+  IMAGE_TOOLS.filter(t => t.status !== 'coming-soon').forEach(tool => {
+    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, `${tool.title} | Free Online PixTool`);
   });
 
   // PDF Tools
-  PDF_TOOLS.forEach(tool => {
-    addUrl(tool.path, '0.8', 'weekly', `/screenshots/pdf-tools-${tool.id}.png`, `${tool.title} interface - Free PixTool`);
+  PDF_TOOLS.filter(t => t.status !== 'coming-soon').forEach(tool => {
+    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, `${tool.title} | Professional PDF PixTool`);
   });
 
   // Utility Tools
-  UTILITY_TOOLS.forEach(tool => {
-    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.id}.png`, `${tool.title} interface - Free PixTool`);
+  UTILITY_TOOLS.filter(t => t.status !== 'coming-soon').forEach(tool => {
+    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, `${tool.title} | Anonymous Tool PixTool`);
   });
 
   // Company & Legal

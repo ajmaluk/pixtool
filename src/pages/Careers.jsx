@@ -30,13 +30,13 @@ export default function Careers() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Careers",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/careers`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/careers`
                 }
             ]
         }
@@ -105,7 +105,7 @@ export default function Careers() {
                     <div style={{ marginTop: '6rem', textAlign: 'center', padding: '4rem', background: 'var(--accent-gradient)', borderRadius: '32px', color: 'white' }}>
                         <h2 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '1rem' }}>Don't see a role for you?</h2>
                         <p style={{ opacity: 0.9, marginBottom: '2.5rem' }}>We're always open to meeting talented people. Send us your resume and tell us how you can help UTHAKKAN grow.</p>
-                        <a href="mailto:contact.uthakkan@gmail.com" className="btn" style={{ background: 'white', color: 'var(--accent-primary)', padding: '1rem 2.5rem' }}>General Application</a>
+                        <a href="mailto:contact@uthakkan.com" className="btn" style={{ background: 'white', color: 'var(--accent-primary)', padding: '1rem 2.5rem' }}>General Application</a>
                     </div>
                 </div>
             </section>

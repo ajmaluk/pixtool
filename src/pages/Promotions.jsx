@@ -33,13 +33,13 @@ export default function Promotions() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Promotions",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/promotions`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/promotions`
                 }
             ]
         }

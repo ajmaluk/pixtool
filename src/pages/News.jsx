@@ -30,13 +30,13 @@ export default function News() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "News",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/news`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/news`
                 }
             ]
         }

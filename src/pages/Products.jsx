@@ -69,13 +69,13 @@ export default function Products() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Products",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/products`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/products`
                 }
             ]
         }

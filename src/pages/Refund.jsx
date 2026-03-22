@@ -12,13 +12,13 @@ export default function Refund() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Refund Policy",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/refund-policy`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/refund-policy`
                 }
             ]
         }
@@ -67,7 +67,7 @@ export default function Refund() {
                             <HelpCircle size={20} style={{ color: 'var(--accent-primary)' }} /> 3. Contact for Support
                         </h2>
                         <p style={{ color: 'var(--text-secondary)' }}>
-                            If you have any issues with a paid service or product, please contact us at <a href="mailto:contact.uthakkan@gmail.com" style={{ color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 600 }}>contact.uthakkan@gmail.com</a>. We are committed to ensuring our customers are satisfied and will work with you to resolve any concerns.
+                            If you have any issues with a paid service or product, please contact us at <a href="mailto:contact@uthakkan.com" style={{ color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 600 }}>contact@uthakkan.com</a>. We are committed to ensuring our customers are satisfied and will work with you to resolve any concerns.
                         </p>
                     </div>
                 </div>

@@ -12,13 +12,13 @@ export default function ThankYou() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Thank You",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/thank-you`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/thank-you`
                 }
             ]
         }
@@ -53,9 +53,9 @@ export default function ThankYou() {
                         </a>
                         <button className="btn btn-secondary" style={{ gap: '10px', padding: '1.25rem 2.5rem' }} onClick={() => {
                             if (navigator.share) {
-                                navigator.share({ title: 'PixTool', url: `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}` });
+                                navigator.share({ title: 'PixTool', url: `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}` });
                             } else {
-                                navigator.clipboard.writeText(`${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}`);
+                                navigator.clipboard.writeText(`${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}`);
                                 alert('Link copied!');
                             }
                         }}>

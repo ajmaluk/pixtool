@@ -135,7 +135,7 @@ export default function TypingTest() {
       "applicationCategory": "UtilitiesApplication",
       "applicationSubCategory": "Typing Test",
       "operatingSystem": "Web Browser",
-      "url": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/typing-test`,
+      "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/typing-test`,
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
     },
     {

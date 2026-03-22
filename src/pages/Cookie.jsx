@@ -12,13 +12,13 @@ export default function Cookie() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Cookie Policy",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://pixtool.in'}/cookie-policy`
+                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/cookie-policy`
                 }
             ]
         }
