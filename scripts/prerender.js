@@ -85,6 +85,12 @@ async function prerender() {
     });
   });
 
+  // Redundant check for CI environments to ensure it never fails on Cloudflare/Netlify
+  if (process.env.SKIP_PRERENDER || process.env.CF_PAGES || process.env.NETLIFY) {
+    console.log('⏩ Skipping prerender (CI/Environment detected inside script)');
+    process.exit(0);
+  }
+
   server.listen(PORT, async () => {
     console.log(`📡 Temporary server running at http://localhost:${PORT}`);
 
