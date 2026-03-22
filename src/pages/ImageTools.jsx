@@ -12,6 +12,7 @@ import { SITE_URL, SITE_NAME } from '../data/constants'
 import { IMAGE_SEO_CONTENT, IMAGE_RELATED_TOOLS, IMAGE_READ_NEXT } from '../data/imageToolsData'
 import ComingSoon from '../components/ComingSoon'
 import { processImageFile } from '../utils/canvasUtils'
+import ToolCard from '../components/ToolCard'
 
 const tools = IMAGE_TOOLS;
 
@@ -455,7 +456,6 @@ export default function ImageTools() {
         ) : !activeTool ? (
           /* CATEGORY HUB MODE */
           <div className="landing-layout">
-            <AdSpace type="side" className="desktop-only" />
 
             <div className="landing-center">
               <div className="page-hero">
@@ -469,36 +469,7 @@ export default function ImageTools() {
 
               <div className="tools-grid" style={{ marginBottom: '6rem' }}>
                 {tools.map(tool => (
-                  <Link
-                    key={tool.id}
-                    to={`/image-tools/${tool.id}`}
-                    className="tool-card"
-                    style={{ border: '1px solid var(--border-color)', height: '100%', textDecoration: 'none', padding: 0, overflow: 'hidden' }}
-                  >
-                    <div style={{ aspectRatio: '16/9', background: 'var(--bg-secondary)', overflow: 'hidden', borderBottom: '1px solid var(--border-color)' }}>
-                      <img 
-                        src={`/screenshots/${tool.screenshot}`} 
-                        alt={`${tool.title} interface preview - Professional browser-based image ${tool.id} tool by PixTool`}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        onError={(e) => {
-                          e.target.style.display = 'none';
-                          e.target.parentElement.style.background = `${tool.color}10`;
-                          e.target.parentElement.innerHTML = `<div style="height: 100%; display: flex; align-items: center; justify-content: center; color: ${tool.color}"><div style="padding: 1.5rem; background: ${tool.color}15; border-radius: 20px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></div></div>`;
-                        }}
-                      />
-                    </div>
-                    <div style={{ padding: '1.5rem' }}>
-                      <div className="tool-card-header">
-                        <div className="tool-card-icon" style={{ background: `${tool.color}15`, color: tool.color }}>
-                          <tool.icon size={22} />
-                        </div>
-                        <div className="tool-card-title-group">
-                          <h3 className="tool-card-title">{tool.title}</h3>
-                        </div>
-                      </div>
-                      <p className="tool-card-description">{tool.description}</p>
-                    </div>
-                  </Link>
+                  <ToolCard key={tool.id} tool={tool} />
                 ))}
               </div>
 
@@ -542,8 +513,6 @@ export default function ImageTools() {
                 />
               </div>
             </div>
-
-            <AdSpace type="side" className="desktop-only" />
           </div>
         ) : (
           <>

@@ -1,5 +1,5 @@
 export default function AdSpace({ type, className = "", style = {} }) {
-    const showAds = false;
+    const showAds = true;
 
     if (!showAds) return null;
 

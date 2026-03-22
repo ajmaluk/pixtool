@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import { Mail, QrCode, Smartphone, Type, Sliders } from 'lucide-react'
+import ToolCard from '../components/ToolCard'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
-import AdSpace from '../components/AdSpace'
 import { UTILITY_TOOLS } from '../data/tools'
 import { UTILITY_SEO_CONTENT } from '../data/utilityToolsData'
 
@@ -29,7 +29,6 @@ export default function UtilityTools() {
                 ]}
             />
             <div className="landing-layout">
-                <AdSpace type="side" className="desktop-only" />
 
                 <div className="landing-center">
                     <div className="page-hero">
@@ -43,36 +42,7 @@ export default function UtilityTools() {
 
                     <div className="tools-grid" style={{ marginBottom: '6rem' }}>
                         {tools.map((tool) => (
-                            <Link
-                                key={tool.id}
-                                to={tool.path}
-                                className="tool-card"
-                                style={{ border: '1px solid var(--border-color)', height: '100%', textDecoration: 'none', padding: 0, overflow: 'hidden' }}
-                            >
-                                <div style={{ aspectRatio: '16/9', background: 'var(--bg-secondary)', overflow: 'hidden', borderBottom: '1px solid var(--border-color)' }}>
-                                    <img 
-                                        src={`/screenshots/${tool.screenshot}`} 
-                                        alt={`${tool.title} interface preview - Specialized daily productivity tool by PixTool`}
-                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                        onError={(e) => {
-                                            e.target.style.display = 'none';
-                                            e.target.parentElement.style.background = 'rgba(16, 185, 129, 0.05)';
-                                            e.target.parentElement.innerHTML = `<div style="height: 100%; display: flex; align-items: center; justify-content: center; color: var(--accent-emerald)"><div style="padding: 1.5rem; background: rgba(16, 185, 129, 0.08); border-radius: 20px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div></div>`;
-                                        }}
-                                    />
-                                </div>
-                                <div style={{ padding: '1.5rem' }}>
-                                    <div className="tool-card-header">
-                                        <div className="tool-card-icon" style={{ background: 'rgba(16, 185, 129, 0.08)', color: 'var(--accent-emerald)' }}>
-                                            <tool.icon size={22} />
-                                        </div>
-                                        <div className="tool-card-title-group">
-                                            <h3 className="tool-card-title">{tool.title}</h3>
-                                        </div>
-                                    </div>
-                                    <p className="tool-card-description">{tool.description}</p>
-                                </div>
-                            </Link>
+                            <ToolCard key={tool.id} tool={tool} />
                         ))}
                     </div>
 
@@ -128,8 +98,6 @@ export default function UtilityTools() {
                         />
                     </div>
                 </div>
-
-                <AdSpace type="side" className="desktop-only" />
             </div>
         </>
     )

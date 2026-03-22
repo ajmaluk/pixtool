@@ -10,6 +10,7 @@ import { useFileDrop } from '../hooks/useFileDrop'
 import { PDF_TOOLS } from '../data/tools'
 import { PDF_SEO_CONTENT, PDF_RELATED_TOOLS, PDF_READ_NEXT } from '../data/pdfToolsData'
 import ComingSoon from '../components/ComingSoon'
+import ToolCard from '../components/ToolCard'
 import { mergePdfs, splitPdf, watermarkPdf, compressPdf, downloadBlob } from '../utils/pdfUtils'
 import { SITE_URL, SITE_NAME } from '../data/constants'
 
@@ -398,8 +399,6 @@ export default function PdfTools() {
         ) : !activeTool ? (
           /* CATEGORY HUB MODE */
           <div className="landing-layout">
-            <AdSpace type="side" className="desktop-only" />
-
             <div className="landing-center">
               <div className="page-hero">
                 <div className="page-hero-content">
@@ -412,36 +411,7 @@ export default function PdfTools() {
 
               <div className="tools-grid" style={{ marginBottom: '6rem' }}>
                 {tools.map(tool => (
-                  <Link
-                    key={tool.id}
-                    to={`/pdf-tools/${tool.id}`}
-                    className="tool-card"
-                    style={{ border: '1px solid var(--border-color)', height: '100%', textDecoration: 'none', padding: 0, overflow: 'hidden' }}
-                  >
-                    <div style={{ aspectRatio: '16/9', background: 'var(--bg-secondary)', overflow: 'hidden', borderBottom: '1px solid var(--border-color)' }}>
-                      <img 
-                        src={`/screenshots/${tool.screenshot}`} 
-                        alt={`${tool.title} interface preview - Professional browser-based PDF ${tool.id} tool by PixTool`}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        onError={(e) => {
-                          e.target.style.display = 'none';
-                          e.target.parentElement.style.background = `${tool.color}10`;
-                          e.target.parentElement.innerHTML = `<div style="height: 100%; display: flex; align-items: center; justify-content: center; color: ${tool.color}"><div style="padding: 1.5rem; background: ${tool.color}15; border-radius: 20px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg></div></div>`;
-                        }}
-                      />
-                    </div>
-                    <div style={{ padding: '1.5rem' }}>
-                      <div className="tool-card-header">
-                        <div className="tool-card-icon" style={{ background: `${tool.color}15`, color: tool.color }}>
-                          <tool.icon size={22} />
-                        </div>
-                        <div className="tool-card-title-group">
-                          <h3 className="tool-card-title">{tool.title}</h3>
-                        </div>
-                      </div>
-                      <p className="tool-card-description">{tool.description}</p>
-                    </div>
-                  </Link>
+                  <ToolCard key={tool.id} tool={tool} />
                 ))}
               </div>
 
@@ -470,76 +440,168 @@ export default function PdfTools() {
                 />
               </div>
             </div>
-
-            <AdSpace type="side" className="desktop-only" />
           </div>
-        ) : files.length === 0 ? (
-          /* LANDING MODE */
+        ) : (
           <div className="landing-layout">
             <AdSpace type="side" className="desktop-only" />
 
             <div className="landing-center">
-              <div className="page-hero">
-                <div className="page-hero-content">
-                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-                    <ShareTool title={`Free Online ${activeToolData.title} | PixTool`} />
-                  </div>
-                  <h1 className="page-title">{activeToolData.title}</h1>
-                  <p className="page-subtitle">
-                    {activeToolData.description}
-                  </p>
-                </div>
-              </div>
+              <AdSpace type="top" />
 
-              <div
-                className="tool-panel"
-                style={{
-                  height: '350px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  border: '2px dashed var(--accent-blue)',
-                  background: 'var(--bg-secondary)',
-                  cursor: 'pointer',
-                  transition: 'var(--transition)',
-                  textAlign: 'center'
-                }}
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={(e) => {
-                  e.preventDefault()
-                  handleFiles(e.dataTransfer.files)
-                }}
-                onClick={() => fileInputRef.current?.click()}
-                onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--accent-primary)'}
-                onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--accent-blue)'}
-              >
-                <div className="tool-card-icon" style={{ background: 'var(--accent-blue-50)', color: 'var(--accent-blue)', width: '80px', height: '80px', borderRadius: '24px', marginBottom: '2rem' }}>
-                  <Upload size={32} />
-                </div>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '0.5rem' }}>Select or Drop PDF Files</h3>
-                <p style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>Works in your browser. Maximum privacy.</p>
-                <button className="btn btn-primary" style={{ marginTop: '2rem', padding: '1rem 2.5rem' }}>
-                  Browse Files
-                </button>
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2.5rem', marginTop: '5rem' }}>
-                {[
-                  { icon: FileText, title: 'Secure & Private', desc: 'Files are processed in your browser. No server uploads.' },
-                  { icon: Upload, title: 'No Limits', desc: 'Upload and process multiple PDF files at once, completely free.' },
-                  { icon: Loader, title: 'Lightning Fast', desc: 'Native browser processing ensures high-speed execution.' }
-                ].map((feat, i) => (
-                  <div key={i} style={{ textAlign: 'center' }}>
-                    <div style={{ color: 'var(--accent-blue)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}>
-                      <feat.icon size={36} />
+              {files.length === 0 ? (
+                /* LANDING MODE */
+                <>
+                  <div className="page-hero">
+                    <div className="page-hero-content">
+                      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
+                        <ShareTool title={`Free Online ${activeToolData.title} | PixTool`} />
+                      </div>
+                      <h1 className="page-title">{activeToolData.title}</h1>
+                      <p className="page-subtitle">
+                        {activeToolData.description}
+                      </p>
                     </div>
-                    <h4 style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.1rem' }}>{feat.title}</h4>
-                    <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>{feat.desc}</p>
                   </div>
-                ))}
-              </div>
-              <div style={{ marginTop: '8rem' }}>
+
+                  <div
+                    className="tool-panel"
+                    style={{
+                      height: '350px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      border: '2px dashed var(--accent-blue)',
+                      background: 'var(--bg-secondary)',
+                      cursor: 'pointer',
+                      transition: 'var(--transition)',
+                      textAlign: 'center'
+                    }}
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={(e) => {
+                      e.preventDefault()
+                      handleFiles(e.dataTransfer.files)
+                    }}
+                    onClick={() => fileInputRef.current?.click()}
+                    onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--accent-primary)'}
+                    onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--accent-blue)'}
+                  >
+                    <div className="tool-card-icon" style={{ background: 'var(--accent-blue-50)', color: 'var(--accent-blue)', width: '80px', height: '80px', borderRadius: '24px', marginBottom: '2rem' }}>
+                      <Upload size={32} />
+                    </div>
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '0.5rem' }}>Select or Drop PDF Files</h3>
+                    <p style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>Works in your browser. Maximum privacy.</p>
+                    <button className="btn btn-primary" style={{ marginTop: '2rem', padding: '1rem 2.5rem' }}>
+                      Browse Files
+                    </button>
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2.5rem', marginTop: '5rem' }}>
+                    {[
+                      { icon: FileText, title: 'Secure & Private', desc: 'Files are processed in your browser. No server uploads.' },
+                      { icon: Upload, title: 'No Limits', desc: 'Upload and process multiple PDF files at once, completely free.' },
+                      { icon: Loader, title: 'Lightning Fast', desc: 'Native browser processing ensures high-speed execution.' }
+                    ].map((feat, i) => (
+                      <div key={i} style={{ textAlign: 'center' }}>
+                        <div style={{ color: 'var(--accent-blue)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}>
+                          <feat.icon size={36} />
+                        </div>
+                        <h4 style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.1rem' }}>{feat.title}</h4>
+                        <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>{feat.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                /* EDITOR MODE */
+                <div className="sidebar-layout">
+                  <aside className="sidebar-settings tool-panel" style={{ position: 'sticky', top: '2rem', height: 'fit-content' }}>
+                    <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem' }}>
+                      <button className="btn btn-secondary" style={{ padding: '0.75rem' }} onClick={() => fileInputRef.current.click()}>
+                        <Upload size={20} />
+                      </button>
+                      <button className="btn btn-secondary" style={{ padding: '0.75rem', marginLeft: 'auto' }} onClick={() => setFiles([])}>
+                        <X size={20} />
+                      </button>
+                    </div>
+
+                    {renderSidebarSettings()}
+                  </aside>
+
+                  <main className="preview-main">
+                    <div className="tool-container">
+                      <div className="tool-panel">
+                        <div className="tool-panel-content">
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+                            <h3 style={{ fontSize: '1.25rem', fontWeight: 900, margin: 0 }}>
+                              Files ({files.length})
+                            </h3>
+                            <div style={{ display: 'flex', gap: '0.75rem' }}>
+                              <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.6rem 1.25rem' }}>
+                                <Upload size={18} /> Add More
+                              </button>
+                              <button className="btn btn-primary" onClick={processPdf} style={{ padding: '0.6rem 2rem' }}>
+                                <Download size={18} /> {processing ? 'Processing...' : `${activeToolData?.title} Now`}
+                              </button>
+                            </div>
+                          </div>
+
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1.5rem' }}>
+                            {files.map((file, idx) => (
+                              <div key={idx} className="tool-card" style={{ padding: '1.5rem', position: 'relative', textAlign: 'center' }}>
+                                <button
+                                  onClick={() => removeFile(idx)}
+                                  className="btn-icon"
+                                  style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', padding: '0.4rem', background: 'var(--bg-glass)', borderRadius: '8px', zIndex: 5 }}
+                                >
+                                  <X size={14} />
+                                </button>
+
+                                {activeTool === 'merge' && (
+                                  <div style={{ position: 'absolute', top: '0.5rem', left: '0.5rem', display: 'flex', gap: '0.25rem', zIndex: 5 }}>
+                                    <button
+                                      onClick={() => moveFile(idx, 'left')}
+                                      disabled={idx === 0}
+                                      className="btn-icon"
+                                      style={{ padding: '0.4rem', background: 'var(--bg-glass)', borderRadius: '8px', opacity: idx === 0 ? 0.3 : 1 }}
+                                    >
+                                      <ChevronDown size={14} style={{ transform: 'rotate(90deg)' }} />
+                                    </button>
+                                    <button
+                                      onClick={() => moveFile(idx, 'right')}
+                                      disabled={idx === files.length - 1}
+                                      className="btn-icon"
+                                      style={{ padding: '0.4rem', background: 'var(--bg-glass)', borderRadius: '8px', opacity: idx === files.length - 1 ? 0.3 : 1 }}
+                                    >
+                                      <ChevronDown size={14} style={{ transform: 'rotate(-90deg)' }} />
+                                    </button>
+                                  </div>
+                                )}
+
+                                <div style={{ color: 'var(--accent-blue)', marginBottom: '1.25rem', display: 'flex', justifyContent: 'center' }}>
+                                  <div style={{ padding: '0.75rem', background: 'rgba(59, 130, 246, 0.05)', borderRadius: '12px' }}>
+                                    <FileText size={40} />
+                                  </div>
+                                </div>
+                                <p style={{ fontWeight: 700, fontSize: '0.85rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', margin: 0 }}>
+                                  {file.name}
+                                </p>
+                                <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', margin: '0.25rem 0 0' }}>
+                                  {(file.size / 1024).toFixed(1)} KB
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </main>
+                </div>
+              )}
+
+              <AdSpace type="bottom" />
+
+              <div style={{ marginTop: '5rem' }}>
                 {seoContent && (
                   <ToolContent
                     title={activeToolData?.title || 'PDF Tool'}
@@ -555,101 +617,12 @@ export default function PdfTools() {
                   />
                 )}
               </div>
-              <AdSpace type="bottom" />
             </div>
+
             <AdSpace type="side" className="desktop-only" />
           </div>
-        ) : (
-          /* EDITOR MODE */
-          <div className="sidebar-layout">
-            <aside className="sidebar-settings tool-panel">
-              <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem' }}>
-                <button className="btn btn-secondary" style={{ padding: '0.75rem' }} onClick={() => fileInputRef.current.click()}>
-                  <Upload size={20} />
-                </button>
-                <button className="btn btn-secondary" style={{ padding: '0.75rem', marginLeft: 'auto' }} onClick={() => setFiles([])}>
-                  <X size={20} />
-                </button>
-              </div>
-
-              {renderSidebarSettings()}
-            </aside>
-
-            <main className="preview-main">
-              <div className="tool-container">
-                <AdSpace type="top" />
-
-                <div className="tool-panel">
-                  <div className="tool-panel-content">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                      <h3 style={{ fontSize: '1.25rem', fontWeight: 900, margin: 0 }}>
-                        Files ({files.length})
-                      </h3>
-                      <div style={{ display: 'flex', gap: '0.75rem' }}>
-                        <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.6rem 1.25rem' }}>
-                          <Upload size={18} /> Add More
-                        </button>
-                        <button className="btn btn-primary" onClick={processPdf} style={{ padding: '0.6rem 2rem' }}>
-                          <Download size={18} /> {processing ? 'Processing...' : `${activeToolData?.title} Now`}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1.5rem' }}>
-                      {files.map((file, idx) => (
-                        <div key={idx} className="tool-card" style={{ padding: '1.5rem', position: 'relative', textAlign: 'center' }}>
-                          <button
-                            onClick={() => removeFile(idx)}
-                            className="btn-icon"
-                            style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', padding: '0.4rem', background: 'var(--bg-glass)', borderRadius: '8px', zIndex: 5 }}
-                          >
-                            <X size={14} />
-                          </button>
-
-                          {activeTool === 'merge' && (
-                            <div style={{ position: 'absolute', top: '0.5rem', left: '0.5rem', display: 'flex', gap: '0.25rem', zIndex: 5 }}>
-                              <button
-                                onClick={() => moveFile(idx, 'left')}
-                                disabled={idx === 0}
-                                className="btn-icon"
-                                style={{ padding: '0.4rem', background: 'var(--bg-glass)', borderRadius: '8px', opacity: idx === 0 ? 0.3 : 1 }}
-                              >
-                                <ChevronDown size={14} style={{ transform: 'rotate(90deg)' }} />
-                              </button>
-                              <button
-                                onClick={() => moveFile(idx, 'right')}
-                                disabled={idx === files.length - 1}
-                                className="btn-icon"
-                                style={{ padding: '0.4rem', background: 'var(--bg-glass)', borderRadius: '8px', opacity: idx === files.length - 1 ? 0.3 : 1 }}
-                              >
-                                <ChevronDown size={14} style={{ transform: 'rotate(-90deg)' }} />
-                              </button>
-                            </div>
-                          )}
-
-                          <div style={{ color: 'var(--accent-blue)', marginBottom: '1.25rem', display: 'flex', justifyContent: 'center' }}>
-                            <div style={{ padding: '0.75rem', background: 'rgba(59, 130, 246, 0.05)', borderRadius: '12px' }}>
-                              <FileText size={40} />
-                            </div>
-                          </div>
-                          <p style={{ fontWeight: 700, fontSize: '0.85rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', margin: 0 }}>
-                            {file.name}
-                          </p>
-                          <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', margin: '0.25rem 0 0' }}>
-                            {(file.size / 1024).toFixed(1)} KB
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <AdSpace type="bottom" />
-              </div>
-            </main>
-            <AdSpace type="side" className="desktop-only" />
-          </div>
-        )}
+        )
+}
 
         {/* Mobile Settings Modal */}
         {

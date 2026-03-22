@@ -12,7 +12,7 @@ import {
   Navigation
 } from 'lucide-react'
 import ShareTool from '../components/ShareTool'
-import AdSpace from '../components/AdSpace'
+import ToolCard from '../components/ToolCard'
 import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS } from '../data/tools'
 import { posts } from '../data/posts'
 
@@ -190,7 +190,6 @@ export default function Home() {
         ]}
       />
       <div className="landing-layout">
-        <AdSpace type="side" className="desktop-only" />
         <div className="landing-center">
 
       <div className="category-hub">
@@ -357,32 +356,7 @@ export default function Home() {
                   className="tools-grid"
                 >
                   {filteredTools.map((tool) => (
-                    <motion.div
-                      key={tool.path}
-                      whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.2 } }}
-                    >
-                      <Link
-                        to={tool.path}
-                        className="tool-card"
-                        style={{ border: '1px solid var(--border-color)', height: '100%' }}
-                      >
-                        <div className="tool-card-header">
-                          <div className="tool-card-icon" style={{
-                            background: `${tool.color}15`,
-                            color: tool.color
-                          }}>
-                            <tool.icon size={22} />
-                          </div>
-                          <div className="tool-card-title-group">
-                            <h3 className="tool-card-title">{tool.title}</h3>
-                            <span className="tool-card-category" style={{ fontSize: '0.7rem', opacity: 0.6, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                              {tool.path.split('/')[1]?.replace('-', ' ') || 'General'}
-                            </span>
-                          </div>
-                        </div>
-                        <p className="tool-card-description">{tool.description}</p>
-                      </Link>
-                    </motion.div>
+                    <ToolCard key={tool.path} tool={tool} />
                   ))}
                 </div>
               ) : (
@@ -408,30 +382,7 @@ export default function Home() {
               </div>
               <div className="tools-grid" style={{ marginBottom: '4rem' }}>
                 {imageTools.map((tool) => (
-                  <motion.div
-                    key={tool.path}
-                    whileHover={{
-                      y: -8,
-                      scale: 1.02,
-                      transition: { duration: 0.2 }
-                    }}
-                  >
-                    <Link
-                      to={tool.path}
-                      className="tool-card"
-                      style={{ border: '1px solid var(--border-color)', height: '100%' }}
-                    >
-                      <div className="tool-card-header">
-                        <div className="tool-card-icon" style={{ background: `${tool.color}15`, color: tool.color }}>
-                          <tool.icon size={22} />
-                        </div>
-                        <div className="tool-card-title-group">
-                          <h3 className="tool-card-title">{tool.title}</h3>
-                        </div>
-                      </div>
-                      <p className="tool-card-description">{tool.description}</p>
-                    </Link>
-                  </motion.div>
+                  <ToolCard key={tool.path} tool={tool} />
                 ))}
               </div>
 
@@ -443,30 +394,7 @@ export default function Home() {
               </div>
               <div className="tools-grid" style={{ marginBottom: '4rem' }}>
                 {pdfTools.map((tool) => (
-                  <motion.div
-                    key={tool.path}
-                    whileHover={{
-                      y: -8,
-                      scale: 1.02,
-                      transition: { duration: 0.2 }
-                    }}
-                  >
-                    <Link
-                      to={tool.path}
-                      className="tool-card"
-                      style={{ border: '1px solid var(--border-color)', height: '100%' }}
-                    >
-                      <div className="tool-card-header">
-                        <div className="tool-card-icon" style={{ background: `${tool.color}15`, color: tool.color }}>
-                          <tool.icon size={22} />
-                        </div>
-                        <div className="tool-card-title-group">
-                          <h3 className="tool-card-title">{tool.title}</h3>
-                        </div>
-                      </div>
-                      <p className="tool-card-description">{tool.description}</p>
-                    </Link>
-                  </motion.div>
+                  <ToolCard key={tool.path} tool={tool} />
                 ))}
               </div>
 
@@ -478,30 +406,7 @@ export default function Home() {
               </div>
               <div className="tools-grid">
                 {communicationTools.map((tool) => (
-                  <motion.div
-                    key={tool.path}
-                    whileHover={{
-                      y: -8,
-                      scale: 1.02,
-                      transition: { duration: 0.2 }
-                    }}
-                  >
-                    <Link
-                      to={tool.path}
-                      className="tool-card"
-                      style={{ border: '1px solid var(--border-color)', height: '100%' }}
-                    >
-                      <div className="tool-card-header">
-                        <div className="tool-card-icon" style={{ background: `${tool.color}15`, color: tool.color }}>
-                          <tool.icon size={22} />
-                        </div>
-                        <div className="tool-card-title-group">
-                          <h3 className="tool-card-title">{tool.title}</h3>
-                        </div>
-                      </div>
-                      <p className="tool-card-description">{tool.description}</p>
-                    </Link>
-                  </motion.div>
+                  <ToolCard key={tool.path} tool={tool} />
                 ))}
               </div>
             </>
@@ -879,7 +784,6 @@ export default function Home() {
         </section>
         </div>
       </div>
-      <AdSpace type="side" className="desktop-only" />
     </div>
   </>
   )

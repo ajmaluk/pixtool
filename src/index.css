@@ -791,6 +791,150 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0.25rem;
 }
 
+/* Premium Tool Card - 2026 Edition */
+.tool-card-premium {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 2.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 32px;
+  text-decoration: none;
+  transition: var(--transition-premium);
+  height: 100%;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.tool-card-premium:hover {
+  border-color: transparent;
+  box-shadow: var(--shadow-premium);
+}
+
+.tool-card-glow {
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200px;
+  height: 200px;
+  filter: blur(80px);
+  opacity: 0;
+  transition: var(--transition-base);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tool-card-premium:hover .tool-card-glow {
+  opacity: 0.15;
+  transform: translate(-20%, 20%);
+}
+
+.tool-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  z-index: 1;
+}
+
+.tool-card-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-base);
+}
+
+.tool-card-premium:hover .tool-card-icon-wrapper {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.tool-card-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: var(--transition-base);
+}
+
+.tool-card-premium:hover .tool-card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+  background: var(--bg-primary);
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.tool-card-body {
+  flex: 1;
+  z-index: 1;
+  text-align: left;
+}
+
+.tool-card-category {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  transition: var(--transition-base);
+}
+
+.tool-card-premium:hover .tool-card-category {
+  color: var(--accent-primary);
+}
+
+.tool-card-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.tool-card-description {
+  font-size: 0.95rem !important;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.tool-card-footer {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.75rem;
+  z-index: 1;
+}
+
+.tool-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.4rem 0.8rem;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-radius: 100px;
+  border: 1px solid var(--border-color);
+  transition: var(--transition-base);
+}
+
+.tool-card-premium:hover .tool-tag {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  background: var(--bg-primary);
+}
+
 /* Tool Page Layout */
 .page-container {
   max-width: 100%;
