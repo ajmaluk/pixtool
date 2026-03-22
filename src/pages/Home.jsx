@@ -79,14 +79,14 @@ export default function Home() {
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "name": "DailyTools FAQ",
+      "name": "PixTool FAQ",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Is DailyTools really free?",
+          "name": "Is PixTool really free?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, 100% free. Every tool on DailyTools is available without any cost, subscription, or registration. We provide professional-grade productivity tools for everyone."
+            "text": "Yes, 100% free. Every tool on PixTool is available without any cost, subscription, or registration. We provide professional-grade productivity tools for everyone."
           }
         },
         {
@@ -94,7 +94,7 @@ export default function Home() {
           "name": "Are my files safe and private?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Absolutely. DailyTools processes your files entirely within your browser. Your images, PDFs, and data are never uploaded to any server, ensuring 100% privacy and security."
+            "text": "Absolutely. PixTool processes your files entirely within your browser. Your images, PDFs, and data are never uploaded to any server, ensuring 100% privacy and security."
           }
         },
         {
@@ -120,31 +120,31 @@ export default function Home() {
       "@context": "https://schema.org",
       "@type": "ItemList",
       "name": "Free Online Tools",
-      "description": "Complete list of free online tools available at DailyTools",
-      "url": "https://dailytools.toolpix.in/sitemap",
+      "description": "Complete list of free online tools available at PixTool",
+      "url": "https://pixtool.toolpix.in/sitemap",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Resize Image", "url": "https://dailytools.toolpix.in/image-tools/resize", "description": "Change image dimensions by pixels or percentage" },
-        { "@type": "ListItem", "position": 2, "name": "Crop Image", "url": "https://dailytools.toolpix.in/image-tools/crop", "description": "Crop images to any size or aspect ratio" },
-        { "@type": "ListItem", "position": 3, "name": "Rotate Image", "url": "https://dailytools.toolpix.in/image-tools/rotate", "description": "Rotate and flip images" },
-        { "@type": "ListItem", "position": 4, "name": "Compress Image", "url": "https://dailytools.toolpix.in/image-tools/compress", "description": "Reduce image file size" },
-        { "@type": "ListItem", "position": 5, "name": "Merge PDF", "url": "https://dailytools.toolpix.in/pdf-tools/merge", "description": "Combine multiple PDFs into one" },
-        { "@type": "ListItem", "position": 6, "name": "Split PDF", "url": "https://dailytools.toolpix.in/pdf-tools/split", "description": "Extract pages from PDF" },
-        { "@type": "ListItem", "position": 7, "name": "Compress PDF", "url": "https://dailytools.toolpix.in/pdf-tools/compress", "description": "Reduce PDF file size" },
-        { "@type": "ListItem", "position": 8, "name": "PDF to Image", "url": "https://dailytools.toolpix.in/pdf-tools/convert", "description": "Convert PDF to images" },
-        { "@type": "ListItem", "position": 9, "name": "Convert Image Format", "url": "https://dailytools.toolpix.in/image-tools/convert", "description": "Convert between JPEG, PNG, WebP, GIF" },
-        { "@type": "ListItem", "position": 10, "name": "Add Watermark", "url": "https://dailytools.toolpix.in/image-tools/watermark", "description": "Add text watermarks to images" },
-        { "@type": "ListItem", "position": 11, "name": "Flip Image", "url": "https://dailytools.toolpix.in/image-tools/flip", "description": "Flip images horizontally or vertically" },
-        { "@type": "ListItem", "position": 12, "name": "Grayscale Converter", "url": "https://dailytools.toolpix.in/image-tools/grayscale", "description": "Convert to black & white, sepia, or invert" },
-        { "@type": "ListItem", "position": 13, "name": "Protect PDF", "url": "https://dailytools.toolpix.in/pdf-tools/protect", "description": "Add password protection to PDF" },
-        { "@type": "ListItem", "position": 14, "name": "Watermark PDF", "url": "https://dailytools.toolpix.in/pdf-tools/watermark", "description": "Add text watermarks to PDF pages" },
-        { "@type": "ListItem", "position": 15, "name": "Reorder PDF Pages", "url": "https://dailytools.toolpix.in/pdf-tools/reorder", "description": "Rearrange PDF pages" },
-        { "@type": "ListItem", "position": 16, "name": "Temporary Email", "url": "https://dailytools.toolpix.in/temp-mail", "description": "Free disposable email address" },
-        { "@type": "ListItem", "position": 17, "name": "QR Code Generator", "url": "https://dailytools.toolpix.in/qr-generator", "description": "Create QR codes" },
-        { "@type": "ListItem", "position": 18, "name": "QR Scanner", "url": "https://dailytools.toolpix.in/qr-scanner", "description": "Scan QR codes" }
+        { "@type": "ListItem", "position": 1, "name": "Resize Image", "url": "https://pixtool.toolpix.in/image-tools/resize", "description": "Change image dimensions by pixels or percentage" },
+        { "@type": "ListItem", "position": 2, "name": "Crop Image", "url": "https://pixtool.toolpix.in/image-tools/crop", "description": "Crop images to any size or aspect ratio" },
+        { "@type": "ListItem", "position": 3, "name": "Rotate Image", "url": "https://pixtool.toolpix.in/image-tools/rotate", "description": "Rotate and flip images" },
+        { "@type": "ListItem", "position": 4, "name": "Compress Image", "url": "https://pixtool.toolpix.in/image-tools/compress", "description": "Reduce image file size" },
+        { "@type": "ListItem", "position": 5, "name": "Merge PDF", "url": "https://pixtool.toolpix.in/pdf-tools/merge", "description": "Combine multiple PDFs into one" },
+        { "@type": "ListItem", "position": 6, "name": "Split PDF", "url": "https://pixtool.toolpix.in/pdf-tools/split", "description": "Extract pages from PDF" },
+        { "@type": "ListItem", "position": 7, "name": "Compress PDF", "url": "https://pixtool.toolpix.in/pdf-tools/compress", "description": "Reduce PDF file size" },
+        { "@type": "ListItem", "position": 8, "name": "PDF to Image", "url": "https://pixtool.toolpix.in/pdf-tools/convert", "description": "Convert PDF to images" },
+        { "@type": "ListItem", "position": 9, "name": "Convert Image Format", "url": "https://pixtool.toolpix.in/image-tools/convert", "description": "Convert between JPEG, PNG, WebP, GIF" },
+        { "@type": "ListItem", "position": 10, "name": "Add Watermark", "url": "https://pixtool.toolpix.in/image-tools/watermark", "description": "Add text watermarks to images" },
+        { "@type": "ListItem", "position": 11, "name": "Flip Image", "url": "https://pixtool.toolpix.in/image-tools/flip", "description": "Flip images horizontally or vertically" },
+        { "@type": "ListItem", "position": 12, "name": "Grayscale Converter", "url": "https://pixtool.toolpix.in/image-tools/grayscale", "description": "Convert to black & white, sepia, or invert" },
+        { "@type": "ListItem", "position": 13, "name": "Protect PDF", "url": "https://pixtool.toolpix.in/pdf-tools/protect", "description": "Add password protection to PDF" },
+        { "@type": "ListItem", "position": 14, "name": "Watermark PDF", "url": "https://pixtool.toolpix.in/pdf-tools/watermark", "description": "Add text watermarks to PDF pages" },
+        { "@type": "ListItem", "position": 15, "name": "Reorder PDF Pages", "url": "https://pixtool.toolpix.in/pdf-tools/reorder", "description": "Rearrange PDF pages" },
+        { "@type": "ListItem", "position": 16, "name": "Temporary Email", "url": "https://pixtool.toolpix.in/temp-mail", "description": "Free disposable email address" },
+        { "@type": "ListItem", "position": 17, "name": "QR Code Generator", "url": "https://pixtool.toolpix.in/qr-generator", "description": "Create QR codes" },
+        { "@type": "ListItem", "position": 18, "name": "QR Scanner", "url": "https://pixtool.toolpix.in/qr-scanner", "description": "Scan QR codes" }
       ].concat([
-        { "@type": "ListItem", "position": 19, "name": "10 Minute Mail", "url": "https://dailytools.toolpix.in/temp-mail/10-minute-mail", "description": "Auto-expiring disposable email" },
-        { "@type": "ListItem", "position": 20, "name": "Change Temporary Email", "url": "https://dailytools.toolpix.in/temp-mail/change-email", "description": "Generate a new temp email" },
-        { "@type": "ListItem", "position": 21, "name": "Typing Test", "url": "https://dailytools.toolpix.in/typing-test", "description": "Online typing speed test (WPM)" }
+        { "@type": "ListItem", "position": 19, "name": "10 Minute Mail", "url": "https://pixtool.toolpix.in/temp-mail/10-minute-mail", "description": "Auto-expiring disposable email" },
+        { "@type": "ListItem", "position": 20, "name": "Change Temporary Email", "url": "https://pixtool.toolpix.in/temp-mail/change-email", "description": "Generate a new temp email" },
+        { "@type": "ListItem", "position": 21, "name": "Typing Test", "url": "https://pixtool.toolpix.in/typing-test", "description": "Online typing speed test (WPM)" }
       ])
     },
     {
@@ -152,12 +152,12 @@ export default function Home() {
       "@type": "CollectionPage",
       "name": "Free Image Tools Collection",
       "description": "Complete suite of free online image editing tools including resize, crop, rotate, compress, convert, watermark, flip, and grayscale.",
-      "url": "https://dailytools.toolpix.in/image-tools",
+      "url": "https://pixtool.toolpix.in/image-tools",
       "hasPart": imageTools.map(t => ({
         "@type": "SoftwareApplication",
         "name": t.title,
         "description": t.description,
-        "url": `https://dailytools.toolpix.in${t.path}`,
+        "url": `https://pixtool.toolpix.in${t.path}`,
         "applicationCategory": "MultimediaApplication"
       }))
     },
@@ -166,12 +166,12 @@ export default function Home() {
       "@type": "CollectionPage",
       "name": "Free PDF Tools Collection",
       "description": "Complete suite of free online PDF tools including merge, split, compress, convert, protect, watermark, and reorder.",
-      "url": "https://dailytools.toolpix.in/pdf-tools",
+      "url": "https://pixtool.toolpix.in/pdf-tools",
       "hasPart": pdfTools.map(t => ({
         "@type": "SoftwareApplication",
         "name": t.title,
         "description": t.description,
-        "url": `https://dailytools.toolpix.in${t.path}`,
+        "url": `https://pixtool.toolpix.in${t.path}`,
         "applicationCategory": "BusinessApplication"
       }))
     }
@@ -180,9 +180,9 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="DailyTools - Free Online Productivity Tools | 100% Client-Side & Private"
-        description="DailyTools: The ultimate 100% private, browser-based suite for professionals. Free online image resizer, PDF merger, compressor, temporary mail, and QR generator. No file uploads, no storage – your data stays on your device."
-        keywords="free online tools, dailytools, image resizer online, crop image free, compress image no quality loss, PDF merge online, split PDF browser, compress PDF sitemap, temp mail, disposable email pro, 10 minute mail serverless, QR code generator wifi, secure typing test, browser-based tools, no upload required, privacy-first tools, professional pdf editor free, online image editor 2026, adobe acrobat alternative, tinypng alternative"
+        title="PixTool - Free Online Productivity Tools | 100% Client-Side & Private"
+        description="PixTool: The ultimate 100% private, browser-based suite for professionals. Free online image resizer, PDF merger, compressor, temporary mail, and QR generator. No file uploads, no storage – your data stays on your device."
+        keywords="free online tools, pixtool, image resizer online, crop image free, compress image no quality loss, PDF merge online, split PDF browser, compress PDF sitemap, temp mail, disposable email pro, 10 minute mail serverless, QR code generator wifi, secure typing test, browser-based tools, no upload required, privacy-first tools, professional pdf editor free, online image editor 2026, adobe acrobat alternative, tinypng alternative"
         path="/"
         schema={homeSchema}
         breadcrumbs={[
@@ -212,7 +212,7 @@ export default function Home() {
               <span style={{ marginRight: '8px' }}>🚀</span> 2026 Edition: Private & Fast
             </div>
             <h1 style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.04em', lineHeight: 1.1 }}>
-              Daily<span style={{ color: 'var(--accent-primary)' }}>Tools</span>
+              Pix<span style={{ color: 'var(--accent-primary)' }}>Tool</span>
             </h1>
             <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '800px', margin: '0 auto 3rem', lineHeight: 1.6, fontWeight: 500 }}>
               The ultimate professional suite for image editing, PDF management, and essential web utilities.
@@ -474,7 +474,7 @@ export default function Home() {
                 <div style={{ padding: '0.6rem', background: 'rgba(16, 185, 129, 0.08)', borderRadius: '12px', color: 'var(--accent-green)' }}>
                   <Wifi size={24} />
                 </div>
-                <h2 style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '-0.02em' }}>Smart Utilities</h2>
+                <h2 style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '-0.02em' }}>Daily Tools</h2>
               </div>
               <div className="tools-grid">
                 {communicationTools.map((tool) => (
@@ -511,14 +511,14 @@ export default function Home() {
           <div className="container-pro" style={{ marginTop: '8rem', padding: '4rem', background: 'var(--bg-secondary)', borderRadius: '32px', textAlign: 'left' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '4rem' }}>
               <div>
-                <h2 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '1.5rem' }}>Why Choose DailyTools?</h2>
+                <h2 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '1.5rem' }}>Why Choose PixTool?</h2>
                 <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>
                   Unlike other platforms that require you to upload your files to their servers,
-                  DailyTools processes almost everything <b>locally in your browser</b>.
+                  PixTool processes almost everything <b>locally in your browser</b>.
                   This means your sensitive images and PDFs never leave your device, ensuring
                   <b> 100% privacy</b> and extreme speed. Whether you need to resize a photo
                   for social media, merge multiple PDF documents for work, or generate a QR code
-                  for an event, DailyTools has you covered with professional-grade results.
+                  for an event, PixTool has you covered with professional-grade results.
                 </p>
               </div>
               <div>
@@ -526,7 +526,7 @@ export default function Home() {
                 <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>
                   Our mission is to provide high-quality productivity tools without the high-end
                   subscription costs. There are no hidden fees, no credit cards, and no "Pro"
-                  tiers that lock away essential features. Every tool on DailyTools is completely
+                  tiers that lock away essential features. Every tool on PixTool is completely
                   free — from our advanced image resizer and cropper to our PDF merger and
                   compressor. We believe essential productivity tools should be accessible to everyone.
                 </p>
@@ -570,7 +570,7 @@ export default function Home() {
                 One Workspace, <span style={{ color: 'var(--accent-primary)' }}>Infinite Use Cases</span>
               </h2>
               <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '700px', margin: '0 auto' }}>
-                Discover how thousands of professionals use DailyTools to streamline their daily digital workflow.
+                Discover how thousands of professionals use PixTool to streamline their daily digital workflow.
               </p>
             </div>
 
@@ -644,14 +644,14 @@ export default function Home() {
           {/* Extended SEO Content — FAQ Section */}
           <div className="container-pro" style={{ marginTop: '6rem', maxWidth: '1000px', margin: '6rem auto 0' }}>
             <h2 style={{ fontSize: '2.5rem', fontWeight: 900, textAlign: 'center', marginBottom: '1rem' }}>Frequently Asked Questions</h2>
-            <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginBottom: '3rem', fontSize: '1.1rem' }}>Everything you need to know about DailyTools</p>
+            <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginBottom: '3rem', fontSize: '1.1rem' }}>Everything you need to know about PixTool</p>
 
             {[
-              { q: "Is DailyTools really free?", a: "Yes, 100% free. Every tool on DailyTools is available without any cost, subscription, or hidden fees. We support the platform through non-intrusive advertising." },
-              { q: "Are my files safe and private?", a: "Absolutely. DailyTools processes your files entirely within your browser. Your images, PDFs, and documents are never uploaded to any server. Once you close the tab, your data is gone." },
+              { q: "Is PixTool really free?", a: "Yes, 100% free. Every tool on PixTool is available without any cost, subscription, or hidden fees. We support the platform through non-intrusive advertising." },
+              { q: "Are my files safe and private?", a: "Absolutely. PixTool processes your files entirely within your browser. Your images, PDFs, and documents are never uploaded to any server. Once you close the tab, your data is gone." },
               { q: "What image formats are supported?", a: "Our image tools support all major formats including JPEG, PNG, WebP, GIF, BMP, and TIFF. You can also convert between formats while resizing, cropping, or compressing." },
               { q: "Can I merge more than two PDFs?", a: "Yes! Our PDF merger supports combining as many PDF files as you need into a single document. Simply upload all your files and arrange them in the desired order." },
-              { q: "Do I need to install anything?", a: "No installation required. DailyTools runs entirely in your web browser. Just visit the site and start using any tool immediately on any device." },
+              { q: "Do I need to install anything?", a: "No installation required. PixTool runs entirely in your web browser. Just visit the site and start using any tool immediately on any device." },
               { q: "What is the maximum file size?", a: "Since processing happens in your browser, the limit depends on your device's available memory. Most modern devices can handle files up to 100MB+ without issues." },
             ].map((faq, i) => (
               <div key={i} style={{ padding: '1.5rem 2rem', background: 'var(--bg-secondary)', borderRadius: '16px', marginBottom: '1rem', border: '1px solid var(--border-color)' }}>
@@ -667,7 +667,7 @@ export default function Home() {
               The Professional All-In-One <br /><span style={{ color: 'var(--accent-primary)' }}>Online Productivity Suite</span>
             </h2>
             <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.2rem', maxWidth: '800px', margin: '0 auto 4rem' }}>
-              DailyTools is the premier high-performance platform for <b>free online image editing</b>,
+              PixTool is the premier high-performance platform for <b>free online image editing</b>,
               <b>advanced PDF management</b>, and <b>secure web utilities</b> — architected for professionals who demand <b>industry-standard quality</b> without the compromise of server uploads.
             </p>
 
@@ -728,7 +728,7 @@ export default function Home() {
             <div className="container-pro" style={{ padding: '4rem', background: 'var(--text-primary)', color: 'var(--bg-primary)', borderRadius: '40px', marginBottom: '6rem', textAlign: 'left', position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'absolute', top: '-100px', right: '-100px', width: '300px', height: '300px', background: 'var(--accent-primary)', filter: 'blur(150px)', opacity: 0.2 }}></div>
               <div style={{ maxWidth: '800px' }}>
-                <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.03em' }}>Why Professionals Switch to DailyTools</h2>
+                <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.03em' }}>Why Professionals Switch to PixTool</h2>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem' }}>
                   <div>
                     <h4 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -744,7 +744,7 @@ export default function Home() {
                   </div>
                   <div style={{ position: 'relative' }}>
                     <h4 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <span style={{ color: '#10b981' }}>✓</span> DailyTools Edge
+                      <span style={{ color: '#10b981' }}>✓</span> PixTool Edge
                     </h4>
                     <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.8rem', fontWeight: 600, fontSize: '0.95rem' }}>
                       <li>100% Client-side browser processing</li>
@@ -788,7 +788,7 @@ export default function Home() {
               <div style={{ marginBottom: '3rem' }}>
                 <h2 style={{ fontSize: '2.8rem', fontWeight: 900, marginBottom: '1rem', letterSpacing: '-0.02em' }}>Technical <span style={{ color: 'var(--accent-primary)' }}>Authority</span></h2>
                 <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto' }}>
-                  Why thousands of professionals and corporate clients trust DailyTools with their most sensitive data.
+                  Why thousands of professionals and corporate clients trust PixTool with their most sensitive data.
                 </p>
               </div>
 
@@ -799,7 +799,7 @@ export default function Home() {
                   </div>
                   <h3 style={{ fontSize: '1.3rem', fontWeight: 800, marginBottom: '0.75rem' }}>Client-Side Security</h3>
                   <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
-                    Unlike traditional tools that upload files to a remote server, DailyTools uses <b>modern WebAssembly</b> to process everything 100% locally in your browser. <b>Your data never leaves your computer.</b>
+                    Unlike traditional tools that upload files to a remote server, PixTool uses <b>modern WebAssembly</b> to process everything 100% locally in your browser. <b>Your data never leaves your computer.</b>
                   </p>
                 </div>
 

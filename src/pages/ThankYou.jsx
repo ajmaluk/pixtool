@@ -12,13 +12,13 @@ export default function ThankYou() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Thank You",
-                    "item": "https://dailytools.toolpix.in/thank-you"
+                    "item": "https://pixtool.toolpix.in/thank-you"
                 }
             ]
         }
@@ -27,8 +27,8 @@ export default function ThankYou() {
     return (
         <div className="thank-you-page">
             <SEO
-                title="Thank You for Your Support | DailyTools"
-                description="We appreciate your support and contribution to the DailyTools mission. Together we're building better, private digital tools for the world."
+                title="Thank You for Your Support | PixTool"
+                description="We appreciate your support and contribution to the PixTool mission. Together we're building better, private digital tools for the world."
                 path="/thank-you"
                 schema={thanksSchema}
             />
@@ -53,13 +53,13 @@ export default function ThankYou() {
                         </a>
                         <button className="btn btn-secondary" style={{ gap: '10px', padding: '1.25rem 2.5rem' }} onClick={() => {
                             if (navigator.share) {
-                                navigator.share({ title: 'DailyTools', url: 'https://dailytools.toolpix.in' });
+                                navigator.share({ title: 'PixTool', url: 'https://pixtool.toolpix.in' });
                             } else {
-                                navigator.clipboard.writeText('https://dailytools.toolpix.in');
+                                navigator.clipboard.writeText('https://pixtool.toolpix.in');
                                 alert('Link copied!');
                             }
                         }}>
-                            <Share2 size={20} /> Share DailyTools
+                            <Share2 size={20} /> Share PixTool
                         </button>
                     </div>
 

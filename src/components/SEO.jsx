@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react'
 
 export default function SEO({
-    title = 'DailyTools - Free Online Productivity Suite',
+    title = 'PixTool - Free Online Productivity Suite',
     description = 'The ultimate all-in-one productivity suite featuring professional browser-based tools for PDF management, image editing, and utility workflows. No uploads, 100% private.',
     keywords = null,
     path = '/',
@@ -21,11 +21,11 @@ export default function SEO({
     toolSteps = null,
     lastModified = null
 }) {
-    const siteUrl = 'https://dailytools.toolpix.in'
-    const siteName = 'DailyTools by UTHAKKAN'
+    const siteUrl = 'https://pixtool.toolpix.in'
+    const siteName = 'PixTool by UTHAKKAN'
     const fullUrl = path === '/' ? siteUrl : `${siteUrl}${path.startsWith('/') ? path : `/${path}`}`
 
-    const brandTitle = title.includes('DailyTools') ? title : `${title} | DailyTools`
+    const brandTitle = title.includes('PixTool') ? title : `${title} | PixTool`
     useEffect(() => {
         document.title = brandTitle
     }, [brandTitle])
@@ -33,7 +33,7 @@ export default function SEO({
     // Map path to screenshot filename for maximum Image SEO ranking
     const getScreenshotPath = (path) => {
         const SCREENSHOT_MAP = {
-            '/': 'dailytools-all-in-one-productivity-suite.png',
+            '/': 'pixtool-all-in-one-productivity-suite.png',
             '/image-tools': 'professional-online-image-studio.png',
             '/pdf-tools': 'secure-pdf-management-suite.png',
             '/utility-tools': 'all-in-one-web-utility-toolbox.png',
@@ -45,7 +45,7 @@ export default function SEO({
             '/image-tools/watermark': 'add-watermark-to-photos-online-free.png',
             '/image-tools/flip': 'flip-and-mirror-images-online-instantly.png',
             '/image-tools/grayscale': 'convert-image-to-grayscale-online.png',
-            '/pdf-tools/merge': 'fast-pdf-merger-no-upload-dailytools.png',
+            '/pdf-tools/merge': 'fast-pdf-merger-no-upload-pixtool.png',
             '/pdf-tools/split': 'split-pdf-pages-online-securely.png',
             '/pdf-tools/compress': 'optimize-pdf-file-size-online.png',
             '/pdf-tools/protect': 'secure-pdf-with-password-online.png',
@@ -64,7 +64,7 @@ export default function SEO({
         }
 
         const cleanPath = path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path
-        return `/screenshots/${SCREENSHOT_MAP[cleanPath] || 'dailytools-all-in-one-productivity-suite.png'}`
+        return `/screenshots/${SCREENSHOT_MAP[cleanPath] || 'pixtool-all-in-one-productivity-suite.png'}`
     }
 
     const screenshotPath = getScreenshotPath(path)
@@ -72,7 +72,7 @@ export default function SEO({
     const twImage = twitterImage ? (twitterImage.startsWith('http') ? twitterImage : `${siteUrl}${twitterImage.startsWith('/') ? twitterImage : `/${twitterImage}`}`) : `${siteUrl}${screenshotPath}`
     
     // Dynamic Alt text for images - critical for image SEO ranking
-    const imageAlt = toolName ? `Screenshot of DailyTools ${toolName} - High-quality browser-based productivity tool` : `${title} - Professional online utility by UTHAKKAN`
+    const imageAlt = toolName ? `Screenshot of PixTool ${toolName} - High-quality browser-based productivity tool` : `${title} - Professional online utility by UTHAKKAN`
 
     // Enhanced keywords based on page type and tool
     const enhancedKeywords = useMemo(() => {
@@ -138,7 +138,7 @@ export default function SEO({
                     "WASM Performance", 
                     "Generative AI Content Analysis"
                 ],
-                "abstract": "DailyTools is a professional-grade productivity suite that executes all file manipulations 100% locally in the browser, ensuring military-grade privacy by never uploading user data to a server.",
+                "abstract": "PixTool is a professional-grade productivity suite that executes all file manipulations 100% locally in the browser, ensuring military-grade privacy by never uploading user data to a server.",
                 "address": {
                     "@type": "PostalAddress",
                     "addressLocality": "Kannur",
@@ -199,10 +199,10 @@ export default function SEO({
             {
                 "@context": "https://schema.org",
                 "@type": "WebSite",
-                "name": "DailyTools",
+                "name": "PixTool",
                 "url": siteUrl,
                 "description": "All-in-one productivity suite with privacy-first tools. Image tools (resize, crop, compress, convert), PDF tools (merge, split, compress), Temp Mail, QR Generator, Typing Test. No uploads - all processing happens in your browser.",
-                "alternateName": "DailyTools - Free Online Tools Suite",
+                "alternateName": "PixTool - Free Online Tools Suite",
                 "potentialAction": {
                     "@type": "SearchAction",
                     "target": {
@@ -226,7 +226,7 @@ export default function SEO({
             {
                 "@context": "https://schema.org",
                 "@type": "WebApplication",
-                "name": "DailyTools",
+                "name": "PixTool",
                 "alternateName": ["DT Tools", "UTHAKKAN Tools"],
                 "applicationCategory": "UtilitiesApplication",
                 "applicationSubCategory": "Productivity",
@@ -283,7 +283,7 @@ export default function SEO({
                 "areaServed": "Worldwide",
                 "hasOfferCatalog": {
                     "@type": "OfferCatalog",
-                    "name": "DailyTools Categories",
+                    "name": "PixTool Categories",
                     "itemListElement": [
                         { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "PDF Management" } },
                         { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Image Studio" } },
@@ -396,7 +396,7 @@ export default function SEO({
                 category = 'QR Code Tools'
             }
 
-            const toolTitle = toolName || title.replace(' | DailyTools', '').replace(' - DailyTools', '')
+            const toolTitle = toolName || title.replace(' | PixTool', '').replace(' - PixTool', '')
 
             globalSchemas.push({
                 "@context": "https://schema.org",
@@ -436,7 +436,7 @@ export default function SEO({
                 globalSchemas.push({
                     "@context": "https://schema.org",
                     "@type": "HowTo",
-                    "name": `How to use ${toolTitle} | DailyTools Guide`,
+                    "name": `How to use ${toolTitle} | PixTool Guide`,
                     "description": `Step-by-step tutorial on using the ${toolTitle} to achieve professional results locally in your browser.`,
                     "url": fullUrl,
                     "image": ogImage,
@@ -445,7 +445,7 @@ export default function SEO({
                         { "@type": "HowToSupply", "name": "Source File (Image/PDF)" }
                     ],
                     "tool": [
-                        { "@type": "HowToTool", "name": "DailyTools Browser Studio" }
+                        { "@type": "HowToTool", "name": "PixTool Browser Studio" }
                     ],
                     "step": toolSteps.map((step, idx) => ({
                         "@type": "HowToStep",
@@ -547,7 +547,7 @@ export default function SEO({
     }, [title, description, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, articleSection, breadcrumbs, faqs, toolName, toolSteps, articleTags, type])
 
     useEffect(() => {
-        const brandTitle = title.includes('DailyTools') ? title : `${title} | DailyTools`
+        const brandTitle = title.includes('PixTool') ? title : `${title} | PixTool`
         document.title = brandTitle
 
         const updateMeta = (name, content, attribute = 'name') => {
@@ -568,10 +568,10 @@ export default function SEO({
 
         // Author & Copyright
         updateMeta('author', articleAuthor || 'UTHAKKAN')
-        updateMeta('copyright', 'Copyright © 2026 DailyTools by UTHAKKAN')
+        updateMeta('copyright', 'Copyright © 2026 PixTool by UTHAKKAN')
         updateMeta('revisit-after', '7 days')
         updateMeta('language', 'English')
-        updateMeta('generator', 'DailyTools - Built with React & Vite')
+        updateMeta('generator', 'PixTool - Built with React & Vite')
         updateMeta('subject', 'Free Online Tools, Image Processing, PDF Management, Productivity')
         updateMeta('rating', 'General')
         updateMeta('distribution', 'Global')
@@ -581,7 +581,7 @@ export default function SEO({
         updateMeta('mobile-web-app-capable', 'yes')
         updateMeta('apple-mobile-web-app-capable', 'yes')
         updateMeta('apple-mobile-web-app-status-bar-style', 'black-translucent')
-        updateMeta('apple-mobile-web-app-title', 'DailyTools')
+        updateMeta('apple-mobile-web-app-title', 'PixTool')
         updateMeta('format-detection', 'telephone=no')
         updateMeta('msapplication-TileColor', '#a855f7')
         updateMeta('msapplication-tap-highlight', 'no')

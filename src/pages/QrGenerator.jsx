@@ -117,13 +117,13 @@ export default function QrGenerator() {
   const qrSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Free QR Code Generator - DailyTools",
+    "name": "Free QR Code Generator - PixTool",
     "description": "Create professional, custom QR codes for URLs, WiFi networks, plain text, email, and phone numbers. 100% free, private, and high-resolution PNG output.",
     "applicationCategory": "UtilitiesApplication",
     "applicationSubCategory": "QR Generator",
     "operatingSystem": "All (Web Browser)",
-    "url": "https://dailytools.toolpix.in/qr-generator",
-    "image": "https://dailytools.toolpix.in/logo.png",
+    "url": "https://pixtool.toolpix.in/qr-generator",
+    "image": "https://pixtool.toolpix.in/logo.png",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -149,12 +149,12 @@ export default function QrGenerator() {
     "@type": "HowTo",
     "name": "How to Generate a QR Code for Free",
     "description": "Learn how to create custom QR codes for any purpose using our free online generator.",
-    "image": "https://dailytools.toolpix.in/logo.png",
+    "image": "https://pixtool.toolpix.in/logo.png",
     "step": [
-      { "@type": "HowToStep", "name": "Select Type", "text": "Choose the data type: URL, WiFi, Email, Phone, or Plain Text.", "image": "https://dailytools.toolpix.in/logo.png" },
-      { "@type": "HowToStep", "name": "Enter Data", "text": "Input the information you want to encode into the QR code.", "image": "https://dailytools.toolpix.in/logo.png" },
-      { "@type": "HowToStep", "name": "Customize", "text": "Adjust size, foreground/background colors, and error correction levels.", "image": "https://dailytools.toolpix.in/logo.png" },
-      { "@type": "HowToStep", "name": "Download", "text": "Click 'Download PNG' to save your high-resolution QR code.", "image": "https://dailytools.toolpix.in/logo.png" }
+      { "@type": "HowToStep", "name": "Select Type", "text": "Choose the data type: URL, WiFi, Email, Phone, or Plain Text.", "image": "https://pixtool.toolpix.in/logo.png" },
+      { "@type": "HowToStep", "name": "Enter Data", "text": "Input the information you want to encode into the QR code.", "image": "https://pixtool.toolpix.in/logo.png" },
+      { "@type": "HowToStep", "name": "Customize", "text": "Adjust size, foreground/background colors, and error correction levels.", "image": "https://pixtool.toolpix.in/logo.png" },
+      { "@type": "HowToStep", "name": "Download", "text": "Click 'Download PNG' to save your high-resolution QR code.", "image": "https://pixtool.toolpix.in/logo.png" }
     ],
     "totalTime": "PT45S"
   }
@@ -216,7 +216,7 @@ export default function QrGenerator() {
     { q: "How do I create a WiFi QR code for my business?", a: "Select the 'WiFi' tab, enter your network SSID and password, then download the code. Customers can simply point their phone camera at the code to connect instantly without typing." },
     { q: "Can I customize the QR code colors?", a: "Yes! You can change both the QR dots (foreground) and the background to match your brand colors. Pro tip: Always use a dark foreground on a light background for the best scan reliability." },
     { q: "What is QR Code error correction (ECC)?", a: "ECC allows a QR code to be scanned even if it's slightly damaged or obscured. 'High (30%)' is safest for printed materials that might get scratched, while 'Low (7%)' creates a cleaner-looking code." },
-    { q: "Is this QR generator safe for private data?", a: "Yes. Unlike cloud-based generators that log your links and data, DailyTools generates everything locally in your browser. Your sensitive URLs and WiFi passwords are never transmitted to our servers." },
+    { q: "Is this QR generator safe for private data?", a: "Yes. Unlike cloud-based generators that log your links and data, PixTool generates everything locally in your browser. Your sensitive URLs and WiFi passwords are never transmitted to our servers." },
     { q: "Can I add my logo to the QR code?", a: "This feature is currently in development. For now, we focus on providing the cleanest, most scannable standard QR codes possible." },
     { q: "Does this work on iPhone and Android?", a: "Absolutely. Our generator is fully responsive, allowing you to create and download QR codes directly on your mobile device." },
     { q: "Can I use these QR codes for commercial purposes?", a: "Yes, 100%. All QR codes generated here are yours to use for any personal or commercial project with no licensing fees or attribution required." }
@@ -225,7 +225,7 @@ export default function QrGenerator() {
   return (
     <>
       <SEO
-        title="Free QR Code Generator | Custom QR Maker - DailyTools"
+        title="Free QR Code Generator | Custom QR Maker - PixTool"
         description="Create high-quality, professional QR codes for free. Generate QR codes for URLs, WiFi, emails, phone numbers, and text. High-resolution PNG output. 100% private and browser-based."
         keywords="qr code generator, free qr maker, create qr code online, wifi qr code generator, url to qr code, high resolution qr code, dynamic qr code alternative, custom qr code free, QR Code Monkey alternative"
         path="/qr-generator"
@@ -251,7 +251,7 @@ export default function QrGenerator() {
             <div className="page-hero">
               <div className="page-hero-content">
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-                  <ShareTool title="Free QR Code Generator | Custom QR Maker - DailyTools" />
+                  <ShareTool title="Free QR Code Generator | Custom QR Maker - PixTool" />
                 </div>
                 <h1 className="page-title">QR Generator</h1>
                 <p className="page-subtitle">

@@ -6,7 +6,7 @@ import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS } from '../src/data/tools.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SITE_URL = 'https://dailytools.toolpix.in';
+const SITE_URL = 'https://pixtool.toolpix.in';
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 const SITEMAP_PATH = path.join(PUBLIC_DIR, 'sitemap.xml');
 
@@ -24,7 +24,7 @@ function generateSitemap() {
     <priority>1.0</priority>
     <image:image>
       <image:loc>${SITE_URL}/og-image.png</image:loc>
-      <image:title>DailyTools - All-in-one Free Online Productivity Suite</image:title>
+      <image:title>PixTool - All-in-one Free Online Productivity Suite</image:title>
     </image:image>
   </url>`;
 
@@ -40,7 +40,7 @@ function generateSitemap() {
       xml += `
     <image:image>
       <image:loc>${SITE_URL}${imagePath}</image:loc>
-      <image:title>${imageTitle || 'DailyTools Interface'}</image:title>
+      <image:title>${imageTitle || 'PixTool Interface'}</image:title>
     </image:image>`;
     }
     
@@ -49,24 +49,24 @@ function generateSitemap() {
   };
 
   // Main Hubs
-  addUrl('/image-tools', '0.9', 'weekly', '/screenshots/image-tools-hub.png', 'DailyTools Image Studio Hub');
-  addUrl('/pdf-tools', '0.9', 'weekly', '/screenshots/pdf-tools-hub.png', 'DailyTools PDF Expert Suite');
-  addUrl('/utility-tools', '0.9', 'weekly', '/screenshots/utility-tools-hub.png', 'DailyTools Utility Suite');
-  addUrl('/showcase', '0.9', 'weekly', '/screenshots/home.png', 'DailyTools Visual Showcase');
+  addUrl('/image-tools', '0.9', 'weekly', '/screenshots/image-tools-hub.png', 'PixTool Image Studio Hub');
+  addUrl('/pdf-tools', '0.9', 'weekly', '/screenshots/pdf-tools-hub.png', 'PixTool PDF Expert Suite');
+  addUrl('/utility-tools', '0.9', 'weekly', '/screenshots/utility-tools-hub.png', 'PixTool Utility Suite');
+  addUrl('/showcase', '0.9', 'weekly', '/screenshots/home.png', 'PixTool Visual Showcase');
 
   // Image Tools
   IMAGE_TOOLS.forEach(tool => {
-    addUrl(tool.path, '0.8', 'weekly', `/screenshots/image-tools-${tool.id}.png`, `${tool.title} interface - Free DailyTools`);
+    addUrl(tool.path, '0.8', 'weekly', `/screenshots/image-tools-${tool.id}.png`, `${tool.title} interface - Free PixTool`);
   });
 
   // PDF Tools
   PDF_TOOLS.forEach(tool => {
-    addUrl(tool.path, '0.8', 'weekly', `/screenshots/pdf-tools-${tool.id}.png`, `${tool.title} interface - Free DailyTools`);
+    addUrl(tool.path, '0.8', 'weekly', `/screenshots/pdf-tools-${tool.id}.png`, `${tool.title} interface - Free PixTool`);
   });
 
   // Utility Tools
   UTILITY_TOOLS.forEach(tool => {
-    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.id}.png`, `${tool.title} interface - Free DailyTools`);
+    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.id}.png`, `${tool.title} interface - Free PixTool`);
   });
 
   // Company & Legal

@@ -7,7 +7,7 @@ import Breadcrumbs from '../components/Breadcrumbs';
 
 const SCREENSHOTS = [
   // Hubs
-  { id: 'home', title: 'DailyTools Homepage', category: 'General', path: '/', img: '/screenshots/dailytools-all-in-one-productivity-suite.png' },
+  { id: 'home', title: 'PixTool Homepage', category: 'General', path: '/', img: '/screenshots/pixtool-all-in-one-productivity-suite.png' },
   { id: 'image-tools', title: 'Image Studio Hub', category: 'Image', path: '/image-tools', img: '/screenshots/professional-online-image-studio.png' },
   { id: 'pdf-tools', title: 'PDF Expert Hub', category: 'PDF', path: '/pdf-tools', img: '/screenshots/secure-pdf-management-suite.png' },
   { id: 'utility-tools', title: 'Utility Suite Hub', category: 'Utility', path: '/utility-tools', img: '/screenshots/all-in-one-web-utility-toolbox.png' },
@@ -23,7 +23,7 @@ const SCREENSHOTS = [
   { id: 'image-grayscale', title: 'Grayscale Editor', category: 'Image', path: '/image-tools/grayscale', img: '/screenshots/convert-image-to-grayscale-online.png' },
   
   // PDF Tools
-  { id: 'pdf-merge', title: 'Merge PDF', category: 'PDF', path: '/pdf-tools/merge', img: '/screenshots/fast-pdf-merger-no-upload-dailytools.png' },
+  { id: 'pdf-merge', title: 'Merge PDF', category: 'PDF', path: '/pdf-tools/merge', img: '/screenshots/fast-pdf-merger-no-upload-pixtool.png' },
   { id: 'pdf-split', title: 'Split PDF', category: 'PDF', path: '/pdf-tools/split', img: '/screenshots/split-pdf-pages-online-securely.png' },
   { id: 'pdf-compress', title: 'Compress PDF', category: 'PDF', path: '/pdf-tools/compress', img: '/screenshots/optimize-pdf-file-size-online.png' },
   { id: 'pdf-convert', title: 'PDF to Image', category: 'PDF', path: '/pdf-tools/convert', img: '/screenshots/convert-pdf-to-images-online-high-res.png' },
@@ -47,9 +47,9 @@ export default function Showcase() {
   return (
     <div className="showcase-page">
       <SEO 
-        title="Visual Showcase & Tool Previews | DailyTools"
-        description="Explore the full visual library of DailyTools. Preview our Image Studio, PDF Expert, and Utility Suite interfaces before you use them. 100% private and professional."
-        keywords="dailytools showcase, tool previews, image studio gallery, pdf suite screenshots, utility tool interfaces, web tool visual library"
+        title="Visual Showcase & Tool Previews | PixTool"
+        description="Explore the full visual library of PixTool. Preview our Image Studio, PDF Expert, and Utility Suite interfaces before you use them. 100% private and professional."
+        keywords="pixtool showcase, tool previews, image studio gallery, pdf suite screenshots, utility tool interfaces, web tool visual library"
         path="/showcase"
         toolName="Visual Showcase"
       />
@@ -104,7 +104,7 @@ export default function Showcase() {
               }}>
                 <img 
                   src={item.img} 
-                  alt={`${item.title} interface preview - DailyTools ${item.category} category`} 
+                  alt={`${item.title} interface preview - PixTool ${item.category} category`} 
                   loading="lazy"
                   style={{
                     width: '100%',
@@ -169,7 +169,7 @@ export default function Showcase() {
           }}>
             <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1.5rem' }}>Professional Quality, Guaranteed</h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '3rem' }}>
-              All DailyTools are built with a focus on performance, security, and user experience. 
+              All PixTool are built with a focus on performance, security, and user experience. 
               Our interfaces are responsive, accessible, and designed to make your daily digital tasks effortless.
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '3rem' }}>

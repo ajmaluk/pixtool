@@ -1,20 +1,20 @@
 ================================================================================
-                        DAILYTOOLS — WEBSITE DATA
+                        PIXTOOL — WEBSITE DATA
 ================================================================================
 
-WEBSITE NAME:       DailyTools
-DOMAIN:             https://dailytools.toolpix.in
+WEBSITE NAME:       PixTool
+DOMAIN:             https://pixtool.toolpix.in
 TAGLINE:            Free Online Image & PDF Tools | No Uploads Required
 TECHNOLOGY:         Vite + React (SPA), JavaScript, CSS
 FONT:               Inter (Google Fonts)
-LOGO:               https://dailytools.toolpix.in/logo.png
+LOGO:               https://pixtool.toolpix.in/logo.png
 PWA:                Yes (mobile-web-app-capable)
 
 ================================================================================
                            ORGANIZATION
 ================================================================================
 
-ORGANIZATION:       DailyTools by UTHAKKAN
+ORGANIZATION:       PixTool by UTHAKKAN
 FOUNDER:            Ajmal U K
 FOUNDER TITLE:      Founder & Senior Full Stack Developer
 CONTACT EMAIL:      contact@uthakkan.com

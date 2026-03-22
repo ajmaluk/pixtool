@@ -12,13 +12,13 @@ export default function Privacy() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Privacy Policy",
-                    "item": "https://dailytools.toolpix.in/privacy-policy"
+                    "item": "https://pixtool.toolpix.in/privacy-policy"
                 }
             ]
         }
@@ -27,8 +27,8 @@ export default function Privacy() {
     return (
         <div className="legal-page">
             <SEO
-                title="Privacy Policy - Your Data Security | DailyTools"
-                description="Our privacy-first policy: your files never leave your browser. Learn how DailyTools and UTHAKKAN protect your data through local processing."
+                title="Privacy Policy - Your Data Security | PixTool"
+                description="Our privacy-first policy: your files never leave your browser. Learn how PixTool and UTHAKKAN protect your data through local processing."
                 path="/privacy-policy"
                 schema={privacySchema}
             />
@@ -53,7 +53,7 @@ export default function Privacy() {
                             At <strong>UTHAKKAN</strong>, we believe that your data is exactly that — <em>yours</em>. Our core architecture is built on the principle of <strong>Local browser-side computation</strong>.
                         </p>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-                            Unlike traditional online tools that require you to upload files to a remote server for processing (where they could be intercepted, stored, or analyzed), DailyTools uses <strong>WebAssembly (WASM)</strong> and <strong>modern Canvas APIs</strong> to perform all transformations directly in your browser's memory.
+                            Unlike traditional online tools that require you to upload files to a remote server for processing (where they could be intercepted, stored, or analyzed), PixTool uses <strong>WebAssembly (WASM)</strong> and <strong>modern Canvas APIs</strong> to perform all transformations directly in your browser's memory.
                         </p>
 
                         <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -73,7 +73,7 @@ export default function Privacy() {
                             <ShieldCheck size={20} style={{ color: 'var(--accent-primary)' }} /> 3. Security Framework
                         </h2>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-                            DailyTools leverages <strong>Content Security Policy (CSP)</strong> and <strong>HTTPS encryption</strong> to ensure that your interaction with our tools remains secure. Our browser-based model is inherently compliant with <strong>GDPR, HIPAA, and CCPA</strong> because the data controller (you) never transfers data to a third-party processor (us).
+                            PixTool leverages <strong>Content Security Policy (CSP)</strong> and <strong>HTTPS encryption</strong> to ensure that your interaction with our tools remains secure. Our browser-based model is inherently compliant with <strong>GDPR, HIPAA, and CCPA</strong> because the data controller (you) never transfers data to a third-party processor (us).
                         </p>
 
                         <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>

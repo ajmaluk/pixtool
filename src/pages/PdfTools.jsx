@@ -74,7 +74,7 @@ export default function PdfTools() {
     try {
       if (activeTool === 'merge') {
         const pdfBytes = await mergePdfs(files);
-        downloadBlob(new Blob([pdfBytes], { type: 'application/pdf' }), 'merged-dailytools.pdf');
+        downloadBlob(new Blob([pdfBytes], { type: 'application/pdf' }), 'merged-pixtool.pdf');
       } else if (activeTool === 'split') {
         const pdfBytes = await splitPdf(files[0], settings.startPage, settings.endPage);
         downloadBlob(new Blob([pdfBytes], { type: 'application/pdf' }), `split-${files[0].name}`);
@@ -102,7 +102,7 @@ export default function PdfTools() {
   const seoContentMap = PDF_SEO_CONTENT;
   const seoContent = activeTool ? seoContentMap[activeTool] : null;
 
-  const pageTitle = activeToolData ? `Free Online ${activeToolData.title} Tool | DailyTools` : "Professional Online PDF Tools | Merge, Split, Compress, Convert, Protect, Watermark, Reorder"
+  const pageTitle = activeToolData ? `Free Online ${activeToolData.title} Tool | PixTool` : "Professional Online PDF Tools | Merge, Split, Compress, Convert, Protect, Watermark, Reorder"
   const pageDescription = activeToolData ?
     seoContentMap[activeTool]?.description :
     "Professional suite of 100% private online PDF tools. Merge, split, compress, and convert PDF documents instantly in your browser. No server uploads, military-grade encryption. Best free alternative to Adobe Acrobat for secure document handling."
@@ -421,7 +421,7 @@ export default function PdfTools() {
                     <div style={{ aspectRatio: '16/9', background: 'var(--bg-secondary)', overflow: 'hidden', borderBottom: '1px solid var(--border-color)' }}>
                       <img 
                         src={`/screenshots/${tool.screenshot}`} 
-                        alt={`${tool.title} interface preview - Professional browser-based PDF ${tool.id} tool by DailyTools`}
+                        alt={`${tool.title} interface preview - Professional browser-based PDF ${tool.id} tool by PixTool`}
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                         onError={(e) => {
                           e.target.style.display = 'none';
@@ -463,7 +463,7 @@ export default function PdfTools() {
 
               <div style={{ marginTop: '5rem' }}>
                 <ToolContent
-                  title="PDF DailyTools"
+                  title="PDF PixTool"
                   description="Our PDF suite offers military-grade security by processing all your sensitive documents directly in your browser. No files are ever uploaded or stored on any server."
                   benefits={["Offline Processing", "High Performance", "Multi-file Support", "100% Free Forever"]}
                   howTo={["Pick a PDF tool from the list", "Upload your documents", "Set your preferences", "Save the result instantly"]}
@@ -482,7 +482,7 @@ export default function PdfTools() {
               <div className="page-hero">
                 <div className="page-hero-content">
                   <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-                    <ShareTool title={`Free Online ${activeToolData.title} | DailyTools`} />
+                    <ShareTool title={`Free Online ${activeToolData.title} | PixTool`} />
                   </div>
                   <h1 className="page-title">{activeToolData.title}</h1>
                   <p className="page-subtitle">

@@ -33,13 +33,13 @@ export default function CaseStudies() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Case Studies",
-                    "item": "https://dailytools.toolpix.in/case-studies"
+                    "item": "https://pixtool.toolpix.in/case-studies"
                 }
             ]
         }
@@ -48,8 +48,8 @@ export default function CaseStudies() {
     return (
         <div className="case-studies-page">
             <SEO
-                title="Case Studies - Real-World Success Stories | DailyTools"
-                description="Discover how businesses and individuals leverage DailyTools and UTHAKKAN's expertise to optimize workflows and drive digital growth through real-world case studies."
+                title="Case Studies - Real-World Success Stories | PixTool"
+                description="Discover how businesses and individuals leverage PixTool and UTHAKKAN's expertise to optimize workflows and drive digital growth through real-world case studies."
                 path="/case-studies"
                 schema={caseSchema}
             />

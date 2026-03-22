@@ -40,7 +40,7 @@ export default function Breadcrumbs({ items = [] }) {
                     transition: 'var(--transition-fast)',
                     opacity: 0.8
                 }}
-                title="DailyTools Home - Free Online Productivity"
+                title="PixTool Home - Free Online Productivity"
             >
                 <Home size={14} />
             </Link>

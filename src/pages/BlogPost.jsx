@@ -120,19 +120,19 @@ export default function BlogPost() {
                 "author": {
                     "@type": "Person",
                     "name": post.author,
-                    "url": "https://dailytools.toolpix.in/founder"
+                    "url": "https://pixtool.toolpix.in/founder"
                 },
                 "publisher": {
                     "@type": "Organization",
-                    "name": "DailyTools by UTHAKKAN",
+                    "name": "PixTool by UTHAKKAN",
                     "logo": {
                         "@type": "ImageObject",
-                        "url": "https://dailytools.toolpix.in/logo.png"
+                        "url": "https://pixtool.toolpix.in/logo.png"
                     }
                 },
                 "mainEntityOfPage": {
                     "@type": "WebPage",
-                    "@id": `https://dailytools.toolpix.in/blog/${post.slug}`
+                    "@id": `https://pixtool.toolpix.in/blog/${post.slug}`
                 },
                 "wordCount": post.excerpt.split(' ').length * 10,
                 "articleSection": "Technology",
@@ -154,19 +154,19 @@ export default function BlogPost() {
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://dailytools.toolpix.in/"
+                        "item": "https://pixtool.toolpix.in/"
                     },
                     {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Blog",
-                        "item": "https://dailytools.toolpix.in/blog"
+                        "item": "https://pixtool.toolpix.in/blog"
                     },
                     {
                         "@type": "ListItem",
                         "position": 3,
                         "name": post.title,
-                        "item": `https://dailytools.toolpix.in/blog/${post.slug}`
+                        "item": `https://pixtool.toolpix.in/blog/${post.slug}`
                     }
                 ]
             }
@@ -200,7 +200,7 @@ export default function BlogPost() {
     return (
         <div className="blog-post-page">
             <SEO
-                title={`${post.title} | DailyTools Insights`}
+                title={`${post.title} | PixTool Insights`}
                 description={post.excerpt}
                 path={`/blog/${post.slug}`}
                 type="article"
@@ -376,7 +376,7 @@ export default function BlogPost() {
                                 className="btn btn-primary"
                                 style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
                                 onClick={() => {
-                                    const shareUrl = `https://dailytools.toolpix.in/blog/${post.slug}`;
+                                    const shareUrl = `https://pixtool.toolpix.in/blog/${post.slug}`;
                                     if (navigator.share) {
                                         navigator.share({
                                             title: post.title,

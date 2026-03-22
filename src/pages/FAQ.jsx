@@ -6,13 +6,13 @@ const faqData = [
     {
         category: "General",
         questions: [
-            { q: "Is DailyTools really free?", a: "Yes, 100% free. Every tool on DailyTools is available without any cost, subscription, or hidden fees. We support the platform through non-intrusive advertising." },
-            { q: "Is my data safe and private?", a: "Absolutely. DailyTools processes your files entirely within your browser. Your images, PDFs, and documents are never uploaded to any server. Once you close the tab, your data is gone." },
+            { q: "Is PixTool really free?", a: "Yes, 100% free. Every tool on PixTool is available without any cost, subscription, or hidden fees. We support the platform through non-intrusive advertising." },
+            { q: "Is my data safe and private?", a: "Absolutely. PixTool processes your files entirely within your browser. Your images, PDFs, and documents are never uploaded to any server. Once you close the tab, your data is gone." },
             { q: "Who is behind UTHAKKAN?", a: "UTHAKKAN is founded by Ajmal U K, a solo developer and MCA student dedicated to building clean, efficient digital tools." },
             { q: "Do I need to create an account?", a: "No account needed! All our tools work immediately without registration or login." },
             { q: "Are there any usage limits?", a: "No limits! Use our tools as much as you want, whenever you want." },
-            { q: "Can I use DailyTools for commercial purposes?", a: "Yes, absolutely! All processed files are yours to use for any purpose, including commercial." },
-            { q: "What makes DailyTools different?", a: "Unlike other online tools, we process everything in your browser. Your files never leave your device, ensuring maximum privacy and speed." },
+            { q: "Can I use PixTool for commercial purposes?", a: "Yes, absolutely! All processed files are yours to use for any purpose, including commercial." },
+            { q: "What makes PixTool different?", a: "Unlike other online tools, we process everything in your browser. Your files never leave your device, ensuring maximum privacy and speed." },
             { q: "Do you offer an API?", a: "Currently we don't offer an API, but contact us if you're interested in custom integrations." }
         ]
     },
@@ -66,7 +66,7 @@ const faqData = [
             { q: "Do you offer custom development services?", a: "Yes, we offer custom web and software development, AI solutions, and automation consulting. Visit our Services page for more info." },
             { q: "How can I support UTHAKKAN?", a: "You can support us by using our tools, sharing them with others, or via 'Buy Me a Coffee'." },
             { q: "Do you offer white-label solutions?", a: "Contact us to discuss white-label options for your business." },
-            { q: "Can I advertise on DailyTools?", a: "Yes, we offer advertising opportunities. Contact us for rates." }
+            { q: "Can I advertise on PixTool?", a: "Yes, we offer advertising opportunities. Contact us for rates." }
         ]
     }
 ];
@@ -94,7 +94,7 @@ export default function FAQ() {
             "mainEntity": faqData.flatMap((cat, catIdx) => cat.questions.map((q, qIdx) => ({
                 "@type": "Question",
                 "name": q.q,
-                "url": `https://dailytools.toolpix.in/faq#q-${catIdx}-${qIdx}`,
+                "url": `https://pixtool.toolpix.in/faq#q-${catIdx}-${qIdx}`,
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": q.a
@@ -109,13 +109,13 @@ export default function FAQ() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "FAQ",
-                    "item": "https://dailytools.toolpix.in/faq"
+                    "item": "https://pixtool.toolpix.in/faq"
                 }
             ]
         }
@@ -124,8 +124,8 @@ export default function FAQ() {
     return (
         <div className="faq-page">
             <SEO
-                title="FAQ - Get Answers to Your Productivity Questions | DailyTools"
-                description="Frequently asked questions about DailyTools, privacy policy, local file processing, and our range of online PDF and image tools."
+                title="FAQ - Get Answers to Your Productivity Questions | PixTool"
+                description="Frequently asked questions about PixTool, privacy policy, local file processing, and our range of online PDF and image tools."
                 path="/faq"
                 schema={faqSchema}
             />

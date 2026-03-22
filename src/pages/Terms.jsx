@@ -12,13 +12,13 @@ export default function Terms() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Terms of Service",
-                    "item": "https://dailytools.toolpix.in/terms-of-service"
+                    "item": "https://pixtool.toolpix.in/terms-of-service"
                 }
             ]
         }
@@ -27,8 +27,8 @@ export default function Terms() {
     return (
         <div className="legal-page">
             <SEO
-                title="Terms of Service - Usage Guidelines | DailyTools"
-                description="Read the terms and conditions for using DailyTools. Understand your rights and our commitment to providing free, high-quality digital tools."
+                title="Terms of Service - Usage Guidelines | PixTool"
+                description="Read the terms and conditions for using PixTool. Understand your rights and our commitment to providing free, high-quality digital tools."
                 path="/terms-of-service"
                 schema={termsSchema}
             />

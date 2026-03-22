@@ -10,8 +10,8 @@ export default function Founder() {
             "@type": "Person",
             "name": "Muhammed Ajmal U K",
             "alternateName": "Ajmal U K",
-            "url": "https://dailytools.toolpix.in/founder",
-            "image": "https://dailytools.toolpix.in/ajmaluk.png",
+            "url": "https://pixtool.toolpix.in/founder",
+            "image": "https://pixtool.toolpix.in/ajmaluk.png",
             "jobTitle": "Founder & Senior Full Stack Developer",
             "address": {
                 "@type": "PostalAddress",
@@ -29,7 +29,7 @@ export default function Founder() {
                 "https://linkedin.com/in/ajmaluk",
                 "https://x.com/ajmal_uk_"
             ],
-            "description": "Founder of UTHAKKAN and the lead developer behind DailyTools. Expert in SaaS architecture, AI-driven productivity solutions, and full-stack engineering based in Kannur, Kerala."
+            "description": "Founder of UTHAKKAN and the lead developer behind PixTool. Expert in SaaS architecture, AI-driven productivity solutions, and full-stack engineering based in Kannur, Kerala."
         },
         {
             "@context": "https://schema.org",
@@ -39,13 +39,13 @@ export default function Founder() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Founder",
-                    "item": "https://dailytools.toolpix.in/founder"
+                    "item": "https://pixtool.toolpix.in/founder"
                 }
             ]
         }
@@ -54,8 +54,8 @@ export default function Founder() {
     return (
         <div className="page-container">
             <SEO
-                title="Founder - Muhammed Ajmal U K | Visionary Behind DailyTools & UTHAKKAN"
-                description="Meet Muhammed Ajmal U K, the founder of UTHAKKAN and lead developer of DailyTools. Expert in SaaS, AI Tools, and Freelance Web Development based in Kannur, Kerala."
+                title="Founder - Muhammed Ajmal U K | Visionary Behind PixTool & UTHAKKAN"
+                description="Meet Muhammed Ajmal U K, the founder of UTHAKKAN and lead developer of PixTool. Expert in SaaS, AI Tools, and Freelance Web Development based in Kannur, Kerala."
                 path="/founder"
                 schema={founderSchema}
             />

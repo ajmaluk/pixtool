@@ -1,11 +1,11 @@
-# DailyTools - Free Online Productivity Suite
+# PixTool - Free Online Productivity Suite
 
 > [!NOTE]
 > All processing is done 100% locally in the user's browser. No files are uploaded to any server.
 
 ## Core Capabilities
 
-DailyTools provides a comprehensive suite of image editing, PDF management, and utility tools that operate entirely client-side.
+PixTool provides a comprehensive suite of image editing, PDF management, and utility tools that operate entirely client-side.
 
 ### Image Studio
 - **Resize & Crop**: Adjust dimensions and aspect ratios for social media.
@@ -33,4 +33,4 @@ DailyTools provides a comprehensive suite of image editing, PDF management, and 
 - **Privacy**: Zero-upload policy (Military-grade privacy)
 - **Availability**: 100% free, no registration required.
 
-For more details, see [llms-full.txt](https://dailytools.toolpix.in/llms-full.txt)
+For more details, see [llms-full.txt](https://pixtool.toolpix.in/llms-full.txt)

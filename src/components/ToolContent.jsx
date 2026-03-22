@@ -64,7 +64,7 @@ export default function ToolContent({
                             color: 'var(--text-primary)',
                             lineHeight: 1.5
                         }}>
-                             DailyTools provides a professional-grade browser-based alternative to <b>{alternativeTo.join(', ')}</b>.
+                             PixTool provides a professional-grade browser-based alternative to <b>{alternativeTo.join(', ')}</b>.
                         </div>
                     )}
                     

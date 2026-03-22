@@ -73,10 +73,10 @@ const sitemapSections = [
         title: "Company & Resources",
         icon: Info,
         links: [
-            { name: "About Us", path: "/about", description: "Learn about the mission and technology behind DailyTools." },
-            { name: "The Founder", path: "/founder", description: "Meet the creator of DailyTools and the UTHAKKAN team." },
+            { name: "About Us", path: "/about", description: "Learn about the mission and technology behind PixTool." },
+            { name: "The Founder", path: "/founder", description: "Meet the creator of PixTool and the UTHAKKAN team." },
             { name: "Our Services", path: "/services", description: "Explore additional professional services we offer." },
-            { name: "Testimonials", path: "/testimonials", description: "What our users say about their experience with DailyTools." },
+            { name: "Testimonials", path: "/testimonials", description: "What our users say about their experience with PixTool." },
             { name: "Case Studies", path: "/case-studies", description: "In-depth look at how professionals use our tools." },
             { name: "Documentation", path: "/documentation", description: "Comprehensive guides on how to use every tool." },
             { name: "Contact Support", path: "/contact", description: "Get in touch for feedback, support, or collaboration." }
@@ -86,10 +86,10 @@ const sitemapSections = [
         title: "Expert Insights & Tutorials",
         icon: Book,
         links: [
-            { name: "DailyTools Blog", path: "/blog", description: "Main hub for all our technical articles and productivity guides." },
+            { name: "PixTool Blog", path: "/blog", description: "Main hub for all our technical articles and productivity guides." },
             { name: "Mastering PDF Tools", path: "/blog/ultimate-pdf-toolkit-merge-split-compress", description: "The ultimate guide to merging, splitting and compressing PDFs." },
             { name: "Best Free PDF Tools 2026", path: "/blog/best-free-pdf-tools-online-2026", description: "Review of the top-rated PDF management utilities for this year." },
-            { name: "Browser Privacy Guide", path: "/blog/privacy-first-why-dailytools-safest-studio", description: "Why local browser processing is the future of data security." },
+            { name: "Browser Privacy Guide", path: "/blog/privacy-first-why-pixtool-safest-studio", description: "Why local browser processing is the future of data security." },
             { name: "PDF to Word Tutorial", path: "/blog/how-to-convert-pdf-to-word-free-2026", description: "Step-by-step guide to high-fidelity document conversion." },
             { name: "Image Format Guide", path: "/blog/best-image-format-webp-avif-jpeg-2026", description: "Choosing between WebP, AVIF, and JPEG for optimal performance." },
             { name: "Social Media Resizing", path: "/blog/resize-images-social-media-2026", description: "Perfect dimensions for Instagram, LinkedIn, and Twitter posts." },
@@ -120,27 +120,27 @@ export default function Sitemap() {
     const sitemapPageSchema = {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        "name": "Sitemap - All DailyTools",
-        "description": "Complete directory of all free online tools at DailyTools. Find image editors, PDF processors, temp mail, and QR tools in one easy-to-navigate sitemap.",
-        "url": "https://dailytools.toolpix.in/sitemap",
+        "name": "Sitemap - All PixTool",
+        "description": "Complete directory of all free online tools at PixTool. Find image editors, PDF processors, temp mail, and QR tools in one easy-to-navigate sitemap.",
+        "url": "https://pixtool.toolpix.in/sitemap",
         "mainEntity": {
             "@type": "ItemList",
-            "name": "All DailyTools Pages",
-            "description": "Complete list of all pages and tools available on DailyTools",
+            "name": "All PixTool Pages",
+            "description": "Complete list of all pages and tools available on PixTool",
             "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Home", "url": "https://dailytools.toolpix.in/" },
-                { "@type": "ListItem", "position": 2, "name": "Image Tools", "url": "https://dailytools.toolpix.in/image-tools" },
-                { "@type": "ListItem", "position": 3, "name": "PDF Tools", "url": "https://dailytools.toolpix.in/pdf-tools" },
-                { "@type": "ListItem", "position": 4, "name": "Utility Tools", "url": "https://dailytools.toolpix.in/utility-tools" },
-                { "@type": "ListItem", "position": 5, "name": "Temporary Email", "url": "https://dailytools.toolpix.in/temp-mail" },
-                { "@type": "ListItem", "position": 6, "name": "10 Minute Mail", "url": "https://dailytools.toolpix.in/temp-mail/10-minute-mail" },
-                { "@type": "ListItem", "position": 7, "name": "Change Temporary Email", "url": "https://dailytools.toolpix.in/temp-mail/change-email" },
-                { "@type": "ListItem", "position": 8, "name": "Typing Speed Test", "url": "https://dailytools.toolpix.in/typing-test" },
-                { "@type": "ListItem", "position": 9, "name": "QR Code Generator", "url": "https://dailytools.toolpix.in/qr-generator" },
-                { "@type": "ListItem", "position": 10, "name": "QR Code Scanner", "url": "https://dailytools.toolpix.in/qr-scanner" },
-                { "@type": "ListItem", "position": 11, "name": "About Us", "url": "https://dailytools.toolpix.in/about" },
-                { "@type": "ListItem", "position": 12, "name": "Contact", "url": "https://dailytools.toolpix.in/contact" },
-                { "@type": "ListItem", "position": 13, "name": "Privacy Policy", "url": "https://dailytools.toolpix.in/privacy-policy" }
+                { "@type": "ListItem", "position": 1, "name": "Home", "url": "https://pixtool.toolpix.in/" },
+                { "@type": "ListItem", "position": 2, "name": "Image Tools", "url": "https://pixtool.toolpix.in/image-tools" },
+                { "@type": "ListItem", "position": 3, "name": "PDF Tools", "url": "https://pixtool.toolpix.in/pdf-tools" },
+                { "@type": "ListItem", "position": 4, "name": "Utility Tools", "url": "https://pixtool.toolpix.in/utility-tools" },
+                { "@type": "ListItem", "position": 5, "name": "Temporary Email", "url": "https://pixtool.toolpix.in/temp-mail" },
+                { "@type": "ListItem", "position": 6, "name": "10 Minute Mail", "url": "https://pixtool.toolpix.in/temp-mail/10-minute-mail" },
+                { "@type": "ListItem", "position": 7, "name": "Change Temporary Email", "url": "https://pixtool.toolpix.in/temp-mail/change-email" },
+                { "@type": "ListItem", "position": 8, "name": "Typing Speed Test", "url": "https://pixtool.toolpix.in/typing-test" },
+                { "@type": "ListItem", "position": 9, "name": "QR Code Generator", "url": "https://pixtool.toolpix.in/qr-generator" },
+                { "@type": "ListItem", "position": 10, "name": "QR Code Scanner", "url": "https://pixtool.toolpix.in/qr-scanner" },
+                { "@type": "ListItem", "position": 11, "name": "About Us", "url": "https://pixtool.toolpix.in/about" },
+                { "@type": "ListItem", "position": 12, "name": "Contact", "url": "https://pixtool.toolpix.in/contact" },
+                { "@type": "ListItem", "position": 13, "name": "Privacy Policy", "url": "https://pixtool.toolpix.in/privacy-policy" }
             ]
         }
     }
@@ -148,9 +148,9 @@ export default function Sitemap() {
     return (
         <>
             <SEO
-                title="HTML Sitemap | All Tools & Resources - DailyTools"
-                description="Complete directory of all free online tools at DailyTools. Find image editors (resize, crop, compress, convert), PDF processors (merge, split, compress), temp mail, QR codes, and more. Browse our sitemap to find any tool instantly."
-                keywords="sitemap, all tools, DailyTools directory, free online tools list, image tools sitemap, PDF tools sitemap, utility tools sitemap"
+                title="HTML Sitemap | All Tools & Resources - PixTool"
+                description="Complete directory of all free online tools at PixTool. Find image editors (resize, crop, compress, convert), PDF processors (merge, split, compress), temp mail, QR codes, and more. Browse our sitemap to find any tool instantly."
+                keywords="sitemap, all tools, PixTool directory, free online tools list, image tools sitemap, PDF tools sitemap, utility tools sitemap"
                 path="/sitemap"
                 schema={sitemapPageSchema}
             />

@@ -1,6 +1,6 @@
 /**
  * Canvas utility functions for high-performance image processing.
- * Part of the DailyTools Architectural Harmonization.
+ * Part of the PixTool Architectural Harmonization.
  */
 
 export const loadImage = (file) => {

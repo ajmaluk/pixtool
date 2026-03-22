@@ -1,6 +1,6 @@
-# DailyTools Backlink Building & SEO Strategy
+# PixTool Backlink Building & SEO Strategy
 
-A comprehensive guide to building authority and visibility for DailyTools (https://dailytools.toolpix.in).
+A comprehensive guide to building authority and visibility for PixTool (https://pixtool.toolpix.in).
 
 ## Phase 1: High-Authority Launch Platforms
 *Focus on immediate visibility and "dofollow" opportunities from major tech hubs.*

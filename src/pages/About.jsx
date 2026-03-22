@@ -10,13 +10,13 @@ export default function About() {
         {
             "@context": "https://schema.org",
             "@type": "AboutPage",
-            "name": "About Uthakkan & DailyTools",
-            "description": "Uthakkan is a software development company building fast, uncompromising digital products like DailyTools, ToolPix, and Byte AI. Based in Kannur, Kerala.",
+            "name": "About Uthakkan & PixTool",
+            "description": "Uthakkan is a software development company building fast, uncompromising digital products like PixTool, ToolPix, and Byte AI. Based in Kannur, Kerala.",
             "mainEntity": {
                 "@type": "Organization",
                 "name": "Uthakkan",
                 "url": "https://www.uthakkan.in",
-                "logo": "https://dailytools.toolpix.in/logo.png",
+                "logo": "https://pixtool.toolpix.in/logo.png",
                 "email": "contact.uthakkan@gmail.com",
                 "foundingDate": "2025",
                 "founder": {
@@ -44,13 +44,13 @@ export default function About() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "About",
-                    "item": "https://dailytools.toolpix.in/about"
+                    "item": "https://pixtool.toolpix.in/about"
                 }
             ]
         }
@@ -78,7 +78,7 @@ export default function About() {
     return (
         <div className="page-container">
             <SEO
-                title="About Us - Mission & Privacy | DailyTools"
+                title="About Us - Mission & Privacy | PixTool"
                 description="Our mission is to merge creativity with technology. Delivering fast, privacy-first online tools that process your data locally in your browser."
                 path="/about"
                 schema={aboutSchema}
@@ -181,7 +181,7 @@ export default function About() {
                                 <div className="status-badge" style={{ width: 'fit-content' }}>THE ARCHITECT</div>
                                 <h2 style={{ fontSize: '3rem', fontWeight: 950, letterSpacing: '-0.03em' }}>Ajmal U K</h2>
                                 <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-                                    Ajmal is a full-stack developer and AI enthusiast who builds products at the intersection of complex engineering and clean design. Frustrated by bloated software, he founded <b>Uthakkan</b> to architect tools—like ToolPix and DailyTools—that are as powerful under the hood as they are elegant on the surface.
+                                    Ajmal is a full-stack developer and AI enthusiast who builds products at the intersection of complex engineering and clean design. Frustrated by bloated software, he founded <b>Uthakkan</b> to architect tools—like ToolPix and PixTool—that are as powerful under the hood as they are elegant on the surface.
                                 </p>
                                 <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
                                     <a href="https://linkedin.com/in/ajmaluk" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">LinkedIn</a>

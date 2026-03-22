@@ -1,8 +1,8 @@
-# DailyTools
+# PixTool
 
-**Free Online Productivity Suite** — Image editing, PDF management, temp mail, QR codes, and more.
+**Free Online Productivity Suite** — Image editing, PDF management, daily tools, QR codes, and more.
 
-🔗 **Live:** [dailytools.toolpix.in](https://dailytools.toolpix.in)
+🔗 **Live:** [pixtool.toolpix.in](https://pixtool.toolpix.in)
 
 ## Features
 

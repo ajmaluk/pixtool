@@ -103,7 +103,7 @@ export default function TypingTest() {
 
   const copyResults = () => {
     if (!results) return
-    const text = `My Typing Speed: ${results.wpm} WPM with ${results.accuracy}% accuracy on DailyTools!`
+    const text = `My Typing Speed: ${results.wpm} WPM with ${results.accuracy}% accuracy on PixTool!`
     navigator.clipboard.writeText(text)
   }
 
@@ -130,12 +130,12 @@ export default function TypingTest() {
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "Typing Speed Test - DailyTools",
+      "name": "Typing Speed Test - PixTool",
       "description": "Online typing test like MonkeyType. Practice with random words, track WPM and accuracy. Free, fast, and private.",
       "applicationCategory": "UtilitiesApplication",
       "applicationSubCategory": "Typing Test",
       "operatingSystem": "Web Browser",
-      "url": "https://dailytools.toolpix.in/typing-test",
+      "url": "https://pixtool.toolpix.in/typing-test",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
     },
     {
@@ -155,7 +155,7 @@ export default function TypingTest() {
   return (
     <>
       <SEO
-        title="Typing Speed Test | Online WPM Test like MonkeyType - DailyTools"
+        title="Typing Speed Test | Online WPM Test like MonkeyType - PixTool"
         description="Free online typing test like MonkeyType. Practice with random words and track WPM, accuracy, and correct words. Fast, distraction-free, privacy-first."
         keywords="typing test, online typing speed test, WPM test, MonkeyType alternative, typing practice, free typing test"
         path="/typing-test"
@@ -181,7 +181,7 @@ export default function TypingTest() {
             <div className="page-hero">
               <div className="page-hero-content">
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-                  <ShareTool title="Free Typing Test | MonkeyType Alternative - DailyTools" />
+                  <ShareTool title="Free Typing Test | MonkeyType Alternative - PixTool" />
                 </div>
                 <h1 className="page-title">Typing Test</h1>
                 <p className="page-subtitle">

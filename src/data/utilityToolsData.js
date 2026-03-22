@@ -1,6 +1,6 @@
 export const UTILITY_SEO_CONTENT = {
     'temp-mail': {
-      title: "Free Temporary Email | Disposable 10 Minute Mail & Fake Inbox - DailyTools",
+      title: "Free Temporary Email | Disposable 10 Minute Mail & Fake Inbox - PixTool",
       keywords: "temp mail, disposable email, temporary email, fake email, 10 minute mail, nada email, spam protection, free inbox, anonymous email, mailbox",
       description: "Get a temporary email address instantly. Protect your primary inbox from spam, marketing, and trackers with our completely free disposable 10 minute mail service. Perfect for nada signups and one-time account verifications.",
       benefits: ["Instant email generation", "No registration required", "Automatic message expiration", "Mobile-ready interface", "Complete privacy protection", "Zero permanent data storage", "100% free forever", "Nada inbox protection"],
@@ -8,7 +8,7 @@ export const UTILITY_SEO_CONTENT = {
       howTo: ["Visit the Temp Mail tool page", "Copy your generated temporary address", "Use it for any online signup", "Check for incoming mail in the dashboard", "Dispose of the email when finished"],
       faq: [
         { q: "How long does a 10 minute mail last?", a: "Your address remains active as long as you keep the tab open, or for up to 24 hours of inactivity." },
-        { q: "Is this a nada temporary email alternative?", a: "Yes, DailyTools provides a similar secure and anonymous inbox experience for one-time use." },
+        { q: "Is this a nada temporary email alternative?", a: "Yes, PixTool provides a similar secure and anonymous inbox experience for one-time use." },
         { q: "Can I use this for secure signups?", a: "Absolutely. Our burner emails are perfect for protecting your identity on suspicious platforms." }
       ]
     },
@@ -20,15 +20,15 @@ export const UTILITY_SEO_CONTENT = {
       alternativeTo: ["QR Code Reader app", "Google Lens", "Online QR Scanner"],
       howTo: ["Allow camera access when prompted", "Point your camera at the QR code", "Ensure the code is within the frame", "Click the detected link to open", "No data is sent to our servers"],
       faq: [
-        { q: "Do I need to download an app to scan QR codes?", a: "No! DailyTools works directly in your web browser using HTML5 camera technology." },
+        { q: "Do I need to download an app to scan QR codes?", a: "No! PixTool works directly in your web browser using HTML5 camera technology." },
         { q: "Is it safe to scan unknown QR codes?", a: "Our scanner previews the URL for you, allowing you to see where the link goes before visiting it." },
         { q: "Does it work on iPhones and Androids?", a: "Yes, it is fully compatible with Safari on iOS and Chrome on Android." }
       ]
     },
     'qr-generator': {
-      title: "Professional Custom QR Code Generator | Free & Unlimited - DailyTools",
+      title: "Professional Custom QR Code Generator | Free & Unlimited - PixTool",
       keywords: "qr generator, create qr code free, qr code for link, text to qr code, custom qr creator, online qr maker, wifi qr code generator, high resolution qr codes, static qr code creator",
-      description: "Generate professional, high-resolution QR codes for websites, text, WiFi credentials, or contact information instantly. DailyTools offers a completely free, unlimited QR maker that works 100% locally in your browser. Create static QR codes that never expire with no tracking, no redirects, and no hidden costs.",
+      description: "Generate professional, high-resolution QR codes for websites, text, WiFi credentials, or contact information instantly. PixTool offers a completely free, unlimited QR maker that works 100% locally in your browser. Create static QR codes that never expire with no tracking, no redirects, and no hidden costs.",
       benefits: ["Customizable text and URLs", "Adjustable QR size and error correction", "High-resolution PNG & SVG-ready downloads", "Real-time instant preview", "Privacy-first: No tracking or dynamic links", "Static QR codes that work forever", "100% free for commercial use", "No registration or account required"],
       alternativeTo: ["QR Code Monkey", "Bitly QR", "GoQR.me", "Beaconstac"],
       howTo: ["Enter your target URL or text in the generator field", "Adjust the size and error correction density", "Wait for the real-time preview to regenerate", "Click the 'Download QR Code' button for a high-res file", "Scan the on-screen preview with your phone to verify"],
@@ -40,7 +40,7 @@ export const UTILITY_SEO_CONTENT = {
       ]
     },
     '10-minute-mail': {
-      title: "10 Minute Mail | High-Speed Temporary Email Generator - DailyTools",
+      title: "10 Minute Mail | High-Speed Temporary Email Generator - PixTool",
       keywords: "10 minute mail, fast temp mail, secure email generator, quick burner email, prevent spam, registration-free inbox, anonymous email session",
       description: "Create a precision-timed 10 minute mail address. Perfect for rapid account activations where privacy is paramount. Works 100% in your browser with zero data retention.",
       benefits: ["Precise 10-minute session management", "Instant activation", "Zero log policy", "Encrypted mailbox", "Mobile-optimized", "Spam-proof inbox", "One-click refresh"],
@@ -49,7 +49,7 @@ export const UTILITY_SEO_CONTENT = {
       faq: [{ q: "Can I extend the 10 minutes?", a: "Yes, you can refresh the timer to extend your session whenever needed." }]
     },
     'change-email': {
-      title: "Change Temp Email | Generate New Anonymous Inboxes - DailyTools",
+      title: "Change Temp Email | Generate New Anonymous Inboxes - PixTool",
       keywords: "change email, rotate temp mail, new anonymous inbox, burner mail switcher, unlimited temporary email, multiple email addresses free",
       description: "Rotate and change your temporary email addresses instantly. Ideal for multiple signups or testing environments requiring fresh burner inboxes with zero wait time.",
       benefits: ["Infinite email rotation", "Unique inbox IDs", "Fast synchronization", "Privacy-first logic", "Zero tracking", "High-speed switching"],
@@ -58,7 +58,7 @@ export const UTILITY_SEO_CONTENT = {
       faq: [{ q: "What happens to old emails?", a: "Changing your address permanently deletes the previous inbox for maximum security." }]
     },
     'fake-email': {
-      title: "Fake Email Generator | Anonymous Burner Inboxes - DailyTools",
+      title: "Fake Email Generator | Anonymous Burner Inboxes - PixTool",
       keywords: "fake email, burner email generator, anonymous mail, dummy inbox, test email address, free fake mail online",
       description: "Generate high-quality fake email addresses for testing, registration, and privacy. Secure, anonymous, and completely browser-controlled.",
       benefits: ["High-speed generation", "Developer-friendly testing", "Anonymous sessions", "Zero spam data", "Reliable delivery"],
@@ -67,7 +67,7 @@ export const UTILITY_SEO_CONTENT = {
       faq: [{ q: "Is this legal?", a: "Yes, temporary emails are a standard privacy tool for protecting of individual identity online." }]
     },
     'typing-test': {
-      title: "Free Online Typing Speed Test | Practice WPM & Accuracy - DailyTools",
+      title: "Free Online Typing Speed Test | Practice WPM & Accuracy - PixTool",
       keywords: "typing test, typing speed test, wpm test online, practice typing, monkeytype alternative, typing accuracy test, keyboard test free, touch typing practice, improve wpm",
       description: "Master your keyboard skills with our professional typing speed test. Featuring a clean, minimalist 'MonkeyType' style interface, you can track your Words Per Minute (WPM) and accuracy in real-time. Practice touch typing with custom text challenges locally in your browser with zero distractions.",
       benefits: ["Real-time WPM & raw speed tracking", "Precise accuracy percentage metrics", "Clean, minimalist distraction-free UI", "Multiple difficulty levels and word sets", "Instant results sharing", "Local history tracking for progress", "100% free - no ads during testing", "Professional keyboard calibration"],
@@ -91,7 +91,7 @@ export const UTILITY_SEO_CONTENT = {
     'qr-scanner': [
       { title: 'Advanced QR Code Marketing Strategies 2026', path: '/blog/advanced-qr-code-marketing-2026' },
       { title: 'Static vs Dynamic QR Codes: What You Need to Know', path: '/blog/qr-static-vs-dynamic-2026' },
-      { title: 'Why DailyTools is the Safest Browser Studio', path: '/blog/privacy-first-why-dailytools-safest-studio' }
+      { title: 'Why PixTool is the Safest Browser Studio', path: '/blog/privacy-first-why-pixtool-safest-studio' }
     ],
     'qr-generator': [
       { title: 'The Ultimate Guide to Static vs Dynamic QR Codes 2026', path: '/blog/qr-static-vs-dynamic-2026' },

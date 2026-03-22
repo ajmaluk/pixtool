@@ -84,7 +84,7 @@ export default function Services() {
             "areaServed": "Global",
             "hasOfferCatalog": {
                 "@type": "OfferCatalog",
-                "name": "DailyTools & UTHAKKAN Services",
+                "name": "PixTool & UTHAKKAN Services",
                 "itemListElement": services.map(s => ({
                     "@type": "Offer",
                     "itemOffered": {
@@ -102,13 +102,13 @@ export default function Services() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Services",
-                    "item": "https://dailytools.toolpix.in/services"
+                    "item": "https://pixtool.toolpix.in/services"
                 }
             ]
         }
@@ -117,7 +117,7 @@ export default function Services() {
     return (
         <div className="services-page" style={{ position: 'relative', overflow: 'hidden' }}>
             <SEO
-                title="Professional Digital Services - Development & AI | DailyTools"
+                title="Professional Digital Services - Development & AI | PixTool"
                 description="Explore our range of digital services including Software Development, Video Editing, and custom AI Solutions. Built for modern creators and businesses."
                 path="/services"
                 schema={servicesSchema}

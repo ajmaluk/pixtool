@@ -32,7 +32,7 @@ export default function ImageTools() {
     maintainAspect: true,
     format: 'original',
     convertTo: 'png',
-    watermarkText: 'DailyTools',
+    watermarkText: 'PixTool',
     watermarkSize: 36,
     watermarkOpacity: 50,
     watermarkPosition: 'center',
@@ -94,7 +94,7 @@ export default function ImageTools() {
   const seoContent = activeTool ? seoContentMap[activeTool] : null;
 
   // Dynamic SEO descriptions - enhanced for better SEO
-  const pageTitle = activeToolData ? `Free Online ${activeToolData.title} Tool | DailyTools` : "Professional Online Image Tools | Resize, Crop, Rotate, Compress, Convert, Watermark, Flip, Grayscale"
+  const pageTitle = activeToolData ? `Free Online ${activeToolData.title} Tool | PixTool` : "Professional Online Image Tools | Resize, Crop, Rotate, Compress, Convert, Watermark, Flip, Grayscale"
   const pageDescription = activeToolData ?
     seoContentMap[activeTool]?.description :
     "Professional suite of 100% private online image tools. Resize, crop, rotate, compress, and convert images instantly in your browser. No server uploads, military-grade privacy. Best free alternative to Photoshop and Squoosh for batch processing."
@@ -478,7 +478,7 @@ export default function ImageTools() {
                     <div style={{ aspectRatio: '16/9', background: 'var(--bg-secondary)', overflow: 'hidden', borderBottom: '1px solid var(--border-color)' }}>
                       <img 
                         src={`/screenshots/${tool.screenshot}`} 
-                        alt={`${tool.title} interface preview - Professional browser-based image ${tool.id} tool by DailyTools`}
+                        alt={`${tool.title} interface preview - Professional browser-based image ${tool.id} tool by PixTool`}
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                         onError={(e) => {
                           e.target.style.display = 'none';
@@ -521,7 +521,7 @@ export default function ImageTools() {
               <div style={{ marginTop: '5rem' }}>
                 <ToolContent
                   title="Professional Image Suite"
-                  description="Our image processing suite is engineered for speed and absolute privacy. Unlike traditional cloud editors, DailyTools processes your high-resolution photos entirely on your own machine using advanced Canvas and WebAsembly APIs. This ensures zero latency and absolute security for your creative assets."
+                  description="Our image processing suite is engineered for speed and absolute privacy. Unlike traditional cloud editors, PixTool processes your high-resolution photos entirely on your own machine using advanced Canvas and WebAsembly APIs. This ensures zero latency and absolute security for your creative assets."
                   benefits={[
                     "100% Client-Side — zero server exposure",
                     "Batch Processing — edit hundreds of images instantly",

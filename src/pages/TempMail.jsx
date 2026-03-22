@@ -164,7 +164,7 @@ class TempMailReceiver {
 
 export default function TempMail({
   seoPath = "/temp-mail",
-  seoTitle = "🔥 Free Temp Mail - Disposable Email in 1 Click | DailyTools",
+  seoTitle = "🔥 Free Temp Mail - Disposable Email in 1 Click | PixTool",
   seoDescription = "Get instant free temporary email. No registration required - copy in 1 tap. Best alternative to 10MinuteMail & Guerrilla Mail. 100% free, private & anonymous.",
   seoKeywords = "temporary email, disposable email, temp mail free, anonymous email, fake email generator, throwaway email, free temporary email address, Guerrilla Mail alternative, 10 minute mail alternative, temp-mail.org alternative, spam free email",
   breadcrumbs: customBreadcrumbs = [
@@ -214,7 +214,7 @@ export default function TempMail({
     } catch (e) { void e; return }
   }
 
-  const toolTitle = seoTitle.replace(' - DailyTools', '')
+  const toolTitle = seoTitle.replace(' - PixTool', '')
   const tempMailSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -223,8 +223,8 @@ export default function TempMail({
     "applicationCategory": "CommunicationApplication",
     "applicationSubCategory": "Privacy Tool",
     "operatingSystem": "All (Web Browser)",
-    "url": `https://dailytools.toolpix.in${seoPath}`,
-    "image": "https://dailytools.toolpix.in/logo.png",
+    "url": `https://pixtool.toolpix.in${seoPath}`,
+    "image": "https://pixtool.toolpix.in/logo.png",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -263,12 +263,12 @@ export default function TempMail({
     "@type": "HowTo",
     "name": "How to Use Free Temporary Email",
     "description": "Learn how to generate and use a free temporary email address for privacy protection.",
-    "image": "https://dailytools.toolpix.in/logo.png",
+    "image": "https://pixtool.toolpix.in/logo.png",
     "step": [
-      { "@type": "HowToStep", "name": "Get Email", "text": "Visit the page - a temporary email address is generated automatically.", "image": "https://dailytools.toolpix.in/logo.png" },
-      { "@type": "HowToStep", "name": "Copy Email", "text": "Click on the email address or Copy button to copy it to your clipboard.", "image": "https://dailytools.toolpix.in/logo.png" },
-      { "@type": "HowToStep", "name": "Use Email", "text": "Paste the email wherever you need to sign up or verify.", "image": "https://dailytools.toolpix.in/logo.png" },
-      { "@type": "HowToStep", "name": "Check Inbox", "text": "Return to this page to see incoming messages - inbox refreshes automatically.", "image": "https://dailytools.toolpix.in/logo.png" }
+      { "@type": "HowToStep", "name": "Get Email", "text": "Visit the page - a temporary email address is generated automatically.", "image": "https://pixtool.toolpix.in/logo.png" },
+      { "@type": "HowToStep", "name": "Copy Email", "text": "Click on the email address or Copy button to copy it to your clipboard.", "image": "https://pixtool.toolpix.in/logo.png" },
+      { "@type": "HowToStep", "name": "Use Email", "text": "Paste the email wherever you need to sign up or verify.", "image": "https://pixtool.toolpix.in/logo.png" },
+      { "@type": "HowToStep", "name": "Check Inbox", "text": "Return to this page to see incoming messages - inbox refreshes automatically.", "image": "https://pixtool.toolpix.in/logo.png" }
     ],
     "totalTime": "PT30S"
   }
@@ -278,9 +278,9 @@ export default function TempMail({
     "@type": "ItemList",
     "name": "Temporary Email Variants",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Free Temporary Email", "url": "https://dailytools.toolpix.in/temp-mail" },
-      { "@type": "ListItem", "position": 2, "name": "10 Minute Mail", "url": "https://dailytools.toolpix.in/temp-mail/10-minute-mail" },
-      { "@type": "ListItem", "position": 3, "name": "Change Temporary Email", "url": "https://dailytools.toolpix.in/temp-mail/change-email" }
+      { "@type": "ListItem", "position": 1, "name": "Free Temporary Email", "url": "https://pixtool.toolpix.in/temp-mail" },
+      { "@type": "ListItem", "position": 2, "name": "10 Minute Mail", "url": "https://pixtool.toolpix.in/temp-mail/10-minute-mail" },
+      { "@type": "ListItem", "position": 3, "name": "Change Temporary Email", "url": "https://pixtool.toolpix.in/temp-mail/change-email" }
     ]
   }
 
@@ -576,7 +576,7 @@ export default function TempMail({
   const tempMailFaqs = [
     { q: "What is a temporary email service?", a: "A temporary email (also known as temp mail, 10-minute mail, or disposable email) provides you with a short-lived inbox to receive verification codes and sign up for services without exposing your real email to potential spam or data breaches." },
     { q: "How long does my temporary email address stay active?", a: "Your email address remains active as long as you keep the browser tab open. Once you close the page or click 'New Email', the mailbox is permanently deleted for your security." },
-    { q: "Is DailyTools Temp Mail truly private?", a: "Yes. Our service runs directly in your browser and communicates with the mail server via secure APIs. We never store your messages on our servers, and we don't track your identity." },
+    { q: "Is PixTool Temp Mail truly private?", a: "Yes. Our service runs directly in your browser and communicates with the mail server via secure APIs. We never store your messages on our servers, and we don't track your identity." },
     { q: "Can I send emails from this address?", a: "To prevent abuse and maintain the integrity of our service, we currently only support receiving emails. This covers 99% of use cases like account verification and newsletter signups." },
     { q: "Will websites know I'm using a temporary email?", a: "Some websites maintain lists of known disposable email domains. If one is blocked, simply click 'New Email' to generate a fresh address from a different domain." },
     { q: "Is this service better than Guerrilla Mail or 10 Minute Mail?", a: "We believe so! Our tool is faster, mobile-responsive, and doesn't require any page reloads to see new messages — they appear instantly as they arrive." },
@@ -961,7 +961,7 @@ export default function TempMail({
                     </thead>
                     <tbody>
                       {[
-                        { s: 'DailyTools Temp Mail', r: 'No', a: 'Minimal', f: 'Yes (5s)' },
+                        { s: 'PixTool Temp Mail', r: 'No', a: 'Minimal', f: 'Yes (5s)' },
                         { s: 'TempMail.org alternative', r: 'Varies', a: 'High', f: 'Yes' },
                         { s: '10MinuteMail alternative', r: 'No', a: 'Medium', f: 'Limited' }
                       ].map((row, i) => (

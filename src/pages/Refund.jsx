@@ -12,13 +12,13 @@ export default function Refund() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Refund Policy",
-                    "item": "https://dailytools.toolpix.in/refund-policy"
+                    "item": "https://pixtool.toolpix.in/refund-policy"
                 }
             ]
         }
@@ -27,8 +27,8 @@ export default function Refund() {
     return (
         <div className="legal-page">
             <SEO
-                title="Refund Policy - Information | DailyTools"
-                description="Learn about our refund policy for paid services and digital products by DailyTools and UTHAKKAN."
+                title="Refund Policy - Information | PixTool"
+                description="Learn about our refund policy for paid services and digital products by PixTool and UTHAKKAN."
                 path="/refund-policy"
                 schema={refundSchema}
             />
@@ -48,7 +48,7 @@ export default function Refund() {
                     <div className="tool-card" style={{ padding: '3rem', fontSize: '1.05rem', lineHeight: 1.8 }}>
                         <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>1. Free Tools</h2>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-                            The vast majority of tools on the UTHAKKAN platform (DailyTools, ToolPix, etc.) are currently <strong>100% free</strong> to use. Since no payment is required for these tools, no refunds are applicable.
+                            The vast majority of tools on the UTHAKKAN platform (PixTool, ToolPix, etc.) are currently <strong>100% free</strong> to use. Since no payment is required for these tools, no refunds are applicable.
                         </p>
 
                         <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>

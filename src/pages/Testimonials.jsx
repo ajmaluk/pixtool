@@ -6,7 +6,7 @@ const testimonials = [
     {
         name: "Alex Johnson",
         role: "Digital Nomad",
-        content: "DailyTools is a game changer. The fact that I can edit my images without uploading them anywhere gives me so much peace of mind.",
+        content: "PixTool is a game changer. The fact that I can edit my images without uploading them anywhere gives me so much peace of mind.",
         stars: 5
     },
     {
@@ -39,13 +39,13 @@ export default function Testimonials() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Testimonials",
-                    "item": "https://dailytools.toolpix.in/testimonials"
+                    "item": "https://pixtool.toolpix.in/testimonials"
                 }
             ]
         }
@@ -54,8 +54,8 @@ export default function Testimonials() {
     return (
         <div className="testimonials-page">
             <SEO
-                title="Testimonials - Real User Success Stories | DailyTools"
-                description="Read how creators, developers, and businesses use DailyTools and UTHAKKAN products to streamline their digital workflows and protect their privacy."
+                title="Testimonials - Real User Success Stories | PixTool"
+                description="Read how creators, developers, and businesses use PixTool and UTHAKKAN products to streamline their digital workflows and protect their privacy."
                 path="/testimonials"
                 schema={reviewSchema}
             />

@@ -6,7 +6,7 @@ const docSections = [
     {
         title: "Getting Started",
         icon: Book,
-        content: "Learn the basics of how DailyTools works. Our browser-based architecture ensures that you don't need to install anything. Simply pick a tool and start processing."
+        content: "Learn the basics of how PixTool works. Our browser-based architecture ensures that you don't need to install anything. Simply pick a tool and start processing."
     },
     {
         title: "Image Processing",
@@ -35,13 +35,13 @@ export default function Documentation() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Documentation",
-                    "item": "https://dailytools.toolpix.in/documentation"
+                    "item": "https://pixtool.toolpix.in/documentation"
                 }
             ]
         }
@@ -50,8 +50,8 @@ export default function Documentation() {
     return (
         <div className="docs-page">
             <SEO
-                title="Documentation - User Guides & API Documentation | DailyTools"
-                description="Master DailyTools with our comprehensive documentation. Detailed guides on image processing, PDF management, and upcoming API features."
+                title="Documentation - User Guides & API Documentation | PixTool"
+                description="Master PixTool with our comprehensive documentation. Detailed guides on image processing, PDF management, and upcoming API features."
                 path="/documentation"
                 schema={docsSchema}
             />

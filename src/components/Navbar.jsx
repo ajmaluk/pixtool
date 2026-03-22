@@ -75,7 +75,7 @@ export default function Navbar() {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'DailyTools - Free Online Productivity Suite',
+          title: 'PixTool - Free Online Productivity Suite',
           text: 'Check out these awesome free tools for PDFs, Images, and more!',
           url: window.location.href,
         })
@@ -94,21 +94,21 @@ export default function Navbar() {
         <Link to="/" className="navbar-logo">
           <img 
             src="/logo.png" 
-            alt="DailyTools Logo" 
+            alt="PixTool Logo" 
             className="navbar-logo-img" 
             style={{ height: '32px', width: 'auto' }}
           />
-          <span className="navbar-logo-text">DailyTools</span>
+          <span className="navbar-logo-text">PixTool</span>
         </Link>
 
         <div className="navbar-links">
-          <Link to="/" className="navbar-link" title="DailyTools Home - Free Online Productivity Suite">Home</Link>
+          <Link to="/" className="navbar-link" title="PixTool Home - Free Online Productivity Suite">Home</Link>
           <Link to="/pdf-tools" className="navbar-link" title="Professional PDF Tools - Merge, Split, Compress, Protect">PDF</Link>
           <Link to="/image-tools" className="navbar-link" title="Image Studio - Resize, Crop, Optimize, Convert">Image</Link>
           <Link to="/utility-tools" className="navbar-link" title="Smart Utilities - Temp Mail, QR Scanner, Typing Test">Utility</Link>
-          <Link to="/about" className="navbar-link" title="About DailyTools - Mission, Privacy & Security">About</Link>
+          <Link to="/about" className="navbar-link" title="About PixTool - Mission, Privacy & Security">About</Link>
           <Link to="/showcase" className="navbar-link" title="Visual Showcase - Gallery of All Tool Interfaces">Showcase</Link>
-          <Link to="/blog" className="navbar-link" title="DailyTools Blog - In-depth Productivity Guides & Tutorials">Blog</Link>
+          <Link to="/blog" className="navbar-link" title="PixTool Blog - In-depth Productivity Guides & Tutorials">Blog</Link>
         </div>
 
         <div className="navbar-actions">

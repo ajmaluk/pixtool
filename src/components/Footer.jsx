@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="footer-grid">
         <div className="footer-brand">
           <Link to="/" className="footer-logo">
-            <span style={{ color: 'var(--accent-primary)' }}>Daily</span>Tools
+            <span style={{ color: 'var(--accent-primary)' }}>Pix</span>Tool
           </Link>
           <p className="footer-tagline">
             The professional suite of 100% private, browser-based tools. No uploads, no tracking, just pure productivity.
@@ -59,11 +59,11 @@ export default function Footer() {
         <div className="footer-links-group">
           <h4 className="footer-heading">Company</h4>
           <ul className="footer-links">
-            <li><Link to="/about" title="Learn about the mission and technology of DailyTools">About Our Mission</Link></li>
+            <li><Link to="/about" title="Learn about the mission and technology of PixTool">About Our Mission</Link></li>
             <li><Link to="/blog" title="Read our latest productivity tutorials and guides">Expert Guides</Link></li>
             <li><Link to="/showcase" title="View screenshots of our professional tool interfaces">Visual Showcase</Link></li>
             <li><Link to="/contact" title="Get in touch for support or feedback">Support Center</Link></li>
-            <li><Link to="/sitemap" title="View the comprehensive HTML sitemap for DailyTools">HTML Sitemap</Link></li>
+            <li><Link to="/sitemap" title="View the comprehensive HTML sitemap for PixTool">HTML Sitemap</Link></li>
           </ul>
         </div>
 
@@ -79,7 +79,7 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <p className="copyright">
-          © {new Date().getFullYear()} DailyTools by <a href="https://uthakkan.in" target="_blank" rel="noopener noreferrer">UTHAKKAN</a>. All rights reserved.
+          © {new Date().getFullYear()} PixTool by <a href="https://uthakkan.in" target="_blank" rel="noopener noreferrer">UTHAKKAN</a>. All rights reserved.
         </p>
         <div className="footer-meta-links">
           <span>Built for Professionals</span>

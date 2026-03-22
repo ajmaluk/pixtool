@@ -42,7 +42,7 @@ export default function Products() {
         {
             "@context": "https://schema.org",
             "@type": "ItemList",
-            "name": "Innovation & AI Products by DailyTools",
+            "name": "Innovation & AI Products by PixTool",
             "description": "Explore our portfolio of AI-powered tools and digital ecosystems, including ToolPix and Byte AI.",
             "itemListElement": products.map((p, i) => ({
                 "@type": "ListItem",
@@ -69,13 +69,13 @@ export default function Products() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Products",
-                    "item": "https://dailytools.toolpix.in/products"
+                    "item": "https://pixtool.toolpix.in/products"
                 }
             ]
         }
@@ -84,7 +84,7 @@ export default function Products() {
     return (
         <div className="products-page">
             <SEO
-                title="Our Products - Advanced AI Tools & Ecosystem | DailyTools"
+                title="Our Products - Advanced AI Tools & Ecosystem | PixTool"
                 description="Innovative digital products including ToolPix AI and Byte AI assistant. Explore the software ecosystem built by UTHAKKAN for maximum productivity."
                 path="/products"
                 schema={productsSchema}

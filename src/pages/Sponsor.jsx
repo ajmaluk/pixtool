@@ -12,13 +12,13 @@ export default function Sponsor() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Sponsor",
-                    "item": "https://dailytools.toolpix.in/sponsor"
+                    "item": "https://pixtool.toolpix.in/sponsor"
                 }
             ]
         }
@@ -27,8 +27,8 @@ export default function Sponsor() {
     return (
         <div className="sponsor-page">
             <SEO
-                title="Sponsor & Support Our Mission | DailyTools"
-                description="Help us keep DailyTools free, private, and accessible for everyone. Support our mission through one-time donations or monthly sponsorships."
+                title="Sponsor & Support Our Mission | PixTool"
+                description="Help us keep PixTool free, private, and accessible for everyone. Support our mission through one-time donations or monthly sponsorships."
                 path="/sponsor"
                 schema={sponsorSchema}
             />
@@ -40,7 +40,7 @@ export default function Sponsor() {
                     </div>
                     <h1 className="hero-title" style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '1.5rem' }}>Support Our Mission</h1>
                     <p className="hero-subtitle" style={{ fontSize: '1.25rem', color: 'var(--text-secondary)' }}>
-                        Your support helps us keep DailyTools free, fast, and private for everyone.
+                        Your support helps us keep PixTool free, fast, and private for everyone.
                     </p>
                 </div>
             </section>

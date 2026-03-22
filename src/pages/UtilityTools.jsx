@@ -12,7 +12,7 @@ export default function UtilityTools() {
     const seoContentMap = UTILITY_SEO_CONTENT;
     const activeTool = null; // Category hub mode
     const seoContent = activeTool ? seoContentMap[activeTool] : {
-        title: "Free Utility Tools | Productivity & Security Suite - DailyTools",
+        title: "Free Utility Tools | Productivity & Security Suite - PixTool",
         description: "Handy free online utility tools for daily productivity, security, and communication. Includes temporary email, QR code generator, and QR scanner.",
         keywords: "utility tools, temp mail, qr scanner, qr generator, typing test, online tools free"
     };
@@ -52,7 +52,7 @@ export default function UtilityTools() {
                                 <div style={{ aspectRatio: '16/9', background: 'var(--bg-secondary)', overflow: 'hidden', borderBottom: '1px solid var(--border-color)' }}>
                                     <img 
                                         src={`/screenshots/${tool.screenshot}`} 
-                                        alt={`${tool.title} interface preview - Specialized daily productivity tool by DailyTools`}
+                                        alt={`${tool.title} interface preview - Specialized daily productivity tool by PixTool`}
                                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                         onError={(e) => {
                                             e.target.style.display = 'none';
@@ -123,7 +123,7 @@ export default function UtilityTools() {
                             readNext={[
                                 { title: 'The Ultimate Guide to Digital Privacy 2026', path: '/blog/browser-based-privacy' },
                                 { title: 'Why Secure Temp Mail is Essential for Business', path: '/blog/secure-temp-mail-business-privacy-2026' },
-                                { title: 'Mastering Productivity with DailyTools Studio', path: '/blog/future-of-ai-productivity' }
+                                { title: 'Mastering Productivity with PixTool Studio', path: '/blog/future-of-ai-productivity' }
                             ]}
                         />
                     </div>

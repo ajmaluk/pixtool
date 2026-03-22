@@ -9,15 +9,15 @@ export default function NotFound() {
       "@type": "WebPage",
       "name": "Page Not Found",
       "description": "The page you are looking for does not exist.",
-      "isPartOf": "https://dailytools.toolpix.in/",
-      "url": "https://dailytools.toolpix.in/404"
+      "isPartOf": "https://pixtool.toolpix.in/",
+      "url": "https://pixtool.toolpix.in/404"
     }
   ]
 
   return (
     <div className="page-container" style={{ textAlign: 'center', padding: '6rem 2rem' }}>
       <SEO
-        title="404 - Page Not Found | DailyTools"
+        title="404 - Page Not Found | PixTool"
         description="The page you requested could not be found. Explore our free tools for images, PDFs, temp mail, and QR."
         path="/404"
         schema={schema}

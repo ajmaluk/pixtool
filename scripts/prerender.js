@@ -88,10 +88,18 @@ async function prerender() {
   server.listen(PORT, async () => {
     console.log(`📡 Temporary server running at http://localhost:${PORT}`);
 
-    const browser = await puppeteer.launch({
-      headless: 'new',
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
-    });
+    let browser;
+    try {
+      browser = await puppeteer.launch({
+        headless: 'new',
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+      });
+    } catch (e) {
+      console.warn('⚠️  Could not launch Puppeteer. Prerendering will be skipped.');
+      console.warn('Error details:', e.message);
+      server.close();
+      process.exit(0); // Exit successfully so build doesn't fail
+    }
 
     const page = await browser.newPage();
 

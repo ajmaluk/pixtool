@@ -20,7 +20,7 @@ export const IMAGE_TOOLS = [
 ];
 
 export const PDF_TOOLS = [
-  { id: 'merge', title: 'Merge PDF', icon: FilePlus, description: 'Combine multiple PDF files into one document — free online PDF merger with drag-and-drop', color: '#06b6d4', path: '/pdf-tools/merge', screenshot: 'fast-pdf-merger-no-upload-dailytools.png' },
+  { id: 'merge', title: 'Merge PDF', icon: FilePlus, description: 'Combine multiple PDF files into one document — free online PDF merger with drag-and-drop', color: '#06b6d4', path: '/pdf-tools/merge', screenshot: 'fast-pdf-merger-no-upload-pixtool.png' },
   { id: 'split', title: 'Split PDF', icon: SplitSquareHorizontal, description: 'Extract specific pages or split PDF into separate files — no upload required', color: '#06b6d4', path: '/pdf-tools/split', screenshot: 'split-pdf-pages-online-securely.png' },
   { id: 'compress', title: 'Compress PDF', icon: FileCheck, description: 'Reduce PDF file size by up to 90% while maintaining document quality', color: '#06b6d4', path: '/pdf-tools/compress', screenshot: 'optimize-pdf-file-size-online.png' },
   { id: 'convert', title: 'PDF to Images', icon: FileImage, description: 'Convert PDF pages to high-quality PNG, JPG, or WebP images instantly', color: '#06b6d4', path: '/pdf-tools/convert', screenshot: 'convert-pdf-to-images-online-high-res.png' },

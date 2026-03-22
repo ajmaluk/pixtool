@@ -12,13 +12,13 @@ export default function HireMe() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Hire Me",
-                    "item": "https://dailytools.toolpix.in/hire-me"
+                    "item": "https://pixtool.toolpix.in/hire-me"
                 }
             ]
         }
@@ -27,7 +27,7 @@ export default function HireMe() {
     return (
         <div className="hire-me-page">
             <SEO
-                title="Hire Me - Custom Software & AI Development | DailyTools"
+                title="Hire Me - Custom Software & AI Development | PixTool"
                 description="Looking for expert web development or AI automation? Hire Ajmal U K for high-quality, custom digital solutions and technical consulting."
                 path="/hire-me"
                 schema={hireSchema}

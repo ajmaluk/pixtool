@@ -30,13 +30,13 @@ export default function Careers() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Careers",
-                    "item": "https://dailytools.toolpix.in/careers"
+                    "item": "https://pixtool.toolpix.in/careers"
                 }
             ]
         }
@@ -45,8 +45,8 @@ export default function Careers() {
     return (
         <div className="careers-page">
             <SEO
-                title="Careers - Join the Future of AI Productivity | DailyTools"
-                description="Explore job opportunities and internships at DailyTools. Join our mission to build high-performance, privacy-focused digital utilities."
+                title="Careers - Join the Future of AI Productivity | PixTool"
+                description="Explore job opportunities and internships at PixTool. Join our mission to build high-performance, privacy-focused digital utilities."
                 path="/careers"
                 schema={careersSchema}
             />

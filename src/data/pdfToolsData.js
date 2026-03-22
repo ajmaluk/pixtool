@@ -1,8 +1,8 @@
 export const PDF_SEO_CONTENT = {
     merge: {
-      title: "Merge PDF Online | Combine Multiple PDF Files Free - DailyTools",
+      title: "Merge PDF Online | Combine Multiple PDF Files Free - PixTool",
       keywords: "merge pdf online, combine pdf files, join pdf pages, merge multiple pdfs, free online pdf merger, secure pdf joiner, browser-based pdf merging, pdf-lib automation, combine pdf documents, joiner pdf free",
-      description: "Combine multiple PDF documents into a single professional-grade file instantly using our high-performance client-side merging engine. DailyTools allows you to reorder, join, and combine PDFs without uploading sensitive data to any server. Perfect for merging invoices, reports, and legal documents with 100% privacy.",
+      description: "Combine multiple PDF documents into a single professional-grade file instantly using our high-performance client-side merging engine. PixTool allows you to reorder, join, and combine PDFs without uploading sensitive data to any server. Perfect for merging invoices, reports, and legal documents with 100% privacy.",
       benefits: ["Unlimited file merging", "Drag-and-drop page reordering", "Preserve links and formatting", "High-speed local processing", "100% private - data stays on device", "Free for large documents", "Direct browser download", "Combine files instantly"],
       alternativeTo: ["SmallPDF", "ILovePDF", "Adobe Acrobat"],
       howTo: ["Upload your PDF files to the merger", "Drag to reorder files if needed", "Click 'Merge PDF' to process locally", "Download your combined document"],
@@ -11,12 +11,12 @@ export const PDF_SEO_CONTENT = {
         { q: "How do I join two PDF files?", a: "Simply upload both files to our merger, reorder them, and click Merge. It's that easy!" },
         { q: "Is it secure to merge sensitive documents?", a: "Extremely. Since the merging happens entirely in your browser, your sensitive data never leaves your computer." }
       ],
-      readNext: ["ultimate-pdf-toolkit-merge-split-compress", "best-free-pdf-tools-online-2026", "privacy-first-why-dailytools-safest-studio"]
+      readNext: ["ultimate-pdf-toolkit-merge-split-compress", "best-free-pdf-tools-online-2026", "privacy-first-why-pixtool-safest-studio"]
     },
     split: {
-      title: "Split PDF Online | Extract Pages from PDF Instantly - DailyTools",
+      title: "Split PDF Online | Extract Pages from PDF Instantly - PixTool",
       keywords: "split pdf, extract pdf pages, separate pdf files, cut pdf document, online pdf splitter, free pdf extract, divide pdf pages, secure pdf splitting",
-      description: "Extract specific pages or custom page ranges from your PDF documents instantly. DailyTools provides a professional-grade PDF splitter that works entirely in your browser, ensuring your sensitive documents never leave your device. Separate a single large PDF into multiple high-quality files with zero upload time.",
+      description: "Extract specific pages or custom page ranges from your PDF documents instantly. PixTool provides a professional-grade PDF splitter that works entirely in your browser, ensuring your sensitive documents never leave your device. Separate a single large PDF into multiple high-quality files with zero upload time.",
       benefits: ["Extract exact page ranges (e.g., 1-5, 10, 12-15)", "Extract all individual pages into separate files", "Visual page selection guide for accuracy", "Lightning-fast local browser processing", "100% private - zero data upload policy", "Free and unlimited usage for all users", "High-fidelity vector extraction - zero quality loss"],
       alternativeTo: ["PDF2Go", "SodaPDF", "ILovePDF", "Adobe Acrobat Split"],
       howTo: ["Upload the PDF document you wish to divide", "Enter specific page numbers or ranges in the text box", "Click 'Split PDF' to start the local extraction process", "Download your new, separated PDF files instantly"],
@@ -28,7 +28,7 @@ export const PDF_SEO_CONTENT = {
       ]
     },
     compress: {
-      title: "Compress PDF Online | Reduce File Size Without Quality Loss - DailyTools",
+      title: "Compress PDF Online | Reduce File Size Without Quality Loss - PixTool",
       keywords: "compress pdf, reduce pdf size, optimize pdf, shrink pdf file, small pdf converter, online pdf compressor, browser-based pdf optimization, shrink pdf without quality loss, make pdf smaller, reduce pdf kb",
       description: "Shrink your PDF documents by up to 90% while maintaining professional visual quality. Our intelligent browser-based compressor uses advanced downsampling to reduce PDF file sizes for email attachments, government portals, and web storage. Perfect for making PDFs smaller without losing clarity.",
       benefits: ["Reduce file size up to 90%", "Three compression level options", "Preserve links and formatting", "Batch compress multiple PDFs", "100% private local processing", "Free for large file sizes", "Direct browser download", "Make PDF smaller instantly"],
@@ -41,7 +41,7 @@ export const PDF_SEO_CONTENT = {
       ]
     },
     convert: {
-      title: "PDF to Image Converter | Convert PDF to PNG, JPG, WebP - DailyTools",
+      title: "PDF to Image Converter | Convert PDF to PNG, JPG, WebP - PixTool",
       keywords: "pdf to image, pdf to png, pdf to jpg, convert pdf to picture, high res pdf images, online pdf to image, free pdf converter",
       description: "Convert your PDF pages into high-resolution images instantly. Extract pictures or turn entire documents into PNG, JPG, or WebP files locally in your browser.",
       benefits: ["High-resolution 300 DPI output", "Select specific pages to convert", "Export to PNG, JPG, or WebP", "Maintain original color accuracy", "Extract individual pages as images", "100% private local conversion", "Free with no registration"],
@@ -54,9 +54,9 @@ export const PDF_SEO_CONTENT = {
       ]
     },
     protect: {
-      title: "Protect PDF Online | Professional AES-256 Encryption - DailyTools",
+      title: "Protect PDF Online | Professional AES-256 Encryption - PixTool",
       keywords: "protect pdf, password protect pdf online, encrypt pdf, secure pdf file, lock pdf free, pdf security tool, aes-256 pdf encryption, secure document sharing",
-      description: "Secure your confidential PDF documents with military-grade AES-256 encryption. DailyTools allows you to add strong password protection and permission restrictions to your files entirely in your browser. Your sensitive data and passwords never leave your device, providing the ultimate in document security.",
+      description: "Secure your confidential PDF documents with military-grade AES-256 encryption. PixTool allows you to add strong password protection and permission restrictions to your files entirely in your browser. Your sensitive data and passwords never leave your device, providing the ultimate in document security.",
       benefits: ["Professional AES-256 bit encryption", "Set independent user and owner passwords", "Restrict printing, copying, and modifications", "100% private - zero data or password uploads", "Secure local background processing using WebCrypto API", "Free for all confidential and legal documents", "Compatible with all professional PDF readers"],
       alternativeTo: ["Adobe Acrobat Pro", "SmallPDF", "ILovePDF", "DocuSign"],
       howTo: ["Upload the PDF document you want to secure", "Enter a strong password in the protection field", "Confirm the password to prevent lockout errors", "Adjust permission settings if necessary", "Click 'Protect PDF' and download your encrypted file"],
@@ -68,7 +68,7 @@ export const PDF_SEO_CONTENT = {
       ]
     },
     watermark: {
-      title: "Add Watermark to PDF Online | Protect Your Documents - DailyTools",
+      title: "Add Watermark to PDF Online | Protect Your Documents - PixTool",
       keywords: "watermark pdf online, add text to pdf, protect pdf document, pdf digital signature, custom pdf watermark, free pdf watermark tool",
       description: "Protect your intellectual property by adding custom text watermarks to all pages of your PDF. Professional overlay with adjustable opacity and orientation.",
       benefits: ["Custom text watermarks on all pages", "Adjustable font size and opacity", "Professional overlay positioning", "Preserve original PDF quality", "Batch watermarking for documents", "100% private local processing", "Free and unlimited usage"],
@@ -81,7 +81,7 @@ export const PDF_SEO_CONTENT = {
       ]
     },
     reorder: {
-      title: "Reorder PDF Pages Online | Organize PDF Document - DailyTools",
+      title: "Reorder PDF Pages Online | Organize PDF Document - PixTool",
       keywords: "reorder pdf pages, organize pdf, rearrange pdf pages, move pdf pages, visual pdf organizer, free pdf reorder",
       description: "Rearrange your PDF pages with our intuitive drag-and-drop tool. Organize documents, move pages, and finalize your PDF structure locally and securely.",
       benefits: ["Visual drag-and-drop interface", "Real-time thumbnail previews", "Move pages between documents", "One-click page sorting", "100% private local processing", "High-speed document management", "Free and unlimited reordering"],
@@ -94,7 +94,7 @@ export const PDF_SEO_CONTENT = {
       ]
     },
     'to-word': {
-      title: "Convert PDF to Word Online | PDF to DOCX Free - DailyTools",
+      title: "Convert PDF to Word Online | PDF to DOCX Free - PixTool",
       keywords: "pdf to word converter, convert pdf to docx online, editable word from pdf, free online pdf to word, high-fidelity pdf to docx, secure pdf conversion",
       description: "Transform your PDF files into fully editable Word documents (.docx) instantly. Our upcoming converter preserves layouts, fonts, and images with high-fidelity, ensuring your documents look perfect after conversion.",
       benefits: ["High-fidelity layout preservation", "Editable DOCX output format", "100% private local conversion", "Fast and secure processing", "No email or sign-up required", "Free for professional use", "Direct browser download"],
@@ -103,7 +103,7 @@ export const PDF_SEO_CONTENT = {
       faq: [{ q: "Will my layout be preserved?", a: "Yes, we use advanced document analysis to keep your text, tables, and images in their original positions." }]
     },
     'to-excel': {
-      title: "Convert PDF to Excel Online | PDF to XLSX Free - DailyTools",
+      title: "Convert PDF to Excel Online | PDF to XLSX Free - PixTool",
       keywords: "pdf to excel converter, extract tables from pdf, pdf to xlsx online, free online pdf to excel, intelligent table extraction, secure data conversion",
       description: "Extract tables and data from PDF files into organized Excel spreadsheets (.xlsx). Our upcoming tool uses intelligent data extraction to ensure your numbers and formatting stay accurate and clean.",
       benefits: ["Intelligent table detection and extraction", "Accurate data and number formatting", "100% private local processing", "No data leaves your device", "Perfect for financial reports and audits", "Free forever", "Secure browser-based conversion"],
@@ -112,7 +112,7 @@ export const PDF_SEO_CONTENT = {
       faq: [{ q: "Does it work with scanned PDFs?", a: "Our upcoming OCR engine will support data extraction from scanned documents very soon." }]
     },
     'to-ppt': {
-      title: "Convert PDF to PowerPoint Online | PDF to PPTX Free - DailyTools",
+      title: "Convert PDF to PowerPoint Online | PDF to PPTX Free - PixTool",
       keywords: "pdf to powerpoint converter, convert pdf to pptx online, pdf to slides free, free online pdf to ppt, presentation converter, secure pdf conversion",
       description: "Transform your PDF pages into editable PowerPoint slides (.pptx). Perfect for updating old presentations or creating new ones from document resources—all done securely in your browser.",
       benefits: ["Editable PPTX slides output", "Preserve presentation layouts", "100% private local conversion", "High-speed document transformation", "Internal link preservation", "Free for commercial use", "Direct browser download"],
@@ -121,14 +121,14 @@ export const PDF_SEO_CONTENT = {
       faq: [{ q: "Can I edit the text in PowerPoint?", a: "Yes, our conversion engine creates editable text blocks for easy updates." }]
     },
     'unlock': {
-      title: "Unlock PDF Online | Remove Password & Security Restrictions - DailyTools",
+      title: "Unlock PDF Online | Remove Password & Security Restrictions - PixTool",
       keywords: "unlock pdf online, remove pdf password, decrypted pdf free, open protected pdf, free online pdf unlocker, secure pdf decryption, bypass pdf printing lock",
-      description: "Remove passwords, printing restrictions, and copying permissions from your protected PDF files instantly. DailyTools provides a secure, browser-based decryption tool that grants you full access to your documents without uploading files to a remote server. Regain control of your PDFs with 100% privacy.",
+      description: "Remove passwords, printing restrictions, and copying permissions from your protected PDF files instantly. PixTool provides a secure, browser-based decryption tool that grants you full access to your documents without uploading files to a remote server. Regain control of your PDFs with 100% privacy.",
       benefits: ["Instant password removal (valid password required)", "Bypass printing and text-copying restrictions", "100% private local decryption - zero server interaction", "Supports all modern PDF encryption versions", "Batch unlocking for multiple documents", "Free and unlimited usage with zero wait times", "Secure browser-based processing using your local CPU"],
       alternativeTo: ["SmallPDF Unlock", "ILovePDF", "Advanced PDF Password Recovery", "SodaPDF"],
       howTo: ["Upload your password-protected PDF file", "Enter the correct 'Open' or 'User' password", "Click 'Unlock PDF' to decrypt the file locally", "Download your fully accessible unprotected document", "Verify that printing and copying are now enabled"],
       faq: [
-        { q: "Can you unlock a PDF if I forgot the password?", a: "For security and legal reasons, DailyTools requires the original password to decrypt the file. We do not support brute-force password cracking." },
+        { q: "Can you unlock a PDF if I forgot the password?", a: "For security and legal reasons, PixTool requires the original password to decrypt the file. We do not support brute-force password cracking." },
         { q: "Is the decrypted file safe to share?", a: "Yes. Once unlocked, the file is a standard PDF without any security layers, making it compatible with all devices." },
         { q: "Does unlocking a PDF affect its quality?", a: "No, the decryption process only removes the security wrapper; the original document content remains perfectly intact." }
       ]
@@ -177,7 +177,7 @@ export const PDF_SEO_CONTENT = {
     merge: [
       { title: 'The Ultimate PDF Toolkit: Merge, Split, and Compress', path: '/blog/ultimate-pdf-toolkit-merge-split-compress' },
       { title: 'Best Free PDF Tools Online 2026', path: '/blog/best-free-pdf-tools-online-2026' },
-      { title: 'Why DailyTools is the Safest Browser Studio', path: '/blog/privacy-first-why-dailytools-safest-studio' }
+      { title: 'Why PixTool is the Safest Browser Studio', path: '/blog/privacy-first-why-pixtool-safest-studio' }
     ],
     split: [
       { title: 'How to Split PDFs and Extract Pages Safely', path: '/blog/ultimate-pdf-toolkit-merge-split-compress' },
@@ -196,7 +196,7 @@ export const PDF_SEO_CONTENT = {
     ],
     protect: [
       { title: 'PDF Security 101: Passwords & Encryption', path: '/blog/pdf-security-101-passwords-encryption-sharing' },
-      { title: 'Why DailyTools is the Safest Browser Studio', path: '/blog/privacy-first-why-dailytools-safest-studio' },
+      { title: 'Why PixTool is the Safest Browser Studio', path: '/blog/privacy-first-why-pixtool-safest-studio' },
       { title: 'Privacy at Scale: The Zero-Knowledge Web', path: '/blog/browser-based-privacy' }
     ],
     watermark: [

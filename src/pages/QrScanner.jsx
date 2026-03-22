@@ -78,13 +78,13 @@ export default function QrScanner() {
   const scannerSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Free QR Code Scanner - DailyTools",
+    "name": "Free QR Code Scanner - PixTool",
     "description": "Scan any QR code instantly using your device camera or by uploading an image. 100% free, private, and secure browser-based scanner.",
     "applicationCategory": "UtilitiesApplication",
     "applicationSubCategory": "QR Scanner",
     "operatingSystem": "All (Web Browser)",
-    "url": "https://dailytools.toolpix.in/qr-scanner",
-    "image": "https://dailytools.toolpix.in/logo.png",
+    "url": "https://pixtool.toolpix.in/qr-scanner",
+    "image": "https://pixtool.toolpix.in/logo.png",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -110,18 +110,18 @@ export default function QrScanner() {
     "@type": "HowTo",
     "name": "How to Scan a QR Code Online for Free",
     "description": "Learn how to scan QR codes using your device camera or by uploading an image in your browser.",
-    "image": "https://dailytools.toolpix.in/logo.png",
+    "image": "https://pixtool.toolpix.in/logo.png",
     "step": [
-      { "@type": "HowToStep", "name": "Open Scanner", "text": "Click 'Start Scanning' to activate your device camera.", "image": "https://dailytools.toolpix.in/logo.png" },
-      { "@type": "HowToStep", "name": "Point Camera", "text": "Point your camera at the QR code you want to scan.", "image": "https://dailytools.toolpix.in/logo.png" },
-      { "@type": "HowToStep", "name": "View Result", "text": "The scanned content will appear on screen. Click to open links or copy text.", "image": "https://dailytools.toolpix.in/logo.png" }
+      { "@type": "HowToStep", "name": "Open Scanner", "text": "Click 'Start Scanning' to activate your device camera.", "image": "https://pixtool.toolpix.in/logo.png" },
+      { "@type": "HowToStep", "name": "Point Camera", "text": "Point your camera at the QR code you want to scan.", "image": "https://pixtool.toolpix.in/logo.png" },
+      { "@type": "HowToStep", "name": "View Result", "text": "The scanned content will appear on screen. Click to open links or copy text.", "image": "https://pixtool.toolpix.in/logo.png" }
     ],
     "totalTime": "PT20S"
   }
 
   const qrScannerFaqs = [
     { q: "Is this online QR scanner safe to use?", a: "Yes, it is safer than most apps. Our scanner runs entirely in your browser tab. We never transmit your camera feed or scanned results to any server, effectively eliminating risk of data breach." },
-    { q: "Do I need to download an app to scan a QR code?", a: "No. DailyTools is a web-based utility. Just visit this page on your smartphone or desktop and use your camera directly. No App Store or Play Store downloads are necessary." },
+    { q: "Do I need to download an app to scan a QR code?", a: "No. PixTool is a web-based utility. Just visit this page on your smartphone or desktop and use your camera directly. No App Store or Play Store downloads are necessary." },
     { q: "Can I scan a QR code from a file or screenshot?", a: "Yes! Use the 'Scan from Image' tab (coming soon) or simply drag and drop your QR code image onto the scanner area. This is perfect for decoding codes found on social media or in emails." },
     { q: "Why is the camera access permission required?", a: "The browser needs your explicit permission to access the hardware camera for live decoding. We only use this permission for the duration of the scan and never record any video." },
     { q: "Does the scanner support multiple QR types?", a: "Yes. It can decode URL links, WiFi credentials, plain text, email addresses, and contact cards. If it's a valid QR code, our tool can read it." },
@@ -135,7 +135,7 @@ export default function QrScanner() {
   return (
     <>
       <SEO
-        title="Free Online QR Code Scanner | Browser Camera - DailyTools"
+        title="Free Online QR Code Scanner | Browser Camera - PixTool"
         description="Scan any QR code instantly using your device camera or by uploading an image. 100% free, private, and secure browser-based scanner. Works on mobile and desktop. Best free QR reader online."
         keywords="QR code scanner free, scan QR code online, QR reader, QR code reader camera, free QR scanner no app, online QR code scanner, scan QR code from image"
         path="/qr-scanner"
@@ -161,7 +161,7 @@ export default function QrScanner() {
             <div className="page-hero">
               <div className="page-hero-content">
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-                  <ShareTool title="Free Online QR Code Scanner | Browser Camera - DailyTools" />
+                  <ShareTool title="Free Online QR Code Scanner | Browser Camera - PixTool" />
                 </div>
                 <h1 className="page-title">QR Scanner</h1>
                 <p className="page-subtitle">

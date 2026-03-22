@@ -12,13 +12,13 @@ export default function Cookie() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Cookie Policy",
-                    "item": "https://dailytools.toolpix.in/cookie-policy"
+                    "item": "https://pixtool.toolpix.in/cookie-policy"
                 }
             ]
         }
@@ -27,8 +27,8 @@ export default function Cookie() {
     return (
         <div className="legal-page">
             <SEO
-                title="Cookie Policy - How We Use Data | DailyTools"
-                description="Understand how DailyTools uses cookies to enhance your experience while maintaining your privacy and data security."
+                title="Cookie Policy - How We Use Data | PixTool"
+                description="Understand how PixTool uses cookies to enhance your experience while maintaining your privacy and data security."
                 path="/cookie-policy"
                 schema={cookieSchema}
             />

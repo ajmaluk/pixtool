@@ -4,7 +4,7 @@ import { Megaphone, Bell, ArrowRight } from 'lucide-react';
 
 const newsItems = [
     {
-        title: "DailyTools Reaches 1,000+ Active Daily Users",
+        title: "PixTool Reaches 1,000+ Active Daily Users",
         date: "Feb 22, 2026",
         content: "We are thrilled to announce that our productivity suite has hit a major milestone. Thank you for trusting us with your daily tasks!"
     },
@@ -30,13 +30,13 @@ export default function News() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "News",
-                    "item": "https://dailytools.toolpix.in/news"
+                    "item": "https://pixtool.toolpix.in/news"
                 }
             ]
         }
@@ -45,8 +45,8 @@ export default function News() {
     return (
         <div className="news-page">
             <SEO
-                title="News & Announcements - Latest from DailyTools"
-                description="Stay up-to-date with the latest product launches, company milestones, and technology updates from the DailyTools and UTHAKKAN team."
+                title="News & Announcements - Latest from PixTool"
+                description="Stay up-to-date with the latest product launches, company milestones, and technology updates from the PixTool and UTHAKKAN team."
                 path="/news"
                 schema={newsSchema}
             />

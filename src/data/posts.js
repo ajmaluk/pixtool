@@ -7,13 +7,13 @@ export const posts = [
     dateISO: "2026-02-24",
     author: "Ajmal U K",
     category: "AI & Future",
-    image: "/screenshots/dailytools-all-in-one-productivity-suite.png",
+    image: "/screenshots/pixtool-all-in-one-productivity-suite.png",
     tags: ["ai", "productivity", "browser tools", "temp mail", "image tools"],
     content: `
-            <p>Artificial Intelligence is no longer a futuristic concept; it's a daily reality that is fundamentally reshaping how we approach productivity. At DailyTools, we've seen firsthand how AI can transform tedious tasks into instantaneous results.</p>
+            <p>Artificial Intelligence is no longer a futuristic concept; it's a daily reality that is fundamentally reshaping how we approach productivity. At PixTool, we've seen firsthand how AI can transform tedious tasks into instantaneous results.</p>
             
             <div class="blog-visual-preview">
-              <img src="/screenshots/dailytools-all-in-one-productivity-suite.png" alt="DailyTools AI Productivity Interface" style="width: 100%; border-radius: 12px; margin: 2rem 0;" />
+              <img src="/screenshots/pixtool-all-in-one-productivity-suite.png" alt="PixTool AI Productivity Interface" style="width: 100%; border-radius: 12px; margin: 2rem 0;" />
             </div>
 
             <h2>The Shift from Manual to Assisted Work</h2>
@@ -41,13 +41,13 @@ export const posts = [
     dateISO: "2026-02-20",
     author: "Ajmal U K",
     category: "Privacy",
-    image: "/screenshots/dailytools-all-in-one-productivity-suite.png",
+    image: "/screenshots/pixtool-all-in-one-productivity-suite.png",
     tags: ["privacy", "local processing", "no upload", "temp mail"],
     content: `
             <p>Privacy is often sacrificed on the altar of convenience. Many online converters require you to upload your sensitive PDFs or personal photos to their servers. But what happens to that data once you click "Convert"?</p>
             
             <div class="blog-visual-preview">
-              <img src="/screenshots/dailytools-all-in-one-productivity-suite.png" alt="DailyTools Secure Hub Preview" style="width: 100%; border-radius: 12px; margin: 2rem 0;" />
+              <img src="/screenshots/pixtool-all-in-one-productivity-suite.png" alt="PixTool Secure Hub Preview" style="width: 100%; border-radius: 12px; margin: 2rem 0;" />
             </div>
 
             <h2>The "Zero-Server" Philosophy</h2>
@@ -60,7 +60,7 @@ export const posts = [
                 <li><strong>Security:</strong> Eliminates the risk of server-side data breaches or unauthorized access.</li>
             </ul>
             
-            <p>As we continue to build out our suite at DailyTools, privacy remains our north star. We believe the future of the web is decentralized and user-centric. For email signups, use our <a href="/temp-mail">temporary email (temp mail)</a> to keep your primary inbox private.</p>
+            <p>As we continue to build out our suite at PixTool, privacy remains our north star. We believe the future of the web is decentralized and user-centric. For email signups, use our <a href="/temp-mail">temporary email (temp mail)</a> to keep your primary inbox private.</p>
         `
   },
   {
@@ -114,7 +114,7 @@ export const posts = [
             <p>YouTube thumbnails should be exactly <strong>1280×720 pixels</strong> with a 16:9 aspect ratio. Use our <a href="/image-tools/crop">professional image cropper</a> to create pixel-perfect thumbnails without any software download.</p>
             
             <h2>How to Resize for Free</h2>
-            <p>With <strong>DailyTools' <a href="/image-tools/resize">free image resizer</a></strong>, you can resize any image to exact pixel dimensions in seconds. Simply upload your photo, enter the target dimensions, and download. Everything happens in your browser.</p>
+            <p>With <strong>PixTool' <a href="/image-tools/resize">free image resizer</a></strong>, you can resize any image to exact pixel dimensions in seconds. Simply upload your photo, enter the target dimensions, and download. Everything happens in your browser.</p>
         `
   },
   {
@@ -131,14 +131,14 @@ export const posts = [
             <p>PDF tools are essential for anyone who works with documents. But which free PDF tools are actually worth using? And more importantly, which ones keep your data safe?</p>
             
             <div class="blog-visual-preview">
-              <img src="/screenshots/secure-pdf-management-suite.png" alt="DailyTools Secure PDF Suite Preview" style="width: 100%; border-radius: 12px; margin: 2rem 0;" />
+              <img src="/screenshots/secure-pdf-management-suite.png" alt="PixTool Secure PDF Suite Preview" style="width: 100%; border-radius: 12px; margin: 2rem 0;" />
             </div>
 
             <h2>The Problem with Cloud-Based PDF Tools</h2>
-            <p>Most popular PDF tools require you to <strong>upload your files to their servers</strong>. This creates serious privacy concerns. Browser-based tools like DailyTools process your PDFs entirely within your browser.</p>
+            <p>Most popular PDF tools require you to <strong>upload your files to their servers</strong>. This creates serious privacy concerns. Browser-based tools like PixTool process your PDFs entirely within your browser.</p>
             
             <h2>Feature Comparison</h2>
-            <p>DailyTools offers free, unlimited <a href="/pdf-tools/merge">PDF merging</a>, <a href="/pdf-tools/split">splitting</a>, <a href="/pdf-tools/compress">compressing</a>, and <a href="/pdf-tools/convert">converting to images</a> — all without uploading. No daily limits and no restrictions whatsoever.</p>
+            <p>PixTool offers free, unlimited <a href="/pdf-tools/merge">PDF merging</a>, <a href="/pdf-tools/split">splitting</a>, <a href="/pdf-tools/compress">compressing</a>, and <a href="/pdf-tools/convert">converting to images</a> — all without uploading. No daily limits and no restrictions whatsoever.</p>
         `
   },
   {
@@ -196,7 +196,7 @@ export const posts = [
             <p>Static QR codes encode data directly and never expire—perfect for WiFi, business cards, and print materials. Create static codes with our <a href="/qr-generator">best-in-class QR Generator</a> and scan using our <a href="/qr-scanner">fast online QR Scanner</a>.</p>
             
             <div class="blog-visual-preview">
-              <img src="/screenshots/best-free-qr-code-generator-online.png" alt="DailyTools QR Generator Preview" style="width: 100%; border-radius: 12px; margin: 2rem 0;" />
+              <img src="/screenshots/best-free-qr-code-generator-online.png" alt="PixTool QR Generator Preview" style="width: 100%; border-radius: 12px; margin: 2rem 0;" />
             </div>
 
             <h2>Use Static for Privacy</h2>
@@ -298,7 +298,7 @@ export const posts = [
             <p>In 2026, protecting your primary email from spam and data breaches is paramount. Use a <a href="/temp-mail">Disposable Email Generator</a> to get verification codes without the long-term marketing baggage.</p>
             
             <div class="blog-visual-preview">
-              <img src="/screenshots/disposable-temporary-email-generator.png" alt="DailyTools Temp Mail Interface Preview" style="width: 100%; border-radius: 12px; margin: 2rem 0;" />
+              <img src="/screenshots/disposable-temporary-email-generator.png" alt="PixTool Temp Mail Interface Preview" style="width: 100%; border-radius: 12px; margin: 2rem 0;" />
             </div>
 
             <h2>The 10-Minute Solution</h2>
@@ -319,25 +319,25 @@ export const posts = [
             <p>Managing PDFs shouldn't require risky cloud uploads. Our professional <a href="/pdf-tools">PDF Management Suite</a> runs 100% locally. Merge files with our <a href="/pdf-tools/merge">Fast PDF Merger</a>, split them with the <a href="/pdf-tools/split">Split tool</a>, and optimize size with the <a href="/pdf-tools/compress">PDF Compressor</a>.</p>
             
             <div class="blog-visual-preview">
-              <img src="/screenshots/secure-pdf-management-suite.png" alt="DailyTools PDF Suite Overview" style="width: 100%; border-radius: 12px; margin: 2rem 0;" />
+              <img src="/screenshots/secure-pdf-management-suite.png" alt="PixTool PDF Suite Overview" style="width: 100%; border-radius: 12px; margin: 2rem 0;" />
             </div>
         `
   },
   {
-    slug: "privacy-first-why-dailytools-safest-studio",
-    title: "Privacy First: Why DailyTools is the Safest Browser-Based Studio",
+    slug: "privacy-first-why-pixtool-safest-studio",
+    title: "Privacy First: Why PixTool is the Safest Browser-Based Studio",
     excerpt: "Discover the technology behind 'Zero-Upload' tools and why processing files on your own device is the future of internet security.",
     date: "Mar 15, 2026",
     dateISO: "2026-03-15",
     author: "Ajmal U K",
     category: "Security",
-    image: "/screenshots/dailytools-all-in-one-productivity-suite.png",
+    image: "/screenshots/pixtool-all-in-one-productivity-suite.png",
     tags: ["privacy", "security", "webassembly", "zero-upload", "browser tools"],
     content: `
             <p>Most "free" tools online make money by collecting your data. Our tools use <strong>WebAssembly (WASM)</strong> to bring processing power directly to you. Whether it's our <a href="/image-tools/compress">Image Compressor</a> or <a href="/pdf-tools/protect">PDF Encryptor</a>, your data never leaves your device.</p>
             
             <div class="blog-visual-preview">
-              <img src="/screenshots/dailytools-all-in-one-productivity-suite.png" alt="DailyTools All-in-One Suite" style="width: 100%; border-radius: 12px; margin: 2rem 0;" />
+              <img src="/screenshots/pixtool-all-in-one-productivity-suite.png" alt="PixTool All-in-One Suite" style="width: 100%; border-radius: 12px; margin: 2rem 0;" />
             </div>
         `
   }

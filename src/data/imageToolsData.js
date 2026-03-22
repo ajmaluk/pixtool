@@ -1,6 +1,6 @@
 export const IMAGE_SEO_CONTENT = {
     resize: {
-      title: "Free High-Quality Image Resizer Online | Resize PNG, JPG, WebP - DailyTools",
+      title: "Free High-Quality Image Resizer Online | Resize PNG, JPG, WebP - PixTool",
       keywords: "resize image online, image resizer, change image dimensions, resize photo for instagram, batch image resizer, free online photo resizer, browser-based image scaling, high-quality bicubic interpolation, optimize image dimensions, resize without losing quality",
       description: "Resize your images instantly using professional-grade bicubic interpolation algorithms. Our high-performance browser engine lets you change dimensions by pixels or percentage without uploading files. Perfect for image optimization, social media scaling, and batch resizing with 100% privacy.",
       benefits: ["Precise pixel-perfect resizing", "Maintain aspect ratio toggle", "High-quality bicubic resampling", "Batch processing support", "Instagram & Social media presets", "Instant download after processing", "100% private - no server upload", "High fidelity scaling"],
@@ -23,7 +23,7 @@ export const IMAGE_SEO_CONTENT = {
       readNext: ["resize-images-social-media-2026", "best-image-format-webp-avif-jpeg-2026", "future-of-ai-productivity"]
     },
     crop: {
-      title: "Online Image Cropper | Perfect Aspect Ratios - DailyTools",
+      title: "Online Image Cropper | Perfect Aspect Ratios - PixTool",
       keywords: "crop image online, photo cropper, cut images, image aspect ratio, social media crop, free online cropping tool",
       description: "Crop your images to any size or aspect ratio with our pixel-perfect online tool. Direct browser processing means zero wait time and total privacy.",
       benefits: ["Freehand or aspect ratio cropping", "Social media layout presets", "Rotation and flip integration", "High-resolution output preservation", "Real-time preview window", "One-click pixel-perfect crops", "Zero data collection policy"],
@@ -46,7 +46,7 @@ export const IMAGE_SEO_CONTENT = {
       readNext: ["resize-images-social-media-2026", "building-toolpix-journey", "image-compression-lossless-vs-lossy-2026"]
     },
     rotate: {
-      title: "Rotate & Flip Images Online | Professional Tools - DailyTools",
+      title: "Rotate & Flip Images Online | Professional Tools - PixTool",
       keywords: "rotate image online, flip photo, fix orientation, mirror image, vertical flip, horizontal flip, image rotator",
       description: "Fix your photo orientation instantly. Rotate 90, 180, or 270 degrees and flip images horizontally or vertically for mirror effects.",
       benefits: ["90°/180°/270° rotation", "Horizontal & Vertical flipping", "Lossless rotation for JPEG/PNG", "Fix EXIF orientation metadata", "Instant browser processing", "Free and unlimited use", "Secure and private"],
@@ -69,7 +69,7 @@ export const IMAGE_SEO_CONTENT = {
       readNext: ["building-toolpix-journey", "resize-images-social-media-2026", "browser-based-privacy"]
     },
     compress: {
-        title: "Compress Image Online | Reduce File Size Without Quality Loss - DailyTools",
+        title: "Compress Image Online | Reduce File Size Without Quality Loss - PixTool",
         keywords: "compress image, reduce image size, optimize photo, shrink image file, small image converter, online image compressor, optimize images for web, reduce photo kb, batch image compression",
         description: "Shrink your images up to 80% while maintaining professional quality. Our browser-based compressor is perfect for image optimization, website performance, and email attachments. Batch optimize PNG, JPG, and WebP files locally.",
         benefits: ["Reduce file size up to 80%", "Lossless compression for PNG/WebP", "High-quality JPEG downsampling", "Batch compress multiple images", "100% private local processing", "Free for large file sizes", "Direct browser download", "Web optimization ready"],
@@ -91,7 +91,7 @@ export const IMAGE_SEO_CONTENT = {
         ]
       },
       convert: {
-        title: "Image Format Converter | JPG, PNG, WebP, GIF - DailyTools",
+        title: "Image Format Converter | JPG, PNG, WebP, GIF - PixTool",
         keywords: "image converter, convert jpg to webp, png to jpg, convert heic to png, online photo converter, free image format change",
         description: "Switch between image formats instantly. Convert JPG to WebP for SEO, HEIC to PNG for compatibility, or GIF to static images. All done locally in your browser.",
         benefits: ["Convert to PNG, WebP, JPEG, GIF", "HEIC and SVG input support", "Batch conversion enabled", "Adjustable output quality", "Instant local processing", "High-fidelity color preservation", "Free and unlimited"],
@@ -113,7 +113,7 @@ export const IMAGE_SEO_CONTENT = {
         ]
       },
       watermark: {
-        title: "Add Watermark to Images Online | Protect Your Photos - DailyTools",
+        title: "Add Watermark to Images Online | Protect Your Photos - PixTool",
         keywords: "watermark image online, add text to photo, protect photos, digital signature, custom watermark creator, free watermarking tool",
         description: "Protect your creative work with custom text watermarks. Adjust font, size, opacity, and position to create professional signatures for your photos.",
         benefits: ["Custom text watermarks", "Adjustable font size and opacity", "Precise positioning (9 directions)", "Batch watermarking support", "Transparent background support", "Free professional signatures", "Secure local processing"],
@@ -122,7 +122,7 @@ export const IMAGE_SEO_CONTENT = {
         faq: [
           { q: "Can I use my own logo?", a: "This version supports text watermarks; logo support is coming in the next update!" },
           { q: "Will the watermark be resized automatically?", a: "Yes, we scale the text relative to the image dimensions for consistency." },
-          { q: "Is this free for professional use?", a: "Yes, DailyTools is 100% free for both personal and commercial projects." }
+          { q: "Is this free for professional use?", a: "Yes, PixTool is 100% free for both personal and commercial projects." }
         ],
         tips: [
           "Keep your watermark subtle with 20-30% opacity.",
@@ -135,7 +135,7 @@ export const IMAGE_SEO_CONTENT = {
         ]
       },
       flip: {
-        title: "Flip Image Online | Horizontal & Vertical Mirror Effect - DailyTools",
+        title: "Flip Image Online | Horizontal & Vertical Mirror Effect - PixTool",
         keywords: "flip image, mirror photo, vertical flip, horizontal flip online, mirror effect tool, flip image free",
         description: "Create mirror effects or fix selfie orientation instantly. Flip images horizontally or vertically while maintaining 100% original quality.",
         benefits: ["Instant horizontal mirror effect", "Vertical flip for specialized needs", "Batch flipping supported", "Zero quality loss processing", "Preview changes in real-time", "One-click mirroring", "Complete browser privacy"],
@@ -157,7 +157,7 @@ export const IMAGE_SEO_CONTENT = {
         ]
       },
       grayscale: {
-        title: "Convert to Grayscale Online | Black & White Filters - DailyTools",
+        title: "Convert to Grayscale Online | Black & White Filters - PixTool",
         keywords: "convert to grayscale free, black and white photo, sepia filter online, invert colors, image color effects, free photo filter",
         description: "Transform your color photos into stunning black and white, warm sepia tones, or inverted color effects. Professional-quality results in seconds.",
         benefits: ["Professional Grayscale (Luma-weighted)", "Warm Sepia and vintage effects", "Color Inversion for negative effects", "Preserve alpha transparency", "Batch apply filters", "Free photo filters online", "Instant browser processing"],
@@ -179,7 +179,7 @@ export const IMAGE_SEO_CONTENT = {
         ]
       },
     upscale: {
-      title: "AI Image Upscaler Online | Enhance Photo Quality Free - DailyTools",
+      title: "AI Image Upscaler Online | Enhance Photo Quality Free - PixTool",
       keywords: "ai image upscaler, upscale image online, enhance photo quality, fix blurry photos, ai photo enlarger, free online image upscaler, browser-based ai upscaling, super-resolution ai, 4k image upscaler",
       description: "Increase your image resolution and quality using professional AI-enhanced super-resolution technology. Our browser-based upscaler uses neural networks to create cleaner, sharper results for small or blurry photos without uploading to a server. Enhance low-res images to 2x or 4x their original size with 100% privacy.",
       benefits: ["AI-powered super-resolution enhancement", "Neural noise reduction and sharpening", "100% private local browser processing", "Zero server uploads - 100% data security", "Perfect for low-res social media photos & old digital files", "Free forever for professional and personal use", "Instant browser-based results using WebGL acceleration"],
@@ -194,7 +194,7 @@ export const IMAGE_SEO_CONTENT = {
       tips: ["For best results, start with photos that have some visible detail.", "AI upscaling is perfect for making old digital photos print-ready.", "Use the 4x setting for small icons and web graphics to reveal hidden sharpness."]
     },
     restore: {
-      title: "AI Photo Restoration | Fix Old & Blurry Photos Online - DailyTools",
+      title: "AI Photo Restoration | Fix Old & Blurry Photos Online - PixTool",
       keywords: "photo restoration ai, fix old photos, restore blurry pictures, ai photo enhancer, repair old photographs, free online photo restoration, face enhancement ai, scratch removal",
       description: "Breathe new life into your vintage and damaged photographs. Our AI Photo Restoration tool uses advanced neural networks to fix blurs, enhance facial details, and restore lost quality—all within your browser. Preserve your family heritage with professional results without ever uploading a file to the cloud.",
       benefits: ["Remove motion blur and camera shake instantly", "AI face enhancement for clear portraits", "100% private - your family photos stay local", "Restore vintage digital heritage with zero tracking", "Professional results without expensive subscription software", "Free forever for all users", "Secure browser-based GPU-accelerated processing"],
@@ -207,7 +207,7 @@ export const IMAGE_SEO_CONTENT = {
       ]
     },
     'image-to-pdf': {
-      title: "Convert Image to PDF Online | JPG/PNG to PDF Free - DailyTools",
+      title: "Convert Image to PDF Online | JPG/PNG to PDF Free - PixTool",
       keywords: "image to pdf, convert jpg to pdf, png to pdf online, create pdf from images, online photo to pdf converter, secure image to pdf",
       description: "Convert your photos and graphics into a professional PDF document instantly. Support for multiple images, custom margins, and high-fidelity output with zero server uploads.",
       benefits: ["Convert multiple images to one PDF", "Adjustable page margins and orientation", "High-fidelity vector PDF output", "100% private local conversion", "Perfect for portfolios and applications", "Secure and fast", "Free and unlimited"],
@@ -216,14 +216,14 @@ export const IMAGE_SEO_CONTENT = {
       faq: [{ q: "Can I combine different image types?", a: "Yes, you can mix JPG, PNG, and WebP in a single PDF document." }]
     },
     'remove-background': {
-      title: "AI Background Remover Online | Remove BG Instantly Free - DailyTools",
+      title: "AI Background Remover Online | Remove BG Instantly Free - PixTool",
       keywords: "remove background from image, transparent background, background remover ai, delete photo background, free online bg remover, browser-based background removal, cutout pro alternative, e-commerce photo editor",
       description: "Remove image backgrounds instantly with professional-grade AI subject isolation. Create perfectly transparent PNGs for product listings, profile pictures, and digital graphics without uploading files to a server. Our local AI ensures 100% privacy and lightning-fast cutouts.",
       benefits: ["Instant AI-powered background removal in <2 seconds", "High-precision edge detection for hair and fine details", "Output high-quality transparent PNGs at full resolution", "100% private local AI processing (TensorFlow.js)", "No account, subscription, or registration required", "Perfect for e-commerce (Amazon, eBay, Etsy) product photos", "Free forever with zero daily limits"],
       alternativeTo: ["remove.bg", "Adobe Express", "Photoroom", "Stickermule"],
       howTo: ["Select the image with the background you want to remove", "Wait 1-2 seconds for the local AI to isolate the subject", "Review the transparency mask in the live preview", "Download your high-resolution PNG with a transparent background", "Use the 'Convert' tool if you need a different final format"],
       faq: [
-        { q: "Is this free for high-resolution images?", a: "Yes! Unlike most background removers that charge for 'HD downloads,' DailyTools lets you export your cutouts at the original resolution for free." },
+        { q: "Is this free for high-resolution images?", a: "Yes! Unlike most background removers that charge for 'HD downloads,' PixTool lets you export your cutouts at the original resolution for free." },
         { q: "How does it handle complex subjects like hair?", a: "We use a 'Segment Anything' inspired model that is trained specifically to distinguish complex edges from backgrounds." },
         { q: "Can I remove backgrounds from multiple images at once?", a: "Batch background removal is supported! Upload your entire product catalog for instant processing." }
       ]
@@ -286,7 +286,7 @@ export const IMAGE_SEO_CONTENT = {
     ],
     crop: [
       { title: 'Perfect Social Media Framing Guide 2026', path: '/blog/resize-images-social-media-2026' },
-      { title: 'Why DailyTools is the Safest Browser Studio', path: '/blog/privacy-first-why-dailytools-safest-studio' },
+      { title: 'Why PixTool is the Safest Browser Studio', path: '/blog/privacy-first-why-pixtool-safest-studio' },
       { title: 'Building ToolPix: Our 2026 Journey', path: '/blog/building-toolpix-journey' }
     ],
     rotate: [
@@ -306,7 +306,7 @@ export const IMAGE_SEO_CONTENT = {
     ],
     flip: [
       { title: 'Creative Mirroring in Digital Design', path: '/blog/resize-images-social-media-2026' },
-      { title: 'Privacy First: The Core of DailyTools', path: '/blog/privacy-first-why-dailytools-safest-studio' },
+      { title: 'Privacy First: The Core of PixTool', path: '/blog/privacy-first-why-pixtool-safest-studio' },
       { title: 'Browser-Based Tools & Your Data Security', path: '/blog/browser-based-privacy' }
     ],
     grayscale: [

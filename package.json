@@ -1,5 +1,5 @@
 {
-  "name": "dailytools",
+  "name": "pixtool",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "screenshots": "node scripts/generate-screenshots.js",
-    "postbuild": "node scripts/prerender.js"
+    "postbuild": "[ -z \"$SKIP_PRERENDER\" ] && [ -z \"$CF_PAGES\" ] && [ -z \"$NETLIFY\" ] && node scripts/prerender.js || echo \"Skipping prerender (CI/Environment check)\""
   },
   "dependencies": {
     "framer-motion": "^12.34.3",

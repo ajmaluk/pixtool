@@ -1,5 +1,5 @@
-export const SITE_URL = 'https://dailytools.toolpix.in';
-export const SITE_NAME = 'DailyTools by UTHAKKAN';
+export const SITE_URL = 'https://pixtool.toolpix.in';
+export const SITE_NAME = 'PixTool by UTHAKKAN';
 export const AUTHOR_NAME = 'Ajmal U K';
 export const AUTHOR_URL = 'https://uthakkan.in';
-export const DEFAULT_LOGO = 'https://dailytools.toolpix.in/logo.png';
+export const DEFAULT_LOGO = 'https://pixtool.toolpix.in/logo.png';

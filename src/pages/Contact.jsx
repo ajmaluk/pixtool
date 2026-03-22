@@ -36,13 +36,13 @@ export default function Contact() {
         {
             "@context": "https://schema.org",
             "@type": "ContactPage",
-            "name": "Contact DailyTools Support & UTHAKKAN",
-            "description": "Get in touch with the DailyTools team for technical support, tool suggestions, custom development services, or business inquiries.",
-            "url": "https://dailytools.toolpix.in/contact",
+            "name": "Contact PixTool Support & UTHAKKAN",
+            "description": "Get in touch with the PixTool team for technical support, tool suggestions, custom development services, or business inquiries.",
+            "url": "https://pixtool.toolpix.in/contact",
             "mainEntity": {
                 "@type": "Organization",
                 "name": "UTHAKKAN Digital",
-                "url": "https://dailytools.toolpix.in",
+                "url": "https://pixtool.toolpix.in",
                 "email": "contact.uthakkan@gmail.com",
                 "contactPoint": {
                     "@type": "ContactPoint",
@@ -60,13 +60,13 @@ export default function Contact() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Contact",
-                    "item": "https://dailytools.toolpix.in/contact"
+                    "item": "https://pixtool.toolpix.in/contact"
                 }
             ]
         }
@@ -75,8 +75,8 @@ export default function Contact() {
     return (
         <div className="page-container">
             <SEO
-                title="Contact Us - Support, Feedback & Business Inquiries | DailyTools"
-                description="Get in touch with DailyTools for technical support, tool suggestions, custom development services, or business partnerships. We respond to all inquiries within 24 hours."
+                title="Contact Us - Support, Feedback & Business Inquiries | PixTool"
+                description="Get in touch with PixTool for technical support, tool suggestions, custom development services, or business partnerships. We respond to all inquiries within 24 hours."
                 path="/contact"
                 schema={contactSchema}
             />

@@ -49,7 +49,7 @@ export const watermarkPdf = async (file, text, size, opacity) => {
   const pages = pdfDoc.getPages();
   pages.forEach(page => {
     const { width, height } = page.getSize();
-    page.drawText(text || 'DailyTools', {
+    page.drawText(text || 'PixTool', {
       x: width / 2 - (text.length * size) / 4,
       y: height / 2,
       size: size,

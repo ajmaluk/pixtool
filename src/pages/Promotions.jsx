@@ -33,13 +33,13 @@ export default function Promotions() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Promotions",
-                    "item": "https://dailytools.toolpix.in/promotions"
+                    "item": "https://pixtool.toolpix.in/promotions"
                 }
             ]
         }
@@ -48,8 +48,8 @@ export default function Promotions() {
     return (
         <div className="promotions-page">
             <SEO
-                title="Promotions & Exclusive Offers | DailyTools"
-                description="Save big on premium digital services and custom development. Explore the latest exclusive offers and discount codes from DailyTools."
+                title="Promotions & Exclusive Offers | PixTool"
+                description="Save big on premium digital services and custom development. Explore the latest exclusive offers and discount codes from PixTool."
                 path="/promotions"
                 schema={promoSchema}
             />

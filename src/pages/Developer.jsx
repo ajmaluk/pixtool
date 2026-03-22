@@ -10,8 +10,8 @@ export default function Developer() {
             "@type": "Person",
             "name": "Muhammed Ajmal U K",
             "alternateName": "Ajmal U K",
-            "url": "https://dailytools.toolpix.in/developer",
-            "image": "https://dailytools.toolpix.in/ajmaluk.png",
+            "url": "https://pixtool.toolpix.in/developer",
+            "image": "https://pixtool.toolpix.in/ajmaluk.png",
             "jobTitle": "Full Stack Developer & Founder",
             "worksFor": {
                 "@type": "Organization",
@@ -32,13 +32,13 @@ export default function Developer() {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://dailytools.toolpix.in/"
+                    "item": "https://pixtool.toolpix.in/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Developer",
-                    "item": "https://dailytools.toolpix.in/developer"
+                    "item": "https://pixtool.toolpix.in/developer"
                 }
             ]
         }
@@ -48,7 +48,7 @@ export default function Developer() {
         <div className="page-container">
             <SEO
                 title="Muhammed Ajmal U K - Senior Full Stack Developer & AI Specialist"
-                description="Muhammed Ajmal U K is the developer behind DailyTools and founder of UTHAKKAN. Expertise in SaaS architecture, AI Tools, and privacy-first web systems."
+                description="Muhammed Ajmal U K is the developer behind PixTool and founder of UTHAKKAN. Expertise in SaaS architecture, AI Tools, and privacy-first web systems."
                 path="/developer"
                 schema={devSchema}
             />

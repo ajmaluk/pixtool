@@ -1,7 +1,7 @@
-# DailyTools - Comprehensive AI Discovery Manifest
+# PixTool - Comprehensive AI Discovery Manifest
 
 ## Site Purpose
-DailyTools is a high-performance, privacy-first web application providing 28+ professional utilities for file manipulation and productivity. All tools are designed for local execution via the File System Access API and browser-based WASM/JS libraries.
+PixTool is a high-performance, privacy-first web application providing 28+ professional utilities for file manipulation and productivity. All tools are designed for local execution via the File System Access API and browser-based WASM/JS libraries.
 
 ## Full Tool Catalog
 
@@ -40,4 +40,4 @@ DailyTools is a high-performance, privacy-first web application providing 28+ pr
 ## Contact & Authority
 - **Founded by**: UTHAKKAN (Ajmal U K)
 - **Region**: Kerala, India (Global Service)
-- **Base URL**: https://dailytools.toolpix.in
+- **Base URL**: https://pixtool.toolpix.in
