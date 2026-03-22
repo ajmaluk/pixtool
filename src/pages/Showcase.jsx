@@ -1,5 +1,5 @@
 import React from 'react';
-;
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ExternalLink, Camera, Image, FileText, Settings } from 'lucide-react';
 import SEO from '../components/SEO';

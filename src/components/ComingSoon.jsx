@@ -1,4 +1,4 @@
-import { } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Rocket, Clock, Zap, Lock } from 'lucide-react';
 
 const ComingSoon = ({ toolName, description }) => {
