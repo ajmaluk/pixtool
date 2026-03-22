@@ -1730,9 +1730,9 @@ h1, h2, h3, h4, h5, h6 {
 /* Ad Region Layouts */
 .ad-region-top {
   width: 100%;
-  max-width: 970px;
+  max-width: 730px;
   margin: 0 auto 2rem;
-  min-height: 90px;
+  min-height: 92px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1744,9 +1744,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .ad-region-bottom {
   width: 100%;
-  max-width: 970px;
+  max-width: 730px;
   margin: 3rem auto 0;
-  min-height: 250px;
+  min-height: 92px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1757,8 +1757,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .ad-region-side {
-  width: 160px;
-  min-height: 600px;
+  width: 162px;
+  height: 602px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1767,6 +1767,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: var(--radius-md);
   position: sticky;
   top: 100px;
+  align-self: flex-start;
 }
 
 .ad-label {
