@@ -10,6 +10,10 @@ export const hasSupabaseConfig = Boolean(
   SUPABASE_ANON_KEY !== 'your_key'
 );
 
+if (!hasSupabaseConfig && import.meta.env.PROD) {
+  console.warn('Supabase configuration missing in production build. Check VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.');
+}
+
 export const supabase = hasSupabaseConfig
   ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
       auth: {

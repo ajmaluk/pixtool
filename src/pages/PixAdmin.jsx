@@ -219,8 +219,16 @@ export default function PixAdmin() {
       <div className="page-container" style={{ maxWidth: '860px', padding: '4rem 2rem', background: '#0f172a', minHeight: '100vh', color: '#fff' }}>
         <SEO title="Pix Admin" description="PixTool Admin Panel" path="/pix-admin" noIndex />
         <h1 style={{ marginBottom: '1.5rem', fontWeight: 900 }}>Pix Admin</h1>
-        <p style={{ color: '#94a3b8' }}>Supabase environment is missing. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.</p>
-        <Link to="/" className="btn btn-secondary" style={{ marginTop: '1.5rem', display: 'inline-block' }}>Back to Home</Link>
+        <div style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', padding: '1.5rem', borderRadius: '16px', marginBottom: '1.5rem' }}>
+          <p style={{ color: '#f87171', fontWeight: 700, marginBottom: '0.5rem' }}>Supabase Configuration Missing</p>
+          <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: 1.6 }}>
+            The environment variables <code style={{ color: '#fff' }}>VITE_SUPABASE_URL</code> and <code style={{ color: '#fff' }}>VITE_SUPABASE_ANON_KEY</code> were not available during the build process.
+          </p>
+          <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: 1.6, marginTop: '0.75rem' }}>
+            <strong>Note for Cloudflare Pages:</strong> Ensure these are set as <strong>Variables</strong> (Plaintext), not <strong>Secrets</strong>, as Secrets are not available during the Vite build step.
+          </p>
+        </div>
+        <Link to="/" className="btn btn-secondary" style={{ display: 'inline-block' }}>Back to Home</Link>
       </div>
     );
   }

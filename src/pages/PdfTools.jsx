@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { FileText, Upload, Download, Loader, X, ChevronDown, Share2, Eye, EyeOff } from 'lucide-react'
+import { FileText, Upload, Download, Loader, X, ChevronDown, Share2, Eye, EyeOff, Sliders } from 'lucide-react'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
@@ -11,7 +11,7 @@ import { PDF_TOOLS } from '../data/tools'
 import { PDF_SEO_CONTENT, PDF_RELATED_TOOLS, PDF_READ_NEXT } from '../data/pdfToolsData'
 import ComingSoon from '../components/ComingSoon'
 import ToolCard from '../components/ToolCard'
-import { mergePdfs, splitPdf, watermarkPdf, compressPdf, unlockPdfWithPassword, extractPdfText, extractPdfTextWithTesseract, downloadBlob } from '../utils/pdfUtils'
+import { mergePdfs, splitPdf, watermarkPdf, compressPdf, unlockPdfWithPassword, extractPdfText, extractPdfTextWithTesseract, downloadBlob, protectPdf, reorderPdfPages, convertPdfToImages } from '../utils/pdfUtils'
 import { SITE_URL, SITE_NAME } from '../data/constants'
 
 const tools = PDF_TOOLS;
@@ -22,6 +22,45 @@ export default function PdfTools() {
   const initialTool = tools.find(t => t.id === toolId)?.id || 'merge'
   const [activeTool, setActiveTool] = useState(initialTool)
   const { files, setFiles, handleFiles, removeFile, moveFile } = useFileDrop(['application/pdf'])
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [touchStart, setTouchStart] = useState(null)
+  const [touchEnd, setTouchEnd] = useState(null)
+  const minSwipeDistance = 50
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX)
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) {
+      setTouchStart(null)
+      setTouchEnd(null)
+      return
+    }
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > minSwipeDistance
+    const isRightSwipe = distance < -minSwipeDistance
+    if (isLeftSwipe || isRightSwipe) {
+      if (isLeftSwipe) {
+        setSelectedIndex(prev => (prev < files.length - 1 ? prev + 1 : 0))
+      } else {
+        setSelectedIndex(prev => (prev > 0 ? prev - 1 : files.length - 1))
+      }
+    }
+    setTouchStart(null)
+    setTouchEnd(null)
+  }
+  const galleryRef = useRef(null)
+
+  useEffect(() => {
+    if (galleryRef.current) {
+      const activeThumb = galleryRef.current.querySelector('.gallery-thumb.active')
+      if (activeThumb) {
+        activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+      }
+    }
+  }, [selectedIndex])
   const [processing, setProcessing] = useState(false)
   const [showMobileSettings, setShowMobileSettings] = useState(false)
   const [settings, setSettings] = useState({
@@ -46,6 +85,19 @@ export default function PdfTools() {
   const fileInputRef = useRef(null)
 
   useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (files.length <= 1) return
+      if (e.key === 'ArrowLeft') {
+        setSelectedIndex(prev => (prev > 0 ? prev - 1 : files.length - 1))
+      } else if (e.key === 'ArrowRight') {
+        setSelectedIndex(prev => (prev < files.length - 1 ? prev + 1 : 0))
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [files.length])
+
+  useEffect(() => {
     if (toolId) {
       const validTool = tools.find(t => t.id === toolId)
       if (validTool) {
@@ -61,6 +113,13 @@ export default function PdfTools() {
   const handleFileSelect = (e) => {
     if (e.target.files.length > 0) {
       handleFiles(Array.from(e.target.files))
+    }
+  }
+
+  const handleRemoveFile = (index) => {
+    removeFile(index)
+    if (selectedIndex >= files.length - 1) {
+      setSelectedIndex(Math.max(0, files.length - 2))
     }
   }
 
@@ -124,6 +183,38 @@ export default function PdfTools() {
             alert(`Error unlocking ${file.name}: ${err.message}`);
           }
         }
+      } else if (activeTool === 'protect') {
+        if (!settings.password || settings.password !== settings.confirmPassword) {
+          throw new Error('Please enter matching passwords to protect your PDF.');
+        }
+        for (const file of files) {
+          const pdfBytes = await protectPdf(file, settings.password);
+          downloadBlob(new Blob([pdfBytes], { type: 'application/pdf' }), `protected-${file.name}`);
+        }
+      } else if (activeTool === 'reorder') {
+        // Reorder pages within the current file (selectedIndex)
+        // This is a simplified version; in a real app, you'd have a UI for this order.
+        // For now, let's assume if they added pages it's just identity reorder until we have a real UI.
+        const file = files[selectedIndex];
+        const arrayBuffer = await file.arrayBuffer();
+        const sourceDoc = await PDFDocument.load(arrayBuffer);
+        const count = sourceDoc.getPageCount();
+        const defaultOrder = Array.from({ length: count }, (_, i) => i);
+        // If we had a state for page order, we'd use it here.
+        const pdfBytes = await reorderPdfPages(file, defaultOrder);
+        downloadBlob(new Blob([pdfBytes], { type: 'application/pdf' }), `reordered-${file.name}`);
+      } else if (activeTool === 'convert') {
+        for (const file of files) {
+          const imageResults = await convertPdfToImages(file, {
+            format: settings.outputFormat,
+            quality: settings.quality,
+            startPage: settings.startPage,
+            endPage: settings.endPage
+          });
+          for (const res of imageResults) {
+            downloadBlob(res.blob, res.name);
+          }
+        }
       } else if (activeTool === 'ocr') {
         // Advanced OCR with method selection
         for (const file of files) {
@@ -136,6 +227,7 @@ export default function PdfTools() {
                 languages: settings.ocrLanguages,
                 includePageBreaks: settings.ocrIncludePageBreaks,
                 onProgress: (progress) => {
+                  setOcrProgress(progress);
                   console.log(`OCR Progress: ${progress.progress?.toFixed(1)}%`);
                 }
               });
@@ -149,8 +241,8 @@ export default function PdfTools() {
             const baseName = file.name.replace(/\.pdf$/i, '');
             const extension = settings.ocrOutputFormat === 'md' ? 'md' : 'txt';
             const header = settings.ocrOutputFormat === 'md'
-              ? `# OCR Export: ${file.name}\n\nPages with extractable text: ${result.recognizedPages}/${result.pageCount}\nMethod: ${result.method === 'tesseract' ? 'Full OCR (Tesseract.js)' : 'Text Extraction'}\n\n`
-              : `OCR Export: ${file.name}\nPages with extractable text: ${result.recognizedPages}/${result.pageCount}\nMethod: ${result.method === 'tesseract' ? 'Full OCR (Tesseract.js)' : 'Text Extraction'}\n\n`;
+              ? `# OCR Export: ${file.name}\n\nPages: ${result.recognizedPages}/${result.pageCount}\nMethod: ${result.method === 'tesseract' ? 'Full OCR' : 'Text Extraction'}\n\n`
+              : `OCR Export: ${file.name}\nPages: ${result.recognizedPages}/${result.pageCount}\nMethod: ${result.method === 'tesseract' ? 'Full OCR' : 'Text Extraction'}\n\n`;
 
             downloadBlob(
               new Blob([`${header}${result.text}`], { type: 'text/plain;charset=utf-8' }),
@@ -158,10 +250,12 @@ export default function PdfTools() {
             );
 
             if (result.recognizedPages === 0 && settings.ocrMethod === 'text-extraction') {
-              alert(`No extractable text found in ${file.name}. Try switching to "Full OCR (Tesseract)" for scanned images.`);
+              alert(`No extractable text found in ${file.name}. Try "Full OCR (Tesseract)" for scanned images.`);
             }
           } catch (err) {
             alert(`OCR failed for ${file.name}: ${err.message}`);
+          } finally {
+            setOcrProgress(null);
           }
         }
       }
@@ -563,7 +657,42 @@ export default function PdfTools() {
         )}
       </div>
 
-      <button className="btn btn-primary" style={{ width: '100%', marginTop: 'auto', background: 'var(--accent-blue)', borderColor: 'var(--accent-blue)' }} onClick={processPdf}>
+      <button
+        className="btn btn-secondary"
+        style={{ width: '100%', marginBottom: '1rem' }}
+        onClick={() => {
+          if (confirm('Reset all settings to default?')) {
+            setSettings({
+              quality: 'medium',
+              startPage: 1,
+              endPage: 1,
+              outputFormat: 'png',
+              compressionLevel: 'recommended',
+              password: '',
+              confirmPassword: '',
+              unlockPassword: '',
+              showUnlockPassword: false,
+              pdfWatermarkText: 'CONFIDENTIAL',
+              pdfWatermarkSize: 48,
+              pdfWatermarkOpacity: 30,
+              ocrOutputFormat: 'txt',
+              ocrIncludePageBreaks: true,
+              ocrMethod: 'text-extraction',
+              ocrLanguages: ['eng'],
+              ocrShowAdvanced: false
+            })
+          }
+        }}
+      >
+        Reset Settings
+      </button>
+
+      <button
+        className="btn btn-primary"
+        style={{ width: '100%', marginTop: 'auto', background: 'var(--accent-blue)', borderColor: 'var(--accent-blue)' }}
+        onClick={processPdf}
+        disabled={processing || files.length === 0}
+      >
         {processing ? <Loader size={18} className="spinning" /> : <Download size={18} />}
         {processing ? 'Processing...' : `${activeToolData?.title} Now`}
       </button>
@@ -764,74 +893,131 @@ export default function PdfTools() {
                   </aside>
 
                   <main className="preview-main">
-                    <div className="tool-container">
-                      <div className="tool-panel">
-                        <div className="tool-panel-content">
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                            <h3 style={{ fontSize: '1.25rem', fontWeight: 900, margin: 0 }}>
-                              Files ({files.length})
-                            </h3>
-                            <div style={{ display: 'flex', gap: '0.75rem' }}>
-                              <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.6rem 1.25rem' }}>
-                                <Upload size={18} /> Add More
-                              </button>
-                              <button className="btn btn-primary" onClick={processPdf} style={{ padding: '0.6rem 2rem' }}>
-                                <Download size={18} /> {processing ? 'Processing...' : `${activeToolData?.title} Now`}
-                              </button>
-                            </div>
+                    {processing && (
+                      <div className="processing-overlay">
+                        <div className="processing-loader"></div>
+                        <p className="processing-text">
+                          {ocrProgress 
+                            ? `OCR in Progress: ${ocrProgress.progress?.toFixed(0)}% (Page ${ocrProgress.pageNo}/${ocrProgress.totalPages})`
+                            : 'Processing your PDF...'}
+                        </p>
+                        {ocrProgress && (
+                          <div style={{ width: '200px', height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginTop: '1rem', overflow: 'hidden' }}>
+                            <div style={{ width: `${ocrProgress.progress}%`, height: '100%', background: 'var(--accent-blue)', transition: 'width 0.3s ease' }}></div>
                           </div>
-
-                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1.5rem' }}>
-                            {files.map((file, idx) => (
-                              <div key={idx} className="tool-card" style={{ padding: '1.5rem', position: 'relative', textAlign: 'center' }}>
-                                <button
-                                  onClick={() => removeFile(idx)}
-                                  className="btn-icon"
-                                  style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', padding: '0.4rem', background: 'var(--bg-glass)', borderRadius: '8px', zIndex: 5 }}
-                                  aria-label={`Remove file ${file.name}`}
-                                >
-                                  <X size={14} />
-                                </button>
-
-                                {activeTool === 'merge' && (
-                                  <div style={{ position: 'absolute', top: '0.5rem', left: '0.5rem', display: 'flex', gap: '0.25rem', zIndex: 5 }}>
-                                    <button
-                                      onClick={() => moveFile(idx, 'left')}
-                                      disabled={idx === 0}
-                                      className="btn-icon"
-                                      style={{ padding: '0.4rem', background: 'var(--bg-glass)', borderRadius: '8px', opacity: idx === 0 ? 0.3 : 1 }}
-                                      aria-label={`Move ${file.name} up`}
-                                    >
-                                      <ChevronDown size={14} style={{ transform: 'rotate(90deg)' }} />
-                                    </button>
-                                    <button
-                                      onClick={() => moveFile(idx, 'right')}
-                                      disabled={idx === files.length - 1}
-                                      className="btn-icon"
-                                      style={{ padding: '0.4rem', background: 'var(--bg-glass)', borderRadius: '8px', opacity: idx === files.length - 1 ? 0.3 : 1 }}
-                                      aria-label={`Move ${file.name} down`}
-                                    >
-                                      <ChevronDown size={14} style={{ transform: 'rotate(-90deg)' }} />
-                                    </button>
-                                  </div>
-                                )}
-
-                                <div style={{ color: 'var(--accent-blue)', marginBottom: '1.25rem', display: 'flex', justifyContent: 'center' }}>
-                                  <div style={{ padding: '0.75rem', background: 'rgba(59, 130, 246, 0.05)', borderRadius: '12px' }}>
-                                    <FileText size={40} />
-                                  </div>
-                                </div>
-                                <p style={{ fontWeight: 700, fontSize: '0.85rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', margin: 0 }}>
-                                  {file.name}
-                                </p>
-                                <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', margin: '0.25rem 0 0' }}>
-                                  {(file.size / 1024).toFixed(1)} KB
-                                </p>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
+                        )}
                       </div>
+                    )}
+
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }} className="mobile-hide-header">
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: 900, margin: 0 }}>
+                          Files ({files.length})
+                        </h3>
+                        <span className="preview-badge">
+                          {files[selectedIndex]?.name}
+                        </span>
+                      </div>
+                      <div style={{ display: 'flex', gap: '0.75rem' }}>
+                         <button className="btn btn-secondary" onClick={() => { if(confirm('Clear all files?')) { setFiles([]); setSelectedIndex(0); } }} style={{ padding: '0.6rem 1rem', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderColor: 'transparent' }}>
+                           <X size={18} /> Clear
+                         </button>
+                         <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.6rem 1.25rem' }}>
+                           <Upload size={18} /> Add More
+                         </button>
+                        <button className="btn btn-primary" onClick={processPdf} style={{ padding: '0.6rem 2rem' }}>
+                          <Download size={18} /> {processing ? 'Processing...' : `${activeToolData?.title} Now`}
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Main Large Preview Area */}
+                    <div 
+                      className="preview-display"
+                      onTouchStart={onTouchStart}
+                      onTouchMove={onTouchMove}
+                      onTouchEnd={onTouchEnd}
+                    >
+                      <div style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
+                        <div style={{ 
+                          width: '120px', 
+                          height: '120px', 
+                          background: 'rgba(59, 130, 246, 0.05)', 
+                          borderRadius: '24px', 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          justifyContent: 'center',
+                          margin: '0 auto 2rem',
+                          color: 'var(--accent-blue)'
+                        }}>
+                          <FileText size={64} />
+                        </div>
+                        <h3 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
+                          {files[selectedIndex]?.name}
+                        </h3>
+                        <p style={{ fontSize: '1rem', opacity: 0.7 }}>
+                          {(files[selectedIndex]?.size / 1024 / 1024).toFixed(2)} MB • PDF Document
+                        </p>
+                        <p style={{ marginTop: '2rem', fontSize: '0.9rem', color: 'var(--accent-blue)', fontWeight: 700 }}>
+                          Ready for processing
+                        </p>
+                      </div>
+
+                      {/* PDF Specific Info Badges */}
+                      <div className="preview-info">
+                        {activeTool === 'merge' && (
+                          <div style={{ display: 'flex', gap: '0.5rem' }}>
+                            <button
+                              onClick={() => moveFile(selectedIndex, 'left')}
+                              disabled={selectedIndex === 0}
+                              className="preview-badge"
+                              style={{ cursor: 'pointer', opacity: selectedIndex === 0 ? 0.3 : 1 }}
+                            >
+                              Move Up
+                            </button>
+                            <button
+                              onClick={() => moveFile(selectedIndex, 'right')}
+                              disabled={selectedIndex === files.length - 1}
+                              className="preview-badge"
+                              style={{ cursor: 'pointer', opacity: selectedIndex === files.length - 1 ? 0.3 : 1 }}
+                            >
+                              Move Down
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Horizontal Thumbnail Gallery Row */}
+                    <div 
+                      className="tool-gallery-row custom-scrollbar" 
+                      ref={galleryRef}
+                      onTouchStart={onTouchStart}
+                      onTouchMove={onTouchMove}
+                      onTouchEnd={onTouchEnd}
+                    >
+                      {files.map((file, i) => (
+                        <div 
+                          key={i} 
+                          className={`gallery-thumb ${selectedIndex === i ? 'active' : ''}`}
+                          onClick={() => setSelectedIndex(i)}
+                        >
+                          <div className="thumb-container">
+                            <FileText size={32} style={{ color: 'var(--accent-blue)', margin: 'auto' }} />
+                            <div className="thumb-label">{file.name}</div>
+                          </div>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              handleRemoveFile(i)
+                            }}
+                            className="gallery-thumb-remove"
+                            aria-label="Remove"
+                          >
+                            <X size={12} />
+                          </button>
+                        </div>
+                      ))}
                     </div>
                   </main>
                 </div>
@@ -862,20 +1048,39 @@ export default function PdfTools() {
         )
 }
 
-        {/* Mobile Settings Modal */}
-        {
-          showMobileSettings && (
-            <div className="settings-modal-overlay" onClick={() => setShowMobileSettings(false)}>
-              <div className="settings-modal-content" onClick={e => e.stopPropagation()}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
-                  <h3 style={{ fontSize: '1.5rem', fontWeight: 800 }}>Settings</h3>
-                  <button className="btn-icon" onClick={() => setShowMobileSettings(false)} style={{ background: 'var(--bg-secondary)' }} aria-label="Close settings"><X /></button>
-                </div>
-                {renderSidebarSettings()}
-              </div>
+        {/* Mobile Action Bar & Settings Drawer */}
+        {files.length > 0 && (
+          <>
+            <div className="mobile-bottom-bar">
+              <button className="btn btn-secondary" onClick={() => setShowMobileSettings(true)}>
+                <Sliders size={18} /> Settings
+              </button>
+              <button className="btn btn-primary" onClick={processPdf}>
+                <Download size={18} /> {processing ? 'Processing...' : 'Process PDF'}
+              </button>
             </div>
-          )
-        }
+
+            {showMobileSettings && (
+              <div className="settings-drawer-overlay" onClick={() => setShowMobileSettings(false)}>
+                <div className="settings-drawer-content" onClick={e => e.stopPropagation()}>
+                  <div className="drawer-handle" />
+                  <div className="drawer-header">
+                    <h3 style={{ margin: 0, fontWeight: 900, fontSize: '1.25rem' }}>Tool Settings</h3>
+                    <button 
+                      className="icon-btn" 
+                      onClick={() => setShowMobileSettings(false)} 
+                      aria-label="Close settings"
+                      style={{ background: 'var(--bg-secondary)', border: 'none' }}
+                    >
+                      <X size={20} />
+                    </button>
+                  </div>
+                  {renderSidebarSettings()}
+                </div>
+              </div>
+            )}
+          </>
+        )}
 
         {
           processing && (

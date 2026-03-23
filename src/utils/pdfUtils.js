@@ -143,7 +143,47 @@ export const compressPdf = async (file) => {
   // but we can re-save with specific flags if available.
   const arrayBuffer = await file.arrayBuffer();
   const pdfDoc = await PDFDocument.load(arrayBuffer);
-  return await pdfDoc.save({ useObjectStreams: false });
+  // pdf-lib doesn't have a simple "compress" but re-saving with object streams 
+  // and removing metadata can help slightly.
+  return await pdfDoc.save({ 
+    useObjectStreams: true,
+    addDefaultPage: false
+  });
+};
+
+/**
+ * Protects a PDF with a password.
+ */
+export const protectPdf = async (file, password) => {
+  const arrayBuffer = await file.arrayBuffer();
+  const pdfDoc = await PDFDocument.load(arrayBuffer);
+  return await pdfDoc.save({
+    userPassword: password,
+    ownerPassword: password,
+    permissions: {
+      printing: 'highResolution',
+      modifying: false,
+      copying: false,
+      annotating: true,
+      fillingForms: true,
+      contentAccessibility: true,
+      documentAssembly: true,
+    },
+  });
+};
+
+/**
+ * Reorders pages in a PDF based on a new index array.
+ */
+export const reorderPdfPages = async (file, newOrder) => {
+  const arrayBuffer = await file.arrayBuffer();
+  const sourceDoc = await PDFDocument.load(arrayBuffer);
+  const pdfDoc = await PDFDocument.create();
+  
+  const pages = await pdfDoc.copyPages(sourceDoc, newOrder);
+  pages.forEach(p => pdfDoc.addPage(p));
+  
+  return await pdfDoc.save();
 };
 
 export const unlockPdf = async (file) => {
@@ -196,9 +236,6 @@ export const extractPdfText = async (file, options = {}) => {
   };
 };
 
-/**
- * Helper to download a blob
- */
 export const downloadBlob = (blob, fileName) => {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -206,6 +243,35 @@ export const downloadBlob = (blob, fileName) => {
   a.download = fileName;
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 100);
+};
+
+/**
+ * Converts PDF pages to images.
+ */
+export const convertPdfToImages = async (file, options = {}) => {
+  const { format = 'png', quality = 'high', startPage = 1, endPage = -1 } = options;
+  const arrayBuffer = await file.arrayBuffer();
+  const loadingTask = getDocument({ data: arrayBuffer });
+  const pdf = await loadingTask.promise;
+  
+  const results = [];
+  const start = Math.max(1, startPage);
+  const end = endPage === -1 ? pdf.numPages : Math.min(pdf.numPages, endPage);
+  
+  const scale = quality === 'high' ? 3 : quality === 'medium' ? 2 : 1;
+  const mimeType = `image/${format === 'jpg' ? 'jpeg' : format}`;
+  
+  for (let pageNo = start; pageNo <= end; pageNo++) {
+    const canvas = await pdfPageToCanvas(pdf, pageNo, scale);
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, mimeType, 0.95));
+    results.push({
+      blob,
+      name: `${file.name.replace(/\.pdf$/i, '')}-page-${pageNo}.${format}`
+    });
+  }
+  
+  await loadingTask.destroy();
+  return results;
 };
 
 /**

@@ -1,6 +1,8 @@
-import { useState, useEffect, useRef } from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom'
-import { Maximize2, Shield, Zap, Upload, Loader, Download, Sliders, X, Share2 } from 'lucide-react'
+import { useState, useEffect, useRef, useMemo } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { Maximize2, Shield, Zap, Upload, Loader, Download, Sliders, X, ChevronLeft, ChevronRight } from 'lucide-react'
+import ReactCrop, { centerCrop, makeAspectCrop } from 'react-image-crop'
+import 'react-image-crop/dist/ReactCrop.css'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
@@ -8,7 +10,6 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import ShareTool from '../components/ShareTool'
 import { useFileDrop } from '../hooks/useFileDrop'
 import { IMAGE_TOOLS } from '../data/tools'
-import { SITE_URL, SITE_NAME } from '../data/constants'
 import { IMAGE_SEO_CONTENT, IMAGE_RELATED_TOOLS, IMAGE_READ_NEXT } from '../data/imageToolsData'
 import ComingSoon from '../components/ComingSoon'
 import { processImageFile } from '../utils/canvasUtils'
@@ -23,15 +24,420 @@ export default function ImageTools() {
   const navigate = useNavigate()
   const initialTool = tools.find(t => t.id === toolId)?.id || 'resize'
   const [activeTool, setActiveTool] = useState(initialTool)
-  const { files, preview, handleFiles, handleDrop, removeFile } = useFileDrop(['image/'])
+  const { files, setFiles, preview, handleFiles, handleDrop, removeFile } = useFileDrop(['image/'])
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [crop, setCrop] = useState({ unit: 'px', width: 0, height: 0, x: 0, y: 0 })
+  const imgRef = useRef(null)
   const [processing, setProcessing] = useState(false)
+  const [zoom, setZoom] = useState(1)
+  const [touchStart, setTouchStart] = useState(null)
+  const [touchEnd, setTouchEnd] = useState(null)
+
+  // the required distance between touchStart and touchEnd to be considered a swipe
+  const minSwipeDistance = 50
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null) // otherwise the swipe is fired even with very small moves
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX)
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) {
+      setTouchStart(null)
+      setTouchEnd(null)
+      return
+    }
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > minSwipeDistance
+    const isRightSwipe = distance < -minSwipeDistance
+    if (isLeftSwipe || isRightSwipe) {
+      if (isLeftSwipe) {
+        setSelectedIndex(prev => (prev < files.length - 1 ? prev + 1 : 0))
+      } else {
+        setSelectedIndex(prev => (prev > 0 ? prev - 1 : files.length - 1))
+      }
+    }
+    setTouchStart(null)
+    setTouchEnd(null)
+  }
+
+  useEffect(() => {
+    if (galleryRef.current) {
+      const activeThumb = galleryRef.current.querySelector('.gallery-thumb.active')
+      if (activeThumb) {
+        activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+      }
+    }
+  }, [selectedIndex])
   const [showMobileSettings, setShowMobileSettings] = useState(false)
+
+  // Settings Panel Component to reuse
+  const SettingsPanel = () => (
+    <>
+      <div className="sidebar-header" style={{ marginBottom: '1.5rem' }}>
+        <Sliders size={20} />
+        <h2 style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0 }}>
+          {activeToolData?.title} Settings
+        </h2>
+      </div>
+
+      <button
+        className="btn btn-secondary"
+        style={{ width: '100%', marginBottom: '1rem', padding: '0.75rem', fontSize: '0.9rem' }}
+        onClick={() => {
+          if (confirm('Reset all settings to default?')) {
+            setSettings({
+              width: 800,
+              height: 600,
+              quality: 80,
+              rotation: 0,
+              maintainAspect: true,
+              format: 'original',
+              convertTo: 'png',
+              watermarkText: 'PixTool',
+              watermarkSize: 36,
+              watermarkOpacity: 50,
+              watermarkPosition: 'center',
+              flipDirection: 'horizontal',
+              colorEffect: 'grayscale',
+              cropX: 0,
+              cropY: 0,
+              cropWidth: 500,
+              cropHeight: 500,
+              cropAspectRatio: '1:1',
+              pdfPageSize: 'A4',
+              pdfOrientation: 'portrait',
+              pdfMargin: 24,
+              bgTolerance: 40,
+              bgFeather: 20,
+              bgUseColorPicker: false,
+              bgCustomColor: { r: 255, g: 255, b: 255, a: 255 },
+              bgShowAdvanced: false,
+              brushSize: 30,
+              brushMode: 'erase'
+            })
+            if (activeTool === 'crop') {
+              handlePreset(1, 1)
+            }
+          }
+        }}
+      >
+        Reset Settings
+      </button>
+
+      <div className="sidebar-scroll custom-scrollbar" style={{ flex: 1, overflowY: 'auto', paddingRight: '0.5rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          {activeTool === 'resize' && (
+            <>
+              <div className="input-group">
+                <label className="input-label">Dimensions (Pixels)</label>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                  <input
+                    type="number"
+                    className="input"
+                    placeholder="Width"
+                    value={settings.width}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value) || 0;
+                      if (settings.maintainAspect && imgRef.current) {
+                        const ratio = imgRef.current.naturalWidth / imgRef.current.naturalHeight;
+                        setSettings(s => ({ ...s, width: val, height: Math.round(val / ratio) }));
+                      } else {
+                        setSettings(s => ({ ...s, width: val }));
+                      }
+                    }}
+                  />
+                  <input
+                    type="number"
+                    className="input"
+                    placeholder="Height"
+                    value={settings.height}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value) || 0;
+                      if (settings.maintainAspect && imgRef.current) {
+                        const ratio = imgRef.current.naturalWidth / imgRef.current.naturalHeight;
+                        setSettings(s => ({ ...s, height: val, width: Math.round(val * ratio) }));
+                      } else {
+                        setSettings(s => ({ ...s, height: val }));
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.875rem' }}>
+                <input
+                  type="checkbox"
+                  checked={settings.maintainAspect}
+                  onChange={(e) => setSettings(s => ({ ...s, maintainAspect: e.target.checked }))}
+                />
+                <span className="input-label" style={{ margin: 0 }}>Maintain Aspect Ratio</span>
+              </label>
+            </>
+          )}
+
+          {activeTool === 'crop' && (
+            <>
+              <div className="input-group">
+                <label className="input-label">Social Presets</label>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
+                  <button
+                    className={`btn ${settings.cropAspectRatio === 'auto' ? 'btn-primary' : 'btn-secondary'}`}
+                    style={{ fontSize: '0.7rem', padding: '0.4rem', fontWeight: 700 }}
+                    onClick={() => handlePreset(null, null, 'auto')}
+                  >
+                    Auto
+                  </button>
+                  {[
+                    ['Insta Post', 1, 1],
+                    ['Insta Story', 9, 16],
+                    ['FB Cover', 16, 9],
+                    ['Twitter', 16, 9],
+                    ['LinkedIn', 1.91, 1],
+                    ['YouTube', 16, 9],
+                  ].map(([label, w, h]) => (
+                    <button
+                      key={label}
+                      className={`btn ${settings.cropAspectRatio === label ? 'btn-primary' : 'btn-secondary'}`}
+                      style={{ fontSize: '0.7rem', padding: '0.4rem', fontWeight: 700 }}
+                      onClick={() => handlePreset(w, h, label)}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="input-group">
+                <label className="input-label">Display Presets</label>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
+                  {[
+                    ['4:5 Port', 4, 5],
+                    ['16:9 HD', 16, 9],
+                    ['21:9 Wide', 21, 9],
+                    ['2K Land', 2560, 1440],
+                    ['4K Ultra', 3840, 2160],
+                  ].map(([label, w, h]) => {
+                    const presetId = `${w}:${h}`;
+                    return (
+                      <button
+                        key={label}
+                        className={`btn ${settings.cropAspectRatio === presetId ? 'btn-primary' : 'btn-secondary'}`}
+                        style={{ fontSize: '0.7rem', padding: '0.4rem', fontWeight: 700 }}
+                        onClick={() => handlePreset(w, h, presetId)}
+                      >
+                        {label}
+                      </button>
+                    )
+                  })}
+                  <button
+                    className="btn btn-secondary"
+                    style={{ fontSize: '0.7rem', padding: '0.4rem', fontWeight: 700 }}
+                    onClick={() => {
+                      if (imgRef.current) {
+                        const { width, height, naturalWidth, naturalHeight } = imgRef.current;
+                        setCrop({ unit: 'px', width, height, x: 0, y: 0 });
+                        setSettings(s => ({ ...s, cropX: 0, cropY: 0, cropWidth: naturalWidth, cropHeight: naturalHeight, maintainAspect: false, cropAspectRatio: 'auto' }));
+                      }
+                    }}
+                  >
+                    Full Image
+                  </button>
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div className="input-group">
+                  <label className="input-label">X Pos</label>
+                  <input
+                    type="number"
+                    className="input"
+                    value={settings.cropX}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value) || 0;
+                      setSettings(s => ({ ...s, cropX: val }));
+                      if (imgRef.current && activeTool === 'crop') {
+                        const scaleX = imgRef.current.width / imgRef.current.naturalWidth;
+                        setCrop(c => ({ ...c, x: val * scaleX }));
+                      }
+                    }}
+                  />
+                </div>
+                <div className="input-group">
+                  <label className="input-label">Y Pos</label>
+                  <input
+                    type="number"
+                    className="input"
+                    value={settings.cropY}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value) || 0;
+                      setSettings(s => ({ ...s, cropY: val }));
+                      if (imgRef.current && activeTool === 'crop') {
+                        const scaleY = imgRef.current.height / imgRef.current.naturalHeight;
+                        setCrop(c => ({ ...c, y: val * scaleY }));
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="input-group">
+                <label className="input-label">Crop Size (Pixels)</label>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                  <input
+                    type="number"
+                    className="input"
+                    placeholder="Width"
+                    value={settings.cropWidth}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value) || 0;
+                      setSettings(s => ({ ...s, cropWidth: val }));
+                      if (imgRef.current && activeTool === 'crop') {
+                        const scaleX = imgRef.current.width / imgRef.current.naturalWidth;
+                        setCrop(c => ({ ...c, width: val * scaleX }));
+                      }
+                    }}
+                  />
+                  <input
+                    type="number"
+                    className="input"
+                    placeholder="Height"
+                    value={settings.cropHeight}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value) || 0;
+                      setSettings(s => ({ ...s, cropHeight: val }));
+                      if (imgRef.current && activeTool === 'crop') {
+                        const scaleY = imgRef.current.height / imgRef.current.naturalHeight;
+                        setCrop(c => ({ ...c, height: val * scaleY }));
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.875rem' }}>
+                <input
+                  type="checkbox"
+                  checked={settings.maintainAspect}
+                  onChange={(e) => {
+                    const checked = e.target.checked;
+                    setSettings(s => ({ ...s, maintainAspect: checked }));
+                    if (checked && crop) {
+                      const aspect = crop.width / crop.height;
+                      setCrop(c => ({ ...c, aspect }));
+                    } else {
+                      setCrop(c => {
+                        const { aspect, ...rest } = c;
+                        return rest;
+                      });
+                    }
+                  }}
+                />
+                <span className="input-label" style={{ margin: 0 }}>Lock Aspect Ratio</span>
+              </label>
+            </>
+          )}
+
+          {activeTool === 'convert' && (
+            <div className="input-group">
+              <label className="input-label">Convert to Format</label>
+              <select
+                className="input"
+                value={settings.convertTo}
+                onChange={(e) => setSettings(s => ({ ...s, convertTo: e.target.value }))}
+              >
+                <option value="png">PNG (Lossless)</option>
+                <option value="jpeg">JPEG (Compressed)</option>
+                <option value="webp">WebP (Modern)</option>
+                <option value="avif">AVIF (Next-Gen)</option>
+              </select>
+            </div>
+          )}
+
+          {(activeTool === 'resize' || activeTool === 'convert') && (
+            <div className="input-group">
+              <label className="input-label">Quality ({settings.quality}%)</label>
+              <input
+                type="range"
+                min="1"
+                max="100"
+                value={settings.quality}
+                onChange={(e) => setSettings(s => ({ ...s, quality: parseInt(e.target.value) }))}
+                style={{ width: '100%' }}
+              />
+            </div>
+          )}
+
+          {activeTool === 'rotate' && (
+            <div className="input-group">
+              <label className="input-label">Rotation Angle ({settings.rotation}°)</label>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.5rem' }}>
+                {[0, 90, 180, 270].map(angle => (
+                  <button
+                    key={angle}
+                    className={`btn ${settings.rotation === angle ? 'btn-primary' : 'btn-secondary'}`}
+                    onClick={() => setSettings(s => ({ ...s, rotation: angle }))}
+                    style={{ fontSize: '0.8rem', padding: '0.5rem' }}
+                  >
+                    {angle}°
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTool === 'watermark' && (
+            <>
+              <div className="input-group">
+                <label className="input-label">Watermark Text</label>
+                <input
+                  type="text"
+                  className="input"
+                  value={settings.watermarkText}
+                  onChange={(e) => setSettings(s => ({ ...s, watermarkText: e.target.value }))}
+                  placeholder="Enter text..."
+                />
+              </div>
+              <div className="input-group">
+                <label className="input-label">Position</label>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
+                  {['top-left', 'top-center', 'top-right', 'center', 'bottom-left', 'bottom-center', 'bottom-right'].map(pos => (
+                    <button
+                      key={pos}
+                      className={`btn ${settings.watermarkPosition === pos ? 'btn-primary' : 'btn-secondary'}`}
+                      onClick={() => setSettings(s => ({ ...s, watermarkPosition: pos }))}
+                      style={{ fontSize: '0.65rem', padding: '0.4rem', textTransform: 'capitalize' }}
+                    >
+                      {pos.replace('-', ' ')}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+
+      <button
+        className="btn btn-primary"
+        style={{ width: '100%', marginTop: '1.5rem', padding: '1rem', fontWeight: 900 }}
+        onClick={() => {
+          processImage()
+          setShowMobileSettings(false)
+        }}
+        disabled={processing || files.length === 0}
+      >
+        {processing ? <Loader className="animate-spin" /> : <><Download size={18} /> Export All</>}
+      </button>
+    </>
+  )
   const [settings, setSettings] = useState({
     width: 800,
     height: 600,
     quality: 80,
     rotation: 0,
-    maintainAspect: true,
+    maintainAspect: false,
     format: 'original',
     convertTo: 'png',
     watermarkText: 'PixTool',
@@ -44,7 +450,7 @@ export default function ImageTools() {
     cropY: 0,
     cropWidth: 500,
     cropHeight: 500,
-    cropAspectRatio: '1:1',
+    cropAspectRatio: 'auto',
     pdfPageSize: 'A4',
     pdfOrientation: 'portrait',
     pdfMargin: 24,
@@ -57,6 +463,49 @@ export default function ImageTools() {
     brushMode: 'erase' // 'erase' or 'restore'
   })
   const fileInputRef = useRef(null)
+  const galleryRef = useRef(null)
+
+  useEffect(() => {
+    if (toolId) {
+      const validTool = tools.find(t => t.id === toolId)
+      if (validTool) {
+        setActiveTool(toolId)
+      } else {
+        navigate('/image-tools')
+      }
+    }
+  }, [toolId, navigate])
+
+  // Manage Object URLs for previews to prevent memory leaks
+  const [objectUrls, setObjectUrls] = useState([])
+
+  useEffect(() => {
+    // Create new URLs
+    const urls = files.map(file => URL.createObjectURL(file))
+    setObjectUrls(urls)
+
+    // Revoke old URLs on cleanup
+    return () => {
+      urls.forEach(url => URL.revokeObjectURL(url))
+    }
+  }, [files])
+
+  const selectedImageUrl = useMemo(() => {
+    return objectUrls[selectedIndex] || null
+  }, [objectUrls, selectedIndex])
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (files.length <= 1) return
+      if (e.key === 'ArrowLeft') {
+        setSelectedIndex(prev => (prev > 0 ? prev - 1 : files.length - 1))
+      } else if (e.key === 'ArrowRight') {
+        setSelectedIndex(prev => (prev < files.length - 1 ? prev + 1 : 0))
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [files.length])
 
   useEffect(() => {
     if (toolId) {
@@ -72,10 +521,94 @@ export default function ImageTools() {
   }, [toolId, navigate])
 
   const handleFileSelect = (e) => {
-    if (e.target.files.length > 0) {
-      handleFiles(Array.from(e.target.files))
+     if (e.target.files.length > 0) {
+       handleFiles(Array.from(e.target.files))
+     }
+   }
+
+   const handleRemoveFile = (index) => {
+     removeFile(index)
+     if (selectedIndex >= files.length - 1) {
+       setSelectedIndex(Math.max(0, files.length - 2))
+     }
+   }
+
+  const onImageLoad = (e) => {
+    const { width, height } = e.currentTarget;
+    // Initialize crop with 90% width/height in pixel units
+    const initialCrop = centerCrop(
+      makeAspectCrop(
+        { unit: 'px', width: width * 0.9 },
+        settings.maintainAspect ? settings.cropWidth / settings.cropHeight : undefined,
+        width,
+        height
+      ),
+      width,
+      height
+    );
+    setCrop(initialCrop);
+
+    // Update settings with natural coordinates
+    const scaleX = e.currentTarget.naturalWidth / width;
+    const scaleY = e.currentTarget.naturalHeight / height;
+    setSettings(s => ({
+      ...s,
+      cropX: Math.round(initialCrop.x * scaleX),
+      cropY: Math.round(initialCrop.y * scaleY),
+      cropWidth: Math.round(initialCrop.width * scaleX),
+      cropHeight: Math.round(initialCrop.height * scaleY)
+    }));
+  };
+
+  const handlePreset = (aspectWidth, aspectHeight, label) => {
+    if (!imgRef.current) return;
+
+    const { width, height } = imgRef.current;
+
+    if (aspectWidth === null) {
+      // Auto / Free-form mode
+      setSettings(s => ({ ...s, cropAspectRatio: 'auto', maintainAspect: false }));
+      setCrop(c => {
+        const { aspect, ...rest } = c;
+        return { ...rest, unit: 'px' };
+      });
+      return;
     }
-  }
+
+    const aspect = aspectWidth / aspectHeight;
+    const newCrop = centerCrop(
+      makeAspectCrop(
+        { unit: 'px', width: width * 0.9 },
+        aspect,
+        width,
+        height
+      ),
+      width,
+      height
+    );
+
+    setCrop(newCrop);
+    setSettings(s => ({ ...s, cropAspectRatio: label || `${aspectWidth}:${aspectHeight}`, maintainAspect: true }));
+  };
+
+  const onCropChange = (c) => {
+    setCrop(c);
+  };
+
+  const onCropComplete = (pixelCrop) => {
+    if (imgRef.current && activeTool === 'crop' && pixelCrop.width > 0) {
+      const scaleX = imgRef.current.naturalWidth / imgRef.current.width;
+      const scaleY = imgRef.current.naturalHeight / imgRef.current.height;
+
+      setSettings(s => ({
+        ...s,
+        cropX: Math.round(pixelCrop.x * scaleX),
+        cropY: Math.round(pixelCrop.y * scaleY),
+        cropWidth: Math.round(pixelCrop.width * scaleX),
+        cropHeight: Math.round(pixelCrop.height * scaleY)
+      }));
+    }
+  };
 
   // Image processing logic will be extracted to canvasUtils.js in the next phase
   const processImage = async () => {
@@ -248,7 +781,14 @@ export default function ImageTools() {
                   type="number"
                   className="input"
                   value={settings.cropX}
-                  onChange={(e) => setSettings(s => ({ ...s, cropX: parseInt(e.target.value) || 0 }))}
+                  onChange={(e) => {
+                    const val = parseInt(e.target.value) || 0;
+                    setSettings(s => ({ ...s, cropX: val }));
+                    if (imgRef.current && activeTool === 'crop') {
+                      const scaleX = imgRef.current.width / imgRef.current.naturalWidth;
+                      setCrop(c => ({ ...c, x: val * scaleX }));
+                    }
+                  }}
                 />
               </div>
               <div className="input-group">
@@ -257,77 +797,133 @@ export default function ImageTools() {
                   type="number"
                   className="input"
                   value={settings.cropY}
-                  onChange={(e) => setSettings(s => ({ ...s, cropY: parseInt(e.target.value) || 0 }))}
-                />
-              </div>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-              <div className="input-group">
-                <label className="input-label">Width</label>
-                <input
-                  type="number"
-                  className="input"
-                  value={settings.cropWidth}
-                  onChange={(e) => setSettings(s => ({ ...s, cropWidth: parseInt(e.target.value) || 100 }))}
-                />
-              </div>
-              <div className="input-group">
-                <label className="input-label">Height</label>
-                <input
-                  type="number"
-                  className="input"
-                  value={settings.cropHeight}
-                  onChange={(e) => setSettings(s => ({ ...s, cropHeight: parseInt(e.target.value) || 100 }))}
+                  onChange={(e) => {
+                    const val = parseInt(e.target.value) || 0;
+                    setSettings(s => ({ ...s, cropY: val }));
+                    if (imgRef.current && activeTool === 'crop') {
+                      const scaleY = imgRef.current.height / imgRef.current.naturalHeight;
+                      setCrop(c => ({ ...c, y: val * scaleY }));
+                    }
+                  }}
                 />
               </div>
             </div>
             <div className="input-group">
-              <label className="input-label">Quick Presets</label>
+              <label className="input-label">Crop Size (Pixels)</label>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <input
+                  type="number"
+                  className="input"
+                  placeholder="Width"
+                  value={settings.cropWidth}
+                  onChange={(e) => {
+                    const val = parseInt(e.target.value) || 0;
+                    setSettings(s => ({ ...s, cropWidth: val }));
+                    if (imgRef.current && activeTool === 'crop') {
+                      const scaleX = imgRef.current.width / imgRef.current.naturalWidth;
+                      setCrop(c => ({ ...c, width: val * scaleX }));
+                    }
+                  }}
+                />
+                <input
+                  type="number"
+                  className="input"
+                  placeholder="Height"
+                  value={settings.cropHeight}
+                  onChange={(e) => {
+                    const val = parseInt(e.target.value) || 0;
+                    setSettings(s => ({ ...s, cropHeight: val }));
+                    if (imgRef.current && activeTool === 'crop') {
+                      const scaleY = imgRef.current.height / imgRef.current.naturalHeight;
+                      setCrop(c => ({ ...c, height: val * scaleY }));
+                    }
+                  }}
+                />
+              </div>
+            </div>
+            <div className="input-group">
+              <label className="input-label">Social Presets</label>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
                 <button
-                  className="btn btn-secondary"
-                  style={{ fontSize: '0.75rem', padding: '0.5rem' }}
-                  onClick={() => setSettings(s => ({ ...s, cropWidth: 1080, cropHeight: 1080 }))}
+                  className={`btn ${settings.cropAspectRatio === 'auto' ? 'btn-primary' : 'btn-secondary'}`}
+                  style={{ fontSize: '0.7rem', padding: '0.4rem', fontWeight: 700 }}
+                  onClick={() => handlePreset(null, null, 'auto')}
                 >
-                  1:1 Post
+                  Auto
                 </button>
+                {[
+                  ['Insta Post', 1, 1],
+                  ['Insta Story', 9, 16],
+                  ['FB Cover', 16, 9],
+                  ['Twitter', 16, 9],
+                  ['LinkedIn', 1.91, 1],
+                  ['YouTube', 16, 9],
+                ].map(([label, w, h]) => (
+                  <button
+                    key={label}
+                    className={`btn ${settings.cropAspectRatio === label ? 'btn-primary' : 'btn-secondary'}`}
+                    style={{ fontSize: '0.7rem', padding: '0.4rem', fontWeight: 700 }}
+                    onClick={() => handlePreset(w, h, label)}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="input-group">
+              <label className="input-label">Display Presets</label>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
+                {[
+                  ['4:5 Port', 4, 5],
+                  ['16:9 HD', 16, 9],
+                  ['21:9 Wide', 21, 9],
+                  ['2K Land', 2560, 1440],
+                  ['4K Ultra', 3840, 2160],
+                ].map(([label, w, h]) => {
+                  const presetId = `${w}:${h}`;
+                  return (
+                    <button
+                      key={label}
+                      className={`btn ${settings.cropAspectRatio === presetId ? 'btn-primary' : 'btn-secondary'}`}
+                      style={{ fontSize: '0.7rem', padding: '0.4rem', fontWeight: 700 }}
+                      onClick={() => handlePreset(w, h, presetId)}
+                    >
+                      {label}
+                    </button>
+                  )
+                })}
                 <button
                   className="btn btn-secondary"
-                  style={{ fontSize: '0.75rem', padding: '0.5rem' }}
-                  onClick={() => setSettings(s => ({ ...s, cropWidth: 1080, cropHeight: 1350 }))}
+                  style={{ fontSize: '0.7rem', padding: '0.4rem', fontWeight: 700 }}
+                  onClick={() => {
+                    if (imgRef.current) {
+                      const { width, height, naturalWidth, naturalHeight } = imgRef.current;
+                      setCrop({ unit: 'px', width, height, x: 0, y: 0 });
+                      setSettings(s => ({ ...s, cropX: 0, cropY: 0, cropWidth: naturalWidth, cropHeight: naturalHeight, maintainAspect: false, cropAspectRatio: 'auto' }));
+                    }
+                  }}
                 >
-                  4:5 Port
-                </button>
-                <button
-                  className="btn btn-secondary"
-                  style={{ fontSize: '0.75rem', padding: '0.5rem' }}
-                  onClick={() => setSettings(s => ({ ...s, cropWidth: 1080, cropHeight: 1920 }))}
-                >
-                  9:16 St
-                </button>
-                <button
-                  className="btn btn-secondary"
-                  style={{ fontSize: '0.75rem', padding: '0.5rem' }}
-                  onClick={() => setSettings(s => ({ ...s, cropWidth: 1280, cropHeight: 720 }))}
-                >
-                  16:9 HD
-                </button>
-                <button
-                  className="btn btn-secondary"
-                  style={{ fontSize: '0.75rem', padding: '0.5rem' }}
-                  onClick={() => setSettings(s => ({ ...s, cropWidth: 2560, cropHeight: 1440 }))}
-                >
-                  2K Land
-                </button>
-                <button
-                  className="btn btn-secondary"
-                  style={{ fontSize: '0.75rem', padding: '0.5rem' }}
-                  onClick={() => setSettings(s => ({ ...s, cropWidth: 3840, cropHeight: 2160 }))}
-                >
-                  4K Ultra
+                  Full Image
                 </button>
               </div>
             </div>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.875rem' }}>
+              <input
+                type="checkbox"
+                checked={settings.maintainAspect}
+                onChange={(e) => {
+                  const checked = e.target.checked
+                  setSettings(s => ({ ...s, maintainAspect: checked }))
+                  if (checked && crop) {
+                    const aspect = crop.width / crop.height
+                    setCrop(c => ({ ...c, aspect }))
+                  } else {
+                    setCrop(c => ({ ...c, aspect: undefined }))
+                  }
+                }}
+              />
+              <span className="input-label" style={{ margin: 0 }}>Lock Aspect Ratio</span>
+            </label>
           </>
         )}
 
@@ -588,6 +1184,50 @@ export default function ImageTools() {
       </div>
 
       <button
+        className="btn btn-secondary"
+        style={{ width: '100%', marginBottom: '1rem' }}
+        onClick={() => {
+          if (confirm('Reset all settings to default?')) {
+            setSettings({
+              width: 800,
+              height: 600,
+              quality: 80,
+              rotation: 0,
+              maintainAspect: true,
+              format: 'original',
+              convertTo: 'png',
+              watermarkText: 'PixTool',
+              watermarkSize: 36,
+              watermarkOpacity: 50,
+              watermarkPosition: 'center',
+              flipDirection: 'horizontal',
+              colorEffect: 'grayscale',
+              cropX: 0,
+              cropY: 0,
+              cropWidth: 500,
+              cropHeight: 500,
+              cropAspectRatio: '1:1',
+              pdfPageSize: 'A4',
+              pdfOrientation: 'portrait',
+              pdfMargin: 24,
+              bgTolerance: 40,
+              bgFeather: 20,
+              bgUseColorPicker: false,
+              bgCustomColor: { r: 255, g: 255, b: 255, a: 255 },
+              bgShowAdvanced: false,
+              brushSize: 30,
+              brushMode: 'erase'
+            })
+            if (activeTool === 'crop') {
+              handlePreset(1, 1)
+            }
+          }
+        }}
+      >
+        Reset Settings
+      </button>
+
+      <button
         className="btn btn-primary"
         style={{ width: '100%', marginTop: 'auto' }}
         onClick={processImage}
@@ -631,9 +1271,9 @@ export default function ImageTools() {
 
         {activeToolData?.status === 'coming-soon' ? (
           <>
-            <ComingSoon 
-              toolName={activeToolData.title} 
-              description={activeToolData.description} 
+            <ComingSoon
+              toolName={activeToolData.title}
+              description={activeToolData.description}
             />
             <div style={{ marginTop: '5rem' }}>
               {seoContent ? (
@@ -797,55 +1437,132 @@ export default function ImageTools() {
                     </div>
 
                     <div className="preview-main">
-                      <div className="tool-panel" style={{ position: 'relative', minHeight: '500px', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                        {processing && (
-                          <div className="processing-overlay">
-                            <div className="processing-loader"></div>
-                            <p className="processing-text">Processing Images...</p>
-                          </div>
-                        )}
+                      {processing && (
+                        <div className="processing-overlay">
+                          <div className="processing-loader"></div>
+                          <p className="processing-text">Processing Images...</p>
+                        </div>
+                      )}
 
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }} className="mobile-hide-header">
                           <h3 style={{ fontSize: '1.25rem', fontWeight: 900, margin: 0 }}>
                             Files ({files.length})
                           </h3>
-                          <div style={{ display: 'flex', gap: '0.75rem' }}>
-                            <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.6rem 1.25rem' }}>
-                              <Upload size={18} /> Add More
-                            </button>
-                            <button className="btn btn-primary" onClick={processImage} style={{ padding: '0.6rem 2rem' }}>
-                              <Download size={18} /> Export All
-                            </button>
-                          </div>
+                          <span className="preview-badge">
+                            {files[selectedIndex]?.name}
+                          </span>
+                        </div>
+                        <div style={{ display: 'flex', gap: '0.75rem' }}>
+                          <button className="btn btn-secondary" onClick={() => { if(confirm('Clear all files?')) { setFiles([]); setSelectedIndex(0); } }} style={{ padding: '0.6rem 1rem', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderColor: 'transparent' }}>
+                            <X size={18} /> Clear
+                          </button>
+                          <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.6rem 1.25rem' }}>
+                            <Upload size={18} /> Add More
+                          </button>
+                          <button className="btn btn-primary" onClick={processImage} style={{ padding: '0.6rem 2rem' }}>
+                            <Download size={18} /> Export All
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Main Large Preview Area */}
+                      <div
+                        className="preview-display"
+                        onTouchStart={onTouchStart}
+                        onTouchMove={onTouchMove}
+                        onTouchEnd={onTouchEnd}
+                      >
+                        <div className="zoom-controls">
+                          <button className="zoom-btn" onClick={() => setZoom(z => Math.max(0.1, z - 0.1))} title="Zoom Out">-</button>
+                          <button className="zoom-value" onClick={() => setZoom(1)}>100%</button>
+                          <button className="zoom-btn" onClick={() => setZoom(z => Math.min(3, z + 0.1))} title="Zoom In">+</button>
                         </div>
 
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1.5rem' }}>
-                          {files.map((file, i) => (
-                            <div key={i} className="tool-card" style={{ padding: '1rem', position: 'relative' }}>
-                              <button
-                                onClick={() => removeFile(i)}
-                                className="btn-icon"
-                                style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', padding: '0.4rem', background: 'var(--bg-glass)', borderRadius: '8px', zIndex: 5 }}
-                                aria-label={`Remove file ${file.name}`}
-                              >
-                                <X size={14} />
-                              </button>
-                              <div style={{ aspectRatio: '1/1', background: 'var(--bg-secondary)', borderRadius: '12px', overflow: 'hidden', marginBottom: '0.75rem', border: '1px solid var(--border-color)' }}>
-                                <img
-                                  src={URL.createObjectURL(file)}
-                                  alt={file.name}
-                                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                />
-                              </div>
-                              <p style={{ fontSize: '0.75rem', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', margin: 0, color: 'var(--text-secondary)' }}>
-                                {file.name}
-                              </p>
-                              <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', margin: '0.25rem 0 0' }}>
-                                {(file.size / 1024).toFixed(1)} KB
-                              </p>
-                            </div>
-                          ))}
+                        <div style={{ transform: `scale(${zoom})`, transition: 'transform 0.2s ease-out', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          {activeTool === 'crop' && selectedImageUrl ? (
+                            <ReactCrop
+                              crop={crop}
+                              onChange={onCropChange}
+                              onComplete={onCropComplete}
+                              aspect={crop.aspect}
+                            >
+                              <img
+                                ref={imgRef}
+                                src={selectedImageUrl}
+                                alt="Crop preview"
+                                className="preview-image-large"
+                                onLoad={onImageLoad}
+                                style={{ maxHeight: '500px', width: 'auto', transform: `rotate(${settings.rotation || 0}deg)`, transition: 'transform 0.3s ease-out' }}
+                              />
+                            </ReactCrop>
+                          ) : selectedImageUrl ? (
+                            <img
+                              src={selectedImageUrl}
+                              alt="Selected file"
+                              className="preview-image-large"
+                              style={{ maxHeight: '500px', width: 'auto', transform: `rotate(${settings.rotation || 0}deg)`, transition: 'transform 0.3s ease-out' }}
+                            />
+                          ) : null}
                         </div>
+
+                        <div className="preview-info">
+                          <span className="preview-badge">
+                            {(files[selectedIndex]?.size / 1024).toFixed(1)} KB
+                          </span>
+                        </div>
+
+                        {/* Prev/Next Buttons */}
+                        {files.length > 1 && (
+                          <>
+                            <button
+                              className="btn-icon"
+                              onClick={() => setSelectedIndex(prev => (prev > 0 ? prev - 1 : files.length - 1))}
+                              style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'var(--bg-glass)', borderRadius: '50%', padding: '0.75rem' }}
+                            >
+                              <ChevronLeft size={24} />
+                            </button>
+                            <button
+                              className="btn-icon"
+                              onClick={() => setSelectedIndex(prev => (prev < files.length - 1 ? prev + 1 : 0))}
+                              style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'var(--bg-glass)', borderRadius: '50%', padding: '0.75rem' }}
+                            >
+                              <ChevronRight size={24} />
+                            </button>
+                          </>
+                        )}
+                      </div>
+
+                      {/* Horizontal Thumbnail Gallery Row */}
+                      <div
+                        className="tool-gallery-row custom-scrollbar"
+                        ref={galleryRef}
+                        onTouchStart={onTouchStart}
+                        onTouchMove={onTouchMove}
+                        onTouchEnd={onTouchEnd}
+                      >
+                        {files.map((file, i) => (
+                          <div
+                            key={i}
+                            className={`gallery-thumb ${selectedIndex === i ? 'active' : ''}`}
+                            onClick={() => setSelectedIndex(i)}
+                          >
+                            <div className="thumb-container">
+                              <img src={objectUrls[i] || null} alt={file.name} />
+                              <div className="thumb-label">{file.name}</div>
+                            </div>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                handleRemoveFile(i)
+                              }}
+                              className="gallery-thumb-remove"
+                              aria-label="Remove"
+                            >
+                              <X size={12} />
+                            </button>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -889,29 +1606,34 @@ export default function ImageTools() {
           </>
         )}
 
-        {/* Mobile Action Bar & Settings Modal */}
+        {/* Mobile Action Bar & Settings Drawer */}
         {preview && (
           <>
             <div className="mobile-bottom-bar">
-              <button className="btn btn-secondary" style={{ flex: 1 }} onClick={() => setShowMobileSettings(true)}>
+              <button className="btn btn-secondary" onClick={() => setShowMobileSettings(true)}>
                 <Sliders size={18} /> Settings
               </button>
-              <button className="btn btn-primary" style={{ flex: 1 }} onClick={processImage}>
+              <button className="btn btn-primary" onClick={processImage}>
                 <Download size={18} /> Export
               </button>
             </div>
 
             {showMobileSettings && (
-              <div className="modal-overlay" onClick={() => setShowMobileSettings(false)}>
-                <div className="modal-content" onClick={e => e.stopPropagation()}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                    <h3 style={{ margin: 0, fontWeight: 900 }}>Tool Settings</h3>
-                    <button className="btn-icon" onClick={() => setShowMobileSettings(false)} aria-label="Close settings"><X size={20} /></button>
+              <div className="settings-drawer-overlay" onClick={() => setShowMobileSettings(false)}>
+                <div className="settings-drawer-content" onClick={e => e.stopPropagation()}>
+                  <div className="drawer-handle" />
+                  <div className="drawer-header">
+                    <h3 style={{ margin: 0, fontWeight: 900, fontSize: '1.25rem' }}>Tool Settings</h3>
+                    <button
+                      className="icon-btn"
+                      onClick={() => setShowMobileSettings(false)}
+                      aria-label="Close settings"
+                      style={{ background: 'var(--bg-secondary)', border: 'none' }}
+                    >
+                      <X size={20} />
+                    </button>
                   </div>
                   {renderSidebarSettings()}
-                  <button className="btn btn-primary" style={{ width: '100%', marginTop: '2rem' }} onClick={() => setShowMobileSettings(false)}>
-                    Apply Settings
-                  </button>
                 </div>
               </div>
             )}

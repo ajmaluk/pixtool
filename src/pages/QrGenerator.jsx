@@ -406,28 +406,33 @@ export default function QrGenerator() {
           <AdSpace type="side" className="desktop-only" />
         </div>
 
-        {/* Mobile Bottom Bar */}
+        {/* Mobile Action Bar & Settings Drawer */}
         <div className="mobile-bottom-bar">
-          <button className="btn btn-secondary" style={{ flex: 1 }} onClick={() => setShowMobileSettings(true)}>
-            <Sliders size={20} /> Settings
+          <button className="btn btn-secondary" onClick={() => setShowMobileSettings(true)}>
+            <Sliders size={18} /> Settings
           </button>
-          <button className="btn btn-primary" style={{ flex: 2 }} onClick={downloadQR}>
-            <Download size={20} /> Download PNG
+          <button className="btn btn-primary" onClick={downloadQR}>
+            <Download size={18} /> Download
           </button>
         </div>
 
-        {/* Mobile Settings Modal */}
+        {/* Mobile Settings Drawer */}
         {showMobileSettings && (
-          <div className="modal-overlay" onClick={() => setShowMobileSettings(false)}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: 900 }}>QR Aesthetics</h3>
-                <button className="btn-icon" onClick={() => setShowMobileSettings(false)} aria-label="Close settings"><X /></button>
+          <div className="settings-drawer-overlay" onClick={() => setShowMobileSettings(false)}>
+            <div className="settings-drawer-content" onClick={e => e.stopPropagation()}>
+              <div className="drawer-handle" />
+              <div className="drawer-header">
+                <h3 style={{ margin: 0, fontWeight: 900, fontSize: '1.25rem' }}>QR Aesthetics</h3>
+                <button 
+                  className="icon-btn" 
+                  onClick={() => setShowMobileSettings(false)} 
+                  aria-label="Close settings"
+                  style={{ background: 'var(--bg-secondary)', border: 'none' }}
+                >
+                  <X size={20} />
+                </button>
               </div>
               {renderSettings()}
-              <button className="btn btn-primary" style={{ width: '100%', marginTop: '2.5rem' }} onClick={() => setShowMobileSettings(false)}>
-                Apply Settings
-              </button>
             </div>
           </div>
         )}
