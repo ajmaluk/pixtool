@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
+import ToolRating from './components/ToolRating'
 import { ALL_TOOLS_MAP } from './data/tools'
 
 // Lazy load pages
@@ -48,6 +49,7 @@ const DisposableEmail = lazy(() => import('./pages/DisposableEmail'))
 const ThrowawayEmail = lazy(() => import('./pages/ThrowawayEmail'))
 const TypingTest = lazy(() => import('./pages/TypingTest'))
 const CodeDiff = lazy(() => import('./pages/CodeDiff'))
+const PixAdmin = lazy(() => import('./pages/PixAdmin'))
 
 // Loading component — stays visible inside the layout
 const PageLoader = () => (
@@ -158,6 +160,11 @@ class ErrorBoundary extends Component {
 const MainLayout = () => {
   const location = useLocation()
   const [recentTools, setRecentTools] = useState([])
+  const currentToolMeta = ALL_TOOLS_MAP[location.pathname]
+  const isRateableToolPath = Boolean(
+    currentToolMeta &&
+    !['/image-tools', '/pdf-tools', '/utility-tools'].includes(location.pathname)
+  )
 
   // Tools mapping for metadata - now driven by tools.js
   const TOOLS_META = ALL_TOOLS_MAP;
@@ -201,167 +208,177 @@ const MainLayout = () => {
     }
   }, [location, TOOLS_META])
 
+  const isAdminPath = location.pathname === '/pix-admin'
+
   return (
     <div className="app">
       <ScrollToTop />
-      <Navbar />
-      <main className="main-content">
+      {!isAdminPath && <Navbar />}
+      <main className="main-content" style={isAdminPath ? { paddingTop: 0 } : {}}>
         <ErrorBoundary>
           <Suspense fallback={<PageLoader />}>
             <Outlet />
           </Suspense>
         </ErrorBoundary>
 
-        <div className="container-pro" style={{ marginTop: '6rem', paddingBottom: '4rem' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-            
-            {/* Recent Tools - Dynamic with Layout Animation */}
-            <AnimatePresence mode="popLayout">
-              {recentTools.length > 0 && (
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                  style={{
-                    background: 'var(--bg-glass)',
-                    backdropFilter: 'blur(24px)',
-                    border: '1px solid var(--accent-primary)',
-                    borderRadius: '32px',
-                    padding: '2rem',
-                    boxShadow: '0 20px 40px var(--accent-glow)'
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-                    <div style={{ padding: '8px', background: 'var(--accent-glow)', borderRadius: '12px' }}>
-                      <span style={{ fontSize: '1.2rem' }}>🕒</span>
-                    </div>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 900, letterSpacing: '-0.02em', margin: 0 }}>Recent Tools</h3>
-                  </div>
-                  <div style={{ display: 'grid', gap: '0.75rem' }}>
-                    {recentTools.map(tool => (
-                      <Link key={tool.path} to={tool.path} style={{ textDecoration: 'none', color: 'inherit' }}>
-                        <motion.div
-                          layout
-                          whileHover={{ x: 8, background: 'var(--bg-secondary)', borderColor: 'var(--accent-primary)' }}
-                          style={{
-                            border: '1px solid var(--border-color)',
-                            borderRadius: '16px',
-                            padding: '0.9rem 1.2rem',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '1rem',
-                            background: 'rgba(255,255,255,0.4)',
-                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-                          }}
-                        >
-                          <span style={{ fontSize: '1.3rem', display: 'flex', alignItems: 'center' }}>
-                            {tool.icon ? (typeof tool.icon === 'string' ? tool.icon : (typeof tool.icon === 'function' ? <tool.icon size={20} /> : '🛠️')) : '🛠️'}
-                          </span>
-                          <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>{tool.name}</span>
-                        </motion.div>
-                      </Link>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Popular Tools - Static Enhanced */}
-            <motion.div
-              style={{
-                background: 'var(--bg-glass)',
-                backdropFilter: 'blur(20px)',
-                border: '1px solid var(--border-color)',
-                borderRadius: '32px',
-                padding: '2rem',
-                boxShadow: 'var(--shadow-lg)'
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-                <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '12px' }}>
-                   <span style={{ fontSize: '1.2rem' }}>🔥</span>
-                </div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 900, letterSpacing: '-0.02em', margin: 0 }}>Popular Tools</h3>
+        {!isAdminPath && (
+          <div className="container-pro" style={{ marginTop: '6rem', paddingBottom: '4rem' }}>
+            {isRateableToolPath ? (
+              <div style={{ marginBottom: '1.5rem', maxWidth: '420px' }}>
+                <ToolRating toolSlug={location.pathname.replace(/^\//, '')} />
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.75rem' }}>
-                {[
-                  { name: 'Image Compressor', path: '/image-tools/compress', icon: '🗜️' },
-                  { name: 'Merge PDF', path: '/pdf-tools/merge', icon: '📄' },
-                  { name: 'Temp Mail', path: '/temp-mail', icon: '📨' },
-                  { name: 'QR Generator', path: '/qr-generator', icon: '🎨' },
-                  { name: 'Typing Test', path: '/typing-test', icon: '⌨️' }
-                ].map(tool => (
-                  <Link key={tool.path} to={tool.path} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <motion.div
-                      whileHover={{ x: 5, background: 'var(--bg-secondary)' }}
-                      style={{
-                        border: '1px solid var(--border-color)',
-                        borderRadius: '16px',
-                        padding: '0.75rem 1rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        background: 'var(--bg-primary)',
-                        transition: 'var(--transition)'
-                      }}
-                    >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                        <span style={{ fontSize: '1.1rem' }}>{tool.icon}</span>
-                        <span style={{ fontWeight: 700, fontSize: '0.9rem' }}>{tool.name}</span>
+            ) : null}
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+              
+              {/* Recent Tools - Dynamic with Layout Animation */}
+              <AnimatePresence mode="popLayout">
+                {recentTools.length > 0 && (
+                  <motion.div
+                    layout
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                    style={{
+                      background: 'var(--bg-glass)',
+                      backdropFilter: 'blur(24px)',
+                      border: '1px solid var(--accent-primary)',
+                      borderRadius: '32px',
+                      padding: '2rem',
+                      boxShadow: '0 20px 40px var(--accent-glow)'
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
+                      <div style={{ padding: '8px', background: 'var(--accent-glow)', borderRadius: '12px' }}>
+                        <span style={{ fontSize: '1.2rem' }}>🕒</span>
                       </div>
-                      <span style={{ color: 'var(--accent-primary)', fontWeight: 900 }}>→</span>
-                    </motion.div>
-                  </Link>
-                ))}
-              </div>
-            </motion.div>
+                      <h3 style={{ fontSize: '1.25rem', fontWeight: 900, letterSpacing: '-0.02em', margin: 0 }}>Recent Tools</h3>
+                    </div>
+                    <div style={{ display: 'grid', gap: '0.75rem' }}>
+                      {recentTools.map(tool => (
+                        <Link key={tool.path} to={tool.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                          <motion.div
+                            layout
+                            whileHover={{ x: 8, background: 'var(--bg-secondary)', borderColor: 'var(--accent-primary)' }}
+                            style={{
+                              border: '1px solid var(--border-color)',
+                              borderRadius: '16px',
+                              padding: '0.9rem 1.2rem',
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '1rem',
+                              background: 'rgba(255,255,255,0.4)',
+                              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                            }}
+                          >
+                            <span style={{ fontSize: '1.3rem', display: 'flex', alignItems: 'center' }}>
+                              {tool.icon ? (typeof tool.icon === 'string' ? tool.icon : (typeof tool.icon === 'function' ? <tool.icon size={20} /> : '🛠️')) : '🛠️'}
+                            </span>
+                            <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>{tool.name}</span>
+                          </motion.div>
+                        </Link>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-            {/* Premium Expert Guides */}
-            <motion.div
-              style={{
-                background: 'linear-gradient(135deg, var(--bg-glass) 0%, rgba(99, 102, 241, 0.05) 100%)',
-                backdropFilter: 'blur(24px)',
-                border: '1px solid var(--border-color)',
-                borderRadius: '32px',
-                padding: '2rem',
-                boxShadow: 'var(--shadow-lg)'
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-                <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '12px' }}>
-                   <span style={{ fontSize: '1.2rem' }}>📚</span>
+              {/* Popular Tools - Static Enhanced */}
+              <motion.div
+                style={{
+                  background: 'var(--bg-glass)',
+                  backdropFilter: 'blur(20px)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '32px',
+                  padding: '2rem',
+                  boxShadow: 'var(--shadow-lg)'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
+                  <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '12px' }}>
+                     <span style={{ fontSize: '1.2rem' }}>🔥</span>
+                  </div>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 900, letterSpacing: '-0.02em', margin: 0 }}>Popular Tools</h3>
                 </div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 900, letterSpacing: '-0.02em', margin: 0 }}>Expert Guides</h3>
-              </div>
-              <div style={{ display: 'grid', gap: '1rem' }}>
-                {[
-                  { name: 'Social Media Size Guide 2026', path: '/blog/resize-images-social-media-2026' },
-                  { name: 'Max Privacy with Temp Mail', path: '/blog/secure-temp-mail-business-privacy-2026' }
-                ].map(guide => (
-                  <Link key={guide.path} to={guide.path} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <motion.div
-                      whileHover={{ scale: 1.02, background: 'var(--bg-primary)', borderColor: 'var(--accent-primary)' }}
-                      style={{
-                        padding: '1.2rem',
-                        background: 'rgba(255,255,255,0.3)',
-                        borderRadius: '20px',
-                        border: '1px solid var(--border-color)',
-                        transition: 'all 0.3s ease'
-                      }}
-                    >
-                      <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-primary)', textTransform: 'uppercase', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>TUTORIAL</div>
-                      <div style={{ fontWeight: 800, fontSize: '1rem', lineHeight: 1.3 }}>{guide.name}</div>
-                    </motion.div>
-                  </Link>
-                ))}
-              </div>
-            </motion.div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.75rem' }}>
+                  {[
+                    { name: 'Image Compressor', path: '/image-tools/compress', icon: '🗜️' },
+                    { name: 'Merge PDF', path: '/pdf-tools/merge', icon: '📄' },
+                    { name: 'Temp Mail', path: '/temp-mail', icon: '📨' },
+                    { name: 'QR Generator', path: '/qr-generator', icon: '🎨' },
+                    { name: 'Typing Test', path: '/typing-test', icon: '⌨️' }
+                  ].map(tool => (
+                    <Link key={tool.path} to={tool.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                      <motion.div
+                        whileHover={{ x: 5, background: 'var(--bg-secondary)' }}
+                        style={{
+                          border: '1px solid var(--border-color)',
+                          borderRadius: '16px',
+                          padding: '0.75rem 1rem',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          background: 'var(--bg-primary)',
+                          transition: 'var(--transition)'
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                          <span style={{ fontSize: '1.1rem' }}>{tool.icon}</span>
+                          <span style={{ fontWeight: 700, fontSize: '0.9rem' }}>{tool.name}</span>
+                        </div>
+                        <span style={{ color: 'var(--accent-primary)', fontWeight: 900 }}>→</span>
+                      </motion.div>
+                    </Link>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Premium Expert Guides */}
+              <motion.div
+                style={{
+                  background: 'linear-gradient(135deg, var(--bg-glass) 0%, rgba(99, 102, 241, 0.05) 100%)',
+                  backdropFilter: 'blur(24px)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '32px',
+                  padding: '2rem',
+                  boxShadow: 'var(--shadow-lg)'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
+                  <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '12px' }}>
+                     <span style={{ fontSize: '1.2rem' }}>📚</span>
+                  </div>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 900, letterSpacing: '-0.02em', margin: 0 }}>Expert Guides</h3>
+                </div>
+                <div style={{ display: 'grid', gap: '1rem' }}>
+                  {[
+                    { name: 'Social Media Size Guide 2026', path: '/blog/resize-images-social-media-2026' },
+                    { name: 'Max Privacy with Temp Mail', path: '/blog/secure-temp-mail-business-privacy-2026' }
+                  ].map(guide => (
+                    <Link key={guide.path} to={guide.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                      <motion.div
+                        whileHover={{ scale: 1.02, background: 'var(--bg-primary)', borderColor: 'var(--accent-primary)' }}
+                        style={{
+                          padding: '1.2rem',
+                          background: 'rgba(255,255,255,0.3)',
+                          borderRadius: '20px',
+                          border: '1px solid var(--border-color)',
+                          transition: 'all 0.3s ease'
+                        }}
+                      >
+                        <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-primary)', textTransform: 'uppercase', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>TUTORIAL</div>
+                        <div style={{ fontWeight: 800, fontSize: '1rem', lineHeight: 1.3 }}>{guide.name}</div>
+                      </motion.div>
+                    </Link>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
           </div>
-        </div>
+        )}
       </main>
-      <Footer />
+      {!isAdminPath && <Footer />}
     </div>
   )
 }
@@ -414,6 +431,7 @@ function App() {
         <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/sitemap" element={<Sitemap />} />
         <Route path="/showcase" element={<Showcase />} />
+        <Route path="/pix-admin" element={<PixAdmin />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<NotFound />} />

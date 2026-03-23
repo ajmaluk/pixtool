@@ -34,59 +34,66 @@ export default function Documentation() {
                 path="/documentation"
             />
 
-            <section className="hero" style={{ padding: '6rem 2rem 4rem' }}>
-                <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+            <section className="hero" style={{ padding: 'clamp(5rem, 15vh, 8rem) 1.5rem 5rem', background: 'var(--bg-secondary)', marginBottom: '4rem' }}>
+                <div style={{ maxWidth: '100%', margin: '0 auto', textAlign: 'center' }}>
                     <div style={{ display: 'inline-flex', padding: '12px', background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-primary)', borderRadius: '50%', marginBottom: '1.5rem' }}>
                         <Book size={32} />
                     </div>
-                    <h1 className="hero-title" style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '1.5rem' }}>Full Documentation</h1>
+                    <h1 className="hero-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>Full Documentation</h1>
 
-                    <div className="search-container" style={{ maxWidth: '600px', margin: '2rem auto 0' }}>
-                        <Search size={20} className="navbar-search-icon" />
+                    <div className="search-container" style={{ maxWidth: '600px', margin: '2rem auto 0', position: 'relative' }}>
+                        <Search size={20} style={{ position: 'absolute', left: '1.5rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                         <input
                             type="text"
                             className="search-input"
                             placeholder="Search documentation..."
-                            style={{ width: '100%', padding: '1rem 3rem' }}
+                            style={{ width: '100%', padding: '1.25rem 1.5rem 1.25rem 3.5rem', borderRadius: '100px', background: 'var(--bg-card)', border: '1px solid var(--border-color)', color: 'var(--text-primary)', fontSize: '1rem', outline: 'none' }}
                         />
                     </div>
                 </div>
             </section>
 
-            <section style={{ padding: '0 2rem 8rem' }}>
-                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+            <section style={{ padding: '0 1.5rem 10rem', width: '100%', overflowX: 'hidden' }}>
+                <div style={{ width: '100%' }}>
+                    <div className="page-grid">
                         {docSections.map((section, i) => (
-                            <div key={i} className="tool-card" style={{ padding: '2.5rem' }}>
-                                <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--bg-secondary)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
+                            <div key={i} className="info-card" style={{ padding: '2.5rem' }}>
+                                <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
                                     <section.icon size={24} />
                                 </div>
-                                <h2 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1rem' }}>{section.title}</h2>
-                                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, fontSize: '0.95rem' }}>
+                                <h2 style={{ fontSize: '1.35rem', fontWeight: 900, marginBottom: '1rem', color: 'var(--text-primary)' }}>{section.title}</h2>
+                                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: '0.95rem' }}>
                                     {section.content}
                                 </p>
-                                <div style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-primary)', fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer' }}>
+                                <div style={{ marginTop: '2rem', display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--accent-primary)', fontSize: '0.95rem', fontWeight: 800, cursor: 'pointer' }}>
                                     Learn More <Terminal size={14} />
                                 </div>
                             </div>
                         ))}
                     </div>
 
-                    <div style={{ marginTop: '6rem', padding: '4rem', background: 'var(--bg-secondary)', borderRadius: '32px' }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', textAlign: 'left' }}>
+                    <div style={{ marginTop: '8rem', padding: '5rem 4rem', background: 'var(--bg-secondary)', borderRadius: '48px', border: '1px solid var(--border-color)' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '5rem', textAlign: 'left' }}>
                             <div>
-                                <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1rem' }}>Common Tasks</h3>
-                                <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                                    <li style={{ color: 'var(--text-primary)', fontWeight: 600, cursor: 'pointer' }}>• How to resize images for Instagram</li>
-                                    <li style={{ color: 'var(--text-primary)', fontWeight: 600, cursor: 'pointer' }}>• Merging multiple school assignments into one PDF</li>
-                                    <li style={{ color: 'var(--text-primary)', fontWeight: 600, cursor: 'pointer' }}>• Setting up a temporary email for testing</li>
-                                    <li style={{ color: 'var(--text-primary)', fontWeight: 600, cursor: 'pointer' }}>• Generating QR codes for WiFi networks</li>
+                                <h3 style={{ fontSize: '1.75rem', fontWeight: 950, marginBottom: '2rem', letterSpacing: '-0.03em' }}>Common Tasks</h3>
+                                <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                                    {[
+                                        'How to resize images for Instagram',
+                                        'Merging school assignments into one PDF',
+                                        'Setting up a private temp email',
+                                        'Generating secure WiFi QR codes'
+                                    ].map((task, idx) => (
+                                        <li key={idx} style={{ color: 'var(--text-primary)', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '12px', transition: 'transform 0.2s' }} className="hover-slide">
+                                            <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-primary)' }} />
+                                            {task}
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
                             <div>
-                                <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1rem' }}>Local Processing</h3>
-                                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-                                    Our unique architecture uses <b>Web Assembly (WASM)</b> and <b>Web Workers</b> to perform heavy computations in your browser thread. This ensures zero latency and maximum privacy.
+                                <h3 style={{ fontSize: '1.75rem', fontWeight: 950, marginBottom: '2rem', letterSpacing: '-0.03em' }}>Local Processing</h3>
+                                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem' }}>
+                                    Our unique architecture uses <b>Web Assembly (WASM)</b> and <b>Web Workers</b> to perform heavy computations in your browser thread. This ensures <b>zero latency</b> and <b>maximum privacy</b>—your data never leaves your machine.
                                 </p>
                             </div>
                         </div>

@@ -1,0 +1,10 @@
+project_id = "pixtool"
+
+[functions.admin-login]
+verify_jwt = false
+
+[functions.admin-api]
+verify_jwt = false
+
+[functions.public-metrics]
+verify_jwt = false

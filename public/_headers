@@ -1,0 +1,76 @@
+# Cloudflare Pages response headers
+
+# Admin routes: noindex + strict no-store and security headers.
+/pix-admin
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
+  Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+/pix-admin/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
+  Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+# Static hashed bundles.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff
+
+# Images.
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+/*.ico
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts.
+/*.woff
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# JS/CSS.
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff
+
+# HTML.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+
+# Root HTML.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+
+# Security and crawler files.
+/.well-known/security.txt
+  Cache-Control: public, max-age=86400
+  Content-Type: text/plain
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+  Content-Type: application/xml
+/robots.txt
+  Cache-Control: public, max-age=3600
+  Content-Type: text/plain

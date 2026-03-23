@@ -121,6 +121,35 @@ h6 {
 }
 
 /* Layout Utilities */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 2.5rem;
+}
+
+.page-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.section-padding {
+  padding: 6rem 0;
+}
+
+.container-wide {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.container-narrow {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
 .container-pro {
   width: 100%;
   max-width: 100%;
@@ -1492,6 +1521,12 @@ h6 {
 
   .navbar-search {
     display: none !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .contact-grid {
+    grid-template-columns: 1fr !important;
   }
 }
 

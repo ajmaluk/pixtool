@@ -1,5 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /pix-admin
+Disallow: /pix-admin/
+Disallow: /pix-admin/*
+Disallow: /api/*
 
 # AI & LLM Crawlers (Generative AI Engine Optimization)
 User-agent: GPTBot

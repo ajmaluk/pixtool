@@ -1,0 +1,5 @@
+Contact: mailto:security@pixtool.in
+Contact: https://www.pixtool.in/contact
+Expires: 2026-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://www.pixtool.in/.well-known/security.txt

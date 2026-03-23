@@ -1,5 +1,42 @@
 import { useEffect, useMemo } from 'react'
 
+const SCREENSHOT_MAP = {
+    '/': 'pixtool-all-in-one-productivity-suite.png',
+    '/image-tools': 'professional-online-image-studio.png',
+    '/pdf-tools': 'secure-pdf-management-suite.png',
+    '/utility-tools': 'all-in-one-web-utility-toolbox.png',
+    '/image-tools/resize': 'best-online-image-resizer-tool.png',
+    '/image-tools/crop': 'professional-image-cropper-online.png',
+    '/image-tools/rotate': 'free-online-image-rotator.png',
+    '/image-tools/compress': 'high-quality-image-compressor-online.png',
+    '/image-tools/convert': 'online-image-format-converter-webp-png-jpg.png',
+    '/image-tools/watermark': 'add-watermark-to-photos-online-free.png',
+    '/image-tools/flip': 'flip-and-mirror-images-online-instantly.png',
+    '/image-tools/grayscale': 'convert-image-to-grayscale-online.png',
+    '/pdf-tools/merge': 'fast-pdf-merger-no-upload-pixtool.png',
+    '/pdf-tools/split': 'split-pdf-pages-online-securely.png',
+    '/pdf-tools/compress': 'optimize-pdf-file-size-online.png',
+    '/pdf-tools/protect': 'secure-pdf-with-password-online.png',
+    '/pdf-tools/reorder': 'reorder-pdf-pages-online-free.png',
+    '/pdf-tools/convert': 'convert-pdf-to-images-online-high-res.png',
+    '/pdf-tools/watermark': 'add-text-watermark-to-pdf-online.png',
+    '/temp-mail': 'disposable-temporary-email-generator.png',
+    '/temp-mail/10-minute-mail': '10-minute-mail-free-disposable-inbox.png',
+    '/temp-mail/change-email': 'change-temporary-email-address-online.png',
+    '/qr-generator': 'best-free-qr-code-generator-online.png',
+    '/qr-scanner': 'fast-online-qr-code-scanner-browser.png',
+    '/typing-test': 'professional-typing-speed-test-online.png',
+    '/fake-email': 'generate-fake-email-for-testing.png',
+    '/disposable-email': 'burner-email-address-generator-privacy.png',
+    '/throwaway-email': 'throwaway-email-inbox-online-free.png',
+    '/code-diff': 'all-in-one-web-utility-toolbox.png'
+}
+
+const getScreenshotPath = (pagePath) => {
+    const cleanPath = pagePath.endsWith('/') && pagePath.length > 1 ? pagePath.slice(0, -1) : pagePath
+    return `/screenshots/${SCREENSHOT_MAP[cleanPath] || 'pixtool-all-in-one-productivity-suite.png'}`
+}
+
 export default function SEO({
     title = 'PixTool - Free Online Productivity Suite',
     description = 'The ultimate all-in-one productivity suite featuring professional browser-based tools for PDF management, image editing, and utility workflows. No uploads, 100% private.',
@@ -28,46 +65,9 @@ export default function SEO({
     const siteName = 'PixTool by UTHAKKAN'
     const fullUrl = path === '/' ? siteUrl : `${siteUrl}${path.startsWith('/') ? path : `/${path}`}`
     const isToolPath = path.includes('/image-tools') || path.includes('/pdf-tools') || path.includes('/temp-mail') || path.includes('/qr-') || path.includes('/typing-test') || path === '/fake-email' || path === '/disposable-email' || path === '/throwaway-email' || path === '/code-diff'
+    const shouldNoIndex = noIndex || path.startsWith('/pix-admin')
 
     const brandTitle = title.includes('PixTool') ? title : `${title} | PixTool`
-    
-    // Map path to screenshot filename for maximum Image SEO ranking
-    const getScreenshotPath = (path) => {
-        const SCREENSHOT_MAP = {
-            '/': 'pixtool-all-in-one-productivity-suite.png',
-            '/image-tools': 'professional-online-image-studio.png',
-            '/pdf-tools': 'secure-pdf-management-suite.png',
-            '/utility-tools': 'all-in-one-web-utility-toolbox.png',
-            '/image-tools/resize': 'best-online-image-resizer-tool.png',
-            '/image-tools/crop': 'professional-image-cropper-online.png',
-            '/image-tools/rotate': 'free-online-image-rotator.png',
-            '/image-tools/compress': 'high-quality-image-compressor-online.png',
-            '/image-tools/convert': 'online-image-format-converter-webp-png-jpg.png',
-            '/image-tools/watermark': 'add-watermark-to-photos-online-free.png',
-            '/image-tools/flip': 'flip-and-mirror-images-online-instantly.png',
-            '/image-tools/grayscale': 'convert-image-to-grayscale-online.png',
-            '/pdf-tools/merge': 'fast-pdf-merger-no-upload-pixtool.png',
-            '/pdf-tools/split': 'split-pdf-pages-online-securely.png',
-            '/pdf-tools/compress': 'optimize-pdf-file-size-online.png',
-            '/pdf-tools/protect': 'secure-pdf-with-password-online.png',
-            '/pdf-tools/reorder': 'reorder-pdf-pages-online-free.png',
-            '/pdf-tools/convert': 'convert-pdf-to-images-online-high-res.png',
-            '/pdf-tools/watermark': 'add-text-watermark-to-pdf-online.png',
-            '/temp-mail': 'disposable-temporary-email-generator.png',
-            '/temp-mail/10-minute-mail': '10-minute-mail-free-disposable-inbox.png',
-            '/temp-mail/change-email': 'change-temporary-email-address-online.png',
-            '/qr-generator': 'best-free-qr-code-generator-online.png',
-            '/qr-scanner': 'fast-online-qr-code-scanner-browser.png',
-            '/typing-test': 'professional-typing-speed-test-online.png',
-            '/fake-email': 'generate-fake-email-for-testing.png',
-            '/disposable-email': 'burner-email-address-generator-privacy.png',
-            '/throwaway-email': 'throwaway-email-inbox-online-free.png',
-            '/code-diff': 'all-in-one-web-utility-toolbox.png'
-        }
-
-        const cleanPath = path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path
-        return `/screenshots/${SCREENSHOT_MAP[cleanPath] || 'pixtool-all-in-one-productivity-suite.png'}`
-    }
 
     const defaultScreenshot = getScreenshotPath(path)
     const ogImage = image ? (image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? image : `/${image}`}`) : `${siteUrl}${defaultScreenshot}`
@@ -227,12 +227,6 @@ export default function SEO({
                     "priceCurrency": "USD",
                     "availability": "https://schema.org/InStock"
                 },
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "ratingCount": "2500",
-                    "bestRating": "5"
-                },
                 "author": {
                     "@type": "Organization",
                     "name": siteName,
@@ -333,7 +327,11 @@ export default function SEO({
 
         updateMeta('description', description)
         updateMeta('keywords', enhancedKeywords)
-        updateMeta('robots', noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large')
+        const robotsContent = shouldNoIndex
+            ? 'noindex, nofollow, noarchive, nosnippet, noimageindex'
+            : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'
+        updateMeta('robots', robotsContent)
+        updateMeta('googlebot', robotsContent)
         
         // Open Graph
         updateMeta('og:title', brandTitle, 'property')
@@ -356,7 +354,7 @@ export default function SEO({
 
         // Canonical Link
         let canonical = document.querySelector('link[rel="canonical"]')
-        if (!noIndex) {
+        if (!shouldNoIndex) {
             if (!canonical) {
                 canonical = document.createElement('link')
                 canonical.setAttribute('rel', 'canonical')
@@ -367,11 +365,13 @@ export default function SEO({
             canonical.remove()
         }
 
-    }, [brandTitle, description, enhancedKeywords, noIndex, fullUrl, ogImage, type, siteName, twImage])
+    }, [brandTitle, description, enhancedKeywords, shouldNoIndex, fullUrl, ogImage, type, siteName, twImage])
+
+    const schemasToRender = shouldNoIndex ? [] : schemas
 
     return (
         <>
-            {schemas.map((s, idx) => (
+            {schemasToRender.map((s, idx) => (
                 <script
                     key={idx}
                     type="application/ld+json"

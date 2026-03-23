@@ -225,9 +225,9 @@ export default function Blog() {
             </section>
 
             <section style={{ padding: '0 1.5rem 10rem', width: '100%', overflowX: 'hidden' }}>
-                <div style={{ width: '100%', boxSizing: 'border-box' }}>
+                <div style={{ width: '100%' }}>
                     <div className="blog-tags-scroll" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'nowrap', overflowX: 'auto', paddingBottom: '1rem', marginBottom: '1.5rem', WebkitOverflowScrolling: 'touch' }}>
-                        {[null, ...allTags].slice(0, 10).map(tag => (
+                        {[null, ...allTags].map(tag => (
                             <button
                                 key={tag || 'all'}
                                 className={`btn ${selectedTag === tag ? 'btn-primary' : 'btn-secondary'}`}
@@ -238,45 +238,43 @@ export default function Blog() {
                             </button>
                         ))}
                     </div>
-                    <div className="blog-grid" style={{
-                        display: 'grid',
-                        gap: '2rem'
-                    }}>
+                    
+                    <div className="blog-grid">
                         {filtered.map((post, index) => (
                             <BlogCard key={post.slug} post={post} index={index} humanizeDate={humanizeDate} />
                         ))}
                     </div>
 
-                    <div style={{ marginTop: '4rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+                    <div style={{ marginTop: '6rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
                         <Link to="/temp-mail" style={{ textDecoration: 'none', color: 'inherit' }}>
-                            <div style={{ border: '1px solid var(--border-color)', borderRadius: '24px', padding: '1.5rem', background: 'var(--bg-secondary)' }}>
-                                <div style={{ fontWeight: 900, marginBottom: '0.5rem' }}>Need a Temporary Email?</div>
-                                <p style={{ color: 'var(--text-secondary)' }}>Use Temp Mail to keep signups clean and private. Copy in one tap.</p>
+                            <div className="info-card" style={{ padding: '2rem', height: '100%' }}>
+                                <div style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.25rem' }}>Need a Temporary Email?</div>
+                                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>Use Temp Mail to keep signups clean and private. Copy in one tap.</p>
                             </div>
                         </Link>
                         <Link to="/pdf-tools" style={{ textDecoration: 'none', color: 'inherit' }}>
-                            <div style={{ border: '1px solid var(--border-color)', borderRadius: '24px', padding: '1.5rem', background: 'var(--bg-secondary)' }}>
-                                <div style={{ fontWeight: 900, marginBottom: '0.5rem' }}>Work Faster with PDFs</div>
-                                <p style={{ color: 'var(--text-secondary)' }}>Merge, split, compress — all locally in your browser.</p>
+                            <div className="info-card" style={{ padding: '2rem', height: '100%' }}>
+                                <div style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.25rem' }}>Work Faster with PDFs</div>
+                                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>Merge, split, compress — all locally in your browser.</p>
                             </div>
                         </Link>
                         <Link to="/image-tools" style={{ textDecoration: 'none', color: 'inherit' }}>
-                            <div style={{ border: '1px solid var(--border-color)', borderRadius: '24px', padding: '1.5rem', background: 'var(--bg-secondary)' }}>
-                                <div style={{ fontWeight: 900, marginBottom: '0.5rem' }}>Optimize Social Images</div>
-                                <p style={{ color: 'var(--text-secondary)' }}>Resize, crop, and compress with precision presets.</p>
+                            <div className="info-card" style={{ padding: '2rem', height: '100%' }}>
+                                <div style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.25rem' }}>Optimize Social Images</div>
+                                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>Resize, crop, and compress with precision presets.</p>
                             </div>
                         </Link>
                     </div>
 
                     {mostRead.length > 0 && (
-                        <div style={{ marginTop: '4rem' }}>
-                            <h3 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '1rem' }}>Most read this week</h3>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+                        <div style={{ marginTop: '6rem' }}>
+                            <h3 style={{ fontSize: '1.75rem', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>Most read this week</h3>
+                            <div className="page-grid">
                                 {mostRead.map(item => (
                                     <Link key={item.slug} to={`/blog/${item.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                        <div style={{ border: '1px solid var(--border-color)', borderRadius: '18px', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                        <div className="info-card" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                             <div style={{ fontWeight: 700 }}>{item.title}</div>
-                                            <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{item.count} reads</span>
+                                            <span style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', fontWeight: 800 }}>{item.count} reads</span>
                                         </div>
                                     </Link>
                                 ))}
@@ -284,12 +282,12 @@ export default function Blog() {
                         </div>
                     )}
 
-                    <div style={{ marginTop: '4rem' }}>
-                        <h3 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '1rem' }}>Popular posts</h3>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+                    <div style={{ marginTop: '6rem' }}>
+                        <h3 style={{ fontSize: '1.75rem', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>Popular posts</h3>
+                        <div className="page-grid">
                             {posts.slice(0, 3).map(p => (
                                 <Link key={p.slug} to={`/blog/${p.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                    <div style={{ border: '1px solid var(--border-color)', borderRadius: '18px', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                    <div className="info-card" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                         <div style={{ fontWeight: 700 }}>{p.title}</div>
                                         <ArrowRight size={18} style={{ color: 'var(--accent-primary)' }} />
                                     </div>
@@ -298,17 +296,17 @@ export default function Blog() {
                         </div>
                     </div>
 
-                    <div style={{ marginTop: '4rem' }}>
-                        <h3 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '1rem' }}>Popular tags</h3>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    <div style={{ marginTop: '6rem' }}>
+                        <h3 style={{ fontSize: '1.75rem', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>Popular tags</h3>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
                             {Object.entries(allTags.reduce((acc, t) => { acc[t] = (acc[t] || 0) + 1; return acc; }, {}))
                                 .sort((a, b) => b[1] - a[1])
-                                .slice(0, 10)
+                                .slice(0, 15)
                                 .map(([tag]) => (
                                     <button
                                         key={`popular-${tag}`}
                                         className="btn btn-secondary"
-                                        style={{ padding: '0.4rem 0.8rem', fontSize: '0.85rem' }}
+                                        style={{ padding: '0.5rem 1rem', fontSize: '0.85rem', borderRadius: '100px' }}
                                         onClick={() => setSelectedTag(tag)}
                                     >
                                         {tag}
@@ -317,25 +315,27 @@ export default function Blog() {
                         </div>
                     </div>
 
-                    <div style={{ marginTop: '8rem', textAlign: 'center', padding: '5rem 2rem', background: 'var(--bg-secondary)', borderRadius: '48px', border: '1px solid var(--border-color)' }}>
-                        <div style={{
-                            width: '80px',
-                            height: '80px',
-                            background: 'var(--bg-card)',
-                            borderRadius: '24px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            margin: '0 auto 2rem',
-                            boxShadow: 'var(--shadow-md)'
-                        }}>
-                            <PenTool size={32} style={{ color: 'var(--accent-primary)' }} />
+                    <div style={{ marginTop: '8rem', textAlign: 'center', padding: '5rem 2rem', background: 'var(--bg-secondary)', borderRadius: '48px', border: '1px solid var(--border-color)', position: 'relative', overflow: 'hidden' }}>
+                        <div style={{ position: 'relative', zIndex: 1 }}>
+                            <div style={{
+                                width: '80px',
+                                height: '80px',
+                                background: 'var(--bg-card)',
+                                borderRadius: '24px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                margin: '0 auto 2rem',
+                                boxShadow: 'var(--shadow-md)'
+                            }}>
+                                <PenTool size={32} style={{ color: 'var(--accent-primary)' }} />
+                            </div>
+                            <h3 style={{ fontSize: '2.5rem', fontWeight: 950, marginBottom: '1rem', letterSpacing: '-0.03em' }}>Want to contribute?</h3>
+                            <p style={{ color: 'var(--text-secondary)', marginBottom: '3rem', maxWidth: '550px', margin: '0 auto 3rem', fontSize: '1.15rem', lineHeight: 1.6 }}>
+                                We're always looking for guest writers who are passionate about tech, productivity, and modern user experience.
+                            </p>
+                            <a href="mailto:contact@uthakkan.com" className="btn btn-primary" style={{ padding: '1.25rem 3rem', borderRadius: '16px', fontSize: '1.1rem' }}>Get in Touch</a>
                         </div>
-                        <h3 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '1rem', letterSpacing: '-0.01em' }}>Want to contribute?</h3>
-                        <p style={{ color: 'var(--text-secondary)', marginBottom: '2.5rem', maxWidth: '500px', margin: '0 auto 2.5rem', fontSize: '1.1rem' }}>
-                            We're always looking for guest writers who are passionate about tech, productivity, and modern user experience.
-                        </p>
-                        <a href="mailto:contact@uthakkan.com" className="btn btn-primary" style={{ padding: '1rem 2.5rem' }}>Get in Touch</a>
                     </div>
                 </div>
             </section>
@@ -350,7 +350,7 @@ export default function Blog() {
                 .arrow { transition: all 0.3s ease; }
                 .blog-tags-scroll::-webkit-scrollbar { display: none; }
                 .blog-tags-scroll { -ms-overflow-style: none; scrollbar-width: none; }
-                           .blog-grid { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+                           .blog-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
                 @media (max-width: 1200px) {
                     .blog-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
                 }

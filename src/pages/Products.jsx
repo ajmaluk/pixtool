@@ -72,72 +72,90 @@ export default function Products() {
                 schema={productsSchema}
             />
 
-            <section className="hero" style={{ padding: '6rem 2rem 4rem' }}>
-                <div className="hero-content" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-                    <div className="status-badge" style={{ margin: '0 auto 1.5rem', width: 'fit-content' }}>
+            <section className="hero" style={{ padding: 'clamp(5rem, 15vh, 8rem) 1.5rem 5rem', background: 'var(--bg-secondary)', marginBottom: '4rem' }}>
+                <div className="hero-content" style={{ maxWidth: '100%', margin: '0 auto', textAlign: 'center' }}>
+                    <div className="status-badge" style={{ margin: '0 auto 1.5rem', width: 'fit-content', background: 'var(--accent-glow)', color: 'var(--accent-primary)', fontWeight: 700 }}>
                         BUILT BY US
                     </div>
-                    <h1 className="hero-title" style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '1.5rem' }}>Digital Ecosystem</h1>
-                    <p className="hero-subtitle" style={{ fontSize: '1.25rem', color: 'var(--text-secondary)' }}>
+                    <h1 className="hero-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>Digital Ecosystem</h1>
+                    <p className="hero-subtitle" style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
                         Smart, scalable solutions designed to simplify the digital world.
                     </p>
                 </div>
             </section>
 
-            <section style={{ padding: '0 2rem 6rem' }}>
-                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: '2.5rem' }}>
+            <section style={{ padding: '0 1.5rem 10rem', width: '100%', overflowX: 'hidden' }}>
+                <div style={{ width: '100%' }}>
+                    <div className="products-grid">
                         {products.map((product, index) => (
-                            <div key={index} className="tool-card" style={{ padding: '3rem', position: 'relative', overflow: 'hidden' }}>
+                            <div key={index} className="info-card" style={{ padding: '2rem', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                                 <div style={{
                                     position: 'absolute',
-                                    top: '-20px',
-                                    right: '-20px',
-                                    width: '150px',
-                                    height: '150px',
+                                    top: '-15px',
+                                    right: '-15px',
+                                    width: '120px',
+                                    height: '120px',
                                     background: `${product.color}05`,
                                     borderRadius: '50%',
                                     zIndex: 0
                                 }}></div>
 
-                                <div style={{ position: 'relative', zIndex: 1 }}>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
+                                <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', height: '100%' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
                                         <div style={{
-                                            width: '64px',
-                                            height: '64px',
-                                            borderRadius: '16px',
+                                            width: '52px',
+                                            height: '52px',
+                                            borderRadius: '14px',
                                             background: `${product.color}15`,
                                             color: product.color,
                                             display: 'flex',
                                             alignItems: 'center',
-                                            justifyContent: 'center'
+                                            justifyContent: 'center',
+                                            boxShadow: `0 8px 20px ${product.color}20`
                                         }}>
-                                            <product.icon size={32} />
+                                            <product.icon size={26} />
                                         </div>
-                                        <span style={{ padding: '6px 14px', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '100px', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)' }}>
+                                        <span style={{ padding: '4px 10px', background: 'var(--accent-glow)', border: '1px solid var(--border-color)', borderRadius: '100px', fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--accent-primary)' }}>
                                             {product.category}
                                         </span>
                                     </div>
 
-                                    <h2 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>{product.name}</h2>
-                                    <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: 1.7, marginBottom: '2.5rem', minHeight: '80px' }}>
+                                    <h2 style={{ fontSize: '1.5rem', fontWeight: 950, marginBottom: '0.75rem', color: 'var(--text-primary)', letterSpacing: '-0.03em' }}>{product.name}</h2>
+                                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '2rem', flex: 1 }}>
                                         {product.description}
                                     </p>
 
-                                    <a href={product.url} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ gap: '10px', width: '100%' }}>
-                                        Visit Tool <ExternalLink size={18} />
+                                    <a href={product.url} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ gap: '10px', width: '100%', padding: '0.85rem', borderRadius: '12px', fontWeight: 800, fontSize: '0.9rem' }}>
+                                        Visit Tool <ExternalLink size={16} />
                                     </a>
                                 </div>
                             </div>
                         ))}
                     </div>
 
-                    <div style={{ marginTop: '8rem', textAlign: 'center' }}>
-                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem', color: 'var(--accent-primary)', fontWeight: 700 }}>
-                            <Rocket size={24} /> <span>Coming Soon</span>
+                    <style>{`
+                        .products-grid { 
+                            display: grid; 
+                            grid-template-columns: repeat(4, 1fr); 
+                            gap: 1rem; 
+                        }
+                        @media (max-width: 1200px) {
+                            .products-grid { grid-template-columns: repeat(3, 1fr); }
+                        }
+                        @media (max-width: 992px) {
+                            .products-grid { grid-template-columns: repeat(2, 1fr); }
+                        }
+                        @media (max-width: 640px) {
+                            .products-grid { grid-template-columns: 1fr; }
+                        }
+                    `}</style>
+
+                    <div style={{ marginTop: '10rem', textAlign: 'center', padding: '6rem 2rem', background: 'var(--bg-secondary)', borderRadius: '48px', border: '1px solid var(--border-color)' }}>
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem', color: 'var(--accent-primary)', fontWeight: 800, fontSize: '1.1rem' }}>
+                            <Rocket size={28} /> <span>Coming Soon</span>
                         </div>
-                        <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1.5rem' }}>More innovation in the pipeline</h2>
-                        <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
+                        <h2 style={{ fontSize: '3rem', fontWeight: 950, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>More innovation in the pipeline</h2>
+                        <p style={{ color: 'var(--text-secondary)', maxWidth: '650px', margin: '0 auto', fontSize: '1.2rem', lineHeight: 1.6 }}>
                             We're constantly working on new tools and platforms to help you build, create, and grow faster. Stay tuned for our next big release.
                         </p>
                     </div>

@@ -9,6 +9,7 @@ import {
   Navigation
 } from 'lucide-react'
 import ToolCard from '../components/ToolCard'
+import OverallRatingBadge from '../components/OverallRatingBadge'
 import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS } from '../data/tools'
 import { posts } from '../data/posts'
 
@@ -155,6 +156,10 @@ export default function Home() {
                 Built for Professionals • Zero Server Uploads • Military-Grade Privacy
               </span>
             </p>
+
+            <div style={{ marginBottom: '1.25rem' }}>
+              <OverallRatingBadge />
+            </div>
 
             <div className="search-container" style={{ boxShadow: 'var(--shadow-xl)', border: '1px solid var(--border-color)' }}>
               <div className="search-icon-wrapper">

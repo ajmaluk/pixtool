@@ -1,188 +1,225 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import { Mail, MessageSquare, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, MessageSquare, MapPin, Send, Github, Linkedin, Twitter, FileText, Image, Star, Zap } from 'lucide-react';
+import { submitContactMessage } from '../services/supabaseService';
+import { hasSupabaseConfig } from '../lib/supabaseClient';
 
 export default function Contact() {
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbx8wjJ5b6vVe3ZG2O9S_7sNp1BP0poejBcOX3tdHReneMunC7DVt_lR9GfAcZnQktk/exec'
+  const [status, setStatus] = useState('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
 
-    const [status, setStatus] = useState('idle') // idle, loading, success, error
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        subject: 'General Inquiry',
-        message: ''
-    })
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        setStatus('loading')
-        try {
-            await fetch(scriptUrl, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            })
-            setStatus('success')
-            setFormData({ name: '', email: '', subject: 'General Inquiry', message: '' })
-        } catch (error) {
-            console.error('Submission error:', error)
-            setStatus('error')
-        }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('loading');
+    setErrorMessage('');
+    try {
+      await submitContactMessage(formData);
+      setStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('Submission error:', error);
+      setErrorMessage(error?.message || 'Unable to submit now.');
+      setStatus('error');
     }
+  };
 
-    const contactSchema = [
-        {
-            "@context": "https://schema.org",
-            "@type": "ContactPage",
-            "name": "Contact PixTool Support & UTHAKKAN",
-            "description": "Get in touch with the PixTool team for technical support, tool suggestions, custom development services, or business inquiries.",
-            "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/contact`,
-            "mainEntity": {
-                "@id": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/#organization`
-            }
-        }
-    ];
+  const contactSchema = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      name: 'Contact PixTool Support',
+      description: 'Get in touch with PixTool for support and partnerships.',
+      url: `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/contact`,
+    },
+  ];
 
-    return (
-        <div className="page-container">
-            <SEO
-                title="Contact Us - Support, Feedback & Business Inquiries | PixTool"
-                description="Get in touch with PixTool for technical support, tool suggestions, custom development services, or business partnerships. We respond to all inquiries within 24 hours."
-                path="/contact"
-                schema={contactSchema}
-            />
+  return (
+    <div className="page-container">
+      <SEO
+        title="Contact Us - Support & Feedback | PixTool"
+        description="Send your message directly to PixTool support. Messages are stored securely with Supabase for fast admin follow-up."
+        path="/contact"
+        schema={contactSchema}
+      />
 
-            <section className="page-hero">
-                <div className="page-hero-content container-narrow">
-                    <div className="status-badge">
-                        GET IN TOUCH
-                    </div>
-                    <h1 className="page-title">Let's Connect</h1>
-                    <p className="page-subtitle">
-                        Have a question, feedback, or a business proposal? We'd love to hear from you.
-                    </p>
-                </div>
-            </section>
-
-            <section className="section-padding">
-                <div className="container-wide">
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '4rem' }}>
-                        {/* Contact Info */}
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                            <div className="info-card" style={{ padding: '2rem' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                                    <div style={{ background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-primary)', padding: '12px', borderRadius: '12px' }}>
-                                        <Mail size={24} />
-                                    </div>
-                                    <div>
-                                        <h3 style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--text-primary)' }}>Email Us</h3>
-                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>contact@uthakkan.com</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="info-card" style={{ padding: '2rem' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                                    <div style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', padding: '12px', borderRadius: '12px' }}>
-                                        <MessageSquare size={24} />
-                                    </div>
-                                    <div>
-                                        <h3 style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--text-primary)' }}>Social Media</h3>
-                                        <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
-                                            <a href="https://github.com/ajmal-uk" className="icon-btn" style={{ width: '32px', height: '32px' }}><Github size={16} /></a>
-                                            <a href="https://linkedin.com/in/ajmaluk" className="icon-btn" style={{ width: '32px', height: '32px' }}><Linkedin size={16} /></a>
-                                            <a href="https://x.com/ajmal_uk_" className="icon-btn" style={{ width: '32px', height: '32px' }}><Twitter size={16} /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="info-card" style={{ padding: '2rem' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                                    <div style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', padding: '12px', borderRadius: '12px' }}>
-                                        <MapPin size={24} />
-                                    </div>
-                                    <div>
-                                        <h3 style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--text-primary)' }}>Location</h3>
-                                        <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Kannur, Kerala, India</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Quick Message Form */}
-                        <div className="info-card" style={{ padding: '3.5rem' }}>
-                            <h2 style={{ fontSize: '1.75rem', fontWeight: 850, marginBottom: '2rem', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>Send a Message</h2>
-                            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                                <div className="input-group">
-                                    <label className="input-label">Your Name</label>
-                                    <input
-                                        type="text"
-                                        className="search-input"
-                                        style={{ height: '56px', borderRadius: '16px', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', width: '100%', padding: '0 1.5rem' }}
-                                        placeholder="Ajmal"
-                                        required
-                                        value={formData.name}
-                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                    />
-                                </div>
-                                <div className="input-group">
-                                    <label className="input-label">Email Address</label>
-                                    <input
-                                        type="email"
-                                        className="search-input"
-                                        style={{ height: '56px', borderRadius: '16px', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', width: '100%', padding: '0 1.5rem' }}
-                                        placeholder="ajmal@example.com"
-                                        required
-                                        value={formData.email}
-                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    />
-                                </div>
-                                <div className="input-group">
-                                    <label className="input-label">Message</label>
-                                    <textarea
-                                        className="search-input"
-                                        style={{ height: 'auto', minHeight: '150px', borderRadius: '16px', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', width: '100%', padding: '1.5rem', resize: 'vertical' }}
-                                        placeholder="How can we help you?"
-                                        required
-                                        value={formData.message}
-                                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                    ></textarea>
-                                </div>
-                                <button type="submit" className="btn btn-primary" style={{ width: '100%', height: '56px', borderRadius: '16px', gap: '10px' }} disabled={status === 'loading'}>
-                                    {status === 'loading' ? 'Sending...' : 'Send Message'} <Send size={18} />
-                                </button>
-                                {status === 'success' && (
-                                    <p style={{ color: '#10b981', fontSize: '1rem', textAlign: 'center', fontWeight: 700 }}>Message sent successfully! We'll get back to you soon.</p>
-                                )}
-                                {status === 'error' && (
-                                    <p style={{ color: '#ef4444', fontSize: '1rem', textAlign: 'center', fontWeight: 700 }}>Something went wrong. Please try again or email us directly.</p>
-                                )}
-                            </form>
-                        </div>
-                    </div>
-
-                    <div style={{ marginTop: '10rem', textAlign: 'center' }}>
-                        <h2 style={{ fontSize: '2.5rem', fontWeight: 950, marginBottom: '3rem', letterSpacing: '-0.03em', color: 'var(--text-primary)' }}>Quick Navigation</h2>
-                        <div className="page-grid">
-                            <Link to="/pdf-tools" className="info-card" style={{ padding: '2rem', textAlign: 'center', textDecoration: 'none' }}>
-                                <h4 style={{ fontWeight: 800, fontSize: '1.2rem', color: 'var(--text-primary)' }}>PDF Tools</h4>
-                            </Link>
-                            <Link to="/image-tools" className="info-card" style={{ padding: '2rem', textAlign: 'center', textDecoration: 'none' }}>
-                                <h4 style={{ fontWeight: 800, fontSize: '1.2rem', color: 'var(--text-primary)' }}>Image Tools</h4>
-                            </Link>
-                            <Link to="/temp-mail" className="info-card" style={{ padding: '2rem', textAlign: 'center', textDecoration: 'none' }}>
-                                <h4 style={{ fontWeight: 800, fontSize: '1.2rem', color: 'var(--text-primary)' }}>Temp Mail</h4>
-                            </Link>
-                            <Link to="/qr-generator" className="info-card" style={{ padding: '2rem', textAlign: 'center', textDecoration: 'none' }}>
-                                <h4 style={{ fontWeight: 800, fontSize: '1.2rem', color: 'var(--text-primary)' }}>QR Generator</h4>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </section>
+      <section className="page-hero">
+        <div className="page-hero-content container-narrow">
+          <div className="status-badge">GET IN TOUCH</div>
+          <h1 className="page-title">Let's Connect</h1>
+          <p className="page-subtitle">
+            Have a question, feedback, or business proposal? We'd love to hear from you.
+          </p>
+          {!hasSupabaseConfig && (
+            <p style={{ marginTop: '0.75rem', color: '#f59e0b', fontWeight: 600 }}>
+              Contact storage is disabled until Supabase env variables are configured.
+            </p>
+          )}
         </div>
-    );
+      </section>
+
+      <section className="section-padding">
+        <div className="container-wide">
+          <div className="contact-grid">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div className="info-card" style={{ padding: '1.2rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <div style={{ background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-primary)', padding: '10px', borderRadius: '10px' }}>
+                    <Mail size={20} />
+                  </div>
+                  <div>
+                    <h3 style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)' }}>Email</h3>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>contact@uthakkan.com</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="info-card" style={{ padding: '1.2rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <div style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', padding: '10px', borderRadius: '10px' }}>
+                    <MessageSquare size={20} />
+                  </div>
+                  <div>
+                    <h3 style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)' }}>Social</h3>
+                    <div style={{ display: 'flex', gap: '10px', marginTop: '6px' }}>
+                      <a href="https://github.com/ajmal-uk" className="icon-btn" style={{ width: '32px', height: '32px' }}><Github size={16} /></a>
+                      <a href="https://linkedin.com/in/ajmaluk" className="icon-btn" style={{ width: '32px', height: '32px' }}><Linkedin size={16} /></a>
+                      <a href="https://x.com/ajmal_uk_" className="icon-btn" style={{ width: '32px', height: '32px' }}><Twitter size={16} /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="info-card" style={{ padding: '1.2rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <div style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', padding: '10px', borderRadius: '10px' }}>
+                    <MapPin size={20} />
+                  </div>
+                  <div>
+                    <h3 style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)' }}>Location</h3>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Kannur, Kerala, India</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="info-card" style={{ padding: '1.5rem' }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.2rem' }}>Send a Message</h2>
+              <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '1rem' }}>
+                <label className="input-group">
+                  <span className="input-label">Your Name</span>
+                  <input
+                    type="text"
+                    className="input"
+                    placeholder="Ajmal"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  />
+                </label>
+
+                <label className="input-group">
+                  <span className="input-label">Email Address</span>
+                  <input
+                    type="email"
+                    className="input"
+                    placeholder="ajmal@example.com"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
+                </label>
+
+                <label className="input-group">
+                  <span className="input-label">Message</span>
+                  <textarea
+                    className="input"
+                    style={{ minHeight: '140px', resize: 'vertical', paddingTop: '0.8rem' }}
+                    placeholder="How can we help you?"
+                    required
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  />
+                </label>
+
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  style={{ width: '100%' }}
+                  disabled={status === 'loading' || !hasSupabaseConfig}
+                >
+                  {status === 'loading' ? 'Sending...' : 'Send Message'} <Send size={16} />
+                </button>
+
+                {status === 'success' && (
+                  <p style={{ color: '#10b981', fontSize: '0.95rem', fontWeight: 700 }}>
+                    Message sent. Our admin team can now review it in the dashboard.
+                  </p>
+                )}
+                {status === 'error' && (
+                  <p style={{ color: '#ef4444', fontSize: '0.95rem', fontWeight: 700 }}>
+                    {errorMessage || 'Unable to send now. Please retry in a few seconds.'}
+                  </p>
+                )}
+              </form>
+            </div>
+          </div>
+
+          <div style={{ marginTop: '5rem', textAlign: 'center' }}>
+            <div className="status-badge" style={{ margin: '0 auto 1rem' }}>RESOURCES</div>
+            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1rem', letterSpacing: '-0.04em' }}>Quick Navigation</h2>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '3rem', maxWidth: '600px', margin: '0 auto 3rem' }}>
+              Explore our most popular sections and find the tools you need instantly.
+            </p>
+            
+            <div className="page-grid">
+              {[
+                { to: '/pdf-tools', icon: <FileText size={24} />, label: 'PDF Tools', desc: 'Merge, Split, Compress & Convert', color: 'rgba(59, 130, 246, 0.1)', textColor: '#3b82f6' },
+                { to: '/image-tools', icon: <Image size={24} />, label: 'Image Tools', desc: 'Resize, Crop & AI Optimization', color: 'rgba(168, 85, 247, 0.1)', textColor: '#a855f7' },
+                { to: '/testimonials', icon: <Star size={24} />, label: 'Testimonials', desc: 'Read what our users are saying', color: 'rgba(245, 158, 11, 0.1)', textColor: '#f59e0b' },
+                { to: '/temp-mail', icon: <Zap size={24} />, label: 'Temp Mail', desc: 'Secure disposable email inbox', color: 'rgba(16, 185, 129, 0.1)', textColor: '#10b981' },
+              ].map((item, idx) => (
+                <Link 
+                  key={idx}
+                  to={item.to} 
+                  className="info-card" 
+                  style={{ 
+                    padding: '2rem', 
+                    textDecoration: 'none', 
+                    textAlign: 'left',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1.25rem',
+                    transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+                  }}
+                >
+                  <div style={{ 
+                    background: item.color, 
+                    color: item.textColor, 
+                    width: '52px', 
+                    height: '52px', 
+                    borderRadius: '14px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    {item.icon}
+                  </div>
+                  <div>
+                    <h4 style={{ fontWeight: 800, fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>{item.label}</h4>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.5 }}>{item.desc}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }

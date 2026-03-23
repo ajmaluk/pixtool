@@ -127,77 +127,73 @@ export default function Services() {
                 />
             </div>
 
-            <section className="hero" style={{ padding: '8rem 2rem 6rem', position: 'relative' }}>
+            <section className="hero" style={{ padding: 'clamp(5rem, 15vh, 8rem) 1.5rem 5rem', position: 'relative' }}>
                 <Motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7 }}
                     className="hero-content"
-                    style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}
+                    style={{ maxWidth: '100%', margin: '0 auto', textAlign: 'center' }}
                 >
-                    <div className="status-badge" style={{ margin: '0 auto 1.5rem', width: 'fit-content', background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-primary)', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
+                    <div className="status-badge" style={{ margin: '0 auto 1.5rem', width: 'fit-content', background: 'var(--accent-glow)', color: 'var(--accent-primary)', border: '1px solid var(--border-color)', fontWeight: 700 }}>
                         OUR EXPERTISE
                     </div>
-                    <h1 className="hero-title" style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.04em', lineHeight: 1 }}>
+                    <h1 className="hero-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 950, marginBottom: '1.5rem', letterSpacing: '-0.04em', lineHeight: 1.1 }}>
                         Premium Digital <span style={{ color: 'var(--accent-primary)' }}>Solutions</span>
                     </h1>
-                    <p className="hero-subtitle" style={{ fontSize: '1.35rem', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto', lineHeight: 1.6 }}>
+                    <p className="hero-subtitle" style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto', lineHeight: 1.6 }}>
                         We blend high-end design with cutting-edge technology to create digital experiences that stand out and perform.
                     </p>
                 </Motion.div>
             </section>
 
-            <section style={{ padding: '0 2rem 8rem', position: 'relative' }}>
+            <section style={{ padding: '0 1.5rem 10rem', position: 'relative', width: '100%', overflowX: 'hidden' }}>
                 <Motion.div
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
-                    style={{ maxWidth: '1300px', margin: '0 auto' }}
+                    style={{ width: '100%' }}
                 >
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '2.5rem' }}>
+                    <div className="services-grid">
                         {services.map((service, index) => (
                             <Motion.div
                                 key={index}
                                 variants={cardVariants}
                                 whileHover={{ y: -10, transition: { duration: 0.2 } }}
-                                className="tool-card"
+                                className="info-card"
                                 style={{
-                                    padding: '3rem',
+                                    padding: '2rem',
                                     display: 'flex',
                                     flexDirection: 'column',
                                     height: '100%',
-                                    background: 'var(--bg-glass)',
-                                    backdropFilter: 'blur(12px)',
-                                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                                    boxShadow: '0 10px 40px rgba(0,0,0,0.04)',
-                                    borderRadius: '32px'
+                                    borderRadius: '24px'
                                 }}
                             >
                                 <div style={{
-                                    width: '72px',
-                                    height: '72px',
-                                    borderRadius: '20px',
+                                    width: '52px',
+                                    height: '52px',
+                                    borderRadius: '14px',
                                     background: `${service.color}15`,
                                     color: service.color,
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    marginBottom: '2rem',
+                                    marginBottom: '1.5rem',
                                     boxShadow: `0 8px 20px ${service.color}20`
                                 }}>
-                                    <service.icon size={36} />
+                                    <service.icon size={26} />
                                 </div>
 
-                                <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>{service.title}</h2>
-                                <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: 1.7, marginBottom: '2.5rem', flex: 1 }}>
+                                <h2 style={{ fontSize: '1.4rem', fontWeight: 950, marginBottom: '0.75rem', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>{service.title}</h2>
+                                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '2rem', flex: 1 }}>
                                     {service.description}
                                 </p>
 
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: 'auto', padding: '1.5rem', background: 'rgba(0,0,0,0.02)', borderRadius: '20px' }}>
-                                    {service.features.map((feature, i) => (
-                                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-                                            <CheckCircle2 size={16} style={{ color: service.color }} />
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.75rem', marginTop: 'auto', padding: '1.25rem', background: 'var(--bg-secondary)', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
+                                    {service.features.slice(0, 3).map((feature, i) => (
+                                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', color: 'var(--text-primary)', fontWeight: 800 }}>
+                                            <CheckCircle2 size={14} style={{ color: service.color }} />
                                             {feature}
                                         </div>
                                     ))}
@@ -206,29 +202,42 @@ export default function Services() {
                         ))}
                     </div>
 
+                    <style>{`
+                        .services-grid { 
+                            display: grid; 
+                            grid-template-columns: repeat(4, 1fr); 
+                            gap: 1rem; 
+                        }
+                        @media (max-width: 1200px) {
+                            .services-grid { grid-template-columns: repeat(3, 1fr); }
+                        }
+                        @media (max-width: 992px) {
+                            .services-grid { grid-template-columns: repeat(2, 1fr); }
+                        }
+                        @media (max-width: 640px) {
+                            .services-grid { grid-template-columns: 1fr; }
+                        }
+                    `}</style>
+
                     <Motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         style={{
-                            marginTop: '8rem',
+                            marginTop: '10rem',
                             textAlign: 'center',
                             padding: '6rem 2rem',
                             background: 'var(--accent-gradient)',
                             borderRadius: '48px',
                             color: 'white',
-                            boxShadow: '0 20px 60px rgba(59, 130, 246, 0.3)',
+                            boxShadow: '0 25px 60px rgba(59, 130, 246, 0.25)',
                             position: 'relative',
                             overflow: 'hidden'
                         }}
                     >
-                        {/* Decorative circles in CTA */}
-                        <div style={{ position: 'absolute', top: '-10%', left: '-5%', width: '200px', height: '200px', background: 'rgba(255,255,255,0.1)', borderRadius: '50%' }} />
-                        <div style={{ position: 'absolute', bottom: '-10%', right: '-5%', width: '300px', height: '300px', background: 'rgba(255,255,255,0.05)', borderRadius: '50%' }} />
-
                         <div style={{ position: 'relative', zIndex: 1 }}>
-                            <h2 style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>Ready to start your project?</h2>
-                            <p style={{ fontSize: '1.3rem', marginBottom: '3.5rem', opacity: 0.9, maxWidth: '600px', margin: '0 auto 3.5rem' }}>Let's build something amazing together and take your vision to the next level.</p>
+                            <h2 style={{ fontSize: '3.5rem', fontWeight: 950, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>Ready to start your project?</h2>
+                            <p style={{ fontSize: '1.35rem', marginBottom: '3.5rem', opacity: 0.9, maxWidth: '650px', margin: '0 auto 3.5rem', lineHeight: 1.6 }}>Let's build something amazing together and take your vision to the next level.</p>
                             <Motion.a
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
@@ -238,9 +247,9 @@ export default function Services() {
                                     background: 'white',
                                     color: 'var(--accent-primary)',
                                     padding: '1.5rem 4rem',
-                                    fontSize: '1.15rem',
+                                    fontSize: '1.2rem',
                                     borderRadius: '100px',
-                                    fontWeight: 800,
+                                    fontWeight: 900,
                                     boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
                                 }}
                             >
