@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { FileText, Upload, Download, Loader, X, ChevronDown, Share2 } from 'lucide-react'
+import { FileText, Upload, Download, Loader, X, ChevronDown, Share2, Eye, EyeOff } from 'lucide-react'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
@@ -11,7 +11,7 @@ import { PDF_TOOLS } from '../data/tools'
 import { PDF_SEO_CONTENT, PDF_RELATED_TOOLS, PDF_READ_NEXT } from '../data/pdfToolsData'
 import ComingSoon from '../components/ComingSoon'
 import ToolCard from '../components/ToolCard'
-import { mergePdfs, splitPdf, watermarkPdf, compressPdf, downloadBlob } from '../utils/pdfUtils'
+import { mergePdfs, splitPdf, watermarkPdf, compressPdf, unlockPdfWithPassword, extractPdfText, extractPdfTextWithTesseract, downloadBlob } from '../utils/pdfUtils'
 import { SITE_URL, SITE_NAME } from '../data/constants'
 
 const tools = PDF_TOOLS;
@@ -32,9 +32,16 @@ export default function PdfTools() {
     compressionLevel: 'recommended',
     password: '',
     confirmPassword: '',
+    unlockPassword: '',
+    showUnlockPassword: false,
     pdfWatermarkText: 'CONFIDENTIAL',
     pdfWatermarkSize: 48,
-    pdfWatermarkOpacity: 30
+    pdfWatermarkOpacity: 30,
+    ocrOutputFormat: 'txt',
+    ocrIncludePageBreaks: true,
+    ocrMethod: 'text-extraction', // 'text-extraction' or 'tesseract'
+    ocrLanguages: ['eng'], // Array of language codes
+    ocrShowAdvanced: false
   })
   const fileInputRef = useRef(null)
 
@@ -88,6 +95,74 @@ export default function PdfTools() {
         for (const file of files) {
           const pdfBytes = await compressPdf(file, settings.compressionLevel);
           downloadBlob(new Blob([pdfBytes], { type: 'application/pdf' }), `compressed-${file.name}`);
+        }
+      } else if (activeTool === 'unlock') {
+        // Enhanced unlock with password support
+        for (const file of files) {
+          try {
+            const result = await unlockPdfWithPassword(file, settings.unlockPassword || null);
+            
+            if (result.success) {
+              const baseName = file.name.replace(/\.pdf$/i, '');
+              downloadBlob(new Blob([result.bytes], { type: 'application/pdf' }), `${baseName}-unlocked.pdf`);
+            } else if (result.requiresPassword) {
+              // Prompt user for password
+              const password = prompt(`This PDF is password-protected. Enter password for ${file.name}:`);
+              if (password) {
+                const retryResult = await unlockPdfWithPassword(file, password);
+                if (retryResult.success) {
+                  const baseName = file.name.replace(/\.pdf$/i, '');
+                  downloadBlob(new Blob([retryResult.bytes], { type: 'application/pdf' }), `${baseName}-unlocked.pdf`);
+                } else {
+                  alert(`Failed to unlock ${file.name}: ${retryResult.error}`);
+                }
+              }
+            } else {
+              alert(`${result.error || 'Could not unlock ' + file.name}`);
+            }
+          } catch (err) {
+            alert(`Error unlocking ${file.name}: ${err.message}`);
+          }
+        }
+      } else if (activeTool === 'ocr') {
+        // Advanced OCR with method selection
+        for (const file of files) {
+          try {
+            let result;
+            
+            if (settings.ocrMethod === 'tesseract') {
+              // Use Tesseract.js for full OCR (scanned images)
+              result = await extractPdfTextWithTesseract(file, {
+                languages: settings.ocrLanguages,
+                includePageBreaks: settings.ocrIncludePageBreaks,
+                onProgress: (progress) => {
+                  console.log(`OCR Progress: ${progress.progress?.toFixed(1)}%`);
+                }
+              });
+            } else {
+              // Use standard text extraction (embedded text)
+              result = await extractPdfText(file, {
+                includePageBreaks: settings.ocrIncludePageBreaks
+              });
+            }
+
+            const baseName = file.name.replace(/\.pdf$/i, '');
+            const extension = settings.ocrOutputFormat === 'md' ? 'md' : 'txt';
+            const header = settings.ocrOutputFormat === 'md'
+              ? `# OCR Export: ${file.name}\n\nPages with extractable text: ${result.recognizedPages}/${result.pageCount}\nMethod: ${result.method === 'tesseract' ? 'Full OCR (Tesseract.js)' : 'Text Extraction'}\n\n`
+              : `OCR Export: ${file.name}\nPages with extractable text: ${result.recognizedPages}/${result.pageCount}\nMethod: ${result.method === 'tesseract' ? 'Full OCR (Tesseract.js)' : 'Text Extraction'}\n\n`;
+
+            downloadBlob(
+              new Blob([`${header}${result.text}`], { type: 'text/plain;charset=utf-8' }),
+              `${baseName}-ocr.${extension}`
+            );
+
+            if (result.recognizedPages === 0 && settings.ocrMethod === 'text-extraction') {
+              alert(`No extractable text found in ${file.name}. Try switching to "Full OCR (Tesseract)" for scanned images.`);
+            }
+          } catch (err) {
+            alert(`OCR failed for ${file.name}: ${err.message}`);
+          }
         }
       }
     } catch (err) {
@@ -349,6 +424,141 @@ export default function PdfTools() {
             <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
               Upload your PDF and drag page thumbnails in the preview area to reorder them as you wish.
             </p>
+          </div>
+        )}
+
+        {activeTool === 'unlock' && (
+          <>
+            <div className="input-group">
+              <label className="input-label">Password (if required)</label>
+              <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                <input
+                  type={settings.showUnlockPassword ? 'text' : 'password'}
+                  className="input"
+                  value={settings.unlockPassword}
+                  onChange={(e) => setSettings(s => ({ ...s, unlockPassword: e.target.value }))}
+                  placeholder="Enter password if PDF is encrypted"
+                  style={{ paddingRight: '2.5rem' }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setSettings(s => ({ ...s, showUnlockPassword: !s.showUnlockPassword }))}
+                  style={{
+                    position: 'absolute',
+                    right: '0.75rem',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: '0.25rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    color: 'var(--text-secondary)'
+                  }}
+                >
+                  {settings.showUnlockPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
+            </div>
+            <div style={{ background: 'var(--bg-secondary)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5, margin: 0 }}>
+                🔒 Removes common PDF permission locks and encryption. Enter password only if the PDF is password-protected. Processing is 100% browser-based and private.
+              </p>
+            </div>
+          </>
+        )}
+
+        {activeTool === 'ocr' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div className="input-group">
+              <label className="input-label">OCR Method</label>
+              <select
+                className="select"
+                value={settings.ocrMethod}
+                onChange={(e) => setSettings(s => ({ ...s, ocrMethod: e.target.value }))}
+              >
+                <option value="text-extraction">Text Extraction (Fast - Embedded Text Only)</option>
+                <option value="tesseract">Full OCR (Tesseract.js - Scanned Images)</option>
+              </select>
+              <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', margin: '0.5rem 0 0', lineHeight: 1.4 }}>
+                {settings.ocrMethod === 'text-extraction' 
+                  ? '✓ Fast extraction for PDFs with embedded text. Returns empty for image-only scans.' 
+                  : '✓ Full OCR for scanned documents. Slower but works on any PDF, even image-only.'}
+              </p>
+            </div>
+
+            {settings.ocrMethod === 'tesseract' && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <div className="input-group">
+                  <label className="input-label">OCR Languages</label>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', margin: '0 0 0.5rem' }}>
+                    Select languages to recognize (multiple supported)
+                  </p>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+                    {[
+                      { code: 'eng', name: 'English' },
+                      { code: 'spa', name: 'Spanish' },
+                      { code: 'fra', name: 'French' },
+                      { code: 'deu', name: 'German' },
+                      { code: 'ita', name: 'Italian' },
+                      { code: 'por', name: 'Portuguese' },
+                      { code: 'rus', name: 'Russian' },
+                      { code: 'jpn', name: 'Japanese' },
+                      { code: 'kor', name: 'Korean' },
+                      { code: 'zho', name: 'Chinese' }
+                    ].map(lang => (
+                      <label key={lang.code} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.875rem' }}>
+                        <input
+                          type="checkbox"
+                          checked={settings.ocrLanguages.includes(lang.code)}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setSettings(s => ({ ...s, ocrLanguages: [...s.ocrLanguages, lang.code] }));
+                            } else {
+                              setSettings(s => ({ ...s, ocrLanguages: s.ocrLanguages.filter(l => l !== lang.code) }));
+                            }
+                          }}
+                        />
+                        <span>{lang.name}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+                <div style={{ background: 'var(--bg-secondary)', padding: '0.75rem', borderRadius: '6px', border: '1px solid var(--border-color)' }}>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
+                    ⚠️ First run downloads language models (~50MB+). Requires stable internet. Processing may take 1-5 minutes per page.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            <div className="input-group">
+              <label className="input-label">Output Format</label>
+              <select
+                className="select"
+                value={settings.ocrOutputFormat}
+                onChange={(e) => setSettings(s => ({ ...s, ocrOutputFormat: e.target.value }))}
+              >
+                <option value="txt">TXT (Plain Text)</option>
+                <option value="md">Markdown</option>
+              </select>
+            </div>
+            
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.875rem' }}>
+              <input
+                type="checkbox"
+                checked={settings.ocrIncludePageBreaks}
+                onChange={(e) => setSettings(s => ({ ...s, ocrIncludePageBreaks: e.target.checked }))}
+              />
+              <span className="input-label" style={{ margin: 0 }}>Include page separators</span>
+            </label>
+
+            <div style={{ background: 'var(--bg-secondary)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5, margin: 0 }}>
+                {settings.ocrMethod === 'tesseract' 
+                  ? '🤖 Full OCR mode uses Tesseract.js (WASM). First run downloads ~50MB language models. Works fully offline after that.'
+                  : '📄 Extract embedded/selectable text from PDF pages. Fast but limited to PDFs with embedded text.'}
+              </p>
+            </div>
           </div>
         )}
       </div>

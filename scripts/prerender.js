@@ -3,54 +3,69 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import http from 'http';
+import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS } from '../src/data/tools.js';
+import { posts } from '../src/data/posts.js';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+void __filename;
 
 const PORT = 5174;
 const DIST_DIR = path.join(process.cwd(), 'dist');
 
-// List of routes to prerender - Should match sitemap.xml
-const routes = [
+const staticRoutes = [
   '/',
   '/image-tools',
   '/pdf-tools',
   '/utility-tools',
-  '/image-tools/resize',
-  '/image-tools/crop',
-  '/image-tools/rotate',
-  '/image-tools/compress',
-  '/image-tools/convert',
-  '/image-tools/watermark',
-  '/image-tools/flip',
-  '/image-tools/grayscale',
-  '/pdf-tools/merge',
-  '/pdf-tools/split',
-  '/pdf-tools/compress',
-  '/pdf-tools/convert',
-  '/pdf-tools/protect',
-  '/pdf-tools/watermark',
-  '/pdf-tools/reorder',
-  '/temp-mail',
-  '/temp-mail/10-minute-mail',
-  '/temp-mail/change-email',
-  '/qr-scanner',
-  '/qr-generator',
-  '/typing-test',
+  '/code-diff',
   '/about',
-  '/contact',
+  '/founder',
+  '/developer',
+  '/services',
+  '/products',
   '/privacy-policy',
   '/terms-of-service',
+  '/contact',
+  '/faq',
+  '/refund-policy',
+  '/cookie-policy',
+  '/blog',
+  '/news',
+  '/testimonials',
+  '/documentation',
+  '/careers',
+  '/case-studies',
+  '/sponsor',
+  '/promotions',
+  '/hire-me',
   '/sitemap',
   '/showcase'
 ];
 
+const toolRoutes = [
+  ...IMAGE_TOOLS.map((t) => t.path),
+  ...PDF_TOOLS.map((t) => t.path),
+  ...UTILITY_TOOLS.map((t) => t.path)
+];
+
+const blogRoutes = posts.map((post) => `/blog/${post.slug}`);
+
+const routes = [...new Set([...staticRoutes, ...toolRoutes, ...blogRoutes])];
+
 async function prerender() {
   console.log('🚀 Starting Prerender...');
 
+  // Skip early in CI-like environments where Chromium may not be available.
+  if (process.env.SKIP_PRERENDER || process.env.CF_PAGES || process.env.NETLIFY) {
+    console.log('⏩ Skipping prerender (CI/Environment detected inside script)');
+    return;
+  }
+
   // 1. Start a simple static file server
   const server = http.createServer((req, res) => {
-    let filePath = path.join(DIST_DIR, req.url === '/' ? 'index.html' : req.url);
+    const rawPath = req.url || '/';
+    const reqPath = rawPath.split('?')[0].split('#')[0];
+    let filePath = path.join(DIST_DIR, reqPath === '/' ? 'index.html' : reqPath);
     
     // If path is a directory or doesn't have an extension, serve index.html (SPA routing)
     if (!path.extname(filePath)) {
@@ -75,21 +90,21 @@ async function prerender() {
         if (ext === '.js') contentType = 'text/javascript';
         if (ext === '.css') contentType = 'text/css';
         if (ext === '.json') contentType = 'application/json';
+        if (ext === '.xml') contentType = 'application/xml';
+        if (ext === '.txt') contentType = 'text/plain';
+        if (ext === '.ico') contentType = 'image/x-icon';
         if (ext === '.png') contentType = 'image/png';
         if (ext === '.jpg') contentType = 'image/jpg';
+        if (ext === '.jpeg') contentType = 'image/jpeg';
+        if (ext === '.webp') contentType = 'image/webp';
         if (ext === '.svg') contentType = 'image/svg+xml';
+        if (ext === '.webmanifest') contentType = 'application/manifest+json';
 
         res.writeHead(200, { 'Content-Type': contentType });
         res.end(content, 'utf-8');
       }
     });
   });
-
-  // Redundant check for CI environments to ensure it never fails on Cloudflare/Netlify
-  if (process.env.SKIP_PRERENDER || process.env.CF_PAGES || process.env.NETLIFY) {
-    console.log('⏩ Skipping prerender (CI/Environment detected inside script)');
-    process.exit(0);
-  }
 
   server.listen(PORT, async () => {
     console.log(`📡 Temporary server running at http://localhost:${PORT}`);

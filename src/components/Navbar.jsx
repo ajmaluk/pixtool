@@ -7,7 +7,6 @@ import {
   MessageSquare, FileCode, Newspaper, Users, Info, 
   ShoppingBag, Star, Zap, GraduationCap, Microscope, Rocket, Gift
 } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS } from '../data/tools'
 
 const allTools = [
@@ -17,10 +16,17 @@ const allTools = [
 ]
 
 export default function Navbar() {
+  const getInitialIsDark = () => {
+    if (typeof window === 'undefined') return false
+    const savedTheme = localStorage.getItem('theme')
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    return savedTheme === 'dark' || (!savedTheme && prefersDark)
+  }
+
   const [mobileOpen, setMobileOpen] = useState(false)
   const [searchValue, setSearchValue] = useState('')
   const [showSuggestions, setShowSuggestions] = useState(false)
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(getInitialIsDark)
   const [showMore, setShowMore] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
@@ -72,13 +78,12 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      setIsDark(true)
+    if (isDark) {
       document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
     }
-  }, [])
+  }, [isDark])
 
   const toggleTheme = () => {
     if (isDark) {
@@ -137,13 +142,8 @@ export default function Navbar() {
               More <ChevronDown size={14} style={{ transform: showMore ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.3s ease' }} />
             </button>
 
-            <AnimatePresence>
-              {showMore && (
-                <motion.div 
-                  initial={{ opacity: 0, y: 15, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 15, scale: 0.95 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
+            {showMore && (
+                <div
                   className="nav-dropdown-menu expanded"
                   style={{ width: 'min(900px, 90vw)', right: '-150px', padding: '1.5rem' }}
                 >
@@ -226,9 +226,8 @@ export default function Navbar() {
                         <Star size={15} /> Hire Us
                       </NavLink>
                   </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                </div>
+            )}
           </div>
         </div>
 

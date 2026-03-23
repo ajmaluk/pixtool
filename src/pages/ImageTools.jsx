@@ -12,6 +12,7 @@ import { SITE_URL, SITE_NAME } from '../data/constants'
 import { IMAGE_SEO_CONTENT, IMAGE_RELATED_TOOLS, IMAGE_READ_NEXT } from '../data/imageToolsData'
 import ComingSoon from '../components/ComingSoon'
 import { processImageFile } from '../utils/canvasUtils'
+import { imageFilesToPdf, downloadBlob } from '../utils/pdfUtils'
 import ToolCard from '../components/ToolCard'
 
 const tools = IMAGE_TOOLS;
@@ -43,7 +44,17 @@ export default function ImageTools() {
     cropY: 0,
     cropWidth: 500,
     cropHeight: 500,
-    cropAspectRatio: '1:1'
+    cropAspectRatio: '1:1',
+    pdfPageSize: 'A4',
+    pdfOrientation: 'portrait',
+    pdfMargin: 24,
+    bgTolerance: 40,
+    bgFeather: 20,
+    bgUseColorPicker: false,
+    bgCustomColor: { r: 255, g: 255, b: 255, a: 255 },
+    bgShowAdvanced: false,
+    brushSize: 30,
+    brushMode: 'erase' // 'erase' or 'restore'
   })
   const fileInputRef = useRef(null)
 
@@ -71,6 +82,16 @@ export default function ImageTools() {
     if (files.length === 0) return
     setProcessing(true)
     try {
+      if (activeTool === 'image-to-pdf') {
+        const pdfBytes = await imageFilesToPdf(files, {
+          pageSize: settings.pdfPageSize,
+          orientation: settings.pdfOrientation,
+          margin: settings.pdfMargin
+        })
+        downloadBlob(new Blob([pdfBytes], { type: 'application/pdf' }), `images-${Date.now()}.pdf`)
+        return
+      }
+
       for (const file of files) {
         const { blob, name } = await processImageFile(file, activeTool, settings)
         const url = URL.createObjectURL(blob)
@@ -390,6 +411,166 @@ export default function ImageTools() {
           </div>
         )}
 
+        {activeTool === 'image-to-pdf' && (
+          <>
+            <div className="input-group">
+              <label className="input-label">Page Size</label>
+              <select
+                className="select"
+                value={settings.pdfPageSize}
+                onChange={(e) => setSettings(s => ({ ...s, pdfPageSize: e.target.value }))}
+              >
+                <option value="A4">A4</option>
+                <option value="Letter">Letter</option>
+              </select>
+            </div>
+            <div className="input-group">
+              <label className="input-label">Orientation</label>
+              <select
+                className="select"
+                value={settings.pdfOrientation}
+                onChange={(e) => setSettings(s => ({ ...s, pdfOrientation: e.target.value }))}
+              >
+                <option value="portrait">Portrait</option>
+                <option value="landscape">Landscape</option>
+              </select>
+            </div>
+            <div className="input-group">
+              <label className="input-label">Margin: {settings.pdfMargin}px</label>
+              <input
+                type="range"
+                min={0}
+                max={72}
+                value={settings.pdfMargin}
+                onChange={(e) => setSettings(s => ({ ...s, pdfMargin: parseInt(e.target.value, 10) || 0 }))}
+                style={{ width: '100%', cursor: 'pointer' }}
+              />
+            </div>
+          </>
+        )}
+
+        {activeTool === 'remove-background' && (
+          <>
+            <div className="input-group">
+              <label className="input-label">Removal Mode</label>
+              <select
+                className="select"
+                value={settings.bgShowAdvanced ? 'advanced' : 'auto'}
+                onChange={(e) => setSettings(s => ({ ...s, bgShowAdvanced: e.target.value === 'advanced' }))}
+              >
+                <option value="auto">Automatic (Corner Detection)</option>
+                <option value="advanced">Advanced (Color Picker + Brush)</option>
+              </select>
+            </div>
+
+            {!settings.bgShowAdvanced && (
+              <>
+                <div className="input-group">
+                  <label className="input-label">Background Tolerance: {settings.bgTolerance}</label>
+                  <input
+                    type="range"
+                    min={5}
+                    max={120}
+                    value={settings.bgTolerance}
+                    onChange={(e) => setSettings(s => ({ ...s, bgTolerance: parseInt(e.target.value, 10) || 40 }))}
+                    style={{ width: '100%', cursor: 'pointer' }}
+                  />
+                </div>
+                <div className="input-group">
+                  <label className="input-label">Edge Feather: {settings.bgFeather}</label>
+                  <input
+                    type="range"
+                    min={0}
+                    max={80}
+                    value={settings.bgFeather}
+                    onChange={(e) => setSettings(s => ({ ...s, bgFeather: parseInt(e.target.value, 10) || 0 }))}
+                    style={{ width: '100%', cursor: 'pointer' }}
+                  />
+                </div>
+                <div style={{ background: 'var(--bg-secondary)', padding: '0.85rem 1rem', borderRadius: '12px', border: '1px solid var(--border-color)', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                  ✓ Automatic detection uses corner pixels to find background. Best for solid color backgrounds.
+                </div>
+              </>
+            )}
+
+            {settings.bgShowAdvanced && (
+              <>
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                  <div className="input-group" style={{ flex: 1 }}>
+                    <label className="input-label">Background Color</label>
+                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                      <input
+                        type="color"
+                        value={`#${settings.bgCustomColor.r.toString(16).padStart(2, '0')}${settings.bgCustomColor.g.toString(16).padStart(2, '0')}${settings.bgCustomColor.b.toString(16).padStart(2, '0')}`}
+                        onChange={(e) => {
+                          const hex = e.target.value.substring(1);
+                          const r = parseInt(hex.substring(0, 2), 16);
+                          const g = parseInt(hex.substring(2, 4), 16);
+                          const b = parseInt(hex.substring(4, 6), 16);
+                          setSettings(s => ({ ...s, bgCustomColor: { r, g, b, a: 255 } }));
+                        }}
+                        style={{ cursor: 'pointer', height: '2.5rem', borderRadius: '6px', border: '1px solid var(--border-color)' }}
+                      />
+                      <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                        RGB({settings.bgCustomColor.r}, {settings.bgCustomColor.g}, {settings.bgCustomColor.b})
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="input-group">
+                  <label className="input-label">Tolerance: {settings.bgTolerance}</label>
+                  <input
+                    type="range"
+                    min={5}
+                    max={120}
+                    value={settings.bgTolerance}
+                    onChange={(e) => setSettings(s => ({ ...s, bgTolerance: parseInt(e.target.value, 10) || 40 }))}
+                    style={{ width: '100%', cursor: 'pointer' }}
+                  />
+                </div>
+
+                <div className="input-group">
+                  <label className="input-label">Brush Size: {settings.brushSize}px</label>
+                  <input
+                    type="range"
+                    min={5}
+                    max={100}
+                    value={settings.brushSize}
+                    onChange={(e) => setSettings(s => ({ ...s, brushSize: parseInt(e.target.value, 10) }))}
+                    style={{ width: '100%', cursor: 'pointer' }}
+                  />
+                </div>
+
+                <div className="input-group">
+                  <label className="input-label">Brush Mode</label>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+                    <button
+                      className={`btn ${settings.brushMode === 'erase' ? 'btn-primary' : 'btn-secondary'}`}
+                      style={{ fontSize: '0.875rem' }}
+                      onClick={() => setSettings(s => ({ ...s, brushMode: 'erase' }))}
+                    >
+                      🗑️ Erase
+                    </button>
+                    <button
+                      className={`btn ${settings.brushMode === 'restore' ? 'btn-primary' : 'btn-secondary'}`}
+                      style={{ fontSize: '0.875rem' }}
+                      onClick={() => setSettings(s => ({ ...s, brushMode: 'restore' }))}
+                    >
+                      ↩️ Restore
+                    </button>
+                  </div>
+                </div>
+
+                <div style={{ background: 'var(--bg-secondary)', padding: '0.85rem 1rem', borderRadius: '12px', border: '1px solid var(--border-color)', fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+                  🎨 Advanced mode: Pick a custom background color, then use the brush to fine-tune the removal. Erase unwanted areas or restore accidentally removed parts.
+                </div>
+              </>
+            )}
+          </>
+        )}
+
+        {activeTool !== 'image-to-pdf' && activeTool !== 'remove-background' && (
         <div className="input-group">
           <label className="input-label">Save As</label>
           <select
@@ -403,6 +584,7 @@ export default function ImageTools() {
             <option value="webp">WebP</option>
           </select>
         </div>
+        )}
       </div>
 
       <button

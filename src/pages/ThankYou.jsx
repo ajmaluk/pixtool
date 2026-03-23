@@ -9,6 +9,7 @@ export default function ThankYou() {
                 title="Thank You for Your Support | PixTool"
                 description="We appreciate your contribution! Your support helps us keep PixTool free, fast, and private for everyone around the world."
                 path="/thank-you"
+                noIndex={true}
             />
 
             <section className="hero" style={{ padding: '8rem 2rem', textAlign: 'center' }}>

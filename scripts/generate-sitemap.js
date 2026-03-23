@@ -64,17 +64,17 @@ function generateSitemap() {
   addUrl('/showcase', '0.9', 'weekly', '/screenshots/home.png', 'PixTool Visual Showcase');
 
   // Image Tools
-  IMAGE_TOOLS.filter(t => t.status !== 'coming-soon').forEach(tool => {
+  IMAGE_TOOLS.forEach(tool => {
     addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | Free Online PixTool`, tool.description);
   });
 
   // PDF Tools
-  PDF_TOOLS.filter(t => t.status !== 'coming-soon').forEach(tool => {
+  PDF_TOOLS.forEach(tool => {
     addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | Professional PDF PixTool`, tool.description);
   });
 
   // Utility Tools
-  UTILITY_TOOLS.filter(t => t.status !== 'coming-soon').forEach(tool => {
+  UTILITY_TOOLS.forEach(tool => {
     addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | Anonymous Tool PixTool`, tool.description);
   });
 
@@ -90,7 +90,7 @@ function generateSitemap() {
     '/privacy-policy', '/terms-of-service', '/contact', '/faq', 
     '/refund-policy', '/cookie-policy', '/blog', '/testimonials', 
     '/documentation', '/sitemap', '/news', '/careers', '/case-studies',
-    '/sponsor', '/promotions', '/hire-me', '/thank-you'
+    '/sponsor', '/promotions', '/hire-me'
   ];
 
   otherPages.forEach(path => {

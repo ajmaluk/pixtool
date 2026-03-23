@@ -27,6 +27,7 @@ export default function SEO({
     const siteUrl = import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'
     const siteName = 'PixTool by UTHAKKAN'
     const fullUrl = path === '/' ? siteUrl : `${siteUrl}${path.startsWith('/') ? path : `/${path}`}`
+    const isToolPath = path.includes('/image-tools') || path.includes('/pdf-tools') || path.includes('/temp-mail') || path.includes('/qr-') || path.includes('/typing-test') || path === '/fake-email' || path === '/disposable-email' || path === '/throwaway-email' || path === '/code-diff'
 
     const brandTitle = title.includes('PixTool') ? title : `${title} | PixTool`
     
@@ -60,7 +61,8 @@ export default function SEO({
             '/typing-test': 'professional-typing-speed-test-online.png',
             '/fake-email': 'generate-fake-email-for-testing.png',
             '/disposable-email': 'burner-email-address-generator-privacy.png',
-            '/throwaway-email': 'throwaway-email-inbox-online-free.png'
+            '/throwaway-email': 'throwaway-email-inbox-online-free.png',
+            '/code-diff': 'all-in-one-web-utility-toolbox.png'
         }
 
         const cleanPath = path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path
@@ -76,25 +78,22 @@ export default function SEO({
 
     // Enhanced keywords based on page type and tool
     const enhancedKeywords = useMemo(() => {
-        const baseKeywords = 'free online tools, browser-based productivity, no upload tools, privacy-first web apps, online PDF editor, free image editor, daily tools for developers, best online utilities 2026'
+        const baseKeywords = 'free online tools, browser-based productivity, no upload tools, privacy-first web apps, online PDF editor, free image editor, daily tools, best online utilities 2026'
         const toolKeywords = {
-            'image-tools': 'resize image online free, crop photo online, compress image no quality loss, convert image format webp, batch image resizer, background remover alternative, online photo editor',
-            'pdf-tools': 'merge pdf free online, split pdf browser, compress pdf 100kb, protect pdf password, watermark pdf documents, pdf to image converter high resolution, adobe acrobat alternative',
+            'image-tools': 'resize image online free, crop image online, compress image online, convert image to jpg png webp, batch image resizer, image editor online',
+            'pdf-tools': 'merge pdf free online, split pdf browser, compress pdf online, protect pdf with password, watermark pdf documents, pdf to image converter, adobe acrobat alternative',
             'temp-mail': 'temporary email generator, disposable email address, 10 minute mail free, anonymous email inbox, protect email from spam, throwaway email account',
             'qr': 'qr code generator wifi, online qr scanner, custom qr code with logo, create qr for link, safe qr reader browser'
         }
 
-        let addedKeywords = ''
+        const matchedKeywords = []
         Object.keys(toolKeywords).forEach(key => {
             if (path.includes(key)) {
-                addedKeywords += `, ${toolKeywords[key]}`
+                matchedKeywords.push(toolKeywords[key])
             }
         })
 
-        if (keywords) {
-            return `${keywords}, ${addedKeywords}, ${baseKeywords}`
-        }
-        return `${addedKeywords ? `${addedKeywords}, ` : ''}${baseKeywords}`
+        return [keywords, ...matchedKeywords, baseKeywords].filter(Boolean).join(', ')
     }, [keywords, path])
 
     // Generate JSON-LD schemas
@@ -141,25 +140,27 @@ export default function SEO({
             )
         }
 
-        // Include WebApplication on all pages but link it to the organization
-        globalSchemas.push({
-            "@context": "https://schema.org",
-            "@type": "WebApplication",
-            "name": toolName ? `PixTool ${toolName}` : siteName,
-            "url": fullUrl,
-            "applicationCategory": path.includes('/pdf') ? "BusinessApplication" : "UtilitiesApplication",
-            "operatingSystem": "All",
-            "isAccessibleForFree": true,
-            "author": { "@id": `${siteUrl}/#organization` },
-            "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-            }
-        })
+        // Include WebApplication only on actual tool pages.
+        if (isToolPath) {
+            globalSchemas.push({
+                "@context": "https://schema.org",
+                "@type": "WebApplication",
+                "name": toolName ? `PixTool ${toolName}` : siteName,
+                "url": fullUrl,
+                "applicationCategory": path.includes('/pdf') ? "BusinessApplication" : "UtilitiesApplication",
+                "operatingSystem": "All",
+                "isAccessibleForFree": true,
+                "author": { "@id": `${siteUrl}/#organization` },
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                }
+            })
+        }
 
         // BreadcrumbList
-        const breadcrumbList = breadcrumbs || []
+        const breadcrumbList = Array.isArray(breadcrumbs) ? [...breadcrumbs] : []
         if (breadcrumbList.length === 0 && path !== '/') {
             const parts = path.split('/').filter(Boolean)
             let currentPath = ''
@@ -208,7 +209,7 @@ export default function SEO({
         }
 
         // SoftwareApplication (Tool specific)
-        if (path !== '/' && (path.includes('/image-tools') || path.includes('/pdf-tools') || path.includes('/temp-mail') || path.includes('/qr-') || path.includes('/typing-test'))) {
+        if (path !== '/' && isToolPath) {
             const toolTitle = toolName || brandTitle || title
             globalSchemas.push({
                 "@context": "https://schema.org",
@@ -266,9 +267,9 @@ export default function SEO({
             }
         }
 
-        // Article
-        if (type === 'article' && articlePublishedTime) {
-            globalSchemas.push({
+        // Article fallback only when no custom article schema is provided
+        if (type === 'article' && articlePublishedTime && !schema) {
+            const articleSchema = {
                 "@context": "https://schema.org",
                 "@type": "Article",
                 "headline": title,
@@ -278,6 +279,20 @@ export default function SEO({
                     "@type": "Person",
                     "name": articleAuthor || "UTHAKKAN"
                 }
+            }
+
+            if (articleSection) {
+                articleSchema.articleSection = articleSection
+            }
+            if (articleTags) {
+                articleSchema.keywords = Array.isArray(articleTags) ? articleTags.join(', ') : articleTags
+            }
+            if (readingTime) {
+                articleSchema.timeRequired = `PT${readingTime}M`
+            }
+
+            globalSchemas.push({
+                ...articleSchema
             })
         }
 
@@ -300,19 +315,8 @@ export default function SEO({
             schemasToInject = schemasToInject.concat(extraSchemas)
         }
 
-        // Speakable Specification
-        schemasToInject.push({
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": title,
-            "speakable": {
-                "@type": "SpeakableSpecification",
-                "xpath": ["/html/head/meta[@name='description']/@content"]
-            }
-        })
-
         return schemasToInject
-    }, [title, description, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, breadcrumbs, faqs, toolName, toolSteps, type, lastModified, screenshot, imageAlt, imageTitle, brandTitle, defaultScreenshot, dynamicImageAlt])
+    }, [title, description, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, articleSection, articleTags, readingTime, breadcrumbs, faqs, toolName, toolSteps, type, lastModified, screenshot, imageTitle, brandTitle, defaultScreenshot, dynamicImageAlt, isToolPath])
 
     useEffect(() => {
         document.title = brandTitle

@@ -123,7 +123,7 @@ export const PDF_SEO_CONTENT = {
     'unlock': {
       title: "Unlock PDF Online | Remove Password & Security Restrictions - PixTool",
       keywords: "unlock pdf online, remove pdf password, decrypted pdf free, open protected pdf, free online pdf unlocker, secure pdf decryption, bypass pdf printing lock, unlock secure pdf no upload",
-      description: "Remove passwords, printing restrictions, and copying permissions from your protected PDF files instantly. PixTool provides a secure, browser-based decryption tool that grants you full access to your documents without uploading files to a remote server. Regain control of your PDFs with 100% privacy.",
+      description: "Remove common PDF restrictions and encryption wrappers directly in your browser. PixTool helps you export accessible copies for printing and reuse without uploading files, keeping your documents private on your device.",
       benefits: ["Instant password removal (valid password required)", "Bypass printing and text-copying restrictions", "100% private local decryption - zero server interaction", "Supports all modern PDF encryption versions", "Batch unlocking for multiple documents", "Free and unlimited usage with zero wait times", "Secure browser-based processing using your local CPU"],
       alternativeTo: ["SmallPDF Unlock", "ILovePDF", "Advanced PDF Password Recovery", "SodaPDF", "iLovePDF Unlock"],
       howTo: ["Upload your password-protected PDF file", "Enter the correct 'Open' or 'User' password", "Click 'Unlock PDF' to decrypt the file locally", "Download your fully accessible unprotected document", "Verify that printing and copying are now enabled"],
@@ -136,7 +136,7 @@ export const PDF_SEO_CONTENT = {
     'ocr': {
       title: "PDF OCR Online | Extract Text from Scanned PDF Free - PixTool",
       keywords: "pdf ocr, extract text from pdf, scanned pdf to text, online ocr converter, free pdf text recognition, optical character recognition pdf, secure ocr online, browser-based ocr",
-      description: "Convert scanned PDF documents into searchable and editable text files instantly. Our upcoming on-device OCR engine uses advanced AI to recognize characters and layout without ever uploading your sensitive documents to a server. 100% private and secure.",
+      description: "Extract text from PDF files directly in your browser and export it as TXT or Markdown. This MVP mode captures embedded/selectable text per page with zero uploads and full local privacy.",
       benefits: ["High-accuracy text recognition", "Preserve document layout", "Support for multiple languages", "100% private local processing", "No data leaves your device", "Free for professional use", "Secure browser-based OCR"],
       alternativeTo: ["Adobe Acrobat OCR", "ABBYY FineReader", "OnlineOCR", "OCR.space"],
       howTo: ["Upload your scanned PDF document", "Select the document language", "Wait for the AI to recognize the text locally", "Download your searchable PDF or text file"],

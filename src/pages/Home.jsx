@@ -123,6 +123,7 @@ export default function Home() {
         keywords="free online tools, pixtool, image resizer online, crop image free, compress image no quality loss, PDF merge online, split PDF browser, compress PDF sitemap, temp mail, disposable email pro, 10 minute mail serverless, QR code generator wifi, secure typing test, browser-based tools, no upload required, privacy-first tools, professional pdf editor free, online image editor 2026, adobe acrobat alternative, tinypng alternative"
         path="/"
         schema={homeSchema}
+        faqs={homeFaqs}
         breadcrumbs={[
           { name: 'Professional Tools', item: '/' }
         ]}

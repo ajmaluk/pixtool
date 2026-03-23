@@ -33,7 +33,7 @@ export default function UtilityTools() {
                 "position": index + 1,
                 "item": {
                     "@type": "SoftwareApplication",
-                    "name": tool.name,
+                    "name": tool.title,
                     "description": tool.description,
                     "applicationCategory": "UtilitiesApplication"
                 }

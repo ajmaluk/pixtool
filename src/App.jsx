@@ -47,6 +47,7 @@ const FakeEmail = lazy(() => import('./pages/FakeEmail'))
 const DisposableEmail = lazy(() => import('./pages/DisposableEmail'))
 const ThrowawayEmail = lazy(() => import('./pages/ThrowawayEmail'))
 const TypingTest = lazy(() => import('./pages/TypingTest'))
+const CodeDiff = lazy(() => import('./pages/CodeDiff'))
 
 // Loading component — stays visible inside the layout
 const PageLoader = () => (
@@ -381,11 +382,8 @@ function App() {
         <Route path="/fake-email" element={<FakeEmail />} />
         <Route path="/disposable-email" element={<DisposableEmail />} />
         <Route path="/throwaway-email" element={<ThrowawayEmail />} />
-        <Route path="/image-tools" element={<ImageTools />} />
-        <Route path="/pdf-tools" element={<PdfTools />} />
-        <Route path="/qr-scanner" element={<QrScanner />} />
-        <Route path="/qr-generator" element={<QrGenerator />} />
         <Route path="/typing-test" element={<TypingTest />} />
+        <Route path="/code-diff" element={<CodeDiff />} />
         <Route path="/utility-tools" element={<UtilityTools />} />
         <Route path="/about" element={<About />} />
 

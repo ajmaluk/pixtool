@@ -78,14 +78,14 @@ export const IMAGE_TOOLS = [
   { 
     id: 'image-to-pdf', title: 'Image to PDF', icon: ImageIcon, 
     description: 'Convert multiple images into a single professional PDF document — perfect for portfolios and reports.', 
-    color: '#a855f7', status: 'coming-soon', path: '/image-tools/image-to-pdf', screenshot: 'secure-pdf-management-suite.png',
+    color: '#a855f7', path: '/image-tools/image-to-pdf', screenshot: 'secure-pdf-management-suite.png',
     imageAlt: 'PixTool Image to PDF conversion',
     imageTitle: 'Create PDF from Photos'
   },
   { 
     id: 'remove-background', title: 'BG Remover', icon: ImageIcon, 
     description: 'Remove image backgrounds instantly in your browser — AI-powered object isolation.', 
-    color: '#a855f7', status: 'coming-soon', path: '/image-tools/remove-background', screenshot: 'professional-online-image-studio.png',
+    color: '#a855f7', path: '/image-tools/remove-background', screenshot: 'professional-online-image-studio.png',
     imageAlt: 'PixTool AI Background Removal coming soon',
     imageTitle: 'Remove BG with AI'
   }
@@ -165,14 +165,14 @@ export const PDF_TOOLS = [
   { 
     id: 'unlock', title: 'Unlock PDF', icon: Lock, 
     description: 'Remove passwords and permissions from protected PDF files — instant access.', 
-    color: '#06b6d4', status: 'coming-soon', path: '/pdf-tools/unlock', screenshot: 'secure-pdf-with-password-online.png',
+    color: '#06b6d4', path: '/pdf-tools/unlock', screenshot: 'secure-pdf-with-password-online.png',
     imageAlt: 'PixTool PDF Unlock coming soon',
     imageTitle: 'Remove PDF Passwords'
   },
   { 
     id: 'ocr', title: 'PDF OCR', icon: Search, 
     description: 'Make scanned PDFs searchable and editable using on-device AI text recognition.', 
-    color: '#06b6d4', status: 'coming-soon', path: '/pdf-tools/ocr', screenshot: 'secure-pdf-management-suite.png',
+    color: '#06b6d4', path: '/pdf-tools/ocr', screenshot: 'secure-pdf-management-suite.png',
     imageAlt: 'PixTool PDF OCR coming soon',
     imageTitle: 'Searchable PDF with OCR'
   },
@@ -248,6 +248,13 @@ export const UTILITY_TOOLS = [
     color: '#ec4899', path: '/throwaway-email', screenshot: 'throwaway-email-inbox-online-free.png',
     imageAlt: 'PixTool Throwaway Email - Instant secure inbox',
     imageTitle: 'Throwaway Inbox Online'
+  },
+  {
+    id: 'code-diff', title: 'Code Diff', icon: Sliders,
+    description: 'Compare two code blocks line by line and copy a unified diff patch instantly in your browser.',
+    color: '#10b981', path: '/code-diff', screenshot: 'all-in-one-web-utility-toolbox.png',
+    imageAlt: 'PixTool Code Diff - side by side comparison tool',
+    imageTitle: 'Online Code Diff Checker'
   }
 ];
 

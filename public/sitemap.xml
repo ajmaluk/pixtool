@@ -144,9 +144,9 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/ai-image-upscaler-online-free.png</image:loc>
-      <image:title>PixTool AI Image Upscaler - Neural super-resolution</image:title>
-      <image:caption>Increase image resolution and quality using AI — upscale 2x or 4x locally</image:caption>
+      <image:loc>https://www.pixtool.in/screenshots/best-online-image-resizer-tool.png</image:loc>
+      <image:title>PixTool AI Upscaler coming soon</image:title>
+      <image:caption>Increase image resolution and quality using AI-enhanced upscaling — cleaner, sharper results for small photos.</image:caption>
     </image:image>
   </url>
   <url>
@@ -155,9 +155,31 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/ai-photo-restoration-online.png</image:loc>
-      <image:title>PixTool AI Photo Restoration - Fix blurry and old photos</image:title>
-      <image:caption>Breathe new life into vintage photographs with AI — fix blur and enhance faces locally</image:caption>
+      <image:loc>https://www.pixtool.in/screenshots/professional-online-image-studio.png</image:loc>
+      <image:title>PixTool AI Restoration coming soon</image:title>
+      <image:caption>Restore old, blurry, or low-quality photos — AI-powered enhancement for vintage digital images.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/image-tools/image-to-pdf</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/secure-pdf-management-suite.png</image:loc>
+      <image:title>PixTool Image to PDF conversion</image:title>
+      <image:caption>Convert multiple images into a single professional PDF document — perfect for portfolios and reports.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/image-tools/remove-background</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/professional-online-image-studio.png</image:loc>
+      <image:title>PixTool AI Background Removal coming soon</image:title>
+      <image:caption>Remove image backgrounds instantly in your browser — AI-powered object isolation.</image:caption>
     </image:image>
   </url>
   <url>
@@ -238,25 +260,14 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.pixtool.in/pdf-tools/unlock</loc>
-    <lastmod>2026-03-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/unlock-password-protected-pdf-online.png</image:loc>
-      <image:title>PixTool PDF Unlock - Remove password and restrictions</image:title>
-      <image:caption>Remove passwords and permissions from your PDF documents — 100% private and secure</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://www.pixtool.in/pdf-tools/to-word</loc>
     <lastmod>2026-03-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/convert-pdf-to-word-online-free.png</image:loc>
-      <image:title>PixTool PDF to Word - Editable DOCX transformation</image:title>
-      <image:caption>Convert PDF files to editable Word documents instantly — preserve layout and fonts</image:caption>
+      <image:loc>https://www.pixtool.in/screenshots/secure-pdf-management-suite.png</image:loc>
+      <image:title>PixTool PDF to Word coming soon</image:title>
+      <image:caption>Convert PDF files to editable Word documents (.docx) — high-fidelity conversion preserving layout.</image:caption>
     </image:image>
   </url>
   <url>
@@ -265,9 +276,9 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/convert-pdf-to-excel-online-free.png</image:loc>
-      <image:title>PixTool PDF to Excel - Precision table extraction</image:title>
-      <image:caption>Extract tables from PDF to organized Excel spreadsheets — secure data conversion</image:caption>
+      <image:loc>https://www.pixtool.in/screenshots/secure-pdf-management-suite.png</image:loc>
+      <image:title>PixTool PDF to Excel coming soon</image:title>
+      <image:caption>Extract tables from PDF to Excel spreadsheets (.xlsx) — intelligent data extraction.</image:caption>
     </image:image>
   </url>
   <url>
@@ -276,9 +287,42 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/convert-pdf-to-powerpoint-online.png</image:loc>
-      <image:title>PixTool PDF to PowerPoint - Slide deck creation</image:title>
-      <image:caption>Turn PDF pages into editable PowerPoint slides — perfect for presentation updates</image:caption>
+      <image:loc>https://www.pixtool.in/screenshots/secure-pdf-management-suite.png</image:loc>
+      <image:title>PixTool PDF to PPT coming soon</image:title>
+      <image:caption>Transform PDF pages into editable PowerPoint slides — perfect for presentations.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/pdf-tools/unlock</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/secure-pdf-with-password-online.png</image:loc>
+      <image:title>PixTool PDF Unlock coming soon</image:title>
+      <image:caption>Remove passwords and permissions from protected PDF files — instant access.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/pdf-tools/ocr</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/secure-pdf-management-suite.png</image:loc>
+      <image:title>PixTool PDF OCR coming soon</image:title>
+      <image:caption>Make scanned PDFs searchable and editable using on-device AI text recognition.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/pdf-tools/edit</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/secure-pdf-management-suite.png</image:loc>
+      <image:title>PixTool PDF Editor coming soon</image:title>
+      <image:caption>Edit existing text and images in your PDF — professional document editing in your browser.</image:caption>
     </image:image>
   </url>
   <url>
@@ -378,6 +422,17 @@
       <image:loc>https://www.pixtool.in/screenshots/throwaway-email-inbox-online-free.png</image:loc>
       <image:title>PixTool Throwaway Email - Instant secure inbox</image:title>
       <image:caption>Secure throwaway inbox for temporary communication.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/code-diff</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/all-in-one-web-utility-toolbox.png</image:loc>
+      <image:title>PixTool Code Diff - side by side comparison tool</image:title>
+      <image:caption>Compare two code blocks line by line and copy a unified diff patch instantly in your browser.</image:caption>
     </image:image>
   </url>
   <url>
@@ -531,6 +586,46 @@
     </image:image>
   </url>
   <url>
+    <loc>https://www.pixtool.in/blog/building-toolpix-journey</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.png</image:loc>
+      <image:title>Building PixTool: Product, SEO, and Privacy Lessons from Year One</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/blog/top-ai-trends-2026-productivity-tools</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/professional-online-image-studio.png</image:loc>
+      <image:title>The Future of AI: Top 5 Trends Reshaping Productivity in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/blog/gpt-5-gemini-3-claude-4-5-model-comparison-2026</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/all-in-one-web-utility-toolbox.png</image:loc>
+      <image:title>AI Model Race 2026: GPT-5 vs Gemini 3 vs Claude 4.5 (Practical Guide)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/blog/rise-of-agentic-ai-in-software-development-2026</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.png</image:loc>
+      <image:title>From Assistants to Agents: The Rise of Agentic AI in Software Development</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://www.pixtool.in/about</loc>
     <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
@@ -652,12 +747,6 @@
   </url>
   <url>
     <loc>https://www.pixtool.in/hire-me</loc>
-    <lastmod>2026-03-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.pixtool.in/thank-you</loc>
     <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

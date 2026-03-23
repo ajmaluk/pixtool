@@ -501,7 +501,7 @@ export const posts = [
             <h2>The Science Behind the Conversion</h2>
             <p>A PDF (Portable Document Format) is essentially a digital piece of paper. The format is explicitly designed <em>not</em> to be edited. A PDF doesn't "know" it contains paragraphs or tables; it only knows "draw the letter 'A' at coordinate X=45, Y=120."</p>
             
-            <p>When you use a <a href="/pdf-tools/hub">Free PDF Conversion Tool</a>, the software performs "Reverse Layout Analysis." It sweeps the document, identifying clusters of words and deducing: "Ah, these coordinates form a paragraph, and these vector lines look like a table." It then logically recreates that exact visual structure natively in a .docx Word format.</p>
+            <p>When you use a <a href="/pdf-tools">Free PDF Conversion Tool</a>, the software performs "Reverse Layout Analysis." It sweeps the document, identifying clusters of words and deducing: "Ah, these coordinates form a paragraph, and these vector lines look like a table." It then logically recreates that exact visual structure natively in a .docx Word format.</p>
 
             <h2>Why Your Conversions Keep Failing</h2>
             <p>If you've used cheap, legacy converters in the past, you've likely suffered through awful results where image artifacts ruined the page. This happens when the PDF is actually a "Scanned PDF" (a photograph of a piece of paper) rather than a "Native PDF" (generated from Word or InDesign).</p>
@@ -579,7 +579,7 @@ export const posts = [
             
             <ol>
                 <li><strong>The Automatic Route:</strong> Use HTML's <code>&lt;picture&gt;</code> element to serve the cutting-edge AVIF format, and provide a WebP fallback for older devices. This guarantees maximum compression for new iPhones while keeping old devices happy.</li>
-                <li><strong>The Practical Route:</strong> Just batch convert everything to WebP. Run your raw assets through an <a href="/image-tools/hub">Image Optimization Hub</a>, hit convert, and reap an instant 35% speed boost across your entire infrastructure.</li>
+                <li><strong>The Practical Route:</strong> Just batch convert everything to WebP. Run your raw assets through an <a href="/image-tools">Image Optimization Hub</a>, hit convert, and reap an instant 35% speed boost across your entire infrastructure.</li>
             </ol>
 
             <p>The era of heavy JPEGs is over. By embracing ultra-efficient Next-Gen formats, you not only save massive amounts of bandwidth costs but also deliver the lightning-fast, reactive experience that modern users demand.</p>
@@ -757,7 +757,7 @@ export const posts = [
     content: `
             <p>In the fast-paced digital office of 2026, the Portable Document Format (PDF) is both a blessing and a curse. It guarantees that your quarterly report looks identical on an iPhone as it does on a Windows desktop. But when that report swells to 50MB and your email client refuses to send it, the PDF suddenly feels like a digital prison.</p>
             
-            <p>Knowing how to seamlessly manipulate, shrink, and reorganize PDFs is no longer just a skill for IT professionals—it is a mandatory productivity requirement for anyone who works from a computer. This guide will walk you through building the ultimate, risk-free <a href="/pdf-tools/hub">PDF Management suite</a>.</p>
+            <p>Knowing how to seamlessly manipulate, shrink, and reorganize PDFs is no longer just a skill for IT professionals—it is a mandatory productivity requirement for anyone who works from a computer. This guide will walk you through building the ultimate, risk-free <a href="/pdf-tools">PDF Management suite</a>.</p>
             
             <div class="blog-visual-preview">
               <img src="/screenshots/secure-pdf-management-suite.png" alt="PixTool PDF Suite Overview" style="width: 100%; border-radius: 12px; margin: 2rem 0;" />
@@ -766,7 +766,7 @@ export const posts = [
             <h2>The Core Problem with Cloud Converters</h2>
             <p>Historically, when office workers needed to merge two documents, they Googled "Free PDF Merger," uploaded their highly sensitive corporate financial data to a random server in an unknown country, downloaded the result, and prayed it wasn't intercepted.</p>
             
-            <p>This is a catastrophic security risk. The modern solution is to use "Zero-Upload" browser applications. By leveraging WebAssembly (WASM), tools like the <a href="/pdf-tools/hub">PixTool Document Suite</a> process the math directly on your laptop’s CPU. Your files never touch an external server, meaning your privacy is cryptographically guaranteed.</p>
+            <p>This is a catastrophic security risk. The modern solution is to use "Zero-Upload" browser applications. By leveraging WebAssembly (WASM), tools like the <a href="/pdf-tools">PixTool Document Suite</a> process the math directly on your laptop’s CPU. Your files never touch an external server, meaning your privacy is cryptographically guaranteed.</p>
 
             <h2>Module 1: Mastering PDF Compression</h2>
             <p>The most common PDF crisis is the "Attachment Too Large" error. This usually happens because a PDF was exported with "Print Quality" settings, embedding uncompressed, massive 300 DPI images into the file.</p>
@@ -826,7 +826,7 @@ export const posts = [
             <h2>The WebAssembly (WASM) Revolution</h2>
             <p>PixTool solves this by eliminating the cloud pipeline entirely using a breakthrough technology called <strong>WebAssembly (WASM)</strong>.</p>
             
-            <p>Instead of sending your files to our servers, we send the "Server" directly to your browser. When you open an app like our <a href="/image-tools/hub">Local Image Optimizer</a> or our <a href="/pdf-tools/hub">Secure PDF Suite</a>, your browser downloads a tiny, highly-optimized engine that runs essentially at native-hardware speeds directly on your laptop or smartphone CPU.</p>
+            <p>Instead of sending your files to our servers, we send the "Server" directly to your browser. When you open an app like our <a href="/image-tools">Local Image Optimizer</a> or our <a href="/pdf-tools">Secure PDF Suite</a>, your browser downloads a tiny, highly-optimized engine that runs essentially at native-hardware speeds directly on your laptop or smartphone CPU.</p>
 
             <h2>The Three Pillars of the Zero-Upload Philosophy</h2>
 
@@ -843,6 +843,94 @@ export const posts = [
             <p>We built PixTool because we were tired of compromising between convenience and security. Whether you are generating <a href="/temp-mail">throwaway email addresses</a> to fight spam, building Omni-channel campaigns with our <a href="/qr-generator">QR Toolkit</a>, or securing top-secret financial records, you deserve tools that respect your digital sovereignty.</p>
             
             <p>Welcome to the future of the internet. Welcome to the safest browser-based studio on earth.</p>
+        `
+  },
+  {
+    slug: "building-toolpix-journey",
+    title: "Building PixTool: Product, SEO, and Privacy Lessons from Year One",
+    excerpt: "An honest behind-the-scenes breakdown of product decisions, SEO wins, and mistakes from building a browser-first utility suite.",
+    date: "Mar 22, 2026",
+    dateISO: "2026-03-22",
+    author: "Ajmal U K",
+    category: "Development",
+    image: "/screenshots/pixtool-all-in-one-productivity-suite.png",
+    tags: ["startup", "seo", "product", "privacy", "web performance"],
+    content: `
+            <p>PixTool started as a simple bet: users wanted iLovePDF-level speed without cloud uploads. The first version solved basic tasks like <a href="/pdf-tools/merge">Merge PDF</a> and <a href="/image-tools/resize">Resize Image</a>, but ranking in search required much more than features.</p>
+            <h2>What Actually Moved SEO Rankings</h2>
+            <p>Clean intent-driven titles, strong internal linking, and technical trust signals like canonical consistency and valid structured data made the biggest difference.</p>
+            <h2>What We Got Wrong Early</h2>
+            <p>We overused broad keywords and created duplicated metadata patterns. We fixed this by writing pages around user tasks and simplifying schema output.</p>
+            <h2>Roadmap for 2026</h2>
+            <p>We are doubling down on AI-assisted workflows and conversion quality for both image and PDF utilities.</p>
+        `
+  },
+  {
+    slug: "top-ai-trends-2026-productivity-tools",
+    title: "The Future of AI: Top 5 Trends Reshaping Productivity in 2026",
+    excerpt: "From multimodal copilots to on-device AI, these are the five trends changing how people create, edit, and automate work in 2026.",
+    date: "Mar 23, 2026",
+    dateISO: "2026-03-23",
+    author: "Ajmal U K",
+    category: "AI & Future",
+    image: "/screenshots/professional-online-image-studio.png",
+    tags: ["ai trends 2026", "ai tools", "productivity", "automation", "edge ai"],
+    content: `
+            <p>AI in 2026 is now embedded in practical workflows: writing, editing, summarizing, converting, and decision support.</p>
+            <h2>1. Agentic Workflows</h2>
+            <p>Users expect complete multi-step execution, not single-prompt responses.</p>
+            <h2>2. Multimodal by Default</h2>
+            <p>Tools that combine text, image, and document inputs are seeing stronger adoption.</p>
+            <h2>3. On-Device AI</h2>
+            <p>Demand is growing for private AI workflows where data stays local.</p>
+            <h2>4. Quality-First Evaluation</h2>
+            <p>Teams now benchmark reliability and edit burden, not only novelty.</p>
+            <h2>5. AI + SEO Systems</h2>
+            <p>Human-edited, intent-mapped AI content still outperforms generic at-scale publishing.</p>
+        `
+  },
+  {
+    slug: "gpt-5-gemini-3-claude-4-5-model-comparison-2026",
+    title: "AI Model Race 2026: GPT-5 vs Gemini 3 vs Claude 4.5 (Practical Guide)",
+    excerpt: "A practical comparison of leading AI models in 2026, including strengths, trade-offs, and best-fit use cases for teams.",
+    date: "Mar 23, 2026",
+    dateISO: "2026-03-23",
+    author: "Ajmal U K",
+    category: "Comparison",
+    image: "/screenshots/all-in-one-web-utility-toolbox.png",
+    tags: ["gpt-5", "gemini 3", "claude 4.5", "best ai model", "ai comparison"],
+    content: `
+            <p>Choosing the best AI model in 2026 depends on your workflow, reliability needs, context length, and cost profile.</p>
+            <h2>GPT-5</h2>
+            <p>Strong for coding-heavy workflows, tool use, and structured multi-step tasks.</p>
+            <h2>Gemini 3</h2>
+            <p>A strong fit for teams deep in the Google ecosystem and multimodal collaboration.</p>
+            <h2>Claude 4.5</h2>
+            <p>Often preferred for long-form synthesis, policy writing, and coherent editorial workflows.</p>
+            <h2>How to Decide</h2>
+            <p>Evaluate with real prompts, then score accuracy, latency, cost per success, and human edit time.</p>
+        `
+  },
+  {
+    slug: "rise-of-agentic-ai-in-software-development-2026",
+    title: "From Assistants to Agents: The Rise of Agentic AI in Software Development",
+    excerpt: "Agentic AI is changing software teams from prompt-based help to autonomous execution loops. Here is what to adopt now.",
+    date: "Mar 23, 2026",
+    dateISO: "2026-03-23",
+    author: "Ajmal U K",
+    category: "AI & Future",
+    image: "/screenshots/pixtool-all-in-one-productivity-suite.png",
+    tags: ["agentic ai", "ai coding tools", "software development", "ai agents", "developer productivity"],
+    content: `
+            <p>Software teams are moving from AI chat assistance to agentic systems that can plan, execute, validate, and retry with tooling.</p>
+            <h2>Where Agentic AI Helps Most</h2>
+            <ul>
+                <li><strong>Code migration:</strong> dependency updates with automated verification.</li>
+                <li><strong>SEO maintenance:</strong> metadata, schema, and sitemap consistency checks.</li>
+                <li><strong>Content ops:</strong> draft, optimize, and refresh loops with editorial controls.</li>
+            </ul>
+            <h2>Adoption Strategy</h2>
+            <p>Start with low-risk tasks, define guardrails, then scale to multi-file execution once quality is stable.</p>
         `
   },
 ];

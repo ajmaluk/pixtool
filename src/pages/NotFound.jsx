@@ -10,6 +10,7 @@ export default function NotFound() {
         description="The page you requested could not be found. Explore our free tools for images, PDFs, temp mail, and QR."
         path="/404"
         type="website"
+        noIndex={true}
       />
       <div style={{ display: 'inline-flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', color: 'var(--accent-red)' }}>
         <AlertCircle size={36} />

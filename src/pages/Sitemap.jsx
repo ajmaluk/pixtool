@@ -101,7 +101,10 @@ const sitemapSections = [
             { name: "Bypass Email Spam", path: "/blog/how-to-bypass-email-spam-2026-guide", description: "The definitive guide to staying anonymous and spam-free." },
             { name: "Browser Privacy Deep-dive", path: "/blog/browser-based-privacy", description: "Technical look at why local processing is safer than cloud uploads." },
             { name: "The ToolPix Journey", path: "/blog/building-toolpix-journey", description: "Developer's story of building an advanced browser-based image engine." },
-            { name: "Image Compression 101", path: "/blog/image-compression-lossless-vs-lossy-2026", description: "Everything you need to know about optimizing image file sizes." }
+            { name: "Image Compression 101", path: "/blog/image-compression-lossless-vs-lossy-2026", description: "Everything you need to know about optimizing image file sizes." },
+            { name: "Top AI Trends 2026", path: "/blog/top-ai-trends-2026-productivity-tools", description: "Five practical AI trends shaping productivity and search intent in 2026." },
+            { name: "GPT-5 vs Gemini 3 vs Claude 4.5", path: "/blog/gpt-5-gemini-3-claude-4-5-model-comparison-2026", description: "Practical model comparison for teams choosing the right AI stack." },
+            { name: "Rise of Agentic AI", path: "/blog/rise-of-agentic-ai-in-software-development-2026", description: "How agentic AI systems are changing software delivery workflows." }
         ]
     },
     {
