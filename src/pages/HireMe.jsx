@@ -3,34 +3,12 @@ import SEO from '../components/SEO';
 import { Briefcase, Code, Terminal, MessageSquare, Send, CheckCircle2 } from 'lucide-react';
 
 export default function HireMe() {
-    const hireSchema = [
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Hire Me",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/hire-me`
-                }
-            ]
-        }
-    ];
-
     return (
         <div className="hire-me-page">
             <SEO
-                title="Hire Me - Custom Software & AI Development | PixTool"
-                description="Looking for expert web development or AI automation? Hire Ajmal U K for high-quality, custom digital solutions and technical consulting."
+                title="Hire Ajmal U K - Senior Software Engineer | PixTool"
+                description="Looking for a full-stack developer? Hire Ajmal U K, the creator of PixTool, for your next web, mobile, or AI project. Expertise in React, Node.js, and AI automation."
                 path="/hire-me"
-                schema={hireSchema}
             />
 
             <section className="hero" style={{ padding: '6rem 2rem 4rem' }}>

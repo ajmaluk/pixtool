@@ -3,34 +3,12 @@ import SEO from '../components/SEO';
 import { ShieldCheck, Lock, Eye, FileText } from 'lucide-react';
 
 export default function Privacy() {
-    const privacySchema = [
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Privacy Policy",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/privacy-policy`
-                }
-            ]
-        }
-    ];
-
     return (
         <div className="legal-page">
             <SEO
-                title="Privacy Policy - Your Data Security | PixTool"
-                description="Our privacy-first policy: your files never leave your browser. Learn how PixTool and UTHAKKAN protect your data through local processing."
+                title="Privacy Policy | PixTool"
+                description="Your privacy is our priority. Learn how PixTool uses local browser-based processing to ensure your files never leave your device."
                 path="/privacy-policy"
-                schema={privacySchema}
             />
 
             <section className="hero" style={{ padding: '6rem 2rem 3rem', background: 'var(--bg-secondary)' }}>

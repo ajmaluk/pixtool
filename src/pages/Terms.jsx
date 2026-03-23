@@ -3,34 +3,12 @@ import SEO from '../components/SEO';
 import { Scale, FileCheck, AlertCircle } from 'lucide-react';
 
 export default function Terms() {
-    const termsSchema = [
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Terms of Service",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/terms-of-service`
-                }
-            ]
-        }
-    ];
-
     return (
         <div className="legal-page">
             <SEO
-                title="Terms of Service - Usage Guidelines | PixTool"
-                description="Read the terms and conditions for using PixTool. Understand your rights and our commitment to providing free, high-quality digital tools."
+                title="Terms of Service | PixTool"
+                description="Clear and simple terms for using our free online tools. No hidden fees, no data harvesting, just professional utilities."
                 path="/terms-of-service"
-                schema={termsSchema}
             />
 
             <section className="hero" style={{ padding: '6rem 2rem 3rem', background: 'var(--bg-secondary)' }}>

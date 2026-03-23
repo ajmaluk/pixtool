@@ -75,11 +75,9 @@ export default function Services() {
         {
             "@context": "https://schema.org",
             "@type": "Service",
-            "serviceType": "Software Development, Video Editing, AI Automation",
+            "name": "Professional Digital Services",
             "provider": {
-                "@type": "Organization",
-                "name": "UTHAKKAN",
-                "url": "https://uthakkan.in/"
+                "@id": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/#organization`
             },
             "areaServed": "Global",
             "hasOfferCatalog": {
@@ -93,24 +91,6 @@ export default function Services() {
                     }
                 }))
             }
-        },
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Services",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/services`
-                }
-            ]
         }
     ];
 

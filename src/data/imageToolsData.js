@@ -195,37 +195,38 @@ export const IMAGE_SEO_CONTENT = {
     },
     restore: {
       title: "AI Photo Restoration | Fix Old & Blurry Photos Online - PixTool",
-      keywords: "photo restoration ai, fix old photos, restore blurry pictures, ai photo enhancer, repair old photographs, free online photo restoration, face enhancement ai, scratch removal",
+      keywords: "photo restoration ai, fix old photos, restore blurry pictures, ai photo enhancer, repair old photographs, free online photo restoration, face enhancement ai, scratch removal, colorize old photos free, enhance historical photos",
       description: "Breathe new life into your vintage and damaged photographs. Our AI Photo Restoration tool uses advanced neural networks to fix blurs, enhance facial details, and restore lost quality—all within your browser. Preserve your family heritage with professional results without ever uploading a file to the cloud.",
       benefits: ["Remove motion blur and camera shake instantly", "AI face enhancement for clear portraits", "100% private - your family photos stay local", "Restore vintage digital heritage with zero tracking", "Professional results without expensive subscription software", "Free forever for all users", "Secure browser-based GPU-accelerated processing"],
-      alternativeTo: ["Remini", "MyHeritage Photo Enhancer", "VanceAI", "Adobe Photoshop Neural Filters"],
-      howTo: ["Upload your old, faded, or blurry digital photo", "Enable 'Face Enhancement' for portraits if needed", "Click the 'Restore' button to start local neural processing", "Review the interactive before/after comparison", "Save the restored high-quality memory to your device"],
+      alternativeTo: ["Remini", "MyHeritage", "VanceAI", "Adobe Photoshop Restoration"],
+      howTo: ["Upload your vintage or blurry photograph", "The AI automatically analyzes and detects facial features", "Wait for the neural restoration to complete locally", "Download your enhanced, high-definition memory"],
       faq: [
-        { q: "Is this safe for private family photos?", a: "Yes, 100%. All AI processing happens locally in your browser's memory. We never see, store, or transmit your photos to any server." },
-        { q: "Can it fix physical scratches on scanned photos?", a: "Our AI is excellent at smoothing out noise and small artifacts. For deep physical tears, it works best as a first step before manual retouching." },
-        { q: "Does it work on black and white photos?", a: "Yes, it will enhance the sharpness and detail of B&W photos, though it does not currently offer automatic colorization." }
+        { q: "Can it fix actual physical scratches?", a: "Our AI is excellent at removing digital noise and blur; deep physical scratches are partially handled through intelligent pixel interpolation." },
+        { q: "Does it work on black and white photos?", a: "Yes! It enhances the sharpness and contrast of black and white photos beautifully. Colorization features are coming soon." }
       ]
     },
     'image-to-pdf': {
-      title: "Convert Image to PDF Online | JPG/PNG to PDF Free - PixTool",
-      keywords: "image to pdf, convert jpg to pdf, png to pdf online, create pdf from images, online photo to pdf converter, secure image to pdf",
-      description: "Convert your photos and graphics into a professional PDF document instantly. Support for multiple images, custom margins, and high-fidelity output with zero server uploads.",
-      benefits: ["Convert multiple images to one PDF", "Adjustable page margins and orientation", "High-fidelity vector PDF output", "100% private local conversion", "Perfect for portfolios and applications", "Secure and fast", "Free and unlimited"],
-      alternativeTo: ["SmallPDF", "JPG2PDF", "ILoveIMG"],
-      howTo: ["Upload one or more images", "Reorder images for the PDF pages", "Set your margin and orientation preferences", "Click Convert and download your PDF"],
-      faq: [{ q: "Can I combine different image types?", a: "Yes, you can mix JPG, PNG, and WebP in a single PDF document." }]
+      title: "Image to PDF Converter | Create PDF from Photos Free - PixTool",
+      keywords: "image to pdf, convert photos to pdf, create pdf from images, jpg to pdf online, png to pdf, multiple images to pdf, secure image to pdf converter, browser-based photo to pdf",
+      description: "Convert your images and photos into a professional PDF document instantly. Our browser-based converter allows you to combine multiple JPG, PNG, or WebP files into a single high-quality PDF without uploading files to any server. 100% private and secure.",
+      benefits: ["Combine multiple images into one PDF", "Adjust page orientation and margins", "Reorder images before conversion", "100% private local processing", "High-fidelity output quality", "Free and unlimited use", "No registration required"],
+      alternativeTo: ["SmallPDF", "iLovePDF", "Adobe Acrobat", "JPG2PDF"],
+      howTo: ["Upload the images you want to convert", "Drag to reorder your photos", "Adjust page settings if needed", "Click 'Convert to PDF'", "Download your new document"],
+      faq: [
+        { q: "Can I convert multiple images at once?", a: "Yes, you can upload dozens of photos and combine them all into a single, well-organized PDF file." },
+        { q: "Is there a file size limit?", a: "No, as long as your browser has enough memory, you can convert as many high-res images as you need." }
+      ]
     },
     'remove-background': {
-      title: "AI Background Remover Online | Remove BG Instantly Free - PixTool",
-      keywords: "remove background from image, transparent background, background remover ai, delete photo background, free online bg remover, browser-based background removal, cutout pro alternative, e-commerce photo editor",
-      description: "Remove image backgrounds instantly with professional-grade AI subject isolation. Create perfectly transparent PNGs for product listings, profile pictures, and digital graphics without uploading files to a server. Our local AI ensures 100% privacy and lightning-fast cutouts.",
-      benefits: ["Instant AI-powered background removal in <2 seconds", "High-precision edge detection for hair and fine details", "Output high-quality transparent PNGs at full resolution", "100% private local AI processing (TensorFlow.js)", "No account, subscription, or registration required", "Perfect for e-commerce (Amazon, eBay, Etsy) product photos", "Free forever with zero daily limits"],
-      alternativeTo: ["remove.bg", "Adobe Express", "Photoroom", "Stickermule"],
-      howTo: ["Select the image with the background you want to remove", "Wait 1-2 seconds for the local AI to isolate the subject", "Review the transparency mask in the live preview", "Download your high-resolution PNG with a transparent background", "Use the 'Convert' tool if you need a different final format"],
+      title: "AI Background Remover | Remove BG Online Free - PixTool",
+      keywords: "remove background online, bg remover, transparent background creator, ai background removal, remove bg from image, free online bg remover, isolate subject from photo, remove image background free",
+      description: "Remove image backgrounds instantly with professional AI precision. Our on-device background remover uses advanced neural networks to isolate subjects and create transparent PNGs directly in your browser. 100% private, secure, and no uploads required.",
+      benefits: ["AI-powered subject isolation", "Instant transparent background generation", "100% private local browser processing", "High-resolution edge detection", "Free for professional and personal use", "No registration or account needed", "Secure and tracking-free"],
+      alternativeTo: ["Remove.bg", "Adobe Express BG Remover", "Canva", "Photoroom"],
+      howTo: ["Upload your image with a clear subject", "Wait for the AI to detect and remove the background", "Review the transparent preview", "Download your subject as a high-quality PNG"],
       faq: [
-        { q: "Is this free for high-resolution images?", a: "Yes! Unlike most background removers that charge for 'HD downloads,' PixTool lets you export your cutouts at the original resolution for free." },
-        { q: "How does it handle complex subjects like hair?", a: "We use a 'Segment Anything' inspired model that is trained specifically to distinguish complex edges from backgrounds." },
-        { q: "Can I remove backgrounds from multiple images at once?", a: "Batch background removal is supported! Upload your entire product catalog for instant processing." }
+        { q: "Does it work with complex backgrounds?", a: "Yes, our AI is trained to handle complex backgrounds, though it works best with a clear distinction between the subject and the surroundings." },
+        { q: "Is my image uploaded to a server?", a: "No! The AI model runs directly in your browser, ensuring your private photos never leave your device." }
       ]
     }
   };

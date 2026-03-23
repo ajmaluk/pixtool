@@ -3,34 +3,12 @@ import SEO from '../components/SEO';
 import { RefreshCcw, DollarSign, HelpCircle } from 'lucide-react';
 
 export default function Refund() {
-    const refundSchema = [
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Refund Policy",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/refund-policy`
-                }
-            ]
-        }
-    ];
-
     return (
         <div className="legal-page">
             <SEO
-                title="Refund Policy - Information | PixTool"
-                description="Learn about our refund policy for paid services and digital products by PixTool and UTHAKKAN."
+                title="Refund Policy | PixTool"
+                description="Our commitment to keeping our professional tools 100% free forever. Learn why we don't need a refund policy."
                 path="/refund-policy"
-                schema={refundSchema}
             />
 
             <section className="hero" style={{ padding: '6rem 2rem 3rem', background: 'var(--bg-secondary)' }}>

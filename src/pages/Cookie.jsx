@@ -3,34 +3,12 @@ import SEO from '../components/SEO';
 import { Database, Info, Settings } from 'lucide-react';
 
 export default function Cookie() {
-    const cookieSchema = [
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Cookie Policy",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/cookie-policy`
-                }
-            ]
-        }
-    ];
-
     return (
         <div className="legal-page">
             <SEO
-                title="Cookie Policy - How We Use Data | PixTool"
-                description="Understand how PixTool uses cookies to enhance your experience while maintaining your privacy and data security."
+                title="Cookie Policy | PixTool"
+                description="Transparency about how we use cookies and local storage to provide a fast and secure experience on PixTool."
                 path="/cookie-policy"
-                schema={cookieSchema}
             />
 
             <section className="hero" style={{ padding: '6rem 2rem 3rem', background: 'var(--bg-secondary)' }}>
@@ -57,7 +35,7 @@ export default function Cookie() {
                             <Settings size={20} style={{ color: 'var(--accent-primary)' }} /> 2. How we use Cookies
                         </h2>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-                            UTHAKKAN uses the following types of cookies:
+                            PixTool uses the following types of cookies:
                         </p>
                         <ul style={{ color: 'var(--text-secondary)', marginBottom: '2rem', paddingLeft: '1.5rem' }}>
                             <li><strong>Essential Cookies:</strong> Used to remember your site preferences, such as dark mode or search history within the session.</li>

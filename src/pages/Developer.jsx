@@ -14,32 +14,12 @@ export default function Developer() {
             "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/ajmaluk.png`,
             "jobTitle": "Full Stack Developer & Founder",
             "worksFor": {
-                "@type": "Organization",
-                "name": "UTHAKKAN",
-                "url": "https://uthakkan.in/"
+                "@id": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/#organization`
             },
             "sameAs": [
                 "https://github.com/ajmal-uk",
                 "https://linkedin.com/in/ajmaluk",
                 "https://x.com/ajmal_uk_"
-            ]
-        },
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Developer",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/developer`
-                }
             ]
         }
     ];

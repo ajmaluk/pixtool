@@ -114,61 +114,20 @@ export default function BlogPost() {
                 "@type": "BlogPosting",
                 "headline": post.title,
                 "description": post.excerpt,
-                "image": post.image,
-                "datePublished": post.dateISO || post.date,
-                "dateModified": post.dateISO || post.date,
+                "image": post.image ? (post.image.startsWith('http') ? post.image : `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}${post.image}`) : `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
                 "author": {
                     "@type": "Person",
-                    "name": post.author,
-                    "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/founder`
+                    "name": post.author || "UTHAKKAN"
                 },
                 "publisher": {
-                    "@type": "Organization",
-                    "name": "PixTool by UTHAKKAN",
-                    "logo": {
-                        "@type": "ImageObject",
-                        "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`
-                    }
+                    "@id": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/#organization`
                 },
+                "datePublished": post.dateISO || post.date,
+                "dateModified": post.dateISO || post.date,
                 "mainEntityOfPage": {
                     "@type": "WebPage",
                     "@id": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/blog/${post.slug}`
-                },
-                "wordCount": post.excerpt.split(' ').length * 10,
-                "articleSection": "Technology",
-                "keywords": post.tags ? post.tags.join(', ') : 'productivity, tools, online',
-                "inLanguage": "en-US",
-                "isAccessibleForFree": true,
-                "speakable": {
-                    "@type": "SpeakableSpecification",
-                    "cssSelector": (post.category === 'Tutorial'
-                        ? ["h1", ".blog-content p:first-child", ".blog-content h2:first-of-type"]
-                        : ["h1", ".blog-content p:first-child"])
                 }
-            },
-            {
-                "@context": "https://schema.org",
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "Home",
-                        "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "Blog",
-                        "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/blog`
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 3,
-                        "name": post.title,
-                        "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/blog/${post.slug}`
-                    }
-                ]
             }
         ];
 

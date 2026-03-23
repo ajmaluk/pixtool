@@ -3,24 +3,12 @@ import { Link } from 'react-router-dom'
 import { AlertCircle } from 'lucide-react'
 
 export default function NotFound() {
-  const schema = [
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Page Not Found",
-      "description": "The page you are looking for does not exist.",
-      "isPartOf": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`,
-      "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/404`
-    }
-  ]
-
   return (
     <div className="page-container" style={{ textAlign: 'center', padding: '6rem 2rem' }}>
       <SEO
         title="404 - Page Not Found | PixTool"
         description="The page you requested could not be found. Explore our free tools for images, PDFs, temp mail, and QR."
         path="/404"
-        schema={schema}
         type="website"
       />
       <div style={{ display: 'inline-flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', color: 'var(--accent-red)' }}>

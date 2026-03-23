@@ -427,11 +427,15 @@ export default function ImageTools() {
         schema={imageHubSchema}
         toolName={activeToolData?.title}
         toolSteps={seoContent?.howTo}
+        screenshot={activeToolData?.screenshot ? `${import.meta.env.VITE_SITE_URL}/screenshots/${activeToolData.screenshot}` : null}
+        imageAlt={activeToolData?.imageAlt}
+        imageTitle={activeToolData?.imageTitle}
         breadcrumbs={[
           { name: 'Image Tools', item: '/image-tools' },
           activeToolData && { name: activeToolData.title, item: `/image-tools/${activeTool}` }
         ].filter(Boolean)}
       />
+
 
       <div className="page-container" style={{ padding: (files.length > 0) ? '0' : '2rem' }}>
         {activeTool && !preview && (
@@ -640,6 +644,7 @@ export default function ImageTools() {
                                 onClick={() => removeFile(i)}
                                 className="btn-icon"
                                 style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', padding: '0.4rem', background: 'var(--bg-glass)', borderRadius: '8px', zIndex: 5 }}
+                                aria-label={`Remove file ${file.name}`}
                               >
                                 <X size={14} />
                               </button>
@@ -719,7 +724,7 @@ export default function ImageTools() {
                 <div className="modal-content" onClick={e => e.stopPropagation()}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                     <h3 style={{ margin: 0, fontWeight: 900 }}>Tool Settings</h3>
-                    <button className="btn-icon" onClick={() => setShowMobileSettings(false)}><X size={20} /></button>
+                    <button className="btn-icon" onClick={() => setShowMobileSettings(false)} aria-label="Close settings"><X size={20} /></button>
                   </div>
                   {renderSidebarSettings()}
                   <button className="btn btn-primary" style={{ width: '100%', marginTop: '2rem' }} onClick={() => setShowMobileSettings(false)}>

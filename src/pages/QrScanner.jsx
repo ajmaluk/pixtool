@@ -75,50 +75,6 @@ export default function QrScanner() {
     }
   }
 
-  const scannerSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Free QR Code Scanner - PixTool",
-    "description": "Scan any QR code instantly using your device camera or by uploading an image. 100% free, private, and secure browser-based scanner.",
-    "applicationCategory": "UtilitiesApplication",
-    "applicationSubCategory": "QR Scanner",
-    "operatingSystem": "All (Web Browser)",
-    "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/qr-scanner`,
-    "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.7",
-      "ratingCount": "890",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
-    "author": {
-      "@type": "Organization",
-      "name": "UTHAKKAN",
-      "url": "https://uthakkan.in"
-    }
-  }
-
-  const howToSchema = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    "name": "How to Scan a QR Code Online for Free",
-    "description": "Learn how to scan QR codes using your device camera or by uploading an image in your browser.",
-    "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
-    "step": [
-      { "@type": "HowToStep", "name": "Open Scanner", "text": "Click 'Start Scanning' to activate your device camera.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` },
-      { "@type": "HowToStep", "name": "Point Camera", "text": "Point your camera at the QR code you want to scan.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` },
-      { "@type": "HowToStep", "name": "View Result", "text": "The scanned content will appear on screen. Click to open links or copy text.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` }
-    ],
-    "totalTime": "PT20S"
-  }
-
   const qrScannerFaqs = [
     { q: "Is this online QR scanner safe to use?", a: "Yes, it is safer than most apps. Our scanner runs entirely in your browser tab. We never transmit your camera feed or scanned results to any server, effectively eliminating risk of data breach." },
     { q: "Do I need to download an app to scan a QR code?", a: "No. PixTool is a web-based utility. Just visit this page on your smartphone or desktop and use your camera directly. No App Store or Play Store downloads are necessary." },
@@ -139,13 +95,23 @@ export default function QrScanner() {
         description="Scan any QR code online for free using your device camera or by uploading an image. 100% free, private, and secure browser-based scanner."
         keywords="qr code scanner online free, qr code scanner online, scan qr code online, online qr code scanner, scan qr code online from image, scan qr online, scanner online, free qr code scanner, scan qr code from image, qr scanner online, qr code scanner free, scan qr code online without app, qr scanner online free"
         path="/qr-scanner"
-        schema={[scannerSchema, howToSchema]}
+        toolName="QR Scanner"
+        toolSteps={[
+          "Click the 'Activate Scanner' button to launch your device camera.",
+          "Allow the browser to access your camera for local processing.",
+          "Point your lens at any QR code (Wait for the instant decoding).",
+          "Review the result: Copy to clipboard or open the link directly."
+        ]}
+        screenshot="/screenshots/fast-online-qr-code-scanner-browser.png"
+        imageAlt="PixTool QR Scanner - Instant browser-based decoding interface"
+        imageTitle="Scan QR Codes Online Free"
         breadcrumbs={[
           { name: 'Utility Tools', item: '/utility-tools' },
           { name: 'QR Scanner', item: '/qr-scanner' }
         ]}
         faqs={qrScannerFaqs}
       />
+
       <div className="page-container">
         <Breadcrumbs items={[
           { name: 'Utility Tools', item: '/utility-tools' },

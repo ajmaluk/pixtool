@@ -3,34 +3,12 @@ import SEO from '../components/SEO';
 import { Heart, PartyPopper, ArrowLeft, Share2 } from 'lucide-react';
 
 export default function ThankYou() {
-    const thanksSchema = [
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Thank You",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/thank-you`
-                }
-            ]
-        }
-    ];
-
     return (
         <div className="thank-you-page">
             <SEO
                 title="Thank You for Your Support | PixTool"
-                description="We appreciate your support and contribution to the PixTool mission. Together we're building better, private digital tools for the world."
+                description="We appreciate your contribution! Your support helps us keep PixTool free, fast, and private for everyone around the world."
                 path="/thank-you"
-                schema={thanksSchema}
             />
 
             <section className="hero" style={{ padding: '8rem 2rem', textAlign: 'center' }}>

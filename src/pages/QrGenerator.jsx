@@ -114,51 +114,6 @@ export default function QrGenerator() {
     })
   }
 
-  const qrSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Free QR Code Generator - PixTool",
-    "description": "Create professional, custom QR codes for URLs, WiFi networks, plain text, email, and phone numbers. 100% free, private, and high-resolution PNG output.",
-    "applicationCategory": "UtilitiesApplication",
-    "applicationSubCategory": "QR Generator",
-    "operatingSystem": "All (Web Browser)",
-    "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/qr-generator`,
-    "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "ratingCount": "3200",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
-    "author": {
-      "@type": "Organization",
-      "name": "UTHAKKAN",
-      "url": "https://uthakkan.in"
-    }
-  }
-
-  const qrHowToSchema = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    "name": "How to Generate a QR Code for Free",
-    "description": "Learn how to create custom QR codes for any purpose using our free online generator.",
-    "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
-    "step": [
-      { "@type": "HowToStep", "name": "Select Type", "text": "Choose the data type: URL, WiFi, Email, Phone, or Plain Text.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` },
-      { "@type": "HowToStep", "name": "Enter Data", "text": "Input the information you want to encode into the QR code.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` },
-      { "@type": "HowToStep", "name": "Customize", "text": "Adjust size, foreground/background colors, and error correction levels.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` },
-      { "@type": "HowToStep", "name": "Download", "text": "Click 'Download PNG' to save your high-resolution QR code.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` }
-    ],
-    "totalTime": "PT45S"
-  }
-
   const renderSettings = () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       <div className="input-group">
@@ -229,13 +184,23 @@ export default function QrGenerator() {
         description="Convert any link to a QR code for free. Professional QR code to link generator for URLs, WiFi, emails, and text. High-resolution PNG output. 100% private."
         keywords="qr code to link, qr to link, convert qr code to link, qr code to url, qr to link converter, qr code to link converter online free, qrcode to link, qr to url, convert qr to link, qr to link generator, qr code to url converter, qr code to link generator, qrcode to url, url from qr code, extract link from qr code, qr code generator, free qr maker"
         path="/qr-generator"
-        schema={[qrSchema, qrHowToSchema]}
+        toolName="QR Generator"
+        toolSteps={[
+          "Choose the data type: URL, WiFi, Email, Phone, or Plain Text.",
+          "Input the information you want to encode into the QR code.",
+          "Adjust size, foreground/background colors, and error correction levels.",
+          "Click 'Download PNG' to save your high-resolution QR code."
+        ]}
+        screenshot="/screenshots/best-free-qr-code-generator-online.png"
+        imageAlt="PixTool QR Generator - Custom code creation and design"
+        imageTitle="Generate QR Codes Free Online"
         breadcrumbs={[
           { name: 'Utility Tools', item: '/utility-tools' },
           { name: 'QR Generator', item: '/qr-generator' }
         ]}
         faqs={qrGeneratorFaqs}
       />
+
       <div className="page-container">
         <Breadcrumbs items={[
           { name: 'Utility Tools', item: '/utility-tools' },
@@ -457,7 +422,7 @@ export default function QrGenerator() {
             <div className="modal-content" onClick={e => e.stopPropagation()}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                 <h3 style={{ fontSize: '1.5rem', fontWeight: 900 }}>QR Aesthetics</h3>
-                <button className="btn-icon" onClick={() => setShowMobileSettings(false)}><X /></button>
+                <button className="btn-icon" onClick={() => setShowMobileSettings(false)} aria-label="Close settings"><X /></button>
               </div>
               {renderSettings()}
               <button className="btn btn-primary" style={{ width: '100%', marginTop: '2.5rem' }} onClick={() => setShowMobileSettings(false)}>

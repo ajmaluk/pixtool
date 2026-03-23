@@ -24,34 +24,12 @@ const offers = [
 ];
 
 export default function Promotions() {
-    const promoSchema = [
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Promotions",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/promotions`
-                }
-            ]
-        }
-    ];
-
     return (
         <div className="promotions-page">
             <SEO
                 title="Promotions & Exclusive Offers | PixTool"
                 description="Save big on premium digital services and custom development. Explore the latest exclusive offers and discount codes from PixTool."
                 path="/promotions"
-                schema={promoSchema}
             />
 
             <section className="hero" style={{ padding: '6rem 2rem 4rem' }}>

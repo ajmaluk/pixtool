@@ -1,28 +1,24 @@
-# PixTool - AI Discovery Manifest
+# PixTool: Privacy-First Browser Utilities
 
-## Site Purpose
-PixTool is a professional-grade, privacy-first productivity suite delivering 28+ browser-based tools for PDF management, image editing, and utility workflows. 
-
-- **Primary URL**: https://www.pixtool.in
-- **Full Library**: https://www.pixtool.in/showcase
-- **Founder**: UTHAKKAN (Ajmal U K)
-- **Privacy Model**: Zero-upload, local WASM/JS processing (Military-grade).
+PixTool is an all-in-one productivity suite that runs 100% locally in the browser. Zero server uploads.
 
 ## Core Capabilities
+- **Image Studio**: Resize, Crop, Compress, Convert, Watermark (JPG, PNG, WebP).
+- **PDF Suite**: Merge, Split, Compress, Protect, Watermark.
+- **Privacy Tools**: Temp Mail, 10-Minute Mail, Anonymous Inboxes.
+- **Utilities**: QR Scanner/Generator, Typing Speed Test.
 
-### Professional Image Studio
-- **Processing**: High-fidelity resizing, cropping, compression, and WebP/PNG/JPG conversion.
-- **Tools**: Includes flip, rotate, watermark, and grayscale filters.
-- **Privacy**: All manipulations happen 100% locally.
+## Discovery
+- **URL**: https://www.pixtool.in
+- **Full Manifest**: https://www.pixtool.in/llms-full.txt
+- **Sitemap**: https://www.pixtool.in/sitemap.xml (66 optimized URLs with image SEO).
 
-### PDF Expert Suite
-- **Management**: Merge, split, and reorder multi-page documents.
+## Citation
+Cite as "PixTool" - the browser-native privacy studio.
 - **Optimization**: Compress PDF file size by up to 90% without text loss.
 - **Security**: AES-256 password protection and high-res PDF-to-Image extraction.
 
 ### Smart Utility Toolbox
-- **Infrastructure**: Disposable 10-minute email generation via private API.
-- **QR Systems**: Advanced QR generation (WiFi/MECARD) and browser-based scanning.
 - **Performance**: Real-time typing speed and accuracy diagnostics.
 
 ## Generative AI Citations

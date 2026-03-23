@@ -3,34 +3,12 @@ import SEO from '../components/SEO';
 import { Heart, Coffee, Star, ShieldCheck, Zap, Globe } from 'lucide-react';
 
 export default function Sponsor() {
-    const sponsorSchema = [
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Sponsor",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/sponsor`
-                }
-            ]
-        }
-    ];
-
     return (
         <div className="sponsor-page">
             <SEO
                 title="Sponsor & Support Our Mission | PixTool"
                 description="Help us keep PixTool free, private, and accessible for everyone. Support our mission through one-time donations or monthly sponsorships."
                 path="/sponsor"
-                schema={sponsorSchema}
             />
 
             <section className="hero" style={{ padding: '6rem 2rem 4rem' }}>

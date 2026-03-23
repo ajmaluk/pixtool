@@ -215,74 +215,25 @@ export default function TempMail({
   }
 
   const toolTitle = seoTitle.replace(' - PixTool', '')
-  const tempMailSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": toolTitle,
-    "description": seoDescription,
-    "applicationCategory": "CommunicationApplication",
-    "applicationSubCategory": "Privacy Tool",
-    "operatingSystem": "All (Web Browser)",
-    "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}${seoPath}`,
-    "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "ratingCount": "1250",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
-    "author": {
-      "@type": "Organization",
-      "name": "UTHAKKAN",
-      "url": "https://uthakkan.in"
-    },
-    "review": {
-      "@type": "Review",
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": "5",
-        "bestRating": "5"
-      },
-      "author": {
-        "@type": "Person",
-        "name": "Anonymous User"
-      },
-      "reviewBody": "Perfect for quick verifications. No sign-up needed!"
-    }
-  }
+  const tempMailFaqs = [
+    { q: "What is a temporary email service?", a: "A temporary email (also known as temp mail, 10-minute mail, or disposable email) provides you with a short-lived inbox to receive verification codes and sign up for services without exposing your real email to potential spam or data breaches." },
+    { q: "How long does my temporary email address stay active?", a: "Your email address remains active as long as you keep the browser tab open. Once you close the page or click 'New Email', the mailbox is permanently deleted for your security." },
+    { q: "Is PixTool Temp Mail truly private?", a: "Yes. Our service runs directly in your browser and communicates with the mail server via secure APIs. We never store your messages on our servers, and we don't track your identity." },
+    { q: "Can I send emails from this address?", a: "To prevent abuse and maintain the integrity of our service, we currently only support receiving emails. This covers 99% of use cases like account verification and newsletter signups." },
+    { q: "Will websites know I'm using a temporary email?", a: "Some websites maintain lists of known disposable email domains. If one is blocked, simply click 'New Email' to generate a fresh address from a different domain." },
+    { q: "Is this service better than Guerrilla Mail or 10 Minute Mail?", a: "We believe so! Our tool is faster, mobile-responsive, and doesn't require any page reloads to see new messages — they appear instantly as they arrive." },
+    { q: "Can I recover an email after closing the tab?", a: "No. For maximum privacy, we do not provide a way to recover old mailboxes. Once it's gone, it's gone forever." },
+    { q: "Do I need to pay for multiple addresses?", a: "Absolutely not. You can generate unlimited temporary email addresses for free, forever." },
+    { q: "Is this safe for sensitive account verifications?", a: "While our service is secure, we recommend using a permanent email for critical accounts like banking or primary social media to ensure you always have access." },
+    { q: "How fast do verification codes arrive?", a: "Usually within 2-5 seconds. Our auto-refresh system ensures you see the message as soon as the sender delivers it." }
+  ]
 
-  const howToSchema = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    "name": "How to Use Free Temporary Email",
-    "description": "Learn how to generate and use a free temporary email address for privacy protection.",
-    "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
-    "step": [
-      { "@type": "HowToStep", "name": "Get Email", "text": "Visit the page - a temporary email address is generated automatically.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` },
-      { "@type": "HowToStep", "name": "Copy Email", "text": "Click on the email address or Copy button to copy it to your clipboard.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` },
-      { "@type": "HowToStep", "name": "Use Email", "text": "Paste the email wherever you need to sign up or verify.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` },
-      { "@type": "HowToStep", "name": "Check Inbox", "text": "Return to this page to see incoming messages - inbox refreshes automatically.", "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png` }
-    ],
-    "totalTime": "PT30S"
-  }
-
-  const variantsSchema = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "Temporary Email Variants",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Free Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail` },
-      { "@type": "ListItem", "position": 2, "name": "10 Minute Mail", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail/10-minute-mail` },
-      { "@type": "ListItem", "position": 3, "name": "Change Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail/change-email` }
-    ]
-  }
+  const tempMailSteps = [
+    "Visit the page - a temporary email address is generated automatically.",
+    "Click on the email address or Copy button to copy it to your clipboard.",
+    "Paste the email wherever you need to sign up or verify.",
+    "Return to this page to see incoming messages - inbox refreshes automatically."
+  ]
 
   useEffect(() => {
     let mounted = true
@@ -573,19 +524,6 @@ export default function TempMail({
     return html
   }
 
-  const tempMailFaqs = [
-    { q: "What is a temporary email service?", a: "A temporary email (also known as temp mail, 10-minute mail, or disposable email) provides you with a short-lived inbox to receive verification codes and sign up for services without exposing your real email to potential spam or data breaches." },
-    { q: "How long does my temporary email address stay active?", a: "Your email address remains active as long as you keep the browser tab open. Once you close the page or click 'New Email', the mailbox is permanently deleted for your security." },
-    { q: "Is PixTool Temp Mail truly private?", a: "Yes. Our service runs directly in your browser and communicates with the mail server via secure APIs. We never store your messages on our servers, and we don't track your identity." },
-    { q: "Can I send emails from this address?", a: "To prevent abuse and maintain the integrity of our service, we currently only support receiving emails. This covers 99% of use cases like account verification and newsletter signups." },
-    { q: "Will websites know I'm using a temporary email?", a: "Some websites maintain lists of known disposable email domains. If one is blocked, simply click 'New Email' to generate a fresh address from a different domain." },
-    { q: "Is this service better than Guerrilla Mail or 10 Minute Mail?", a: "We believe so! Our tool is faster, mobile-responsive, and doesn't require any page reloads to see new messages — they appear instantly as they arrive." },
-    { q: "Can I recover an email after closing the tab?", a: "No. For maximum privacy, we do not provide a way to recover old mailboxes. Once it's gone, it's gone forever." },
-    { q: "Do I need to pay for multiple addresses?", a: "Absolutely not. You can generate unlimited temporary email addresses for free, forever." },
-    { q: "Is this safe for sensitive account verifications?", a: "While our service is secure, we recommend using a permanent email for critical accounts like banking or primary social media to ensure you always have access." },
-    { q: "How fast do verification codes arrive?", a: "Usually within 2-5 seconds. Our auto-refresh system ensures you see the message as soon as the sender delivers it." }
-  ]
-
   return (
     <>
       <SEO
@@ -593,12 +531,15 @@ export default function TempMail({
         description={seoDescription}
         keywords={seoKeywords}
         path={seoPath}
-        schema={[tempMailSchema, howToSchema, variantsSchema]}
-        breadcrumbs={[
-          ...customBreadcrumbs
-        ]}
+        toolName={toolTitle}
+        toolSteps={tempMailSteps}
+        breadcrumbs={customBreadcrumbs}
         faqs={tempMailFaqs}
+        screenshot={`${import.meta.env.VITE_SITE_URL}/screenshots/disposable-temporary-email-generator.png`}
+        imageAlt="PixTool Temp Mail - Instant anonymous inbox interface"
+        imageTitle="Free Temporary Email Service"
       />
+
 
       <div className="page-container">
         <Breadcrumbs items={customBreadcrumbs} />
@@ -1034,7 +975,7 @@ export default function TempMail({
                     <span style={{ fontSize: '1.1rem', letterSpacing: '-0.02em' }}>Your Inbox</span>
                   </div>
                   {isMobile && (
-                    <button className="btn-icon" onClick={() => setSelectedMessage(null)}><X size={18} /></button>
+                    <button className="btn-icon" onClick={() => setSelectedMessage(null)} aria-label="Close message view"><X size={18} /></button>
                   )}
                 </div>
                 <div style={{ overflow: 'auto', padding: '0.75rem' }}>
@@ -1128,7 +1069,7 @@ export default function TempMail({
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', minWidth: 0, flex: 1 }}>
                     {isMobile && (
-                      <button className="btn-icon" onClick={() => setMobilePane('list')}><ArrowLeft size={18} /></button>
+                      <button className="btn-icon" onClick={() => setMobilePane('list')} aria-label="Back to inbox"><ArrowLeft size={18} /></button>
                     )}
                     <h3 style={{ margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', fontSize: '1.1rem', fontWeight: 900 }}>
                       {selectedMessage.subject || '(No Subject)'}
@@ -1136,12 +1077,12 @@ export default function TempMail({
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                     <div style={{ display: 'flex', background: 'var(--bg-secondary)', borderRadius: '12px', padding: '2px' }}>
-                      <button className="btn-icon" onClick={navPrev} disabled={currentIndex <= 0} style={{ border: 'none' }}><ArrowLeft size={18} /></button>
-                      <button className="btn-icon" onClick={navNext} disabled={currentIndex < 0 || currentIndex >= displayed.length - 1} style={{ border: 'none' }}><ArrowRight size={18} /></button>
+                      <button className="btn-icon" onClick={navPrev} disabled={currentIndex <= 0} style={{ border: 'none' }} aria-label="Previous message"><ArrowLeft size={18} /></button>
+                      <button className="btn-icon" onClick={navNext} disabled={currentIndex < 0 || currentIndex >= displayed.length - 1} style={{ border: 'none' }} aria-label="Next message"><ArrowRight size={18} /></button>
                     </div>
-                    <button className="btn-icon" onClick={toggleReadUnread}>{selectedMessage.seen ? <EyeOff size={18} /> : <Eye size={18} />}</button>
-                    <button className="btn-icon" onClick={deleteCurrent} style={{ color: 'var(--accent-red)' }}><Trash2 size={18} /></button>
-                    <button className="btn-icon" onClick={() => setSelectedMessage(null)} style={{ background: 'var(--bg-secondary)', borderRadius: '50%' }}><X size={18} /></button>
+                    <button className="btn-icon" onClick={toggleReadUnread} aria-label={selectedMessage.seen ? "Mark as unread" : "Mark as read"}>{selectedMessage.seen ? <EyeOff size={18} /> : <Eye size={18} />}</button>
+                    <button className="btn-icon" onClick={deleteCurrent} style={{ color: 'var(--accent-red)' }} aria-label="Delete message"><Trash2 size={18} /></button>
+                    <button className="btn-icon" onClick={() => setSelectedMessage(null)} style={{ background: 'var(--bg-secondary)', borderRadius: '50%' }} aria-label="Close message"><X size={18} /></button>
                   </div>
                 </div>
                 <div

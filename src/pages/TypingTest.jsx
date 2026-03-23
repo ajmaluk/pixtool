@@ -126,32 +126,6 @@ export default function TypingTest() {
   }
 
 
-  const typingSchema = [
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Typing Speed Test - PixTool",
-      "description": "Online typing test like MonkeyType. Practice with random words, track WPM and accuracy. Free, fast, and private.",
-      "applicationCategory": "UtilitiesApplication",
-      "applicationSubCategory": "Typing Test",
-      "operatingSystem": "Web Browser",
-      "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/typing-test`,
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "How to use Typing Speed Test",
-      "description": "Start typing to begin the test. Choose 15/30/60s and track WPM.",
-      "step": [
-        { "@type": "HowToStep", "name": "Select Time", "text": "Choose 15, 30, or 60 seconds." },
-        { "@type": "HowToStep", "name": "Start Typing", "text": "Focus the input and start typing words." },
-        { "@type": "HowToStep", "name": "View Results", "text": "See WPM, accuracy, and correct words." },
-        { "@type": "HowToStep", "name": "Restart", "text": "Click Restart to try again." }
-      ]
-    }
-  ]
-
   return (
     <>
       <SEO
@@ -159,12 +133,22 @@ export default function TypingTest() {
         description="Take our free online typing test to check your WPM (Words Per Minute). A fast, privacy-first MonkeyType alternative with distraction-free typing practice."
         keywords="online typing test, free typing test online, wpm test run, typing speed test, MonkeyType alternative, typing practice"
         path="/typing-test"
-        schema={typingSchema}
+        toolName="Typing Test"
+        toolSteps={[
+          "Choose your preferred test duration: 15s, 30s, or 60s.",
+          "Click the input field and start typing the words shown.",
+          "Press SPACE or ENTER after each word to move to the next.",
+          "Review your final WPM and accuracy metrics instantly."
+        ]}
+        screenshot="/screenshots/professional-typing-speed-test-online.png"
+        imageAlt="PixTool Typing Test - Professional WPM and accuracy tracking interface"
+        imageTitle="MonkeyType Alternative Typing Test Online"
         breadcrumbs={[
           { name: 'Utility Tools', item: '/utility-tools' },
           { name: 'Typing Test', item: '/typing-test' }
         ]}
       />
+
 
       <div className="page-container">
         <Breadcrumbs items={[

@@ -11,9 +11,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS } from '../data/tools'
 
 const allTools = [
-  ...IMAGE_TOOLS.map(t => ({ path: t.path, title: t.title, category: 'Image', icon: t.icon, color: t.color })),
-  ...PDF_TOOLS.map(t => ({ path: t.path, title: t.title, category: 'PDF', icon: t.icon, color: t.color })),
-  ...UTILITY_TOOLS.map(t => ({ path: t.path, title: t.title, category: 'Utility', icon: t.icon, color: t.color })),
+  ...IMAGE_TOOLS.filter(t => !t.status).map(t => ({ path: t.path, title: t.title, category: 'Image', icon: t.icon, color: t.color })),
+  ...PDF_TOOLS.filter(t => !t.status).map(t => ({ path: t.path, title: t.title, category: 'PDF', icon: t.icon, color: t.color })),
+  ...UTILITY_TOOLS.filter(t => !t.status).map(t => ({ path: t.path, title: t.title, category: 'Utility', icon: t.icon, color: t.color })),
 ]
 
 export default function Navbar() {
@@ -31,7 +31,7 @@ export default function Navbar() {
     '/showcase', '/blog', '/privacy-policy', '/terms-of-service', 
     '/cookie-policy', '/refund-policy', '/faq', '/contact', 
     '/documentation', '/testimonials', '/founder', '/developer',
-    '/services', '/products', '/articles', '/news', '/case-studies',
+    '/services', '/products', '/news', '/case-studies',
     '/sponsor', '/promotions', '/hire-me', '/careers', '/thank-you', '/sitemap'
   ]
   const isMoreActive = morePaths.includes(location.pathname) || location.pathname.startsWith('/blog/')

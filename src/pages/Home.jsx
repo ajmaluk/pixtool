@@ -79,104 +79,38 @@ export default function Home() {
 
   const isSearching = searchTerm.trim().length > 0
 
-  const homeSchema = [
+  const homeFaqs = [
     {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "name": "PixTool FAQ",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Is PixTool really free?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, 100% free. Every tool on PixTool is available without any cost, subscription, or registration. We provide professional-grade productivity tools for everyone."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Are my files safe and private?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Absolutely. PixTool processes your files entirely within your browser. Your images, PDFs, and data are never uploaded to any server, ensuring 100% privacy and security."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What image tools are available?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Our suite includes Resize, Crop, Rotate, Compress, Convert Format (JPEG/PNG/WebP/GIF), Watermark, Flip, and Grayscale effects. All work locally in your browser."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I merge, split, and compress PDFs?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes! We offer tools to Merge, Split, Compress, Convert PDF to Image, Password Protect, Watermark, and Reorder PDF pages — all without uploading your files."
-          }
-        }
-      ]
+      q: "Is PixTool really free?",
+      a: "Yes, 100% free. Every tool on PixTool is available without any cost, subscription, or registration. We provide professional-grade productivity tools for everyone."
     },
+    {
+      q: "Are my files safe and private?",
+      a: "Absolutely. PixTool processes your files entirely within your browser. Your images, PDFs, and data are never uploaded to any server, ensuring 100% privacy and security."
+    },
+    {
+      q: "What image tools are available?",
+      a: "Our suite includes Resize, Crop, Rotate, Compress, Convert Format (JPEG/PNG/WebP/GIF), Watermark, Flip, and Grayscale effects. All work locally in your browser."
+    },
+    {
+      q: "Can I merge, split, and compress PDFs?",
+      a: "Yes! We offer tools to Merge, Split, Compress, Convert PDF to Image, Password Protect, Watermark, and Reorder PDF pages — all without uploading your files."
+    }
+  ]
 
+  const homeSchema = [
     {
       "@context": "https://schema.org",
       "@type": "ItemList",
       "name": "Free Online Tools",
       "description": "Complete list of free online tools available at PixTool",
       "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/sitemap`,
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Resize Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools/resize`, "description": "Change image dimensions by pixels or percentage" },
-        { "@type": "ListItem", "position": 2, "name": "Crop Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools/crop`, "description": "Crop images to any size or aspect ratio" },
-        { "@type": "ListItem", "position": 3, "name": "Rotate Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools/rotate`, "description": "Rotate and flip images" },
-        { "@type": "ListItem", "position": 4, "name": "Compress Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools/compress`, "description": "Reduce image file size" },
-        { "@type": "ListItem", "position": 5, "name": "Merge PDF", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools/merge`, "description": "Combine multiple PDFs into one" },
-        { "@type": "ListItem", "position": 6, "name": "Split PDF", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools/split`, "description": "Extract pages from PDF" },
-        { "@type": "ListItem", "position": 7, "name": "Compress PDF", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools/compress`, "description": "Reduce PDF file size" },
-        { "@type": "ListItem", "position": 8, "name": "PDF to Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools/convert`, "description": "Convert PDF to images" },
-        { "@type": "ListItem", "position": 9, "name": "Convert Image Format", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools/convert`, "description": "Convert between JPEG, PNG, WebP, GIF" },
-        { "@type": "ListItem", "position": 10, "name": "Add Watermark", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools/watermark`, "description": "Add text watermarks to images" },
-        { "@type": "ListItem", "position": 11, "name": "Flip Image", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools/flip`, "description": "Flip images horizontally or vertically" },
-        { "@type": "ListItem", "position": 12, "name": "Grayscale Converter", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools/grayscale`, "description": "Convert to black & white, sepia, or invert" },
-        { "@type": "ListItem", "position": 13, "name": "Protect PDF", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools/protect`, "description": "Add password protection to PDF" },
-        { "@type": "ListItem", "position": 14, "name": "Watermark PDF", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools/watermark`, "description": "Add text watermarks to PDF pages" },
-        { "@type": "ListItem", "position": 15, "name": "Reorder PDF Pages", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools/reorder`, "description": "Rearrange PDF pages" },
-        { "@type": "ListItem", "position": 16, "name": "Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail`, "description": "Free disposable email address" },
-        { "@type": "ListItem", "position": 17, "name": "QR Code Generator", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/qr-generator`, "description": "Create QR codes" },
-        { "@type": "ListItem", "position": 18, "name": "QR Scanner", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/qr-scanner`, "description": "Scan QR codes" }
-      ].concat([
-        { "@type": "ListItem", "position": 19, "name": "10 Minute Mail", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail/10-minute-mail`, "description": "Auto-expiring disposable email" },
-        { "@type": "ListItem", "position": 20, "name": "Change Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail/change-email`, "description": "Generate a new temp email" },
-        { "@type": "ListItem", "position": 21, "name": "Typing Test", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/typing-test`, "description": "Online typing speed test (WPM)" }
-      ])
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "name": "Free Image Tools Collection",
-      "description": "Complete suite of free online image editing tools including resize, crop, rotate, compress, convert, watermark, flip, and grayscale.",
-      "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools`,
-      "hasPart": imageTools.map(t => ({
-        "@type": "SoftwareApplication",
+      "itemListElement": mixedTools.map((t, idx) => ({
+        "@type": "ListItem",
+        "position": idx + 1,
         "name": t.title,
-        "description": t.description,
         "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}${t.path}`,
-        "applicationCategory": "MultimediaApplication"
-      }))
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "name": "Free PDF Tools Collection",
-      "description": "Complete suite of free online PDF tools including merge, split, compress, convert, protect, watermark, and reorder.",
-      "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools`,
-      "hasPart": pdfTools.map(t => ({
-        "@type": "SoftwareApplication",
-        "name": t.title,
-        "description": t.description,
-        "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}${t.path}`,
-        "applicationCategory": "BusinessApplication"
+        "description": t.description
       }))
     }
   ]

@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS } from '../src/data/tools.js';
+import { posts } from '../src/data/posts.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,7 +29,7 @@ function generateSitemap() {
     </image:image>
   </url>`;
 
-  const addUrl = (relPath, priority = '0.8', freq = 'weekly', imagePath = null, imageTitle = null) => {
+  const addUrl = (relPath, priority = '0.8', freq = 'weekly', imagePath = null, imageTitle = null, imageCaption = null) => {
     xml += `
   <url>
     <loc>${SITE_URL}${relPath}</loc>
@@ -40,13 +41,21 @@ function generateSitemap() {
       xml += `
     <image:image>
       <image:loc>${SITE_URL}${imagePath}</image:loc>
-      <image:title>${imageTitle || 'PixTool Interface'}</image:title>
+      <image:title>${imageTitle || 'PixTool Interface'}</image:title>`;
+      
+      if (imageCaption) {
+        xml += `
+      <image:caption>${imageCaption}</image:caption>`;
+      }
+      
+      xml += `
     </image:image>`;
     }
     
     xml += `
   </url>`;
   };
+
 
   // Main Hubs
   addUrl('/image-tools', '0.9', 'weekly', '/screenshots/image-tools-hub.png', 'PixTool Image Studio Hub');
@@ -56,17 +65,23 @@ function generateSitemap() {
 
   // Image Tools
   IMAGE_TOOLS.filter(t => t.status !== 'coming-soon').forEach(tool => {
-    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, `${tool.title} | Free Online PixTool`);
+    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | Free Online PixTool`, tool.description);
   });
 
   // PDF Tools
   PDF_TOOLS.filter(t => t.status !== 'coming-soon').forEach(tool => {
-    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, `${tool.title} | Professional PDF PixTool`);
+    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | Professional PDF PixTool`, tool.description);
   });
 
   // Utility Tools
   UTILITY_TOOLS.filter(t => t.status !== 'coming-soon').forEach(tool => {
-    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, `${tool.title} | Anonymous Tool PixTool`);
+    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | Anonymous Tool PixTool`, tool.description);
+  });
+
+
+  // Blog Posts
+  posts.forEach(post => {
+    addUrl(`/blog/${post.slug}`, '0.7', 'monthly', post.image, post.title);
   });
 
   // Company & Legal
@@ -74,7 +89,8 @@ function generateSitemap() {
     '/about', '/founder', '/developer', '/services', '/products', 
     '/privacy-policy', '/terms-of-service', '/contact', '/faq', 
     '/refund-policy', '/cookie-policy', '/blog', '/testimonials', 
-    '/documentation', '/sitemap'
+    '/documentation', '/sitemap', '/news', '/careers', '/case-studies',
+    '/sponsor', '/promotions', '/hire-me', '/thank-you'
   ];
 
   otherPages.forEach(path => {

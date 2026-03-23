@@ -24,34 +24,12 @@ const cases = [
 ];
 
 export default function CaseStudies() {
-    const caseSchema = [
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Case Studies",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/case-studies`
-                }
-            ]
-        }
-    ];
-
     return (
         <div className="case-studies-page">
             <SEO
                 title="Case Studies - Real-World Success Stories | PixTool"
                 description="Discover how businesses and individuals leverage PixTool and UTHAKKAN's expertise to optimize workflows and drive digital growth through real-world case studies."
                 path="/case-studies"
-                schema={caseSchema}
             />
 
             <section className="hero" style={{ padding: '6rem 2rem 4rem' }}>

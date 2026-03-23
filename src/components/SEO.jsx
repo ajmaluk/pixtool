@@ -19,17 +19,17 @@ export default function SEO({
     readingTime = null,
     toolName = null,
     toolSteps = null,
-    lastModified = null
+    lastModified = null,
+    screenshot = null,
+    imageAlt = null,
+    imageTitle = null
 }) {
     const siteUrl = import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'
     const siteName = 'PixTool by UTHAKKAN'
     const fullUrl = path === '/' ? siteUrl : `${siteUrl}${path.startsWith('/') ? path : `/${path}`}`
 
     const brandTitle = title.includes('PixTool') ? title : `${title} | PixTool`
-    useEffect(() => {
-        document.title = brandTitle
-    }, [brandTitle])
-
+    
     // Map path to screenshot filename for maximum Image SEO ranking
     const getScreenshotPath = (path) => {
         const SCREENSHOT_MAP = {
@@ -67,12 +67,12 @@ export default function SEO({
         return `/screenshots/${SCREENSHOT_MAP[cleanPath] || 'pixtool-all-in-one-productivity-suite.png'}`
     }
 
-    const screenshotPath = getScreenshotPath(path)
-    const ogImage = image ? (image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? image : `/${image}`}`) : `${siteUrl}${screenshotPath}`
-    const twImage = twitterImage ? (twitterImage.startsWith('http') ? twitterImage : `${siteUrl}${twitterImage.startsWith('/') ? twitterImage : `/${twitterImage}`}`) : `${siteUrl}${screenshotPath}`
+    const defaultScreenshot = getScreenshotPath(path)
+    const ogImage = image ? (image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? image : `/${image}`}`) : `${siteUrl}${defaultScreenshot}`
+    const twImage = twitterImage ? (twitterImage.startsWith('http') ? twitterImage : `${siteUrl}${twitterImage.startsWith('/') ? twitterImage : `/${twitterImage}`}`) : `${siteUrl}${defaultScreenshot}`
     
     // Dynamic Alt text for images - critical for image SEO ranking
-    const imageAlt = toolName ? `Screenshot of PixTool ${toolName} - High-quality browser-based productivity tool` : `${title} - Professional online utility by UTHAKKAN`
+    const dynamicImageAlt = imageAlt || (toolName ? `Screenshot of PixTool ${toolName} - High-quality browser-based productivity tool` : `${title} - Professional online utility by UTHAKKAN`)
 
     // Enhanced keywords based on page type and tool
     const enhancedKeywords = useMemo(() => {
@@ -94,261 +94,83 @@ export default function SEO({
         if (keywords) {
             return `${keywords}, ${addedKeywords}, ${baseKeywords}`
         }
-        return `${addedKeywords}, ${baseKeywords}`
+        return `${addedKeywords ? `${addedKeywords}, ` : ''}${baseKeywords}`
     }, [keywords, path])
 
     // Generate JSON-LD schemas
     const schemas = useMemo(() => {
-        const globalSchemas = [
-            {
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                "name": siteName,
-                "url": siteUrl,
-                "logo": `${siteUrl}/logo.png`,
-                "image": ogImage,
-                "description": description || "All-in-one productivity suite with privacy-first tools. Image tools (resize, crop, compress, convert), PDF tools (merge, split, compress), Temp Mail, QR Generator, Typing Test. No uploads - all processing happens in your browser.",
-                "sameAs": [
-                    "https://www.linkedin.com/company/uthakkan",
-                    "https://twitter.com/ajmal_uk_",
-                    "https://www.instagram.com/ajmal_uk_",
-                    "https://github.com/ajmaluk"
-                ],
-                "contactPoint": {
-                    "@type": "ContactPoint",
-                    "email": "contact@uthakkan.com",
-                    "contactType": "customer service",
-                    "availableLanguage": ["English"]
-                },
-                "founder": {
-                    "@type": "Person",
-                    "name": "Ajmal U K",
-                    "jobTitle": "Founder & Senior Full Stack Developer",
-                    "url": `${siteUrl}/founder`,
-                    "knowsAbout": ["Full Stack Development", "Information Security", "Digital Image Processing", "PDF Automation", "AI Engineering"],
-                    "sameAs": [
-                        "https://twitter.com/ajmal_uk_",
-                        "https://linkedin.com/in/ajmaluk"
-                    ]
-                },
-                "knowsAbout": [
-                    "Lossless Image Compression", 
-                    "AES-256 PDF Encryption", 
-                    "Client-Side Privacy", 
-                    "WASM Performance", 
-                    "Generative AI Content Analysis"
-                ],
-                "abstract": "PixTool is a professional-grade productivity suite that executes all file manipulations 100% locally in the browser, ensuring military-grade privacy by never uploading user data to a server.",
-                "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": "Kannur",
-                    "addressRegion": "Kerala",
-                    "addressCountry": "IN"
-                },
-                "geo": {
-                    "@type": "GeoCoordinates",
-                    "latitude": "11.8745",
-                    "longitude": "75.3664"
-                },
-                "areaServed": "Worldwide",
-                "serviceType": "Online Tools Platform",
-                "priceRange": "$$",
-                "openingHoursSpecification": {
-                    "@type": "OpeningHoursSpecification",
-                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-                    "opens": "00:00",
-                    "closes": "23:59"
-                }
-            },
-            {
-                "@context": "https://schema.org",
-                "@type": "LocalBusiness",
-                "name": siteName,
-                "image": ogImage,
-                "@id": siteUrl,
-                "url": siteUrl,
-                "telephone": "",
-                "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "Kasaragod - Kannur Rd",
-                    "addressLocality": "Kannur",
-                    "addressRegion": "Kerala",
-                    "postalCode": "670001",
-                    "addressCountry": "IN"
-                },
-                "geo": {
-                    "@type": "GeoCoordinates",
-                    "latitude": "11.8745",
-                    "longitude": "75.3664"
-                },
-                "openingHoursSpecification": {
-                    "@type": "OpeningHoursSpecification",
-                    "dayOfWeek": [
-                        "Monday",
-                        "Tuesday",
-                        "Wednesday",
-                        "Thursday",
-                        "Friday",
-                        "Saturday",
-                        "Sunday"
-                    ],
-                    "opens": "00:00",
-                    "closes": "23:59"
-                }
-            },
-            {
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                "name": "PixTool",
-                "url": siteUrl,
-                "description": "All-in-one productivity suite with privacy-first tools. Image tools (resize, crop, compress, convert), PDF tools (merge, split, compress), Temp Mail, QR Generator, Typing Test. No uploads - all processing happens in your browser.",
-                "alternateName": "PixTool - Free Online Tools Suite",
-                "potentialAction": {
-                    "@type": "SearchAction",
-                    "target": {
-                        "@type": "EntryPoint",
-                        "urlTemplate": `${siteUrl}/?q={search_term_string}`
-                    },
-                    "query-input": "required name=search_term_string"
-                },
-                "publisher": {
+        const globalSchemas = []
+
+        // Only include Organization and WebSite schemas on the homepage to avoid duplication
+        if (path === '/') {
+            globalSchemas.push(
+                {
+                    "@context": "https://schema.org",
                     "@type": "Organization",
+                    "@id": `${siteUrl}/#organization`,
                     "name": siteName,
+                    "url": siteUrl,
                     "logo": {
                         "@type": "ImageObject",
                         "url": `${siteUrl}/logo.png`,
-                        "width": 512,
-                        "height": 512
-                    }
-                },
-                "image": `${siteUrl}/logo.png`
-            },
-            {
-                "@context": "https://schema.org",
-                "@type": "WebApplication",
-                "name": "PixTool",
-                "alternateName": ["DT Tools", "UTHAKKAN Tools"],
-                "applicationCategory": "UtilitiesApplication",
-                "applicationSubCategory": "Productivity",
-                "operatingSystem": "Web Browser (Chrome, Firefox, Safari, Edge)",
-                "url": siteUrl,
-                "description": "All-in-one productivity suite with privacy-first tools. Image tools (resize, crop, compress, convert), PDF tools (merge, split, compress), Temp Mail, QR Generator, Typing Test. No uploads - all processing happens in your browser.",
-                "browserRequirements": "Requires a modern web browser with JavaScript enabled.",
-                "permissions": "Requires no special permissions for basic use; camera access for QR scanning.",
-                "isAccessibleForFree": true,
-                "offers": {
-                    "@type": "Offer",
-                    "price": "0",
-                    "priceCurrency": "USD",
-                    "availability": "https://schema.org/InStock"
-                },
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "ratingCount": "3500",
-                    "bestRating": "5",
-                    "worstRating": "1"
-                },
-                "author": {
-                    "@type": "Organization",
-                    "name": siteName,
-                    "url": siteUrl
-                },
-                "abstract": "A robust, privacy-first web application specializing in browser-based image editing and PDF management.",
-                "knowsAbout": ["Image Processing", "PDF Compression", "Privacy-Preserving Computation"]
-            },
-            {
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                "url": siteUrl,
-                "potentialAction": {
-                    "@type": "SearchAction",
-                    "target": `${siteUrl}/?q={search_term_string}`,
-                    "query-input": "required name=search_term_string"
-                },
-                "speakable": {
-                    "@type": "SpeakableSpecification",
-                    "cssSelector": [".site-description", ".tool-header-description"]
-                }
-            },
-            {
-                "@context": "https://schema.org",
-                "@type": "Service",
-                "serviceType": "Online Productivity Tools",
-                "provider": {
-                    "@type": "Organization",
-                    "name": siteName,
-                    "url": siteUrl
-                },
-                "areaServed": "Worldwide",
-                "hasOfferCatalog": {
-                    "@type": "OfferCatalog",
-                    "name": "PixTool Categories",
-                    "itemListElement": [
-                        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "PDF Management" } },
-                        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Image Studio" } },
-                        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Utility Toolbox" } },
-                        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Temporary Email Infrastructure" } },
-                        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "QR Code Systems" } }
+                        "width": "512",
+                        "height": "512"
+                    },
+                    "image": ogImage,
+                    "description": description || "All-in-one productivity suite with privacy-first tools.",
+                    "sameAs": [
+                        "https://www.linkedin.com/company/uthakkan",
+                        "https://twitter.com/ajmal_uk_",
+                        "https://www.instagram.com/ajmal_uk_",
+                        "https://github.com/ajmaluk"
                     ]
-                }
-            },
-            {
-                "@context": "https://schema.org",
-                "@type": "SocialMediaPosting",
-                "headline": title,
-                "datePublished": articlePublishedTime || '2026-03-01T00:00:00Z',
-                "dateModified": lastModified || new Date().toISOString(),
-                "author": {
-                    "@type": "Person",
-                    "name": "Ajmal U K",
-                    "url": `${siteUrl}/founder`
                 },
-                "publisher": {
-                    "@type": "Organization",
-                    "name": "UTHAKKAN",
-                    "logo": {
-                        "@type": "ImageObject",
-                        "url": `${siteUrl}/logo.png`
+                {
+                    "@context": "https://schema.org",
+                    "@type": "WebSite",
+                    "@id": `${siteUrl}/#website`,
+                    "name": "PixTool",
+                    "url": siteUrl,
+                    "publisher": { "@id": `${siteUrl}/#organization` },
+                    "potentialAction": {
+                        "@type": "SearchAction",
+                        "target": `${siteUrl}/search?q={search_term_string}`,
+                        "query-input": "required name=search_term_string"
                     }
-                },
-                "url": fullUrl,
-                "image": ogImage
+                }
+            )
+        }
+
+        // Include WebApplication on all pages but link it to the organization
+        globalSchemas.push({
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": toolName ? `PixTool ${toolName}` : siteName,
+            "url": fullUrl,
+            "applicationCategory": path.includes('/pdf') ? "BusinessApplication" : "UtilitiesApplication",
+            "operatingSystem": "All",
+            "isAccessibleForFree": true,
+            "author": { "@id": `${siteUrl}/#organization` },
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
             }
-        ]
+        })
 
-        // Add page-specific schemas
-        if (path === '/about') {
-            globalSchemas.push({
-                "@context": "https://schema.org",
-                "@type": "AboutPage",
-                "mainEntity": globalSchemas[0]
-            })
-        }
-
-        if (path === '/contact') {
-            globalSchemas.push({
-                "@context": "https://schema.org",
-                "@type": "ContactPage",
-                "mainEntity": globalSchemas[0]
-            })
-        }
-
-        // Add breadcrumb schema
-        const breadcrumbItems = breadcrumbs || []
-        
-        // Auto-generate breadcrumbs if not provided and not on home page
-        if (breadcrumbItems.length === 0 && path !== '/') {
+        // BreadcrumbList
+        const breadcrumbList = breadcrumbs || []
+        if (breadcrumbList.length === 0 && path !== '/') {
             const parts = path.split('/').filter(Boolean)
             let currentPath = ''
             parts.forEach((part) => {
                 currentPath += `/${part}`
                 const name = part.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
-                breadcrumbItems.push({ name, item: currentPath })
+                breadcrumbList.push({ name, item: currentPath })
             })
         }
 
-        if (breadcrumbItems.length > 0) {
+        if (breadcrumbList.length > 0) {
             globalSchemas.push({
                 "@context": "https://schema.org",
                 "@type": "BreadcrumbList",
@@ -359,7 +181,7 @@ export default function SEO({
                         "name": "Home",
                         "item": siteUrl
                     },
-                    ...breadcrumbItems.map((crumb, idx) => ({
+                    ...breadcrumbList.map((crumb, idx) => ({
                         "@type": "ListItem",
                         "position": idx + 2,
                         "name": crumb.name,
@@ -369,8 +191,7 @@ export default function SEO({
             })
         }
 
-
-        // Add FAQ schema if provided
+        // FAQPage
         if (faqs && Array.isArray(faqs) && faqs.length > 0) {
             globalSchemas.push({
                 "@context": "https://schema.org",
@@ -386,39 +207,19 @@ export default function SEO({
             })
         }
 
-        // Add tool-specific schema for image/PDF/QR tools
-        if (path.includes('/image-tools/') || path.includes('/pdf-tools/') || path === '/temp-mail' || path.includes('/qr-')) {
-            let toolType = 'MultimediaApplication'
-            let category = 'Image Processing'
-            if (path.includes('/pdf-tools/')) {
-                toolType = 'BusinessApplication'
-                category = 'PDF Management'
-            }
-            if (path === '/temp-mail') {
-                toolType = 'CommunicationApplication'
-                category = 'Email Utilities'
-            }
-            if (path.includes('/qr-')) {
-                toolType = 'UtilitiesApplication'
-                category = 'QR Code Tools'
-            }
-
-            const toolTitle = toolName || title.replace(' | PixTool', '').replace(' - PixTool', '')
-
+        // SoftwareApplication (Tool specific)
+        if (path !== '/' && (path.includes('/image-tools') || path.includes('/pdf-tools') || path.includes('/temp-mail') || path.includes('/qr-') || path.includes('/typing-test'))) {
+            const toolTitle = toolName || brandTitle || title
             globalSchemas.push({
                 "@context": "https://schema.org",
                 "@type": "SoftwareApplication",
                 "name": toolTitle,
                 "description": description,
-                "applicationCategory": toolType,
-                "applicationSubCategory": category,
-                "operatingSystem": "Any modern web browser (Chrome, Firefox, Safari, Edge)",
+                "applicationCategory": path.includes('/pdf') ? "BusinessApplication" : "UtilitiesApplication",
                 "url": fullUrl,
                 "image": ogImage,
                 "isAccessibleForFree": true,
                 "softwareRequirements": "No installation or account required. Works 100% locally in your browser.",
-                "featureList": (toolSteps && Array.isArray(toolSteps)) ? toolSteps.join(', ') : 
-                              (Array.isArray(globalSchemas[0]?.benefits) ? globalSchemas[0].benefits.join(', ') : "Professional browser-based file processing"),
                 "offers": {
                     "@type": "Offer",
                     "price": "0",
@@ -449,7 +250,7 @@ export default function SEO({
                     "image": ogImage,
                     "totalTime": "PT1M",
                     "supply": [
-                        { "@type": "HowToSupply", "name": "Source File (Image/PDF)" }
+                        { "@type": "HowToSupply", "name": "Source File" }
                     ],
                     "tool": [
                         { "@type": "HowToTool", "name": "PixTool Browser Studio" }
@@ -465,96 +266,55 @@ export default function SEO({
             }
         }
 
-        // Add article schema for blog posts
-        let articleSchema = null
+        // Article
         if (type === 'article' && articlePublishedTime) {
-            articleSchema = {
+            globalSchemas.push({
                 "@context": "https://schema.org",
                 "@type": "Article",
                 "headline": title,
-                "description": description,
-                "image": ogImage,
-                "url": fullUrl,
                 "datePublished": articlePublishedTime,
                 "dateModified": lastModified || new Date().toISOString(),
-                "dateCreated": articlePublishedTime,
                 "author": {
                     "@type": "Person",
-                    "name": articleAuthor || 'UTHAKKAN',
-                    "url": `${siteUrl}/founder`
-                },
-                "publisher": {
-                    "@type": "Organization",
-                    "name": siteName,
-                    "logo": {
-                        "@type": "ImageObject",
-                        "url": `${siteUrl}/logo.png`,
-                        "width": 512,
-                        "height": 512
-                    }
-                },
-                "mainEntityOfPage": {
-                    "@type": "WebPage",
-                    "@id": fullUrl
-                },
-                "wordCount": description ? description.split(' ').length * 10 : 500,
-                "articleSection": articleSection || 'Technology',
-                "inLanguage": "en",
-                "isAccessibleForFree": true,
-                "about": {
-                    "@type": "Thing",
-                    "name": "Online Tools",
-                    "description": "Free browser-based productivity tools"
+                    "name": articleAuthor || "UTHAKKAN"
                 }
-            }
-
-            if (articleTags && Array.isArray(articleTags)) {
-                articleSchema.keywords = articleTags.join(', ')
-            }
+            })
         }
 
-        // Combine all schemas
-        let schemasToInject = [...globalSchemas]
+        // ImageObject
+        const finalScreenshot = screenshot ? (screenshot.startsWith('http') ? screenshot : `${siteUrl}${screenshot}`) : (path !== '/' ? `${siteUrl}${defaultScreenshot}` : null)
+        if (finalScreenshot) {
+            globalSchemas.push({
+                "@context": "https://schema.org",
+                "@type": "ImageObject",
+                "contentUrl": finalScreenshot,
+                "name": imageTitle || toolName || title,
+                "caption": dynamicImageAlt
+            })
+        }
 
+        // Combine into schemasToInject
+        let schemasToInject = [...globalSchemas]
         if (schema) {
             const extraSchemas = Array.isArray(schema) ? schema : [schema]
-            // Filter out existing WebApplication/Organization if the specific schema already provides one
-            const hasSpecificApp = extraSchemas.some(s => s["@type"] === "SoftwareApplication" || s["@type"] === "WebApplication")
-            const hasSpecificOrg = extraSchemas.some(s => s["@type"] === "Organization")
-
-            if (hasSpecificApp || hasSpecificOrg) {
-                schemasToInject = globalSchemas.filter(s => {
-                    if (hasSpecificApp && (s["@type"] === "WebApplication" || s["@type"] === "SoftwareApplication")) return false
-                    if (hasSpecificOrg && s["@type"] === "Organization") return false
-                    return true
-                })
-            }
             schemasToInject = schemasToInject.concat(extraSchemas)
         }
 
-        if (articleSchema) {
-            schemasToInject.push(articleSchema)
-        }
-
-        // Add Speakable specification for the main description to help AI/Voice 
+        // Speakable Specification
         schemasToInject.push({
             "@context": "https://schema.org",
             "@type": "WebPage",
             "name": title,
-            "description": description,
             "speakable": {
                 "@type": "SpeakableSpecification",
-                "xpath": [
-                    "/html/head/meta[@name='description']/@content"
-                ]
+                "xpath": ["/html/head/meta[@name='description']/@content"]
             }
         })
 
         return schemasToInject
-    }, [title, description, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, articleSection, breadcrumbs, faqs, toolName, toolSteps, articleTags, type, lastModified])
+    }, [title, description, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, breadcrumbs, faqs, toolName, toolSteps, type, lastModified, screenshot, imageAlt, imageTitle, brandTitle, defaultScreenshot, dynamicImageAlt])
 
     useEffect(() => {
-        const brandTitle = title.includes('PixTool') ? title : `${title} | PixTool`
         document.title = brandTitle
 
         const updateMeta = (name, content, attribute = 'name') => {
@@ -565,184 +325,55 @@ export default function SEO({
                 document.head.appendChild(meta)
             }
             meta.setAttribute('content', content)
-            return meta
         }
 
-        // Primary Meta Tags
         updateMeta('description', description)
         updateMeta('keywords', enhancedKeywords)
-        updateMeta('robots', noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1')
-
-        // Author & Copyright
-        updateMeta('author', articleAuthor || 'UTHAKKAN')
-        updateMeta('copyright', 'Copyright © 2026 PixTool by UTHAKKAN')
-        updateMeta('revisit-after', '7 days')
-        updateMeta('language', 'English')
-        updateMeta('generator', 'PixTool - Built with React & Vite')
-        updateMeta('subject', 'Free Online Tools, Image Processing, PDF Management, Productivity')
-        updateMeta('rating', 'General')
-        updateMeta('distribution', 'Global')
-
-        // PWA Meta Tags
-        updateMeta('theme-color', '#6366f1')
-        updateMeta('mobile-web-app-capable', 'yes')
-        updateMeta('apple-mobile-web-app-capable', 'yes')
-        updateMeta('apple-mobile-web-app-status-bar-style', 'black-translucent')
-        updateMeta('apple-mobile-web-app-title', 'PixTool')
-        updateMeta('format-detection', 'telephone=no')
-        updateMeta('msapplication-TileColor', '#a855f7')
-        updateMeta('msapplication-tap-highlight', 'no')
-
-        // GEO Meta Tags - Critical for Local & Global SEO
-        updateMeta('geo.region', 'IN-KL')
-        updateMeta('geo.placename', 'Kannur, Kerala, India')
-        updateMeta('geo.position', '11.8745;75.3664')
-        updateMeta('ICBM', '11.8745, 75.3664')
-        updateMeta('DC.title', brandTitle)
-        updateMeta('DC.description', description)
-        updateMeta('DC.publisher', 'UTHAKKAN')
-        updateMeta('DC.format', 'text/html')
-        updateMeta('DC.language', 'en')
-
-        // Search Engine Bots
-        updateMeta('googlebot', noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1')
-        updateMeta('google-site-verification', '83f8616f6a5b1974')
-        updateMeta('bingbot', noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1')
-        updateMeta('duckduckbot', noIndex ? 'noindex, nofollow' : 'index, follow')
-        updateMeta('slurp', noIndex ? 'noindex, nofollow' : 'index, follow')
-
-        // Open Graph Meta Tags
+        updateMeta('robots', noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large')
+        
+        // Open Graph
         updateMeta('og:title', brandTitle, 'property')
         updateMeta('og:description', description, 'property')
         updateMeta('og:url', fullUrl, 'property')
-        updateMeta('og:type', type, 'property')
         updateMeta('og:image', ogImage, 'property')
-        updateMeta('og:image:alt', imageAlt, 'property')
-        updateMeta('og:image:width', '1200', 'property')
-        updateMeta('og:image:height', '630', 'property')
+        updateMeta('og:type', type, 'property')
         updateMeta('og:site_name', siteName, 'property')
-        updateMeta('og:locale', 'en_US', 'property')
-        updateMeta('og:locale:alternate', 'en_GB', 'property')
-        updateMeta('og:locale:alternate', 'en_IN', 'property')
 
-        // Article-specific Open Graph tags
-        if (type === 'article' && articlePublishedTime) {
-            updateMeta('article:published_time', articlePublishedTime, 'property')
-            updateMeta('article:modified_time', new Date().toISOString(), 'property')
-            updateMeta('article:expiration_time', new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), 'property')
-            updateMeta('article:author', articleAuthor || 'UTHAKKAN', 'property')
-            updateMeta('article:section', articleSection || 'Technology', 'property')
-            updateMeta('article:tag', 'Online Tools', 'property')
-            updateMeta('article:tag', 'Free Tools', 'property')
-            updateMeta('article:tag', 'Productivity', 'property')
-
-            if (articleTags && Array.isArray(articleTags)) {
-                articleTags.forEach(tag => {
-                    updateMeta('article:tag', tag, 'property')
-                })
-            }
-        }
-
-        // Twitter Card Meta Tags
+        // Twitter
         updateMeta('twitter:card', 'summary_large_image')
-        updateMeta('twitter:url', fullUrl)
         updateMeta('twitter:title', brandTitle)
         updateMeta('twitter:description', description)
         updateMeta('twitter:image', twImage)
-        updateMeta('twitter:image:alt', imageAlt)
-        updateMeta('twitter:site', '@ajmal_uk_')
-        updateMeta('twitter:creator', '@ajmal_uk_')
 
-        if (type === 'article') {
-            updateMeta('twitter:label1', 'Written by', 'name')
-            updateMeta('twitter:data1', articleAuthor || 'UTHAKKAN', 'name')
-            updateMeta('twitter:label2', readingTime || 'Est. reading time', 'name')
-            updateMeta('twitter:data2', '5 min read', 'name')
-        }
+        // GEO Tags
+        updateMeta('geo.region', 'IN-KL')
+        updateMeta('geo.placename', 'Kannur, Kerala, India')
+        updateMeta('geo.position', '11.8745;75.3664')
 
-        // Canonical URL
+        // Canonical Link
         let canonical = document.querySelector('link[rel="canonical"]')
-        if (!canonical) {
-            canonical = document.createElement('link')
-            canonical.setAttribute('rel', 'canonical')
-            document.head.appendChild(canonical)
-        }
-        canonical.setAttribute('href', fullUrl)
-
-        // Alternate Languages for International SEO
-        let alternateEn = document.querySelector('link[rel="alternate"][hreflang="en"]')
-        if (!alternateEn) {
-            alternateEn = document.createElement('link')
-            alternateEn.setAttribute('rel', 'alternate')
-            alternateEn.setAttribute('hreflang', 'en')
-            document.head.appendChild(alternateEn)
-        }
-        alternateEn.setAttribute('href', fullUrl)
-
-        let alternateEnGb = document.querySelector('link[rel="alternate"][hreflang="en-gb"]')
-        if (!alternateEnGb) {
-            alternateEnGb = document.createElement('link')
-            alternateEnGb.setAttribute('rel', 'alternate')
-            alternateEnGb.setAttribute('hreflang', 'en-gb')
-            document.head.appendChild(alternateEnGb)
-        }
-        alternateEnGb.setAttribute('href', fullUrl)
-
-        let xDefault = document.querySelector('link[rel="alternate"][hreflang="x-default"]')
-        if (!xDefault) {
-            xDefault = document.createElement('link')
-            xDefault.setAttribute('rel', 'alternate')
-            xDefault.setAttribute('hreflang', 'x-default')
-            document.head.appendChild(xDefault)
-        }
-        xDefault.setAttribute('href', fullUrl)
-
-        // Performance hints: preconnect & dns-prefetch for common origins
-        const ensureLink = (rel, href, crossOrigin = false) => {
-            const selector = `link[rel="${rel}"][href="${href}"]`
-            let link = document.querySelector(selector)
-            if (!link) {
-                link = document.createElement('link')
-                link.setAttribute('rel', rel)
-                link.setAttribute('href', href)
-                if (crossOrigin) link.setAttribute('crossorigin', '')
-                document.head.appendChild(link)
+        if (!noIndex) {
+            if (!canonical) {
+                canonical = document.createElement('link')
+                canonical.setAttribute('rel', 'canonical')
+                document.head.appendChild(canonical)
             }
-            return link
-        }
-        ensureLink('preconnect', 'https://fonts.googleapis.com')
-        ensureLink('preconnect', 'https://fonts.gstatic.com', true)
-        ensureLink('dns-prefetch', 'https://fonts.googleapis.com')
-        ensureLink('dns-prefetch', 'https://fonts.gstatic.com')
-        ensureLink('dns-prefetch', 'https://images.unsplash.com')
-        ensureLink('dns-prefetch', 'https://api.mail.tm')
-
-        // Performance: Add preconnect for common CDNs and analytics if needed
-        ensureLink('preconnect', 'https://www.googletagmanager.com')
-        ensureLink('dns-prefetch', 'https://www.googletagmanager.com')
-        ensureLink('preconnect', 'https://www.google-analytics.com')
-        ensureLink('dns-prefetch', 'https://www.google-analytics.com')
-
-        // JSON-LD Structured Data
-        const scriptId = 'json-ld-schema'
-        let scriptTag = document.getElementById(scriptId)
-
-        if (!scriptTag) {
-            scriptTag = document.createElement('script')
-            scriptTag.id = scriptId
-            scriptTag.type = 'application/ld+json'
-            scriptTag.setAttribute('data-seo', 'true')
-            document.head.appendChild(scriptTag)
+            canonical.setAttribute('href', fullUrl)
+        } else if (canonical) {
+            canonical.remove()
         }
 
-        // Inject schema with proper formatting
-        try {
-            scriptTag.innerHTML = JSON.stringify(schemas)
-        } catch (e) {
-            console.error('Error generating schema:', e)
-        }
+    }, [brandTitle, description, enhancedKeywords, noIndex, fullUrl, ogImage, type, siteName, twImage])
 
-    }, [title, description, enhancedKeywords, fullUrl, type, ogImage, twImage, schemas, siteName, noIndex, articlePublishedTime, articleAuthor, articleSection, articleTags, readingTime, imageAlt])
-
-    return null
+    return (
+        <>
+            {schemas.map((s, idx) => (
+                <script
+                    key={idx}
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(s) }}
+                />
+            ))}
+        </>
+    )
 }

@@ -21,34 +21,12 @@ const newsItems = [
 ];
 
 export default function News() {
-    const newsSchema = [
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "News",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/news`
-                }
-            ]
-        }
-    ];
-
     return (
         <div className="news-page">
             <SEO
                 title="News & Announcements - Latest from PixTool"
                 description="Stay up-to-date with the latest product launches, company milestones, and technology updates from the PixTool and UTHAKKAN team."
                 path="/news"
-                schema={newsSchema}
             />
 
             <section className="hero" style={{ padding: '6rem 2rem 4rem' }}>

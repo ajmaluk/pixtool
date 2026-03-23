@@ -40,35 +40,8 @@ export default function Contact() {
             "description": "Get in touch with the PixTool team for technical support, tool suggestions, custom development services, or business inquiries.",
             "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/contact`,
             "mainEntity": {
-                "@type": "Organization",
-                "name": "UTHAKKAN Digital",
-                "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}`,
-                "email": "contact@uthakkan.com",
-                "contactPoint": {
-                    "@type": "ContactPoint",
-                    "email": "contact@uthakkan.com",
-                    "contactType": "customer service",
-                    "availableLanguage": "English"
-                }
+                "@id": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/#organization`
             }
-        },
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Contact",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/contact`
-                }
-            ]
         }
     ];
 

@@ -21,34 +21,12 @@ const positions = [
 ];
 
 export default function Careers() {
-    const careersSchema = [
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Careers",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/careers`
-                }
-            ]
-        }
-    ];
-
     return (
         <div className="careers-page">
             <SEO
                 title="Careers - Join the Future of AI Productivity | PixTool"
                 description="Explore job opportunities and internships at PixTool. Join our mission to build high-performance, privacy-focused digital utilities."
                 path="/careers"
-                schema={careersSchema}
             />
 
             <section className="hero" style={{ padding: '6rem 2rem 4rem' }}>

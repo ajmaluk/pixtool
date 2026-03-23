@@ -20,9 +20,7 @@ export default function Founder() {
                 "addressCountry": "India"
             },
             "worksFor": {
-                "@type": "Organization",
-                "name": "UTHAKKAN",
-                "url": "https://uthakkan.in/"
+                "@id": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/#organization`
             },
             "sameAs": [
                 "https://github.com/ajmal-uk",
@@ -30,24 +28,6 @@ export default function Founder() {
                 "https://x.com/ajmal_uk_"
             ],
             "description": "Founder of UTHAKKAN and the lead developer behind PixTool. Expert in SaaS architecture, AI-driven productivity solutions, and full-stack engineering based in Kannur, Kerala."
-        },
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Founder",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/founder`
-                }
-            ]
         }
     ];
 

@@ -30,34 +30,12 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
-    const reviewSchema = [
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Testimonials",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/testimonials`
-                }
-            ]
-        }
-    ];
-
     return (
         <div className="testimonials-page">
             <SEO
                 title="Testimonials - Real User Success Stories | PixTool"
                 description="Read how creators, developers, and businesses use PixTool and UTHAKKAN products to streamline their digital workflows and protect their privacy."
                 path="/testimonials"
-                schema={reviewSchema}
             />
 
             <section className="hero" style={{ padding: '6rem 2rem 4rem' }}>

@@ -368,9 +368,12 @@ export default function PdfTools() {
         keywords={pageKeywords}
         path={canonicalPath}
         schema={pdfHubSchema}
-        toolName={activeToolData?.title}
         toolSteps={seoContent?.howTo}
         faqs={seoContent?.faq}
+        screenshot={activeToolData?.screenshot ? `${import.meta.env.VITE_SITE_URL}/screenshots/${activeToolData.screenshot}` : null}
+        imageAlt={activeToolData?.imageAlt}
+        imageTitle={activeToolData?.imageTitle}
+
         breadcrumbs={[
           { name: 'PDF Tools', item: '/pdf-tools' },
           activeToolData && { name: activeToolData.title, item: `/pdf-tools/${activeTool}` }
@@ -575,6 +578,7 @@ export default function PdfTools() {
                                   onClick={() => removeFile(idx)}
                                   className="btn-icon"
                                   style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', padding: '0.4rem', background: 'var(--bg-glass)', borderRadius: '8px', zIndex: 5 }}
+                                  aria-label={`Remove file ${file.name}`}
                                 >
                                   <X size={14} />
                                 </button>
@@ -586,6 +590,7 @@ export default function PdfTools() {
                                       disabled={idx === 0}
                                       className="btn-icon"
                                       style={{ padding: '0.4rem', background: 'var(--bg-glass)', borderRadius: '8px', opacity: idx === 0 ? 0.3 : 1 }}
+                                      aria-label={`Move ${file.name} up`}
                                     >
                                       <ChevronDown size={14} style={{ transform: 'rotate(90deg)' }} />
                                     </button>
@@ -594,6 +599,7 @@ export default function PdfTools() {
                                       disabled={idx === files.length - 1}
                                       className="btn-icon"
                                       style={{ padding: '0.4rem', background: 'var(--bg-glass)', borderRadius: '8px', opacity: idx === files.length - 1 ? 0.3 : 1 }}
+                                      aria-label={`Move ${file.name} down`}
                                     >
                                       <ChevronDown size={14} style={{ transform: 'rotate(-90deg)' }} />
                                     </button>
@@ -653,7 +659,7 @@ export default function PdfTools() {
               <div className="settings-modal-content" onClick={e => e.stopPropagation()}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
                   <h3 style={{ fontSize: '1.5rem', fontWeight: 800 }}>Settings</h3>
-                  <button className="btn-icon" onClick={() => setShowMobileSettings(false)} style={{ background: 'var(--bg-secondary)' }}><X /></button>
+                  <button className="btn-icon" onClick={() => setShowMobileSettings(false)} style={{ background: 'var(--bg-secondary)' }} aria-label="Close settings"><X /></button>
                 </div>
                 {renderSidebarSettings()}
               </div>

@@ -15,33 +15,10 @@ export default function Blog() {
             "description": "Expert insights, tutorials, and updates on AI, web development, browser-based tools, and digital productivity. Learn how to use free online tools effectively.",
             "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/blog`,
             "publisher": {
-                "@type": "Organization",
-                "name": "PixTool by UTHAKKAN",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`
-                }
+                "@id": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/#organization`
             },
             "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
             "keywords": "productivity, AI tools, web development, online tools, tutorials"
-        },
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Blog",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/blog`
-                }
-            ]
         }
     ];
 

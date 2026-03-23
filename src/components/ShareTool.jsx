@@ -37,7 +37,7 @@ export default function ShareTool({ title, url = window.location.href }) {
                 style={{
                     position: 'fixed',
                     bottom: '2rem',
-                    left: '2rem',
+                    right: '2rem',
                     width: '48px',
                     height: '48px',
                     borderRadius: '50%',
@@ -76,7 +76,7 @@ export default function ShareTool({ title, url = window.location.href }) {
                             style={{
                                 position: 'fixed',
                                 bottom: '5.5rem',
-                                left: '2rem',
+                                right: '2rem',
                                 width: '240px',
                                 background: 'var(--bg-card)',
                                 border: '1px solid var(--border-color)',

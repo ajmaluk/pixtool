@@ -26,34 +26,12 @@ const docSections = [
 ];
 
 export default function Documentation() {
-    const docsSchema = [
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/`
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Documentation",
-                    "item": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/documentation`
-                }
-            ]
-        }
-    ];
-
     return (
         <div className="docs-page">
             <SEO
                 title="Documentation - User Guides & API Documentation | PixTool"
                 description="Master PixTool with our comprehensive documentation. Detailed guides on image processing, PDF management, and upcoming API features."
                 path="/documentation"
-                schema={docsSchema}
             />
 
             <section className="hero" style={{ padding: '6rem 2rem 4rem' }}>
