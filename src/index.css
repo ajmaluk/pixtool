@@ -55,7 +55,11 @@
   --transition-premium: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: 'Outfit', var(--font-sans);
+  --font-display: var(--font-sans);
+}
+
+* {
+  font-family: var(--font-sans) !important;
 }
 
 ::selection {
