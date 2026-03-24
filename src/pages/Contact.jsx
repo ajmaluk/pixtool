@@ -24,7 +24,11 @@ export default function Contact() {
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
       console.error('Submission error:', error);
-      setErrorMessage(error?.message || 'Unable to submit now.');
+      let msg = error?.message || 'Unable to submit now.';
+      if (msg.includes('Load failed')) {
+        msg = 'Connection failed. This usually means the site is misconfigured or your browser is blocking the request. Check your internet or contact the admin.';
+      }
+      setErrorMessage(msg);
       setStatus('error');
     }
   };
