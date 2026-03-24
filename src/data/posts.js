@@ -15,7 +15,7 @@ export const posts = [
             <p>At PixTool, we’ve integrated lightweight AI processing into our core utilities, demonstrating that the future of productivity isn't about replacing humans—it's about removing the technical barriers between thought and execution.</p>
             
             <div class="blog-visual-preview">
-              <img src="/screenshots/pixtool-all-in-one-productivity-suite.png" alt="PixTool AI Productivity Suite Dashboard" style="width: 100%; border-radius: 12px; margin: 2rem 0;" />
+              <img src="/screenshots/pixtool-all-in-one-productivity-suite.png" alt="PixTool AI Productivity Suite Dashboard" width="1200" height="630" loading="lazy" style="width: 100%; border-radius: 12px; margin: 2rem 0;" />
             </div>
 
             <h2>The Death of Manual File Optimization</h2>

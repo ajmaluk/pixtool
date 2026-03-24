@@ -12,6 +12,17 @@ const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 const SITEMAP_PATH = path.join(PUBLIC_DIR, 'sitemap.xml');
 
 const lastmod = new Date().toISOString().split('T')[0];
+const escapeXml = (unsafe) => {
+  return unsafe.replace(/[<>&'"]/g, (c) => {
+    switch (c) {
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '&': return '&amp;';
+      case '\'': return '&apos;';
+      case '"': return '&quot;';
+    }
+  });
+};
 
 function generateSitemap() {
   console.log('🚀 Starting sitemap generation...');
@@ -41,11 +52,11 @@ function generateSitemap() {
       xml += `
     <image:image>
       <image:loc>${SITE_URL}${imagePath}</image:loc>
-      <image:title>${imageTitle || 'PixTool Interface'}</image:title>`;
+      <image:title>${escapeXml(imageTitle || 'PixTool Interface')}</image:title>`;
       
       if (imageCaption) {
         xml += `
-      <image:caption>${imageCaption}</image:caption>`;
+      <image:caption>${escapeXml(imageCaption)}</image:caption>`;
       }
       
       xml += `
@@ -90,7 +101,7 @@ function generateSitemap() {
     '/privacy-policy', '/terms-of-service', '/contact', '/faq', 
     '/refund-policy', '/cookie-policy', '/blog', '/testimonials', 
     '/documentation', '/sitemap', '/news', '/careers', '/case-studies',
-    '/sponsor', '/promotions', '/hire-me'
+    '/support-us', '/promotions', '/hire-me'
   ];
 
   otherPages.forEach(path => {

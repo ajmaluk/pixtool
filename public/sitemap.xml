@@ -57,8 +57,8 @@
     <priority>0.8</priority>
     <image:image>
       <image:loc>https://www.pixtool.in/screenshots/best-online-image-resizer-tool.png</image:loc>
-      <image:title>PixTool Image Resizer Interface - Professional Photo Scaling</image:title>
-      <image:caption>Resize photos by pixels or percentage — free online image resizer for social media, web, and print</image:caption>
+      <image:title>PixTool Image Resizer - Precision Scaling for High-Quality Photos</image:title>
+      <image:caption>Quickly resize images to exact dimensions or percentages using professional-grade scaling algorithms.</image:caption>
     </image:image>
   </url>
   <url>
@@ -68,8 +68,8 @@
     <priority>0.8</priority>
     <image:image>
       <image:loc>https://www.pixtool.in/screenshots/professional-image-cropper-online.png</image:loc>
-      <image:title>PixTool Image Cropper - Precision Aspect Ratio Selection</image:title>
-      <image:caption>Crop images to any aspect ratio — perfect for Instagram, YouTube thumbnails, and profile pictures</image:caption>
+      <image:title>PixTool Image Cropper - Pixel-Perfect Aspect Ratio Selection</image:title>
+      <image:caption>Precision cropping for any aspect ratio. Optimized for social media posts, thumbnails, and profile pictures.</image:caption>
     </image:image>
   </url>
   <url>
@@ -90,8 +90,8 @@
     <priority>0.8</priority>
     <image:image>
       <image:loc>https://www.pixtool.in/screenshots/high-quality-image-compressor-online.png</image:loc>
-      <image:title>PixTool Image Compressor - High Fidelity Size Reduction</image:title>
-      <image:caption>Reduce image file size by up to 80% without quality loss — optimize for web and email</image:caption>
+      <image:title>PixTool Image Compressor - High-Fidelity Size Reduction</image:title>
+      <image:caption>Intelligent image compression that reduces file size by up to 80% while retaining original visual quality.</image:caption>
     </image:image>
   </url>
   <url>
@@ -101,8 +101,8 @@
     <priority>0.8</priority>
     <image:image>
       <image:loc>https://www.pixtool.in/screenshots/online-image-format-converter-webp-png-jpg.png</image:loc>
-      <image:title>PixTool Image Converter - WebP, PNG, and JPG Transformation</image:title>
-      <image:caption>Convert images between JPEG, PNG, WebP, and GIF — free format converter</image:caption>
+      <image:title>PixTool Image Converter - Professional Format Transformation</image:title>
+      <image:caption>Seamlessly convert between JPEG, PNG, WebP, and GIF formats instantly in your browser.</image:caption>
     </image:image>
   </url>
   <url>
@@ -134,8 +134,8 @@
     <priority>0.8</priority>
     <image:image>
       <image:loc>https://www.pixtool.in/screenshots/convert-image-to-grayscale-online.png</image:loc>
-      <image:title>PixTool Grayscale Filter - Professional B&W Conversion</image:title>
-      <image:caption>Convert color images to black & white, sepia, or vintage — artistic photo effects</image:caption>
+      <image:title>PixTool Grayscale Filter - Professional B&amp;W Conversion</image:title>
+      <image:caption>Convert color images to black &amp; white, sepia, or vintage — artistic photo effects</image:caption>
     </image:image>
   </url>
   <url>
@@ -189,8 +189,8 @@
     <priority>0.8</priority>
     <image:image>
       <image:loc>https://www.pixtool.in/screenshots/fast-pdf-merger-no-upload-pixtool.png</image:loc>
-      <image:title>PixTool PDF Merger - Secure multi-file document joining</image:title>
-      <image:caption>Combine multiple PDF files into one document — free online PDF merger with drag-and-drop</image:caption>
+      <image:title>PixTool PDF Merger - Secure and Fast Multi-File Joining</image:title>
+      <image:caption>Combine multiple PDF documents into a single professional file instantly. Reorder pages with ease.</image:caption>
     </image:image>
   </url>
   <url>
@@ -200,8 +200,8 @@
     <priority>0.8</priority>
     <image:image>
       <image:loc>https://www.pixtool.in/screenshots/split-pdf-pages-online-securely.png</image:loc>
-      <image:title>PixTool PDF Splitter - Precision page extraction</image:title>
-      <image:caption>Extract specific pages or split PDF into separate files — no upload required</image:caption>
+      <image:title>PixTool PDF Splitter - Professional Page Extraction Tool</image:title>
+      <image:caption>Extract specific pages or separate your PDF into multiple documents with pixel-perfect precision.</image:caption>
     </image:image>
   </url>
   <url>
@@ -211,8 +211,8 @@
     <priority>0.8</priority>
     <image:image>
       <image:loc>https://www.pixtool.in/screenshots/optimize-pdf-file-size-online.png</image:loc>
-      <image:title>PixTool PDF Compressor - Efficiency size optimization</image:title>
-      <image:caption>Reduce PDF file size by up to 90% while maintaining document quality</image:caption>
+      <image:title>PixTool PDF Compressor - Efficient Document Size Optimization</image:title>
+      <image:caption>Optimize PDF file sizes for email and web while maintaining high document fidelity and clarity.</image:caption>
     </image:image>
   </url>
   <url>
@@ -767,7 +767,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.pixtool.in/sponsor</loc>
+    <loc>https://www.pixtool.in/support-us</loc>
     <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

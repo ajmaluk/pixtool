@@ -40,7 +40,7 @@ export default function Navbar() {
     '/cookie-policy', '/refund-policy', '/faq', '/contact', 
     '/documentation', '/testimonials', '/founder', '/developer',
     '/services', '/products', '/news', '/case-studies',
-    '/sponsor', '/promotions', '/hire-me', '/careers', '/thank-you', '/sitemap'
+    '/support-us', '/promotions', '/hire-me', '/careers', '/thank-you', '/sitemap'
   ]
   const isMoreActive = morePaths.includes(location.pathname) || location.pathname.startsWith('/blog/')
 
@@ -128,7 +128,9 @@ export default function Navbar() {
             src="/logo.png" 
             alt="PixTool Logo" 
             className="navbar-logo-img" 
-            style={{ height: '32px', width: 'auto' }}
+            width="32"
+            height="32"
+            style={{ height: '32px', width: '32px', objectFit: 'contain' }}
           />
           <span className="navbar-logo-text">PixTool</span>
         </Link>
@@ -225,8 +227,8 @@ export default function Navbar() {
                      <NavLink to="/promotions" className="dropdown-item dense" onClick={() => setShowMore(false)}>
                         <Gift size={15} /> Promotions
                       </NavLink>
-                      <NavLink to="/sponsor" className="dropdown-item dense" onClick={() => setShowMore(false)}>
-                        <Rocket size={15} /> Sponsor
+                      <NavLink to="/support-us" className="dropdown-item dense" onClick={() => setShowMore(false)}>
+                        <Rocket size={15} /> Support Us
                       </NavLink>
                       <NavLink to="/hire-me" className="dropdown-item dense" onClick={() => setShowMore(false)}>
                         <Star size={15} /> Hire Us

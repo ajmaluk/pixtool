@@ -7,16 +7,16 @@ import {
 export const IMAGE_TOOLS = [
   { 
     id: 'resize', title: 'Resize Image', icon: Maximize2, 
-    description: 'Resize photos by pixels or percentage — free online image resizer for social media, web, and print', 
+    description: 'Quickly resize images to exact dimensions or percentages using professional-grade scaling algorithms.', 
     color: '#a855f7', path: '/image-tools/resize', screenshot: 'best-online-image-resizer-tool.png',
-    imageAlt: 'PixTool Image Resizer Interface - Professional Photo Scaling',
+    imageAlt: 'PixTool Image Resizer - Precision Scaling for High-Quality Photos',
     imageTitle: 'Resize Images Online with PixTool'
   },
   { 
     id: 'crop', title: 'Crop Image', icon: Crop, 
-    description: 'Crop images to any aspect ratio — perfect for Instagram, YouTube thumbnails, and profile pictures', 
+    description: 'Precision cropping for any aspect ratio. Optimized for social media posts, thumbnails, and profile pictures.', 
     color: '#a855f7', path: '/image-tools/crop', screenshot: 'professional-image-cropper-online.png',
-    imageAlt: 'PixTool Image Cropper - Precision Aspect Ratio Selection',
+    imageAlt: 'PixTool Image Cropper - Pixel-Perfect Aspect Ratio Selection',
     imageTitle: 'Crop Photos for Social Media'
   },
   { 
@@ -28,16 +28,16 @@ export const IMAGE_TOOLS = [
   },
   { 
     id: 'compress', title: 'Compress Image', icon: FileArchive, 
-    description: 'Reduce image file size by up to 80% without quality loss — optimize for web and email', 
+    description: 'Intelligent image compression that reduces file size by up to 80% while retaining original visual quality.', 
     color: '#a855f7', path: '/image-tools/compress', screenshot: 'high-quality-image-compressor-online.png',
-    imageAlt: 'PixTool Image Compressor - High Fidelity Size Reduction',
+    imageAlt: 'PixTool Image Compressor - High-Fidelity Size Reduction',
     imageTitle: 'Optimize Images for Web Performance'
   },
   { 
     id: 'convert', title: 'Convert Format', icon: RefreshCw, 
-    description: 'Convert images between JPEG, PNG, WebP, and GIF — free format converter', 
+    description: 'Seamlessly convert between JPEG, PNG, WebP, and GIF formats instantly in your browser.', 
     color: '#a855f7', path: '/image-tools/convert', screenshot: 'online-image-format-converter-webp-png-jpg.png',
-    imageAlt: 'PixTool Image Converter - WebP, PNG, and JPG Transformation',
+    imageAlt: 'PixTool Image Converter - Professional Format Transformation',
     imageTitle: 'Convert Image Formats Instantly'
   },
   { 
@@ -94,23 +94,23 @@ export const IMAGE_TOOLS = [
 export const PDF_TOOLS = [
   { 
     id: 'merge', title: 'Merge PDF', icon: FilePlus, 
-    description: 'Combine multiple PDF files into one document — free online PDF merger with drag-and-drop', 
+    description: 'Combine multiple PDF documents into a single professional file instantly. Reorder pages with ease.', 
     color: '#06b6d4', path: '/pdf-tools/merge', screenshot: 'fast-pdf-merger-no-upload-pixtool.png',
-    imageAlt: 'PixTool PDF Merger - Secure multi-file document joining',
+    imageAlt: 'PixTool PDF Merger - Secure and Fast Multi-File Joining',
     imageTitle: 'Merge PDF Files Online'
   },
   { 
     id: 'split', title: 'Split PDF', icon: SplitSquareHorizontal, 
-    description: 'Extract specific pages or split PDF into separate files — no upload required', 
+    description: 'Extract specific pages or separate your PDF into multiple documents with pixel-perfect precision.', 
     color: '#06b6d4', path: '/pdf-tools/split', screenshot: 'split-pdf-pages-online-securely.png',
-    imageAlt: 'PixTool PDF Splitter - Precision page extraction',
+    imageAlt: 'PixTool PDF Splitter - Professional Page Extraction Tool',
     imageTitle: 'Split and Extract PDF Pages'
   },
   { 
     id: 'compress', title: 'Compress PDF', icon: FileCheck, 
-    description: 'Reduce PDF file size by up to 90% while maintaining document quality', 
+    description: 'Optimize PDF file sizes for email and web while maintaining high document fidelity and clarity.', 
     color: '#06b6d4', path: '/pdf-tools/compress', screenshot: 'optimize-pdf-file-size-online.png',
-    imageAlt: 'PixTool PDF Compressor - Efficiency size optimization',
+    imageAlt: 'PixTool PDF Compressor - Efficient Document Size Optimization',
     imageTitle: 'Compress PDF Online'
   },
   { 

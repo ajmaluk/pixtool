@@ -1,9 +1,15 @@
+# Optimized robots.txt for PixTool
 User-agent: *
 Allow: /
-Disallow: /pix-admin
+Allow: /image-tools/
+Allow: /pdf-tools/
+Allow: /utility-tools/
 Disallow: /pix-admin/
-Disallow: /pix-admin/*
-Disallow: /api/*
+Disallow: /api/
+Disallow: /?q=*
+
+# Multi-country sitemap references
+Sitemap: https://www.pixtool.in/sitemap.xml
 
 # AI & LLM Crawlers (Generative AI Engine Optimization)
 User-agent: GPTBot

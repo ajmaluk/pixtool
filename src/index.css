@@ -25,7 +25,7 @@
 
   --text-primary: #0f172a;
   --text-secondary: #475569;
-  --text-muted: #94a3b8;
+  --text-muted: #64748b;
 
   --border-color: rgba(226, 232, 240, 0.8);
   --border-hover: #cbd5e1;
@@ -63,6 +63,17 @@
   color: var(--accent-primary);
 }
 
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 4px;
+}
+
+/* Ensure buttons and links have a clear focus state even if outline is overridden */
+a:focus-visible, 
+button:focus-visible {
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
 .dark {
   --bg-primary: #020617;
   --bg-secondary: #0f172a;
@@ -72,7 +83,7 @@
 
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
-  --text-muted: #475569;
+  --text-muted: #718096;
 
   --border-color: rgba(30, 41, 59, 0.7);
   --border-hover: #334155;
@@ -385,17 +396,19 @@ h6 {
 }
 
 .icon-btn {
-  background: transparent;
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
   cursor: pointer;
   transition: var(--transition);
+  padding: 0;
 }
 
 .icon-btn:hover {
@@ -1124,7 +1137,8 @@ h6 {
   border-radius: var(--radius-xl);
   padding: clamp(2rem, 5vw, 4rem);
   box-shadow: var(--shadow-xl);
-  max-width: 1000px;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   position: relative;
   overflow: hidden;

@@ -36,7 +36,7 @@ const Testimonials = lazy(() => import('./pages/Testimonials'))
 const Documentation = lazy(() => import('./pages/Documentation'))
 const Careers = lazy(() => import('./pages/Careers'))
 const CaseStudies = lazy(() => import('./pages/CaseStudies'))
-const Sponsor = lazy(() => import('./pages/Sponsor'))
+const SupportUs = lazy(() => import('./pages/SupportUs'))
 const Promotions = lazy(() => import('./pages/Promotions'))
 const HireMe = lazy(() => import('./pages/HireMe'))
 const ThankYou = lazy(() => import('./pages/ThankYou'))
@@ -233,7 +233,7 @@ const MainLayout = () => {
       <RatingOverlay />
       {!isAdminPath && <Navbar />}
       <main className="main-content" style={isAdminPath ? { paddingTop: 0 } : {}}>
-        <ErrorBoundary>
+        <ErrorBoundary key={location.pathname}>
           <Suspense fallback={<PageLoader />}>
             <Outlet />
           </Suspense>
@@ -447,7 +447,8 @@ function App() {
           <Route path="/documentation" element={<Documentation />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/case-studies" element={<CaseStudies />} />
-          <Route path="/sponsor" element={<Sponsor />} />
+          <Route path="/sponsor" element={<Navigate to="/support-us" replace />} />
+          <Route path="/support-us" element={<SupportUs />} />
           <Route path="/promotions" element={<Promotions />} />
           <Route path="/hire-me" element={<HireMe />} />
           <Route path="/thank-you" element={<ThankYou />} />

@@ -35,7 +35,7 @@ const staticRoutes = [
   '/documentation',
   '/careers',
   '/case-studies',
-  '/sponsor',
+  '/support-us',
   '/promotions',
   '/hire-me',
   '/sitemap',

@@ -81,12 +81,12 @@ export default function SEO({
 
     // Enhanced keywords based on page type and tool
     const enhancedKeywords = useMemo(() => {
-        const baseKeywords = 'free online tools 2026, browser-based productivity suite, no upload tools, privacy-first web apps, online PDF editor, free image editor, daily tools, best online utilities 2026, secure browser tools, local-first web apps'
+        const baseKeywords = 'browser-based productivity suite, privacy-first web apps, local file processing, secure online utilities, developer tools, professional document management'
         const toolKeywords = {
-            'image-tools': 'resize image online for social media, best free image resizer 2026, compress PNG without quality loss, convert HEIC to JPG online, batch image resizer free, professional image editor browser, optimize images for web performance',
-            'pdf-tools': 'merge multiple PDF files into one free, split PDF by pages online, compress PDF for email, password protect PDF online secure, watermark PDF documents free, PDF to image converter high res, adobe acrobat alternative 2026, reduce PDF file size online',
-            'temp-mail': 'disposable temporary email generator, 10 minute mail free secure, anonymous email inbox for signups, protect inbox from spam 2026, throwaway email account instant, fake email creator for testing',
-            'qr': 'secure QR code generator with logo, safe QR scanner browser online, create QR for wifi and link, custom branded QR codes free, QR reader no download'
+            'image-tools': 'professional image editing, high-fidelity photo scaling, batch image optimization, local image conversion, privacy-focused photo editor',
+            'pdf-tools': 'secure pdf management, client-side pdf merging, local pdf encryption, professional document splitting, high-performance pdf compression',
+            'temp-mail': 'anonymous temporary email, secure disposable inbox, privacy-first mail generator, professional burner email services',
+            'qr': 'branded qr code generator, secure offline qr scanner, local qr code creation, privacy-focused qr tools'
         }
 
         const matchedKeywords = []

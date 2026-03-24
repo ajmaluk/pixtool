@@ -8,20 +8,21 @@ export default defineConfig({
     minify: 'esbuild',
     cssCodeSplit: true,
     sourcemap: false,
+    reportCompressedSize: false,
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          utils: ['lucide-react', 'framer-motion'],
-          qr: ['qrcode.react'],
-          pdf: ['pdf-lib', 'pdfjs-dist']
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-utils': ['lucide-react', 'framer-motion'],
+          'tool-qr': ['qrcode.react'],
+          'tool-pdf': ['pdf-lib', 'pdfjs-dist']
         },
         chunkFileNames: 'assets/[name]-[hash].js',
         entryFileNames: 'assets/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash].[ext]'
       }
     },
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1500
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom', 'lucide-react', 'framer-motion', 'qrcode.react'],

@@ -2,13 +2,13 @@ import React from 'react';
 import SEO from '../components/SEO';
 import { Heart, Coffee, Star, ShieldCheck, Zap, Globe } from 'lucide-react';
 
-export default function Sponsor() {
+export default function SupportUs() {
     return (
         <div className="sponsor-page">
             <SEO
                 title="Sponsor & Support Our Mission | PixTool"
                 description="Help us keep PixTool free, private, and accessible for everyone. Support our mission through one-time donations or monthly sponsorships."
-                path="/sponsor"
+                path="/support-us"
             />
 
             <section className="hero" style={{ padding: '6rem 2rem 4rem' }}>
