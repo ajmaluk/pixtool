@@ -122,6 +122,7 @@ export default function Contact() {
                     className="input"
                     placeholder="Ajmal"
                     required
+                    minLength={2}
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   />
@@ -146,6 +147,7 @@ export default function Contact() {
                     style={{ minHeight: '140px', resize: 'vertical', paddingTop: '0.8rem' }}
                     placeholder="How can we help you?"
                     required
+                    minLength={5}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   />

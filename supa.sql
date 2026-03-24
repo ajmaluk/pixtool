@@ -476,7 +476,10 @@ insert into tools (name, slug) values
   ('QR Scanner', 'qr-scanner'),
   ('QR Generator', 'qr-generator'),
   ('Typing Test', 'typing-test'),
-  ('Code Diff', 'code-diff')
+  ('Code Diff', 'code-diff'),
+  ('JSON Formatter', 'json-formatter'),
+  ('Unit Converter', 'unit-converter'),
+  ('Password Generator', 'password-generator')
 on conflict (slug) do nothing;
 
 -- Setup complete.

@@ -5,6 +5,7 @@ import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
 import Breadcrumbs from '../components/Breadcrumbs'
+import { useRatePopup } from '../hooks/useRatePopup'
 import { UTILITY_READ_NEXT } from '../data/utilityToolsData'
 import ShareTool from '../components/ShareTool'
 
@@ -17,6 +18,7 @@ const qrTypes = [
 ]
 
 export default function QrGenerator() {
+  const { triggerRating } = useRatePopup()
   const [activeType, setActiveType] = useState('url')
   const [data, setData] = useState({
     url: '',
@@ -74,6 +76,7 @@ export default function QrGenerator() {
       link.download = `qrcode-${Date.now()}.png`
       link.href = canvas.toDataURL('image/png')
       link.click()
+      triggerRating('qr-generator')
     }
 
     img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)))
@@ -105,6 +108,7 @@ export default function QrGenerator() {
     canvas.toBlob(async (blob) => {
       try {
         await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+        triggerRating('qr-generator')
         setToast({ show: true, message: 'QR Code copied to clipboard!' })
         setTimeout(() => setToast({ show: false, message: '' }), 3000)
       } catch {

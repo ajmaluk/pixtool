@@ -49,6 +49,9 @@ const formatSupabaseError = (error, fallbackMessage = 'Request failed') => {
   if (error.code === '23505' || /duplicate|unique/i.test(message)) {
     return 'Already submitted.';
   }
+  if (/row-level security policy/i.test(message)) {
+    return 'Permission denied. Please ensure your message is at least 5 characters long.';
+  }
   if (/rate limited/i.test(message)) {
     return 'Too many requests. Please try again shortly.';
   }

@@ -3,10 +3,12 @@ import { useParams, Link } from 'react-router-dom';
 import { posts } from '../data/posts';
 import SEO from '../components/SEO';
 import { Calendar, ArrowLeft, Share2, Clock, ArrowRight } from 'lucide-react';
+import { useAlert } from '../context/ConfirmContext';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 
 export default function BlogPost() {
+    const alert = useAlert();
     const { slug } = useParams();
 
     const post = useMemo(() => posts.find(p => p.slug === slug), [slug]);
@@ -344,7 +346,11 @@ export default function BlogPost() {
                                         }).catch(() => { });
                                     } else {
                                         navigator.clipboard.writeText(shareUrl);
-                                        alert('Link copied to clipboard!');
+                                        alert({
+                                            title: 'Link Copied',
+                                            message: 'Article link has been copied to your clipboard!',
+                                            type: 'success'
+                                        });
                                     }
                                 }}
                             >

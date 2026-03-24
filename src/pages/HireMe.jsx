@@ -1,8 +1,10 @@
 import React from 'react';
 import SEO from '../components/SEO';
 import { Briefcase, Code, Terminal, MessageSquare, Send, CheckCircle2 } from 'lucide-react';
+import { useAlert } from '../context/ConfirmContext';
 
 export default function HireMe() {
+    const alert = useAlert();
     return (
         <div className="hire-me-page">
             <SEO
@@ -79,7 +81,7 @@ export default function HireMe() {
                                 <p style={{ color: 'var(--text-secondary)' }}>Describe your vision and I'll get back to you within 24 hours.</p>
                             </div>
 
-                            <form onSubmit={(e) => { e.preventDefault(); alert("Feature coming soon! Please use email."); }} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                            <form onSubmit={(e) => { e.preventDefault(); alert({ title: 'Coming Soon', message: "This feature is coming soon! For now, please reach out directly via email at contact@uthakkan.com", type: 'warning' }); }} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                                 <div className="input-group">
                                     <label className="input-label">Project Name</label>
                                     <input type="text" className="input" placeholder="e.g. My Awesome SaaS" required />

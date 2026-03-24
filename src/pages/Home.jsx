@@ -6,7 +6,7 @@ import SEO from '../components/SEO'
 import {
   Image, FileText,
   Shield, Wifi, Search, X, Zap, Lock,
-  Navigation
+  Navigation, Sparkles
 } from 'lucide-react'
 import ToolCard from '../components/ToolCard'
 import OverallRatingBadge from '../components/OverallRatingBadge'
@@ -96,6 +96,10 @@ export default function Home() {
     {
       q: "Can I merge, split, and compress PDFs?",
       a: "Yes! We offer tools to Merge, Split, Compress, Convert PDF to Image, Password Protect, Watermark, and Reorder PDF pages — all without uploading your files."
+    },
+    {
+      q: "What professional utilities does PixTool offer?",
+      a: "Beyond image and PDF tools, we provide a JSON Formatter & Validator, Unit Converter, Password Generator, QR tools, and more — all designed for professional speed and 100% privacy."
     }
   ]
 
@@ -308,7 +312,7 @@ export default function Home() {
                     We couldn't find any tools for <strong>"{searchTerm}"</strong>. Try searching for broader terms like "Image", "PDF", or "Email".
                   </p>
                   <button className="btn btn-primary" style={{ marginTop: '2.5rem', padding: '1rem 2.5rem' }} onClick={() => { setSearchTerm(''); setSearchParams({}); }}>
-                    Explore All 18 Tools
+                    Explore All {allTools.length} Tools
                   </button>
                 </div>
               )}
@@ -321,11 +325,137 @@ export default function Home() {
                 </div>
                 <h2 style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '-0.02em' }}>Professional Tools Suite</h2>
               </div>
-              <div className="tools-grid">
-                {mixedTools.map((tool) => (
-                  <ToolCard key={tool.path} tool={tool} />
-                ))}
-              </div>
+
+              {/* New & Trending Category */}
+              {!isSearching && (
+                <section style={{ marginBottom: '6rem', position: 'relative' }}>
+                  <div style={{ 
+                    position: 'sticky', 
+                    top: '80px', 
+                    zIndex: 10,
+                    background: 'rgba(var(--bg-primary-rgb), 0.8)',
+                    backdropFilter: 'blur(12px)',
+                    padding: '1.5rem 0',
+                    marginBottom: '2rem',
+                    borderBottom: '1px solid var(--border-color)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '1rem'
+                  }}>
+                    <div style={{ padding: '0.6rem', background: 'rgba(168, 85, 247, 0.08)', borderRadius: '12px', color: '#a855f7' }}>
+                      <Sparkles size={24} />
+                    </div>
+                    <div>
+                      <h2 style={{ fontSize: '1.8rem', fontWeight: 900, margin: 0, letterSpacing: '-0.02em' }}>New & Trending <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, marginLeft: '0.5rem' }}>(Latest Tools)</span></h2>
+                    </div>
+                  </div>
+                  <div className="tools-grid">
+                    {communicationTools.filter(t => ['json-formatter', 'unit-converter', 'password-generator'].includes(t.id)).map(tool => (
+                      <ToolCard key={tool.path} tool={tool} featured={true} />
+                    ))}
+                  </div>
+                </section>
+              )}
+              {/* Image Tools Category */}
+              {!isSearching && (
+                <section style={{ marginBottom: '6rem', position: 'relative' }}>
+                  <div style={{ 
+                    position: 'sticky', 
+                    top: '80px', 
+                    zIndex: 10,
+                    background: 'rgba(var(--bg-primary-rgb), 0.8)',
+                    backdropFilter: 'blur(12px)',
+                    padding: '1.5rem 0',
+                    marginBottom: '2rem',
+                    borderBottom: '1px solid var(--border-color)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '1rem'
+                  }}>
+                    <div style={{ padding: '0.6rem', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '12px', color: '#3b82f6' }}>
+                      <Image size={24} />
+                    </div>
+                    <div>
+                      <h2 style={{ fontSize: '1.8rem', fontWeight: 900, margin: 0, letterSpacing: '-0.02em' }}>Image Processing <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, marginLeft: '0.5rem' }}>({imageTools.length} Tools)</span></h2>
+                    </div>
+                  </div>
+                  <div className="tools-grid">
+                    {imageTools.map((tool) => (
+                      <ToolCard 
+                        key={tool.path} 
+                        tool={tool} 
+                        featured={['upscale', 'restore', 'remove-background'].includes(tool.id)} 
+                      />
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* PDF Tools Category */}
+              {!isSearching && (
+                <section style={{ marginBottom: '6rem', position: 'relative' }}>
+                  <div style={{ 
+                    position: 'sticky', 
+                    top: '80px', 
+                    zIndex: 10,
+                    background: 'rgba(var(--bg-primary-rgb), 0.8)',
+                    backdropFilter: 'blur(12px)',
+                    padding: '1.5rem 0',
+                    marginBottom: '2rem',
+                    borderBottom: '1px solid var(--border-color)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '1rem'
+                  }}>
+                    <div style={{ padding: '0.6rem', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '12px', color: '#ef4444' }}>
+                      <FileText size={24} />
+                    </div>
+                    <div>
+                      <h2 style={{ fontSize: '1.8rem', fontWeight: 900, margin: 0, letterSpacing: '-0.02em' }}>PDF Management <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, marginLeft: '0.5rem' }}>({pdfTools.length} Tools)</span></h2>
+                    </div>
+                  </div>
+                  <div className="tools-grid">
+                    {pdfTools.map((tool) => (
+                      <ToolCard key={tool.path} tool={tool} />
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Utility Tools Category */}
+              {!isSearching && (
+                <section style={{ marginBottom: '6rem', position: 'relative' }}>
+                  <div style={{ 
+                    position: 'sticky', 
+                    top: '80px', 
+                    zIndex: 10,
+                    background: 'rgba(var(--bg-primary-rgb), 0.8)',
+                    backdropFilter: 'blur(12px)',
+                    padding: '1.5rem 0',
+                    marginBottom: '2rem',
+                    borderBottom: '1px solid var(--border-color)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '1rem'
+                  }}>
+                    <div style={{ padding: '0.6rem', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '12px', color: '#10b981' }}>
+                      <Zap size={24} />
+                    </div>
+                    <div>
+                      <h2 style={{ fontSize: '1.8rem', fontWeight: 900, margin: 0, letterSpacing: '-0.02em' }}>Professional Utilities <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, marginLeft: '0.5rem' }}>({communicationTools.length} Tools)</span></h2>
+                    </div>
+                  </div>
+                  <div className="tools-grid">
+                    {communicationTools.map((tool) => (
+                      <ToolCard 
+                        key={tool.path} 
+                        tool={tool} 
+                        featured={['json-formatter', 'unit-converter', 'password-generator'].includes(tool.id)} 
+                      />
+                    ))}
+                  </div>
+                </section>
+              )}
             </>
           )}
         </div>

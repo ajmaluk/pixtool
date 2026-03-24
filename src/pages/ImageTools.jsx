@@ -15,6 +15,8 @@ import ComingSoon from '../components/ComingSoon'
 import { processImageFile } from '../utils/canvasUtils'
 import { imageFilesToPdf, downloadBlob } from '../utils/pdfUtils'
 import ToolCard from '../components/ToolCard'
+import { useRatePopup } from '../hooks/useRatePopup'
+import { useConfirm, useAlert } from '../context/ConfirmContext'
 
 const tools = IMAGE_TOOLS;
 
@@ -22,16 +24,39 @@ const tools = IMAGE_TOOLS;
 export default function ImageTools() {
   const { toolId } = useParams()
   const navigate = useNavigate()
-  const initialTool = tools.find(t => t.id === toolId)?.id || 'resize'
+  const { triggerRating } = useRatePopup()
+  const confirm = useConfirm()
+  const alert = useAlert()
+  const initialTool = tools.find(t => t.id === toolId)?.id || null
   const [activeTool, setActiveTool] = useState(initialTool)
+
+  useEffect(() => {
+    if (toolId && tools.find(t => t.id === toolId)) {
+      setActiveTool(toolId)
+    } else {
+      setActiveTool(null)
+    }
+  }, [toolId])
   const { files, setFiles, preview, handleFiles, handleDrop, removeFile } = useFileDrop(['image/'])
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [processedPreview, setProcessedPreview] = useState(null)
+  const [isProcessing, setIsProcessing] = useState(false)
   const [crop, setCrop] = useState({ unit: 'px', width: 0, height: 0, x: 0, y: 0 })
   const imgRef = useRef(null)
   const [processing, setProcessing] = useState(false)
   const [zoom, setZoom] = useState(1)
   const [touchStart, setTouchStart] = useState(null)
   const [touchEnd, setTouchEnd] = useState(null)
+  const galleryRef = useRef(null)
+
+  const objectUrls = useMemo(() => files.map(f => URL.createObjectURL(f)), [files])
+  const selectedImageUrl = objectUrls[selectedIndex]
+
+  useEffect(() => {
+    return () => {
+      objectUrls.forEach(url => URL.revokeObjectURL(url))
+    }
+  }, [objectUrls])
 
   // the required distance between touchStart and touchEnd to be considered a swipe
   const minSwipeDistance = 50
@@ -86,8 +111,14 @@ export default function ImageTools() {
       <button
         className="btn btn-secondary"
         style={{ width: '100%', marginBottom: '1rem', padding: '0.75rem', fontSize: '0.9rem' }}
-        onClick={() => {
-          if (confirm('Reset all settings to default?')) {
+        onClick={async () => {
+          const ok = await confirm({
+            title: 'Reset Settings?',
+            message: 'Are you sure you want to reset all image processing settings to their defaults?',
+            confirmText: 'Reset Now',
+            type: 'warning'
+          });
+          if (ok) {
             setSettings({
               width: 800,
               height: 600,
@@ -463,36 +494,6 @@ export default function ImageTools() {
     brushMode: 'erase' // 'erase' or 'restore'
   })
   const fileInputRef = useRef(null)
-  const galleryRef = useRef(null)
-
-  useEffect(() => {
-    if (toolId) {
-      const validTool = tools.find(t => t.id === toolId)
-      if (validTool) {
-        setActiveTool(toolId)
-      } else {
-        navigate('/image-tools')
-      }
-    }
-  }, [toolId, navigate])
-
-  // Manage Object URLs for previews to prevent memory leaks
-  const [objectUrls, setObjectUrls] = useState([])
-
-  useEffect(() => {
-    // Create new URLs
-    const urls = files.map(file => URL.createObjectURL(file))
-    setObjectUrls(urls)
-
-    // Revoke old URLs on cleanup
-    return () => {
-      urls.forEach(url => URL.revokeObjectURL(url))
-    }
-  }, [files])
-
-  const selectedImageUrl = useMemo(() => {
-    return objectUrls[selectedIndex] || null
-  }, [objectUrls, selectedIndex])
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -521,17 +522,17 @@ export default function ImageTools() {
   }, [toolId, navigate])
 
   const handleFileSelect = (e) => {
-     if (e.target.files.length > 0) {
-       handleFiles(Array.from(e.target.files))
-     }
-   }
+    if (e.target.files.length > 0) {
+      handleFiles(Array.from(e.target.files))
+    }
+  }
 
-   const handleRemoveFile = (index) => {
-     removeFile(index)
-     if (selectedIndex >= files.length - 1) {
-       setSelectedIndex(Math.max(0, files.length - 2))
-     }
-   }
+  const handleRemoveFile = (index) => {
+    removeFile(index)
+    if (selectedIndex >= files.length - 1) {
+      setSelectedIndex(Math.max(0, files.length - 2))
+    }
+  }
 
   const onImageLoad = (e) => {
     const { width, height } = e.currentTarget;
@@ -611,6 +612,43 @@ export default function ImageTools() {
   };
 
   // Image processing logic will be extracted to canvasUtils.js in the next phase
+  useEffect(() => {
+    return () => {
+      if (processedPreview) URL.revokeObjectURL(processedPreview)
+    }
+  }, [processedPreview])
+
+  // Real-time preview effect
+  useEffect(() => {
+    const activeFile = files[selectedIndex]
+    if (!activeFile || activeTool === 'image-to-pdf' || activeFile.size > 10 * 1024 * 1024) {
+      setProcessedPreview(null)
+      return
+    }
+
+    const timer = setTimeout(async () => {
+      try {
+        setIsProcessing(true)
+        // For crop, we use ReactCrop's own preview, so we don't re-process here to avoid flickering
+        if (activeTool === 'crop') {
+          setProcessedPreview(null)
+          setIsProcessing(false)
+          return
+        }
+
+        const { blob } = await processImageFile(activeFile, activeTool, settings)
+        const url = URL.createObjectURL(blob)
+        setProcessedPreview(url)
+      } catch (err) {
+        console.error('Preview processing error:', err)
+      } finally {
+        setIsProcessing(false)
+      }
+    }, 400) // 400ms debounce
+
+    return () => clearTimeout(timer)
+  }, [files, selectedIndex, activeTool, settings])
+
   const processImage = async () => {
     if (files.length === 0) return
     setProcessing(true)
@@ -622,6 +660,7 @@ export default function ImageTools() {
           margin: settings.pdfMargin
         })
         downloadBlob(new Blob([pdfBytes], { type: 'application/pdf' }), `images-${Date.now()}.pdf`)
+        triggerRating('image-tools/image-to-pdf')
         return
       }
 
@@ -634,9 +673,16 @@ export default function ImageTools() {
         a.click()
         setTimeout(() => URL.revokeObjectURL(url), 100)
       }
+
+      // Trigger rating popup after successful tool use
+      triggerRating(`image-tools/${activeTool}`)
     } catch (error) {
       console.error('Processing error:', error)
-      alert('Error processing images. Please ensure your dimensions are within image bounds.')
+      await alert({
+        title: 'Processing Error',
+        message: 'Error processing images. Please ensure your dimensions are within image bounds.',
+        type: 'danger'
+      });
     } finally {
       setProcessing(false)
     }
@@ -660,25 +706,25 @@ export default function ImageTools() {
 
   const imageHubSchema = activeTool ? null : [
     {
-        "@context": "https://schema.org",
-        "@type": "CollectionPage",
-        "name": "Free Online Image Studio - PixTool",
-        "description": pageDescription,
-        "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools`
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Free Online Image Studio - PixTool",
+      "description": pageDescription,
+      "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools`
     },
     {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "itemListElement": tools.map((tool, index) => ({
-            "@type": "ListItem",
-            "position": index + 1,
-            "item": {
-                "@type": "SoftwareApplication",
-                "name": tool.title,
-                "description": tool.description,
-                "applicationCategory": "MultimediaApplication"
-            }
-        }))
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": tools.map((tool, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": tool.title,
+          "description": tool.description,
+          "applicationCategory": "MultimediaApplication"
+        }
+      }))
     }
   ];
 
@@ -1167,27 +1213,33 @@ export default function ImageTools() {
         )}
 
         {activeTool !== 'image-to-pdf' && activeTool !== 'remove-background' && (
-        <div className="input-group">
-          <label className="input-label">Save As</label>
-          <select
-            className="select"
-            value={settings.format}
-            onChange={(e) => setSettings({ ...settings, format: e.target.value })}
-          >
-            <option value="original">Original Format</option>
-            <option value="png">PNG</option>
-            <option value="jpg">JPG</option>
-            <option value="webp">WebP</option>
-          </select>
-        </div>
+          <div className="input-group">
+            <label className="input-label">Save As</label>
+            <select
+              className="select"
+              value={settings.format}
+              onChange={(e) => setSettings({ ...settings, format: e.target.value })}
+            >
+              <option value="original">Original Format</option>
+              <option value="png">PNG</option>
+              <option value="jpg">JPG</option>
+              <option value="webp">WebP</option>
+            </select>
+          </div>
         )}
       </div>
 
       <button
         className="btn btn-secondary"
         style={{ width: '100%', marginBottom: '1rem' }}
-        onClick={() => {
-          if (confirm('Reset all settings to default?')) {
+        onClick={async () => {
+          const ok = await confirm({
+            title: 'Reset Settings?',
+            message: 'Are you sure you want to reset all image processing settings to their defaults?',
+            confirmText: 'Reset Now',
+            type: 'warning'
+          });
+          if (ok) {
             setSettings({
               width: 800,
               height: 600,
@@ -1372,7 +1424,7 @@ export default function ImageTools() {
               <div className="landing-center">
                 <AdSpace type="top" />
 
-                {!preview ? (
+                {files.length === 0 ? (
                   <>
                     <div className="page-hero">
                       <div className="page-hero-content">
@@ -1446,15 +1498,20 @@ export default function ImageTools() {
 
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }} className="mobile-hide-header">
-                          <h3 style={{ fontSize: '1.25rem', fontWeight: 900, margin: 0 }}>
+                          <h3 style={{ fontSize: '1.05rem', fontWeight: 900, margin: 0 }}>
                             Files ({files.length})
                           </h3>
-                          <span className="preview-badge">
-                            {files[selectedIndex]?.name}
-                          </span>
                         </div>
                         <div style={{ display: 'flex', gap: '0.75rem' }}>
-                          <button className="btn btn-secondary" onClick={() => { if(confirm('Clear all files?')) { setFiles([]); setSelectedIndex(0); } }} style={{ padding: '0.6rem 1rem', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderColor: 'transparent' }}>
+                          <button className="btn btn-secondary" onClick={async () => {
+                            const ok = await confirm({
+                              title: 'Clear All Files?',
+                              message: 'Are you sure you want to remove all uploaded images?',
+                              confirmText: 'Clear All',
+                              type: 'danger'
+                            });
+                            if (ok) { setFiles([]); setSelectedIndex(0); }
+                          }} style={{ padding: '0.6rem 1rem', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderColor: 'transparent' }}>
                             <X size={18} /> Clear
                           </button>
                           <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.6rem 1.25rem' }}>
@@ -1485,7 +1542,8 @@ export default function ImageTools() {
                               crop={crop}
                               onChange={onCropChange}
                               onComplete={onCropComplete}
-                              aspect={crop.aspect}
+                              aspect={settings.maintainAspect ? crop.aspect : undefined}
+                              ruleOfThirds
                             >
                               <img
                                 ref={imgRef}
@@ -1497,16 +1555,26 @@ export default function ImageTools() {
                               />
                             </ReactCrop>
                           ) : selectedImageUrl ? (
-                            <img
-                              src={selectedImageUrl}
-                              alt="Selected file"
-                              className="preview-image-large"
-                              style={{ maxHeight: '500px', width: 'auto', transform: `rotate(${settings.rotation || 0}deg)`, transition: 'transform 0.3s ease-out' }}
-                            />
+                            <div style={{ position: 'relative' }}>
+                              {isProcessing && (
+                                <div style={{ position: 'absolute', inset: 0, zIndex: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.3)', backdropFilter: 'blur(2px)', borderRadius: '12px' }}>
+                                  <Loader className="spinning" size={40} />
+                                </div>
+                              )}
+                              <img
+                                src={processedPreview || selectedImageUrl}
+                                alt="Selected file"
+                                className="preview-image-large"
+                                style={{ maxHeight: '500px', width: 'auto', transform: `rotate(${settings.rotation || 0}deg)`, transition: 'transform 0.3s ease-out' }}
+                              />
+                            </div>
                           ) : null}
                         </div>
 
-                        <div className="preview-info">
+                        <div className="preview-info" style={{ flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
+                          <span className="preview-badge" style={{ fontSize: '0.65rem', opacity: 0.8 }}>
+                            {files[selectedIndex]?.name}
+                          </span>
                           <span className="preview-badge">
                             {(files[selectedIndex]?.size / 1024).toFixed(1)} KB
                           </span>

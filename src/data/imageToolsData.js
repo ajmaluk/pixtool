@@ -1,7 +1,7 @@
 export const IMAGE_SEO_CONTENT = {
     resize: {
       title: "Free High-Quality Image Resizer Online | Resize PNG, JPG, WebP - PixTool",
-      keywords: "resize image online, image resizer, change image dimensions, resize photo for instagram, batch image resizer, free online photo resizer, browser-based image scaling, high-quality bicubic interpolation, optimize image dimensions, resize without losing quality",
+      keywords: "resize image online social media 2026, free photo resizer, change image dimensions browser, resize for instagram 1080x1080, batch image resizer no upload, high-quality image scaling online",
       description: "Resize your images instantly using professional-grade bicubic interpolation algorithms. Our high-performance browser engine lets you change dimensions by pixels or percentage without uploading files. Perfect for image optimization, social media scaling, and batch resizing with 100% privacy.",
       benefits: ["Precise pixel-perfect resizing", "Maintain aspect ratio toggle", "High-quality bicubic resampling", "Batch processing support", "Instagram & Social media presets", "Instant download after processing", "100% private - no server upload", "High fidelity scaling"],
       alternativeTo: ["Adobe Express", "Canva", "PicResize"],
@@ -24,7 +24,7 @@ export const IMAGE_SEO_CONTENT = {
     },
     crop: {
       title: "Online Image Cropper | Perfect Aspect Ratios - PixTool",
-      keywords: "crop image online, photo cropper, cut images, image aspect ratio, social media crop, free online cropping tool",
+      keywords: "crop image online 2026, photo cropper browser, cut images no upload, image aspect ratio presets, social media crop online, free precision cropping tool",
       description: "Crop your images to any size or aspect ratio with our pixel-perfect online tool. Direct browser processing means zero wait time and total privacy.",
       benefits: ["Freehand or aspect ratio cropping", "Social media layout presets", "Rotation and flip integration", "High-resolution output preservation", "Real-time preview window", "One-click pixel-perfect crops", "Zero data collection policy"],
       alternativeTo: ["Pixlr", "Fotor", "BeFunky"],
@@ -70,7 +70,7 @@ export const IMAGE_SEO_CONTENT = {
     },
     compress: {
         title: "Compress Image Online | Reduce File Size Without Quality Loss - PixTool",
-        keywords: "compress image, reduce image size, optimize photo, shrink image file, small image converter, online image compressor, optimize images for web, reduce photo kb, batch image compression",
+        keywords: "compress image 2026, reduce image size without quality loss, optimize photo for web, shrink image file online, online image compressor batch, reduce photo kb free",
         description: "Shrink your images up to 80% while maintaining professional quality. Our browser-based compressor is perfect for image optimization, website performance, and email attachments. Batch optimize PNG, JPG, and WebP files locally.",
         benefits: ["Reduce file size up to 80%", "Lossless compression for PNG/WebP", "High-quality JPEG downsampling", "Batch compress multiple images", "100% private local processing", "Free for large file sizes", "Direct browser download", "Web optimization ready"],
         alternativeTo: ["TinyPNG", "Squoosh", "Kraken.io"],
@@ -92,7 +92,7 @@ export const IMAGE_SEO_CONTENT = {
       },
       convert: {
         title: "Image Format Converter | JPG, PNG, WebP, GIF - PixTool",
-        keywords: "image converter, convert jpg to webp, png to jpg, convert heic to png, online photo converter, free image format change",
+        keywords: "image converter 2026, convert heic to jpg online, convert png to webp free, heic to png browser, online photo format converter, free image conversion",
         description: "Switch between image formats instantly. Convert JPG to WebP for SEO, HEIC to PNG for compatibility, or GIF to static images. All done locally in your browser.",
         benefits: ["Convert to PNG, WebP, JPEG, GIF", "HEIC and SVG input support", "Batch conversion enabled", "Adjustable output quality", "Instant local processing", "High-fidelity color preservation", "Free and unlimited"],
         alternativeTo: ["CloudConvert", "Zamzar", "Convertio"],
@@ -271,6 +271,26 @@ export const IMAGE_SEO_CONTENT = {
       { name: 'Convert Format', path: '/image-tools/convert' },
       { name: 'Compress Image', path: '/image-tools/compress' },
       { name: 'QR Generator', path: '/qr-generator' }
+    ],
+    upscale: [
+      { name: 'Photo Restoration', path: '/image-tools/restore' },
+      { name: 'Remove Background', path: '/image-tools/remove-background' },
+      { name: 'Resize Image', path: '/image-tools/resize' }
+    ],
+    restore: [
+      { name: 'AI Upscaler', path: '/image-tools/upscale' },
+      { name: 'Remove Background', path: '/image-tools/remove-background' },
+      { name: 'Grayscale Filter', path: '/image-tools/grayscale' }
+    ],
+    'remove-background': [
+      { name: 'AI Upscaler', path: '/image-tools/upscale' },
+      { name: 'Photo Restoration', path: '/image-tools/restore' },
+      { name: 'Convert Format', path: '/image-tools/convert' }
+    ],
+    'image-to-pdf': [
+      { name: 'Merge PDF', path: '/pdf-tools/merge' },
+      { name: 'Compress Image', path: '/image-tools/compress' },
+      { name: 'Resize Image', path: '/image-tools/resize' }
     ]
   };
 
@@ -314,5 +334,25 @@ export const IMAGE_SEO_CONTENT = {
       { title: 'Black & White Photography: Composition Tips', path: '/blog/resize-images-social-media-2026' },
       { title: 'Browser-Based Privacy for Content Creators', path: '/blog/browser-based-privacy' },
       { title: 'The 2026 Guide to AI Tools', path: '/blog/future-of-ai-productivity' }
+    ],
+    upscale: [
+      { title: 'The Future of AI-Powered Productivity 2026', path: '/blog/future-of-ai-productivity' },
+      { title: 'Browser-Based AI: Why Local is Better', path: '/blog/browser-based-privacy' },
+      { title: 'AI Image Quality vs Traditional Scaling', path: '/blog/image-compression-lossless-vs-lossy-2026' }
+    ],
+    restore: [
+      { title: 'Preserving Digital Heritage in 2026', path: '/blog/building-toolpix-journey' },
+      { title: 'Why Privacy-First AI Architecture Matters', path: '/blog/privacy-first-why-pixtool-safest-studio' },
+      { title: 'AI Face Restoration: A Technical Overview', path: '/blog/future-of-ai-productivity' }
+    ],
+    'remove-background': [
+      { title: 'Transparent PNG Essentials for Designers', path: '/blog/resize-images-social-media-2026' },
+      { title: 'How Local AI Background Removal Works', path: '/blog/browser-based-privacy' },
+      { title: 'Creating Professional eCommerce Photos in 2026', path: '/blog/building-toolpix-journey' }
+    ],
+    'image-to-pdf': [
+      { title: 'Building a Private Document Workspace', path: '/blog/pdf-security-101-passwords-encryption-sharing' },
+      { title: 'Image to PDF: Best Practices for Quality', path: '/blog/best-image-format-webp-avif-jpeg-2026' },
+      { title: 'The 2026 Guide to Universal File Formats', path: '/blog/future-of-ai-productivity' }
     ]
   };

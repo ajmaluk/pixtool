@@ -1,7 +1,7 @@
 export const UTILITY_SEO_CONTENT = {
     'temp-mail': {
       title: "Free Temporary Email | Disposable 10 Minute Mail & Fake Inbox - PixTool",
-      keywords: "temp mail, disposable email, temporary email, fake email, 10 minute mail, nada email, spam protection, free inbox, anonymous email, mailbox, burner email address, secure temp mail online, no registration temp mail",
+      keywords: "temp mail 2026, disposable email generator, free temporary email address, best 10 minute mail online, anonymous email inbox, protect primary email from spam",
       description: "Get a temporary email address instantly. Protect your primary inbox from spam, marketing, and trackers with our completely free disposable 10 minute mail service. Perfect for anonymous signups and one-time account verifications with zero data retention.",
       benefits: ["Instant email generation", "No registration required", "Automatic message expiration", "Mobile-ready interface", "Complete privacy protection", "Zero permanent data storage", "100% free forever", "Nada inbox protection", "Secure SSL encryption"],
       alternativeTo: ["TempMail.io", "GuerrillaMail", "10MinuteMail", "Nada", "Mailinator"],
@@ -14,7 +14,7 @@ export const UTILITY_SEO_CONTENT = {
     },
     'qr-scanner': {
       title: "Free Online QR Code Scanner | No App Needed - Browser QR Reader",
-      keywords: "qr scanner online, scan qr code browser, camera qr reader, free qr code scanner, webcam qr scan, qr code reader online, qr code scanner no app, secure qr scanner browser, scan qr from camera",
+      keywords: "qr scanner online 2026, scan qr code browser free, best online qr reader no app, secure qr scanner browser, scan qr from camera online",
       description: "Scan QR codes instantly using your browser's camera. Our online QR reader requires no application download—just point your webcam or phone camera for immediate results. 100% private and secure browser-based scanning.",
       benefits: ["No App Download Required", "Mobile camera support", "Desktop webcam compatibility", "Local Privacy Focus", "Instant URL detection", "High-speed processing", "Free and unlimited", "Secure and safe scanning"],
       alternativeTo: ["QR Code Reader app", "Google Lens", "Online QR Scanner", "Zxing"],
@@ -27,7 +27,7 @@ export const UTILITY_SEO_CONTENT = {
     },
     'qr-generator': {
       title: "Professional Custom QR Code Generator | Free & Unlimited - PixTool",
-      keywords: "qr generator, create qr code free, qr code for link, text to qr code, custom qr creator, online qr maker, wifi qr code generator, high resolution qr codes, static qr code creator, no expiration qr code",
+      keywords: "qr generator 2026, create custom qr code free, qr code for link with logo, best online qr maker, wifi qr code generator, permanent static qr codes",
       description: "Generate professional, high-resolution QR codes for websites, text, WiFi credentials, or contact information instantly. PixTool offers a completely free, unlimited QR maker that works 100% locally in your browser. Create static QR codes that never expire with no tracking, no redirects, and no hidden costs.",
       benefits: ["Customizable text and URLs", "Adjustable QR size and error correction", "High-resolution PNG & SVG-ready downloads", "Real-time instant preview", "Privacy-first: No tracking or dynamic links", "Static QR codes that work forever", "100% free for commercial use", "No registration or account required"],
       alternativeTo: ["QR Code Monkey", "Bitly QR", "GoQR.me", "Beaconstac", "QR Tiger"],
@@ -71,7 +71,7 @@ export const UTILITY_SEO_CONTENT = {
     },
     'typing-test': {
       title: "Free Online Typing Speed Test | Practice WPM & Accuracy - PixTool",
-      keywords: "typing test, typing speed test, wpm test online, practice typing, monkeytype alternative, typing accuracy test, keyboard test free, touch typing practice, improve wpm, 10fastfingers alternative, secure typing test",
+      keywords: "typing test online 2026, monkeytype alternative free, typing speed test wpm, best online typing practice, typing accuracy test browser, improve wpm fast",
       description: "Master your keyboard skills with our professional typing speed test. Featuring a clean, minimalist 'MonkeyType' style interface, you can track your Words Per Minute (WPM) and accuracy in real-time with zero ads and 100% privacy.",
       benefits: ["Real-time WPM & raw speed tracking", "Precise accuracy percentage metrics", "Clean, minimalist distraction-free UI", "Multiple difficulty levels and word sets", "Instant results sharing", "Local history tracking for progress", "100% free - no ads during testing", "Professional keyboard calibration"],
       alternativeTo: ["MonkeyType", "10FastFingers", "TypeRacer", "Keybr", "Typing.com"],
@@ -106,7 +106,71 @@ export const UTILITY_SEO_CONTENT = {
         { q: "Is throwaway mail safe for sensitive info?", a: "While our service is secure, we recommend using throwaway mail only for non-critical signups and testing, as the addresses are temporary." },
         { q: "How fast do emails arrive?", a: "Emails usually arrive within seconds of being sent, with our real-time synchronization engine." }
       ]
+    },
+    'json-formatter': {
+      title: "Free JSON Formatter & Validator | Beautify and Minify JSON - PixTool",
+      keywords: "json formatter 2026, pretty print json, online json validator, minify json, json beautifier online, free developer tools, validate json string",
+      description: "Format, validate, and minify your JSON data instantly in your browser. Our professional JSON tool provides syntax highlighting, error detection, and indentation control with 100% local privacy.",
+      benefits: ["Professional pretty-printing", "One-click minification", "Real-time syntax validation", "Detailed error reporting", "Copy to clipboard instantly", "100% private local processing", "No data sent to servers"],
+      alternativeTo: ["JSONLint", "JSONFormatter.org", "Prettier Online", "VS Code"],
+      howTo: ["Paste your raw JSON into the input box", "Click 'Beautify' to format or 'Minify' to compress", "Check for any syntax errors in the status panel", "Copy or download your formatted result"],
+      faq: [
+        { q: "Is my JSON data secure?", a: "Yes. All processing happens entirely in your browser using JavaScript. We never upload or store your code on our servers." },
+        { q: "Can it handle large JSON files?", a: "Yes, our engine is optimized to handle multi-megabyte JSON strings efficiently within your browser." }
+      ]
+    },
+    'unit-converter': {
+      title: "Universal Unit Converter | Length, Weight, Temperature - PixTool",
+      keywords: "unit converter 2026, convert meters to feet, kg to lbs converter, celsius to fahrenheit, volume conversion online, best free unit converter",
+      description: "Convert between hundreds of units across Length, Weight, Temperature, and Volume instantly. High-precision calculations with a clean, mobile-responsive interface. 100% free and private.",
+      benefits: ["Multi-category support", "High-precision results", "Instant real-time conversion", "Swap button for quick switching", "Clean minimalist interface", "100% private calculations", "Mobile-optimized design"],
+      alternativeTo: ["Google Converter", "UnitConverters.net", "ConvertUnits.com"],
+      howTo: ["Select the measurement category", "Enter the value you want to convert", "Select your source and target units", "Get the result instantly"],
+      faq: [
+        { q: "How many units are supported?", a: "We support all common units for Length, Weight, Temperature, and Volume, covering 99% of daily conversion needs." },
+        { q: "Is the conversion accurate?", a: "Yes, we use high-precision floating point math based on internationally recognized conversion standards." }
+      ]
+    },
+    'password-generator': {
+      title: "Secure Password Generator | Strong & Random Keys - PixTool",
+      keywords: "password generator 2026, secure random password, generate strong password, password maker online, random key generator, secure credentials free",
+      description: "Create cryptographically secure, random passwords instantly. Protect your online accounts with high-entropy keys that never leave your device. Fully customizable length and characters.",
+      benefits: ["Military-grade entropy", "WebCrypto API security", "Customizable length (6-64)", "Adjustable character sets", "Real-time strength meter", "100% private local generation", "Blur mode for privacy"],
+      alternativeTo: ["1Password Generator", "LastPass Generator", "Dashlane", "Bitwarden"],
+      howTo: ["Choose your desired password length", "Toggle Uppercase, Numbers, or Symbols", "Review the strength meter", "Copy your new secure password"],
+      faq: [
+        { q: "Are these passwords really secure?", a: "Yes. We use the browser's built-in WebCrypto API for true randomness, ensuring your passwords are unpredictable." },
+        { q: "Do you store my generated passwords?", a: "Never. Passwords are generated locally in your browser and are lost the moment you close the tab or refresh." }
+      ]
     }
+  };
+
+  export const UTILITY_RELATED_TOOLS = {
+    'temp-mail': [
+      { name: '10 Minute Mail', path: '/utility-tools/10-minute-mail' },
+      { name: 'QR Generator', path: '/utility-tools/qr-generator' },
+      { name: 'Password Generator', path: '/utility-tools/password-generator' }
+    ],
+    'qr-scanner': [
+      { name: 'QR Generator', path: '/utility-tools/qr-generator' },
+      { name: 'Unit Converter', path: '/utility-tools/unit-converter' },
+      { name: 'JSON Formatter', path: '/utility-tools/json-formatter' }
+    ],
+    'json-formatter': [
+      { name: 'Unit Converter', path: '/utility-tools/unit-converter' },
+      { name: 'Password Generator', path: '/utility-tools/password-generator' },
+      { name: 'QR Generator', path: '/utility-tools/qr-generator' }
+    ],
+    'unit-converter': [
+      { name: 'JSON Formatter', path: '/utility-tools/json-formatter' },
+      { name: 'Password Generator', path: '/utility-tools/password-generator' },
+      { name: 'QR Scanner', path: '/utility-tools/qr-scanner' }
+    ],
+    'password-generator': [
+      { name: 'JSON Formatter', path: '/utility-tools/json-formatter' },
+      { name: 'Unit Converter', path: '/utility-tools/unit-converter' },
+      { name: 'Temp Mail', path: '/utility-tools/temp-mail' }
+    ]
   };
 
   export const UTILITY_READ_NEXT = {
@@ -129,5 +193,18 @@ export const UTILITY_SEO_CONTENT = {
       { title: 'The Future of AI-Powered Productivity 2026', path: '/blog/future-of-ai-productivity' },
       { title: 'Building ToolPix: The Journey So Far', path: '/blog/building-toolpix-journey' },
       { title: 'Why Privacy-First Tools are the New Gold Standard', path: '/blog/browser-based-privacy' }
+    ],
+    'json-formatter': [
+      { title: 'The Future of AI-Powered Productivity 2026', path: '/blog/future-of-ai-productivity' },
+      { title: 'Why Privacy-First Tools are the New Gold Standard', path: '/blog/browser-based-privacy' }
+    ],
+    'unit-converter': [
+      { title: 'The Future of AI-Powered Productivity 2026', path: '/blog/future-of-ai-productivity' },
+      { title: 'Building ToolPix: The Journey So Far', path: '/blog/building-toolpix-journey' }
+    ],
+    'password-generator': [
+      { title: 'The Ultimate Guide to Browser-Based Privacy', path: '/blog/browser-based-privacy' },
+      { title: 'Why Secure Temp Mail is Essential for Business', path: '/blog/secure-temp-mail-business-privacy-2026' },
+      { title: 'Building a Private Digital Workspace in 2026', path: '/blog/building-toolpix-journey' }
     ]
   };

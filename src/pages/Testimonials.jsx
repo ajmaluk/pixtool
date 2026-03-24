@@ -159,6 +159,7 @@ export default function Testimonials() {
                     placeholder="Your name"
                     value={form.name}
                     required
+                    minLength={2}
                     onChange={(e) => setForm((s) => ({ ...s, name: e.target.value }))}
                   />
                   <select
@@ -177,6 +178,7 @@ export default function Testimonials() {
                     placeholder="Your experience"
                     value={form.message}
                     required
+                    minLength={5}
                     onChange={(e) => setForm((s) => ({ ...s, message: e.target.value }))}
                   />
                   <button className="btn btn-primary" type="submit" disabled={status === 'loading'}>

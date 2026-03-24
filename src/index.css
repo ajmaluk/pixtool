@@ -409,15 +409,17 @@ h6 {
   align-items: center;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 6px 12px;
-  transition: var(--transition);
+  border-radius: 100px;
+  padding: 0.5rem 1rem;
+  width: 240px;
+  transition: var(--transition-base);
   position: relative;
 }
 
 .navbar-search:focus-within {
+  width: 300px;
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 4px var(--accent-glow);
   background: var(--bg-primary);
 }
 
@@ -469,23 +471,6 @@ h6 {
 }
 
 /* Navbar Search & Suggestions */
-.navbar-search {
-  display: flex;
-  align-items: center;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 100px;
-  padding: 0.5rem 1rem;
-  width: 240px;
-  transition: var(--transition);
-}
-
-.navbar-search:focus-within {
-  width: 300px;
-  border-color: var(--accent-primary);
-  background: var(--bg-primary);
-  box-shadow: 0 0 0 4px var(--accent-glow);
-}
 
 @media (max-width: 480px) {
   .navbar-search {
@@ -2269,7 +2254,7 @@ h6 {
 .ad-region-top {
   width: 100%;
   max-width: 730px;
-  margin: 0 auto 2rem;
+  margin: 0 auto 1.5rem;
   min-height: 92px;
   display: flex;
   align-items: center;
@@ -2306,6 +2291,40 @@ h6 {
   position: sticky;
   top: 100px;
   align-self: flex-start;
+  flex-shrink: 0;
+}
+
+/* Page Layout for Ad Integration */
+.landing-layout {
+  display: flex;
+  gap: 2rem;
+  max-width: 1550px;
+  margin: 0 auto;
+  align-items: flex-start;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+.landing-center {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.desktop-only {
+  display: flex;
+}
+
+@media (max-width: 1200px) {
+  .desktop-only {
+    display: none !important;
+  }
+  
+  .landing-layout {
+    display: block;
+    padding: 0;
+  }
 }
 
 .ad-label {

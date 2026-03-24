@@ -4,10 +4,12 @@ import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
 import Breadcrumbs from '../components/Breadcrumbs'
+import { useRatePopup } from '../hooks/useRatePopup'
 import { UTILITY_READ_NEXT } from '../data/utilityToolsData'
 import ShareTool from '../components/ShareTool'
 
 export default function QrScanner() {
+  const { triggerRating } = useRatePopup()
   const [scanning, setScanning] = useState(false)
   const [result, setResult] = useState(null)
   const [error, setError] = useState(null)
@@ -41,6 +43,7 @@ export default function QrScanner() {
           },
           (decodedText) => {
             setResult(decodedText)
+            triggerRating('qr-scanner')
             stopScanning()
           },
           () => { }

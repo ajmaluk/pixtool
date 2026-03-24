@@ -7,6 +7,8 @@ import AdSpace from '../components/AdSpace'
 import Breadcrumbs from '../components/Breadcrumbs'
 import ShareTool from '../components/ShareTool'
 import { useFileDrop } from '../hooks/useFileDrop'
+import { useRatePopup } from '../hooks/useRatePopup'
+import { useConfirm, useAlert } from '../context/ConfirmContext'
 import { PDF_TOOLS } from '../data/tools'
 import { PDF_SEO_CONTENT, PDF_RELATED_TOOLS, PDF_READ_NEXT } from '../data/pdfToolsData'
 import ComingSoon from '../components/ComingSoon'
@@ -19,8 +21,19 @@ const tools = PDF_TOOLS;
 export default function PdfTools() {
   const { toolId } = useParams()
   const navigate = useNavigate()
-  const initialTool = tools.find(t => t.id === toolId)?.id || 'merge'
+  const { triggerRating } = useRatePopup()
+  const confirm = useConfirm()
+  const alert = useAlert()
+  const initialTool = tools.find(t => t.id === toolId)?.id || null
   const [activeTool, setActiveTool] = useState(initialTool)
+
+  useEffect(() => {
+    if (toolId && tools.find(t => t.id === toolId)) {
+      setActiveTool(toolId)
+    } else {
+      setActiveTool(null)
+    }
+  }, [toolId])
   const { files, setFiles, handleFiles, removeFile, moveFile } = useFileDrop(['application/pdf'])
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [touchStart, setTouchStart] = useState(null)
@@ -250,7 +263,11 @@ export default function PdfTools() {
             );
 
             if (result.recognizedPages === 0 && settings.ocrMethod === 'text-extraction') {
-              alert(`No extractable text found in ${file.name}. Try "Full OCR (Tesseract)" for scanned images.`);
+              await alert({
+                title: 'No Text Found',
+                message: `No extractable text found in ${file.name}. Try "Full OCR (Tesseract)" for scanned images.`,
+                type: 'warning'
+              });
             }
           } catch (err) {
             alert(`OCR failed for ${file.name}: ${err.message}`);
@@ -259,9 +276,16 @@ export default function PdfTools() {
           }
         }
       }
+      
+      // Trigger rating popup after successful tool use
+      triggerRating(`pdf-tools/${activeTool}`)
     } catch (err) {
       console.error('PDF Error:', err);
-      alert('Error processing PDF: ' + err.message);
+      await alert({
+        title: 'Processing Error',
+        message: 'Error processing PDF: ' + err.message,
+        type: 'danger'
+      });
     } finally {
       setProcessing(false);
     }
@@ -660,8 +684,14 @@ export default function PdfTools() {
       <button
         className="btn btn-secondary"
         style={{ width: '100%', marginBottom: '1rem' }}
-        onClick={() => {
-          if (confirm('Reset all settings to default?')) {
+        onClick={async () => {
+          const ok = await confirm({
+            title: 'Reset Settings?',
+            message: 'Are you sure you want to reset all settings to their default values?',
+            confirmText: 'Reset Now',
+            type: 'warning'
+          });
+          if (ok) {
             setSettings({
               quality: 'medium',
               startPage: 1,
@@ -911,15 +941,20 @@ export default function PdfTools() {
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }} className="mobile-hide-header">
-                        <h3 style={{ fontSize: '1.25rem', fontWeight: 900, margin: 0 }}>
+                        <h3 style={{ fontSize: '1.05rem', fontWeight: 900, margin: 0 }}>
                           Files ({files.length})
                         </h3>
-                        <span className="preview-badge">
-                          {files[selectedIndex]?.name}
-                        </span>
                       </div>
                       <div style={{ display: 'flex', gap: '0.75rem' }}>
-                         <button className="btn btn-secondary" onClick={() => { if(confirm('Clear all files?')) { setFiles([]); setSelectedIndex(0); } }} style={{ padding: '0.6rem 1rem', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderColor: 'transparent' }}>
+                        <button className="btn btn-secondary" onClick={async () => { 
+                           const ok = await confirm({
+                             title: 'Clear All Files?',
+                             message: 'Are you sure you want to remove all uploaded PDF files?',
+                             confirmText: 'Clear All',
+                             type: 'danger'
+                           });
+                           if(ok) { setFiles([]); setSelectedIndex(0); } 
+                         }} style={{ padding: '0.6rem 1rem', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderColor: 'transparent' }}>
                            <X size={18} /> Clear
                          </button>
                          <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.6rem 1.25rem' }}>
@@ -963,8 +998,10 @@ export default function PdfTools() {
                         </p>
                       </div>
 
-                      {/* PDF Specific Info Badges */}
-                      <div className="preview-info">
+                      <div className="preview-info" style={{ flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
+                        <span className="preview-badge" style={{ fontSize: '0.65rem', opacity: 0.8 }}>
+                          {files[selectedIndex]?.name}
+                        </span>
                         {activeTool === 'merge' && (
                           <div style={{ display: 'flex', gap: '0.5rem' }}>
                             <button

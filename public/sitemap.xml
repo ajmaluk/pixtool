@@ -436,6 +436,39 @@
     </image:image>
   </url>
   <url>
+    <loc>https://www.pixtool.in/json-formatter</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/all-in-one-web-utility-toolbox.png</image:loc>
+      <image:title>PixTool JSON Formatter - Syntax highlighting and validation</image:title>
+      <image:caption>Format, validate, and minify JSON data instantly — professional developer utility.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/unit-converter</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/all-in-one-web-utility-toolbox.png</image:loc>
+      <image:title>PixTool Unit Converter - Versatile conversion utility</image:title>
+      <image:caption>Convert between Length, Weight, Temperature, and Volume units instantly.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/password-generator</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/all-in-one-web-utility-toolbox.png</image:loc>
+      <image:title>PixTool Password Generator - Secure entropy-based keys</image:title>
+      <image:caption>Generate secure, random passwords with custom requirements — 100% private.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://www.pixtool.in/blog/future-of-ai-productivity</loc>
     <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>

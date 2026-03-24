@@ -6,6 +6,8 @@ import AdSpace from '../components/AdSpace'
 import Breadcrumbs from '../components/Breadcrumbs'
 import { UTILITY_READ_NEXT } from '../data/utilityToolsData'
 import ShareTool from '../components/ShareTool'
+import { useRatePopup } from '../hooks/useRatePopup'
+import { useConfirm } from '../context/ConfirmContext'
 
 const TEMPMAIL_DIRECT_BASE = 'https://api.mail.tm'
 
@@ -186,6 +188,8 @@ export default function TempMail({
   const [toast, setToast] = useState({ show: false, message: '', type: 'success' })
   const [refreshing, setRefreshing] = useState(false)
   const [copied, setCopied] = useState(false)
+  const { triggerRating } = useRatePopup()
+  const confirm = useConfirm()
 
   const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.matchMedia('(max-width: 900px)').matches : false)
   const [mobilePane, setMobilePane] = useState('content') // 'list' | 'content'
@@ -316,6 +320,7 @@ export default function TempMail({
     navigator.clipboard.writeText(email).then(() => {
       setCopied(true)
       showToast('Email copied to clipboard!')
+      triggerRating('temp-mail')
       setTimeout(() => setCopied(false), 3000)
     })
   }
@@ -332,7 +337,13 @@ export default function TempMail({
 
   const doChangeEmail = async (silent = false) => {
     if (!silent) {
-      if (!confirm('Generate a new email? Current inbox will be cleared.')) return
+      const ok = await confirm({
+        title: 'Generate New Email?',
+        message: 'Are you sure you want to generate a new address? Your current inbox will be permanently cleared.',
+        confirmText: 'Generate New',
+        type: 'warning'
+      })
+      if (!ok) return
     }
     setLoading(true)
     const oldEmail = email
@@ -389,8 +400,14 @@ export default function TempMail({
     }
   }, [])
 
-  const deleteEmail = () => {
-    if (!confirm('Delete this email permanently?')) return
+  const deleteEmail = async () => {
+    const ok = await confirm({
+      title: 'Delete Email?',
+      message: 'Are you sure you want to delete this email address permanently? This action cannot be undone.',
+      confirmText: 'Delete Forever',
+      type: 'danger'
+    })
+    if (!ok) return
     const oldEmail = email
     setEmail('')
     setMessages([])

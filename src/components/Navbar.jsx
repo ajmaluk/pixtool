@@ -7,6 +7,7 @@ import {
   MessageSquare, FileCode, Newspaper, Users, Info, 
   ShoppingBag, Star, Zap, GraduationCap, Microscope, Rocket, Gift
 } from 'lucide-react'
+import { useAlert } from '../context/ConfirmContext'
 import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS } from '../data/tools'
 
 const allTools = [
@@ -16,6 +17,7 @@ const allTools = [
 ]
 
 export default function Navbar() {
+  const alert = useAlert()
   const getInitialIsDark = () => {
     if (typeof window === 'undefined') return false
     const savedTheme = localStorage.getItem('theme')
@@ -110,7 +112,11 @@ export default function Navbar() {
       }
     } else {
       navigator.clipboard.writeText(window.location.href)
-      alert('Link copied to clipboard!')
+      alert({
+        title: 'Link Copied',
+        message: 'PixTool link has been copied to your clipboard!',
+        type: 'success'
+      })
     }
   }
 
@@ -254,23 +260,34 @@ export default function Navbar() {
 
             {showSuggestions && (
               <div className="search-suggestions">
-                {suggestions.length > 0 ? suggestions.map(tool => (
-                  <button
-                    key={tool.path}
-                    className="suggestion-item"
-                    onClick={() => handleSelectTool(tool.path)}
-                  >
-                    <div className="suggestion-icon" style={{ background: `${tool.color}15`, color: tool.color }}>
-                      <tool.icon size={20} />
+                {suggestions.length > 0 ? (
+                  suggestions.map(tool => (
+                    <button
+                      key={tool.path}
+                      className="suggestion-item"
+                      onClick={() => handleSelectTool(tool.path)}
+                    >
+                      <div className="suggestion-icon" style={{ background: `${tool.color}15`, color: tool.color }}>
+                        <tool.icon size={20} />
+                      </div>
+                      <div className="suggestion-info">
+                        <div className="suggestion-title">{tool.title}</div>
+                        <div className="suggestion-category">{tool.category}</div>
+                      </div>
+                    </button>
+                  ))
+                ) : (
+                  <div className="no-suggestions" style={{ padding: '2.5rem 1.5rem', textAlign: 'center' }}>
+                    <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🔍</div>
+                    <div style={{ fontWeight: 800, fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>No tools match "{searchValue}"</div>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1.5rem', lineHeight: 1.5 }}>
+                      Try searching for a different keyword or explore our popular categories below.
+                    </p>
+                    <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                      <Link to="/image-tools" className="btn btn-secondary dense" style={{ borderRadius: '10px' }} onClick={() => setShowSuggestions(false)}>Image Tools</Link>
+                      <Link to="/pdf-tools" className="btn btn-secondary dense" style={{ borderRadius: '10px' }} onClick={() => setShowSuggestions(false)}>PDF Tools</Link>
+                      <Link to="/utility-tools" className="btn btn-secondary dense" style={{ borderRadius: '10px' }} onClick={() => setShowSuggestions(false)}>Utility</Link>
                     </div>
-                    <div className="suggestion-info">
-                      <div className="suggestion-title">{tool.title}</div>
-                      <div className="suggestion-category">{tool.category}</div>
-                    </div>
-                  </button>
-                )) : (
-                  <div className="no-suggestions">
-                    No tools match "{searchValue}"
                   </div>
                 )}
               </div>

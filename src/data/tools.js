@@ -1,7 +1,7 @@
 import { 
   Maximize2, Crop, RotateCw, FileArchive, RefreshCw, Type, FlipHorizontal, Palette, 
   FilePlus, SplitSquareHorizontal, FileCheck, FileImage, Lock, ArrowUpDown, FileText, Sliders,
-  Mail, Smartphone, QrCode, Image as ImageIcon, Search
+  Mail, Smartphone, QrCode, Image as ImageIcon, Search, Braces, Scale, Key
 } from 'lucide-react';
 
 export const IMAGE_TOOLS = [
@@ -255,6 +255,27 @@ export const UTILITY_TOOLS = [
     color: '#10b981', path: '/code-diff', screenshot: 'all-in-one-web-utility-toolbox.png',
     imageAlt: 'PixTool Code Diff - side by side comparison tool',
     imageTitle: 'Online Code Diff Checker'
+  },
+  {
+    id: 'json-formatter', title: 'JSON Formatter', icon: Braces,
+    description: 'Format, validate, and minify JSON data instantly — professional developer utility.',
+    color: '#ec4899', path: '/json-formatter', screenshot: 'all-in-one-web-utility-toolbox.png',
+    imageAlt: 'PixTool JSON Formatter - Syntax highlighting and validation',
+    imageTitle: 'Online JSON Formatter & Validator'
+  },
+  {
+    id: 'unit-converter', title: 'Unit Converter', icon: Scale,
+    description: 'Convert between Length, Weight, Temperature, and Volume units instantly.',
+    color: '#10b981', path: '/unit-converter', screenshot: 'all-in-one-web-utility-toolbox.png',
+    imageAlt: 'PixTool Unit Converter - Versatile conversion utility',
+    imageTitle: 'Free Online Unit Converter'
+  },
+  {
+    id: 'password-generator', title: 'Password Generator', icon: Key,
+    description: 'Generate secure, random passwords with custom requirements — 100% private.',
+    color: '#f59e0b', path: '/password-generator', screenshot: 'all-in-one-web-utility-toolbox.png',
+    imageAlt: 'PixTool Password Generator - Secure entropy-based keys',
+    imageTitle: 'Secure Random Password Generator'
   }
 ];
 

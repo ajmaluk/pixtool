@@ -29,6 +29,9 @@ const SCREENSHOT_MAP = {
     '/fake-email': 'generate-fake-email-for-testing.png',
     '/disposable-email': 'burner-email-address-generator-privacy.png',
     '/throwaway-email': 'throwaway-email-inbox-online-free.png',
+    '/json-formatter': 'free-json-formatter-and-validator-online.png',
+    '/unit-converter': 'universal-unit-converter-pro-browser.png',
+    '/password-generator': 'secure-random-password-generator-local.png',
     '/code-diff': 'all-in-one-web-utility-toolbox.png'
 }
 
@@ -78,12 +81,12 @@ export default function SEO({
 
     // Enhanced keywords based on page type and tool
     const enhancedKeywords = useMemo(() => {
-        const baseKeywords = 'free online tools, browser-based productivity, no upload tools, privacy-first web apps, online PDF editor, free image editor, daily tools, best online utilities 2026'
+        const baseKeywords = 'free online tools 2026, browser-based productivity suite, no upload tools, privacy-first web apps, online PDF editor, free image editor, daily tools, best online utilities 2026, secure browser tools, local-first web apps'
         const toolKeywords = {
-            'image-tools': 'resize image online free, crop image online, compress image online, convert image to jpg png webp, batch image resizer, image editor online',
-            'pdf-tools': 'merge pdf free online, split pdf browser, compress pdf online, protect pdf with password, watermark pdf documents, pdf to image converter, adobe acrobat alternative',
-            'temp-mail': 'temporary email generator, disposable email address, 10 minute mail free, anonymous email inbox, protect email from spam, throwaway email account',
-            'qr': 'qr code generator wifi, online qr scanner, custom qr code with logo, create qr for link, safe qr reader browser'
+            'image-tools': 'resize image online for social media, best free image resizer 2026, compress PNG without quality loss, convert HEIC to JPG online, batch image resizer free, professional image editor browser, optimize images for web performance',
+            'pdf-tools': 'merge multiple PDF files into one free, split PDF by pages online, compress PDF for email, password protect PDF online secure, watermark PDF documents free, PDF to image converter high res, adobe acrobat alternative 2026, reduce PDF file size online',
+            'temp-mail': 'disposable temporary email generator, 10 minute mail free secure, anonymous email inbox for signups, protect inbox from spam 2026, throwaway email account instant, fake email creator for testing',
+            'qr': 'secure QR code generator with logo, safe QR scanner browser online, create QR for wifi and link, custom branded QR codes free, QR reader no download'
         }
 
         const matchedKeywords = []

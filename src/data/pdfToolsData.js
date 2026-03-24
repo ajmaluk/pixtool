@@ -1,7 +1,7 @@
 export const PDF_SEO_CONTENT = {
     merge: {
       title: "Merge PDF Online | Combine Multiple PDF Files Free - PixTool",
-      keywords: "merge pdf online, combine pdf files, join pdf pages, merge multiple pdfs, free online pdf merger, secure pdf joiner, browser-based pdf merging, pdf-lib automation, combine pdf documents, joiner pdf free, adobe acrobat alternative, no registration pdf merge",
+      keywords: "merge pdf online 2026, combine multiple pdf files free, join pdf pages no upload, best online pdf merger secure, merge pdf for email free, combine pdf documents instantly",
       description: "Combine multiple PDF documents into a single professional-grade file instantly using our high-performance client-side merging engine. PixTool allows you to reorder, join, and combine PDFs without uploading sensitive data to any server. Perfect for merging invoices, reports, and legal documents with 100% privacy and no registration.",
       benefits: ["Unlimited file merging", "Drag-and-drop page reordering", "Preserve links and formatting", "High-speed local processing", "100% private - data stays on device", "Free for large documents", "Direct browser download", "Combine files instantly", "No account required"],
       alternativeTo: ["SmallPDF", "ILovePDF", "Adobe Acrobat", "PDF2Go"],
@@ -15,7 +15,7 @@ export const PDF_SEO_CONTENT = {
     },
     split: {
       title: "Split PDF Online | Extract Pages from PDF Instantly - PixTool",
-      keywords: "split pdf, extract pdf pages, separate pdf files, cut pdf document, online pdf splitter, free pdf extract, divide pdf pages, secure pdf splitting, pdf page remover online, browser-based pdf splitter",
+      keywords: "split pdf online 2026, extract pdf pages browser, separate pdf files no upload, free online pdf splitter, cut pdf pages free, secure pdf extraction",
       description: "Extract specific pages or custom page ranges from your PDF documents instantly. PixTool provides a professional-grade PDF splitter that works entirely in your browser, ensuring your sensitive documents never leave your device. Separate a single large PDF into multiple high-quality files with zero upload time and total privacy.",
       benefits: ["Extract exact page ranges (e.g., 1-5, 10, 12-15)", "Extract all individual pages into separate files", "Visual page selection guide for accuracy", "Lightning-fast local browser processing", "100% private - zero data upload policy", "Free and unlimited usage for all users", "High-fidelity vector extraction - zero quality loss", "Works without registration"],
       alternativeTo: ["PDF2Go", "SodaPDF", "ILovePDF", "Adobe Acrobat Split", "Sejda"],
@@ -29,7 +29,7 @@ export const PDF_SEO_CONTENT = {
     },
     compress: {
       title: "Compress PDF Online | Reduce File Size Without Quality Loss - PixTool",
-      keywords: "compress pdf, reduce pdf size, optimize pdf, shrink pdf file, small pdf converter, online pdf compressor, browser-based pdf optimization, shrink pdf without quality loss, make pdf smaller, reduce pdf kb, secure pdf compression",
+      keywords: "compress pdf 2026, reduce pdf file size without quality loss, optimize pdf for email free, shrink pdf browser online, best free pdf compressor, make pdf smaller online",
       description: "Shrink your PDF documents by up to 90% while maintaining professional visual quality. Our intelligent browser-based compressor uses advanced downsampling to reduce PDF file sizes for email attachments, government portals, and web storage. Perfect for making PDFs smaller without losing clarity, all with 100% privacy.",
       benefits: ["Reduce file size up to 90%", "Three compression level options", "Preserve links and formatting", "Batch compress multiple PDFs", "100% private local processing", "Free for large file sizes", "Direct browser download", "Make PDF smaller instantly", "No file uploads required"],
       alternativeTo: ["SmallPDF", "ILovePDF", "Adobe Acrobat", "PDFCompressor"],
@@ -42,7 +42,7 @@ export const PDF_SEO_CONTENT = {
     },
     convert: {
       title: "PDF to Image Converter | Convert PDF to PNG, JPG, WebP - PixTool",
-      keywords: "pdf to image, pdf to png, pdf to jpg, convert pdf to picture, high res pdf images, online pdf to image, free pdf converter, pdf to webp online, secure document to image",
+      keywords: "pdf to image converter 2026, convert pdf to png high res, pdf to jpg free online, pdf to webp browser, export pdf pages as images, secure pdf to picture",
       description: "Convert your PDF pages into high-resolution images instantly. Extract pictures or turn entire documents into PNG, JPG, or WebP files locally in your browser with 100% privacy and no registration.",
       benefits: ["High-resolution 300 DPI output", "Select specific pages to convert", "Export to PNG, JPG, or WebP", "Maintain original color accuracy", "Extract individual pages as images", "100% private local conversion", "Free with no registration", "Fast batch conversion"],
       alternativeTo: ["PDF2JPG", "SmallPDF", "CloudConvert", "PDFToImage"],
@@ -55,7 +55,7 @@ export const PDF_SEO_CONTENT = {
     },
     protect: {
       title: "Protect PDF Online | Professional AES-256 Encryption - PixTool",
-      keywords: "protect pdf, password protect pdf online, encrypt pdf, secure pdf file, lock pdf free, pdf security tool, aes-256 pdf encryption, secure document sharing, military-grade pdf protection",
+      keywords: "protect pdf online 2026, password protect pdf secure, encrypt pdf browser free, lock pdf no upload, best free pdf security tool, military-grade pdf protection",
       description: "Secure your confidential PDF documents with military-grade AES-256 encryption. PixTool allows you to add strong password protection and permission restrictions to your files entirely in your browser. Your sensitive data and passwords never leave your device, providing the ultimate in document security and privacy.",
       benefits: ["Professional AES-256 bit encryption", "Set independent user and owner passwords", "Restrict printing, copying, and modifications", "100% private - zero data or password uploads", "Secure local background processing using WebCrypto API", "Free for all confidential and legal documents", "Compatible with all professional PDF readers", "No registration required"],
       alternativeTo: ["Adobe Acrobat Pro", "SmallPDF", "ILovePDF", "DocuSign", "Sejda"],
@@ -194,6 +194,26 @@ export const PDF_SEO_CONTENT = {
       { name: 'Merge PDF', path: '/pdf-tools/merge' },
       { name: 'Split PDF', path: '/pdf-tools/split' },
       { name: 'Watermark PDF', path: '/pdf-tools/watermark' }
+    ],
+    'to-word': [
+      { name: 'PDF to Image', path: '/pdf-tools/convert' },
+      { name: 'OCR PDF', path: '/pdf-tools/ocr' },
+      { name: 'Compress PDF', path: '/pdf-tools/compress' }
+    ],
+    'to-excel': [
+      { name: 'OCR PDF', path: '/pdf-tools/ocr' },
+      { name: 'PDF to Word', path: '/pdf-tools/to-word' },
+      { name: 'Merge PDF', path: '/pdf-tools/merge' }
+    ],
+    'unlock': [
+      { name: 'Protect PDF', path: '/pdf-tools/protect' },
+      { name: 'Compress PDF', path: '/pdf-tools/compress' },
+      { name: 'Edit PDF', path: '/pdf-tools/edit' }
+    ],
+    'ocr': [
+      { name: 'PDF to Word', path: '/pdf-tools/to-word' },
+      { name: 'PDF to Excel', path: '/pdf-tools/to-excel' },
+      { name: 'Searchable PDF', path: '/pdf-tools/convert' }
     ]
   };
 
@@ -232,5 +252,20 @@ export const PDF_SEO_CONTENT = {
       { title: 'Document Structure & UX: Best Practices', path: '/blog/browser-based-privacy' },
       { title: 'The Evolution of Browser-Based Productivity', path: '/blog/future-of-ai-productivity' },
       { title: 'Building ToolPix: Our 2026 Journey', path: '/blog/building-toolpix-journey' }
+    ],
+    'to-word': [
+      { title: 'How to Convert PDF to Word Free 2026', path: '/blog/how-to-convert-pdf-to-word-free-2026' },
+      { title: 'Lossless Document Conversion Explained', path: '/blog/image-compression-lossless-vs-lossy-2026' },
+      { title: 'The Future of Editable PDF Documents', path: '/blog/future-of-ai-productivity' }
+    ],
+    'unlock': [
+      { title: 'PDF Security 101: Understanding Encryption', path: '/blog/pdf-security-101-passwords-encryption-sharing' },
+      { title: 'Privacy at Scale: Avoiding Cloud Decryption', path: '/blog/browser-based-privacy' },
+      { title: 'Safe Document Sharing in the AI Era', path: '/blog/priority-first-why-pixtool-safest-studio' }
+    ],
+    'ocr': [
+      { title: 'Extracting Data from Scanned Documents locally', path: '/blog/browser-based-privacy' },
+      { title: 'The AI Revolution in Document Analysis 2026', path: '/blog/future-of-ai-productivity' },
+      { title: 'Building a Private Searchable Archive', path: '/blog/building-toolpix-journey' }
     ]
   };

@@ -1,8 +1,10 @@
 import React from 'react';
 import SEO from '../components/SEO';
 import { Heart, PartyPopper, ArrowLeft, Share2 } from 'lucide-react';
+import { useAlert } from '../context/ConfirmContext';
 
 export default function ThankYou() {
+    const alert = useAlert();
     return (
         <div className="thank-you-page">
             <SEO
@@ -35,7 +37,11 @@ export default function ThankYou() {
                                 navigator.share({ title: 'PixTool', url: `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}` });
                             } else {
                                 navigator.clipboard.writeText(`${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}`);
-                                alert('Link copied!');
+                                alert({
+                                    title: 'Link Copied',
+                                    message: 'PixTool link has been copied to your clipboard!',
+                                    type: 'success'
+                                });
                             }
                         }}>
                             <Share2 size={20} /> Share PixTool

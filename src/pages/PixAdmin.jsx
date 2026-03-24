@@ -8,6 +8,7 @@ import {
   getAdminSession,
 } from '../services/supabaseService';
 import { hasSupabaseConfig } from '../lib/supabaseClient';
+import { useConfirm } from '../context/ConfirmContext';
 
 const PAGE_SIZE = 10;
 
@@ -34,6 +35,7 @@ export default function PixAdmin() {
   const [error, setError] = useState('');
   const [tab, setTab] = useState('dashboard');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const confirm = useConfirm();
 
   const [dashboard, setDashboard] = useState({
     toolsCount: 0,
@@ -95,7 +97,13 @@ export default function PixAdmin() {
   };
 
   const onDeleteTool = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this tool? This will also delete all its ratings and testimonials.')) return;
+    const ok = await confirm({
+      title: 'Delete Tool?',
+      message: 'Are you sure you want to delete this tool? This will also delete all its ratings and testimonials.',
+      confirmText: 'Delete Tool',
+      type: 'danger'
+    });
+    if (!ok) return;
     setLoading(true);
     setError('');
     try {
@@ -174,7 +182,13 @@ export default function PixAdmin() {
   };
 
   const onDeleteTestimonial = async (id) => {
-    if (!window.confirm('Delete this testimonial?')) return;
+    const ok = await confirm({
+      title: 'Delete Testimonial?',
+      message: 'Are you sure you want to delete this user feedback? This action cannot be undone.',
+      confirmText: 'Delete',
+      type: 'danger'
+    });
+    if (!ok) return;
     setLoading(true);
     setError('');
     try {
@@ -188,7 +202,13 @@ export default function PixAdmin() {
   };
 
   const onDeleteContact = async (id) => {
-    if (!window.confirm('Delete this contact message?')) return;
+    const ok = await confirm({
+      title: 'Delete Message?',
+      message: 'Are you sure you want to delete this contact message?',
+      confirmText: 'Delete',
+      type: 'danger'
+    });
+    if (!ok) return;
     setLoading(true);
     setError('');
     try {

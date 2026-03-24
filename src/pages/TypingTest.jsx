@@ -4,6 +4,7 @@ import SEO from '../components/SEO'
 import ShareTool from '../components/ShareTool'
 import Breadcrumbs from '../components/Breadcrumbs'
 import { UTILITY_READ_NEXT } from '../data/utilityToolsData'
+import { useRatePopup } from '../hooks/useRatePopup'
 import AdSpace from '../components/AdSpace'
 import ToolContent from '../components/ToolContent'
 
@@ -31,6 +32,7 @@ export default function TypingTest() {
   const [words, setWords] = useState(() => shuffle(WORDS).slice(0, 220))
   const [correctChars, setCorrectChars] = useState(0)
   const [typedChars, setTypedChars] = useState(0)
+  const { triggerRating } = useRatePopup()
 
   const [results, setResults] = useState(null)
   const inputRef = useRef(null)
@@ -59,6 +61,7 @@ export default function TypingTest() {
             wpm,
             accuracy
           })
+          triggerRating('typing-test')
           return 0
         }
         return prev - 1

@@ -1,6 +1,5 @@
 export default function AdSpace({ type, className = "", style = {} }) {
     const showAds = false;
-
     if (!showAds) return null;
 
     const styles = {

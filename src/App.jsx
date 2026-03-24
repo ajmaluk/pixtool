@@ -7,7 +7,9 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import ToolRating from './components/ToolRating'
+import RatingOverlay from './components/RatingOverlay'
 import { ALL_TOOLS_MAP } from './data/tools'
+import { ConfirmProvider } from './context/ConfirmContext'
 
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home'))
@@ -49,6 +51,9 @@ const DisposableEmail = lazy(() => import('./pages/DisposableEmail'))
 const ThrowawayEmail = lazy(() => import('./pages/ThrowawayEmail'))
 const TypingTest = lazy(() => import('./pages/TypingTest'))
 const CodeDiff = lazy(() => import('./pages/CodeDiff'))
+const JsonFormatter = lazy(() => import('./pages/JsonFormatter'))
+const UnitConverter = lazy(() => import('./pages/UnitConverter'))
+const PasswordGenerator = lazy(() => import('./pages/PasswordGenerator'))
 const PixAdmin = lazy(() => import('./pages/PixAdmin'))
 
 // Loading component — stays visible inside the layout
@@ -173,11 +178,24 @@ const MainLayout = () => {
     try {
       // Track tool visits
       const path = location.pathname
-      const rawSaved = localStorage.getItem('dt_recent_tools')
+      const storageKey = 'pt_recent_tools'
+      const legacyKey = 'dt_recent_tools'
+      
+      let rawSaved = localStorage.getItem(storageKey)
+      if (!rawSaved) {
+        // Migration from legacy DailyTools key
+        const legacyData = localStorage.getItem(legacyKey)
+        if (legacyData) {
+          rawSaved = legacyData
+          localStorage.setItem(storageKey, legacyData)
+          localStorage.removeItem(legacyKey)
+        }
+      }
+      
       const saved = rawSaved ? JSON.parse(rawSaved) : []
       
       if (!Array.isArray(saved)) {
-        localStorage.setItem('dt_recent_tools', '[]')
+        localStorage.setItem(storageKey, '[]')
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setRecentTools([])
         return
@@ -185,16 +203,15 @@ const MainLayout = () => {
 
       if (TOOLS_META[path]) {
         // Only store the path in localStorage to avoid issues with stringifying components
-        // Also migrate old object-based format to simple path strings
         const filtered = saved.map(p => (p && typeof p === 'object' ? p.path : p)).filter(p => p && p !== path)
         const updated = [path, ...filtered].slice(0, 4)
-        localStorage.setItem('dt_recent_tools', JSON.stringify(updated))
+        localStorage.setItem(storageKey, JSON.stringify(updated))
         
         // Map paths back to full tool objects for display
         const displayTools = updated.map(p => ({ path: p, ...TOOLS_META[p] })).filter(t => t.name)
         setRecentTools(displayTools)
       } else {
-        // Map saved paths back to full tool objects, handling migration
+        // Map saved paths back to full tool objects
         const displayTools = saved
           .map(p => (p && typeof p === 'object' ? p.path : p))
           .filter(p => p && TOOLS_META[p])
@@ -213,6 +230,7 @@ const MainLayout = () => {
   return (
     <div className="app">
       <ScrollToTop />
+      <RatingOverlay />
       {!isAdminPath && <Navbar />}
       <main className="main-content" style={isAdminPath ? { paddingTop: 0 } : {}}>
         <ErrorBoundary>
@@ -385,58 +403,63 @@ const MainLayout = () => {
 
 function App() {
   return (
-    <Routes>
-      {/* All standard pages wrapped in MainLayout */}
-      <Route element={<MainLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/image-tools/:toolId?" element={<ImageTools />} />
-        <Route path="/pdf-tools/:toolId?" element={<PdfTools />} />
-        <Route path="/temp-mail" element={<TempMail />} />
-        <Route path="/temp-mail/10-minute-mail" element={<TenMinuteMail />} />
-        <Route path="/temp-mail/change-email" element={<ChangeEmail />} />
-        <Route path="/qr-scanner" element={<QrScanner />} />
-        <Route path="/qr-generator" element={<QrGenerator />} />
-        <Route path="/fake-email" element={<FakeEmail />} />
-        <Route path="/disposable-email" element={<DisposableEmail />} />
-        <Route path="/throwaway-email" element={<ThrowawayEmail />} />
-        <Route path="/typing-test" element={<TypingTest />} />
-        <Route path="/code-diff" element={<CodeDiff />} />
-        <Route path="/utility-tools" element={<UtilityTools />} />
-        <Route path="/about" element={<About />} />
+    <ConfirmProvider>
+      <Routes>
+        {/* All standard pages wrapped in MainLayout */}
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/image-tools/:toolId?" element={<ImageTools />} />
+          <Route path="/pdf-tools/:toolId?" element={<PdfTools />} />
+          <Route path="/temp-mail" element={<TempMail />} />
+          <Route path="/temp-mail/10-minute-mail" element={<TenMinuteMail />} />
+          <Route path="/temp-mail/change-email" element={<ChangeEmail />} />
+          <Route path="/qr-scanner" element={<QrScanner />} />
+          <Route path="/qr-generator" element={<QrGenerator />} />
+          <Route path="/fake-email" element={<FakeEmail />} />
+          <Route path="/disposable-email" element={<DisposableEmail />} />
+          <Route path="/throwaway-email" element={<ThrowawayEmail />} />
+          <Route path="/typing-test" element={<TypingTest />} />
+          <Route path="/code-diff" element={<CodeDiff />} />
+          <Route path="/json-formatter" element={<JsonFormatter />} />
+          <Route path="/unit-converter" element={<UnitConverter />} />
+          <Route path="/password-generator" element={<PasswordGenerator />} />
+          <Route path="/utility-tools" element={<UtilityTools />} />
+          <Route path="/about" element={<About />} />
 
-        {/* Legacy SEO Redirects */}
-        <Route path="/convert-qr-to-url-online" element={<Navigate to="/qr-scanner" replace />} />
-        <Route path="/free-online-qr-code-scanner" element={<Navigate to="/qr-scanner" replace />} />
-        <Route path="/free-qr-code-scanner" element={<Navigate to="/qr-scanner" replace />} />
-        <Route path="/convert-url-to-qr-code-online" element={<Navigate to="/qr-generator" replace />} />
-        <Route path="/founder" element={<Founder />} />
-        <Route path="/developer" element={<Developer />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/privacy-policy" element={<Privacy />} />
-        <Route path="/terms-of-service" element={<Terms />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/refund-policy" element={<Refund />} />
-        <Route path="/cookie-policy" element={<Cookie />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/news" element={<News />} />
-        <Route path="/testimonials" element={<Testimonials />} />
-        <Route path="/documentation" element={<Documentation />} />
-        <Route path="/careers" element={<Careers />} />
-        <Route path="/case-studies" element={<CaseStudies />} />
-        <Route path="/sponsor" element={<Sponsor />} />
-        <Route path="/promotions" element={<Promotions />} />
-        <Route path="/hire-me" element={<HireMe />} />
-        <Route path="/thank-you" element={<ThankYou />} />
-        <Route path="/sitemap" element={<Sitemap />} />
-        <Route path="/showcase" element={<Showcase />} />
-        <Route path="/pix-admin" element={<PixAdmin />} />
-        <Route path="/blog/:slug" element={<BlogPost />} />
-        <Route path="/404" element={<NotFound />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+          {/* Legacy SEO Redirects */}
+          <Route path="/convert-qr-to-url-online" element={<Navigate to="/qr-scanner" replace />} />
+          <Route path="/free-online-qr-code-scanner" element={<Navigate to="/qr-scanner" replace />} />
+          <Route path="/free-qr-code-scanner" element={<Navigate to="/qr-scanner" replace />} />
+          <Route path="/convert-url-to-qr-code-online" element={<Navigate to="/qr-generator" replace />} />
+          <Route path="/founder" element={<Founder />} />
+          <Route path="/developer" element={<Developer />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/privacy-policy" element={<Privacy />} />
+          <Route path="/terms-of-service" element={<Terms />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/refund-policy" element={<Refund />} />
+          <Route path="/cookie-policy" element={<Cookie />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/documentation" element={<Documentation />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/case-studies" element={<CaseStudies />} />
+          <Route path="/sponsor" element={<Sponsor />} />
+          <Route path="/promotions" element={<Promotions />} />
+          <Route path="/hire-me" element={<HireMe />} />
+          <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/sitemap" element={<Sitemap />} />
+          <Route path="/showcase" element={<Showcase />} />
+          <Route path="/pix-admin" element={<PixAdmin />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </ConfirmProvider>
   )
 }
 
