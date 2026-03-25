@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
 import { Star, X, CheckCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { submitToolRating, getToolRatingStats, hasRatedToolLocally } from '../services/supabaseService';
+import { submitToolRating } from '../services/supabaseService';
 import { hasSupabaseConfig } from '../lib/supabaseClient';
 
 const StarIcon = ({ size = 24, filled = false, active = false }) => (
@@ -22,6 +23,18 @@ const StarIcon = ({ size = 24, filled = false, active = false }) => (
 
 export default function RatingOverlay() {
   const [isVisible, setIsVisible] = useState(false);
+  // Lazy initializer to ensure purity and avoid cascading renders
+  const [particles] = useState(() => Array.from({ length: 40 }).map((_, i) => ({
+    id: i,
+    x: Math.random() * 400 - 200,
+    y: Math.random() * -400 - 100,
+    size: Math.random() * 10 + 5,
+    color: ['#6366f1', '#a855f7', '#ec4899', '#f59e0b', '#10b981'][Math.floor(Math.random() * 5)],
+    delay: Math.random() * 0.5,
+    duration: Math.random() * 2 + 1,
+    isCircle: Math.random() > 0.5
+  })));
+
   const [toolSlug, setToolSlug] = useState('');
   const [rating, setRating] = useState(0);
   const [hoveredRating, setHoveredRating] = useState(0);
@@ -72,16 +85,6 @@ export default function RatingOverlay() {
 
   if (!hasSupabaseConfig) return null;
 
-  // Generate some confetti particles
-  const particles = Array.from({ length: 40 }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 400 - 200,
-    y: Math.random() * -400 - 100,
-    size: Math.random() * 10 + 5,
-    color: ['#6366f1', '#a855f7', '#ec4899', '#f59e0b', '#10b981'][Math.floor(Math.random() * 5)],
-    delay: Math.random() * 0.5,
-    duration: Math.random() * 2 + 1
-  }));
 
   return (
     <AnimatePresence>
@@ -148,7 +151,7 @@ export default function RatingOverlay() {
                       width: p.size,
                       height: p.size,
                       background: p.color,
-                      borderRadius: Math.random() > 0.5 ? '50%' : '2px',
+                      borderRadius: p.isCircle ? '50%' : '2px',
                       zIndex: 0
                     }}
                   />

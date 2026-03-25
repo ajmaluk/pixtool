@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS } from '../src/data/tools.js';
+import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS } from '../src/data/tools.js';
 import { posts } from '../src/data/posts.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -72,7 +72,7 @@ function generateSitemap() {
   addUrl('/image-tools', '0.9', 'weekly', '/screenshots/image-tools-hub.png', 'PixTool Image Studio Hub');
   addUrl('/pdf-tools', '0.9', 'weekly', '/screenshots/pdf-tools-hub.png', 'PixTool PDF Expert Suite');
   addUrl('/utility-tools', '0.9', 'weekly', '/screenshots/utility-tools-hub.png', 'PixTool Utility Suite');
-  addUrl('/showcase', '0.9', 'weekly', '/screenshots/home.png', 'PixTool Visual Showcase');
+  addUrl('/ai-tools', '0.9', 'weekly', '/screenshots/home.png', 'PixTool AI Tools Hub');
 
   // Image Tools
   IMAGE_TOOLS.forEach(tool => {
@@ -89,19 +89,24 @@ function generateSitemap() {
     addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | Anonymous Tool PixTool`, tool.description);
   });
 
+  // AI Tools
+  AI_TOOLS.forEach(tool => {
+    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | AI Generated PixTool`, tool.description);
+  });
+
 
   // Blog Posts
   posts.forEach(post => {
     addUrl(`/blog/${post.slug}`, '0.7', 'monthly', post.image, post.title);
   });
 
-  // Company & Legal
+  // Company & Legal & Others
   const otherPages = [
     '/about', '/founder', '/developer', '/services', '/products', 
     '/privacy-policy', '/terms-of-service', '/contact', '/faq', 
     '/refund-policy', '/cookie-policy', '/blog', '/testimonials', 
     '/documentation', '/sitemap', '/news', '/careers', '/case-studies',
-    '/support-us', '/promotions', '/hire-me'
+    '/support-us', '/promotions', '/hire-me', '/showcase', '/thank-you'
   ];
 
   otherPages.forEach(path => {

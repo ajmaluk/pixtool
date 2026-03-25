@@ -1,5 +1,4 @@
-import { useState, useMemo, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useMemo } from 'react'
 import { Scale, RefreshCw, ArrowLeftRight, Activity, Zap, Shield, Globe, Copy, Check } from 'lucide-react'
 import SEO from '../components/SEO'
 import Breadcrumbs from '../components/Breadcrumbs'

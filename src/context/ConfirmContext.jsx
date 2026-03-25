@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, useCallback } from 'react';
 import ConfirmModal from '../components/ConfirmModal';
 
@@ -72,18 +73,18 @@ export const ConfirmProvider = ({ children }) => {
   );
 };
 
-export const useConfirm = () => {
+export function useConfirm() {
   const context = useContext(ConfirmContext);
   if (!context) {
     throw new Error('useConfirm must be used within a ConfirmProvider');
   }
   return context.confirm;
-};
+}
 
-export const useAlert = () => {
+export function useAlert() {
   const context = useContext(ConfirmContext);
   if (!context) {
     throw new Error('useAlert must be used within a ConfirmProvider');
   }
   return context.alert;
-};
+}

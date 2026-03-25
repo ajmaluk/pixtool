@@ -479,7 +479,21 @@ insert into tools (name, slug) values
   ('Code Diff', 'code-diff'),
   ('JSON Formatter', 'json-formatter'),
   ('Unit Converter', 'unit-converter'),
-  ('Password Generator', 'password-generator')
+  ('Password Generator', 'password-generator'),
+  ('Deep Mind', 'ai-tools/chat'),
+  ('Content Forge', 'ai-tools/content-generator'),
+  ('Grammar Architect', 'ai-tools/grammar-fixer'),
+  ('Resume Architect', 'ai-tools/resume-generator'),
+  ('Code Intelligence', 'ai-tools/coding-chat'),
+  ('Professional Correspondence', 'ai-tools/email-writer'),
+  ('Marketing Pulse', 'ai-tools/ad-copy-generator'),
+  ('Social Pulse', 'ai-tools/caption-generator'),
+  ('Nuance Engine', 'ai-tools/paraphraser'),
+  ('Intelligence Distiller', 'ai-tools/summarizer'),
+  ('Linguist Intelligence', 'ai-tools/translator'),
+  ('SEO Architect', 'ai-tools/keyword-generator'),
+  ('Viral Density', 'ai-tools/hashtag-generator'),
+  ('Narrative Forge', 'ai-tools/story-generator')
 on conflict (slug) do nothing;
 
 -- Setup complete.

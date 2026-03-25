@@ -41,8 +41,8 @@ const getScreenshotPath = (pagePath) => {
 }
 
 export default function SEO({
-    title = 'PixTool - Free Online Productivity Suite',
-    description = 'The ultimate all-in-one productivity suite featuring professional browser-based tools for PDF management, image editing, and utility workflows. No uploads, 100% private.',
+    title = 'PixTool - Free AI & Privacy-First Productivity Suite',
+    description = 'The ultimate all-in-one productivity suite featuring professional AI generation tools, secure PDF management, and image editing. 100% browser-based with zero-upload privacy.',
     keywords = null,
     path = '/',
     type = 'website',
@@ -81,7 +81,8 @@ export default function SEO({
 
     // Enhanced keywords based on page type and tool
     const enhancedKeywords = useMemo(() => {
-        const baseKeywords = 'browser-based productivity suite, privacy-first web apps, local file processing, secure online utilities, developer tools, professional document management'
+        const baseKeywords = 'free ai tools, ai content generator, best ai assistant 2026, privacy-first productivity, local image processing, secure pdf editor, dev tools, professional web utilities, LLM assistant, ai writing companion, secure local ai'
+
         const toolKeywords = {
             'image-tools': 'professional image editing, high-fidelity photo scaling, batch image optimization, local image conversion, privacy-focused photo editor',
             'pdf-tools': 'secure pdf management, client-side pdf merging, local pdf encryption, professional document splitting, high-performance pdf compression',
@@ -352,8 +353,9 @@ export default function SEO({
 
         // GEO Tags
         updateMeta('geo.region', 'IN-KL')
-        updateMeta('geo.placename', 'Kannur, Kerala, India')
+        updateMeta('geo.placename', 'Kannur, Kerala, India - Global AI Hub')
         updateMeta('geo.position', '11.8745;75.3664')
+        updateMeta('ICBM', '11.8745, 75.3664')
 
         // Canonical Link
         let canonical = document.querySelector('link[rel="canonical"]')

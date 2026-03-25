@@ -127,7 +127,7 @@ export default function About() {
                             </div>
                             <h2 style={{ fontSize: '2rem', fontWeight: 850, marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>Our Mission</h2>
                             <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8' }}>
-                                To merge creativity with technology — delivering clean, efficient, and impactful digital products that simplify work, enhance productivity, and inspire innovation.
+                                To merge creativity with technology — delivering clean, efficient, and AI-empowered digital products that simplify work, enhance productivity, and inspire innovation.
                             </p>
                         </Motion.div>
 
@@ -166,7 +166,7 @@ export default function About() {
                                 <div className="status-badge" style={{ width: 'fit-content' }}>THE ARCHITECT</div>
                                 <h2 style={{ fontSize: '3rem', fontWeight: 950, letterSpacing: '-0.03em' }}>Ajmal U K</h2>
                                 <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-                                    Ajmal is a full-stack developer and AI enthusiast who builds products at the intersection of complex engineering and clean design. Frustrated by bloated software, he founded <b>Uthakkan</b> to architect tools—like ToolPix and PixTool—that are as powerful under the hood as they are elegant on the surface.
+                                    Ajmal is a full-stack developer and AI architect who builds products at the intersection of complex engineering and high-end design. Frustrated by bloated software, he founded <b>Uthakkan</b> to architect tools—like PixTool—that are as powerful under the hood as they are elegant on the surface.
                                 </p>
                                 <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
                                     <a href="https://linkedin.com/in/ajmaluk" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">LinkedIn</a>

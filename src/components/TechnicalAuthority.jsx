@@ -49,7 +49,7 @@ export default function TechnicalAuthority() {
                 </li>
                 <li style={{ padding: '1.5rem', background: 'var(--bg-glass)', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
                   <strong style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--accent-primary)' }}>For Content Creators</strong>
-                  Batch-resize and watermark photos for social media with professional-grade interpolation.
+                  Batch-resize photos, generate viral social captions, and architect long-form narratives with specialized AI.
                 </li>
               </ul>
             </section>
@@ -65,26 +65,26 @@ export default function TechnicalAuthority() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '4rem' }}>
             <div>
               <h4 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <span style={{ color: '#ef4444' }}>✕</span> Other Online Tools
+                <span style={{ color: '#ef4444' }}>✕</span> Legacy Productivity Sites
               </h4>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1.25rem', opacity: 0.8, fontSize: '1.05rem' }}>
-                <li>Upload files to remote servers</li>
-                <li>Wait for queues and processing</li>
-                <li>Limited file sizes on free tiers</li>
-                <li>Mandatory registration and account</li>
-                <li>Data and privacy at risk</li>
+                <li>Bulk file uploads to third-party clouds</li>
+                <li>Limited credits and paywalled AI usage</li>
+                <li>Generic, one-size-fits-all AI prompts</li>
+                <li>Mandatory registration for saving work</li>
+                <li>Data harvesting for model training</li>
               </ul>
             </div>
             <div style={{ position: 'relative' }}>
               <h4 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <span style={{ color: '#10b981' }}>✓</span> PixTool Edge
+                <span style={{ color: '#10b981' }}>✓</span> The PixTool Standard
               </h4>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1.25rem', fontWeight: 600, fontSize: '1.05rem' }}>
-                <li>100% Client-side browser processing</li>
-                <li>Sub-second execution speeds</li>
-                <li>Unlimited file size (Device memory)</li>
-                <li>No accounts, no tracking, no logging</li>
-                <li>Military-grade browser privacy</li>
+                <li>100% On-device browser processing</li>
+                <li>14+ Specialized AI Intelligence tools</li>
+                <li>Unlimited local usage with no registration</li>
+                <li>Zero-knowledge privacy architecture</li>
+                <li>Professional-grade editorial output</li>
               </ul>
             </div>
           </div>
@@ -94,20 +94,20 @@ export default function TechnicalAuthority() {
       {/* Trust Bar */}
       <div className="container-pro" style={{ display: 'flex', justifyContent: 'center', gap: '4rem', padding: '2rem', borderTop: '1px solid var(--border-color)', borderBottom: '1px solid var(--border-color)', opacity: 0.7, flexWrap: 'wrap', marginBottom: '4rem' }}>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-primary)' }}>18+</div>
-          <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Free Tools</div>
+          <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-primary)' }}>45+</div>
+          <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Professional Tools</div>
         </div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-primary)' }}>0</div>
-          <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Files Uploaded</div>
+          <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-primary)' }}>14</div>
+          <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Specialized AIs</div>
         </div>
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-primary)' }}>100%</div>
-          <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Browser Based</div>
+          <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Private Context</div>
         </div>
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-primary)' }}>∞</div>
-          <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Privacy Guaranteed</div>
+          <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Zero Cloud Uploads</div>
         </div>
       </div>
 

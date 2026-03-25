@@ -48,11 +48,13 @@ const sitemapSections = [
         ]
     },
     {
-        title: "Utility & Privacy Tools",
+        title: "Developer & Utility Suite",
         icon: Shield,
         links: [
-            { name: "Temporary Email", path: "/temp-mail", description: "Get a disposable anonymous inbox to avoid spam and trackers." },
-            { name: "Change Temporary Email", path: "/temp-mail/change-email", description: "Generate a brand-new temporary email instantly." },
+            { name: "Code Diff Checker", path: "/code-diff", description: "Compare code blocks and generate diff patches instantly." },
+            { name: "JSON Formatter", path: "/json-formatter", description: "Format, validate, and minify JSON data with syntax highlighting." },
+            { name: "Unit Converter", path: "/unit-converter", description: "Convert between metric and imperial units for length, weight, and more." },
+            { name: "Secure Password Generator", path: "/password-generator", description: "Generate strong, random passwords with custom entropy." },
             { name: "QR Code Generator", path: "/qr-generator", description: "Create custom QR codes for WiFi, URLs, and phone numbers." },
             { name: "QR Code Scanner", path: "/qr-scanner", description: "Safely scan and decode QR codes directly in your browser." },
             { name: "Typing Speed Test", path: "/typing-test", description: "Test and improve your typing WPM and accuracy like MonkeyType." }
@@ -67,6 +69,27 @@ const sitemapSections = [
             { name: "Fake Email Generator", path: "/fake-email", description: "Random fake emails for testing and development." },
             { name: "Disposable Email", path: "/disposable-email", description: "One-time use email to protect your primary identity." },
             { name: "Throwaway Email", path: "/throwaway-email", description: "Burn-after-reading inbox for absolute privacy." }
+        ]
+    },
+    {
+        title: "Artificial Intelligence Suite",
+        icon: MessageSquare,
+        links: [
+            { name: "All AI Tools", path: "/ai-tools", description: "Specialized suite of 14 next-gen AI tools for productivity." },
+            { name: "Deep Mind", path: "/ai-tools/chat", description: "High-authority AI assistant for complex reasoning." },
+            { name: "Content Forge", path: "/ai-tools/content-generator", description: "Architect high-authority blog posts and scripts." },
+            { name: "Grammar Architect", path: "/ai-tools/grammar-fixer", description: "Linguistic perfection and professional tone checker." },
+            { name: "Resume Architect", path: "/ai-tools/resume-generator", description: "Build career-winning, ATS-friendly resumes." },
+            { name: "Code Intelligence", path: "/ai-tools/coding-chat", description: "24/7 senior developer AI for debugging and refactoring." },
+            { name: "Professional Correspondence", path: "/ai-tools/email-writer", description: "Draft high-conversion professional business emails." },
+            { name: "Marketing Pulse", path: "/ai-tools/ad-copy-generator", description: "Generate high-performance marketing and ad copy." },
+            { name: "Social Pulse", path: "/ai-tools/caption-generator", description: "Viral captions for Instagram, TikTok, and X." },
+            { name: "Nuance Engine", path: "/ai-tools/paraphraser", description: "Advanced Stylistic Rewriter and content transformer." },
+            { name: "Intelligence Distiller", path: "/ai-tools/summarizer", description: "Condense massive documents into high-level summaries." },
+            { name: "Linguist Intelligence", path: "/ai-tools/translator", description: "Context-aware global language translation." },
+            { name: "SEO Architect", path: "/ai-tools/keyword-generator", description: "Generate high-intent keywords for search dominance." },
+            { name: "Viral Density", path: "/ai-tools/hashtag-generator", description: "Find high-velocity tags to expand your digital footprint." },
+            { name: "Narrative Forge", path: "/ai-tools/story-generator", description: " साहित्यिक architecture for capturing fictional arcs." }
         ]
     },
     {
@@ -134,16 +157,14 @@ export default function Sitemap() {
                 { "@type": "ListItem", "position": 1, "name": "Home", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/` },
                 { "@type": "ListItem", "position": 2, "name": "Image Tools", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools` },
                 { "@type": "ListItem", "position": 3, "name": "PDF Tools", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools` },
-                { "@type": "ListItem", "position": 4, "name": "Utility Tools", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/utility-tools` },
-                { "@type": "ListItem", "position": 5, "name": "Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail` },
-                { "@type": "ListItem", "position": 6, "name": "10 Minute Mail", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail/10-minute-mail` },
-                { "@type": "ListItem", "position": 7, "name": "Change Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail/change-email` },
-                { "@type": "ListItem", "position": 8, "name": "Typing Speed Test", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/typing-test` },
-                { "@type": "ListItem", "position": 9, "name": "QR Code Generator", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/qr-generator` },
-                { "@type": "ListItem", "position": 10, "name": "QR Code Scanner", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/qr-scanner` },
-                { "@type": "ListItem", "position": 11, "name": "About Us", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/about` },
-                { "@type": "ListItem", "position": 12, "name": "Contact", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/contact` },
-                { "@type": "ListItem", "position": 13, "name": "Privacy Policy", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/privacy-policy` }
+                { "@type": "ListItem", "position": 4, "name": "AI Tools", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/ai-tools` },
+                { "@type": "ListItem", "position": 5, "name": "Utility Tools", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/utility-tools` },
+                { "@type": "ListItem", "position": 6, "name": "Code Diff", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/code-diff` },
+                { "@type": "ListItem", "position": 7, "name": "JSON Formatter", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/json-formatter` },
+                { "@type": "ListItem", "position": 8, "name": "Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail` },
+                { "@type": "ListItem", "position": 9, "name": "10 Minute Mail", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail/10-minute-mail` },
+                { "@type": "ListItem", "position": 10, "name": "About Us", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/about` },
+                { "@type": "ListItem", "position": 11, "name": "Privacy Policy", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/privacy-policy` }
             ]
         }
     }

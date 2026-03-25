@@ -10,7 +10,7 @@ import {
 } from 'lucide-react'
 import ToolCard from '../components/ToolCard'
 import OverallRatingBadge from '../components/OverallRatingBadge'
-import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS } from '../data/tools'
+import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS } from '../data/tools'
 import { posts } from '../data/posts'
 
 // Lazy Load subsections for performance
@@ -22,6 +22,7 @@ const TechnicalAuthority = lazy(() => import('../components/TechnicalAuthority')
 const imageTools = IMAGE_TOOLS.filter(t => !t.status);
 const pdfTools = PDF_TOOLS.filter(t => !t.status);
 const communicationTools = UTILITY_TOOLS;
+const aiTools = AI_TOOLS.filter(t => !t.status);
 
 export default function Home() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -69,15 +70,16 @@ export default function Home() {
     }
   }
 
-  const allTools = [...imageTools, ...pdfTools, ...communicationTools]
+  const allTools = [...imageTools, ...pdfTools, ...communicationTools, ...aiTools]
 
   // Interleave tools from different categories to mix them one after one
   const mixedTools = [];
-  const maxLen = Math.max(imageTools.length, pdfTools.length, communicationTools.length);
+  const maxLen = Math.max(imageTools.length, pdfTools.length, communicationTools.length, aiTools.length);
   for (let i = 0; i < maxLen; i++) {
     if (i < imageTools.length) mixedTools.push({ ...imageTools[i], typeLabel: 'Image Tool' });
     if (i < pdfTools.length) mixedTools.push({ ...pdfTools[i], typeLabel: 'PDF Tool' });
     if (i < communicationTools.length) mixedTools.push({ ...communicationTools[i], typeLabel: 'Utility' });
+    if (i < aiTools.length) mixedTools.push({ ...aiTools[i], typeLabel: 'AI Tool' });
   }
   const filteredTools = allTools.filter(tool =>
     tool.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -106,6 +108,10 @@ export default function Home() {
     {
       q: "What professional utilities does PixTool offer?",
       a: "Beyond image and PDF tools, we provide a JSON Formatter & Validator, Unit Converter, Password Generator, QR tools, and more — all designed for professional speed and 100% privacy."
+    },
+    {
+      q: "What are the AI tools?",
+      a: "Our newest suite includes advanced AI tools: generate entire blogs, rewrite paragraphs, summarize long text, generate marketing ad copies, code faster, and even chat with a powerful AI directly from PixTool."
     }
   ]
 
@@ -129,9 +135,9 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="PixTool - Free Online Productivity Tools | 100% Client-Side & Private"
-        description="PixTool: The ultimate 100% private, browser-based suite for professionals. Free online image resizer, PDF merger, compressor, temporary mail, and QR generator. No file uploads, no storage – your data stays on your device."
-        keywords="free online tools, pixtool, image resizer online, crop image free, compress image no quality loss, PDF merge online, split PDF browser, compress PDF sitemap, temp mail, disposable email pro, 10 minute mail serverless, QR code generator wifi, secure typing test, browser-based tools, no upload required, privacy-first tools, professional pdf editor free, online image editor 2026, adobe acrobat alternative, tinypng alternative"
+        title="PixTool - Master Your AI Workflow with Free Online Tools | 100% Private"
+        description="Unlock 52+ free online tools. PixTool is the ultimate AI productivity suite for content generation, PDF management, and image editing. No upload needed, 100% browser-based security."
+        keywords="free online ai suite, secure pdf tools, private image editor, ai content writer free, master ai workflow, browser-native productivity, 2026 ai tools"
         path="/"
         schema={homeSchema}
         faqs={homeFaqs}
@@ -155,15 +161,71 @@ export default function Home() {
                 transition={{ duration: 0.8 }}
               >
                 <div className="status-badge" style={{ margin: '0 auto 2rem' }}>
-                  <span style={{ marginRight: '8px' }}>🚀</span> 2026 Edition: Private & Fast
+                  <span style={{ marginRight: '8px' }}>🚀</span> 2026 AI Innovation Suite
                 </div>
-                <h1 style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.04em', lineHeight: 1.1 }}>
-                  Pix<span style={{ color: 'var(--accent-primary)' }}>Tool</span>
+                <h1 style={{ 
+                  fontSize: 'clamp(3.5rem, 10vw, 6.5rem)', 
+                  fontWeight: 900, 
+                  marginBottom: '1.5rem', 
+                  letterSpacing: '-0.06em', 
+                  lineHeight: 0.95,
+                  position: 'relative',
+                  display: 'inline-block'
+                }}>
+                  Master Your <br/>
+                  <span className="text-gradient-hero" style={{ 
+                    background: 'linear-gradient(135deg, #a855f7 0%, #3b82f6 50%, #10b981 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundSize: '200% auto',
+                    animation: 'gradient-flow 6s linear infinite',
+                    display: 'inline-block',
+                    padding: '0.1em 0'
+                  }}>
+                    AI Workflow
+                  </span>
+                  <motion.div
+                    animate={{ 
+                      scale: [1, 1.2, 1],
+                      opacity: [0.3, 0.6, 0.3],
+                    }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      width: '140%',
+                      height: '140%',
+                      background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)',
+                      zIndex: -1,
+                      pointerEvents: 'none'
+                    }}
+                  />
                 </h1>
-                <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '800px', margin: '0 auto 3rem', lineHeight: 1.6, fontWeight: 500 }}>
-                  The ultimate professional suite for image editing, PDF management, and essential web utilities.
-                  <span style={{ display: 'block', marginTop: '1rem', fontSize: '0.85rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--accent-primary)', letterSpacing: '0.1em' }}>
-                    Built for Professionals • Zero Server Uploads • Military-Grade Privacy
+                <p style={{ fontSize: '1.4rem', color: 'var(--text-secondary)', maxWidth: '900px', margin: '0 auto 3.5rem', lineHeight: 1.6, fontWeight: 500, opacity: 0.9 }}>
+                  The world's most powerful browser-native AI suite. 52+ professional tools for 
+                  <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> content generation </span>, 
+                  <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> secure PDF management </span>, 
+                  and <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> image studio operations </span>
+                  —all with absolute privacy.
+                  <span style={{ 
+                    display: 'flex', 
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                    gap: '1rem',
+                    marginTop: '2rem', 
+                    fontSize: '0.85rem', 
+                    fontWeight: 900, 
+                    textTransform: 'uppercase', 
+                    color: 'var(--accent-primary)', 
+                    letterSpacing: '0.2em' 
+                  }}>
+                    <span>✦ Zero-Upload AI</span>
+                    <span style={{ opacity: 0.3 }}>|</span>
+                    <span>✦ Industry-Standard Security</span>
+                    <span style={{ opacity: 0.3 }}>|</span>
+                    <span>✦ High-Fidelity Output</span>
                   </span>
                 </p>
 
@@ -351,7 +413,7 @@ export default function Home() {
                       </div>
                       <div className="tools-grid">
                         {communicationTools.filter(t => ['json-formatter', 'unit-converter', 'password-generator'].includes(t.id)).map(tool => (
-                          <ToolCard key={tool.path} tool={tool} featured={true} />
+                          <ToolCard key={tool.path} tool={tool} />
                         ))}
                       </div>
                     </section>
@@ -384,7 +446,6 @@ export default function Home() {
                           <ToolCard
                             key={tool.path}
                             tool={tool}
-                            featured={['upscale', 'restore', 'remove-background'].includes(tool.id)}
                           />
                         ))}
                       </div>
@@ -450,7 +511,40 @@ export default function Home() {
                           <ToolCard
                             key={tool.path}
                             tool={tool}
-                            featured={['json-formatter', 'unit-converter', 'password-generator'].includes(tool.id)}
+                          />
+                        ))}
+                      </div>
+                    </section>
+                  )}
+
+                  {/* AI Tools Category */}
+                  {!isSearching && (
+                    <section style={{ marginBottom: '6rem', position: 'relative' }}>
+                      <div style={{
+                        position: 'sticky',
+                        top: '80px',
+                        zIndex: 10,
+                        background: 'rgba(var(--bg-primary-rgb), 0.8)',
+                        backdropFilter: 'blur(12px)',
+                        padding: '1.5rem 0',
+                        marginBottom: '2rem',
+                        borderBottom: '1px solid var(--border-color)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '1rem'
+                      }}>
+                        <div style={{ padding: '0.6rem', background: 'rgba(139, 92, 246, 0.1)', borderRadius: '12px', color: '#8b5cf6' }}>
+                          <Sparkles size={24} />
+                        </div>
+                        <div>
+                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, margin: 0, letterSpacing: '-0.02em' }}>Next-Gen AI <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, marginLeft: '0.5rem' }}>({aiTools.length} Tools)</span></h2>
+                        </div>
+                      </div>
+                      <div className="tools-grid">
+                        {aiTools.map((tool) => (
+                          <ToolCard
+                            key={tool.path}
+                            tool={tool}
                           />
                         ))}
                       </div>
@@ -524,6 +618,20 @@ export default function Home() {
           </section>
         </div>
       </div>
+      <style>{`
+        @keyframes gradient-flow {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .text-gradient-hero {
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .text-gradient-hero:hover {
+          filter: drop-shadow(0 0 25px rgba(139, 92, 246, 0.5));
+          transform: scale(1.03) translateY(-2px);
+        }
+      `}</style>
     </>
   )
 }

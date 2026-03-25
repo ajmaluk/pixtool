@@ -68,7 +68,7 @@ export default function TypingTest() {
       })
     }, 1000)
     return () => clearInterval(timerRef.current)
-  }, [running, wpm, accuracy])
+  }, [running, wpm, accuracy, triggerRating])
 
   const restart = (keepDuration = true) => {
     timerRef.current && clearInterval(timerRef.current)

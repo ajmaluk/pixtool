@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
 
 export default function UseCaseSection() {
@@ -49,6 +50,18 @@ export default function UseCaseSection() {
       description: 'Merge personalized sales decks with confidential pricing sheets instantly, all without uploading prospect data to the cloud.',
       icon: '📈',
       tools: ['Merge PDF', 'Split PDF', 'Protect PDF']
+    },
+    {
+      title: 'For Content Marketers',
+      description: 'Forge high-authority blog posts, generate viral social captions, and find high-intent SEO keywords to dominate search rankings.',
+      icon: '🚀',
+      tools: ['Content Forge', 'Viral Captions', 'SEO Engine']
+    },
+    {
+      title: 'For Software Engineers',
+      description: 'Debug complex code blocks, generate terminal-ready scripts, and compare code diffs with senior-level AI intelligence.',
+      icon: '🛡️',
+      tools: ['Code Intelligence', 'Code Diff', 'JSON Formatter']
     }
   ]
 

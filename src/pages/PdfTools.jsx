@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { PDFDocument } from 'pdf-lib'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { FileText, Upload, Download, Loader, X, ChevronDown, Share2, Eye, EyeOff, Sliders } from 'lucide-react'
 import SEO from '../components/SEO'
@@ -95,6 +96,7 @@ export default function PdfTools() {
     ocrLanguages: ['eng'], // Array of language codes
     ocrShowAdvanced: false
   })
+  const [ocrProgress, setOcrProgress] = useState(null)
   const fileInputRef = useRef(null)
 
   useEffect(() => {
@@ -1062,22 +1064,21 @@ export default function PdfTools() {
 
               <AdSpace type="bottom" />
 
-              <div style={{ marginTop: '5rem' }}>
-                {seoContent && (
+                <div style={{ marginTop: '5rem' }}>
                   <ToolContent
                     title={activeToolData?.title || 'PDF Tool'}
-                    description={seoContent.description}
-                    benefits={seoContent.benefits}
-                    howTo={seoContent.howTo}
-                    faq={seoContent.faq}
-                    tips={seoContent.tips}
-                    useCases={seoContent.useCases}
+                    description={activeToolData?.description || (activeTool ? `Our ${activeToolData?.title} is a professional browser-based utility for secure PDF management.` : 'Professional Online PDF Studio')}
+                    toolId={activeTool}
+                    benefits={activeToolData?.features || ["100% Privacy — files stay on your device", "No registration or signup required", "Local client-side processing", "High-fidelity results"]}
+                    howTo={activeToolData?.howItWorks || ["Upload your PDF files via drag & drop", "Pick your desired settings", "Process instantly in your browser", "Download the secured results"]}
                     relatedTools={PDF_RELATED_TOOLS[activeTool] || []}
                     readNext={PDF_READ_NEXT[activeTool] || []}
-                    alternativeTo={seoContent.alternativeTo || []}
+                    alternativeTo={seoContent?.alternativeTo || []}
+                    faq={seoContent?.faq || []}
+                    tips={seoContent?.tips || []}
+                    useCases={seoContent?.useCases || []}
                   />
-                )}
-              </div>
+                </div>
             </div>
 
             <AdSpace type="side" className="desktop-only" />
@@ -1119,14 +1120,6 @@ export default function PdfTools() {
           </>
         )}
 
-        {
-          processing && (
-            <div className="processing-overlay">
-              <div className="processing-loader"></div>
-              <p className="processing-text">Processing your PDF...</p>
-            </div>
-          )
-        }
         <input
           ref={fileInputRef}
           type="file"
@@ -1148,7 +1141,7 @@ export default function PdfTools() {
             transform: scale(0.95);
           }
         `}} />
-      </div >
+      </div>
       <ShareTool title={`Free Online ${activeToolData?.title || 'PDF Tools'} | PixTool`} />
     </>
   )

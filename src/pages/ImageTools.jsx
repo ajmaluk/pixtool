@@ -352,14 +352,13 @@ export default function ImageTools() {
                   type="checkbox"
                   checked={settings.maintainAspect}
                   onChange={(e) => {
-                    const checked = e.target.checked;
-                    setSettings(s => ({ ...s, maintainAspect: checked }));
-                    if (checked && crop) {
-                      const aspect = crop.width / crop.height;
-                      setCrop(c => ({ ...c, aspect }));
+                    const isChecked = e.target.checked;
+                    setSettings(s => ({ ...s, maintainAspect: isChecked }));
+                    if (isChecked && crop) {
+                      setCrop(c => ({ ...c, aspect: crop.width / crop.height }));
                     } else {
                       setCrop(c => {
-                        const { aspect, ...rest } = c;
+                        const { aspect: _, ...rest } = c;
                         return rest;
                       });
                     }
@@ -506,7 +505,7 @@ export default function ImageTools() {
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [files.length])
+  }, [files.length, triggerRating])
 
   useEffect(() => {
     if (toolId) {
@@ -570,17 +569,17 @@ export default function ImageTools() {
       // Auto / Free-form mode
       setSettings(s => ({ ...s, cropAspectRatio: 'auto', maintainAspect: false }));
       setCrop(c => {
-        const { aspect, ...rest } = c;
+        const { aspect: _, ...rest } = c;
         return { ...rest, unit: 'px' };
       });
       return;
     }
 
-    const aspect = aspectWidth / aspectHeight;
+    const aspectValue = aspectWidth / aspectHeight;
     const newCrop = centerCrop(
       makeAspectCrop(
         { unit: 'px', width: width * 0.9 },
-        aspect,
+        aspectValue,
         width,
         height
       ),
@@ -1639,34 +1638,19 @@ export default function ImageTools() {
                 <AdSpace type="bottom" />
 
                 <div style={{ marginTop: '5rem' }}>
-                  {seoContent ? (
-                    <ToolContent
-                      title={activeToolData?.title || 'Image Tool'}
-                      description={seoContent.description}
-                      benefits={seoContent.benefits}
-                      howTo={seoContent.howTo}
-                      faq={seoContent.faq}
-                      tips={seoContent.tips}
-                      useCases={seoContent.useCases}
-                      relatedTools={IMAGE_RELATED_TOOLS[activeTool] || []}
-                      readNext={IMAGE_READ_NEXT[activeTool] || []}
-                      alternativeTo={seoContent.alternativeTo || []}
-                    />
-                  ) : (
-                    <ToolContent
-                      title={activeToolData?.title || 'Image Resizer'}
-                      description={`Our ${activeToolData?.title || 'Image Resizer'} is a powerful browser-based utility for professional image editing.`}
-                      benefits={["100% Privacy — files never leave your device", "No registration or signup required", "Batch processing for multiple images", "All major formats supported"]}
-                      howTo={["Upload your photos via drag & drop or file picker", "Configure your desired settings", "Preview the results in real-time", "Download high-quality processed images"]}
-                      relatedTools={[
-                        { name: 'All Image Tools', path: '/image-tools' },
-                        { name: 'PDF Tools', path: '/pdf-tools' }
-                      ]}
-                      readNext={[
-                        { title: 'Lossless vs Lossy Image Compression', path: '/blog/image-compression-lossless-vs-lossy-2026' }
-                      ]}
-                    />
-                  )}
+                  <ToolContent
+                    title={activeToolData?.title || 'Image Tool'}
+                    description={activeToolData?.description || (activeTool ? `Our ${activeToolData?.title} is a professional browser-based utility for photo editing.` : 'Professional Online Image Studio')}
+                    toolId={activeTool}
+                    benefits={activeToolData?.features || ["100% Privacy — files never leave your device", "No registration required", "Batch processing support", "All major formats supported"]}
+                    howTo={activeToolData?.howItWorks || ["Upload your photos via drag & drop", "Configure your desired settings", "Preview the results in real-time", "Download high-quality images"]}
+                    relatedTools={IMAGE_RELATED_TOOLS[activeTool] || []}
+                    readNext={IMAGE_READ_NEXT[activeTool] || []}
+                    alternativeTo={seoContent?.alternativeTo || []}
+                    faq={seoContent?.faq || []}
+                    tips={seoContent?.tips || []}
+                    useCases={seoContent?.useCases || []}
+                  />
                 </div>
               </div>
               <AdSpace type="side" className="desktop-only" />

@@ -11,18 +11,29 @@ export default defineConfig({
     reportCompressedSize: false,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-          'vendor-utils': ['lucide-react', 'framer-motion'],
-          'tool-qr': ['qrcode.react'],
-          'tool-pdf': ['pdf-lib', 'pdfjs-dist']
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+              return 'vendor-react';
+            }
+            if (id.includes('framer-motion')) {
+              return 'vendor-framer';
+            }
+            if (id.includes('lucide-react')) {
+              return 'vendor-icons';
+            }
+            if (id.includes('pdf-lib') || id.includes('pdfjs-dist')) {
+              return 'vendor-pdf';
+            }
+            return 'vendor-core';
+          }
         },
         chunkFileNames: 'assets/[name]-[hash].js',
         entryFileNames: 'assets/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash].[ext]'
       }
     },
-    chunkSizeWarningLimit: 1500
+    chunkSizeWarningLimit: 2000
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom', 'lucide-react', 'framer-motion', 'qrcode.react'],

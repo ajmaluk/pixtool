@@ -16,9 +16,14 @@ export const useRatePopup = () => {
       return;
     }
 
-    // Check if popup was already shown for this tool in this session/device
-    const seenKey = `${POPUP_SEEN_PREFIX}${toolSlug}`;
-    if (localStorage.getItem(seenKey)) {
+    // GLOBAL CHECK: If they've seen any rating popup in this session, don't show another
+    if (sessionStorage.getItem('pix_global_rating_shown')) {
+      return;
+    }
+
+    // Check if already rated ANY tool locally
+    // (This is a more aggressive anti-fatigue measure)
+    if (localStorage.getItem('pix_has_rated_any')) {
       return;
     }
 
@@ -28,8 +33,8 @@ export const useRatePopup = () => {
     });
     window.dispatchEvent(event);
     
-    // Mark as seen so it doesn't pop again immediately or on every action
-    localStorage.setItem(seenKey, 'true');
+    // Mark as seen in session so it doesn't pop again during this visit
+    sessionStorage.setItem('pix_global_rating_shown', 'true');
   }, []);
 
   return { triggerRating };

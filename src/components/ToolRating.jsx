@@ -11,7 +11,6 @@ export default function ToolRating({ toolSlug }) {
   const [hoveredStar, setHoveredStar] = useState(0);
   const [selectedStar, setSelectedStar] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [statsLoading, setStatsLoading] = useState(true);
   const [message, setMessage] = useState('');
   const [stats, setStats] = useState({ avgRating: 4.9, totalVotes: 124, distribution: [0, 0, 0, 0, 0] });
   const [alreadyRated, setAlreadyRated] = useState(false);
@@ -21,7 +20,6 @@ export default function ToolRating({ toolSlug }) {
 
     const run = async () => {
       if (!toolSlug || !hasSupabaseConfig) {
-        if (mounted) setStatsLoading(false);
         return;
       }
       try {
@@ -35,8 +33,6 @@ export default function ToolRating({ toolSlug }) {
         }
       } catch {
         // Silent catch for background rating fetch
-      } finally {
-        if (mounted) setStatsLoading(false);
       }
     };
 

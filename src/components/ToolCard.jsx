@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 import { ArrowUpRight } from 'lucide-react'
 
-export default function ToolCard({ tool, featured = false }) {
+export default function ToolCard({ tool }) {
   // Use category from tool object if available, otherwise infer from path
   const category = tool.category || tool.path?.split('/')[1]?.replace('-', ' ') || 'General'
 
@@ -29,21 +29,7 @@ export default function ToolCard({ tool, featured = false }) {
           >
             <tool.icon size={24} strokeWidth={2.5} />
           </div>
-          <div className="tool-card-arrow" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-            {featured && (
-              <span style={{ 
-                fontSize: '0.7rem', 
-                fontWeight: 800, 
-                padding: '0.2rem 0.6rem', 
-                background: 'var(--accent-primary)', 
-                color: 'white', 
-                borderRadius: '20px',
-                textTransform: 'uppercase',
-                letterSpacing: '0.05em'
-              }}>
-                New
-              </span>
-            )}
+          <div className="tool-card-arrow">
             <ArrowUpRight size={20} />
           </div>
         </div>

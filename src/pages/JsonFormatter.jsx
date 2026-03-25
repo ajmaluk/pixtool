@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion' // eslint-disable-line no-unused-vars
 import { Braces, Copy, Trash2, Check, Download, AlertCircle, FileJson, Zap, Shield, ZapOff } from 'lucide-react'
 import SEO from '../components/SEO'
 import Breadcrumbs from '../components/Breadcrumbs'

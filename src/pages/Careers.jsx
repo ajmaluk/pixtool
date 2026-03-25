@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'; // eslint-disable-line no-unused-vars
 import { Heart, Coffee, Globe, ArrowRight, Mail } from 'lucide-react';
 
 export default function Careers() {

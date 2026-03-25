@@ -8,8 +8,10 @@ import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import ToolRating from './components/ToolRating'
 import RatingOverlay from './components/RatingOverlay'
+import PixAiOverlay from './components/PixAiOverlay'
 import { ALL_TOOLS_MAP } from './data/tools'
 import { ConfirmProvider } from './context/ConfirmContext'
+import { useRatePopup } from './hooks/useRatePopup'
 
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home'))
@@ -55,6 +57,21 @@ const JsonFormatter = lazy(() => import('./pages/JsonFormatter'))
 const UnitConverter = lazy(() => import('./pages/UnitConverter'))
 const PasswordGenerator = lazy(() => import('./pages/PasswordGenerator'))
 const PixAdmin = lazy(() => import('./pages/PixAdmin'))
+const AiTools = lazy(() => import('./pages/AiTools'))
+const AiChat = lazy(() => import('./pages/AiChat'))
+const AiContentGenerator = lazy(() => import('./pages/AiContentGenerator'))
+const AiGrammarFixer = lazy(() => import('./pages/AiGrammarFixer'))
+const AiResumeGenerator = lazy(() => import('./pages/AiResumeGenerator'))
+const AiCodingChat = lazy(() => import('./pages/AiCodingChat'))
+const AiEmailWriter = lazy(() => import('./pages/AiEmailWriter'))
+const AiAdCopy = lazy(() => import('./pages/AiAdCopy'))
+const AiCaption = lazy(() => import('./pages/AiCaption'))
+const AiParaphraser = lazy(() => import('./pages/AiParaphraser'))
+const AiSummarizer = lazy(() => import('./pages/AiSummarizer'))
+const AiTranslator = lazy(() => import('./pages/AiTranslator'))
+const AiKeyword = lazy(() => import('./pages/AiKeyword'))
+const AiHashtag = lazy(() => import('./pages/AiHashtag'))
+const AiStory = lazy(() => import('./pages/AiStory'))
 
 // Loading component — stays visible inside the layout
 const PageLoader = () => (
@@ -179,20 +196,7 @@ const MainLayout = () => {
       // Track tool visits
       const path = location.pathname
       const storageKey = 'pt_recent_tools'
-      const legacyKey = 'dt_recent_tools'
-      
-      let rawSaved = localStorage.getItem(storageKey)
-      if (!rawSaved) {
-        // Migration from legacy DailyTools key
-        const legacyData = localStorage.getItem(legacyKey)
-        if (legacyData) {
-          rawSaved = legacyData
-          localStorage.setItem(storageKey, legacyData)
-          localStorage.removeItem(legacyKey)
-        }
-      }
-      
-      const saved = rawSaved ? JSON.parse(rawSaved) : []
+      const saved = localStorage.getItem(storageKey) ? JSON.parse(localStorage.getItem(storageKey)) : []
       
       if (!Array.isArray(saved)) {
         localStorage.setItem(storageKey, '[]')
@@ -208,7 +212,7 @@ const MainLayout = () => {
         localStorage.setItem(storageKey, JSON.stringify(updated))
         
         // Map paths back to full tool objects for display
-        const displayTools = updated.map(p => ({ path: p, ...TOOLS_META[p] })).filter(t => t.name)
+        const displayTools = updated.map(p => ({ path: p, ...TOOLS_META[p] })).filter(t => t.title || t.name)
         setRecentTools(displayTools)
       } else {
         // Map saved paths back to full tool objects
@@ -220,10 +224,23 @@ const MainLayout = () => {
       }
     } catch (err) {
       console.error('Error tracking recent tools:', err)
-      localStorage.setItem('dt_recent_tools', '[]')
+      localStorage.setItem('pt_recent_tools', '[]')
       setRecentTools([])
     }
   }, [location, TOOLS_META])
+
+  const { triggerRating } = useRatePopup()
+  
+  // Trigger rating overlay gracefully after a short delay on rateable tools
+  useEffect(() => {
+    if (isRateableToolPath) {
+      const slug = location.pathname.replace(/^\//, '')
+      const timer = setTimeout(() => {
+        triggerRating(slug)
+      }, 5000) // Show popup 5 seconds after visiting the tool
+      return () => clearTimeout(timer)
+    }
+  }, [location.pathname, isRateableToolPath, triggerRating])
 
   const isAdminPath = location.pathname === '/pix-admin'
 
@@ -231,6 +248,7 @@ const MainLayout = () => {
     <div className="app">
       <ScrollToTop />
       <RatingOverlay />
+      <PixAiOverlay />
       {!isAdminPath && <Navbar />}
       <main className="main-content" style={isAdminPath ? { paddingTop: 0 } : {}}>
         <ErrorBoundary key={location.pathname}>
@@ -241,12 +259,6 @@ const MainLayout = () => {
 
         {!isAdminPath && (
           <div className="container-pro" style={{ marginTop: '6rem', paddingBottom: '4rem' }}>
-            {isRateableToolPath ? (
-              <div style={{ marginBottom: '1.5rem', maxWidth: '420px' }}>
-                <ToolRating toolSlug={location.pathname.replace(/^\//, '')} />
-              </div>
-            ) : null}
-
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
               
               {/* Recent Tools - Dynamic with Layout Animation */}
@@ -293,7 +305,7 @@ const MainLayout = () => {
                             <span style={{ fontSize: '1.3rem', display: 'flex', alignItems: 'center' }}>
                               {tool.icon ? (typeof tool.icon === 'string' ? tool.icon : (typeof tool.icon === 'function' ? <tool.icon size={20} /> : '🛠️')) : '🛠️'}
                             </span>
-                            <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>{tool.name}</span>
+                            <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>{tool.title || tool.name}</span>
                           </motion.div>
                         </Link>
                       ))}
@@ -424,6 +436,21 @@ function App() {
           <Route path="/unit-converter" element={<UnitConverter />} />
           <Route path="/password-generator" element={<PasswordGenerator />} />
           <Route path="/utility-tools" element={<UtilityTools />} />
+          <Route path="/ai-tools" element={<AiTools />} />
+          <Route path="/ai-tools/chat" element={<AiChat />} />
+          <Route path="/ai-tools/content-generator" element={<AiContentGenerator />} />
+          <Route path="/ai-tools/grammar-fixer" element={<AiGrammarFixer />} />
+          <Route path="/ai-tools/resume-generator" element={<AiResumeGenerator />} />
+          <Route path="/ai-tools/coding-chat" element={<AiCodingChat />} />
+          <Route path="/ai-tools/email-writer" element={<AiEmailWriter />} />
+          <Route path="/ai-tools/ad-copy-generator" element={<AiAdCopy />} />
+          <Route path="/ai-tools/caption-generator" element={<AiCaption />} />
+          <Route path="/ai-tools/paraphraser" element={<AiParaphraser />} />
+          <Route path="/ai-tools/summarizer" element={<AiSummarizer />} />
+          <Route path="/ai-tools/translator" element={<AiTranslator />} />
+          <Route path="/ai-tools/keyword-generator" element={<AiKeyword />} />
+          <Route path="/ai-tools/hashtag-generator" element={<AiHashtag />} />
+          <Route path="/ai-tools/story-generator" element={<AiStory />} />
           <Route path="/about" element={<About />} />
 
           {/* Legacy SEO Redirects */}
