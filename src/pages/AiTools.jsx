@@ -51,13 +51,13 @@ export default function AiTools() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="status-badge" style={{ margin: '0 auto 2.5rem', background: '#f4f4f5', color: '#71717a', padding: '8px 20px', borderRadius: '100px', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              <div className="status-badge" style={{ margin: '0 auto 2.5rem', background: 'var(--bg-secondary)', color: 'var(--text-muted)', padding: '8px 20px', borderRadius: '100px', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
                 <Sparkles size={14} style={{ display: 'inline', marginRight: '8px', verticalAlign: 'middle' }} /> AI Evolution 2026
               </div>
-              <h1 style={{ fontSize: 'clamp(3rem, 8vw, 5.5rem)', fontWeight: 900, marginBottom: '2rem', letterSpacing: '-0.05em', lineHeight: 0.9, color: '#09090b' }}>
-                Specialized <span style={{ color: '#8b5cf6' }}>Intelligence.</span>
+              <h1 style={{ fontSize: 'clamp(3rem, 8vw, 5.5rem)', fontWeight: 900, marginBottom: '2rem', letterSpacing: '-0.05em', lineHeight: 0.9, color: 'var(--text-primary)' }}>
+                Specialized <span style={{ color: 'var(--accent-purple)' }}>Intelligence.</span>
               </h1>
-              <p style={{ fontSize: '1.4rem', color: '#71717a', maxWidth: '800px', margin: '0 auto', lineHeight: 1.5, fontWeight: 500 }}>
+              <p style={{ fontSize: '1.4rem', color: 'var(--text-secondary)', maxWidth: '800px', margin: '0 auto', lineHeight: 1.5, fontWeight: 500 }}>
                 14 precision-engineered AI tools designed to architect, generate, and evolve your digital workflow with high-authority reasoning.
               </p>
             </motion.div>
@@ -73,10 +73,10 @@ export default function AiTools() {
                     { title: "Privacy First", desc: "Context-aware processing without permanent server-side data retention.", icon: ShieldCheck },
                     { title: "Global Context", desc: "Engineered to understand over 50+ linguistic and cultural nuances.", icon: Globe }
                 ].map((p, i) => (
-                    <div key={i} style={{ padding: '2.5rem', background: '#fdfdfd', borderRadius: '32px', border: '1px solid #f4f4f5' }}>
-                        <div style={{ color: '#8b5cf6', marginBottom: '1.5rem' }}><p.icon size={28} strokeWidth={1.5} /></div>
-                        <h3 style={{ fontSize: '1.25rem', fontWeight: 900, marginBottom: '0.75rem', color: '#09090b' }}>{p.title}</h3>
-                        <p style={{ color: '#71717a', lineHeight: 1.6, fontSize: '0.95rem' }}>{p.desc}</p>
+                    <div key={i} style={{ padding: '2.5rem', background: 'var(--bg-card)', borderRadius: '32px', border: '1px solid var(--border-color)' }}>
+                        <div style={{ color: 'var(--accent-purple)', marginBottom: '1.5rem' }}><p.icon size={28} strokeWidth={1.5} /></div>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: 900, marginBottom: '0.75rem', color: 'var(--text-primary)' }}>{p.title}</h3>
+                        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, fontSize: '0.95rem' }}>{p.desc}</p>
                     </div>
                 ))}
             </div>
@@ -87,14 +87,14 @@ export default function AiTools() {
         {categories.map((cat, idx) => (
           <section key={idx} style={{ marginBottom: '6rem' }}>
             <div className="container-pro">
-              <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '3.5rem', borderBottom: '1px solid #f4f4f5', paddingBottom: '2.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '3.5rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '2.5rem' }}>
                 <div style={{ maxWidth: '600px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: '#8b5cf6', marginBottom: '1rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: 'var(--accent-purple)', marginBottom: '1rem' }}>
                         <cat.icon size={24} strokeWidth={1.5} />
                         <span style={{ fontWeight: 800, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Intelligence Cluster 0{idx + 1}</span>
                     </div>
-                    <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#09090b', marginBottom: '0.75rem', letterSpacing: '-0.03em' }}>{cat.title}</h2>
-                    <p style={{ color: '#71717a', fontSize: '1.1rem', fontWeight: 500 }}>{cat.desc}</p>
+                    <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--text-primary)', marginBottom: '0.75rem', letterSpacing: '-0.03em' }}>{cat.title}</h2>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', fontWeight: 500 }}>{cat.desc}</p>
                 </div>
               </div>
 
@@ -112,8 +112,8 @@ export default function AiTools() {
 
       <style dangerouslySetInnerHTML={{ __html: `
         .ai-hub-container {
-            background: #fff;
-            color: #09090b;
+            background: var(--bg-primary);
+            color: var(--text-primary);
         }
         .container-pro {
             max-width: 1400px;
