@@ -23,7 +23,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-links-group">
-          <h4 className="footer-heading">Image Studio</h4>
+          <h3 className="footer-heading">Image Studio</h3>
           <ul className="footer-links">
             <li><Link to="/image-tools/resize" title="Resize PNG, JPG, WebP images online for free">Resize Image</Link></li>
             <li><Link to="/image-tools/crop" title="Crop images to specific aspect ratios or freehand">Crop & Rotate</Link></li>
@@ -34,7 +34,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-links-group">
-          <h4 className="footer-heading">PDF Expert</h4>
+          <h3 className="footer-heading">PDF Expert</h3>
           <ul className="footer-links">
             <li><Link to="/pdf-tools/merge" title="Combine multiple PDF files into one document">Merge PDF</Link></li>
             <li><Link to="/pdf-tools/split" title="Extract pages or split PDF into separate files">Split & Extract</Link></li>
@@ -46,7 +46,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-links-group">
-          <h4 className="footer-heading">Utilities</h4>
+          <h3 className="footer-heading">Utilities</h3>
           <ul className="footer-links">
             <li><Link to="/temp-mail" title="Disposable temporary email for spam protection">Temp Mail</Link></li>
             <li><Link to="/qr-generator" title="Create custom high-resolution QR codes">QR Maker</Link></li>
@@ -57,7 +57,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-links-group">
-          <h4 className="footer-heading">Company</h4>
+          <h3 className="footer-heading">Company</h3>
           <ul className="footer-links">
             <li><Link to="/about" title="Learn about the mission and technology of PixTool">About Our Mission</Link></li>
             <li><Link to="/blog" title="Read our latest productivity tutorials and guides">Expert Guides</Link></li>
@@ -68,7 +68,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-links-group">
-          <h4 className="footer-heading">Legal & Privacy</h4>
+          <h3 className="footer-heading">Legal & Privacy</h3>
           <ul className="footer-links">
             <li><Link to="/privacy-policy" title="Read our strict zero-data collection policy">Privacy Policy</Link></li>
             <li><Link to="/terms-of-service" title="View our terms of service and usage guidelines">Terms of Service</Link></li>

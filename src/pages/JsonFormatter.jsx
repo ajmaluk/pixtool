@@ -166,7 +166,7 @@ export default function JsonFormatter() {
                   }}>
                     <AlertCircle size={24} style={{ flexShrink: 0 }} />
                     <div>
-                      <h4 style={{ margin: '0 0 0.5rem 0', fontWeight: 800 }}>Invalid JSON</h4>
+                      <h3 style={{ margin: '0 0 0.5rem 0', fontWeight: 800, fontSize: '1.1rem' }}>Invalid JSON</h3>
                       <p style={{ margin: 0, fontSize: '0.9rem', opacity: 0.9, lineHeight: 1.5 }}>{error}</p>
                     </div>
                   </div>
@@ -216,7 +216,7 @@ export default function JsonFormatter() {
                   <div className="tool-card-icon" style={{ background: `${feat.color}15`, color: feat.color, margin: '0 auto' }}>
                     <feat.icon size={26} />
                   </div>
-                  <h4 style={{ fontWeight: 900, marginBottom: '0.5rem', fontSize: '1.1rem' }}>{feat.title}</h4>
+                  <h2 style={{ fontWeight: 900, marginBottom: '0.5rem', fontSize: '1.1rem' }}>{feat.title}</h2>
                   <p className="tool-card-description" style={{ fontSize: '0.9rem' }}>{feat.desc}</p>
                 </div>
               ))}

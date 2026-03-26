@@ -39,8 +39,8 @@ export default function BlogSection({ posts }) {
               <p className="blog-card-excerpt">
                 {post.excerpt}
               </p>
-              <Link to={`/blog/${post.slug}`} className="blog-card-link">
-                Read Article <Navigation size={16} style={{ transform: 'rotate(90deg)' }} />
+              <Link to={`/blog/${post.slug}`} className="blog-card-link" aria-label={`Read full article: ${post.title}`}>
+                Read Article <Navigation size={16} style={{ transform: 'rotate(90deg)' }} aria-hidden="true" />
               </Link>
             </div>
           </motion.div>

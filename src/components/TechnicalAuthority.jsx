@@ -64,9 +64,9 @@ export default function TechnicalAuthority() {
           <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '2rem', letterSpacing: '-0.03em' }}>Why Professionals Switch to PixTool</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '4rem' }}>
             <div>
-              <h4 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <span style={{ color: '#ef4444' }}>✕</span> Legacy Productivity Sites
-              </h4>
+              </h3>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1.25rem', opacity: 0.8, fontSize: '1.05rem' }}>
                 <li>Bulk file uploads to third-party clouds</li>
                 <li>Limited credits and paywalled AI usage</li>
@@ -76,9 +76,9 @@ export default function TechnicalAuthority() {
               </ul>
             </div>
             <div style={{ position: 'relative' }}>
-              <h4 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <span style={{ color: '#10b981' }}>✓</span> The PixTool Standard
-              </h4>
+              </h3>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1.25rem', fontWeight: 600, fontSize: '1.05rem' }}>
                 <li>100% On-device browser processing</li>
                 <li>14+ Specialized AI Intelligence tools</li>

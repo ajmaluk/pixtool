@@ -270,7 +270,7 @@ const MainLayout = () => {
         </ErrorBoundary>
 
         {!isAdminPath && (
-          <div className="container-pro" style={{ marginTop: '6rem', paddingBottom: '4rem' }}>
+          <div className="container-pro" style={{ marginTop: '6rem', paddingBottom: '4rem', minHeight: '380px' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
               
               {/* Recent Tools - Dynamic with Layout Animation */}

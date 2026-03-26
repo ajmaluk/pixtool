@@ -1395,7 +1395,7 @@ export default function ImageTools() {
                     <div style={{ color: 'var(--accent-purple)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}>
                       <feat.icon size={36} />
                     </div>
-                    <h4 style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.1rem' }}>{feat.title}</h4>
+                    <h2 style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.25rem' }}>{feat.title}</h2>
                     <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>{feat.desc}</p>
                   </div>
                 ))}
@@ -1468,7 +1468,7 @@ export default function ImageTools() {
                       <div className="tool-card-icon" style={{ background: 'var(--accent-purple-50)', color: 'var(--accent-purple)', width: '80px', height: '80px', borderRadius: '24px', marginBottom: '2rem' }}>
                         <Upload size={32} />
                       </div>
-                      <h3 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '0.5rem' }}>Select or Drop Images</h3>
+                      <h2 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '0.5rem' }}>Select or Drop Images</h2>
                       <p style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>Supports JPG, PNG, WebP, GIF & HEIC</p>
                       <button className="btn btn-primary" style={{ marginTop: '2rem', padding: '1rem 2.5rem' }}>
                         Browse Files
@@ -1485,7 +1485,7 @@ export default function ImageTools() {
                           <div style={{ color: 'var(--accent-purple)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}>
                             <feat.icon size={36} />
                           </div>
-                          <h4 style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.1rem' }}>{feat.title}</h4>
+                          <h3 style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.1rem' }}>{feat.title}</h3>
                           <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>{feat.desc}</p>
                         </div>
                       ))}
@@ -1508,9 +1508,9 @@ export default function ImageTools() {
 
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }} className="mobile-hide-header">
-                          <h3 style={{ fontSize: '1.05rem', fontWeight: 900, margin: 0 }}>
+                          <h2 style={{ fontSize: '1.05rem', fontWeight: 900, margin: 0 }}>
                             Files ({files.length})
-                          </h3>
+                          </h2>
                         </div>
                         <div style={{ display: 'flex', gap: '0.75rem' }}>
                           <button className="btn btn-secondary" onClick={async () => {

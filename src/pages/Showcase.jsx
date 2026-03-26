@@ -72,6 +72,9 @@ const ShowcaseCard = ({ item, index }) => {
             <img
               src={item.img}
               alt={item.title}
+              width="400"
+              height="220"
+              loading="lazy"
               style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
               className="blog-image"
             />

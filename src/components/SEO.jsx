@@ -128,7 +128,7 @@ export default function SEO({
                     "url": siteUrl,
                     "logo": {
                         "@type": "ImageObject",
-                        "url": `${siteUrl}/logo.png`,
+                        "url": `${siteUrl}/logo.webp`,
                         "width": "512",
                         "height": "512"
                     },

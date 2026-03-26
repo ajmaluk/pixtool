@@ -172,7 +172,7 @@ export default function QrScanner() {
                     <div style={{ color: 'var(--accent-red)', marginBottom: '1.5rem' }}>
                       <Shield size={64} style={{ opacity: 0.8 }} />
                     </div>
-                    <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem' }}>Camera Access Denied</h3>
+                    <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem' }}>Camera Access Denied</h2>
                     <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>{error}</p>
                     <button className="btn btn-primary" onClick={startScanning} style={{ padding: '0.75rem 2rem' }}>
                       Try Again
@@ -208,17 +208,17 @@ export default function QrScanner() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem', marginTop: '5rem' }}>
               <div style={{ textAlign: 'center' }}>
                 <div style={{ color: '#10b981', marginBottom: '1rem' }}><Lock size={32} /></div>
-                <h4 style={{ fontWeight: 700, marginBottom: '0.5rem' }}>Total Privacy</h4>
+                <h2 style={{ fontWeight: 700, marginBottom: '0.5rem', fontSize: '1rem' }}>Total Privacy</h2>
                 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Camera feed is processed locally. We never see your data.</p>
               </div>
               <div style={{ textAlign: 'center' }}>
                 <div style={{ color: '#10b981', marginBottom: '1rem' }}><Zap size={32} /></div>
-                <h4 style={{ fontWeight: 700, marginBottom: '0.5rem' }}>Lightning Fast</h4>
+                <h2 style={{ fontWeight: 700, marginBottom: '0.5rem', fontSize: '1rem' }}>Lightning Fast</h2>
                 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Instant decoding powered by industrial-grade QR algorithms.</p>
               </div>
               <div style={{ textAlign: 'center' }}>
                 <div style={{ color: '#10b981', marginBottom: '1rem' }}><Shield size={32} /></div>
-                <h4 style={{ fontWeight: 700, marginBottom: '0.5rem' }}>Secure & Verified</h4>
+                <h2 style={{ fontWeight: 700, marginBottom: '0.5rem', fontSize: '1rem' }}>Secure & Verified</h2>
                 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Scan unknown links safely without risking your device privacy.</p>
               </div>
             </div>

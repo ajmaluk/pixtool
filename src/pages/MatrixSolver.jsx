@@ -4,14 +4,21 @@ import {
   Grid, RefreshCw, Trash2, Maximize2, 
   Settings, Info, Download, Trash, Layers
 } from 'lucide-react'
-import { create, all } from 'mathjs'
 import SEO from '../components/SEO'
 import Breadcrumbs from '../components/Breadcrumbs'
 import AdSpace from '../components/AdSpace'
 import ToolContent from '../components/ToolContent'
 import ShareTool from '../components/ShareTool'
-
-const math = create(all)
+// mathjs will be loaded dynamically for performance
+let mathPromise = null;
+const getMath = () => {
+  if (!mathPromise) {
+    mathPromise = import('mathjs').then(module => {
+      return module.create(module.all)
+    });
+  }
+  return mathPromise;
+};
 
 export default function MatrixSolver() {
   const [size, setSize] = useState(3)
@@ -35,28 +42,27 @@ export default function MatrixSolver() {
   }
 
   const solve = (op) => {
-    try {
-      const numericMatrix = matrix.map(row => row.map(cell => {
-        const val = math.evaluate(cell || '0')
-        if (typeof val !== 'number') throw new Error()
-        return val
-      }))
+    getMath().then(math => {
+      try {
+        const numericMatrix = matrix.map(row => row.map(cell => {
+          const val = math.evaluate(cell || '0')
+          if (typeof val !== 'number') throw new Error()
+          return val
+        }))
 
-      let res
-      if (op === 'det') {
-        res = `Determinant: ${math.det(numericMatrix)}`
-      } else if (op === 'inv') {
-        res = math.inv(numericMatrix)
-      } else if (op === 'transpose') {
-        res = math.transpose(numericMatrix)
-      } else if (op === 'rank') {
-        // rank is not directly in mathjs basic det, but we can use it via lup
-        // simplified for det/inv for now
+        let res
+        if (op === 'det') {
+          res = `Determinant: ${math.det(numericMatrix)}`
+        } else if (op === 'inv') {
+          res = math.inv(numericMatrix)
+        } else if (op === 'transpose') {
+          res = math.transpose(numericMatrix)
+        }
+        setResult({ type: op, data: res })
+      } catch (err) {
+        setError('Invalid Matrix or Operation (e.g., non-invertible)')
       }
-      setResult({ type: op, data: res })
-    } catch (err) {
-      setError('Invalid Matrix or Operation (e.g., non-invertible)')
-    }
+    })
   }
 
   return (
@@ -196,7 +202,7 @@ export default function MatrixSolver() {
                             }}
                         >
                             <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '4px', background: 'var(--accent-blue)', opacity: 0.5 }}></div>
-                            <h4 style={{ fontWeight: 900, marginBottom: '2rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.2em', fontSize: '0.8rem' }}>Operation: <span style={{ color: 'var(--accent-blue)' }}>{result.type}</span></h4>
+                            <h2 style={{ fontWeight: 900, marginBottom: '2rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.2em', fontSize: '0.8rem' }}>Operation: <span style={{ color: 'var(--accent-blue)' }}>{result.type}</span></h2>
                             
                             {typeof result.data === 'string' ? (
                                 <div className="math-text-glow" style={{ fontSize: '2.5rem', fontWeight: 900, fontFamily: 'monospace', color: 'var(--text-primary)' }}>{result.data}</div>
@@ -208,24 +214,29 @@ export default function MatrixSolver() {
                                     padding: '2.5rem',
                                     borderRadius: '24px'
                                 }}>
-                                    {result.data.map((row, r) => row.map((cell, c) => (
-                                        <div key={`${r}-${c}`} style={{ 
-                                            padding: '1.25rem', 
-                                            background: 'rgba(var(--bg-secondary-rgb), 0.5)', 
-                                            borderRadius: '12px', 
-                                            fontWeight: 800,
-                                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                                            fontSize: '1.1rem',
-                                            fontFamily: 'monospace',
-                                            color: 'var(--text-primary)',
-                                            minWidth: '80px',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
-                                            {math.format(cell, { precision: 4 })}
-                                        </div>
-                                    )))}
+                                    {result.data.map((row, r) => row.map((cell, c) => {
+                                        // We need to define math format locally or pass it
+                                        // Since we are inside the component, we can use a small formatter
+                                        const formatNum = (n) => Number(n).toFixed(4).replace(/\.?0+$/, "");
+                                        return (
+                                            <div key={`${r}-${c}`} style={{ 
+                                                padding: '1.25rem', 
+                                                background: 'rgba(var(--bg-secondary-rgb), 0.5)', 
+                                                borderRadius: '12px', 
+                                                fontWeight: 800,
+                                                border: '1px solid rgba(255, 255, 255, 0.1)',
+                                                fontSize: '1.1rem',
+                                                fontFamily: 'monospace',
+                                                color: 'var(--text-primary)',
+                                                minWidth: '80px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center'
+                                            }}>
+                                                {formatNum(cell)}
+                                            </div>
+                                        );
+                                    }))}
                                 </div>
                             )}
                         </motion.div>

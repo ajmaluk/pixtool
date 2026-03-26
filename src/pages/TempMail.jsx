@@ -782,7 +782,7 @@ export default function TempMail({
                   <div className="tool-card-icon" style={{ background: `${feat.color}15`, color: feat.color, margin: '0 auto' }}>
                     <feat.icon size={26} />
                   </div>
-                  <h4 style={{ fontWeight: 900, marginBottom: '0.5rem', fontSize: '1.1rem' }}>{feat.title}</h4>
+                  <h2 style={{ fontWeight: 900, marginBottom: '0.5rem', fontSize: '1.1rem' }}>{feat.title}</h2>
                   <p className="tool-card-description" style={{ fontSize: '0.9rem' }}>{feat.desc}</p>
                 </div>
               ))}

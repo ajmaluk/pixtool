@@ -47,7 +47,9 @@ export default function Founder() {
                             <div style={{ width: '240px', height: '240px', borderRadius: '48px', border: '8px solid var(--bg-primary)', padding: '2px', background: 'var(--accent-primary)', transform: 'rotate(-2deg)', boxShadow: 'var(--shadow-premium)', overflow: 'hidden' }}>
                                 <img
                                     src={founderImg}
-                                    alt="Muhammed Ajmal U K"
+                                    alt="Muhammed Ajmal U K - PixTool Founder"
+                                    width="240"
+                                    height="240"
                                     loading="lazy"
                                     style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.05)' }}
                                 />

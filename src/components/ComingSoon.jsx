@@ -66,7 +66,7 @@ const ComingSoon = ({ toolName, description }) => {
             <div style={{ color: 'var(--accent-primary)', marginBottom: '0.75rem' }}>
               <feat.icon size={24} />
             </div>
-            <h4 style={{ fontWeight: 800, marginBottom: '0.25rem' }}>{feat.title}</h4>
+            <h3 style={{ fontWeight: 800, marginBottom: '0.25rem' }}>{feat.title}</h3>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: 0 }}>{feat.desc}</p>
           </div>
         ))}

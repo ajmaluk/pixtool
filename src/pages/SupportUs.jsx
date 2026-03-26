@@ -58,21 +58,21 @@ export default function SupportUs() {
                             <div style={{ display: 'flex', gap: '1rem' }}>
                                 <ShieldCheck style={{ color: '#10b981', flexShrink: 0 }} />
                                 <div>
-                                    <h4 style={{ fontWeight: 800, marginBottom: '0.5rem' }}>Server Costs</h4>
+                                    <h3 style={{ fontWeight: 800, marginBottom: '0.5rem' }}>Server Costs</h3>
                                     <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Keeping our high-speed global infrastructure running 24/7.</p>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '1rem' }}>
                                 <Zap style={{ color: '#fbbf24', flexShrink: 0 }} />
                                 <div>
-                                    <h4 style={{ fontWeight: 800, marginBottom: '0.5rem' }}>New Features</h4>
+                                    <h3 style={{ fontWeight: 800, marginBottom: '0.5rem' }}>New Features</h3>
                                     <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Research and development for more advanced AI-powered tools.</p>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '1rem' }}>
                                 <Heart style={{ color: '#ef4444', flexShrink: 0 }} />
                                 <div>
-                                    <h4 style={{ fontWeight: 800, marginBottom: '0.5rem' }}>Open Source</h4>
+                                    <h3 style={{ fontWeight: 800, marginBottom: '0.5rem' }}>Open Source</h3>
                                     <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Supporting the open-source libraries that make our work possible.</p>
                                 </div>
                             </div>

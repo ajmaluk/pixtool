@@ -3,7 +3,7 @@ import SEO from '../components/SEO';
 import { motion as Motion } from 'framer-motion';
 import { Target, Eye, Rocket, Shield, Zap, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import uthakkanLogo from '../assets/uthakkan.png';
+import uthakkanLogo from '../assets/uthakkan.webp';
 
 export default function About() {
     const aboutSchema = [
@@ -18,7 +18,7 @@ export default function About() {
                 "url": "https://www.uthakkan.in",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`
+                    "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.webp`
                 },
                 "email": "contact@uthakkan.com",
                 "foundingDate": "2025",
@@ -90,7 +90,13 @@ export default function About() {
                         transition={{ delay: 0.3, duration: 0.5 }}
                         style={{ marginBottom: '2.5rem' }}
                     >
-                        <img src={uthakkanLogo} alt="UTHAKKAN Logo" style={{ height: '100px', width: 'auto' }} />
+                        <img 
+                            src={uthakkanLogo} 
+                            alt="Uthakkan - Professional Software Development Studio" 
+                            width="200"
+                            height="100"
+                            style={{ height: '100px', width: 'auto', objectFit: 'contain' }} 
+                        />
                     </Motion.div>
                     <h1 className="page-title">
                         Uthakkan
@@ -160,7 +166,15 @@ export default function About() {
                     >
                         <div className="profile-flex">
                             <div className="profile-image-wrapper">
-                                <img src="/ajmaluk.png" alt="Ajmal U K" className="profile-image" style={{ transform: 'rotate(2deg)' }} />
+                                <img 
+                                    src="/ajmaluk.png" 
+                                    alt="Ajmal U K - Founder of PixTool & Lead Engineer at Uthakkan" 
+                                    className="profile-image" 
+                                    width="200"
+                                    height="200"
+                                    loading="lazy"
+                                    style={{ transform: 'rotate(2deg)', objectFit: 'cover' }} 
+                                />
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                                 <div className="status-badge" style={{ width: 'fit-content' }}>THE ARCHITECT</div>

@@ -39,7 +39,10 @@ export default function Developer() {
                         <div className="profile-image-wrapper">
                             <img
                                 src={profileImg}
-                                alt="Muhammed Ajmal U K"
+                                alt="Muhammed Ajmal U K - Lead Developer"
+                                width="200"
+                                height="200"
+                                loading="lazy"
                                 className="profile-image"
                                 style={{ borderRadius: '50%' }}
                                 onError={(e) => { e.target.src = 'https://ui-avatars.com/api/?name=Ajmal+UK&background=3b82f6&color=fff'; }}

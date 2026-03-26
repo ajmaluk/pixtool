@@ -77,7 +77,7 @@ export default function Contact() {
                     <Mail size={20} />
                   </div>
                   <div>
-                    <h3 style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)' }}>Email</h3>
+                    <h2 style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)' }}>Email</h2>
                     <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>contact@uthakkan.com</p>
                   </div>
                 </div>
@@ -89,7 +89,7 @@ export default function Contact() {
                     <MessageSquare size={20} />
                   </div>
                   <div>
-                    <h3 style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)' }}>Social</h3>
+                    <h2 style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)' }}>Social</h2>
                     <div style={{ display: 'flex', gap: '10px', marginTop: '6px' }}>
                       <a href="https://github.com/ajmal-uk" className="icon-btn" style={{ width: '32px', height: '32px' }}><Github size={16} /></a>
                       <a href="https://linkedin.com/in/ajmaluk" className="icon-btn" style={{ width: '32px', height: '32px' }}><Linkedin size={16} /></a>
@@ -105,7 +105,7 @@ export default function Contact() {
                     <MapPin size={20} />
                   </div>
                   <div>
-                    <h3 style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)' }}>Location</h3>
+                    <h2 style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)' }}>Location</h2>
                     <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Kannur, Kerala, India</p>
                   </div>
                 </div>
@@ -217,7 +217,7 @@ export default function Contact() {
                     {item.icon}
                   </div>
                   <div>
-                    <h4 style={{ fontWeight: 800, fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>{item.label}</h4>
+                    <h3 style={{ fontWeight: 800, fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>{item.label}</h3>
                     <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.5 }}>{item.desc}</p>
                   </div>
                 </Link>

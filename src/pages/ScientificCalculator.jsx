@@ -4,14 +4,21 @@ import {
   Calculator, History, Trash2, Copy, Check, 
   RotateCcw, Delete, Info, ArrowLeft
 } from 'lucide-react'
-import { create, all } from 'mathjs'
 import SEO from '../components/SEO'
 import Breadcrumbs from '../components/Breadcrumbs'
 import AdSpace from '../components/AdSpace'
 import ToolContent from '../components/ToolContent'
 import ShareTool from '../components/ShareTool'
-
-const math = create(all)
+// mathjs will be loaded dynamically for performance
+let mathPromise = null;
+const getMath = () => {
+  if (!mathPromise) {
+    mathPromise = import('mathjs').then(module => {
+      return module.create(module.all)
+    });
+  }
+  return mathPromise;
+};
 
 export default function ScientificCalculator() {
   const [expression, setExpression] = useState('')
@@ -36,17 +43,16 @@ export default function ScientificCalculator() {
     if (val === '=') {
       try {
         const cleanExpr = expression.replace(/π/g, 'pi').replace(/÷/g, '/').replace(/×/g, '*')
-        let evaluated = math.evaluate(cleanExpr)
         
-        // Handle trig modes
-        if (!isRadian) {
-          // This is a simplified internal handling, mathjs evaluates in radians by default
-        }
-
-        const formattedResult = math.format(evaluated, { precision: 14 })
-        setResult(formattedResult)
-        setHistory(prev => [{ expr: expression, res: formattedResult }, ...prev].slice(0, 10))
-        setExpression(formattedResult)
+        getMath().then(math => {
+          let evaluated = math.evaluate(cleanExpr)
+          const formattedResult = math.format(evaluated, { precision: 14 })
+          setResult(formattedResult)
+          setHistory(prev => [{ expr: expression, res: formattedResult }, ...prev].slice(0, 10))
+          setExpression(formattedResult)
+        }).catch(() => {
+          setError('Engine Error')
+        })
       } catch (err) {
         setError('Syntax Error')
       }
@@ -210,9 +216,9 @@ export default function ScientificCalculator() {
                     gap: '2rem'
                 }} className="desktop-only">
                     <div>
-                        <h4 style={{ fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1.5rem' }}>
+                        <h2 style={{ fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1.5rem' }}>
                             Scientific Constants
-                        </h4>
+                        </h2>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                             {[
                                 { label: 'π', val: 'pi', desc: 'Circumference' },
@@ -236,9 +242,9 @@ export default function ScientificCalculator() {
                     </div>
 
                     <div style={{ flex: 1, overflowY: 'auto' }}>
-                        <h4 style={{ fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <h2 style={{ fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <History size={14} /> Quick History
-                        </h4>
+                        </h2>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                             {history.length === 0 ? (
                                 <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textAlign: 'center', padding: '2rem 0' }}>No calculations yet</div>
@@ -260,9 +266,9 @@ export default function ScientificCalculator() {
             {/* History Section */}
             {history.length > 0 && (
                 <div style={{ maxWidth: '800px', margin: '4rem auto' }}>
-                    <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontWeight: 900, marginBottom: '2rem' }}>
+                    <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontWeight: 900, marginBottom: '2rem', fontSize: '1.5rem' }}>
                         <History size={20} /> Calculation History
-                    </h3>
+                    </h2>
                     <div style={{ display: 'grid', gap: '1rem' }}>
                         {history.map((item, i) => (
                             <div key={i} className="tool-card" style={{ padding: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

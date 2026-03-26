@@ -125,13 +125,15 @@ export default function Navbar() {
   return (
     <>
       <nav className="navbar">
-        <Link to="/" className="navbar-logo">
+        <Link to="/" className="navbar-logo" title="PixTool Home - Professional Private Productivity Suite">
           <img 
-            src="/logo.png" 
-            alt="PixTool Logo" 
+            src="/logo.webp" 
+            alt="PixTool - Secure Private Browser Hub" 
             className="navbar-logo-img" 
             width="32"
             height="32"
+            fetchpriority="high"
+            loading="eager"
             style={{ height: '32px', width: '32px', objectFit: 'contain' }}
           />
           <span className="navbar-logo-text">PixTool</span>

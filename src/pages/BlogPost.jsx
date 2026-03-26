@@ -116,7 +116,7 @@ export default function BlogPost() {
                 "@type": "BlogPosting",
                 "headline": post.title,
                 "description": post.excerpt,
-                "image": post.image ? (post.image.startsWith('http') ? post.image : `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}${post.image}`) : `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
+                "image": post.image ? (post.image.startsWith('http') ? post.image : `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}${post.image}`) : `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.webp`,
                 "author": {
                     "@type": "Person",
                     "name": post.author || "UTHAKKAN"
@@ -267,6 +267,9 @@ export default function BlogPost() {
                         <img
                             src={post.image}
                             alt={post.title}
+                            width="1200"
+                            height="630"
+                            loading="lazy"
                             style={{
                                 width: '100%',
                                 height: 'auto',

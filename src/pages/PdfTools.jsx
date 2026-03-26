@@ -835,7 +835,7 @@ export default function PdfTools() {
                     <div style={{ color: 'var(--accent-blue)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}>
                       <feat.icon size={36} />
                     </div>
-                    <h4 style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.1rem' }}>{feat.title}</h4>
+                    <h3 style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.25rem' }}>{feat.title}</h3>
                     <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>{feat.desc}</p>
                   </div>
                 ))}
@@ -896,7 +896,7 @@ export default function PdfTools() {
                     <div className="tool-card-icon" style={{ background: 'var(--accent-blue-50)', color: 'var(--accent-blue)', width: '80px', height: '80px', borderRadius: '24px', marginBottom: '2rem' }}>
                       <Upload size={32} />
                     </div>
-                    <h3 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '0.5rem' }}>Select or Drop PDF Files</h3>
+                    <h2 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '0.5rem' }}>Select or Drop PDF Files</h2>
                     <p style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>Works in your browser. Maximum privacy.</p>
                     <button className="btn btn-primary" style={{ marginTop: '2rem', padding: '1rem 2.5rem' }}>
                       Browse Files
@@ -913,7 +913,7 @@ export default function PdfTools() {
                         <div style={{ color: 'var(--accent-blue)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}>
                           <feat.icon size={36} />
                         </div>
-                        <h4 style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.1rem' }}>{feat.title}</h4>
+                        <h3 style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.1rem' }}>{feat.title}</h3>
                         <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>{feat.desc}</p>
                       </div>
                     ))}
@@ -954,9 +954,9 @@ export default function PdfTools() {
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }} className="mobile-hide-header">
-                        <h3 style={{ fontSize: '1.05rem', fontWeight: 900, margin: 0 }}>
+                        <h2 style={{ fontSize: '1.05rem', fontWeight: 900, margin: 0 }}>
                           Files ({files.length})
-                        </h3>
+                        </h2>
                       </div>
                       <div style={{ display: 'flex', gap: '0.75rem' }}>
                         <button className="btn btn-secondary" onClick={async () => { 
@@ -1000,9 +1000,9 @@ export default function PdfTools() {
                         }}>
                           <FileText size={64} />
                         </div>
-                        <h3 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
+                        <h2 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
                           {files[selectedIndex]?.name}
-                        </h3>
+                        </h2>
                         <p style={{ fontSize: '1rem', opacity: 0.7 }}>
                           {(files[selectedIndex]?.size / 1024 / 1024).toFixed(2)} MB • PDF Document
                         </p>
@@ -1114,7 +1114,7 @@ export default function PdfTools() {
                 <div className="settings-drawer-content" onClick={e => e.stopPropagation()}>
                   <div className="drawer-handle" />
                   <div className="drawer-header">
-                    <h3 style={{ margin: 0, fontWeight: 900, fontSize: '1.25rem' }}>Tool Settings</h3>
+                    <h2 style={{ margin: 0, fontWeight: 900, fontSize: '1.25rem' }}>Tool Settings</h2>
                     <button 
                       className="icon-btn" 
                       onClick={() => setShowMobileSettings(false)} 

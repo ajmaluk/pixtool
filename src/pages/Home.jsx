@@ -185,7 +185,8 @@ export default function Home() {
               textAlign: 'center',
               padding: 'clamp(6rem, 15vh, 10rem) 1.5rem clamp(2rem, 10vh, 4rem)',
               marginBottom: 'clamp(4rem, 8vw, 6rem)',
-              position: 'relative'
+              position: 'relative',
+              minHeight: '400px'
             }}>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -207,13 +208,9 @@ export default function Home() {
                 }}>
                   Master Your <br/>
                   <span className="text-gradient-hero" style={{ 
-                    background: 'linear-gradient(135deg, #6b38d4 0%, #8455ef 50%, #3b82f6 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundSize: '200% auto',
-                    animation: 'gradient-flow 6s linear infinite',
                     display: 'inline-block',
-                    padding: '0.1em 0'
+                    padding: '0.1em 0',
+                    position: 'relative'
                   }}>
                     AI Workflow
                   </span>
@@ -730,17 +727,30 @@ export default function Home() {
               <BlogSection posts={posts} />
             </Suspense>
           </section>
-      <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
         </div>
       </div>
       <style>{`
-        @keyframes gradient-flow {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
         .text-gradient-hero {
+          background: linear-gradient(135deg, #6b38d4 0%, #8455ef 50%, #3b82f6 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-size: 200% auto;
           transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+          position: relative;
+        }
+        .text-gradient-hero::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+          transform: translateX(-100%);
+          animation: shim-flow 6s infinite;
+          pointer-events: none;
+        }
+        @keyframes shim-flow {
+          0% { transform: translateX(-100%); }
+          50% { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
         }
         .text-gradient-hero:hover {
           filter: drop-shadow(0 0 25px rgba(139, 92, 246, 0.5));

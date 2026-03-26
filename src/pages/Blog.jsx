@@ -17,7 +17,7 @@ export default function Blog() {
             "publisher": {
                 "@id": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/#organization`
             },
-            "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.png`,
+            "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.webp`,
             "keywords": "productivity, AI tools, web development, online tools, tutorials"
         }
     ];
@@ -79,6 +79,9 @@ export default function Blog() {
                             <img
                                 src={post.image}
                                 alt={post.title}
+                                width="400"
+                                height="200"
+                                loading="lazy"
                                 style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
                                 className="blog-image"
                             />
