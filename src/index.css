@@ -31,8 +31,8 @@
   --accent-red-50: rgba(220, 38, 38, 0.08);
 
   --text-primary: #0f172a;
-  --text-secondary: #334155;
-  --text-muted: #475569;
+  --text-secondary: #1e293b;
+  --text-muted: #334155;
 
   --border-color: rgba(226, 232, 240, 0.8);
   --border-hover: #cbd5e1;
@@ -211,61 +211,64 @@ h6 {
 }
 
 .main-content {
-  padding-top: 104px;
-  min-height: calc(100vh - 104px);
+  padding-top: 88px;
+  min-height: calc(100vh - 88px);
 }
 
 @media (max-width: 768px) {
   .main-content {
-    padding-top: 84px;
-    min-height: calc(100vh - 84px);
+    padding-top: 76px;
+    min-height: calc(100vh - 76px);
   }
 }
 
 /* Navbar Enhancements */
 .navbar {
   position: fixed;
-  top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 2rem);
-  max-width: 1400px;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 72px;
   background: var(--bg-glass);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 9999px;
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 0 0 24px 24px;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+    0 10px 15px -3px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2rem;
-  transition: var(--transition-base);
+  padding: 0 5%;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dark .navbar {
-  background: var(--bg-glass-dark);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  background: rgba(15, 23, 42, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
 }
 
 .navbar.scrolled {
   height: 64px;
-  box-shadow: var(--shadow-lg);
+  background: var(--bg-glass-heavy);
+  border-bottom-color: var(--accent-primary-transparent);
+  box-shadow: var(--shadow-xl);
 }
 
 @media (max-width: 1024px) {
   .navbar {
-    padding: 0 2rem;
+    padding: 0 5%;
   }
 }
 
 @media (max-width: 768px) {
   .navbar {
-    padding: 0 1.25rem;
+    padding: 0 1.5rem;
     height: 64px;
+    border-radius: 0 0 20px 20px;
   }
 
   .navbar-links {

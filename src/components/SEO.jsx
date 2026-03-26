@@ -81,7 +81,7 @@ export default function SEO({
     const siteName = 'PixTool by UTHAKKAN'
     const fullUrl = path === '/' ? siteUrl : `${siteUrl}${path.startsWith('/') ? path : `/${path}`}`
     const isToolPath = path.includes('/image-tools') || path.includes('/pdf-tools') || path.includes('/temp-mail') || path.includes('/qr-') || path.includes('/typing-test') || path === '/fake-email' || path === '/disposable-email' || path === '/throwaway-email' || path === '/code-diff' || path.includes('/ai-tools') || path.includes('/math-tools')
-    const shouldNoIndex = noIndex || path.startsWith('/pix-admin')
+    const shouldNoIndex = noIndex || path.startsWith('/pix-admin') || window.location.search.includes('q={search_term_string}') || window.location.search.includes('?q=')
 
     const brandTitle = title.includes('PixTool') ? title : `${title} | PixTool`
 

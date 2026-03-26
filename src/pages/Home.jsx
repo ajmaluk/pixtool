@@ -233,7 +233,7 @@ export default function Home() {
                     }}
                   />
                 </h1>
-                <p style={{ fontSize: '1.4rem', color: 'var(--text-secondary)', maxWidth: '900px', margin: '0 auto 3.5rem', lineHeight: 1.6, fontWeight: 500, opacity: 0.9 }}>
+                <p style={{ fontSize: '1.4rem', color: 'var(--text-secondary)', maxWidth: '900px', margin: '0 auto 3.5rem', lineHeight: 1.6, fontWeight: 500 }}>
                   The world's most powerful browser-native AI suite. 52+ professional tools for 
                   <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> content generation </span>, 
                   <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> secure PDF management </span>, 
@@ -253,9 +253,9 @@ export default function Home() {
                     letterSpacing: '0.2em' 
                   }}>
                     <span>✦ Zero-Upload AI</span>
-                    <span style={{ opacity: 0.3 }}>|</span>
+                    <span style={{ opacity: 0.6 }}>|</span>
                     <span>✦ Industry-Standard Security</span>
-                    <span style={{ opacity: 0.3 }}>|</span>
+                    <span style={{ opacity: 0.6 }}>|</span>
                     <span>✦ High-Fidelity Output</span>
                   </span>
                 </p>
@@ -720,11 +720,11 @@ export default function Home() {
               </div>
             </div>
 
-            <Suspense fallback={<div style={{ height: '20vh' }} />}>
-              <UseCaseSection />
-              <FAQSection />
-              <TechnicalAuthority />
-              <BlogSection posts={posts} />
+            <Suspense fallback={<div style={{ minHeight: '400px', background: 'var(--bg-secondary)', borderRadius: '40px', margin: '2rem 0' }} />}>
+              <div style={{ minHeight: '600px' }}><UseCaseSection /></div>
+              <div style={{ minHeight: '800px' }}><FAQSection /></div>
+              <div style={{ minHeight: '1200px' }}><TechnicalAuthority /></div>
+              <div style={{ minHeight: '600px' }}><BlogSection posts={posts} /></div>
             </Suspense>
           </section>
         </div>

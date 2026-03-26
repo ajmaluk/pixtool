@@ -92,22 +92,22 @@ export default function TechnicalAuthority() {
       </div>
 
       {/* Trust Bar */}
-      <div className="container-pro" style={{ display: 'flex', justifyContent: 'center', gap: '4rem', padding: '2rem', borderTop: '1px solid var(--border-color)', borderBottom: '1px solid var(--border-color)', opacity: 0.7, flexWrap: 'wrap', marginBottom: '4rem' }}>
+      <div className="container-pro" style={{ display: 'flex', justifyContent: 'center', gap: '4rem', padding: '2rem', borderTop: '1px solid var(--border-color)', borderBottom: '1px solid var(--border-color)', flexWrap: 'wrap', marginBottom: '4rem' }}>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-primary)' }}>45+</div>
-          <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Professional Tools</div>
+          <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--accent-primary)' }}>45+</div>
+          <div style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-primary)' }}>Professional Tools</div>
         </div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-primary)' }}>14</div>
-          <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Specialized AIs</div>
+          <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--accent-primary)' }}>14</div>
+          <div style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-primary)' }}>Specialized AIs</div>
         </div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-primary)' }}>100%</div>
-          <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Private Context</div>
+          <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--accent-primary)' }}>100%</div>
+          <div style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-primary)' }}>Private Context</div>
         </div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-primary)' }}>∞</div>
-          <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>Zero Cloud Uploads</div>
+          <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--accent-primary)' }}>∞</div>
+          <div style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-primary)' }}>Zero Cloud Uploads</div>
         </div>
       </div>
 

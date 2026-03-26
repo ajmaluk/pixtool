@@ -6,7 +6,7 @@
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/og-image.png</image:loc>
+      <image:loc>https://www.pixtool.in/og-image.webp</image:loc>
       <image:title>PixTool - All-in-one Free Online Productivity Suite</image:title>
     </image:image>
   </url>
@@ -16,7 +16,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/image-tools-hub.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/image-tools-hub.webp</image:loc>
       <image:title>PixTool Image Studio Hub</image:title>
     </image:image>
   </url>
@@ -26,7 +26,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/pdf-tools-hub.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/pdf-tools-hub.webp</image:loc>
       <image:title>PixTool PDF Expert Suite</image:title>
     </image:image>
   </url>
@@ -36,7 +36,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/utility-tools-hub.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/utility-tools-hub.webp</image:loc>
       <image:title>PixTool Utility Suite</image:title>
     </image:image>
   </url>
@@ -46,8 +46,128 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/home.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/home.webp</image:loc>
       <image:title>PixTool AI Tools Hub</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/math-tools</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/scientific-calculator-online.webp</image:loc>
+      <image:title>PixTool Math &amp; Scientific Hub</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/math-tools/scientific-calculator</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/scientific-calculator-online.png</image:loc>
+      <image:title>PixTool Scientific Calculator - High-Precision Algebraic Engine</image:title>
+      <image:caption>High-precision algebraic engine for complex engineering and scientific computations.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/math-tools/graph-visualizer</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/online-graphing-calculator-pixtool.png</image:loc>
+      <image:title>PixTool Graph Visualizer - Interactive Functional Plotting</image:title>
+      <image:caption>Interactive functional plotting engine for 2D and 3D mathematical visualizations.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/math-tools/matrix-solver</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/linear-algebra-matrix-solver.png</image:loc>
+      <image:title>PixTool Matrix Solver - Linear Algebra Studio</image:title>
+      <image:caption>Professional linear algebra studio for matrix inversion, determinants, and rank calculations.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/math-tools/statistics-visualizer</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/expert-data-visualization-studio.png</image:loc>
+      <image:title>PixTool Data Visualizer - Statistical Charting Studio</image:title>
+      <image:caption>Transform raw data into high-authority statistical charts and professional visualizations.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/math-tools/equation-solver</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/algebraic-equation-solver.png</image:loc>
+      <image:title>PixTool Equation Solver - Root Finding Engine</image:title>
+      <image:caption>Instant root finding and algebraic simplification for linear and quadratic equations.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/math-tools/unit-circle</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/interactive-unit-circle-trigonometry.png</image:loc>
+      <image:title>PixTool Unit Circle - Trigonometry Visualizer</image:title>
+      <image:caption>Interactive trigonometry visualizer for understanding sines, cosines, and angle rotations.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/math-tools/financial-calculator</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/advanced-financial-calculator.png</image:loc>
+      <image:title>PixTool Finance Architect - Business Logic Engine</image:title>
+      <image:caption>Advanced financial suite for TVM, Loan amortization, and ROI analysis.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/math-tools/number-theory</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/number-theory-prime-forge.png</image:loc>
+      <image:title>PixTool Number Theory Forge - Prime Factorization</image:title>
+      <image:caption>Analyze number properties including prime factorization, GCD, and modular arithmetic.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/math-tools/fraction-calculator</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/precise-fraction-calculator.png</image:loc>
+      <image:title>PixTool Fraction Pro - Precision Arithmetic</image:title>
+      <image:caption>Precise fractional arithmetic with simplified results and step-by-step logic.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.pixtool.in/math-tools/vector-calculator</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.pixtool.in/screenshots/3d-vector-calculator-visualizer.png</image:loc>
+      <image:title>PixTool Vector Forge - 3D Magnitude Calculator</image:title>
+      <image:caption>Calculate dot products, cross products, and magnitudes with 3D vector visualization.</image:caption>
     </image:image>
   </url>
   <url>
@@ -56,7 +176,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/best-online-image-resizer-tool.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/best-online-image-resizer-tool.webp</image:loc>
       <image:title>PixTool Image Resizer - Precision Scaling for High-Quality Photos</image:title>
       <image:caption>Quickly resize images to exact dimensions or percentages using professional-grade scaling algorithms.</image:caption>
     </image:image>
@@ -67,7 +187,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/professional-image-cropper-online.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/professional-image-cropper-online.webp</image:loc>
       <image:title>PixTool Image Cropper - Pixel-Perfect Aspect Ratio Selection</image:title>
       <image:caption>Precision cropping for any aspect ratio. Optimized for social media posts, thumbnails, and profile pictures.</image:caption>
     </image:image>
@@ -78,7 +198,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/free-online-image-rotator.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/free-online-image-rotator.webp</image:loc>
       <image:title>PixTool Image Rotator - Instant 90/180 Degree Correction</image:title>
       <image:caption>Rotate and flip images instantly — fix orientation, create mirror effects, correct EXIF data</image:caption>
     </image:image>
@@ -89,7 +209,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/high-quality-image-compressor-online.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/high-quality-image-compressor-online.webp</image:loc>
       <image:title>PixTool Image Compressor - High-Fidelity Size Reduction</image:title>
       <image:caption>Intelligent image compression that reduces file size by up to 80% while retaining original visual quality.</image:caption>
     </image:image>
@@ -100,7 +220,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/online-image-format-converter-webp-png-jpg.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/online-image-format-converter-webp-png-jpg.webp</image:loc>
       <image:title>PixTool Image Converter - Professional Format Transformation</image:title>
       <image:caption>Seamlessly convert between JPEG, PNG, WebP, and GIF formats instantly in your browser.</image:caption>
     </image:image>
@@ -111,7 +231,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/add-watermark-to-photos-online-free.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/add-watermark-to-photos-online-free.webp</image:loc>
       <image:title>PixTool Watermark Tool - Digital Asset Protection</image:title>
       <image:caption>Add custom text watermarks to protect your photos — adjustable font, size, and opacity</image:caption>
     </image:image>
@@ -122,7 +242,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/flip-and-mirror-images-online-instantly.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/flip-and-mirror-images-online-instantly.webp</image:loc>
       <image:title>PixTool Image Flip - Horizontal and Vertical Mirroring</image:title>
       <image:caption>Flip images horizontally or vertically — create mirror effects and fix selfie orientation</image:caption>
     </image:image>
@@ -133,7 +253,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/convert-image-to-grayscale-online.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/convert-image-to-grayscale-online.webp</image:loc>
       <image:title>PixTool Grayscale Filter - Professional B&amp;W Conversion</image:title>
       <image:caption>Convert color images to black &amp; white, sepia, or vintage — artistic photo effects</image:caption>
     </image:image>
@@ -144,7 +264,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/best-online-image-resizer-tool.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/best-online-image-resizer-tool.webp</image:loc>
       <image:title>PixTool AI Upscaler coming soon</image:title>
       <image:caption>Increase image resolution and quality using AI-enhanced upscaling — cleaner, sharper results for small photos.</image:caption>
     </image:image>
@@ -155,7 +275,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/professional-online-image-studio.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/professional-online-image-studio.webp</image:loc>
       <image:title>PixTool AI Restoration coming soon</image:title>
       <image:caption>Restore old, blurry, or low-quality photos — AI-powered enhancement for vintage digital images.</image:caption>
     </image:image>
@@ -166,7 +286,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/secure-pdf-management-suite.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/secure-pdf-management-suite.webp</image:loc>
       <image:title>PixTool Image to PDF conversion</image:title>
       <image:caption>Convert multiple images into a single professional PDF document — perfect for portfolios and reports.</image:caption>
     </image:image>
@@ -177,7 +297,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/professional-online-image-studio.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/professional-online-image-studio.webp</image:loc>
       <image:title>PixTool AI Background Removal coming soon</image:title>
       <image:caption>Remove image backgrounds instantly in your browser — AI-powered object isolation.</image:caption>
     </image:image>

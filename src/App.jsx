@@ -505,6 +505,7 @@ function App() {
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/showcase" element={<Showcase />} />
           <Route path="/pix-admin" element={<PixAdmin />} />
+          <Route path="/blog/advanced-qr-code-marketing-2024" element={<Navigate to="/blog/advanced-qr-code-marketing-2026" replace />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />

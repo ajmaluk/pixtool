@@ -158,7 +158,7 @@ export default function Navbar() {
             {showMore && (
                 <div
                   className="nav-dropdown-menu expanded"
-                  style={{ width: 'min(900px, 90vw)', right: '-150px', padding: '1.5rem' }}
+                  style={{ width: 'min(900px, 90vw)', right: '0', padding: '1.5rem' }}
                 >
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
                     {/* Resources Column */}

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS } from '../src/data/tools.js';
+import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS, MATH_TOOLS } from '../src/data/tools.js';
 import { posts } from '../src/data/posts.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -35,7 +35,7 @@ function generateSitemap() {
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>${SITE_URL}/og-image.png</image:loc>
+      <image:loc>${SITE_URL}/og-image.webp</image:loc>
       <image:title>PixTool - All-in-one Free Online Productivity Suite</image:title>
     </image:image>
   </url>`;
@@ -69,14 +69,20 @@ function generateSitemap() {
 
 
   // Main Hubs
-  addUrl('/image-tools', '0.9', 'weekly', '/screenshots/image-tools-hub.png', 'PixTool Image Studio Hub');
-  addUrl('/pdf-tools', '0.9', 'weekly', '/screenshots/pdf-tools-hub.png', 'PixTool PDF Expert Suite');
-  addUrl('/utility-tools', '0.9', 'weekly', '/screenshots/utility-tools-hub.png', 'PixTool Utility Suite');
-  addUrl('/ai-tools', '0.9', 'weekly', '/screenshots/home.png', 'PixTool AI Tools Hub');
+  addUrl('/image-tools', '0.9', 'weekly', '/screenshots/image-tools-hub.webp', 'PixTool Image Studio Hub');
+  addUrl('/pdf-tools', '0.9', 'weekly', '/screenshots/pdf-tools-hub.webp', 'PixTool PDF Expert Suite');
+  addUrl('/utility-tools', '0.9', 'weekly', '/screenshots/utility-tools-hub.webp', 'PixTool Utility Suite');
+  addUrl('/ai-tools', '0.9', 'weekly', '/screenshots/home.webp', 'PixTool AI Tools Hub');
+  addUrl('/math-tools', '0.9', 'weekly', '/screenshots/scientific-calculator-online.webp', 'PixTool Math & Scientific Hub');
+
+  // MATH Tools
+  MATH_TOOLS.forEach(tool => {
+    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | Advance Math PixTool`, tool.description);
+  });
 
   // Image Tools
   IMAGE_TOOLS.forEach(tool => {
-    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | Free Online PixTool`, tool.description);
+    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot.replace('.png', '.webp')}`, tool.imageAlt || `${tool.title} | Free Online PixTool`, tool.description);
   });
 
   // PDF Tools

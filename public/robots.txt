@@ -32,5 +32,5 @@ Sitemap: https://www.pixtool.in/llms.txt
 # Media Crawlers
 User-agent: Googlebot-Image
 Allow: /screenshots/
-Allow: /og-image.png
-Allow: /logo.png
+Allow: /og-image.webp
+Allow: /logo.webp
