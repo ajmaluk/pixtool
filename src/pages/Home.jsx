@@ -183,7 +183,7 @@ export default function Home() {
           <div className="category-hub">
             <div className="hub-hero" style={{
               textAlign: 'center',
-              padding: 'clamp(6rem, 15vh, 10rem) 1.5rem clamp(2rem, 10vh, 4rem)',
+              padding: 'clamp(4rem, 10vh, 7rem) 1.5rem clamp(1.5rem, 8vh, 3rem)',
               marginBottom: 'clamp(4rem, 8vw, 6rem)',
               position: 'relative',
               minHeight: '400px'
@@ -197,7 +197,7 @@ export default function Home() {
                   <span style={{ marginRight: '8px' }}>🚀</span> 2026 AI Innovation Suite
                 </div>
                 <h1 style={{ 
-                  fontSize: 'clamp(3.5rem, 10vw, 6.5rem)', 
+                  fontSize: 'clamp(2.5rem, 8vw, 4.8rem)', 
                   fontWeight: 900, 
                   fontFamily: '"Manrope", sans-serif',
                   marginBottom: '1.5rem', 
@@ -233,7 +233,7 @@ export default function Home() {
                     }}
                   />
                 </h1>
-                <p style={{ fontSize: '1.4rem', color: 'var(--text-secondary)', maxWidth: '900px', margin: '0 auto 3.5rem', lineHeight: 1.6, fontWeight: 500 }}>
+                <p style={{ fontSize: '1.15rem', color: 'var(--text-secondary)', maxWidth: '800px', margin: '0 auto 3.5rem', lineHeight: 1.6, fontWeight: 500 }}>
                   The world's most powerful browser-native AI suite. 52+ professional tools for 
                   <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> content generation </span>, 
                   <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> secure PDF management </span>, 

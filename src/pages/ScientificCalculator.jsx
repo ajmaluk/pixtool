@@ -104,16 +104,16 @@ export default function ScientificCalculator() {
             </div>
 
             <div className="calculator-wrapper" style={{ 
-                maxWidth: '900px', 
-                margin: '0 auto 4rem',
+                maxWidth: '860px', 
+                margin: '0 auto 3rem',
                 display: 'grid',
-                gridTemplateColumns: '1fr 300px',
-                gap: '2rem',
+                gridTemplateColumns: '1fr 280px',
+                gap: '1.5rem',
                 background: 'var(--bg-card)',
-                borderRadius: '32px',
+                borderRadius: '24px',
                 border: '1px solid var(--border-color)',
-                padding: '2rem',
-                boxShadow: 'var(--shadow-xl)',
+                padding: '1.5rem',
+                boxShadow: 'var(--shadow-lg)',
                 position: 'relative'
             }}>
                 <div className="calc-main-area">

@@ -82,7 +82,7 @@ function generateSitemap() {
 
   // Image Tools
   IMAGE_TOOLS.forEach(tool => {
-    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot.replace('.png', '.webp')}`, tool.imageAlt || `${tool.title} | Free Online PixTool`, tool.description);
+    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot.replace('.webp', '.webp')}`, tool.imageAlt || `${tool.title} | Free Online PixTool`, tool.description);
   });
 
   // PDF Tools

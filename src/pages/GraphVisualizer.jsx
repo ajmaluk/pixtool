@@ -89,10 +89,10 @@ export default function GraphVisualizer() {
                 {/* Graph Canvas */}
                 <div style={{ 
                     background: 'var(--bg-card)', 
-                    borderRadius: '32px', 
+                    borderRadius: '24px', 
                     border: '1px solid var(--border-color)',
-                    padding: '2.5rem',
-                    boxShadow: 'var(--shadow-xl)',
+                    padding: '2rem',
+                    boxShadow: 'var(--shadow-lg)',
                     position: 'relative',
                     overflow: 'hidden',
                     height: '500px' // Defined height for ResponsiveContainer
@@ -138,9 +138,9 @@ export default function GraphVisualizer() {
                 {/* Sidebar Controls */}
                 <div style={{ 
                     background: 'var(--bg-secondary)', 
-                    borderRadius: '32px', 
+                    borderRadius: '24px', 
                     border: '1px solid var(--border-color)',
-                    padding: '2rem',
+                    padding: '1.5rem',
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '2rem',

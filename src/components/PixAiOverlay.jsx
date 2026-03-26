@@ -31,56 +31,86 @@ export default function PixAiOverlay() {
     setInput('');
     setLoading(true);
 
-    const promptContext = `
-You are Pix AI, the high-authority intelligence curator for the PixTool ecosystem.
-PixTool offers:
-1. Image Suite: resize, crop, compress, format convert, watermark, rotate, remove background.
-2. PDF Suite: merge, split, compress, protect, watermark, convert to image, reorder.
-3. AI Suite (14 Specialized Tools):
-   - Deep Mind (Chat): /ai-tools/chat
-   - Content Forge: /ai-tools/content-generator
-   - Grammar Architect: /ai-tools/grammar-fixer
-   - Resume Architect: /ai-tools/resume-generator
-   - Code Intelligence: /ai-tools/coding-chat
-   - Professional Correspondence: /ai-tools/email-writer
-   - Marketing Pulse: /ai-tools/ad-copy-generator
-   - Social Pulse: /ai-tools/caption-generator
-   - Nuance Engine (Paraphraser): /ai-tools/paraphraser
-   - Intelligence Distiller (Summarizer): /ai-tools/summarizer
-   - Linguist Intelligence (Translator): /ai-tools/translator
-   - SEO Architect (Keywords): /ai-tools/keyword-generator
-   - Viral Density (Hashtags): /ai-tools/hashtag-generator
-   - Narrative Forge (Story): /ai-tools/story-generator
-
-If the user asks for a specific tool, reply with a focused, authoritative response AND include the relative URL to that tool in markdown link format (e.g. "[Access the SEO Architect](/ai-tools/keyword-generator)").
-User request: "${input}"
-Reply with intelligence and precision.
+    try {
+      const promptContext = `
+Pix AI: Official PixTool guide.
+ROLE: Assist navigation.
+FORMAT: ALWAYS use markdown links "[Text](/path)" for tools. 
+HUBS: /image-tools, /pdf-tools, /utility-tools, /ai-tools, /math-tools.
+SPECIFIC: /image-tools/crop, /image-tools/resize, /pdf-tools/merge, /temp-mail, /math-tools/scientific-calculator.
+POLICY: friendly, concise.
+User: ${input}
 `;
 
-    const res = await fetchTextResponse(promptContext);
-    setMessages([...newMessages, { role: 'assistant', text: res }]);
-    setLoading(false);
+      const res = await fetchTextResponse(promptContext);
+      setMessages([...newMessages, { role: 'assistant', text: res }]);
+    } catch (error) {
+      console.error('Pix AI Error:', error);
+      setMessages([...newMessages, { role: 'assistant', text: 'Sorry, I encountered an error. Please try again.' }]);
+    } finally {
+      setLoading(false);
+    }
   }
 
-  // Simple parser to render markdown links as React Router Links
+  // Enhanced parser to render markdown links and raw paths as React Router Links
   const renderMessageContent = (text) => {
-    const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
-    const parts = [];
+    // 1. Detect Markdown Links: [Text](/path)
+    const markdownRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+    // 2. Detect Raw Paths: /hub/tool (not followed by punctuation/space usually)
+    const rawPathRegex = /(^|\s)(\/(?:image|pdf|utility|ai|math|temp-mail)[^\s.,!?;)]*)/g;
+    
+    let parts = [];
     let lastIndex = 0;
     
+    // First pass: Markdown Links
     let match;
-    while ((match = linkRegex.exec(text)) !== null) {
-      if (match.index > lastIndex) {
-        parts.push(text.substring(lastIndex, match.index));
+    const markdownMatches = [];
+    while ((match = markdownRegex.exec(text)) !== null) {
+      markdownMatches.push({
+        start: match.index,
+        end: markdownRegex.lastIndex,
+        text: match[1],
+        path: match[2],
+        type: 'markdown'
+      });
+    }
+
+    // Second pass: Raw Paths (only if not already inside a markdown match)
+    let rawMatch;
+    while ((rawMatch = rawPathRegex.exec(text)) !== null) {
+      const start = rawMatch.index + rawMatch[1].length;
+      const end = rawPathRegex.lastIndex;
+      const path = rawMatch[2];
+      
+      const isOverlap = markdownMatches.some(m => (start >= m.start && start < m.end) || (end > m.start && end <= m.end));
+      
+      if (!isOverlap) {
+        markdownMatches.push({
+          start,
+          end,
+          text: path,
+          path,
+          type: 'raw'
+        });
+      }
+    }
+
+    // Sort all matches by start position
+    markdownMatches.sort((a,b) => a.start - b.start);
+
+    lastIndex = 0;
+    markdownMatches.forEach((m, i) => {
+      if (m.start > lastIndex) {
+        parts.push(text.substring(lastIndex, m.start));
       }
       parts.push(
-        <Link key={match.index} to={match[2]} style={{ color: 'var(--accent-primary)', textDecoration: 'underline', fontWeight: 600 }} onClick={() => setIsOpen(false)}>
-          {match[1]}
+        <Link key={i} to={m.path} style={{ color: 'var(--accent-primary)', textDecoration: 'underline', fontWeight: 600 }} onClick={() => setIsOpen(false)}>
+          {m.text}
         </Link>
       );
-      lastIndex = linkRegex.lastIndex;
-    }
-    
+      lastIndex = m.end;
+    });
+
     if (lastIndex < text.length) {
       parts.push(text.substring(lastIndex));
     }

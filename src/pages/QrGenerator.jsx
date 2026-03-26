@@ -226,9 +226,9 @@ export default function QrGenerator() {
               </div>
             </div>
 
-            <div className="sidebar-layout" style={{ marginBottom: '4rem' }}>
+            <div className="sidebar-layout" style={{ marginBottom: '3rem' }}>
               <div className="tool-panel">
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', marginBottom: '2rem' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.5rem' }}>
                   {qrTypes.map(type => (
                     <button
                       key={type.id}
@@ -336,8 +336,8 @@ export default function QrGenerator() {
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <div className="tool-panel" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'sticky', top: '100px' }}>
-                  <div className="qr-preview" style={{ padding: '2rem', background: settings.bgColor, borderRadius: '24px', boxShadow: '0 20px 40px rgba(0,0,0,0.1)', border: '1px solid var(--border-color)' }}>
+                <div className="tool-panel" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'sticky', top: '88px' }}>
+                  <div className="qr-preview" style={{ padding: '1.5rem', background: settings.bgColor, borderRadius: '16px', boxShadow: 'var(--shadow-lg)', border: '1px solid var(--border-color)' }}>
                     <QRCodeSVG
                       value={getQrValue()}
                       size={settings.size > 280 ? 280 : settings.size}

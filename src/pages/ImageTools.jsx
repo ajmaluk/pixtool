@@ -998,7 +998,7 @@ export default function ImageTools() {
             <div className="landing-center">
               <div className="page-hero">
                 <div className="page-hero-content">
-                  <h1 className="page-title" style={{ fontFamily: '"Manrope", sans-serif', fontSize: 'clamp(3rem, 8vw, 4.5rem)', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
+                  <h1 className="page-title" style={{ fontFamily: '"Manrope", sans-serif', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
                     Studio-Grade <br/>
                     <span style={{ 
                       background: 'linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%)',
@@ -1040,7 +1040,7 @@ export default function ImageTools() {
 
               <div style={{ marginTop: '5rem' }}>
                 <ToolContent
-                  title="Professional Image Suite"
+                  title="Professional Image Tools"
                   description="Our image processing suite is engineered for speed and absolute privacy. Unlike traditional cloud editors, PixTool processes your high-resolution photos entirely on your own machine using advanced Canvas and WebAsembly APIs. This ensures zero latency and absolute security for your creative assets."
                   benefits={[
                     "100% Client-Side — zero server exposure",

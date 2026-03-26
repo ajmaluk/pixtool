@@ -21,7 +21,7 @@ export default function MathTools() {
                 <div className="landing-center">
                     <div className="page-hero">
                         <div className="page-hero-content">
-                            <h1 className="page-title" style={{ fontFamily: '"Manrope", sans-serif', fontSize: 'clamp(3rem, 8vw, 4.5rem)', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
+                            <h1 className="page-title" style={{ fontFamily: '"Manrope", sans-serif', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
                               Advanced <br/>
                               <span style={{ 
                                 background: 'linear-gradient(135deg, #3b82f6 0%, #10b981 100%)',
@@ -39,13 +39,13 @@ export default function MathTools() {
                         </div>
                     </div>
 
-                    <div className="tools-grid" style={{ marginBottom: '6rem' }}>
+                    <div className="tools-grid" style={{ marginBottom: '4rem' }}>
                         {tools.map((tool) => (
                             <ToolCard key={tool.id} tool={tool} />
                         ))}
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2.5rem', marginTop: '5rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2rem', marginTop: '3rem' }}>
                         {[
                             { icon: Zap, title: 'Zero Latency', desc: 'Lightning-fast native computation powered by WebAssembly and local logic.' },
                             { icon: Lock, title: 'Total Privacy', desc: 'All equations and data matrices are processed strictly within your local browser sandbox.' },

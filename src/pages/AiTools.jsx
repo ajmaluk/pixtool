@@ -21,7 +21,7 @@ export default function AiTools() {
                 <div className="landing-center">
                     <div className="page-hero">
                         <div className="page-hero-content">
-                            <h1 className="page-title" style={{ fontFamily: '"Manrope", sans-serif', fontSize: 'clamp(3rem, 8vw, 4.5rem)', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
+                            <h1 className="page-title" style={{ fontFamily: '"Manrope", sans-serif', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
                               Next-Gen <br/>
                               <span style={{ 
                                 background: 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)',
@@ -39,13 +39,13 @@ export default function AiTools() {
                         </div>
                     </div>
 
-                    <div className="tools-grid" style={{ marginBottom: '6rem' }}>
+                    <div className="tools-grid" style={{ marginBottom: '4rem' }}>
                         {tools.map((tool) => (
                             <ToolCard key={tool.id} tool={tool} />
                         ))}
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2.5rem', marginTop: '5rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2rem', marginTop: '3rem' }}>
                         {[
                             { icon: Zap, title: 'Zero Latency', desc: 'Native streaming generation built for instant high-authority responses.' },
                             { icon: ShieldCheck, title: 'Privacy First', desc: 'Context-aware processing without permanent server-side data retention.' },

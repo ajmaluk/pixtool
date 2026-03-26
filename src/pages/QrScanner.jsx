@@ -141,13 +141,13 @@ export default function QrScanner() {
                 {!scanning && !result && !error && (
                   <div
                     className="drop-zone"
-                    style={{ cursor: 'pointer', background: 'var(--bg-secondary)', border: '2px dashed var(--accent-emerald)', padding: '5rem 2.5rem', borderRadius: '32px', textAlign: 'center', transition: 'var(--transition)' }}
+                    style={{ cursor: 'pointer', background: 'var(--bg-secondary)', border: '2px dashed var(--accent-emerald)', padding: '3.5rem 2rem', borderRadius: '24px', textAlign: 'center', transition: 'var(--transition)' }}
                     onClick={startScanning}
                   >
                     <div className="drop-zone-icon" style={{ background: 'var(--accent-emerald-50)', color: 'var(--accent-emerald)', width: '80px', height: '80px', borderRadius: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
                       <Camera size={44} />
                     </div>
-                    <p className="drop-zone-text" style={{ fontSize: '1.5rem', fontWeight: 900, marginTop: '2rem', marginBottom: '0.5rem' }}>Activate Scanner</p>
+                    <p className="drop-zone-text" style={{ fontSize: '1.25rem', fontWeight: 900, marginTop: '1.5rem', marginBottom: '0.5rem' }}>Activate Scanner</p>
                     <p className="drop-zone-hint" style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>Safe local processing • Requires camera permission</p>
                     <button
                       className="btn btn-primary"

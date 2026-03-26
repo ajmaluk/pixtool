@@ -150,9 +150,9 @@ export default function UnitConverter() {
               </div>
             </div>
 
-            <div className="tool-panel" style={{ maxWidth: '800px', margin: '0 auto 4rem auto' }}>
+            <div className="tool-panel" style={{ maxWidth: '800px', margin: '0 auto 3rem auto' }}>
               {/* Category Selector */}
-              <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '2.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', gap: '0.6rem', marginBottom: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {Object.keys(UNITS_DATA).map(cat => (
                   <button
                     key={cat}
@@ -170,7 +170,7 @@ export default function UnitConverter() {
                 ))}
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '1.5rem', alignItems: 'flex-end', marginBottom: '3rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '1rem', alignItems: 'flex-end', marginBottom: '2rem' }}>
                 {/* From */}
                 <div>
                   <label style={{ display: 'block', marginBottom: '0.75rem', fontWeight: 800, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>From</label>

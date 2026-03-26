@@ -127,7 +127,9 @@ const sitemapSections = [
         icon: Book,
         links: [
             { name: "PixTool Blog", path: "/blog", description: "Main hub for all our technical articles and productivity guides." },
-            { name: "Mastering PDF Tools", path: "/blog/ultimate-pdf-toolkit-merge-split-compress", description: "The ultimate guide to merging, splitting and compressing PDFs." },
+            { name: 'Claude vs ChatGPT vs Gemini 2026', path: '/blog/claude-vs-gpt-vs-gemini-2026', description: 'Comprehensive 2026 AI model comparison and benchmarks.' },
+            { name: 'Maximizing AI Productivity', path: '/blog/maximizing-productivity-pixtool-ai', description: 'Pro workflows using the PixTool AI suite.' },
+            { name: "Mastering PDF Tools", path: "/blog/ultimate-pdf-toolkit-merge-split-compress", description: "The professional guide to PDF manipulation." },
             { name: "Best Free PDF Tools 2026", path: "/blog/best-free-pdf-tools-online-2026", description: "Review of the top-rated PDF management utilities for this year." },
             { name: "Browser Privacy Guide", path: "/blog/privacy-first-why-pixtool-safest-studio", description: "Why local browser processing is the future of data security." },
             { name: "PDF to Word Tutorial", path: "/blog/how-to-convert-pdf-to-word-free-2026", description: "Step-by-step guide to high-fidelity document conversion." },
@@ -144,7 +146,8 @@ const sitemapSections = [
             { name: "Image Compression 101", path: "/blog/image-compression-lossless-vs-lossy-2026", description: "Everything you need to know about optimizing image file sizes." },
             { name: "Top AI Trends 2026", path: "/blog/top-ai-trends-2026-productivity-tools", description: "Five practical AI trends shaping productivity and search intent in 2026." },
             { name: "GPT-5 vs Gemini 3 vs Claude 4.5", path: "/blog/gpt-5-gemini-3-claude-4-5-model-comparison-2026", description: "Practical model comparison for teams choosing the right AI stack." },
-            { name: "Rise of Agentic AI", path: "/blog/rise-of-agentic-ai-in-software-development-2026", description: "How agentic AI systems are changing software delivery workflows." }
+            { name: 'Rise of Agentic AI', path: '/blog/rise-of-agentic-ai-in-software-development-2026', description: 'The transition from assistants to autonomous agents.' },
+            { name: 'PixTool Origins', path: '/blog/pixtool-inspired-by-toolpix', description: 'The journey from ToolPix to the new privacy-first suite.' }
         ]
     },
     {

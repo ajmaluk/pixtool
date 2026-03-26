@@ -801,7 +801,7 @@ export default function PdfTools() {
             <div className="landing-center">
               <div className="page-hero">
                 <div className="page-hero-content">
-                  <h1 className="page-title" style={{ fontFamily: '"Manrope", sans-serif', fontSize: 'clamp(3rem, 8vw, 4.5rem)', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
+                  <h1 className="page-title" style={{ fontFamily: '"Manrope", sans-serif', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
                     Professional <br/>
                     <span style={{ 
                       background: 'linear-gradient(135deg, #b5161e 0%, #8930b0 100%)',
@@ -844,7 +844,7 @@ export default function PdfTools() {
               <div style={{ marginTop: '5rem' }}>
                 <ToolContent
                   title="PDF PixTool"
-                  description="Our PDF suite offers military-grade security by processing all your sensitive documents directly in your browser. No files are ever uploaded or stored on any server."
+                  description="Our PDF Tools offer military-grade security by processing all your sensitive documents directly in your browser. No files are ever uploaded or stored on any server."
                   benefits={["Offline Processing", "High Performance", "Multi-file Support", "100% Free Forever"]}
                   howTo={["Pick a PDF tool from the list", "Upload your documents", "Set your preferences", "Save the result instantly"]}
                 />
