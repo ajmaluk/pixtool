@@ -10,8 +10,9 @@ import {
 } from 'lucide-react'
 import ToolCard from '../components/ToolCard'
 import OverallRatingBadge from '../components/OverallRatingBadge'
-import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS } from '../data/tools'
+import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS, MATH_TOOLS } from '../data/tools'
 import { posts } from '../data/posts'
+import { Calculator } from 'lucide-react'
 
 // Lazy Load subsections for performance
 const BlogSection = lazy(() => import('../components/BlogSection'))
@@ -23,6 +24,7 @@ const imageTools = IMAGE_TOOLS.filter(t => !t.status);
 const pdfTools = PDF_TOOLS.filter(t => !t.status);
 const communicationTools = UTILITY_TOOLS;
 const aiTools = AI_TOOLS.filter(t => !t.status);
+const mathTools = MATH_TOOLS.filter(t => !t.status);
 
 export default function Home() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -70,16 +72,17 @@ export default function Home() {
     }
   }
 
-  const allTools = [...imageTools, ...pdfTools, ...communicationTools, ...aiTools]
+  const allTools = [...imageTools, ...pdfTools, ...communicationTools, ...aiTools, ...mathTools]
 
   // Interleave tools from different categories to mix them one after one
   const mixedTools = [];
-  const maxLen = Math.max(imageTools.length, pdfTools.length, communicationTools.length, aiTools.length);
+  const maxLen = Math.max(imageTools.length, pdfTools.length, communicationTools.length, aiTools.length, mathTools.length);
   for (let i = 0; i < maxLen; i++) {
     if (i < imageTools.length) mixedTools.push({ ...imageTools[i], typeLabel: 'Image Tool' });
     if (i < pdfTools.length) mixedTools.push({ ...pdfTools[i], typeLabel: 'PDF Tool' });
     if (i < communicationTools.length) mixedTools.push({ ...communicationTools[i], typeLabel: 'Utility' });
     if (i < aiTools.length) mixedTools.push({ ...aiTools[i], typeLabel: 'AI Tool' });
+    if (i < mathTools.length) mixedTools.push({ ...mathTools[i], typeLabel: 'Math Tool' });
   }
   const filteredTools = allTools.filter(tool =>
     tool.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -112,6 +115,10 @@ export default function Home() {
     {
       q: "What are the AI tools?",
       a: "Our newest suite includes advanced AI tools: generate entire blogs, rewrite paragraphs, summarize long text, generate marketing ad copies, code faster, and even chat with a powerful AI directly from PixTool."
+    },
+    {
+      q: "What mathematics tools are available?",
+      a: "PixTool offers 11 advanced scientific and mathematical tools, including a Scientific Calculator, Graph Visualizer, Matrix Solver, Statistics Visualizer, Financial Architect, and more — all processed locally for privacy."
     }
   ]
 
@@ -136,8 +143,8 @@ export default function Home() {
     <>
       <SEO
         title="PixTool - Master Your AI Workflow with Free Online Tools | 100% Private"
-        description="Unlock 52+ free online tools. PixTool is the ultimate AI productivity suite for content generation, PDF management, and image editing. No upload needed, 100% browser-based security."
-        keywords="free online ai suite, secure pdf tools, private image editor, ai content writer free, master ai workflow, browser-native productivity, 2026 ai tools"
+        description="Unlock 63+ free online tools. PixTool is the ultimate AI productivity suite for content generation, scientific mathematics, PDF management, and image editing. No upload needed, 100% browser-based security."
+        keywords="free online ai suite, secure pdf tools, private image editor, scientific calculator online, academic math tools, ai content writer free, master ai workflow, browser-native productivity, 2026 ai tools"
         path="/"
         schema={homeSchema}
         faqs={homeFaqs}
@@ -145,14 +152,39 @@ export default function Home() {
           { name: 'Professional Tools', item: '/' }
         ]}
       />
-      <div className="landing-layout">
+      <div className="landing-layout" style={{ position: 'relative', overflow: 'hidden' }}>
+        {/* Modern Tech Glow Accents */}
+        <div style={{
+          position: 'absolute',
+          top: '-10%',
+          left: '-10%',
+          width: '50vw',
+          height: '50vw',
+          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 60%)',
+          borderRadius: '50%',
+          filter: 'blur(80px)',
+          zIndex: -1,
+          pointerEvents: 'none'
+        }} />
+        <div style={{
+          position: 'absolute',
+          top: '20%',
+          right: '-5%',
+          width: '40vw',
+          height: '40vw',
+          background: 'radial-gradient(circle, rgba(239, 68, 68, 0.08) 0%, transparent 60%)',
+          borderRadius: '50%',
+          filter: 'blur(80px)',
+          zIndex: -1,
+          pointerEvents: 'none'
+        }} />
         <div className="landing-center">
 
           <div className="category-hub">
             <div className="hub-hero" style={{
               textAlign: 'center',
-              padding: 'clamp(2rem, 10vh, 4rem) 1.5rem',
-              marginBottom: 'clamp(2rem, 5vw, 4rem)',
+              padding: 'clamp(6rem, 15vh, 10rem) 1.5rem clamp(2rem, 10vh, 4rem)',
+              marginBottom: 'clamp(4rem, 8vw, 6rem)',
               position: 'relative'
             }}>
               <motion.div
@@ -166,6 +198,7 @@ export default function Home() {
                 <h1 style={{ 
                   fontSize: 'clamp(3.5rem, 10vw, 6.5rem)', 
                   fontWeight: 900, 
+                  fontFamily: '"Manrope", sans-serif',
                   marginBottom: '1.5rem', 
                   letterSpacing: '-0.06em', 
                   lineHeight: 0.95,
@@ -174,7 +207,7 @@ export default function Home() {
                 }}>
                   Master Your <br/>
                   <span className="text-gradient-hero" style={{ 
-                    background: 'linear-gradient(135deg, #a855f7 0%, #3b82f6 50%, #10b981 100%)',
+                    background: 'linear-gradient(135deg, #6b38d4 0%, #8455ef 50%, #3b82f6 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundSize: '200% auto',
@@ -207,6 +240,7 @@ export default function Home() {
                   The world's most powerful browser-native AI suite. 52+ professional tools for 
                   <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> content generation </span>, 
                   <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> secure PDF management </span>, 
+                  <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> scientific mathematics </span>,
                   and <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> image studio operations </span>
                   —all with absolute privacy.
                   <span style={{ 
@@ -233,18 +267,35 @@ export default function Home() {
                   <OverallRatingBadge />
                 </div>
 
-                <div className="search-container" style={{ boxShadow: 'var(--shadow-xl)', border: '1px solid var(--border-color)' }}>
-                  <div className="search-icon-wrapper">
-                    <Search size={22} />
+                <div className="search-container" style={{ 
+                  boxShadow: '0 24px 64px rgba(107, 56, 212, 0.15)', 
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  background: 'rgba(255, 255, 255, 0.05)',
+                  backdropFilter: 'blur(20px)',
+                  WebkitBackdropFilter: 'blur(20px)',
+                  borderRadius: '2rem',
+                  maxWidth: '700px',
+                  margin: '0 auto',
+                  height: '72px'
+                }}>
+                  <div className="search-icon-wrapper" style={{ left: '24px', opacity: 0.7 }}>
+                    <Search size={28} />
                   </div>
                   <input
                     type="text"
                     className="search-input"
-                    placeholder="What tool do you need today?"
+                    placeholder="Search 63+ professional tools..."
                     value={searchTerm}
                     onChange={handleSearchChange}
                     onKeyDown={handleKeyDown}
                     onFocus={() => setShowSuggestions(searchTerm.length > 0)}
+                    style={{ 
+                      fontSize: '1.25rem', 
+                      height: '100%', 
+                      paddingLeft: '4rem',
+                      fontFamily: '"Inter", sans-serif',
+                      fontWeight: 500
+                    }}
                   />
                   {searchTerm && (
                     <button
@@ -395,25 +446,65 @@ export default function Home() {
                         position: 'sticky',
                         top: '80px',
                         zIndex: 10,
-                        background: 'rgba(var(--bg-primary-rgb), 0.8)',
-                        backdropFilter: 'blur(12px)',
+                        background: 'rgba(var(--bg-primary-rgb), 0.7)',
+                        backdropFilter: 'blur(24px)',
+                        WebkitBackdropFilter: 'blur(24px)',
                         padding: '1.5rem 0',
-                        marginBottom: '2rem',
-                        borderBottom: '1px solid var(--border-color)',
+                        marginBottom: '3rem',
+                        boxShadow: '0 4px 40px rgba(0, 0, 0, 0.05)',
+                        borderBottom: '1px solid rgba(255,255,255,0.05)',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '1rem'
+                        gap: '1.2rem',
+                        borderRadius: '0 0 24px 24px'
                       }}>
                         <div style={{ padding: '0.6rem', background: 'rgba(168, 85, 247, 0.08)', borderRadius: '12px', color: '#a855f7' }}>
                           <Sparkles size={24} />
                         </div>
                         <div>
-                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, margin: 0, letterSpacing: '-0.02em' }}>New & Trending <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, marginLeft: '0.5rem' }}>(Latest Tools)</span></h2>
+                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', margin: 0, letterSpacing: '-0.02em' }}>New & Trending <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, fontFamily: '"Inter", sans-serif', marginLeft: '0.5rem' }}>(Latest Tools)</span></h2>
                         </div>
                       </div>
                       <div className="tools-grid">
                         {communicationTools.filter(t => ['json-formatter', 'unit-converter', 'password-generator'].includes(t.id)).map(tool => (
                           <ToolCard key={tool.path} tool={tool} />
+                        ))}
+                      </div>
+                    </section>
+                  )}
+
+                  {/* Math Tools Category */}
+                  {!isSearching && (
+                    <section style={{ marginBottom: '6rem', position: 'relative' }}>
+                      <div style={{
+                        position: 'sticky',
+                        top: '80px',
+                        zIndex: 10,
+                        background: 'rgba(var(--bg-primary-rgb), 0.7)',
+                        backdropFilter: 'blur(24px)',
+                        WebkitBackdropFilter: 'blur(24px)',
+                        padding: '1.5rem 0',
+                        marginBottom: '3rem',
+                        boxShadow: '0 4px 40px rgba(0, 0, 0, 0.05)',
+                        borderBottom: '1px solid rgba(255,255,255,0.05)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '1.2rem',
+                        borderRadius: '0 0 24px 24px'
+                      }}>
+                        <div style={{ padding: '0.6rem', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '12px', color: '#3b82f6' }}>
+                          <Calculator size={24} />
+                        </div>
+                        <div>
+                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', margin: 0, letterSpacing: '-0.02em' }}>Advanced Mathematics <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, fontFamily: '"Inter", sans-serif', marginLeft: '0.5rem' }}>({mathTools.length} Tools)</span></h2>
+                        </div>
+                      </div>
+                      <div className="tools-grid">
+                        {mathTools.map((tool) => (
+                          <ToolCard
+                            key={tool.path}
+                            tool={tool}
+                          />
                         ))}
                       </div>
                     </section>
@@ -425,20 +516,23 @@ export default function Home() {
                         position: 'sticky',
                         top: '80px',
                         zIndex: 10,
-                        background: 'rgba(var(--bg-primary-rgb), 0.8)',
-                        backdropFilter: 'blur(12px)',
+                        background: 'rgba(var(--bg-primary-rgb), 0.7)',
+                        backdropFilter: 'blur(24px)',
+                        WebkitBackdropFilter: 'blur(24px)',
                         padding: '1.5rem 0',
-                        marginBottom: '2rem',
-                        borderBottom: '1px solid var(--border-color)',
+                        marginBottom: '3rem',
+                        boxShadow: '0 4px 40px rgba(0, 0, 0, 0.05)',
+                        borderBottom: '1px solid rgba(255,255,255,0.05)',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '1rem'
+                        gap: '1.2rem',
+                        borderRadius: '0 0 24px 24px'
                       }}>
                         <div style={{ padding: '0.6rem', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '12px', color: '#3b82f6' }}>
                           <Image size={24} />
                         </div>
                         <div>
-                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, margin: 0, letterSpacing: '-0.02em' }}>Image Processing <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, marginLeft: '0.5rem' }}>({imageTools.length} Tools)</span></h2>
+                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', margin: 0, letterSpacing: '-0.02em' }}>Image Processing <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, fontFamily: '"Inter", sans-serif', marginLeft: '0.5rem' }}>({imageTools.length} Tools)</span></h2>
                         </div>
                       </div>
                       <div className="tools-grid">
@@ -459,20 +553,23 @@ export default function Home() {
                         position: 'sticky',
                         top: '80px',
                         zIndex: 10,
-                        background: 'rgba(var(--bg-primary-rgb), 0.8)',
-                        backdropFilter: 'blur(12px)',
+                        background: 'rgba(var(--bg-primary-rgb), 0.7)',
+                        backdropFilter: 'blur(24px)',
+                        WebkitBackdropFilter: 'blur(24px)',
                         padding: '1.5rem 0',
-                        marginBottom: '2rem',
-                        borderBottom: '1px solid var(--border-color)',
+                        marginBottom: '3rem',
+                        boxShadow: '0 4px 40px rgba(0, 0, 0, 0.05)',
+                        borderBottom: '1px solid rgba(255,255,255,0.05)',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '1rem'
+                        gap: '1.2rem',
+                        borderRadius: '0 0 24px 24px'
                       }}>
                         <div style={{ padding: '0.6rem', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '12px', color: '#ef4444' }}>
                           <FileText size={24} />
                         </div>
                         <div>
-                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, margin: 0, letterSpacing: '-0.02em' }}>PDF Management <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, marginLeft: '0.5rem' }}>({pdfTools.length} Tools)</span></h2>
+                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', margin: 0, letterSpacing: '-0.02em' }}>PDF Management <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, fontFamily: '"Inter", sans-serif', marginLeft: '0.5rem' }}>({pdfTools.length} Tools)</span></h2>
                         </div>
                       </div>
                       <div className="tools-grid">
@@ -490,20 +587,23 @@ export default function Home() {
                         position: 'sticky',
                         top: '80px',
                         zIndex: 10,
-                        background: 'rgba(var(--bg-primary-rgb), 0.8)',
-                        backdropFilter: 'blur(12px)',
+                        background: 'rgba(var(--bg-primary-rgb), 0.7)',
+                        backdropFilter: 'blur(24px)',
+                        WebkitBackdropFilter: 'blur(24px)',
                         padding: '1.5rem 0',
-                        marginBottom: '2rem',
-                        borderBottom: '1px solid var(--border-color)',
+                        marginBottom: '3rem',
+                        boxShadow: '0 4px 40px rgba(0, 0, 0, 0.05)',
+                        borderBottom: '1px solid rgba(255,255,255,0.05)',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '1rem'
+                        gap: '1.2rem',
+                        borderRadius: '0 0 24px 24px'
                       }}>
                         <div style={{ padding: '0.6rem', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '12px', color: '#10b981' }}>
                           <Zap size={24} />
                         </div>
                         <div>
-                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, margin: 0, letterSpacing: '-0.02em' }}>Professional Utilities <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, marginLeft: '0.5rem' }}>({communicationTools.length} Tools)</span></h2>
+                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', margin: 0, letterSpacing: '-0.02em' }}>Professional Utilities <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, fontFamily: '"Inter", sans-serif', marginLeft: '0.5rem' }}>({communicationTools.length} Tools)</span></h2>
                         </div>
                       </div>
                       <div className="tools-grid">
@@ -524,20 +624,23 @@ export default function Home() {
                         position: 'sticky',
                         top: '80px',
                         zIndex: 10,
-                        background: 'rgba(var(--bg-primary-rgb), 0.8)',
-                        backdropFilter: 'blur(12px)',
+                        background: 'rgba(var(--bg-primary-rgb), 0.7)',
+                        backdropFilter: 'blur(24px)',
+                        WebkitBackdropFilter: 'blur(24px)',
                         padding: '1.5rem 0',
-                        marginBottom: '2rem',
-                        borderBottom: '1px solid var(--border-color)',
+                        marginBottom: '3rem',
+                        boxShadow: '0 4px 40px rgba(0, 0, 0, 0.05)',
+                        borderBottom: '1px solid rgba(255,255,255,0.05)',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '1rem'
+                        gap: '1.2rem',
+                        borderRadius: '0 0 24px 24px'
                       }}>
                         <div style={{ padding: '0.6rem', background: 'rgba(139, 92, 246, 0.1)', borderRadius: '12px', color: '#8b5cf6' }}>
                           <Sparkles size={24} />
                         </div>
                         <div>
-                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, margin: 0, letterSpacing: '-0.02em' }}>Next-Gen AI <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, marginLeft: '0.5rem' }}>({aiTools.length} Tools)</span></h2>
+                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', margin: 0, letterSpacing: '-0.02em' }}>Next-Gen AI <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, fontFamily: '"Inter", sans-serif', marginLeft: '0.5rem' }}>({aiTools.length} Tools)</span></h2>
                         </div>
                       </div>
                       <div className="tools-grid">
@@ -554,37 +657,48 @@ export default function Home() {
               )}
             </div>
 
-            <div className="container-pro" style={{ marginTop: 'clamp(4rem, 10vw, 8rem)', padding: 'clamp(2rem, 5vw, 4rem) 1.5rem', background: 'var(--bg-secondary)', borderRadius: '32px', textAlign: 'left' }}>
+            <div className="container-pro" style={{ 
+                marginTop: 'clamp(4rem, 10vw, 8rem)', 
+                padding: 'clamp(3rem, 5vw, 5rem) 2rem', 
+                background: 'linear-gradient(180deg, rgba(247, 249, 251, 0.02) 0%, rgba(107, 56, 212, 0.02) 100%)', 
+                borderRadius: '40px', 
+                border: '1px solid rgba(255,255,255,0.05)',
+                textAlign: 'left' 
+              }}>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '4rem' }}>
                 <div>
-                  <h2 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '1.5rem' }}>Why Choose PixTool?</h2>
-                  <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>
+                  <h2 style={{ fontSize: '2rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
+                    <span style={{ color: 'var(--accent-blue)' }}>1.</span> Why Choose PixTool?
+                  </h2>
+                  <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem', fontFamily: '"Inter", sans-serif' }}>
                     Unlike other platforms that require you to upload your files to their servers,
-                    PixTool processes almost everything <b>locally in your browser</b>.
+                    PixTool processes almost everything <b style={{ color: 'var(--text-primary)' }}>locally in your browser</b>.
                     This means your sensitive images and PDFs never leave your device, ensuring
-                    <b> 100% privacy</b> and extreme speed. Whether you need to resize a photo
-                    for social media, merge multiple PDF documents for work, or generate a QR code
-                    for an event, PixTool has you covered with professional-grade results.
+                    <b style={{ color: 'var(--text-primary)' }}> 100% privacy</b> and extreme speed. Whether you need to resize a photo
+                    for social media or merge documents, PixTool has you covered with professional-grade results.
                   </p>
                 </div>
                 <div>
-                  <h2 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '1.5rem' }}>100% Free Forever</h2>
-                  <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>
+                  <h2 style={{ fontSize: '2rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
+                    <span style={{ color: '#8b5cf6' }}>2.</span> 100% Free Forever
+                  </h2>
+                  <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem', fontFamily: '"Inter", sans-serif' }}>
                     Our mission is to provide high-quality productivity tools without the high-end
                     subscription costs. There are no hidden fees, no credit cards, and no "Pro"
                     tiers that lock away essential features. Every tool on PixTool is completely
-                    free — from our advanced image resizer and cropper to our PDF merger and
-                    compressor. We believe essential productivity tools should be accessible to everyone.
+                    free — from our advanced image resizer to our scientific calculators.
+                    Essential logic should be accessible to everyone.
                   </p>
                 </div>
                 <div>
-                  <h2 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '1.5rem' }}>Optimized for Speed</h2>
-                  <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-                    Time is money. Our tools are optimized to be lightweight and fast.
-                    Whether you're merging a 100-page PDF or resizing a high-resolution 4K image,
-                    you'll get results in seconds, not minutes. No queues, no waiting. Our
-                    browser-based processing engine leverages modern Web APIs like Canvas, WebAssembly,
-                    and Web Workers to deliver desktop-class performance directly in your browser tab.
+                  <h2 style={{ fontSize: '2rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
+                    <span style={{ color: '#10b981' }}>3.</span> Zero Latency Speed
+                  </h2>
+                  <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem', fontFamily: '"Inter", sans-serif' }}>
+                    Time is money. Our tools are optimized to be lightweight and infinitely fast.
+                    Whether you're compiling code patterns or resizing a high-resolution 4K image,
+                    you'll get results in milliseconds. No server queues. Our
+                    browser-based processing engine leverages WebAssembly and Web Workers to deliver desktop-class performance directly in your tab.
                   </p>
                 </div>
               </div>
@@ -616,6 +730,7 @@ export default function Home() {
               <BlogSection posts={posts} />
             </Suspense>
           </section>
+      <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
         </div>
       </div>
       <style>{`

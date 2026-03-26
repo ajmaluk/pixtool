@@ -72,6 +72,17 @@ const AiTranslator = lazy(() => import('./pages/AiTranslator'))
 const AiKeyword = lazy(() => import('./pages/AiKeyword'))
 const AiHashtag = lazy(() => import('./pages/AiHashtag'))
 const AiStory = lazy(() => import('./pages/AiStory'))
+const MathTools = lazy(() => import('./pages/MathTools'))
+const ScientificCalculator = lazy(() => import('./pages/ScientificCalculator'))
+const GraphVisualizer = lazy(() => import('./pages/GraphVisualizer'))
+const MatrixSolver = lazy(() => import('./pages/MatrixSolver'))
+const StatisticsVisualizer = lazy(() => import('./pages/StatisticsVisualizer'))
+const EquationSolver = lazy(() => import('./pages/EquationSolver'))
+const UnitCircle = lazy(() => import('./pages/UnitCircle'))
+const FinancialCalculator = lazy(() => import('./pages/FinancialCalculator'))
+const NumberTheory = lazy(() => import('./pages/NumberTheory'))
+const FractionCalculator = lazy(() => import('./pages/FractionCalculator'))
+const VectorCalculator = lazy(() => import('./pages/VectorCalculator'))
 
 // Loading component — stays visible inside the layout
 const PageLoader = () => (
@@ -185,7 +196,8 @@ const MainLayout = () => {
   const currentToolMeta = ALL_TOOLS_MAP[location.pathname]
   const isRateableToolPath = Boolean(
     currentToolMeta &&
-    !['/image-tools', '/pdf-tools', '/utility-tools'].includes(location.pathname)
+    !['/image-tools', '/pdf-tools', '/utility-tools', '/math-tools', '/ai-tools', '/'].includes(location.pathname) &&
+    currentToolMeta.id // Only actual tools have an 'id', suites don't
   )
 
   // Tools mapping for metadata - now driven by tools.js
@@ -451,6 +463,17 @@ function App() {
           <Route path="/ai-tools/keyword-generator" element={<AiKeyword />} />
           <Route path="/ai-tools/hashtag-generator" element={<AiHashtag />} />
           <Route path="/ai-tools/story-generator" element={<AiStory />} />
+          <Route path="/math-tools" element={<MathTools />} />
+          <Route path="/math-tools/scientific-calculator" element={<ScientificCalculator />} />
+          <Route path="/math-tools/graph-visualizer" element={<GraphVisualizer />} />
+          <Route path="/math-tools/matrix-solver" element={<MatrixSolver />} />
+          <Route path="/math-tools/statistics-visualizer" element={<StatisticsVisualizer />} />
+          <Route path="/math-tools/equation-solver" element={<EquationSolver />} />
+          <Route path="/math-tools/unit-circle" element={<UnitCircle />} />
+          <Route path="/math-tools/financial-calculator" element={<FinancialCalculator />} />
+          <Route path="/math-tools/number-theory" element={<NumberTheory />} />
+          <Route path="/math-tools/fraction-calculator" element={<FractionCalculator />} />
+          <Route path="/math-tools/vector-calculator" element={<VectorCalculator />} />
           <Route path="/about" element={<About />} />
 
           {/* Legacy SEO Redirects */}

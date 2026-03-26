@@ -592,69 +592,49 @@ export default function TempMail({
               </div>
 
               {loading ? (
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', padding: '2rem' }}>
-                  <Loader size={40} className="spinning" style={{ color: 'var(--accent-pink)' }} />
-                  <p style={{ color: 'var(--text-muted)' }}>Creating your secure mailbox...</p>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem', padding: '4rem 2rem' }}>
+                  <div className="loader-orbit">
+                    <div className="loader-inner" />
+                    <Mail size={32} className="loader-icon" />
+                  </div>
+                  <p style={{ color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: '0.8rem' }}>Forging Secure Identity...</p>
                 </div>
               ) : (
-                <>
-                  {/* Email Display */}
+                <div className="tempmail-display-container">
+                  <div className="tempmail-glow" />
                   <div
                     onClick={copyEmail}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '1.5rem',
-                      padding: '1.5rem 2rem',
-                      background: 'var(--bg-secondary)',
-                      borderRadius: '20px',
-                      cursor: 'pointer',
-                      border: copied ? '2px solid var(--accent-emerald)' : '2px solid transparent',
-                      transition: 'var(--transition)',
-                      marginBottom: '1rem',
-                      minHeight: '72px'
-                    }}
+                    className="tempmail-address-card"
                   >
-                    <Mail size={24} style={{ color: 'var(--accent-pink)', flexShrink: 0 }} />
-                    <span style={{
-                      fontSize: '1.5rem',
-                      fontWeight: 800,
-                      fontFamily: 'monospace',
-                      letterSpacing: '0.02em',
-                      wordBreak: 'break-all',
-                      textAlign: 'center'
-                    }}>
-                      {email || 'Generating address...'}
-                    </span>
-                    {copied ? (
-                      <CheckCircle2 size={24} style={{ color: 'var(--accent-emerald)', flexShrink: 0 }} />
-                    ) : (
-                      <Copy size={24} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
-                    )}
+                    <div className="tempmail-icon-glow">
+                      <Mail size={28} />
+                    </div>
+                    <div className="tempmail-address-wrapper">
+                      <span className="tempmail-label">Your Secure Address</span>
+                      <span className="tempmail-address">
+                        {email || 'Generating...'}
+                      </span>
+                    </div>
+                    <div className={`tempmail-copy-btn ${copied ? 'copied' : ''}`}>
+                      {copied ? <CheckCircle2 size={24} /> : <Copy size={24} />}
+                    </div>
                   </div>
 
-                  <p style={{ textAlign: 'center', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '2rem', fontWeight: 600 }}>
-                    Click to copy address instantly
-                  </p>
-
-                  <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                    <button className="btn btn-primary" onClick={copyEmail} style={{ background: 'var(--accent-pink)', borderColor: 'var(--accent-pink)', minWidth: '160px' }}>
-                      {copied ? <CheckCircle2 size={18} /> : <Copy size={18} />}
-                      {copied ? 'Copied!' : 'Copy Email'}
+                  <div className="tempmail-actions-grid">
+                    <button className="action-btn-premium refresh" onClick={refreshInbox} disabled={refreshing}>
+                      <RefreshCw size={20} className={refreshing ? 'spinning' : ''} />
+                      <span>{refreshing ? 'Syncing...' : 'Sync Inbox'}</span>
                     </button>
-                    <button className="btn btn-secondary" onClick={refreshInbox} disabled={refreshing}>
-                      <RefreshCw size={18} className={refreshing ? 'spinning' : ''} />
-                      Refresh
+                    <button className="action-btn-premium rotate" onClick={changeEmail}>
+                      <RefreshCw size={20} />
+                      <span>New Identity</span>
                     </button>
-                    <button className="btn btn-secondary" onClick={changeEmail}>
-                      <RefreshCw size={18} /> New Email
-                    </button>
-                    <button className="btn btn-secondary" onClick={deleteEmail} style={{ color: 'var(--accent-red)' }}>
-                      <Trash2 size={18} /> Delete
+                    <button className="action-btn-premium delete" onClick={deleteEmail}>
+                      <Trash2 size={20} />
+                      <span>Terminate</span>
                     </button>
                   </div>
-                </>
+                </div>
               )}
             </div>
             <div style={{ textAlign: 'center', marginTop: '1rem', marginBottom: '2rem' }}>

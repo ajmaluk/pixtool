@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from 'react'
+import { ALL_TOOLS_MAP } from '../data/tools'
 
 const SCREENSHOT_MAP = {
     '/': 'pixtool-all-in-one-productivity-suite.png',
@@ -37,7 +38,19 @@ const SCREENSHOT_MAP = {
 
 const getScreenshotPath = (pagePath) => {
     const cleanPath = pagePath.endsWith('/') && pagePath.length > 1 ? pagePath.slice(0, -1) : pagePath
-    return `/screenshots/${SCREENSHOT_MAP[cleanPath] || 'pixtool-all-in-one-productivity-suite.png'}`
+    
+    // Check local SCREENSHOT_MAP first for legacy/special pages
+    if (SCREENSHOT_MAP[cleanPath]) {
+        return `/screenshots/${SCREENSHOT_MAP[cleanPath]}`
+    }
+
+    // Dynamic lookup from global tools map
+    const toolData = ALL_TOOLS_MAP[cleanPath]
+    if (toolData && toolData.screenshot) {
+        return `/screenshots/${toolData.screenshot}`
+    }
+
+    return '/screenshots/pixtool-all-in-one-productivity-suite.png'
 }
 
 export default function SEO({
@@ -67,7 +80,7 @@ export default function SEO({
     const siteUrl = import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'
     const siteName = 'PixTool by UTHAKKAN'
     const fullUrl = path === '/' ? siteUrl : `${siteUrl}${path.startsWith('/') ? path : `/${path}`}`
-    const isToolPath = path.includes('/image-tools') || path.includes('/pdf-tools') || path.includes('/temp-mail') || path.includes('/qr-') || path.includes('/typing-test') || path === '/fake-email' || path === '/disposable-email' || path === '/throwaway-email' || path === '/code-diff'
+    const isToolPath = path.includes('/image-tools') || path.includes('/pdf-tools') || path.includes('/temp-mail') || path.includes('/qr-') || path.includes('/typing-test') || path === '/fake-email' || path === '/disposable-email' || path === '/throwaway-email' || path === '/code-diff' || path.includes('/ai-tools') || path.includes('/math-tools')
     const shouldNoIndex = noIndex || path.startsWith('/pix-admin')
 
     const brandTitle = title.includes('PixTool') ? title : `${title} | PixTool`

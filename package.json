@@ -23,6 +23,7 @@
     "framer-motion": "^12.34.3",
     "html5-qrcode": "^2.3.8",
     "lucide-react": "^0.575.0",
+    "mathjs": "^15.1.1",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^5.4.624",
     "qrcode.react": "^4.2.0",
@@ -30,6 +31,7 @@
     "react-dom": "^19.2.0",
     "react-image-crop": "^11.0.10",
     "react-router-dom": "^7.13.0",
+    "recharts": "^3.8.1",
     "tesseract.js": "^7.0.0"
   },
   "devDependencies": {

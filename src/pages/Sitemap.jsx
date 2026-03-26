@@ -93,6 +93,23 @@ const sitemapSections = [
         ]
     },
     {
+        title: "Advanced Mathematics Suite",
+        icon: Star,
+        links: [
+            { name: "All Math Tools", path: "/math-tools", description: "Professional suite for scientific calculation and data visualization." },
+            { name: "Scientific Calculator", path: "/math-tools/scientific-calculator", description: "High-precision algebraic engine for complex engineering computations." },
+            { name: "Graph Visualizer", path: "/math-tools/graph-visualizer", description: "Interactive functional plotting engine for 2D/3D visualizations." },
+            { name: "Matrix Solver", path: "/math-tools/matrix-solver", description: "Linear algebra studio for matrix inversion and determinants." },
+            { name: "Data Visualizer", path: "/math-tools/statistics-visualizer", description: "Transform raw data into high-authority statistical charts." },
+            { name: "Equation Solver", path: "/math-tools/equation-solver", description: "Instant root finding and algebraic simplification for equations." },
+            { name: "Unit Circle Studio", path: "/math-tools/unit-circle", description: "Interactive trigonometry visualizer for sines and cosines." },
+            { name: "Finance Architect", path: "/math-tools/financial-calculator", description: "Advanced financial suite for TVM, Loans, and ROI analysis." },
+            { name: "Number Theory Forge", path: "/math-tools/number-theory", description: "Analyze prime factorization, GCD, and modular arithmetic." },
+            { name: "Fraction Pro", path: "/math-tools/fraction-calculator", description: "Precise fractional arithmetic with simplified step-by-step logic." },
+            { name: "Vector Forge", path: "/math-tools/vector-calculator", description: "Calculate dot products and magnitudes with 3D visualization." }
+        ]
+    },
+    {
         title: "Company & Resources",
         icon: Info,
         links: [

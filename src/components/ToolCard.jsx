@@ -6,7 +6,7 @@ import { ArrowUpRight } from 'lucide-react'
 
 export default function ToolCard({ tool }) {
   // Use category from tool object if available, otherwise infer from path
-  const category = tool.category || tool.path?.split('/')[1]?.replace('-', ' ') || 'General'
+  const category = tool.category || tool.path?.split('/')[1]?.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') || 'General'
 
   return (
     <motion.div

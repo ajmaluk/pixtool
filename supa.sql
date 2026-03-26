@@ -457,7 +457,7 @@ insert into tools (name, slug) values
   ('Merge PDF', 'pdf-tools/merge'),
   ('Split PDF', 'pdf-tools/split'),
   ('Compress PDF', 'pdf-tools/compress'),
-  ('PDF to Images', 'pdf-tools/convert'),
+  ('PDF to images', 'pdf-tools/convert'),
   ('Protect PDF', 'pdf-tools/protect'),
   ('Watermark PDF', 'pdf-tools/watermark'),
   ('Reorder Pages', 'pdf-tools/reorder'),
@@ -493,7 +493,17 @@ insert into tools (name, slug) values
   ('Linguist Intelligence', 'ai-tools/translator'),
   ('SEO Architect', 'ai-tools/keyword-generator'),
   ('Viral Density', 'ai-tools/hashtag-generator'),
-  ('Narrative Forge', 'ai-tools/story-generator')
+  ('Narrative Forge', 'ai-tools/story-generator'),
+  ('Scientific Calculator', 'math-tools/scientific-calculator'),
+  ('Graph Visualizer', 'math-tools/graph-visualizer'),
+  ('Matrix Solver', 'math-tools/matrix-solver'),
+  ('Data Visualizer', 'math-tools/statistics-visualizer'),
+  ('Equation Solver', 'math-tools/equation-solver'),
+  ('Unit Circle Studio', 'math-tools/unit-circle'),
+  ('Finance Architect', 'math-tools/financial-calculator'),
+  ('Number Theory Forge', 'math-tools/number-theory'),
+  ('Fraction Pro', 'math-tools/fraction-calculator'),
+  ('Vector Forge', 'math-tools/vector-calculator')
 on conflict (slug) do nothing;
 
 -- Setup complete.

@@ -104,6 +104,7 @@ export default function AiToolTemplate({
         description={description}
         keywords={seoKeywords}
         path={path}
+        toolName={title}
       />
       
       <div className="tool-page-v2" style={{ background: 'var(--bg-secondary)', minHeight: '100vh', display: 'flex', flexDirection: 'column', color: 'var(--text-primary)' }}>

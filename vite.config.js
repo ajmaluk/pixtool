@@ -13,8 +13,8 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
-              return 'vendor-react';
+            if (id.includes('pdf-lib') || id.includes('pdfjs-dist')) {
+              return 'vendor-pdf';
             }
             if (id.includes('framer-motion')) {
               return 'vendor-framer';
@@ -22,10 +22,8 @@ export default defineConfig({
             if (id.includes('lucide-react')) {
               return 'vendor-icons';
             }
-            if (id.includes('pdf-lib') || id.includes('pdfjs-dist')) {
-              return 'vendor-pdf';
-            }
-            return 'vendor-core';
+            // Group everything else (React & Core) into one to avoid circularities
+            return 'vendor-main';
           }
         },
         chunkFileNames: 'assets/[name]-[hash].js',

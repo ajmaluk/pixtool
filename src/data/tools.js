@@ -1,9 +1,11 @@
 import { 
-  Maximize2, Crop, RotateCw, FileArchive, RefreshCw, Type, FlipHorizontal, Palette, 
-  FilePlus, SplitSquareHorizontal, FileCheck, FileImage, Lock, ArrowUpDown, FileText, Sliders,
-  Mail, Smartphone, QrCode, Image as ImageIcon, Search, Braces, Scale, Key, MessageSquare, 
-  PenTool, Edit3, FileSignature, Code, AtSign, Megaphone, Hash, AlignLeft, Globe, 
-  BookOpen
+  AlignLeft, ArrowUpDown, ArrowUpRight, AtSign, BarChart, Binary, BookOpen, 
+  Braces, Calculator, Circle, Code, Crop, DollarSign, Edit3, Equal, 
+  FileArchive, FileCheck, FileImage, FilePlus, FileSignature, FileText, 
+  FlipHorizontal, Globe, Grid, Hash, Image as ImageIcon, Key, Lock, 
+  Mail, Maximize2, Megaphone, MessageSquare, Palette, PenTool, 
+  Percent, QrCode, RefreshCw, RotateCw, Scale, Search, Sliders, 
+  Smartphone, SplitSquareHorizontal, TrendingUp, Type
 } from 'lucide-react';
 
 export const IMAGE_TOOLS = [
@@ -414,11 +416,94 @@ export const AI_TOOLS = [
   }
 ];
 
+export const MATH_TOOLS = [
+  {
+    id: 'scientific-calculator', title: 'Scientific Calculator', icon: Calculator,
+    description: 'High-precision algebraic engine for complex engineering and scientific computations.',
+    color: '#3b82f6', path: '/math-tools/scientific-calculator', screenshot: 'scientific-calculator-online.png',
+    imageAlt: 'PixTool Scientific Calculator - High-Precision Algebraic Engine',
+    imageTitle: 'Advanced Scientific Calculator Online',
+    features: ['Algebraic logic', 'Trigonometric functions', 'Logarithmic operations', 'Memory recall'],
+    howItWorks: ['Enter your expression', 'Select Radian or Degree', 'Calculate instant results']
+  },
+  {
+    id: 'graph-visualizer', title: 'Graph Visualizer', icon: TrendingUp,
+    description: 'Interactive functional plotting engine for 2D and 3D mathematical visualizations.',
+    color: '#3b82f6', path: '/math-tools/graph-visualizer', screenshot: 'online-graphing-calculator-pixtool.png',
+    imageAlt: 'PixTool Graph Visualizer - Interactive Functional Plotting',
+    imageTitle: 'Expert Graphing Calculator Online',
+    features: ['Multi-function plotting', 'Dynamic zooming', 'Coordinate tracking', 'High-res exports'],
+    howItWorks: ['Add a function (e.g., sin(x))', 'Adjust view range', 'Analyze intersections']
+  },
+  {
+    id: 'matrix-solver', title: 'Matrix Solver', icon: Grid,
+    description: 'Professional linear algebra studio for matrix inversion, determinants, and rank calculations.',
+    color: '#3b82f6', path: '/math-tools/matrix-solver', screenshot: 'linear-algebra-matrix-solver.png',
+    imageAlt: 'PixTool Matrix Solver - Linear Algebra Studio',
+    imageTitle: 'Solve Matrix Equations Online',
+    features: ['Inverse calculation', 'Determinant analysis', 'Matrix multiplication', 'Step-by-step logic'],
+    howItWorks: ['Select matrix dimension', 'Input cell values', 'Perform linear operations']
+  },
+  {
+    id: 'statistics-visualizer', title: 'Data Visualizer', icon: BarChart,
+    description: 'Transform raw data into high-authority statistical charts and professional visualizations.',
+    color: '#3b82f6', path: '/math-tools/statistics-visualizer', screenshot: 'expert-data-visualization-studio.png',
+    imageAlt: 'PixTool Data Visualizer - Statistical Charting Studio',
+    imageTitle: 'Generate Statistical Charts Online',
+    features: ['Bar & Line charts', 'Distribution analysis', 'Mean/Median/StdDev', 'Web-ready exports'],
+    howItWorks: ['Paste your data set', 'Select chart type', 'Download high-res visuals']
+  },
+  {
+    id: 'equation-solver', title: 'Equation Solver', icon: Equal,
+    description: 'Instant root finding and algebraic simplification for linear and quadratic equations.',
+    color: '#3b82f6', path: '/math-tools/equation-solver', screenshot: 'algebraic-equation-solver.png',
+    imageAlt: 'PixTool Equation Solver - Root Finding Engine',
+    imageTitle: 'Solve Equations Online instantly'
+  },
+  {
+    id: 'unit-circle', title: 'Unit Circle Studio', icon: Circle,
+    description: 'Interactive trigonometry visualizer for understanding sines, cosines, and angle rotations.',
+    color: '#3b82f6', path: '/math-tools/unit-circle', screenshot: 'interactive-unit-circle-trigonometry.png',
+    imageAlt: 'PixTool Unit Circle - Trigonometry Visualizer',
+    imageTitle: 'Explore the Unit Circle Interactively'
+  },
+  {
+    id: 'financial-calculator', title: 'Finance Architect', icon: DollarSign,
+    description: 'Advanced financial suite for TVM, Loan amortization, and ROI analysis.',
+    color: '#3b82f6', path: '/math-tools/financial-calculator', screenshot: 'advanced-financial-calculator.png',
+    imageAlt: 'PixTool Finance Architect - Business Logic Engine',
+    imageTitle: 'Professional Financial Calculator Online'
+  },
+  {
+    id: 'number-theory', title: 'Number Theory Forge', icon: Binary,
+    description: 'Analyze number properties including prime factorization, GCD, and modular arithmetic.',
+    color: '#3b82f6', path: '/math-tools/number-theory', screenshot: 'number-theory-prime-forge.png',
+    imageAlt: 'PixTool Number Theory Forge - Prime Factorization',
+    imageTitle: 'Number Theory & Prime Tools Online'
+  },
+  {
+    id: 'fraction-calculator', title: 'Fraction Pro', icon: Percent,
+    description: 'Precise fractional arithmetic with simplified results and step-by-step logic.',
+    color: '#3b82f6', path: '/math-tools/fraction-calculator', screenshot: 'precise-fraction-calculator.png',
+    imageAlt: 'PixTool Fraction Pro - Precision Arithmetic',
+    imageTitle: 'Add and Subtract Fractions Online'
+  },
+  {
+    id: 'vector-calculator', title: 'Vector Forge', icon: ArrowUpRight,
+    description: 'Calculate dot products, cross products, and magnitudes with 3D vector visualization.',
+    color: '#3b82f6', path: '/math-tools/vector-calculator', screenshot: '3d-vector-calculator-visualizer.png',
+    imageAlt: 'PixTool Vector Forge - 3D Magnitude Calculator',
+    imageTitle: 'Solve Vector Equations Online'
+  }
+];
+
 export const ALL_TOOLS_MAP = {
   ...IMAGE_TOOLS.reduce((acc, t) => ({ ...acc, [t.path]: t }), {}),
   ...PDF_TOOLS.reduce((acc, t) => ({ ...acc, [t.path]: t }), {}),
   ...UTILITY_TOOLS.reduce((acc, t) => ({ ...acc, [t.path]: t }), {}),
   ...AI_TOOLS.reduce((acc, t) => ({ ...acc, [t.path]: t }), {}),
+  ...MATH_TOOLS.reduce((acc, t) => ({ ...acc, [t.path]: t }), {}),
   '/utility-tools': { title: 'Utility Suite', icon: Sliders },
-  '/ai-tools': { title: 'AI Suite', icon: MessageSquare }
+  '/ai-tools': { title: 'AI Suite', icon: MessageSquare },
+  '/math-tools': { title: 'Math Suite', icon: Calculator }
 };

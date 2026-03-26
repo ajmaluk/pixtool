@@ -8,13 +8,14 @@ import {
   ShoppingBag, Star, Zap, GraduationCap, Microscope, Rocket, Gift
 } from 'lucide-react'
 import { useAlert } from '../context/ConfirmContext'
-import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS } from '../data/tools'
+import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS, MATH_TOOLS } from '../data/tools'
 
 const allTools = [
   ...IMAGE_TOOLS.filter(t => !t.status).map(t => ({ path: t.path, title: t.title, category: 'Image', icon: t.icon, color: t.color })),
   ...PDF_TOOLS.filter(t => !t.status).map(t => ({ path: t.path, title: t.title, category: 'PDF', icon: t.icon, color: t.color })),
   ...UTILITY_TOOLS.filter(t => !t.status).map(t => ({ path: t.path, title: t.title, category: 'Utility', icon: t.icon, color: t.color })),
   ...AI_TOOLS.filter(t => !t.status).map(t => ({ path: t.path, title: t.title, category: 'AI', icon: t.icon, color: t.color })),
+  ...MATH_TOOLS.filter(t => !t.status).map(t => ({ path: t.path, title: t.title, category: 'Math', icon: t.icon, color: t.color })),
 ]
 
 export default function Navbar() {
@@ -142,6 +143,7 @@ export default function Navbar() {
           <NavLink to="/image-tools" className="navbar-link">Image</NavLink>
           <NavLink to="/utility-tools" className="navbar-link">Utility</NavLink>
           <NavLink to="/ai-tools" className="navbar-link">AI</NavLink>
+          <NavLink to="/math-tools" className="navbar-link">Math</NavLink>
           
           <div className="nav-dropdown" ref={moreRef}>
             <button 
@@ -324,6 +326,7 @@ export default function Navbar() {
           <NavLink to="/image-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Image Tools</NavLink>
           <NavLink to="/utility-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Utility Tools</NavLink>
           <NavLink to="/ai-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>AI Tools</NavLink>
+          <NavLink to="/math-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Math Tools</NavLink>
           
           <div className="mobile-section-title">Resources</div>
           <NavLink to="/showcase" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Visual Showcase</NavLink>

@@ -801,8 +801,19 @@ export default function PdfTools() {
             <div className="landing-center">
               <div className="page-hero">
                 <div className="page-hero-content">
-                  <h1 className="page-title">PDF <span style={{ color: 'var(--accent-blue)' }}>Suite</span></h1>
-                  <p className="page-subtitle">
+                  <h1 className="page-title" style={{ fontFamily: '"Manrope", sans-serif', fontSize: 'clamp(3rem, 8vw, 4.5rem)', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
+                    Professional <br/>
+                    <span style={{ 
+                      background: 'linear-gradient(135deg, #b5161e 0%, #8930b0 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundSize: '200% auto',
+                      animation: 'gradient-flow 6s linear infinite',
+                      display: 'inline-block',
+                      padding: '0.1em 0'
+                    }}>PDF Management</span>
+                  </h1>
+                  <p className="page-subtitle" style={{ fontFamily: '"Inter", sans-serif', fontSize: '1.25rem', opacity: 0.9, marginTop: '1rem', lineHeight: 1.6 }}>
                     The most efficient way to manage your PDF workflows. Merge, split, compress, and convert documents locally for ultimate security.
                   </p>
                 </div>
