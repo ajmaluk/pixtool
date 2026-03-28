@@ -1,15 +1,7 @@
+import { GLOBAL_FAQS } from '../data/faqs'
+
 export default function FAQSection() {
-  const faqs = [
-    { q: "Is PixTool really free?", a: "Yes, 100% free. Every tool on PixTool is available without any cost, subscription, or hidden fees. We support the platform through non-intrusive advertising." },
-    { q: "Are my files safe and private?", a: "Absolutely. PixTool processes your files entirely within your browser. Your images, PDFs, and documents are never uploaded to any server. Once you close the tab, your data is gone." },
-    { q: "What image formats are supported?", a: "Our image tools support all major formats including JPEG, PNG, WebP, GIF, BMP, and TIFF. You can also convert between formats while resizing, cropping, or compressing." },
-    { q: "Can I merge more than two PDFs?", a: "Yes! Our PDF merger supports combining as many PDF files as you need into a single document. Simply upload all your files and arrange them in the desired order." },
-    { q: "Do I need to install anything?", a: "No installation required. PixTool runs entirely in your web browser. Just visit the site and start using any tool immediately on any device." },
-    { q: "What is the maximum file size?", a: "Since processing happens in your browser, the limit depends on your device's available memory. Most modern devices can handle files up to 100MB+ without issues." },
-    { q: "How secure are the AI tools?", a: "Extremely secure. Unlike other platforms, PixTool AI tools use a privacy-first integration. Your prompt context is only used to generate the response and is never stored, sold, or used for training models." },
-    { q: "Do the AI tools work offline?", a: "Currently, our AI tools (Chat, Resume Architect, etc.) require an internet connection to communicate with our secure inference backend. However, all image and PDF processing remains 100% offline." },
-    { q: "Which AI models power PixTool?", a: "We leverage a blend of state-of-the-art LLMs (including Claude 4.5 and GPT-5 equivalents) via our high-speed, secure API to ensure you get professional-grade results for free." },
-  ]
+  const faqs = GLOBAL_FAQS
 
   return (
     <div className="container-pro" style={{ marginTop: '6rem', maxWidth: '100%', margin: '6rem auto 0' }}>

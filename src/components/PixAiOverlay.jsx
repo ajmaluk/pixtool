@@ -129,23 +129,10 @@ User: ${input}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              style={{
-                position: 'absolute',
-                bottom: '80px',
-                right: '0',
-                width: '350px',
-                height: '500px',
-                background: 'var(--bg-primary)',
-                border: '1px solid var(--border-color)',
-                borderRadius: '24px',
-                boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
-                display: 'flex',
-                flexDirection: 'column',
-                overflow: 'hidden'
-              }}
+              className="pix-ai-window"
             >
               {/* Header */}
-              <div style={{ padding: '1.25rem', background: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div className="pix-ai-header">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <div style={{ width: '36px', height: '36px', background: 'var(--accent-primary)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
                     <Webhook size={20} />
@@ -164,49 +151,37 @@ User: ${input}
               </div>
 
               {/* Chat Area */}
-              <div style={{ flex: 1, overflowY: 'auto', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem', background: 'var(--bg-primary)' }}>
+              <div className="pix-ai-chat-area">
                 {messages.map((msg, idx) => (
                   <div key={idx} style={{ alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start', maxWidth: '85%' }}>
-                    <div style={{ 
-                      background: msg.role === 'user' ? 'var(--accent-primary)' : 'var(--bg-secondary)', 
-                      color: msg.role === 'user' ? '#fff' : 'var(--text-primary)',
-                      padding: '0.75rem 1rem', 
-                      borderRadius: '16px',
-                      borderBottomRightRadius: msg.role === 'user' ? '4px' : '16px',
-                      borderBottomLeftRadius: msg.role === 'assistant' ? '4px' : '16px',
-                      fontSize: '0.95rem',
-                      lineHeight: 1.5,
-                      boxShadow: 'var(--shadow-sm)'
-                    }}>
+                    <div className={msg.role === 'user' ? 'pix-ai-message pix-ai-message-user' : 'pix-ai-message pix-ai-message-assistant'}>
                       {renderMessageContent(msg.text)}
                     </div>
                   </div>
                 ))}
-                {loading && (
                   <div style={{ alignSelf: 'flex-start' }}>
-                    <div style={{ background: 'var(--bg-secondary)', padding: '0.75rem 1rem', borderRadius: '16px', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+                    <div className="pix-ai-message pix-ai-message-assistant" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
                       Typing...
                     </div>
                   </div>
-                )}
                 <div ref={chatEndRef} />
               </div>
 
               {/* Input Area */}
-              <div style={{ padding: '1rem', background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', display: 'flex', gap: '0.5rem' }}>
+              <div className="pix-ai-input-wrapper">
                 <input 
                   type="text" 
                   placeholder="Ask Pix AI..."
+                  className="pix-ai-input"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                  style={{ flex: 1, padding: '0.75rem 1rem', borderRadius: '12px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)', fontSize: '0.95rem' }}
                   disabled={loading}
                 />
                 <button 
                   onClick={handleSend}
                   disabled={loading || !input.trim()}
-                  style={{ background: 'var(--accent-primary)', color: '#fff', border: 'none', borderRadius: '12px', padding: '0 1rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  className="pix-ai-send-btn"
                 >
                   <Send size={18} />
                 </button>
@@ -220,20 +195,7 @@ User: ${input}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "Close Pix AI Chat" : "Open Pix AI Chat"}
-          style={{
-            width: '60px',
-            height: '60px',
-            borderRadius: '30px',
-            background: 'var(--accent-primary)',
-            color: '#fff',
-            border: 'none',
-            boxShadow: '0 10px 25px rgba(139, 92, 246, 0.4)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            zIndex: 10000
-          }}
+          className="pix-ai-fab"
         >
           {isOpen ? <X size={28} /> : <MessageSquare size={28} />}
         </motion.button>

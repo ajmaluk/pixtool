@@ -184,9 +184,9 @@ export default function QrGenerator() {
   return (
     <>
       <SEO
-        title="Free QR Code to Link Converter & Generator - PixTool"
-        description="Convert any link to a QR code for free. Professional QR code to link generator for URLs, WiFi, emails, and text. High-resolution PNG output. 100% private."
-        keywords="qr code to link, qr to link, convert qr code to link, qr code to url, qr to link converter, qr code to link converter online free, qrcode to link, qr to url, convert qr to link, qr to link generator, qr code to url converter, qr code to link generator, qrcode to url, url from qr code, extract link from qr code, qr code generator, free qr maker"
+        title="Free QR Code Generator - Create Custom QR Codes (No Signup) | PixTool"
+        description="The #1 free QR code generator for URLs, WiFi, vCards & text. Create high-resolution custom QR codes instantly in your browser. No signup required, 100% private tool."
+        keywords="free qr code generator, qr code maker, custom qr code, create qr code free, qr generator no signup, high resolution qr code, branded qr code, qr code for wifi, url to qr code, best qr maker 2026, pixtool qr"
         path="/qr-generator"
         toolName="QR Generator"
         toolSteps={[

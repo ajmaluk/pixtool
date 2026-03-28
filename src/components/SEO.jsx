@@ -372,6 +372,10 @@ export default function SEO({
 
         // Canonical Link
         let canonical = document.querySelector('link[rel="canonical"]')
+        // Language Alternates (hreflang)
+        let alternateEn = document.querySelector('link[hreflang="en"]')
+        let alternateDefault = document.querySelector('link[hreflang="x-default"]')
+
         if (!shouldNoIndex) {
             if (!canonical) {
                 canonical = document.createElement('link')
@@ -379,8 +383,26 @@ export default function SEO({
                 document.head.appendChild(canonical)
             }
             canonical.setAttribute('href', fullUrl)
-        } else if (canonical) {
-            canonical.remove()
+
+            if (!alternateEn) {
+                alternateEn = document.createElement('link')
+                alternateEn.setAttribute('rel', 'alternate')
+                alternateEn.setAttribute('hreflang', 'en')
+                document.head.appendChild(alternateEn)
+            }
+            alternateEn.setAttribute('href', fullUrl)
+
+            if (!alternateDefault) {
+                alternateDefault = document.createElement('link')
+                alternateDefault.setAttribute('rel', 'alternate')
+                alternateDefault.setAttribute('hreflang', 'x-default')
+                document.head.appendChild(alternateDefault)
+            }
+            alternateDefault.setAttribute('href', fullUrl)
+        } else {
+            if (canonical) canonical.remove()
+            if (alternateEn) alternateEn.remove()
+            if (alternateDefault) alternateDefault.remove()
         }
 
     }, [brandTitle, description, enhancedKeywords, shouldNoIndex, fullUrl, ogImage, type, siteName, twImage])

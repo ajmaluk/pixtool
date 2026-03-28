@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="footer-grid">
         <div className="footer-brand">
           <Link to="/" className="footer-logo">
-            <span style={{ color: 'var(--accent-primary)' }}>Pix</span>Tool
+            <span className="footer-logo-accent">Pix</span>Tool
           </Link>
           <p className="footer-tagline">
             The professional suite of 100% private, browser-based tools. No uploads, no tracking, just pure productivity.

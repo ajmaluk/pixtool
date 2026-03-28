@@ -129,12 +129,11 @@ export default function Navbar() {
           <img 
             src="/logo.webp" 
             alt="PixTool - Secure Private Browser Hub" 
-            className="navbar-logo-img" 
+            className="navbar-logo-img navbar-logo-icon" 
             width="32"
             height="32"
             fetchpriority="high"
             loading="eager"
-            style={{ height: '32px', width: '32px', objectFit: 'contain' }}
           />
           <span className="navbar-logo-text">PixTool</span>
         </Link>
@@ -158,9 +157,8 @@ export default function Navbar() {
             {showMore && (
                 <div
                   className="nav-dropdown-menu expanded"
-                  style={{ width: 'min(900px, 90vw)', right: '0', padding: '1.5rem' }}
                 >
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
+                  <div className="dropdown-grid-3">
                     {/* Resources Column */}
                     <div>
                       <div className="dropdown-section-title">Resources</div>
@@ -322,7 +320,7 @@ export default function Navbar() {
         <button className="mobile-menu-close" onClick={() => setMobileOpen(false)} aria-label="Close Menu">
           <X size={20} />
         </button>
-        <div className="mobile-menu-content" style={{ padding: '1rem 0', maxHeight: '100vh', overflowY: 'auto', paddingBottom: '4rem' }}>
+        <div className="mobile-menu-content">
           <NavLink to="/" className="mobile-menu-link" onClick={() => setMobileOpen(false)} end>Home</NavLink>
           <NavLink to="/pdf-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>PDF Tools</NavLink>
           <NavLink to="/image-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Image Tools</NavLink>
@@ -355,45 +353,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
-        .mobile-menu-link.active {
-          color: var(--accent-primary) !important;
-          background: var(--accent-glow);
-          border-left: 4px solid var(--accent-primary);
-        }
-        .mobile-menu-link {
-          padding: 0.85rem 2rem;
-          display: block;
-          text-decoration: none;
-          color: var(--text-primary);
-          font-weight: 600;
-          font-size: 0.95rem;
-          transition: all 0.2s ease;
-          border-left: 4px solid transparent;
-        }
-        .mobile-section-title {
-          padding: 1.5rem 2rem 0.5rem;
-          font-size: 0.7rem;
-          fontWeight: 900;
-          color: var(--text-muted);
-          text-transform: uppercase;
-          letterSpacing: 0.1em;
-          opacity: 0.8;
-        }
-        .dropdown-section-title {
-          font-size: 0.75rem;
-          font-weight: 900;
-          color: var(--text-muted);
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          margin-bottom: 0.75rem;
-          padding-left: 14px;
-        }
-        .dropdown-item.dense {
-          padding: 6px 14px;
-          font-size: 0.85rem;
-        }
-      `}} />
     </>
   )
 }

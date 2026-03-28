@@ -5,6 +5,7 @@ import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
 import Breadcrumbs from '../components/Breadcrumbs'
 import { UTILITY_READ_NEXT } from '../data/utilityToolsData'
+import { TOOL_SPECIFIC_FAQS } from '../data/faqs'
 import ShareTool from '../components/ShareTool'
 import { useRatePopup } from '../hooks/useRatePopup'
 import { useConfirm } from '../context/ConfirmContext'
@@ -219,18 +220,7 @@ export default function TempMail({
   }
 
   const toolTitle = seoTitle.replace(' - PixTool', '')
-  const tempMailFaqs = [
-    { q: "What is a temporary email service?", a: "A temporary email (also known as temp mail, 10-minute mail, or disposable email) provides you with a short-lived inbox to receive verification codes and sign up for services without exposing your real email to potential spam or data breaches." },
-    { q: "How long does my temporary email address stay active?", a: "Your email address remains active as long as you keep the browser tab open. Once you close the page or click 'New Email', the mailbox is permanently deleted for your security." },
-    { q: "Is PixTool Temp Mail truly private?", a: "Yes. Our service runs directly in your browser and communicates with the mail server via secure APIs. We never store your messages on our servers, and we don't track your identity." },
-    { q: "Can I send emails from this address?", a: "To prevent abuse and maintain the integrity of our service, we currently only support receiving emails. This covers 99% of use cases like account verification and newsletter signups." },
-    { q: "Will websites know I'm using a temporary email?", a: "Some websites maintain lists of known disposable email domains. If one is blocked, simply click 'New Email' to generate a fresh address from a different domain." },
-    { q: "Is this service better than Guerrilla Mail or 10 Minute Mail?", a: "We believe so! Our tool is faster, mobile-responsive, and doesn't require any page reloads to see new messages — they appear instantly as they arrive." },
-    { q: "Can I recover an email after closing the tab?", a: "No. For maximum privacy, we do not provide a way to recover old mailboxes. Once it's gone, it's gone forever." },
-    { q: "Do I need to pay for multiple addresses?", a: "Absolutely not. You can generate unlimited temporary email addresses for free, forever." },
-    { q: "Is this safe for sensitive account verifications?", a: "While our service is secure, we recommend using a permanent email for critical accounts like banking or primary social media to ensure you always have access." },
-    { q: "How fast do verification codes arrive?", a: "Usually within 2-5 seconds. Our auto-refresh system ensures you see the message as soon as the sender delivers it." }
-  ]
+  const tempMailFaqs = TOOL_SPECIFIC_FAQS['temp-mail']
 
   const tempMailSteps = [
     "Visit the page - a temporary email address is generated automatically.",

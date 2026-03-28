@@ -282,14 +282,7 @@ const MainLayout = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                    style={{
-                      background: 'var(--bg-glass)',
-                      backdropFilter: 'blur(24px)',
-                      border: '1px solid var(--accent-primary)',
-                      borderRadius: '32px',
-                      padding: '2rem',
-                      boxShadow: '0 20px 40px var(--accent-glow)'
-                    }}
+                    className="layout-widget-premium"
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
                       <div style={{ padding: '8px', background: 'var(--accent-glow)', borderRadius: '12px' }}>
@@ -302,17 +295,7 @@ const MainLayout = () => {
                         <Link key={tool.path} to={tool.path} style={{ textDecoration: 'none', color: 'inherit' }}>
                           <motion.div
                             layout
-                            whileHover={{ x: 8, background: 'var(--bg-secondary)', borderColor: 'var(--accent-primary)' }}
-                            style={{
-                              border: '1px solid var(--border-color)',
-                              borderRadius: '16px',
-                              padding: '0.9rem 1.2rem',
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: '1rem',
-                              background: 'rgba(255,255,255,0.4)',
-                              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-                            }}
+                            className="widget-item-interactive"
                           >
                             <span style={{ fontSize: '1.3rem', display: 'flex', alignItems: 'center' }}>
                               {tool.icon ? (typeof tool.icon === 'string' ? tool.icon : (typeof tool.icon === 'function' ? <tool.icon size={20} /> : '🛠️')) : '🛠️'}
@@ -328,14 +311,7 @@ const MainLayout = () => {
 
               {/* Popular Tools - Static Enhanced */}
               <motion.div
-                style={{
-                  background: 'var(--bg-glass)',
-                  backdropFilter: 'blur(20px)',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '32px',
-                  padding: '2rem',
-                  boxShadow: 'var(--shadow-lg)'
-                }}
+                className="layout-widget-standard"
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
                   <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '12px' }}>
@@ -378,14 +354,7 @@ const MainLayout = () => {
 
               {/* Premium Expert Guides */}
               <motion.div
-                style={{
-                  background: 'linear-gradient(135deg, var(--bg-glass) 0%, rgba(99, 102, 241, 0.05) 100%)',
-                  backdropFilter: 'blur(24px)',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '32px',
-                  padding: '2rem',
-                  boxShadow: 'var(--shadow-lg)'
-                }}
+                className="layout-widget-gradient"
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
                   <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '12px' }}>

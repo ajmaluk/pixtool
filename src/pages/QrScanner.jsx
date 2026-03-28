@@ -94,9 +94,9 @@ export default function QrScanner() {
   return (
     <>
       <SEO
-        title="Free QR Code Scanner Online | Scan from Image - PixTool"
-        description="Scan any QR code online for free using your device camera or by uploading an image. 100% free, private, and secure browser-based scanner."
-        keywords="qr code scanner online free, qr code scanner online, scan qr code online, online qr code scanner, scan qr code online from image, scan qr online, scanner online, free qr code scanner, scan qr code from image, qr scanner online, qr code scanner free, scan qr code online without app, qr scanner online free"
+        title="Online QR Code Scanner - Scan from Image or Camera (Free) | PixTool"
+        description="The fastest free online QR scanner. Scan from your camera or upload a photo instantly in your browser. No app download needed, 100% private & secure."
+        keywords="online qr scanner, scan qr code online, qr code reader online, scan qr from image, browser-based qr scanner, free qr scanner no app, scan qr online from photo, fast qr decoder, secure qr scanner, pixtool qr"
         path="/qr-scanner"
         toolName="QR Scanner"
         toolSteps={[

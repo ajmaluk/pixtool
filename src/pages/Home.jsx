@@ -11,6 +11,7 @@ import {
 import ToolCard from '../components/ToolCard'
 import OverallRatingBadge from '../components/OverallRatingBadge'
 import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS, MATH_TOOLS } from '../data/tools'
+import { GLOBAL_FAQS } from '../data/faqs'
 import { posts } from '../data/posts'
 import { Calculator } from 'lucide-react'
 
@@ -91,36 +92,7 @@ export default function Home() {
 
   const isSearching = searchTerm.trim().length > 0
 
-  const homeFaqs = [
-    {
-      q: "Is PixTool really free?",
-      a: "Yes, 100% free. Every tool on PixTool is available without any cost, subscription, or registration. We provide professional-grade productivity tools for everyone."
-    },
-    {
-      q: "Are my files safe and private?",
-      a: "Absolutely. PixTool processes your files entirely within your browser. Your images, PDFs, and data are never uploaded to any server, ensuring 100% privacy and security."
-    },
-    {
-      q: "What image tools are available?",
-      a: "Our suite includes Resize, Crop, Rotate, Compress, Convert Format (JPEG/PNG/WebP/GIF), Watermark, Flip, and Grayscale effects. All work locally in your browser."
-    },
-    {
-      q: "Can I merge, split, and compress PDFs?",
-      a: "Yes! We offer tools to Merge, Split, Compress, Convert PDF to Image, Password Protect, Watermark, and Reorder PDF pages — all without uploading your files."
-    },
-    {
-      q: "What professional utilities does PixTool offer?",
-      a: "Beyond image and PDF tools, we provide a JSON Formatter & Validator, Unit Converter, Password Generator, QR tools, and more — all designed for professional speed and 100% privacy."
-    },
-    {
-      q: "What are the AI tools?",
-      a: "Our newest suite includes advanced AI tools: generate entire blogs, rewrite paragraphs, summarize long text, generate marketing ad copies, code faster, and even chat with a powerful AI directly from PixTool."
-    },
-    {
-      q: "What mathematics tools are available?",
-      a: "PixTool offers 11 advanced scientific and mathematical tools, including a Scientific Calculator, Graph Visualizer, Matrix Solver, Statistics Visualizer, Financial Architect, and more — all processed locally for privacy."
-    }
-  ]
+  const homeFaqs = GLOBAL_FAQS
 
   const homeSchema = [
     {
@@ -154,58 +126,21 @@ export default function Home() {
       />
       <div className="landing-layout" style={{ position: 'relative', overflow: 'hidden' }}>
         {/* Modern Tech Glow Accents */}
-        <div style={{
-          position: 'absolute',
-          top: '-10%',
-          left: '-10%',
-          width: '50vw',
-          height: '50vw',
-          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 60%)',
-          borderRadius: '50%',
-          filter: 'blur(80px)',
-          zIndex: -1,
-          pointerEvents: 'none'
-        }} />
-        <div style={{
-          position: 'absolute',
-          top: '20%',
-          right: '-5%',
-          width: '40vw',
-          height: '40vw',
-          background: 'radial-gradient(circle, rgba(239, 68, 68, 0.08) 0%, transparent 60%)',
-          borderRadius: '50%',
-          filter: 'blur(80px)',
-          zIndex: -1,
-          pointerEvents: 'none'
-        }} />
+        <div className="glow-accent glow-accent-purple" />
+        <div className="glow-accent glow-accent-red" />
         <div className="landing-center">
 
           <div className="category-hub">
-            <div className="hub-hero" style={{
-              textAlign: 'center',
-              padding: 'clamp(4rem, 10vh, 7rem) 1.5rem clamp(1.5rem, 8vh, 3rem)',
-              marginBottom: 'clamp(4rem, 8vw, 6rem)',
-              position: 'relative',
-              minHeight: '400px'
-            }}>
+            <div className="hero-hub-container">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <div className="status-badge" style={{ margin: '0 auto 2rem' }}>
+                <div className="hero-status-badge">
                   <span style={{ marginRight: '8px' }}>🚀</span> 2026 AI Innovation Suite
                 </div>
-                <h1 style={{ 
-                  fontSize: 'clamp(2.5rem, 8vw, 4.8rem)', 
-                  fontWeight: 900, 
-                  fontFamily: '"Manrope", sans-serif',
-                  marginBottom: '1.5rem', 
-                  letterSpacing: '-0.06em', 
-                  lineHeight: 0.95,
-                  position: 'relative',
-                  display: 'inline-block'
-                }}>
+                <h1 className="hero-main-title">
                   Master Your <br/>
                   <span className="text-gradient-hero" style={{ 
                     display: 'inline-block',
@@ -233,7 +168,7 @@ export default function Home() {
                     }}
                   />
                 </h1>
-                <p style={{ fontSize: '1.15rem', color: 'var(--text-secondary)', maxWidth: '800px', margin: '0 auto 3.5rem', lineHeight: 1.6, fontWeight: 500 }}>
+                <p className="hero-text-description">
                   The world's most powerful browser-native AI suite. 52+ professional tools for 
                   <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> content generation </span>, 
                   <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> secure PDF management </span>, 
@@ -264,17 +199,7 @@ export default function Home() {
                   <OverallRatingBadge />
                 </div>
 
-                <div className="search-container" style={{ 
-                  boxShadow: '0 24px 64px rgba(107, 56, 212, 0.15)', 
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  backdropFilter: 'blur(20px)',
-                  WebkitBackdropFilter: 'blur(20px)',
-                  borderRadius: '2rem',
-                  maxWidth: '700px',
-                  margin: '0 auto',
-                  height: '72px'
-                }}>
+                <div className="search-container hero-search-wrapper">
                   <div className="search-icon-wrapper" style={{ left: '24px', opacity: 0.7 }}>
                     <Search size={28} />
                   </div>
@@ -286,13 +211,6 @@ export default function Home() {
                     onChange={handleSearchChange}
                     onKeyDown={handleKeyDown}
                     onFocus={() => setShowSuggestions(searchTerm.length > 0)}
-                    style={{ 
-                      fontSize: '1.25rem', 
-                      height: '100%', 
-                      paddingLeft: '4rem',
-                      fontFamily: '"Inter", sans-serif',
-                      fontWeight: 500
-                    }}
                   />
                   {searchTerm && (
                     <button
@@ -310,22 +228,7 @@ export default function Home() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.98 }}
                         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                        style={{
-                          position: 'absolute',
-                          top: '120%',
-                          left: '0',
-                          right: '0',
-                          background: 'var(--bg-glass)',
-                          backdropFilter: 'blur(30px)',
-                          WebkitBackdropFilter: 'blur(30px)',
-                          borderRadius: '32px',
-                          border: '1px solid var(--border-color)',
-                          boxShadow: '0 30px 60px rgba(0,0,0,0.15)',
-                          overflow: 'hidden',
-                          zIndex: 2000,
-                          textAlign: 'left',
-                          padding: '0.75rem'
-                        }}
+                        className="hero-search-suggestions-box"
                       >
                         <div style={{ padding: '0.75rem 1.25rem', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                           Suggested Tools
@@ -381,7 +284,7 @@ export default function Home() {
                   </AnimatePresence>
                 </div>
 
-                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1.5rem', opacity: 0.7, marginTop: 'clamp(1.5rem, 5vw, 3rem)' }}>
+                <div className="hero-feature-tags">
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
                     <Shield size={18} style={{ color: 'var(--accent-green)' }} /> 100% Private
                   </div>

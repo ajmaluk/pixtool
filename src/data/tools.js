@@ -100,26 +100,26 @@ export const IMAGE_TOOLS = [
 export const PDF_TOOLS = [
   { 
     id: 'merge', title: 'Merge PDF', icon: FilePlus, 
-    description: 'Combine multiple PDF documents into a single professional file instantly. Reorder pages with ease, 100% private.', 
+    description: 'Merge PDF online for free. Combine multiple PDF documents into one professional file instantly without uploading. Reorder pages with ease, 100% secure.', 
     color: '#06b6d4', path: '/pdf-tools/merge', screenshot: 'fast-pdf-merger-no-upload-pixtool.webp',
-    imageAlt: 'PixTool PDF Merger - Secure and Fast Multi-File Joining locally',
-    imageTitle: 'Merge PDF Files Online Securely',
+    imageAlt: 'PixTool PDF Merger - Securely combine PDF files online without uploading',
+    imageTitle: 'Merge PDF Online for Free',
     features: ['Instant local merging', 'No upload required', 'Drag-and-drop reordering', 'Maintains original quality'],
     howItWorks: ['Upload multiple PDF files', 'Drag to reorder pages', 'Merge and download instantly']
   },
   { 
     id: 'split', title: 'Split PDF', icon: SplitSquareHorizontal, 
-    description: 'Extract specific pages or separate your PDF into multiple documents with pixel-perfect precision.', 
+    description: 'Split PDF pages online for free. Extract specific pages or separate your PDF into multiple documents with pixel-perfect precision—no uploading required.', 
     color: '#06b6d4', path: '/pdf-tools/split', screenshot: 'split-pdf-pages-online-securely.webp',
-    imageAlt: 'PixTool PDF Splitter - Professional Page Extraction Tool',
-    imageTitle: 'Split and Extract PDF Pages'
+    imageAlt: 'PixTool PDF Splitter - Extract PDF pages online privately and securely',
+    imageTitle: 'Split PDF Pages Online'
   },
   { 
     id: 'compress', title: 'Compress PDF', icon: FileCheck, 
-    description: 'Optimize PDF file sizes for email and web while maintaining professional document fidelity and clarity, 100% private.', 
+    description: 'Compress PDF file size online for free. Reduce PDF size for email & web without losing quality. 100% private browser-based compression—no upload required.', 
     color: '#06b6d4', path: '/pdf-tools/compress', screenshot: 'optimize-pdf-file-size-online.webp',
-    imageAlt: 'PixTool PDF Compressor - Professional Size Reduction locally',
-    imageTitle: 'Compress PDF Online without Uploading',
+    imageAlt: 'PixTool PDF Compressor - Reduce PDF size online without uploading',
+    imageTitle: 'Compress PDF Online Free',
     features: ['Precision size reduction', 'Maintains text clarity', 'Batch compression support', 'Secure local processing'],
     howItWorks: ['Upload your bulky PDF', 'Select compression level', 'Download the optimized file']
   },
@@ -200,9 +200,9 @@ export const PDF_TOOLS = [
 export const UTILITY_TOOLS = [
   { 
     id: 'temp-mail', title: 'Temp Mail', icon: Mail, 
-    description: 'Generate free disposable email addresses instantly — protect your inbox from spam, trackers, and Reddit-approved privacy.', 
+    description: 'Free Temp Mail - Disposable Email Address Generator. Protect your real inbox from spam with a secure anonymous temporary email. Instant & Reddit-approved.', 
     color: '#ec4899', path: '/temp-mail', screenshot: 'disposable-temporary-email-generator.webp',
-    imageAlt: 'PixTool Temp Mail - Instant anonymous inbox generation',
+    imageAlt: 'PixTool Temp Mail - Instant secure anonymous inbox generator',
     imageTitle: 'Free Temporary Email Service for Privacy',
     features: ['No registration required', 'Instant inbox creation', 'Auto-refreshing messages', 'Safe for forum signups'],
     howItWorks: ['Generate your unique address', 'Use it for any signup', 'Watch your inbox live']
@@ -232,19 +232,19 @@ export const UTILITY_TOOLS = [
   },
   { 
     id: 'qr-scanner', title: 'QR Scanner', icon: Smartphone, 
-    description: 'Scan any QR code using your camera or by uploading an image — free, private, and professional.', 
+    description: 'The fastest free online QR scanner. Scan from your camera or upload a photo instantly in your browser. No app download needed, 100% private & secure.', 
     color: '#10b981', path: '/qr-scanner', screenshot: 'fast-online-qr-code-scanner-browser.webp',
-    imageAlt: 'PixTool QR Scanner - Browser-based decoding from Image/Camera',
-    imageTitle: 'Scan QR Code Online from Photos',
+    imageAlt: 'PixTool QR Scanner - Online reader for fast browser-native decoding',
+    imageTitle: 'Scan QR Codes Online Free',
     features: ['Decode from Image File', 'Live Camera Scanning', 'Instant link detection', 'Privacy-first processing'],
     howItWorks: ['Grant camera access or upload', 'Point at code or select image', 'Access the decoded content']
   },
   { 
     id: 'qr-generator', title: 'QR Generator', icon: QrCode, 
-    description: 'Create custom branded QR codes for URLs, WiFi, text, email, and phone — high-resolution PNG downloads.', 
+    description: 'The #1 free QR code generator for URLs, WiFi, vCards & text. Create high-resolution custom QR codes instantly. No signup required, 100% private tool.', 
     color: '#f59e0b', path: '/qr-generator', screenshot: 'best-free-qr-code-generator-online.webp',
-    imageAlt: 'PixTool QR Generator - Professional Custom code creation',
-    imageTitle: 'Generate High-Quality QR Codes Free',
+    imageAlt: 'PixTool QR Generator - Create custom branded QR codes online for free',
+    imageTitle: 'Free QR Code Generator Online',
     features: ['Custom Link Support', 'WiFi/vCard generation', 'High-res PNG Export', 'Privacy-first generation'],
     howItWorks: ['Choose your data type', 'Input your content details', 'Download your custom QR code']
   },

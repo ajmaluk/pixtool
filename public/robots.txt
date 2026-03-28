@@ -1,36 +1,15 @@
-# Optimized robots.txt for PixTool
+# PixTool Robots.txt - Optimized for SEO
 User-agent: *
 Allow: /
+
+# Prevent indexing of search result parameters to avoid duplicate content bloat
+Disallow: /*?q=
+Disallow: /*?search=
+Disallow: /*?tool=
+
+# Administrative areas
 Disallow: /pix-admin/
 Disallow: /api/
-Disallow: /?q=*
 
-# AI & LLM Crawlers
-User-agent: GPTBot
-Allow: /
-User-agent: ChatGPT-User
-Allow: /
-User-agent: Claude-Web
-Allow: /
-User-agent: Claude-bot
-Allow: /
-User-agent: Google-Extended
-Allow: /
-User-agent: CCBot
-Allow: /
-User-agent: YandexBot
-Allow: /
-User-agent: Baiduspider
-Allow: /
-User-agent: BingPreview
-Allow: /
-
-# Sitemap
+# Specify sitemap location
 Sitemap: https://www.pixtool.in/sitemap.xml
-Sitemap: https://www.pixtool.in/llms.txt
-
-# Media Crawlers
-User-agent: Googlebot-Image
-Allow: /screenshots/
-Allow: /og-image.webp
-Allow: /logo.webp
