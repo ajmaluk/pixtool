@@ -18,17 +18,7 @@ export default function ToolContent({
     return (
         <article className="tool-content-section" style={{ marginTop: '10rem', borderTop: '1px solid var(--border-color)', paddingTop: '6rem' }}>
             {/* SEO Trust Bar */}
-            <div className="trust-badges-bar" style={{
-                display: 'flex',
-                justifyContent: 'center',
-                gap: '2.5rem',
-                flexWrap: 'wrap',
-                marginBottom: '4rem',
-                padding: '1.5rem',
-                background: 'var(--bg-secondary)',
-                borderRadius: '24px',
-                border: '1px solid var(--border-color)'
-            }}>
+            <div className="trust-badges-bar">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)' }}>
                     <Shield size={20} style={{ color: '#10b981' }} />
                     <span>100% Private & Secure</span>
@@ -43,7 +33,7 @@ export default function ToolContent({
                 </div>
             </div>
 
-            <div className="content-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem' }}>
+            <div className="content-grid-tool">
                 <div className="content-main">
                     <header style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem', color: 'var(--accent-primary)' }}>
                         <Info size={24} />
@@ -72,7 +62,7 @@ export default function ToolContent({
                         {description}
                     </p>
 
-                    <section id="tool-features" style={{ background: 'var(--bg-secondary)', padding: '2.5rem', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
+                    <section id="tool-features" className="content-section-premium">
                         <h3 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                             <CheckCircle2 size={24} style={{ color: 'var(--accent-primary)' }} />
                             Built for Performance & Privacy
@@ -88,7 +78,7 @@ export default function ToolContent({
                     </section>
 
                     {tips && tips.length > 0 && (
-                        <section id="pro-tips" style={{ marginTop: '3rem', background: 'rgba(255, 191, 0, 0.03)', padding: '2.5rem', borderRadius: '24px', border: '1px solid rgba(255, 191, 0, 0.15)' }}>
+                        <section id="pro-tips" className="pro-tip-box">
                             <h3 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#d97706' }}>
                                 <Zap size={24} />
                                 Professional Workflow Tips
@@ -197,8 +187,8 @@ export default function ToolContent({
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                                 {faq.map((item, i) => (
                                     <div key={i} className="faq-item">
-                                        <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.75rem', lineHeight: 1.4 }}>{item.q}</h4>
-                                        <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6 }}>{item.a}</p>
+                                        <h4 className="faq-question">{item.q}</h4>
+                                        <p className="faq-answer">{item.a}</p>
                                     </div>
                                 ))}
                             </div>

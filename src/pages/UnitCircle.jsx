@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 import { 
   Circle, Zap, Info, Compass, 
   RotateCw, Download, Trash, Activity

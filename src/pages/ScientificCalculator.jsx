@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState } from 'react'
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion'
 import { 
   Calculator, History, Trash2, Copy, Check, 
   RotateCcw, Delete, Info, ArrowLeft
@@ -25,9 +26,7 @@ export default function ScientificCalculator() {
   const [result, setResult] = useState('')
   const [history, setHistory] = useState([])
   const [isRadian, setIsRadian] = useState(true)
-  const [copied, setCopied] = useState(false)
   const [error, setError] = useState(null)
-  const inputRef = useRef(null)
 
   const buttons = [
     ['C', '(', ')', '/', 'back'],
@@ -53,7 +52,7 @@ export default function ScientificCalculator() {
         }).catch(() => {
           setError('Engine Error')
         })
-      } catch (err) {
+      } catch {
         setError('Syntax Error')
       }
     } else if (val === 'C') {
@@ -67,11 +66,6 @@ export default function ScientificCalculator() {
     }
   }
 
-  const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
 
   return (
     <>

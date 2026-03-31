@@ -121,7 +121,7 @@ User: ${input}
   return (
     <>
       {/* Floating Action Button */}
-      <div style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 9999 }}>
+      <div className="pix-ai-fab-container" style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 9999 }}>
         <AnimatePresence>
           {isOpen && (
             <motion.div 
@@ -144,7 +144,8 @@ User: ${input}
                 </div>
                 <button 
                   onClick={() => setIsOpen(false)}
-                  style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '0.5rem' }}
+                  className="icon-btn"
+                  aria-label="Close Chat"
                 >
                   <X size={20} />
                 </button>
@@ -159,11 +160,13 @@ User: ${input}
                     </div>
                   </div>
                 ))}
-                  <div style={{ alignSelf: 'flex-start' }}>
+                {loading && (
+                   <div style={{ alignSelf: 'flex-start' }}>
                     <div className="pix-ai-message pix-ai-message-assistant" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-                      Typing...
+                      Translating logic...
                     </div>
                   </div>
+                )}
                 <div ref={chatEndRef} />
               </div>
 

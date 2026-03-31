@@ -1,10 +1,10 @@
 import { useState, useMemo } from 'react'
-import { motion } from 'framer-motion'
 import { 
-  ArrowUpRight, Zap, Info, Layers, 
-  RotateCw, Download, Trash, Activity, Box
+  Box
 } from 'lucide-react'
 import { create, all } from 'mathjs'
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from 'framer-motion'
 import SEO from '../components/SEO'
 import Breadcrumbs from '../components/Breadcrumbs'
 import AdSpace from '../components/AdSpace'
@@ -33,7 +33,7 @@ export default function VectorCalculator() {
           mag1,
           mag2
       }
-    } catch (e) {
+    } catch {
       return null
     }
   }, [v1, v2])

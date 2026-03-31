@@ -1,5 +1,4 @@
 import { useState, useMemo } from 'react'
-import { motion } from 'framer-motion'
 import { 
   BarChart, PieChart, TrendingUp, Info, 
   Settings, Download, Trash, Activity, 
@@ -29,7 +28,7 @@ export default function StatisticsVisualizer() {
         const [label, value] = item.split(':').map(s => s.trim())
         return { name: label, value: parseFloat(value) || 0 }
       })
-    } catch (e) {
+    } catch {
       return []
     }
   }, [rawData])

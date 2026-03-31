@@ -1,5 +1,4 @@
 import { useState, useMemo } from 'react'
-import { motion } from 'framer-motion'
 import { 
   DollarSign, TrendingUp, Info, Briefcase, 
   RotateCw, Download, Trash, Activity, CreditCard

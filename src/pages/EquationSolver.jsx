@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Equal, Zap, Info, Search, 
   Settings, Download, Trash, Activity
@@ -16,19 +15,17 @@ const math = create(all)
 export default function EquationSolver() {
   const [equation, setEquation] = useState('x^2 - 4 = 0')
   const [result, setResult] = useState(null)
-  const [error, setError] = useState(null)
 
   const solve = () => {
     try {
-      setError(null)
       // mathjs help for simplifying and potentially numeric solving
       const simplified = math.simplify(equation.split('=')[0]).toString()
       
       // For basic linear/quadratic, we can find roots
       // Using math.derivative for numeric methods if needed, but let's stick to simplify/eval
       setResult({ simplified, roots: "Analysis complete. Root detection active." })
-    } catch (err) {
-      setError('Invalid algebraic expression.')
+    } catch {
+      setResult({ error: 'Invalid equation. Tool supports linear and quadratic formats.' })
     }
   }
 
@@ -107,8 +104,8 @@ export default function EquationSolver() {
                         <Zap size={18} style={{ display: 'inline', marginRight: '8px' }} /> Solve Algebraically
                     </button>
 
-                    {error && (
-                        <div style={{ color: 'var(--accent-red)', marginTop: '2rem', textAlign: 'center', fontWeight: 800, padding: '1rem', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '12px', border: '1px solid rgba(239, 68, 68, 0.3)' }}>{error}</div>
+                    {result?.error && (
+                        <div style={{ color: 'var(--accent-red)', marginTop: '2rem', textAlign: 'center', fontWeight: 800, padding: '1rem', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '12px', border: '1px solid rgba(239, 68, 68, 0.3)' }}>{result.error}</div>
                     )}
 
                     <AnimatePresence>

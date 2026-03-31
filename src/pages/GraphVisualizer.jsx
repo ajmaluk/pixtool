@@ -1,5 +1,4 @@
 import { useState, useMemo } from 'react'
-import { motion } from 'framer-motion'
 import { 
   TrendingUp, Plus, Trash2, Maximize2, 
   Settings, Info, Download, Trash
@@ -30,7 +29,7 @@ export default function GraphVisualizer() {
           if (typeof val === 'number' && isFinite(val)) {
             point[`f${f.id}`] = val
           }
-        } catch (e) {
+        } catch {
           // Skip invalid evaluation
         }
       })

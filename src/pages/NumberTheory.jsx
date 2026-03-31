@@ -1,5 +1,4 @@
 import { useState, useMemo } from 'react'
-import { motion } from 'framer-motion'
 import { 
   Binary, Zap, Info, Hash, 
   RotateCw, Download, Trash, Activity
@@ -43,7 +42,7 @@ export default function NumberTheory() {
         binary: n.toString(2),
         hex: n.toString(16).toUpperCase()
       }
-    } catch (e) {
+    } catch {
         return null
     }
   }, [number])

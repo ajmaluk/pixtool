@@ -46,10 +46,19 @@ export default function Navbar() {
   ]
   const isMoreActive = morePaths.includes(location.pathname) || location.pathname.startsWith('/blog/')
 
-  const suggestions = searchValue.trim()
+  const [debouncedSearch, setDebouncedSearch] = useState('')
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchValue)
+    }, 150) // Technical optimization: 150ms debounce for UI fluidity
+    return () => clearTimeout(timer)
+  }, [searchValue])
+
+  const suggestions = debouncedSearch.trim()
     ? allTools.filter(t =>
-      t.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-      t.category.toLowerCase().includes(searchValue.toLowerCase())
+      t.title.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+      t.category.toLowerCase().includes(debouncedSearch.toLowerCase())
     )
     : allTools
 
@@ -130,8 +139,8 @@ export default function Navbar() {
             src="/logo.webp" 
             alt="PixTool - Secure Private Browser Hub" 
             className="navbar-logo-img navbar-logo-icon" 
-            width="32"
-            height="32"
+            width="56"
+            height="56"
             fetchpriority="high"
             loading="eager"
           />
@@ -150,13 +159,18 @@ export default function Navbar() {
             <button 
               className={`nav-dropdown-trigger ${isMoreActive ? 'nav-more-active' : ''}`}
               onClick={() => setShowMore(!showMore)}
+              aria-haspopup="true"
+              aria-expanded={showMore}
+              aria-controls="nav-more-menu"
             >
-              More <ChevronDown size={14} style={{ transform: showMore ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.3s ease' }} />
+              More <ChevronDown size={14} style={{ transform: showMore ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.3s ease' }} aria-hidden="true" />
             </button>
 
             {showMore && (
                 <div
+                  id="nav-more-menu"
                   className="nav-dropdown-menu expanded"
+                  role="menu"
                 >
                   <div className="dropdown-grid-3">
                     {/* Resources Column */}
@@ -285,10 +299,10 @@ export default function Navbar() {
                     </button>
                   ))
                 ) : (
-                  <div className="no-suggestions" style={{ padding: '2.5rem 1.5rem', textAlign: 'center' }}>
-                    <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🔍</div>
-                    <div style={{ fontWeight: 800, fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>No tools match "{searchValue}"</div>
-                    <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1.5rem', lineHeight: 1.5 }}>
+                  <div className="no-suggestions-state">
+                    <div className="no-suggestions-icon">🔍</div>
+                    <div className="no-suggestions-title">No tools match "{searchValue}"</div>
+                    <p className="no-suggestions-text">
                       Try searching for a different keyword or explore our popular categories below.
                     </p>
                     <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>

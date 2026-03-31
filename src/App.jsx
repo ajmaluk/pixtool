@@ -192,7 +192,22 @@ class ErrorBoundary extends Component {
 // Feature-rich Layout with Recent Tools tracking
 const MainLayout = () => {
   const location = useLocation()
-  const [recentTools, setRecentTools] = useState([])
+  const [recentTools, setRecentTools] = useState(() => {
+    try {
+      const storageKey = 'pt_recent_tools'
+      const saved = localStorage.getItem(storageKey)
+      if (!saved) return []
+      const parsed = JSON.parse(saved)
+      if (!Array.isArray(parsed)) return []
+      return parsed
+        .map(p => (p && typeof p === 'object' ? p.path : p))
+        .filter(p => p && ALL_TOOLS_MAP[p])
+        .map(p => ({ path: p, ...ALL_TOOLS_MAP[p] }))
+    } catch (err) {
+      console.error('Error initializing recent tools:', err)
+      return []
+    }
+  })
   const currentToolMeta = ALL_TOOLS_MAP[location.pathname]
   const isRateableToolPath = Boolean(
     currentToolMeta &&
@@ -200,46 +215,43 @@ const MainLayout = () => {
     currentToolMeta.id // Only actual tools have an 'id', suites don't
   )
 
-  // Tools mapping for metadata - now driven by tools.js
-  const TOOLS_META = ALL_TOOLS_MAP;
-
   useEffect(() => {
     try {
-      // Track tool visits
       const path = location.pathname
       const storageKey = 'pt_recent_tools'
-      const saved = localStorage.getItem(storageKey) ? JSON.parse(localStorage.getItem(storageKey)) : []
       
+      // Only track if it's a valid tool path
+      if (!ALL_TOOLS_MAP[path]) return
+
+      const saved = localStorage.getItem(storageKey) ? JSON.parse(localStorage.getItem(storageKey)) : []
       if (!Array.isArray(saved)) {
         localStorage.setItem(storageKey, '[]')
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setRecentTools([])
         return
       }
 
-      if (TOOLS_META[path]) {
-        // Only store the path in localStorage to avoid issues with stringifying components
-        const filtered = saved.map(p => (p && typeof p === 'object' ? p.path : p)).filter(p => p && p !== path)
-        const updated = [path, ...filtered].slice(0, 4)
+      // Map to paths to avoid object serialization issues
+      const filtered = saved.map(p => (p && typeof p === 'object' ? p.path : p)).filter(p => p && p !== path)
+      const updated = [path, ...filtered].slice(0, 4)
+      
+      // Update localStorage only if changed
+      const currentSavedStr = JSON.stringify(saved.map(p => (p && typeof p === 'object' ? p.path : p)))
+      if (currentSavedStr !== JSON.stringify(updated)) {
         localStorage.setItem(storageKey, JSON.stringify(updated))
         
-        // Map paths back to full tool objects for display
-        const displayTools = updated.map(p => ({ path: p, ...TOOLS_META[p] })).filter(t => t.title || t.name)
-        setRecentTools(displayTools)
-      } else {
-        // Map saved paths back to full tool objects
-        const displayTools = saved
-          .map(p => (p && typeof p === 'object' ? p.path : p))
-          .filter(p => p && TOOLS_META[p])
-          .map(p => ({ path: p, ...TOOLS_META[p] }))
-        setRecentTools(displayTools)
+        // Map back to tool objects for display
+        const displayTools = updated.map(p => ({ path: p, ...ALL_TOOLS_MAP[p] })).filter(t => t.title || t.name)
+        
+        // Use a functional update to avoid unnecessary re-renders and potential lint triggers
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setRecentTools(prev => {
+          if (JSON.stringify(prev.map(t => t.path)) === JSON.stringify(displayTools.map(t => t.path))) return prev;
+          return displayTools;
+        })
       }
     } catch (err) {
       console.error('Error tracking recent tools:', err)
-      localStorage.setItem('pt_recent_tools', '[]')
-      setRecentTools([])
     }
-  }, [location, TOOLS_META])
+  }, [location.pathname])
 
   const { triggerRating } = useRatePopup()
   
@@ -270,8 +282,8 @@ const MainLayout = () => {
         </ErrorBoundary>
 
         {!isAdminPath && (
-          <div className="container-pro" style={{ marginTop: '6rem', paddingBottom: '4rem', minHeight: '380px' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+          <div className="container-pro" style={{ marginTop: '6rem', paddingBottom: '4rem' }}>
+            <div className="bottom-widgets-grid">
               
               {/* Recent Tools - Dynamic with Layout Animation */}
               <AnimatePresence mode="popLayout">
@@ -282,7 +294,7 @@ const MainLayout = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                    className="layout-widget-premium"
+                    className="layout-widget layout-widget-premium"
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
                       <div style={{ padding: '8px', background: 'var(--accent-glow)', borderRadius: '12px' }}>
@@ -311,7 +323,7 @@ const MainLayout = () => {
 
               {/* Popular Tools - Static Enhanced */}
               <motion.div
-                className="layout-widget-standard"
+                className="layout-widget layout-widget-standard"
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
                   <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '12px' }}>
@@ -330,16 +342,7 @@ const MainLayout = () => {
                     <Link key={tool.path} to={tool.path} style={{ textDecoration: 'none', color: 'inherit' }}>
                       <motion.div
                         whileHover={{ x: 5, background: 'var(--bg-secondary)' }}
-                        style={{
-                          border: '1px solid var(--border-color)',
-                          borderRadius: '16px',
-                          padding: '0.75rem 1rem',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          background: 'var(--bg-primary)',
-                          transition: 'var(--transition)'
-                        }}
+                        className="widget-item-interactive"
                       >
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                           <span style={{ fontSize: '1.1rem' }}>{tool.icon}</span>
@@ -354,7 +357,7 @@ const MainLayout = () => {
 
               {/* Premium Expert Guides */}
               <motion.div
-                className="layout-widget-gradient"
+                className="layout-widget layout-widget-gradient"
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
                   <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '12px' }}>
@@ -370,13 +373,8 @@ const MainLayout = () => {
                     <Link key={guide.path} to={guide.path} style={{ textDecoration: 'none', color: 'inherit' }}>
                       <motion.div
                         whileHover={{ scale: 1.02, background: 'var(--bg-primary)', borderColor: 'var(--accent-primary)' }}
-                        style={{
-                          padding: '1.2rem',
-                          background: 'rgba(255,255,255,0.3)',
-                          borderRadius: '20px',
-                          border: '1px solid var(--border-color)',
-                          transition: 'all 0.3s ease'
-                        }}
+                        className="layout-widget-standard"
+                        style={{ padding: '1.2rem' }}
                       >
                         <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-primary)', textTransform: 'uppercase', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>TUTORIAL</div>
                         <div style={{ fontWeight: 800, fontSize: '1rem', lineHeight: 1.3 }}>{guide.name}</div>

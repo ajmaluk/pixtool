@@ -87,9 +87,9 @@ export default function Blog() {
                             />
                             <div style={{ position: 'absolute', top: '1rem', left: '1rem' }}>
                                 <span className="blog-card-category" style={{
-                                    background: 'rgba(255, 255, 255, 0.9)',
-                                    backdropFilter: 'blur(10px)',
-                                    color: '#000',
+                                    background: '#ffffff',
+                                    color: '#0f172a', /* High contrast text */
+                                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                                     padding: '4px 12px',
                                     borderRadius: '100px',
                                     fontSize: '0.7rem',

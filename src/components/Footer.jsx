@@ -81,10 +81,20 @@ export default function Footer() {
         <p className="copyright">
           © {new Date().getFullYear()} PixTool by <a href="https://uthakkan.in" target="_blank" rel="noopener noreferrer">UTHAKKAN</a>. All rights reserved.
         </p>
-        <div className="footer-meta-links">
+        <div className="footer-meta-links" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <span>Built for Professionals</span>
           <span className="dot-separator">•</span>
           <span>Zero-Upload Technology</span>
+          <span className="dot-separator">•</span>
+          <span style={{ 
+            fontSize: '0.75rem', 
+            background: 'var(--bg-secondary)', 
+            padding: '2px 8px', 
+            borderRadius: '6px', 
+            border: '1px solid var(--border-color)',
+            fontWeight: 800,
+            color: 'var(--accent-primary)'
+          }}>v1.1.0</span>
         </div>
       </div>
     </footer>

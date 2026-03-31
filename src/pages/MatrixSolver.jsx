@@ -1,5 +1,6 @@
-import { useState, useMemo } from 'react'
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Grid, RefreshCw, Trash2, Maximize2, 
   Settings, Info, Download, Trash, Layers
@@ -59,7 +60,7 @@ export default function MatrixSolver() {
           res = math.transpose(numericMatrix)
         }
         setResult({ type: op, data: res })
-      } catch (err) {
+      } catch {
         setError('Invalid Matrix or Operation (e.g., non-invertible)')
       }
     })

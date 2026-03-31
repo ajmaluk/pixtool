@@ -96,7 +96,16 @@ export default function UseCaseSection() {
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6 }}>{useCase.description}</p>
             <div style={{ marginTop: 'auto', display: 'flex', flexWrap: 'wrap', gap: '0.5rem', paddingTop: '1.5rem' }}>
               {useCase.tools.map(tool => (
-                <span key={tool} style={{ fontSize: '0.7rem', fontWeight: 700, padding: '0.3rem 0.7rem', background: 'rgba(99, 102, 241, 0.08)', color: 'var(--accent-primary)', borderRadius: '100px' }}>
+                <span key={tool} style={{ 
+                  fontSize: '0.7rem', 
+                  fontWeight: 800, 
+                  padding: '0.35rem 0.8rem', 
+                  background: 'rgba(79, 70, 229, 0.12)', 
+                  color: 'var(--accent-primary)', 
+                  borderRadius: '100px',
+                  letterSpacing: '0.02em',
+                  boxShadow: '0 0 0 1px rgba(79, 70, 229, 0.1)' 
+                }}>
                   {tool}
                 </span>
               ))}

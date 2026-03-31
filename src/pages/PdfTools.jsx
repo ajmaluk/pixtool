@@ -243,7 +243,6 @@ export default function PdfTools() {
                 includePageBreaks: settings.ocrIncludePageBreaks,
                 onProgress: (progress) => {
                   setOcrProgress(progress);
-                  console.log(`OCR Progress: ${progress.progress?.toFixed(1)}%`);
                 }
               });
             } else {

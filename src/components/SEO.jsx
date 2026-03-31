@@ -1,56 +1,26 @@
 import { useEffect, useMemo } from 'react'
 import { ALL_TOOLS_MAP } from '../data/tools'
 
-const SCREENSHOT_MAP = {
-    '/': 'pixtool-all-in-one-productivity-suite.png',
-    '/image-tools': 'professional-online-image-studio.png',
-    '/pdf-tools': 'secure-pdf-management-suite.png',
-    '/utility-tools': 'all-in-one-web-utility-toolbox.png',
-    '/image-tools/resize': 'best-online-image-resizer-tool.png',
-    '/image-tools/crop': 'professional-image-cropper-online.png',
-    '/image-tools/rotate': 'free-online-image-rotator.png',
-    '/image-tools/compress': 'high-quality-image-compressor-online.png',
-    '/image-tools/convert': 'online-image-format-converter-webp-png-jpg.png',
-    '/image-tools/watermark': 'add-watermark-to-photos-online-free.png',
-    '/image-tools/flip': 'flip-and-mirror-images-online-instantly.png',
-    '/image-tools/grayscale': 'convert-image-to-grayscale-online.png',
-    '/pdf-tools/merge': 'fast-pdf-merger-no-upload-pixtool.png',
-    '/pdf-tools/split': 'split-pdf-pages-online-securely.png',
-    '/pdf-tools/compress': 'optimize-pdf-file-size-online.png',
-    '/pdf-tools/protect': 'secure-pdf-with-password-online.png',
-    '/pdf-tools/reorder': 'reorder-pdf-pages-online-free.png',
-    '/pdf-tools/convert': 'convert-pdf-to-images-online-high-res.png',
-    '/pdf-tools/watermark': 'add-text-watermark-to-pdf-online.png',
-    '/temp-mail': 'disposable-temporary-email-generator.png',
-    '/temp-mail/10-minute-mail': '10-minute-mail-free-disposable-inbox.png',
-    '/temp-mail/change-email': 'change-temporary-email-address-online.png',
-    '/qr-generator': 'best-free-qr-code-generator-online.png',
-    '/qr-scanner': 'fast-online-qr-code-scanner-browser.png',
-    '/typing-test': 'professional-typing-speed-test-online.png',
-    '/fake-email': 'generate-fake-email-for-testing.png',
-    '/disposable-email': 'burner-email-address-generator-privacy.png',
-    '/throwaway-email': 'throwaway-email-inbox-online-free.png',
-    '/json-formatter': 'free-json-formatter-and-validator-online.png',
-    '/unit-converter': 'universal-unit-converter-pro-browser.png',
-    '/password-generator': 'secure-random-password-generator-local.png',
-    '/code-diff': 'all-in-one-web-utility-toolbox.png'
-}
-
 const getScreenshotPath = (pagePath) => {
     const cleanPath = pagePath.endsWith('/') && pagePath.length > 1 ? pagePath.slice(0, -1) : pagePath
     
-    // Check local SCREENSHOT_MAP first for legacy/special pages
-    if (SCREENSHOT_MAP[cleanPath]) {
-        return `/screenshots/${SCREENSHOT_MAP[cleanPath]}`
-    }
-
-    // Dynamic lookup from global tools map
+    // Dynamic lookup from global tools map - This is the single source of truth
     const toolData = ALL_TOOLS_MAP[cleanPath]
     if (toolData && toolData.screenshot) {
         return `/screenshots/${toolData.screenshot}`
     }
 
-    return '/screenshots/pixtool-all-in-one-productivity-suite.png'
+    // Fallback for category hubs or special pages
+    const fallbackMap = {
+        '/': 'pixtool-all-in-one-productivity-suite.png',
+        '/image-tools': 'professional-online-image-studio.png',
+        '/pdf-tools': 'secure-pdf-management-suite.png',
+        '/utility-tools': 'all-in-one-web-utility-toolbox.png',
+        '/ai-tools': 'pixtool-all-in-one-productivity-suite.png',
+        '/math-tools': 'pixtool-all-in-one-productivity-suite.png'
+    }
+
+    return `/screenshots/${fallbackMap[cleanPath] || fallbackMap['/']}`
 }
 
 export default function SEO({

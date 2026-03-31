@@ -1,5 +1,4 @@
 import { useState, useMemo } from 'react'
-import { motion } from 'framer-motion'
 import { 
   Percent, Zap, Info, Layers, 
   RotateCw, Download, Trash, Activity, Divide
@@ -34,7 +33,7 @@ export default function FractionCalculator() {
           decimal: (res.n / res.d).toFixed(4),
           mixed: res.n > res.d ? `${Math.floor(res.n/res.d)} ${res.n % res.d}/${res.d}` : null
       }
-    } catch (e) {
+    } catch {
       return null
     }
   }, [f1, f2, op])

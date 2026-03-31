@@ -1,4 +1,4 @@
-# PixTool Robots.txt - Optimized for SEO
+# PixTool Robots.txt - Optimized for SEO & AI Privacy
 User-agent: *
 Allow: /
 
@@ -10,6 +10,29 @@ Disallow: /*?tool=
 # Administrative areas
 Disallow: /pix-admin/
 Disallow: /api/
+
+# Modern AI Crawler Controls (Standard & Valid Directives)
+# These replace the non-standard "Content-Signal" with recognized robot directives
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
 
 # Specify sitemap location
 Sitemap: https://www.pixtool.in/sitemap.xml
