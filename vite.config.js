@@ -23,20 +23,18 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            // Keep React runtime, router, and framer-motion in a stable core chunk.
+            // Keep React runtime, router, framer-motion, and lucide-react in a stable core chunk.
             if (
               id.includes('/react/') ||
               id.includes('/react-dom/') ||
               id.includes('/scheduler/') ||
               id.includes('/react-router/') ||
               id.includes('/react-router-dom/') ||
-              id.includes('framer-motion')
+              id.includes('framer-motion') ||
+              id.includes('lucide-react')
             ) {
               return 'vendor-react-core';
             }
-
-            // Icon system
-            if (id.includes('lucide-react')) return 'vendor-icons';
 
             // Data/visualization and compute-heavy libs.
             if (id.includes('/mathjs/') || id.includes('/complex.js/') || id.includes('/fraction.js/')) return 'vendor-math';
