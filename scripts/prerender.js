@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import http from 'http';
-import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS } from '../src/data/tools.js';
+import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS, MATH_TOOLS, PRODUCTIVITY_TOOLS } from '../src/data/tools.js';
 import { posts } from '../src/data/posts.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -38,6 +38,11 @@ const staticRoutes = [
   '/support-us',
   '/promotions',
   '/hire-me',
+  '/thank-you',
+  '/status',
+  '/ai-tools',
+  '/math-tools',
+  '/productivity-tools',
   '/sitemap',
   '/showcase'
 ];
@@ -45,7 +50,10 @@ const staticRoutes = [
 const toolRoutes = [
   ...IMAGE_TOOLS.map((t) => t.path),
   ...PDF_TOOLS.map((t) => t.path),
-  ...UTILITY_TOOLS.map((t) => t.path)
+  ...UTILITY_TOOLS.map((t) => t.path),
+  ...AI_TOOLS.map((t) => t.path),
+  ...MATH_TOOLS.map((t) => t.path),
+  ...PRODUCTIVITY_TOOLS.map((t) => t.path)
 ];
 
 const blogRoutes = posts.map((post) => `/blog/${post.slug}`);

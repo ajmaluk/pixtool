@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import { 
   Equal, Zap, Info, Search, 
   Settings, Download, Trash, Activity
