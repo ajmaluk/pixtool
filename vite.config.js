@@ -5,27 +5,37 @@ export default defineConfig({
   plugins: [react()],
   build: {
     target: 'esnext',
-    minify: 'esbuild',
+    minify: 'terser',
     cssCodeSplit: true,
     sourcemap: false,
     reportCompressedSize: false,
+    terserOptions: {
+      format: {
+        comments: false
+      },
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        passes: 2
+      }
+    },
     rollupOptions: {
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            // Keep React runtime and router in a stable core chunk.
+            // Keep React runtime, router, and framer-motion in a stable core chunk.
             if (
               id.includes('/react/') ||
               id.includes('/react-dom/') ||
               id.includes('/scheduler/') ||
               id.includes('/react-router/') ||
-              id.includes('/react-router-dom/')
+              id.includes('/react-router-dom/') ||
+              id.includes('framer-motion')
             ) {
               return 'vendor-react-core';
             }
 
-            // Animation and icon systems used across many pages.
-            if (id.includes('framer-motion')) return 'vendor-framer';
+            // Icon system
             if (id.includes('lucide-react')) return 'vendor-icons';
 
             // Data/visualization and compute-heavy libs.
