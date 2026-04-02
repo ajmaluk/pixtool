@@ -28,7 +28,7 @@ export default function KanbanBoard() {
   const addCard = (columnId) => {
     if (!newTitle.trim()) return
     const newCard = {
-      id: Date.now().toString(),
+      id: crypto.randomUUID(),
       title: newTitle.trim(),
       columnId,
       createdAt: new Date().toISOString()

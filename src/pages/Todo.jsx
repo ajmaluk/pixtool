@@ -32,7 +32,6 @@ export default function Todo() {
   const [priority, setPriority] = useState('medium')
   const [category, setCategory] = useState('work')
   const [activeFilter, setActiveFilter] = useState('all')
-  const [isAdding, setIsAdding] = useState(false)
 
   useEffect(() => {
     writeStoredJson('pt_todo_tasks', tasks)
@@ -51,7 +50,6 @@ export default function Todo() {
     }
     setTasks([newTask, ...tasks])
     setInput('')
-    setIsAdding(false)
   }
 
   const toggleTask = (id) => {

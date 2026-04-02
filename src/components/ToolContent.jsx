@@ -1,6 +1,6 @@
 import { HelpCircle, Info, CheckCircle2, ArrowRight, Shield, Zap, Lock } from 'lucide-react'
 import { Link } from 'react-router-dom'
-// eslint-disable-next-line no-unused-vars
+ 
 import { motion } from 'framer-motion'
 
 export default function ToolContent({

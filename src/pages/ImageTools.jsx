@@ -17,6 +17,7 @@ import { imageFilesToPdf, downloadBlob } from '../utils/pdfUtils'
 import ToolCard from '../components/ToolCard'
 import { useRatePopup } from '../hooks/useRatePopup'
 import { useConfirm, useAlert } from '../context/ConfirmContext'
+import { SITE_URL } from '../config/app.config'
 
 const tools = IMAGE_TOOLS;
 

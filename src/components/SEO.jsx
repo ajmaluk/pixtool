@@ -471,7 +471,7 @@ export default function SEO({
                 updateMeta('article:section', articleSection, 'property')
             }
             if (articleTags && Array.isArray(articleTags)) {
-                articleTags.forEach((tag, idx) => {
+                articleTags.forEach((tag) => {
                     const tagMeta = document.createElement('meta')
                     tagMeta.setAttribute('property', 'article:tag')
                     tagMeta.setAttribute('content', tag)
@@ -525,7 +525,7 @@ export default function SEO({
             if (alternateDefault) alternateDefault.remove()
         }
 
-    }, [brandTitle, description, enhancedKeywords, shouldNoIndex, fullUrl, ogImage, type, siteName, twImage, type, articlePublishedTime, lastModified, articleAuthor, articleSection, articleTags, dynamicImageAlt])
+    }, [brandTitle, description, enhancedKeywords, shouldNoIndex, fullUrl, ogImage, type, siteName, twImage, articlePublishedTime, lastModified, articleAuthor, articleSection, articleTags, dynamicImageAlt])
 
     const schemasToRender = shouldNoIndex ? [] : schemas
 

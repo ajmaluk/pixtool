@@ -6,6 +6,7 @@ import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
 import { UTILITY_TOOLS } from '../data/tools'
 import { UTILITY_SEO_CONTENT } from '../data/utilityToolsData'
+import { SITE_URL } from '../config/app.config'
 
 const tools = UTILITY_TOOLS;
 

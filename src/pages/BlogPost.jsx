@@ -6,6 +6,7 @@ import { Calendar, ArrowLeft, Share2, Clock, ArrowRight } from 'lucide-react';
 import { useAlert } from '../context/ConfirmContext';
 import { motion } from 'framer-motion';
 import AdSpace from '../components/AdSpace';
+import { SITE_URL } from '../config/app.config';
 
 export default function BlogPost() {
     const alert = useAlert();

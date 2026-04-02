@@ -65,33 +65,6 @@ const featureHighlights = [
   { title: 'Analytics Integration', description: 'Comprehensive event tracking and reporting', icon: Gauge, completed: false },
 ]
 
-const statusStats = [
-  {
-    label: 'Latest validation',
-    value: '0 errors',
-    detail: 'Touched productivity, config, and SEO files revalidated successfully.',
-    icon: Shield,
-  },
-  {
-    label: 'Infrastructure',
-    value: '4 core files',
-    detail: 'Config, error handling, validation, and browser storage support are in place.',
-    icon: Code2,
-  },
-  {
-    label: 'Productivity suite',
-    value: '8 tools',
-    detail: 'Hub, task, board, note, canvas, vault, timer, notes, and habit tracking pages shipped.',
-    icon: Activity,
-  },
-  {
-    label: 'SEO surfaces',
-    value: '5 surfaces',
-    detail: 'Navigation, footer, HTML sitemap, XML sitemap, and schema coverage were updated.',
-    icon: Sparkles,
-  },
-]
-
 const implementationAreas = [
   {
     title: 'Infrastructure',

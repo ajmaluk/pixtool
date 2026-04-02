@@ -1,5 +1,5 @@
 import { useState } from 'react'
-// eslint-disable-next-line no-unused-vars
+ 
 import { motion, AnimatePresence } from 'framer-motion'
 import AiToolTemplate from '../components/AiToolTemplate'
 import { FileSignature, User, Briefcase, GraduationCap, Star, CheckCircle, Plus, Trash2, ArrowRight, ArrowLeft, Download } from 'lucide-react'

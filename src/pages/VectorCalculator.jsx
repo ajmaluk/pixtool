@@ -3,7 +3,7 @@ import {
   Box
 } from 'lucide-react'
 import { create, all } from 'mathjs'
-// eslint-disable-next-line no-unused-vars
+ 
 import { motion, AnimatePresence } from 'framer-motion'
 import SEO from '../components/SEO'
 import Breadcrumbs from '../components/Breadcrumbs'

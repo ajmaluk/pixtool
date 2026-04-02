@@ -1,5 +1,5 @@
 import { Suspense, lazy, Component } from 'react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Routes, Route, Outlet, useLocation, Link, Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
@@ -251,7 +251,7 @@ const MainLayout = () => {
         const displayTools = updated.map(p => ({ path: p, ...ALL_TOOLS_MAP[p] })).filter(t => t.title || t.name)
         
         // Use a functional update to avoid unnecessary re-renders and potential lint triggers
-        // eslint-disable-next-line react-hooks/set-state-in-effect
+         
         setRecentTools(prev => {
           if (JSON.stringify(prev.map(t => t.path)) === JSON.stringify(displayTools.map(t => t.path))) return prev;
           return displayTools;

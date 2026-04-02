@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Share2, Check, Copy, Twitter, Linkedin, Facebook, X } from 'lucide-react'
-// eslint-disable-next-line no-unused-vars
+ 
 import { AnimatePresence, motion } from 'framer-motion'
 
 export default function ShareTool({ title, url = window.location.href }) {

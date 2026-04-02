@@ -55,6 +55,8 @@ export default function DrawingBoard() {
     const handleResize = () => setupCanvas()
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
+    // setupCanvas intentionally runs once on mount and window resize.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {

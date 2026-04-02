@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// eslint-disable-next-line no-unused-vars
+ 
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ExternalLink, Camera, Image as ImageIcon, FileText, Settings, ArrowRight } from 'lucide-react';

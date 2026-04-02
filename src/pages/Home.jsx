@@ -39,6 +39,8 @@ export default function Home() {
   useEffect(() => {
     const q = searchParams.get('q') || ''
     if (q !== searchTerm) {
+      // Sync search input when URL query changes from outside this page.
+       
       setSearchTerm(q)
     }
   }, [searchParams, searchTerm])

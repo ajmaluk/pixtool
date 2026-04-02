@@ -47,7 +47,7 @@ export const getErrorMessage = (error, context = 'UNKNOWN') => {
   }
 
   // Log dev-friendly message
-  if (process.env.NODE_ENV === 'development') {
+  if (import.meta.env.DEV) {
     console.error(`[${context}]`, error)
   }
 

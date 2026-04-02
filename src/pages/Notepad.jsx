@@ -21,6 +21,7 @@ export default function Notepad() {
 
   useEffect(() => {
     writeStoredJson('pt_notepad_content', content)
+     
     setLastSaved(new Date().toLocaleTimeString())
   }, [content])
 

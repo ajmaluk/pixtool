@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { ChevronDown, ChevronUp, Search, HelpCircle } from 'lucide-react';
+import { SITE_URL } from '../config/app.config';
 
 const faqData = [
     {

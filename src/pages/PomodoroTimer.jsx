@@ -29,7 +29,6 @@ export default function PomodoroTimer() {
       timerRef.current = setInterval(() => {
         setTimeLeft((prev) => Math.max(prev - 1, 0))
       }, 1000)
-      setCompletionNotified(false)
       return () => clearInterval(timerRef.current)
     }
 

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
 import { FileText, Image as ImageIcon, Mail, QrCode, Shield, Info, User, Briefcase, MessageSquare, Book, Star, Phone, Home } from 'lucide-react'
+import { SITE_URL } from '../config/app.config'
 
 const sitemapSections = [
     {

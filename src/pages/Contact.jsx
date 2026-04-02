@@ -4,6 +4,7 @@ import SEO from '../components/SEO';
 import { Mail, MessageSquare, MapPin, Send, Github, Linkedin, Twitter, FileText, Image, Star, Zap } from 'lucide-react';
 import { submitContactMessage } from '../services/supabaseService';
 import { hasSupabaseConfig } from '../lib/supabaseClient';
+import { SITE_URL } from '../config/app.config';
 
 export default function Contact() {
   const [status, setStatus] = useState('idle');
