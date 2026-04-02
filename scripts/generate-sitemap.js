@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS, MATH_TOOLS } from '../src/data/tools.js';
+import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS, MATH_TOOLS, PRODUCTIVITY_TOOLS } from '../src/data/tools.js';
 import { posts } from '../src/data/posts.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -74,6 +74,7 @@ function generateSitemap() {
   addUrl('/utility-tools', '0.9', 'weekly', '/screenshots/utility-tools-hub.webp', 'PixTool Utility Suite');
   addUrl('/ai-tools', '0.9', 'weekly', '/screenshots/home.webp', 'PixTool AI Tools Hub');
   addUrl('/math-tools', '0.9', 'weekly', '/screenshots/scientific-calculator-online.webp', 'PixTool Math & Scientific Hub');
+  addUrl('/productivity-tools', '0.9', 'weekly', '/screenshots/pomodoro-timer-focus-clock.png', 'PixTool Productivity Suite Hub');
 
   // MATH Tools
   MATH_TOOLS.forEach(tool => {
@@ -100,6 +101,11 @@ function generateSitemap() {
     addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | AI Generated PixTool`, tool.description);
   });
 
+  // Productivity Tools
+  PRODUCTIVITY_TOOLS.forEach(tool => {
+    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | Productivity PixTool`, tool.description);
+  });
+
 
   // Blog Posts
   posts.forEach(post => {
@@ -111,7 +117,7 @@ function generateSitemap() {
     '/about', '/founder', '/developer', '/services', '/products', 
     '/privacy-policy', '/terms-of-service', '/contact', '/faq', 
     '/refund-policy', '/cookie-policy', '/blog', '/testimonials', 
-    '/documentation', '/sitemap', '/news', '/careers', '/case-studies',
+    '/documentation', '/sitemap', '/status', '/news', '/careers', '/case-studies',
     '/support-us', '/promotions', '/hire-me', '/showcase', '/thank-you'
   ];
 

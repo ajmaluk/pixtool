@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { posts } from '../data/posts';
 import { PenTool, Calendar, ArrowRight, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
-// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
+import AdSpace from '../components/AdSpace';
+import { SITE_URL } from '../config/app.config';
 
 export default function Blog() {
     const blogSchema = [
@@ -13,11 +14,11 @@ export default function Blog() {
             "@type": "Blog",
             "name": "PixTool Tech & Productivity Blog",
             "description": "Expert insights, tutorials, and updates on AI, web development, browser-based tools, and digital productivity. Learn how to use free online tools effectively.",
-            "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/blog`,
+            "url": `${SITE_URL}/blog`,
             "publisher": {
-                "@id": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/#organization`
+                "@id": `${SITE_URL}/#organization`
             },
-            "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.webp`,
+            "image": `${SITE_URL}/logo.webp`,
             "keywords": "productivity, AI tools, web development, online tools, tutorials"
         }
     ];
@@ -203,8 +204,9 @@ export default function Blog() {
     return (
         <div className="blog-page">
             <SEO
-                title="Blog - Tech Insights, AI & Productivity Tutorials | PixTool"
-                description="Explore the PixTool blog for in-depth articles on AI tools, web development best practices, browser-based productivity, and digital workflows. Learn how to use free online tools effectively."
+                title="🔥 AI & Productivity Blog - Tutorials, Tips & Web Dev Insights | PixTool"
+                description="Expert blog on AI tools, web development, browser-based productivity, and free online software. Learn how to use PixTool and master modern digital workflows. 20+ in-depth tutorials on optimization, privacy & automation."
+                keywords="ai tutorials, productivity blog, web development guide, browser tools, online productivity, free software tips, ai guide, privacy first tools, workflow automation, developer documentation"
                 path="/blog"
                 schema={blogSchema}
             />
@@ -228,7 +230,8 @@ export default function Blog() {
             </section>
 
             <section style={{ padding: '0 1.5rem 10rem', width: '100%', overflowX: 'hidden' }}>
-                <div style={{ width: '100%' }}>
+                <div style={{ width: '100%', maxWidth: '1400px', margin: '0 auto' }}>
+                    <AdSpace type="top" style={{ marginBottom: '3rem' }} />
                     <div className="blog-tags-scroll" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'nowrap', overflowX: 'auto', paddingBottom: '1rem', marginBottom: '1.5rem', WebkitOverflowScrolling: 'touch' }}>
                         {[null, ...allTags].map(tag => (
                             <button
@@ -317,6 +320,8 @@ export default function Blog() {
                                 ))}
                         </div>
                     </div>
+
+                    <AdSpace type="bottom" style={{ marginTop: '5rem' }} />
 
                     <div style={{ marginTop: '8rem', textAlign: 'center', padding: '5rem 2rem', background: 'var(--bg-secondary)', borderRadius: '48px', border: '1px solid var(--border-color)', position: 'relative', overflow: 'hidden' }}>
                         <div style={{ position: 'relative', zIndex: 1 }}>

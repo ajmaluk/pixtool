@@ -1,6 +1,5 @@
 import { Suspense, lazy, Component } from 'react'
-// eslint-disable-next-line no-unused-vars
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Routes, Route, Outlet, useLocation, Link, Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
@@ -44,6 +43,7 @@ const HireMe = lazy(() => import('./pages/HireMe'))
 const ThankYou = lazy(() => import('./pages/ThankYou'))
 const BlogPost = lazy(() => import('./pages/BlogPost'))
 const Sitemap = lazy(() => import('./pages/Sitemap'))
+const Status = lazy(() => import('./pages/Status'))
 const Showcase = lazy(() => import('./pages/Showcase'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 const TenMinuteMail = lazy(() => import('./pages/TenMinuteMail'))
@@ -83,6 +83,15 @@ const FinancialCalculator = lazy(() => import('./pages/FinancialCalculator'))
 const NumberTheory = lazy(() => import('./pages/NumberTheory'))
 const FractionCalculator = lazy(() => import('./pages/FractionCalculator'))
 const VectorCalculator = lazy(() => import('./pages/VectorCalculator'))
+const ProductivityTools = lazy(() => import('./pages/ProductivityTools'))
+const Todo = lazy(() => import('./pages/Todo'))
+const KanbanBoard = lazy(() => import('./pages/KanbanBoard'))
+const Notepad = lazy(() => import('./pages/Notepad'))
+const DrawingBoard = lazy(() => import('./pages/DrawingBoard'))
+const FileManager = lazy(() => import('./pages/FileManager'))
+const PomodoroTimer = lazy(() => import('./pages/PomodoroTimer'))
+const StickyNotes = lazy(() => import('./pages/StickyNotes'))
+const HabitTracker = lazy(() => import('./pages/HabitTracker'))
 
 // Loading component — stays visible inside the layout
 const PageLoader = () => (
@@ -441,6 +450,15 @@ function App() {
           <Route path="/math-tools/number-theory" element={<NumberTheory />} />
           <Route path="/math-tools/fraction-calculator" element={<FractionCalculator />} />
           <Route path="/math-tools/vector-calculator" element={<VectorCalculator />} />
+          <Route path="/productivity-tools" element={<ProductivityTools />} />
+          <Route path="/productivity-tools/todo" element={<Todo />} />
+          <Route path="/productivity-tools/kanban" element={<KanbanBoard />} />
+          <Route path="/productivity-tools/notepad" element={<Notepad />} />
+          <Route path="/productivity-tools/drawing-board" element={<DrawingBoard />} />
+          <Route path="/productivity-tools/file-manager" element={<FileManager />} />
+          <Route path="/productivity-tools/pomodoro" element={<PomodoroTimer />} />
+          <Route path="/productivity-tools/sticky-notes" element={<StickyNotes />} />
+          <Route path="/productivity-tools/habit-tracker" element={<HabitTracker />} />
           <Route path="/about" element={<About />} />
 
           {/* Legacy SEO Redirects */}
@@ -469,6 +487,7 @@ function App() {
           <Route path="/promotions" element={<Promotions />} />
           <Route path="/hire-me" element={<HireMe />} />
           <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/status" element={<Status />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/showcase" element={<Showcase />} />
           <Route path="/pix-admin" element={<PixAdmin />} />

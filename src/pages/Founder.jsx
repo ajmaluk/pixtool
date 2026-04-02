@@ -2,6 +2,7 @@ import React from 'react';
 import SEO from '../components/SEO';
 import { Github, Linkedin, Code, Cpu, Globe, Award, Sparkles } from 'lucide-react';
 import founderImg from '../assets/ajmaluk.png';
+import { SITE_URL } from '../config/app.config';
 
 export default function Founder() {
     const founderSchema = [
@@ -10,8 +11,8 @@ export default function Founder() {
             "@type": "Person",
             "name": "Muhammed Ajmal U K",
             "alternateName": "Ajmal U K",
-            "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/founder`,
-            "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/ajmaluk.png`,
+            "url": `${SITE_URL}/founder`,
+            "image": `${SITE_URL}/ajmaluk.png`,
             "jobTitle": "Founder & Senior Full Stack Developer",
             "address": {
                 "@type": "PostalAddress",
@@ -20,7 +21,7 @@ export default function Founder() {
                 "addressCountry": "India"
             },
             "worksFor": {
-                "@id": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/#organization`
+                "@id": `${SITE_URL}/#organization`
             },
             "sameAs": [
                 "https://github.com/ajmal-uk",

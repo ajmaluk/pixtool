@@ -9,12 +9,69 @@ export default function ToolContent({
     benefits = [],
     howTo = [],
     faq,
+    relatedArticles = [],
     relatedTools = [],
     readNext = [],
     alternativeTo = [],
     tips = [],
     useCases = []
 }) {
+    const currentPath = typeof window !== 'undefined' ? window.location.pathname : ''
+
+    const defaultRelatedArticles = (() => {
+        if (currentPath.startsWith('/qr-') || currentPath.startsWith('/utility-tools') || currentPath.startsWith('/temp-mail')) {
+            return [
+                { title: '📲 Static vs Dynamic QR Codes 2026: Which One Should You Use?', path: '/blog/qr-static-vs-dynamic-2026', description: 'Understand which QR strategy fits long-term printing, privacy, and tracking.' },
+                { title: '📊 Advanced QR Code Marketing 2026: 3x Conversion Rates with Smart Offline-to-Online Strategy', path: '/blog/advanced-qr-code-marketing-2026', description: 'Turn QR scans into measurable conversions with better landing page strategy.' },
+                { title: '📧 Secure Temporary Email Strategy: Stop Spam, Phishing & Data Scraping', path: '/blog/secure-temp-mail-business-privacy-2026', description: 'Use disposable inboxes to protect your identity and keep signups clean.' }
+            ]
+        }
+
+        if (currentPath.startsWith('/pdf-tools')) {
+            return [
+                { title: '🔓 Best Free PDF Tools 2026 - Merge, Split, Compress WITHOUT Cloud Upload', path: '/blog/best-free-pdf-tools-online-2026', description: 'Compare the safest local PDF workflows and cloud-free document utilities.' },
+                { title: '📦 Ultimate PDF Toolkit 2026: Merge, Split & Compress Like a Pro', path: '/blog/ultimate-pdf-toolkit-merge-split-compress', description: 'Learn the best practical workflow for large PDFs and document management.' },
+                { title: '🔐 PDF Security 101: Passwords, Encryption & Safe Sharing for 2026', path: '/blog/pdf-security-101-passwords-encryption-sharing', description: 'Secure PDFs with encryption, watermarking, and safe distribution practices.' }
+            ]
+        }
+
+        if (currentPath.startsWith('/image-tools')) {
+            return [
+                { title: '📱 Perfect Social Media Image Sizes 2026: Exact Dimensions', path: '/blog/resize-images-social-media-2026', description: 'Use the right image dimensions for Instagram, Facebook, X, LinkedIn, and TikTok.' },
+                { title: '🎯 WebP vs AVIF vs JPEG 2026: Best Image Format for Web Performance & SEO', path: '/blog/best-image-format-webp-avif-jpeg-2026', description: 'Choose the best format for compression, browser support, and page speed.' },
+                { title: '🗜️ Image Compression 101: Lossless vs Lossy - Reduce Size 80% Without Quality Loss', path: '/blog/image-compression-lossless-vs-lossy-2026', description: 'Reduce file sizes without breaking quality or user experience.' }
+            ]
+        }
+
+        if (currentPath.startsWith('/productivity-tools')) {
+            return [
+                { title: '🔐 Browser-Based Tools = Zero Privacy Risk [2026 Security Guide]', path: '/blog/browser-based-privacy', description: 'Why local-first productivity tools are safer than cloud apps.' },
+                { title: '⚡ 80% Productivity Boost: Master PixTool AI Workflow [Pro Guide]', path: '/blog/maximizing-productivity-pixtool-ai', description: 'Build a faster workflow with the right productivity habits and tools.' },
+                { title: '🚀 Future of AI Productivity 2026: Edge AI Guide - Privacy Without Compromise', path: '/blog/future-of-ai-productivity', description: 'See how private on-device workflows are changing productivity in 2026.' }
+            ]
+        }
+
+        if (currentPath.startsWith('/ai-tools')) {
+            return [
+                { title: '🚀 Future of AI Productivity 2026: Edge AI Guide - Privacy Without Compromise', path: '/blog/future-of-ai-productivity', description: 'On-device AI and practical workflows are redefining daily productivity.' },
+                { title: '🤖 Top 5 AI Trends Reshaping Productivity in 2026', path: '/blog/top-ai-trends-2026-productivity-tools', description: 'Track the biggest shifts in multimodal and agentic AI tools.' },
+                { title: '⚔️ GPT-5 vs Gemini 3 vs Claude 4.5: Best AI Model for 2026?', path: '/blog/gpt-5-gemini-3-claude-4-5-model-comparison-2026', description: 'Choose the best model for writing, coding, and context-heavy tasks.' }
+            ]
+        }
+
+        if (currentPath.startsWith('/math-tools')) {
+            return [
+                { title: '🚀 Future of AI Productivity 2026: Edge AI Guide - Privacy Without Compromise', path: '/blog/future-of-ai-productivity', description: 'The same browser-first approach powers private calculations and workflows.' },
+                { title: '🧠 From Assistants to Agents: The Rise of Agentic AI in Software Development', path: '/blog/rise-of-agentic-ai-in-software-development-2026', description: 'See how AI systems are evolving from suggestions to execution.' },
+                { title: '⚔️ GPT-5 vs Gemini 3 vs Claude 4.5: Best AI Model for 2026?', path: '/blog/gpt-5-gemini-3-claude-4-5-model-comparison-2026', description: 'Useful context for computational workflows and AI-assisted analysis.' }
+            ]
+        }
+
+        return []
+    })()
+
+    const resolvedRelatedArticles = relatedArticles.length > 0 ? relatedArticles : defaultRelatedArticles
+
     return (
         <article className="tool-content-section" style={{ marginTop: '10rem', borderTop: '1px solid var(--border-color)', paddingTop: '6rem' }}>
             {/* SEO Trust Bar */}
@@ -190,6 +247,36 @@ export default function ToolContent({
                                         <h4 className="faq-question">{item.q}</h4>
                                         <p className="faq-answer">{item.a}</p>
                                     </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
+                    {resolvedRelatedArticles && resolvedRelatedArticles.length > 0 && (
+                        <section id="related-guides" style={{ marginBottom: '4rem' }}>
+                            <h3 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '2rem' }}>Related Guides</h3>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
+                                {resolvedRelatedArticles.map((article, i) => (
+                                    <Link key={i} to={article.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                        <motion.div
+                                            whileHover={{ y: -4, borderColor: 'var(--accent-primary)' }}
+                                            style={{
+                                                padding: '1.25rem',
+                                                background: 'var(--bg-secondary)',
+                                                border: '1px solid var(--border-color)',
+                                                borderRadius: '20px',
+                                                height: '100%'
+                                            }}
+                                        >
+                                            <div style={{ fontSize: '0.72rem', fontWeight: 900, color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.75rem' }}>
+                                                Blog Guide
+                                            </div>
+                                            <h4 style={{ fontSize: '1rem', fontWeight: 800, lineHeight: 1.4, margin: 0 }}>{article.title}</h4>
+                                            {article.description && (
+                                                <p style={{ margin: '0.75rem 0 0', color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.6 }}>{article.description}</p>
+                                            )}
+                                        </motion.div>
+                                    </Link>
                                 ))}
                             </div>
                         </section>

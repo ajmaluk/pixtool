@@ -1,6 +1,6 @@
 import React from 'react';
 import SEO from '../components/SEO';
-import { motion as Motion } from 'framer-motion';
+import { SITE_URL } from '../config/app.config'
 import { Code2, Video, Zap, BarChart3, Youtube, Box, CheckCircle2 } from 'lucide-react';
 
 const services = [
@@ -77,7 +77,7 @@ export default function Services() {
             "@type": "Service",
             "name": "Professional Digital Services",
             "provider": {
-                "@id": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/#organization`
+                "@id": `${SITE_URL}/#organization`
             },
             "areaServed": "Global",
             "hasOfferCatalog": {

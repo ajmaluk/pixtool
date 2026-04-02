@@ -8,7 +8,7 @@ import {
   ShoppingBag, Star, Zap, GraduationCap, Microscope, Rocket, Gift
 } from 'lucide-react'
 import { useAlert } from '../context/ConfirmContext'
-import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS, MATH_TOOLS } from '../data/tools'
+import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS, MATH_TOOLS, PRODUCTIVITY_TOOLS } from '../data/tools'
 
 const allTools = [
   ...IMAGE_TOOLS.filter(t => !t.status).map(t => ({ path: t.path, title: t.title, category: 'Image', icon: t.icon, color: t.color })),
@@ -16,6 +16,7 @@ const allTools = [
   ...UTILITY_TOOLS.filter(t => !t.status).map(t => ({ path: t.path, title: t.title, category: 'Utility', icon: t.icon, color: t.color })),
   ...AI_TOOLS.filter(t => !t.status).map(t => ({ path: t.path, title: t.title, category: 'AI', icon: t.icon, color: t.color })),
   ...MATH_TOOLS.filter(t => !t.status).map(t => ({ path: t.path, title: t.title, category: 'Math', icon: t.icon, color: t.color })),
+  ...PRODUCTIVITY_TOOLS.filter(t => !t.status).map(t => ({ path: t.path, title: t.title, category: 'Productivity', icon: t.icon, color: t.color })),
 ]
 
 export default function Navbar() {
@@ -40,7 +41,7 @@ export default function Navbar() {
   const morePaths = [
     '/showcase', '/blog', '/privacy-policy', '/terms-of-service', 
     '/cookie-policy', '/refund-policy', '/faq', '/contact', 
-    '/documentation', '/testimonials', '/founder', '/developer',
+    '/documentation', '/testimonials', '/founder', '/developer', '/status',
     '/services', '/products', '/news', '/case-studies',
     '/support-us', '/promotions', '/hire-me', '/careers', '/thank-you', '/sitemap'
   ]
@@ -154,6 +155,10 @@ export default function Navbar() {
           <NavLink to="/utility-tools" className="navbar-link">Utility</NavLink>
           <NavLink to="/ai-tools" className="navbar-link">AI</NavLink>
           <NavLink to="/math-tools" className="navbar-link">Math</NavLink>
+          <NavLink to="/productivity-tools" className="navbar-link" style={{ position: 'relative' }}>
+            Productivity
+            <span className="navbar-new-badge">New</span>
+          </NavLink>
           
           <div className="nav-dropdown" ref={moreRef}>
             <button 
@@ -187,6 +192,9 @@ export default function Navbar() {
                       </NavLink>
                       <NavLink to="/documentation" className="dropdown-item" onClick={() => setShowMore(false)}>
                         <FileCode size={16} /> Docs
+                      </NavLink>
+                      <NavLink to="/status" className="dropdown-item" onClick={() => setShowMore(false)}>
+                        <FileText size={16} /> Status & Changelog
                       </NavLink>
                       <NavLink to="/case-studies" className="dropdown-item" onClick={() => setShowMore(false)}>
                         <Microscope size={16} /> Case Studies
@@ -341,12 +349,17 @@ export default function Navbar() {
           <NavLink to="/utility-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Utility Tools</NavLink>
           <NavLink to="/ai-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>AI Tools</NavLink>
           <NavLink to="/math-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Math Tools</NavLink>
+          <NavLink to="/productivity-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            Productivity Tools
+            <span className="navbar-new-badge" style={{ position: 'static', transform: 'none' }}>New</span>
+          </NavLink>
           
           <div className="mobile-section-title">Resources</div>
           <NavLink to="/showcase" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Visual Showcase</NavLink>
           <NavLink to="/blog" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Blog & Tutorials</NavLink>
           <NavLink to="/news" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Latest News</NavLink>
           <NavLink to="/documentation" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Documentation</NavLink>
+          <NavLink to="/status" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Status & Changelog</NavLink>
           
           <div className="mobile-section-title">Company</div>
           <NavLink to="/about" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>About Us</NavLink>

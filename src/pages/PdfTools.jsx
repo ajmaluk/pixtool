@@ -312,7 +312,7 @@ export default function PdfTools() {
         "@type": "CollectionPage",
         "name": "Free Secure PDF Tools - PixTool",
         "description": pageDescription,
-        "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools`
+        "url": `${SITE_URL}/pdf-tools`
     },
     {
         "@context": "https://schema.org",

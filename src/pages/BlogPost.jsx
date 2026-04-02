@@ -4,8 +4,8 @@ import { posts } from '../data/posts';
 import SEO from '../components/SEO';
 import { Calendar, ArrowLeft, Share2, Clock, ArrowRight } from 'lucide-react';
 import { useAlert } from '../context/ConfirmContext';
-// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
+import AdSpace from '../components/AdSpace';
 
 export default function BlogPost() {
     const alert = useAlert();
@@ -264,6 +264,7 @@ export default function BlogPost() {
                                 </ul>
                             </div>
                         )}
+                        <AdSpace type="top" style={{ marginBottom: '3rem' }} />
                         <img
                             src={post.image}
                             alt={post.title}
@@ -321,6 +322,8 @@ export default function BlogPost() {
                             </div>
                         </div>
 
+                        <AdSpace type="bottom" style={{ marginTop: '5rem' }} />
+
                         <div style={{
                             marginTop: '6rem',
                             padding: '3rem',
@@ -340,7 +343,7 @@ export default function BlogPost() {
                                 className="btn btn-primary"
                                 style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
                                 onClick={() => {
-                                    const shareUrl = `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/blog/${post.slug}`;
+                                    const shareUrl = `${SITE_URL}/blog/${post.slug}`;
                                     if (navigator.share) {
                                         navigator.share({
                                             title: post.title,

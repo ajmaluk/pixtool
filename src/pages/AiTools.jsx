@@ -2,6 +2,7 @@ import { MessageSquare, Sparkles, BrainCircuit, Target, Users, Zap, ShieldCheck,
 import ToolCard from '../components/ToolCard'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
+import AdSpace from '../components/AdSpace'
 import { AI_TOOLS } from '../data/tools'
 
 const tools = AI_TOOLS.filter(t => !t.status);

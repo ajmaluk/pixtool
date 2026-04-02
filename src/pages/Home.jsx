@@ -1,7 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from 'react'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
-// eslint-disable-next-line no-unused-vars
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import SEO from '../components/SEO'
 import {
   Image, FileText,
@@ -10,7 +9,8 @@ import {
 } from 'lucide-react'
 import ToolCard from '../components/ToolCard'
 import OverallRatingBadge from '../components/OverallRatingBadge'
-import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS, MATH_TOOLS } from '../data/tools'
+import { SITE_URL } from '../config/app.config'
+import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS, MATH_TOOLS, PRODUCTIVITY_TOOLS } from '../data/tools'
 import { GLOBAL_FAQS } from '../data/faqs'
 import { posts } from '../data/posts'
 import { Calculator } from 'lucide-react'
@@ -26,6 +26,7 @@ const pdfTools = PDF_TOOLS.filter(t => !t.status);
 const communicationTools = UTILITY_TOOLS;
 const aiTools = AI_TOOLS.filter(t => !t.status);
 const mathTools = MATH_TOOLS.filter(t => !t.status);
+const productivityTools = PRODUCTIVITY_TOOLS;
 
 export default function Home() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -40,8 +41,7 @@ export default function Home() {
     if (q !== searchTerm) {
       setSearchTerm(q)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams])
+  }, [searchParams, searchTerm])
 
   const handleSearchChange = (e) => {
     const val = e.target.value
@@ -73,17 +73,25 @@ export default function Home() {
     }
   }
 
-  const allTools = [...imageTools, ...pdfTools, ...communicationTools, ...aiTools, ...mathTools]
+  const allTools = [
+    ...imageTools.map(t => ({ ...t, typeLabel: 'Image Studio' })),
+    ...pdfTools.map(t => ({ ...t, typeLabel: 'PDF Expert' })),
+    ...communicationTools.map(t => ({ ...t, typeLabel: 'Utility' })),
+    ...aiTools.map(t => ({ ...t, typeLabel: 'AI Tool' })),
+    ...mathTools.map(t => ({ ...t, typeLabel: 'Math Hub' })),
+    ...productivityTools.map(t => ({ ...t, typeLabel: 'Productivity' }))
+  ]
 
   // Interleave tools from different categories to mix them one after one
   const mixedTools = [];
-  const maxLen = Math.max(imageTools.length, pdfTools.length, communicationTools.length, aiTools.length, mathTools.length);
+  const maxLen = Math.max(imageTools.length, pdfTools.length, communicationTools.length, aiTools.length, mathTools.length, productivityTools.length);
   for (let i = 0; i < maxLen; i++) {
     if (i < imageTools.length) mixedTools.push({ ...imageTools[i], typeLabel: 'Image Tool' });
     if (i < pdfTools.length) mixedTools.push({ ...pdfTools[i], typeLabel: 'PDF Tool' });
     if (i < communicationTools.length) mixedTools.push({ ...communicationTools[i], typeLabel: 'Utility' });
     if (i < aiTools.length) mixedTools.push({ ...aiTools[i], typeLabel: 'AI Tool' });
     if (i < mathTools.length) mixedTools.push({ ...mathTools[i], typeLabel: 'Math Tool' });
+    if (i < productivityTools.length) mixedTools.push({ ...productivityTools[i], typeLabel: 'Productivity' });
   }
   const filteredTools = allTools.filter(tool =>
     tool.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -100,12 +108,12 @@ export default function Home() {
       "@type": "ItemList",
       "name": "Free Online Tools",
       "description": "Complete list of free online tools available at PixTool",
-      "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/sitemap`,
-      "itemListElement": mixedTools.map((t, idx) => ({
+      "url": `${SITE_URL}/sitemap`,
+      "itemListElement": allTools.map((t, idx) => ({
         "@type": "ListItem",
         "position": idx + 1,
         "name": t.title,
-        "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}${t.path}`,
+        "url": `${SITE_URL}${t.path}`,
         "description": t.description
       }))
     }
@@ -114,9 +122,9 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="PixTool - Master Your AI Workflow with Free Online Tools | 100% Private"
-        description="Unlock 63+ free online tools. PixTool is the ultimate AI productivity suite for content generation, scientific mathematics, PDF management, and image editing. No upload needed, 100% browser-based security."
-        keywords="free online ai suite, secure pdf tools, private image editor, scientific calculator online, academic math tools, ai content writer free, master ai workflow, browser-native productivity, 2026 ai tools"
+        title="121+ Free Online AI Tools - Privacy-First Suite for Productivity [2026]"
+        description="🚀 Master your AI workflow with 121+ free tools: AI writing, PDF editor, image resizer, QR codes, temp mail & more. Zero data upload, 100% browser-based, works offline. No account needed. Used by 50,000+ professionals."
+        keywords="free online tools, free ai tools, privacy first productivity suite, browser based tools, offline productivity software, free image editor online, secure pdf editor, free qr generator, temp mail generator, ai writing assistant free, kanban board software, drawing app online, calculator online, free coding tools, online productivity suite, all in one tool, web utilities"
         path="/"
         schema={homeSchema}
         faqs={homeFaqs}
@@ -169,7 +177,8 @@ export default function Home() {
                   />
                 </h1>
                 <p className="hero-text-description">
-                  The world's most powerful browser-native AI suite. 52+ professional tools for 
+                  The world's most powerful browser-native AI suite. 121+ professional tools for 
+                  <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> task management </span>, 
                   <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> content generation </span>, 
                   <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> secure PDF management </span>, 
                   <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> scientific mathematics </span>,
@@ -206,7 +215,7 @@ export default function Home() {
                   <input
                     type="text"
                     className="search-input"
-                    placeholder="Search 63+ professional tools..."
+                    placeholder="Search 121+ professional tools..."
                     value={searchTerm}
                     onChange={handleSearchChange}
                     onKeyDown={handleKeyDown}
@@ -545,6 +554,43 @@ export default function Home() {
                       </div>
                       <div className="tools-grid">
                         {aiTools.map((tool) => (
+                          <ToolCard
+                            key={tool.path}
+                            tool={tool}
+                          />
+                        ))}
+                      </div>
+                    </section>
+                  )}
+
+                  {/* Productivity Tools Category */}
+                  {!isSearching && (
+                    <section style={{ marginBottom: '6rem', position: 'relative' }}>
+                      <div style={{
+                        position: 'sticky',
+                        top: '80px',
+                        zIndex: 10,
+                        background: 'rgba(var(--bg-primary-rgb), 0.7)',
+                        backdropFilter: 'blur(24px)',
+                        WebkitBackdropFilter: 'blur(24px)',
+                        padding: '1.5rem 0',
+                        marginBottom: '3rem',
+                        boxShadow: '0 4px 40px rgba(0, 0, 0, 0.05)',
+                        borderBottom: '1px solid rgba(255,255,255,0.05)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '1.2rem',
+                        borderRadius: '0 0 24px 24px'
+                      }}>
+                        <div style={{ padding: '0.6rem', background: 'rgba(107, 114, 128, 0.1)', borderRadius: '12px', color: '#6366f1' }}>
+                          <FileText size={24} />
+                        </div>
+                        <div>
+                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', margin: 0, letterSpacing: '-0.02em' }}>Productivity Suite <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, fontFamily: '"Inter", sans-serif', marginLeft: '0.5rem' }}>({productivityTools.length} Tools)</span></h2>
+                        </div>
+                      </div>
+                      <div className="tools-grid">
+                        {productivityTools.map((tool) => (
                           <ToolCard
                             key={tool.path}
                             tool={tool}

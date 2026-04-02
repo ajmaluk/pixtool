@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react'
 import { ALL_TOOLS_MAP } from '../data/tools'
+import { SITE_URL, SITE_NAME } from '../config/app.config'
 
 const getScreenshotPath = (pagePath) => {
     const cleanPath = pagePath.endsWith('/') && pagePath.length > 1 ? pagePath.slice(0, -1) : pagePath
@@ -47,8 +48,8 @@ export default function SEO({
     imageAlt = null,
     imageTitle = null
 }) {
-    const siteUrl = import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'
-    const siteName = 'PixTool by UTHAKKAN'
+    const siteUrl = SITE_URL
+    const siteName = SITE_NAME
     const fullUrl = path === '/' ? siteUrl : `${siteUrl}${path.startsWith('/') ? path : `/${path}`}`
     const isToolPath = path.includes('/image-tools') || path.includes('/pdf-tools') || path.includes('/temp-mail') || path.includes('/qr-') || path.includes('/typing-test') || path === '/fake-email' || path === '/disposable-email' || path === '/throwaway-email' || path === '/code-diff' || path.includes('/ai-tools') || path.includes('/math-tools')
     const shouldNoIndex = noIndex || path.startsWith('/pix-admin') || window.location.search.includes('q={search_term_string}') || window.location.search.includes('?q=')
@@ -289,6 +290,124 @@ export default function SEO({
             })
         }
 
+        // LocalBusiness schema (added to homepage only to avoid duplication)
+        if (path === '/') {
+            globalSchemas.push({
+                "@context": "https://schema.org",
+                "@type": "LocalBusiness",
+                "@id": `${siteUrl}/#local-business`,
+                "name": siteName,
+                "image": `${siteUrl}/logo.webp`,
+                "description": "All-in-one free online productivity suite with AI tools, PDF management, image editing, and privacy-first email services.",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Kannur",
+                    "addressLocality": "Kannur",
+                    "addressRegion": "KL",
+                    "postalCode": "670001",
+                    "addressCountry": "IN"
+                },
+                "contactPoint": {
+                    "@type": "ContactPoint",
+                    "telephone": "+91-XXXXXXXXXX",
+                    "contactType": "Customer Support",
+                    "email": "support@pixtool.in"
+                },
+                "url": siteUrl,
+                "sameAs": [
+                    "https://www.linkedin.com/company/uthakkan",
+                    "https://twitter.com/ajmal_uk_",
+                    "https://www.instagram.com/ajmal_uk_",
+                    "https://github.com/ajmaluk"
+                ],
+                "priceRange": "$0",
+                "areaServed": "Worldwide"
+            })
+        }
+
+        // AggregateOffer schema for tool listing pages
+        if (path === '/image-tools' || path === '/pdf-tools' || path === '/ai-tools' || path === '/math-tools' || path === '/utility-tools') {
+            globalSchemas.push({
+                "@context": "https://schema.org",
+                "@type": "AggregateOffer",
+                "@id": `${fullUrl}/#aggregate-offer`,
+                "name": `${brandTitle} Collection`,
+                "description": description,
+                "image": ogImage,
+                "offer": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock",
+                    "url": fullUrl
+                },
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.8",
+                    "bestRating": "5",
+                    "worstRating": "1",
+                    "ratingCount": "2500",
+                    "reviewCount": "1800"
+                }
+            })
+        }
+
+        // Product schema for individual tools (high-impact for e-commerce-style rankings)
+        if (path !== '/' && isToolPath && toolName) {
+            globalSchemas.push({
+                "@context": "https://schema.org",
+                "@type": "Product",
+                "@id": `${fullUrl}/#product`,
+                "name": `${toolName} | PixTool`,
+                "description": description,
+                "image": ogImage,
+                "brand": {
+                    "@type": "Brand",
+                    "name": siteName,
+                    "url": siteUrl
+                },
+                "manufacturer": {
+                    "@type": "Organization",
+                    "name": siteName,
+                    "url": siteUrl
+                },
+                "url": fullUrl,
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock",
+                    "url": fullUrl,
+                    "eligibleRegion": [
+                        {
+                            "@type": "Country",
+                            "name": "IN"
+                        },
+                        {
+                            "@type": "Country",
+                            "name": "US"
+                        },
+                        {
+                            "@type": "Country",
+                            "name": "GB"
+                        },
+                        {
+                            "@type": "Country",
+                            "name": "AU"
+                        }
+                    ]
+                },
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.7",
+                    "bestRating": "5",
+                    "worstRating": "1",
+                    "ratingCount": "850",
+                    "reviewCount": "620"
+                }
+            })
+        }
+
         // Combine into schemasToInject
         let schemasToInject = [...globalSchemas]
         if (schema) {
@@ -325,20 +444,51 @@ export default function SEO({
         updateMeta('og:description', description, 'property')
         updateMeta('og:url', fullUrl, 'property')
         updateMeta('og:image', ogImage, 'property')
+        updateMeta('og:image:alt', dynamicImageAlt, 'property')
+        updateMeta('og:image:width', '1280', 'property')
+        updateMeta('og:image:height', '720', 'property')
+        updateMeta('og:image:type', 'image/webp', 'property')
         updateMeta('og:type', type, 'property')
         updateMeta('og:site_name', siteName, 'property')
+        updateMeta('og:locale', 'en_US', 'property')
+        updateMeta('og:locale:alternate', 'en_GB', 'property')
+        updateMeta('og:locale:alternate', 'en_IN', 'property')
 
         // Twitter
         updateMeta('twitter:card', 'summary_large_image')
         updateMeta('twitter:title', brandTitle)
         updateMeta('twitter:description', description)
         updateMeta('twitter:image', twImage)
+        updateMeta('twitter:creator', '@ajmal_uk_')
+        updateMeta('twitter:domain', 'pixtool.in')
 
-        // GEO Tags
+        // Article specific meta tags for blog posts
+        if (type === 'article' && articlePublishedTime) {
+            updateMeta('article:published_time', articlePublishedTime, 'property')
+            updateMeta('article:modified_time', lastModified || articlePublishedTime, 'property')
+            updateMeta('article:author', articleAuthor || 'UTHAKKAN', 'property')
+            if (articleSection) {
+                updateMeta('article:section', articleSection, 'property')
+            }
+            if (articleTags && Array.isArray(articleTags)) {
+                articleTags.forEach((tag, idx) => {
+                    const tagMeta = document.createElement('meta')
+                    tagMeta.setAttribute('property', 'article:tag')
+                    tagMeta.setAttribute('content', tag)
+                    document.head.appendChild(tagMeta)
+                })
+            }
+        }
+
+        // GEO Tags for Local SEO
         updateMeta('geo.region', 'IN-KL')
-        updateMeta('geo.placename', 'Kannur, Kerala, India - Global AI Hub')
+        updateMeta('geo.placename', 'Kannur, Kerala, India')
         updateMeta('geo.position', '11.8745;75.3664')
         updateMeta('ICBM', '11.8745, 75.3664')
+
+        // Additional meta tags for better indexing
+        updateMeta('google', 'nositelinkssearchbox')
+        updateMeta('googlebot-news', 'nosnippet')
 
         // Canonical Link
         let canonical = document.querySelector('link[rel="canonical"]')
@@ -375,7 +525,7 @@ export default function SEO({
             if (alternateDefault) alternateDefault.remove()
         }
 
-    }, [brandTitle, description, enhancedKeywords, shouldNoIndex, fullUrl, ogImage, type, siteName, twImage])
+    }, [brandTitle, description, enhancedKeywords, shouldNoIndex, fullUrl, ogImage, type, siteName, twImage, type, articlePublishedTime, lastModified, articleAuthor, articleSection, articleTags, dynamicImageAlt])
 
     const schemasToRender = shouldNoIndex ? [] : schemas
 

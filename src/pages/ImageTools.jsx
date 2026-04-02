@@ -346,7 +346,7 @@ export default function ImageTools() {
       "@type": "CollectionPage",
       "name": "Free Online Image Studio - PixTool",
       "description": pageDescription,
-      "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools`
+      "url": `${SITE_URL}/image-tools`
     },
     {
       "@context": "https://schema.org",

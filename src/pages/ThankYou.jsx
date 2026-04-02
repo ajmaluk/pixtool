@@ -2,6 +2,7 @@ import React from 'react';
 import SEO from '../components/SEO';
 import { Heart, PartyPopper, ArrowLeft, Share2 } from 'lucide-react';
 import { useAlert } from '../context/ConfirmContext';
+import { SITE_URL } from '../config/app.config';
 
 export default function ThankYou() {
     const alert = useAlert();
@@ -34,9 +35,9 @@ export default function ThankYou() {
                         </a>
                         <button className="btn btn-secondary" style={{ gap: '10px', padding: '1.25rem 2.5rem' }} onClick={() => {
                             if (navigator.share) {
-                                navigator.share({ title: 'PixTool', url: `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}` });
+                                navigator.share({ title: 'PixTool', url: SITE_URL });
                             } else {
-                                navigator.clipboard.writeText(`${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}`);
+                                navigator.clipboard.writeText(SITE_URL);
                                 alert({
                                     title: 'Link Copied',
                                     message: 'PixTool link has been copied to your clipboard!',

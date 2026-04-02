@@ -110,6 +110,21 @@ const sitemapSections = [
         ]
     },
     {
+        title: "Professional Productivity Suite",
+        icon: Briefcase,
+        links: [
+            { name: "Productivity Home", path: "/productivity-tools", description: "All-in-one private hub for professional workflow and task management." },
+            { name: "Todo List", path: "/productivity-tools/todo", description: "High-performance task management with priorities and local database save." },
+            { name: "Kanban Board", path: "/productivity-tools/kanban", description: "Visual drag-and-drop workflow for project tracking and board progress." },
+            { name: "Notepad Pro", path: "/productivity-tools/notepad", description: "Secure markdown editor with word count, auto-save, and text export." },
+            { name: "Drawing Board", path: "/productivity-tools/drawing-board", description: "Digital canvas for sketching, wireframing, and creative export." },
+            { name: "File Vault", path: "/productivity-tools/file-manager", description: "Secure local storage for virtual file management and IndexedDB browsing." },
+            { name: "Focus Clock", path: "/productivity-tools/pomodoro", description: "Scientific Pomodoro timer for deep work and concentration intervals." },
+            { name: "Sticky Notes", path: "/productivity-tools/sticky-notes", description: "Color-coded virtual notes for brainstorming and rapid thinking." },
+            { name: "Habit Tracker", path: "/productivity-tools/habit-tracker", description: "Visual consistency manager for building routines and daily tracking streaks." }
+        ]
+    },
+    {
         title: "Company & Resources",
         icon: Info,
         links: [
@@ -117,6 +132,7 @@ const sitemapSections = [
             { name: "The Founder", path: "/founder", description: "Meet the creator of PixTool and the UTHAKKAN team." },
             { name: "Our Services", path: "/services", description: "Explore additional professional services we offer." },
             { name: "Testimonials", path: "/testimonials", description: "What our users say about their experience with PixTool." },
+            { name: "Status & Changelog", path: "/status", description: "Track the latest implementation updates, validation notes, and documentation index." },
             { name: "Case Studies", path: "/case-studies", description: "In-depth look at how professionals use our tools." },
             { name: "Documentation", path: "/documentation", description: "Comprehensive guides on how to use every tool." },
             { name: "Contact Support", path: "/contact", description: "Get in touch for feedback, support, or collaboration." }
@@ -167,24 +183,27 @@ export default function Sitemap() {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
         "name": "Sitemap - All PixTool",
-        "description": "Complete directory of all free online tools at PixTool. Find image editors, PDF processors, temp mail, and QR tools in one easy-to-navigate sitemap.",
-        "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/sitemap`,
+        "description": "Complete directory of 121+ free online tools at PixTool. Find image editors, PDF processors, AI assistants, and our new local-first Productivity Suite.",
+        "url": `${SITE_URL}/sitemap`,
         "mainEntity": {
             "@type": "ItemList",
             "name": "All PixTool Pages",
             "description": "Complete list of all pages and tools available on PixTool",
             "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Home", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/` },
-                { "@type": "ListItem", "position": 2, "name": "Image Tools", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/image-tools` },
-                { "@type": "ListItem", "position": 3, "name": "PDF Tools", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/pdf-tools` },
-                { "@type": "ListItem", "position": 4, "name": "AI Tools", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/ai-tools` },
-                { "@type": "ListItem", "position": 5, "name": "Utility Tools", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/utility-tools` },
-                { "@type": "ListItem", "position": 6, "name": "Code Diff", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/code-diff` },
-                { "@type": "ListItem", "position": 7, "name": "JSON Formatter", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/json-formatter` },
-                { "@type": "ListItem", "position": 8, "name": "Temporary Email", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail` },
-                { "@type": "ListItem", "position": 9, "name": "10 Minute Mail", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/temp-mail/10-minute-mail` },
-                { "@type": "ListItem", "position": 10, "name": "About Us", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/about` },
-                { "@type": "ListItem", "position": 11, "name": "Privacy Policy", "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/privacy-policy` }
+                { "@type": "ListItem", "position": 1, "name": "Home", "url": `${SITE_URL}/` },
+                { "@type": "ListItem", "position": 2, "name": "Image Tools", "url": `${SITE_URL}/image-tools` },
+                { "@type": "ListItem", "position": 3, "name": "PDF Tools", "url": `${SITE_URL}/pdf-tools` },
+                { "@type": "ListItem", "position": 4, "name": "Utility Tools", "url": `${SITE_URL}/utility-tools` },
+                { "@type": "ListItem", "position": 5, "name": "Productivity Suite", "url": `${SITE_URL}/productivity-tools` },
+                { "@type": "ListItem", "position": 6, "name": "AI Tools", "url": `${SITE_URL}/ai-tools` },
+                { "@type": "ListItem", "position": 7, "name": "Mathematics Hub", "url": `${SITE_URL}/math-tools` },
+                { "@type": "ListItem", "position": 8, "name": "Code Diff", "url": `${SITE_URL}/code-diff` },
+                { "@type": "ListItem", "position": 9, "name": "JSON Formatter", "url": `${SITE_URL}/json-formatter` },
+                { "@type": "ListItem", "position": 10, "name": "Temporary Email", "url": `${SITE_URL}/temp-mail` },
+                { "@type": "ListItem", "position": 11, "name": "10 Minute Mail", "url": `${SITE_URL}/temp-mail/10-minute-mail` },
+                { "@type": "ListItem", "position": 12, "name": "Status & Changelog", "url": `${SITE_URL}/status` },
+                { "@type": "ListItem", "position": 13, "name": "About Us", "url": `${SITE_URL}/about` },
+                { "@type": "ListItem", "position": 14, "name": "Privacy Policy", "url": `${SITE_URL}/privacy-policy` }
             ]
         }
     }

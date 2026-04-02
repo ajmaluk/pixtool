@@ -12,7 +12,6 @@ Disallow: /pix-admin/
 Disallow: /api/
 
 # Modern AI Crawler Controls (Standard & Valid Directives)
-# These replace the non-standard "Content-Signal" with recognized robot directives
 User-agent: GPTBot
 Disallow: /
 

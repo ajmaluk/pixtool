@@ -32,14 +32,24 @@ const faqData = [
     {
         category: "PDF Tools",
         questions: [
-            { q: "Can I merge multiple PDFs?", a: "Yes, you can merge as many PDF files as you like into a single document." },
+            { q: "Can I merge multiple PDFs?", a: "Yes, you can merge as many PDF files as you like into a single high-quality document." },
             { q: "Does splitting a PDF reduce quality?", a: "No, our PDF tools preserve the original quality of the source document during split and merge operations." },
-            { q: "Can I password protect my PDFs?", a: "Currently we don't offer password protection, but you can convert PDFs to images for secure sharing." },
-            { q: "Can I convert images to PDF?", a: "Yes! Use our PDF tools to combine images into a PDF document." },
-            { q: "How much can I compress a PDF?", a: "Compression depends on the content. Most PDFs can be reduced by 50-90%." },
-            { q: "Can I extract specific pages from a PDF?", a: "Yes! Use our split tool to extract any page or page range." },
-            { q: "Do you support scanned PDFs?", a: "Yes, scanned PDFs work with our tools, though quality depends on the scan resolution." },
-            { q: "Can I convert PDF to Word?", a: "Currently we support PDF to image conversion. For Word, we'd recommend other specialized tools." }
+            { q: "Is my data safe during compression?", a: "Absolutely. All PDF compression happens locally in your browser using WebAssembly. Your files are never uploaded." },
+            { q: "Can I convert images to PDF?", a: "Yes! Use our 'Image to PDF' tool to combine multiple photos into a single professional PDF document." },
+            { q: "What's the maximum file size for PDF compression?", a: "Our local engine can handle PDFs up to several hundred MBs depending on your device's memory." },
+            { q: "Can I extract specific pages from a PDF?", a: "Yes! Use our 'Split PDF' tool to extract individual pages or a range of pages instantly." },
+            { q: "Is registration required for PDF tools?", a: "No. All PDF tools are 100% free with no registration, no watermarks, and no sign-ups." },
+            { q: "Do you support OCR?", a: "Currently, we focus on high-speed manipulation. Advanced OCR (text recognition) is on our roadmap for later in 2026." }
+        ]
+    },
+    {
+        category: "Productivity Suite",
+        questions: [
+            { q: "Where is my Todo List and Kanban data stored?", a: "All productivity data (Tasks, Kanban boards, and Sticky Notes) is stored strictly in your browser's IndexedDB and LocalStorage. It remains available even after you close the tab." },
+            { q: "Can I use the productivity tools offline?", a: "Yes! Once you've loaded PixTool, the Todo List, Kanban, and Draw tools work completely offline as all processing and storage are local." },
+            { q: "How secure are my Notepad entries?", a: "Maximum security. Since we never upload your data, your private notes are only accessible on your physical device unless you choosing to download or export them." },
+            { q: "Is there a limit to how many Sticky Notes I can create?", a: "There are no hard limits. You can fill your virtual board with as many notes as your browser storage allows." },
+            { q: "Does the Habit Tracker lose data on refresh?", a: "No. Your progress is persisted in real-time, allowing you to track your streaks over weeks and months perfectly." }
         ]
     },
     {
@@ -94,7 +104,7 @@ export default function FAQ() {
             "mainEntity": faqData.flatMap((cat, catIdx) => cat.questions.map((q, qIdx) => ({
                 "@type": "Question",
                 "name": q.q,
-                "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/faq#q-${catIdx}-${qIdx}`,
+                "url": `${SITE_URL}/faq#q-${catIdx}-${qIdx}`,
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": q.a

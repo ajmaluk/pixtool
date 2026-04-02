@@ -2,6 +2,7 @@ import { Calculator, Zap, Lock, Compass } from 'lucide-react'
 import ToolCard from '../components/ToolCard'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
+import AdSpace from '../components/AdSpace'
 import { MATH_TOOLS } from '../data/tools'
 
 const tools = MATH_TOOLS.filter(t => !t.status);

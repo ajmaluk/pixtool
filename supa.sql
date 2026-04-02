@@ -5,13 +5,13 @@
 -- 2. Go to SQL Editor > New Query
 -- 3. Paste this entire file and Run
 -- 4. In Settings > API, copy URL and anon key to your .env:
---    VITE_SUPABASE_URL=https://qqkguvtujmiajoamuqor.supabase.co
---    VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxa2d1dnR1am1pYWpvYW11cW9yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNDczMTksImV4cCI6MjA4OTgyMzMxOX0.zlqGivZngxtYiFw4SD-YQa5VqAh45yuUt2CPyk5E3Co
+--    VITE_SUPABASE_URL=<YOUR_SUPABASE_URL>
+--    VITE_SUPABASE_ANON_KEY=<YOUR_SUPABASE_ANON_KEY>
 -- 5. Set up Edge Functions (Optional for Admin/Metrics):
 --    - Install Supabase CLI: brew install supabase/tap/supabase
 --    - Login & Link: supabase login && supabase link --project-ref your-project-id
 --    - Set secrets:
---      supabase secrets set ADMIN_USERNAME=ajmal ADMIN_PASSWORD=Ajmal@123 ADMIN_SESSION_SECRET=ajmaluk123pixtool.in-2026
+--      supabase secrets set ADMIN_USERNAME=<ADMIN_USERNAME> ADMIN_PASSWORD=<ADMIN_PASSWORD> ADMIN_SESSION_SECRET=<ADMIN_SESSION_SECRET>
 --    - Deploy: supabase functions deploy
 -- ==========================================
 

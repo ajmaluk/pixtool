@@ -57,10 +57,22 @@ export default function Footer() {
         </div>
 
         <div className="footer-links-group">
+          <h3 className="footer-heading">Productivity</h3>
+          <ul className="footer-links">
+            <li><Link to="/productivity-tools/todo" title="Manage your daily tasks with our private todo list">Private Todo List</Link></li>
+            <li><Link to="/productivity-tools/kanban" title="Visual project management with kanban boards">Kanban Board</Link></li>
+            <li><Link to="/productivity-tools/notepad" title="Distraction-free markdown notepad with auto-save">Secure Notepad</Link></li>
+            <li><Link to="/productivity-tools/pomodoro" title="Focus timer for deep work sessions">Pomodoro Clock</Link></li>
+            <li><Link to="/productivity-tools/file-manager" title="Manage your browser-native local file vault">File Manager</Link></li>
+          </ul>
+        </div>
+
+        <div className="footer-links-group">
           <h3 className="footer-heading">Company</h3>
           <ul className="footer-links">
             <li><Link to="/about" title="Learn about the mission and technology of PixTool">About Our Mission</Link></li>
             <li><Link to="/blog" title="Read our latest productivity tutorials and guides">Expert Guides</Link></li>
+            <li><Link to="/status" title="Review the current PixTool status, changelog, and implementation notes">Status & Changelog</Link></li>
             <li><Link to="/showcase" title="View screenshots of our professional tool interfaces">Visual Showcase</Link></li>
             <li><Link to="/contact" title="Get in touch for support or feedback">Support Center</Link></li>
             <li><Link to="/sitemap" title="View the comprehensive HTML sitemap for PixTool">HTML Sitemap</Link></li>

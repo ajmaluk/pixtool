@@ -39,7 +39,7 @@ export default function Contact() {
       '@type': 'ContactPage',
       name: 'Contact PixTool Support',
       description: 'Get in touch with PixTool for support and partnerships.',
-      url: `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/contact`,
+      url: `${SITE_URL}/contact`,
     },
   ];
 

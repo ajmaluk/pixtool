@@ -1,6 +1,6 @@
 import React from 'react';
 import SEO from '../components/SEO';
-import { motion as Motion } from 'framer-motion';
+import { SITE_URL } from '../config/app.config'
 import { Target, Eye, Rocket, Shield, Zap, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import uthakkanLogo from '../assets/uthakkan.webp';
@@ -18,7 +18,7 @@ export default function About() {
                 "url": "https://www.uthakkan.in",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.webp`
+                    "url": `${SITE_URL}/logo.webp`
                 },
                 "email": "contact@uthakkan.com",
                 "foundingDate": "2025",
@@ -153,7 +153,7 @@ export default function About() {
                             </div>
                             <h2 style={{ fontSize: '2rem', fontWeight: 850, marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>The Tech</h2>
                             <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8' }}>
-                                Built with <b>React 19, Framer Motion, and WebAssembly</b>. We leverage the full power of your modern browser to deliver sub-second response times for images, PDFs, and secure communications.
+                                Built with <b>React 19, Framer Motion, and WebAssembly</b>. We leverage the full power of your modern browser to deliver sub-second response times for 121+ tools across Productivity, AI, Image, PDF, and Math suites.
                             </p>
                         </Motion.div>
                     </Motion.div>
@@ -202,10 +202,11 @@ export default function About() {
                         <p className="page-cta-text">
                             Join thousands of professionals using our 100% private, browser-based tools every day. No signups, no fees.
                         </p>
-                        <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                            <Link to="/image-tools" className="btn btn-primary" style={{ background: '#fff', color: '#000', border: 'none' }}>Image Tools</Link>
-                            <Link to="/pdf-tools" className="btn btn-primary" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>PDF Tools</Link>
-                            <Link to="/utility-tools" className="btn btn-primary" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>Utility Tools</Link>
+                        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                            <Link to="/productivity-tools" className="btn btn-primary" style={{ background: '#fff', color: '#000', border: 'none' }}>Productivity Suite</Link>
+                            <Link to="/ai-tools" className="btn btn-primary" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>AI Tools</Link>
+                            <Link to="/image-tools" className="btn btn-primary" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>Image Studio</Link>
+                            <Link to="/pdf-tools" className="btn btn-primary" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>PDF Expert</Link>
                         </div>
                     </Motion.div>
                 </div>

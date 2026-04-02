@@ -9,6 +9,8 @@ import { TOOL_SPECIFIC_FAQS } from '../data/faqs'
 import ShareTool from '../components/ShareTool'
 import { useRatePopup } from '../hooks/useRatePopup'
 import { useConfirm } from '../context/ConfirmContext'
+import { getErrorMessage } from '../utils/errorHandling'
+import { API_ENDPOINTS, API_TIMEOUTS } from '../config/app.config'
 
 const TEMPMAIL_DIRECT_BASE = 'https://api.mail.tm'
 
@@ -317,10 +319,19 @@ export default function TempMail({
 
   const refreshInbox = async () => {
     setRefreshing(true)
-    const msgs = await tempMailRef.current.checkInbox()
-    setMessages(msgs)
-    if (email) {
-      try { localStorage.setItem(INBOX_PREFIX + email, JSON.stringify(msgs)) } catch (e) { void e }
+    try {
+      const msgs = await tempMailRef.current.checkInbox()
+      if (msgs !== null && msgs !== undefined) {
+        setMessages(msgs || [])
+        if (email) {
+          try { localStorage.setItem(INBOX_PREFIX + email, JSON.stringify(msgs)) } catch (e) { void e }
+        }
+      } else {
+        setToast({ show: true, message: 'Failed to refresh inbox. Please try again.', type: 'error' })
+      }
+    } catch (err) {
+      const errorMsg = getErrorMessage(err, 'TEMPMAIL_REFRESH')
+      setToast({ show: true, message: errorMsg, type: 'error' })
     }
     setRefreshing(false)
   }
@@ -351,6 +362,9 @@ export default function TempMail({
         token: tempMailRef.current.token
       })
       try { localStorage.setItem(INBOX_PREFIX + tempMailRef.current.email, JSON.stringify([])) } catch (e) { void e }
+      setToast({ show: true, message: 'New email generated successfully!', type: 'success' })
+    } else {
+      setToast({ show: true, message: 'Failed to generate new email. Please try again later.', type: 'error' })
     }
     setLoading(false)
   }

@@ -3,6 +3,7 @@ import { Mail, QrCode, Smartphone, Type, Sliders } from 'lucide-react'
 import ToolCard from '../components/ToolCard'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
+import AdSpace from '../components/AdSpace'
 import { UTILITY_TOOLS } from '../data/tools'
 import { UTILITY_SEO_CONTENT } from '../data/utilityToolsData'
 
@@ -23,7 +24,7 @@ export default function UtilityTools() {
             "@type": "CollectionPage",
             "name": "Free Web Utility Tools - PixTool",
             "description": seoContent.description,
-            "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/utility-tools`
+            "url": `${SITE_URL}/utility-tools`
         },
         {
             "@context": "https://schema.org",
@@ -54,7 +55,6 @@ export default function UtilityTools() {
                 ]}
             />
             <div className="landing-layout">
-
                 <div className="landing-center">
                     <div className="page-hero">
                         <div className="page-hero-content">

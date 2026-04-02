@@ -5,7 +5,9 @@ import {
   FlipHorizontal, Globe, Grid, Hash, Image as ImageIcon, Key, Lock, 
   Mail, Maximize2, Megaphone, MessageSquare, Palette, PenTool, 
   Percent, QrCode, RefreshCw, RotateCw, Scale, Search, Sliders, 
-  Smartphone, SplitSquareHorizontal, TrendingUp, Type
+  Smartphone, SplitSquareHorizontal, TrendingUp, Type,
+  CheckSquare, Layout, Pencil, Folder, Timer, StickyNote, Activity,
+  ListTodo, ClipboardList, Zap
 } from 'lucide-react';
 
 export const IMAGE_TOOLS = [
@@ -497,13 +499,80 @@ export const MATH_TOOLS = [
   }
 ];
 
+export const PRODUCTIVITY_TOOLS = [
+  {
+    id: 'todo', title: 'Todo List', icon: ListTodo,
+    description: 'High-performance task management with priorities, categories, and browser-native persistence.',
+    color: '#4f46e5', path: '/productivity-tools/todo', screenshot: 'online-todo-list-pixtool.png',
+    imageAlt: 'PixTool Todo List - Private Task Management',
+    imageTitle: 'Free Online Todo List with Persistence',
+    features: ['Task priorities', 'Category grouping', 'Auto-save locally', 'One-click clearing'],
+    howItWorks: ['Add your tasks', 'Set priority and category', 'Check off as you complete']
+  },
+  {
+    id: 'kanban', title: 'Kanban Board', icon: Layout,
+    description: 'Professional drag-and-drop board for visual project tracking. 100% private and on-device.',
+    color: '#8b5cf6', path: '/productivity-tools/kanban', screenshot: 'kanban-board-online-free.png',
+    imageAlt: 'PixTool Kanban Board - Visual Workflow Management',
+    imageTitle: 'Free Online Kanban Board Pro',
+    features: ['Drag-and-drop workflow', 'Custom card notes', 'Visual progress tracking', 'Instant local save']
+  },
+  {
+    id: 'notepad', title: 'NotePad Pro', icon: FileText,
+    description: 'Focus-built markdown editor with syntax highlighting, auto-save, and instant text exports.',
+    color: '#06b6d4', path: '/productivity-tools/notepad', screenshot: 'professional-online-notepad-pixtool.png',
+    imageAlt: 'PixTool Notepad - Secure Markdown Editor',
+    imageTitle: 'Free Online Notepad with Auto-save',
+    features: ['Markdown support', 'Live word count', 'Auto-save to browser', 'Download as .txt / .md']
+  },
+  {
+    id: 'drawing-board', title: 'Drawing Board', icon: Pencil,
+    description: 'Full-featured digital canvas for sketching, wireframing, and creative design directly in your browser.',
+    color: '#ec4899', path: '/productivity-tools/drawing-board', screenshot: 'online-drawing-canvas-free.png',
+    imageAlt: 'PixTool Drawing Board - Digital Sketching Studio',
+    imageTitle: 'Free Online Drawing Tool for Sketching',
+    features: ['Brush & Shape tools', 'Multi-color palette', 'High-res exports', 'Layer-like control']
+  },
+  {
+    id: 'file-manager', title: 'File Vault', icon: Folder,
+    description: 'Browser-native file manager. Store, organize, and manage your virtual files securely in IndexedDB.',
+    color: '#f59e0b', path: '/productivity-tools/file-manager', screenshot: 'indexeddb-file-manager-online.png',
+    imageAlt: 'PixTool File Manager - Local Storage Explorer',
+    imageTitle: 'Private Local File Manager Online',
+    features: ['IndexedDB storage', 'Visual quota tracking', 'Folder organization', 'Import/Export system']
+  },
+  {
+    id: 'pomodoro', title: 'Focus Clock', icon: Timer,
+    description: 'Aesthetic Pomodoro timer designed to boost deep work through scientifically proven rest intervals.',
+    color: '#ef4444', path: '/productivity-tools/pomodoro', screenshot: 'pomodoro-timer-focus-clock.png',
+    imageAlt: 'PixTool Pomodoro Timer - productivity focus tool',
+    imageTitle: 'Free Online Pomodoro Timer'
+  },
+  {
+    id: 'sticky-notes', title: 'Sticky Notes', icon: StickyNote,
+    description: 'Virtual board for movable, color-coded sticky notes. Perfect for brainstorming and quick reminders.',
+    color: '#10b981', path: '/productivity-tools/sticky-notes', screenshot: 'virtual-sticky-notes-board.png',
+    imageAlt: 'PixTool Sticky Notes - Digital Brainstorming Board',
+    imageTitle: 'Online Virtual Sticky Notes Board'
+  },
+  {
+    id: 'habit-tracker', title: 'Habit Tracker', icon: Activity,
+    description: 'Track your daily routines and build long-term consistency with our visual habit streak manager.',
+    color: '#3b82f6', path: '/productivity-tools/habit-tracker', screenshot: 'habit-tracker-consistency-manager.png',
+    imageAlt: 'PixTool Habit Tracker - Daily Routine Manager',
+    imageTitle: 'Free Online Habit Tracker Pro'
+  }
+];
+
 export const ALL_TOOLS_MAP = {
   ...IMAGE_TOOLS.reduce((acc, t) => ({ ...acc, [t.path]: t }), {}),
   ...PDF_TOOLS.reduce((acc, t) => ({ ...acc, [t.path]: t }), {}),
   ...UTILITY_TOOLS.reduce((acc, t) => ({ ...acc, [t.path]: t }), {}),
   ...AI_TOOLS.reduce((acc, t) => ({ ...acc, [t.path]: t }), {}),
   ...MATH_TOOLS.reduce((acc, t) => ({ ...acc, [t.path]: t }), {}),
+  ...PRODUCTIVITY_TOOLS.reduce((acc, t) => ({ ...acc, [t.path]: t }), {}),
   '/utility-tools': { title: 'Utility Suite', icon: Sliders },
   '/ai-tools': { title: 'AI Suite', icon: MessageSquare },
-  '/math-tools': { title: 'Math Suite', icon: Calculator }
+  '/math-tools': { title: 'Math Suite', icon: Calculator },
+  '/productivity-tools': { title: 'Productivity Suite', icon: Zap }
 };

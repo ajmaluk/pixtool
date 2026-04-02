@@ -2,6 +2,7 @@ import React from 'react';
 import SEO from '../components/SEO';
 import { Github, Linkedin, Twitter, Coffee, Code, Layers, Cpu, Globe } from 'lucide-react';
 import profileImg from '../assets/ajmaluk.png';
+import { SITE_URL } from '../config/app.config';
 
 export default function Developer() {
     const devSchema = [
@@ -10,11 +11,11 @@ export default function Developer() {
             "@type": "Person",
             "name": "Muhammed Ajmal U K",
             "alternateName": "Ajmal U K",
-            "url": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/developer`,
-            "image": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/ajmaluk.png`,
+            "url": `${SITE_URL}/developer`,
+            "image": `${SITE_URL}/ajmaluk.png`,
             "jobTitle": "Full Stack Developer & Founder",
             "worksFor": {
-                "@id": `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/#organization`
+                "@id": `${SITE_URL}/#organization`
             },
             "sameAs": [
                 "https://github.com/ajmal-uk",
