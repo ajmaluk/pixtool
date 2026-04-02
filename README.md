@@ -5,7 +5,6 @@
 🔗 **Live:** [pixtool.toolpix.in](https://pixtool.toolpix.in)
 
 ## Features
-
 ### 🖼️ Image Tools
 - **Resize Image** — Change dimensions with pixel-perfect accuracy
 - **Crop Image** — Cut out unwanted areas with preset ratios
