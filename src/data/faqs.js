@@ -21,5 +21,15 @@ export const TOOL_SPECIFIC_FAQS = {
     { q: "Is this QR generator free for commercial use?", a: "Yes. You can generate unlimited QR codes for your business, marketing materials, or personal projects without any licensing fees or attribution required." },
     { q: "Do these QR codes expire?", a: "No. Our QR codes are static, meaning they contain the data directly. As long as the link or information inside is valid, the QR code will work forever." },
     { q: "Can I customize the color and logo?", a: "Yes! Our professional generator allows you to change colors, add custom logos, and choose different frame styles to match your brand identity." }
+  ],
+  'scientific-calculator': [
+    { q: "Is this scientific calculator as accurate as a physical one?", a: "Yes. Our math engine uses high-precision decimal libraries to ensure that calculations stay accurate even with very large numbers or complex trigonometric functions, matching or exceeding hardware calculators." },
+    { q: "Does it support calculus and statistics?", a: "Absolutely. You can perform derivatives, integrals, and statistical analysis (mean, median, standard deviation) directly in the advanced mode. All calculations are processed locally for instant results." },
+    { q: "Can I save my calculation history?", a: "Yes. Your recent calculations are stored safely in your browser's local storage. They will be available even if you refresh the page or return later, provided you don't clear your browser data." }
+  ],
+  'todo': [
+    { q: "Where is my todo list stored?", a: "Your tasks are stored 100% locally in your browser using IndexedDB. We never upload your personal tasks or notes to any server, ensuring complete privacy." },
+    { q: "Can I organize tasks with priorities and tags?", a: "Yes. You can assign Priority (Low, Medium, High, Urgent) to each task and add custom tags to categorize your work. You can also filter by these fields to stay focused." },
+    { q: "Is there a way to export my data?", a: "Yes! You can export your entire task list as a JSON or CSV file at any time. This allows you to keep backups or migrate your data to other tools if needed." }
   ]
 };
