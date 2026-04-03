@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Mail, QrCode, Smartphone, Type, Sliders } from 'lucide-react'
+import { Mail, QrCode, Smartphone } from 'lucide-react'
 import ToolCard from '../components/ToolCard'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'

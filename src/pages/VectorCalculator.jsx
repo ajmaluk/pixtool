@@ -4,7 +4,7 @@ import {
 } from 'lucide-react'
 import { create, all } from 'mathjs'
  
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import SEO from '../components/SEO'
 import Breadcrumbs from '../components/Breadcrumbs'
 import AdSpace from '../components/AdSpace'

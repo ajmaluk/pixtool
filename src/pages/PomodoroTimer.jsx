@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Play, Pause, RotateCcw, Coffee, Zap, Moon, Settings, Bell, BellOff } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Play, Pause, RotateCcw, Bell, BellOff } from 'lucide-react'
 import Breadcrumbs from '../components/Breadcrumbs'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
