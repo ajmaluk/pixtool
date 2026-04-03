@@ -57,14 +57,12 @@
   Cache-Control: public, max-age=0, must-revalidate
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  Link: <https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap>; rel=preload; as=style, <https://fonts.gstatic.com>; rel=preconnect; crossorigin
 
 # Root HTML.
 /
   Cache-Control: public, max-age=0, must-revalidate
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
-  Link: <https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap>; rel=preload; as=style, <https://fonts.gstatic.com>; rel=preconnect; crossorigin
 
 # Security and crawler files.
 /.well-known/security.txt

@@ -5,5 +5,8 @@ http://pixtool.in/* https://www.pixtool.in/:splat 301!
 http://www.pixtool.in/* https://www.pixtool.in/:splat 301!
 https://pixtool.in/* https://www.pixtool.in/:splat 301!
 
+# Never rewrite built assets to index.html
+/assets/* /assets/:splat 200
+
 # SPA fallback
 /* /index.html 200
