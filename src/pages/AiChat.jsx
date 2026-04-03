@@ -37,11 +37,13 @@ ${text}`
       <div className="chat-workspace" style={{ marginBottom: '1.5rem' }}>
         {/* Intelligence Forge */}
         <div style={{ marginBottom: '3.5rem' }}>
-          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+          <label htmlFor="ai-chat-prompt" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
             Thought Input Forge
           </label>
           <div style={{ position: 'relative' }}>
             <textarea 
+                id="ai-chat-prompt"
+                name="prompt"
                 className="dalam-textarea"
                 style={{ width: '100%', minHeight: '300px', padding: '2.5rem', fontSize: '1.25rem', background: '#fdfdfd', borderRadius: '32px', border: '1px solid #f4f4f5', outline: 'none', color: '#1a1a1a', lineHeight: 1.7, transition: 'all 0.3s ease' }}
                 placeholder="Submit your query to the Deep Mind core..."

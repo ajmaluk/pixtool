@@ -86,8 +86,10 @@ export default function FinancialCalculator() {
 
                         <div style={{ display: 'grid', gap: '2rem', marginTop: '2.5rem' }}>
                             <div style={{ position: 'relative' }}>
-                                <label style={{ position: 'absolute', left: '16px', top: '12px', fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Principal Amount ($)</label>
+                                <label htmlFor="financial-principal" style={{ position: 'absolute', left: '16px', top: '12px', fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Principal Amount ($)</label>
                                 <input 
+                                    id="financial-principal"
+                                    name="principal"
                                     type="number" 
                                     className="input math-btn-glass" 
                                     value={params.principal}
@@ -96,8 +98,10 @@ export default function FinancialCalculator() {
                                 />
                             </div>
                             <div style={{ position: 'relative' }}>
-                                <label style={{ position: 'absolute', left: '16px', top: '12px', fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Interest Rate (%)</label>
+                                <label htmlFor="financial-rate" style={{ position: 'absolute', left: '16px', top: '12px', fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Interest Rate (%)</label>
                                 <input 
+                                    id="financial-rate"
+                                    name="rate"
                                     type="number" 
                                     className="input math-btn-glass" 
                                     value={params.rate}
@@ -106,8 +110,10 @@ export default function FinancialCalculator() {
                                 />
                             </div>
                             <div style={{ position: 'relative' }}>
-                                <label style={{ position: 'absolute', left: '16px', top: '12px', fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Time (Years)</label>
+                                <label htmlFor="financial-time" style={{ position: 'absolute', left: '16px', top: '12px', fontSize: '0.7rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Time (Years)</label>
                                 <input 
+                                    id="financial-time"
+                                    name="time"
                                     type="number" 
                                     className="input math-btn-glass" 
                                     value={params.time}

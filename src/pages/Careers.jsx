@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { Heart, Coffee, Globe, ArrowRight, Mail } from 'lucide-react';
+import { motion } from 'framer-motion'
 
 export default function Careers() {
     return (

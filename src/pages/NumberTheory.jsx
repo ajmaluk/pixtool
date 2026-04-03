@@ -94,9 +94,11 @@ export default function NumberTheory() {
                     </div>
 
                     <div style={{ marginBottom: '3rem', marginTop: '1.5rem' }}>
-                        <label style={{ display: 'block', marginBottom: '1rem', fontWeight: 900, fontSize: '0.85rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.15em', textAlign: 'center' }}>Enter Integer Target</label>
+                      <label htmlFor="number-theory-input" style={{ display: 'block', marginBottom: '1rem', fontWeight: 900, fontSize: '0.85rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.15em', textAlign: 'center' }}>Enter Integer Target</label>
                         <div className="math-oled-display" style={{ padding: '0.5rem', borderRadius: '20px' }}>
                             <input 
+                          id="number-theory-input"
+                          name="number"
                                 type="number"
                                 className="input math-btn-glass"
                                 value={number}

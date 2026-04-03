@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { 
   Equal, Zap, Info, Search, 
   Settings, Download, Trash, Activity
@@ -77,9 +77,11 @@ export default function EquationSolver() {
                     </div>
 
                     <div style={{ marginBottom: '3rem', marginTop: '1.5rem' }}>
-                        <label style={{ display: 'block', marginBottom: '1rem', fontWeight: 900, fontSize: '0.85rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.15em', textAlign: 'center' }}>Equation (In terms of x)</label>
+                      <label htmlFor="equation-solver-input" style={{ display: 'block', marginBottom: '1rem', fontWeight: 900, fontSize: '0.85rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.15em', textAlign: 'center' }}>Equation (In terms of x)</label>
                         <div className="math-oled-display" style={{ padding: '0.5rem', borderRadius: '20px' }}>
                             <input 
+                          id="equation-solver-input"
+                          name="equation"
                                 className="input math-btn-glass"
                                 value={equation}
                                 onChange={(e) => setEquation(e.target.value)}

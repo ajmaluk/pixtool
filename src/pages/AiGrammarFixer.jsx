@@ -21,10 +21,12 @@ export default function AiGrammarFixer() {
     >
       <div className="grammar-workspace" style={{ marginBottom: '1.5rem' }}>
         <div style={{ marginBottom: '3rem' }}>
-          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+          <label htmlFor="ai-grammar-input" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
             Source Manuscript
           </label>
           <textarea 
+            id="ai-grammar-input"
+            name="inputText"
             className="dalam-textarea"
             style={{ width: '100%', minHeight: '300px', padding: '2rem', fontSize: '1.2rem', border: '1px solid #f4f4f5', background: '#fdfdfd', borderRadius: '32px', color: '#1a1a1a', outline: 'none', lineHeight: 1.6 }}
             placeholder="Paste your text here for linguistic architecting..."

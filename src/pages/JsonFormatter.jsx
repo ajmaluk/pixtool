@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Braces, Copy, Trash2, Check, Download, AlertCircle, FileJson, Zap, Shield, ZapOff } from 'lucide-react'
+import { motion } from 'framer-motion'
 import SEO from '../components/SEO'
 import Breadcrumbs from '../components/Breadcrumbs'
 import ShareTool from '../components/ShareTool'

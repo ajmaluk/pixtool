@@ -3,6 +3,7 @@ import SEO from '../components/SEO';
 import { SITE_URL } from '../config/app.config'
 import { Target, Eye, Rocket, Shield, Zap, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion'
 import uthakkanLogo from '../assets/uthakkan.webp';
 
 export default function About() {
@@ -70,21 +71,21 @@ export default function About() {
             />
 
             <section className="page-hero">
-                <Motion.div
+                <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8 }}
                     className="page-hero-content container-narrow"
                 >
-                    <Motion.div
+                    <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
                         className="status-badge"
                     >
                         THE TEAM BEHIND THE TOOLS
-                    </Motion.div>
-                    <Motion.div
+                    </motion.div>
+                    <motion.div
                         initial={{ opacity: 0, rotate: -5 }}
                         animate={{ opacity: 1, rotate: 0 }}
                         transition={{ delay: 0.3, duration: 0.5 }}
@@ -97,14 +98,14 @@ export default function About() {
                             height="100"
                             style={{ height: '100px', width: 'auto', objectFit: 'contain' }} 
                         />
-                    </Motion.div>
+                    </motion.div>
                     <h1 className="page-title">
                         Uthakkan
                     </h1>
                     <p className="page-subtitle">
                         We build <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}>fast, uncompromising software</span>. Focused on creating digital products that solve complex problems with elegant architecture.
                     </p>
-                    <Motion.div
+                    <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.5 }}
@@ -114,20 +115,20 @@ export default function About() {
                             className="btn btn-secondary">
                             Visit uthakkan.in
                         </a>
-                    </Motion.div>
-                </Motion.div>
+                    </motion.div>
+                </motion.div>
             </section>
 
             <section className="section-padding">
                 <div className="container-wide">
-                    <Motion.div
+                    <motion.div
                         variants={containerVariants}
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, margin: "-100px" }}
                         className="page-grid"
                     >
-                        <Motion.div variants={itemVariants} className="info-card">
+                        <motion.div variants={itemVariants} className="info-card">
                             <div className="info-card-icon" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>
                                 <Target size={32} />
                             </div>
@@ -135,9 +136,9 @@ export default function About() {
                             <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8' }}>
                                 To merge creativity with technology — delivering clean, efficient, and AI-empowered digital products that simplify work, enhance productivity, and inspire innovation.
                             </p>
-                        </Motion.div>
+                        </motion.div>
 
-                        <Motion.div variants={itemVariants} className="info-card">
+                        <motion.div variants={itemVariants} className="info-card">
                             <div className="info-card-icon" style={{ background: 'rgba(168, 85, 247, 0.1)', color: '#a855f7' }}>
                                 <Eye size={32} />
                             </div>
@@ -145,9 +146,9 @@ export default function About() {
                             <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8' }}>
                                 To innovate across AI, development, and design — shaping technology that inspires creativity and drives meaningful digital growth.
                             </p>
-                        </Motion.div>
+                        </motion.div>
 
-                        <Motion.div variants={itemVariants} className="info-card">
+                        <motion.div variants={itemVariants} className="info-card">
                             <div className="info-card-icon" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
                                 <Rocket size={32} />
                             </div>
@@ -155,10 +156,10 @@ export default function About() {
                             <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8' }}>
                                 Built with <b>React 19, Framer Motion, and WebAssembly</b>. We leverage the full power of your modern browser to deliver sub-second response times for 121+ tools across Productivity, AI, Image, PDF, and Math suites.
                             </p>
-                        </Motion.div>
-                    </Motion.div>
+                        </motion.div>
+                    </motion.div>
 
-                    <Motion.div
+                    <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -188,9 +189,9 @@ export default function About() {
                                 </div>
                             </div>
                         </div>
-                    </Motion.div>
+                    </motion.div>
 
-                    <Motion.div
+                    <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -208,7 +209,7 @@ export default function About() {
                             <Link to="/image-tools" className="btn btn-primary" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>Image Studio</Link>
                             <Link to="/pdf-tools" className="btn btn-primary" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>PDF Expert</Link>
                         </div>
-                    </Motion.div>
+                    </motion.div>
                 </div>
             </section>
         </div>

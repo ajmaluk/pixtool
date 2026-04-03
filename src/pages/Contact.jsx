@@ -119,9 +119,12 @@ export default function Contact() {
                 <label className="input-group">
                   <span className="input-label">Your Name</span>
                   <input
+                    id="contact-name"
+                    name="name"
                     type="text"
                     className="input"
                     placeholder="Ajmal"
+                    autoComplete="name"
                     required
                     minLength={2}
                     value={formData.name}
@@ -132,9 +135,12 @@ export default function Contact() {
                 <label className="input-group">
                   <span className="input-label">Email Address</span>
                   <input
+                    id="contact-email"
+                    name="email"
                     type="email"
                     className="input"
                     placeholder="ajmal@example.com"
+                    autoComplete="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -144,6 +150,8 @@ export default function Contact() {
                 <label className="input-group">
                   <span className="input-label">Message</span>
                   <textarea
+                    id="contact-message"
+                    name="message"
                     className="input"
                     style={{ minHeight: '140px', resize: 'vertical', paddingTop: '0.8rem' }}
                     placeholder="How can we help you?"

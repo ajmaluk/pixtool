@@ -92,11 +92,13 @@ export default function Testimonials() {
         </div>
       </section>
 
-      <section style={{ padding: '0 1.5rem 4rem' }}>
+      <section style={{ padding: '0 1rem 4rem' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gap: '1.2rem' }}>
           <div className="tool-card" style={{ padding: '1rem', display: 'grid', gap: '0.6rem' }}>
-            <label className="input-label" style={{ marginBottom: 0 }}>Filter by tool</label>
+            <label className="input-label" htmlFor="testimonial-tool-filter" style={{ marginBottom: 0 }}>Filter by tool</label>
             <select
+              id="testimonial-tool-filter"
+              name="testimonialToolFilter"
               className="select"
               value={selectedTool}
               onChange={(e) => {
@@ -117,7 +119,7 @@ export default function Testimonials() {
             </div>
           ) : (
             <>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '1rem' }}>
                 {rows.map((t) => (
                   <div key={t.id} className="tool-card" style={{ padding: '1.3rem', display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
                     <div style={{ display: 'flex', gap: '4px' }}>
@@ -154,15 +156,22 @@ export default function Testimonials() {
               <div className="tool-card" style={{ padding: '1.2rem' }}>
                 <h2 style={{ fontSize: '1.35rem', marginBottom: '0.8rem' }}>Submit Testimonial</h2>
                 <form onSubmit={onSubmit} style={{ display: 'grid', gap: '0.8rem' }}>
+                  <label className="input-label" htmlFor="testimonial-name">Your name</label>
                   <input
+                    id="testimonial-name"
+                    name="name"
                     className="input"
                     placeholder="Your name"
+                    autoComplete="name"
                     value={form.name}
                     required
                     minLength={2}
                     onChange={(e) => setForm((s) => ({ ...s, name: e.target.value }))}
                   />
+                  <label className="input-label" htmlFor="testimonial-tool">Tool used</label>
                   <select
+                    id="testimonial-tool"
+                    name="toolSlug"
                     className="select"
                     value={form.toolSlug}
                     onChange={(e) => setForm((s) => ({ ...s, toolSlug: e.target.value }))}
@@ -172,10 +181,14 @@ export default function Testimonials() {
                       <option key={tool.slug} value={tool.slug}>{tool.label}</option>
                     ))}
                   </select>
+                  <label className="input-label" htmlFor="testimonial-message">Your experience</label>
                   <textarea
+                    id="testimonial-message"
+                    name="message"
                     className="input"
-                    style={{ minHeight: '120px', paddingTop: '0.8rem' }}
+                    style={{ minHeight: '120px', paddingTop: '0.8rem', width: '100%', boxSizing: 'border-box' }}
                     placeholder="Your experience"
+                    rows={5}
                     value={form.message}
                     required
                     minLength={5}

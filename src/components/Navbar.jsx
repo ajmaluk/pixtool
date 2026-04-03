@@ -142,7 +142,7 @@ export default function Navbar() {
             className="navbar-logo-img navbar-logo-icon" 
             width="56"
             height="56"
-            fetchpriority="high"
+            fetchPriority="high"
             loading="eager"
           />
           <span className="navbar-logo-text">PixTool</span>
@@ -279,8 +279,11 @@ export default function Navbar() {
             <form className="navbar-search" onSubmit={handleSearch} role="search">
               <Search size={14} className="navbar-search-icon" aria-hidden="true" />
               <input
+                id="navbar-tool-search"
+                name="search"
                 type="text"
                 placeholder="Search tools..."
+                autoComplete="off"
                 aria-label="Search across all tools"
                 value={searchValue}
                 onChange={(e) => { setSearchValue(e.target.value); setShowSuggestions(true) }}

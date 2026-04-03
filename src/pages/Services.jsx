@@ -2,6 +2,7 @@ import React from 'react';
 import SEO from '../components/SEO';
 import { SITE_URL } from '../config/app.config'
 import { Code2, Video, Zap, BarChart3, Youtube, Box, CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion'
 
 const services = [
     {
@@ -115,12 +116,12 @@ export default function Services() {
                 filter: 'blur(100px)',
                 pointerEvents: 'none'
             }}>
-                <Motion.div
+                <motion.div
                     animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
                     transition={{ duration: 15, repeat: Infinity }}
                     style={{ position: 'absolute', top: '10%', left: '10%', width: '40vw', height: '40vw', background: 'var(--accent-primary)', borderRadius: '50%', opacity: 0.2 }}
                 />
-                <Motion.div
+                <motion.div
                     animate={{ x: [0, -40, 0], y: [0, 50, 0] }}
                     transition={{ duration: 12, repeat: Infinity, delay: 1 }}
                     style={{ position: 'absolute', bottom: '10%', right: '10%', width: '35vw', height: '35vw', background: 'var(--accent-pink)', borderRadius: '50%', opacity: 0.15 }}
@@ -128,7 +129,7 @@ export default function Services() {
             </div>
 
             <section className="hero" style={{ padding: 'clamp(5rem, 15vh, 8rem) 1.5rem 5rem', position: 'relative' }}>
-                <Motion.div
+                <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7 }}
@@ -144,11 +145,11 @@ export default function Services() {
                     <p className="hero-subtitle" style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto', lineHeight: 1.6 }}>
                         We blend high-end design with cutting-edge technology to create digital experiences that stand out and perform.
                     </p>
-                </Motion.div>
+                </motion.div>
             </section>
 
             <section style={{ padding: '0 1.5rem 10rem', position: 'relative', width: '100%', overflowX: 'hidden' }}>
-                <Motion.div
+                <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
@@ -157,7 +158,7 @@ export default function Services() {
                 >
                     <div className="services-grid">
                         {services.map((service, index) => (
-                            <Motion.div
+                            <motion.div
                                 key={index}
                                 variants={cardVariants}
                                 whileHover={{ y: -10, transition: { duration: 0.2 } }}
@@ -198,7 +199,7 @@ export default function Services() {
                                         </div>
                                     ))}
                                 </div>
-                            </Motion.div>
+                            </motion.div>
                         ))}
                     </div>
 
@@ -219,7 +220,7 @@ export default function Services() {
                         }
                     `}</style>
 
-                    <Motion.div
+                    <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
@@ -238,7 +239,7 @@ export default function Services() {
                         <div style={{ position: 'relative', zIndex: 1 }}>
                             <h2 style={{ fontSize: '3.5rem', fontWeight: 950, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>Ready to start your project?</h2>
                             <p style={{ fontSize: '1.35rem', marginBottom: '3.5rem', opacity: 0.9, maxWidth: '650px', margin: '0 auto 3.5rem', lineHeight: 1.6 }}>Let's build something amazing together and take your vision to the next level.</p>
-                            <Motion.a
+                            <motion.a
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 href="mailto:contact@uthakkan.com"
@@ -254,10 +255,10 @@ export default function Services() {
                                 }}
                             >
                                 Contact Us Today
-                            </Motion.a>
+                            </motion.a>
                         </div>
-                    </Motion.div>
-                </Motion.div>
+                    </motion.div>
+                </motion.div>
             </section>
         </div>
     );

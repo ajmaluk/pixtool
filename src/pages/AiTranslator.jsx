@@ -63,6 +63,8 @@ ${text}`
               <Languages size={18} color="#d4d4d8" strokeWidth={1.5} />
             </div>
             <textarea 
+              id="ai-translator-input"
+              name="text"
               className="dalam-textarea"
               style={{ width: '100%', minHeight: '220px', background: 'transparent', border: 'none', color: '#18181b', padding: '2rem', fontSize: '1.25rem', resize: 'none', outline: 'none', lineHeight: 1.6 }}
               placeholder="Enter text to translate..."

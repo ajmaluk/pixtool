@@ -47,10 +47,12 @@ OUTPUT REQUIREMENTS:
       <div className="marketing-workspace" style={{ marginBottom: '1.5rem' }}>
         {/* Core Identity */}
         <div style={{ marginBottom: '3rem' }}>
-          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+          <label htmlFor="ai-adcopy-product" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
             Product or Service Identity
           </label>
           <input 
+            id="ai-adcopy-product"
+            name="product"
             type="text"
             className="dalam-input-field"
             style={{ width: '100%', padding: '1.5rem 2rem', borderRadius: '24px', fontSize: '1.2rem', backgroundColor: '#fdfdfd', border: '1px solid #f4f4f5', outline: 'none', color: '#1a1a1a' }}

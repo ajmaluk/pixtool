@@ -51,10 +51,12 @@ Output ONLY the formatted content in high-end Markdown.`
         {/* Main Inputs */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem', marginBottom: '3rem' }}>
           <div className="input-group">
-            <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem', fontWeight: 900, fontSize: '0.8rem', color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+            <label htmlFor="ai-content-topic" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem', fontWeight: 900, fontSize: '0.8rem', color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
               <PenTool size={16} /> Main Topic or Blueprint
             </label>
             <input 
+              id="ai-content-topic"
+              name="topic"
               type="text"
               className="dalam-input-field"
               style={{ width: '100%', padding: '1.5rem 2rem', borderRadius: '24px', fontSize: '1.2rem', backgroundColor: '#fdfdfd', border: '1px solid #f4f4f5', outline: 'none', color: '#1a1a1a' }}
@@ -65,10 +67,12 @@ Output ONLY the formatted content in high-end Markdown.`
           </div>
 
           <div className="input-group">
-            <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem', fontWeight: 900, fontSize: '0.8rem', color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+            <label htmlFor="ai-content-keywords" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem', fontWeight: 900, fontSize: '0.8rem', color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
               <Hash size={16} /> Linguistic Keywords
             </label>
             <input 
+              id="ai-content-keywords"
+              name="keywords"
               type="text"
               className="dalam-input-field"
               style={{ width: '100%', padding: '1.5rem 2rem', borderRadius: '24px', fontSize: '1.2rem', backgroundColor: '#fdfdfd', border: '1px solid #f4f4f5', outline: 'none', color: '#1a1a1a' }}
@@ -82,7 +86,7 @@ Output ONLY the formatted content in high-end Markdown.`
         {/* Tone Selector */}
         <div style={{ marginBottom: '3.5rem' }}>
           <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem', fontWeight: 900, fontSize: '0.8rem', color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-            <Layers size={16} /> Content Atmoshere
+            <Layers size={16} /> Content Atmosphere
           </label>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
             {tones.map(t => (

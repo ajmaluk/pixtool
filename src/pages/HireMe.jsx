@@ -83,12 +83,12 @@ export default function HireMe() {
 
                             <form onSubmit={(e) => { e.preventDefault(); alert({ title: 'Coming Soon', message: "This feature is coming soon! For now, please reach out directly via email at contact@uthakkan.com", type: 'warning' }); }} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                                 <div className="input-group">
-                                    <label className="input-label">Project Name</label>
-                                    <input type="text" className="input" placeholder="e.g. My Awesome SaaS" required />
+                                    <label className="input-label" htmlFor="hireme-project-name">Project Name</label>
+                                    <input id="hireme-project-name" name="projectName" type="text" className="input" placeholder="e.g. My Awesome SaaS" required autoComplete="off" />
                                 </div>
                                 <div className="input-group">
-                                    <label className="input-label">Budget Range</label>
-                                    <select className="select" required>
+                                    <label className="input-label" htmlFor="hireme-budget-range">Budget Range</label>
+                                    <select id="hireme-budget-range" name="budgetRange" className="select" required>
                                         <option value="">Select a range</option>
                                         <option value="100-500">$100 - $500</option>
                                         <option value="500-2000">$500 - $2,000</option>
@@ -97,8 +97,8 @@ export default function HireMe() {
                                     </select>
                                 </div>
                                 <div className="input-group">
-                                    <label className="input-label">Project Details</label>
-                                    <textarea className="input" style={{ minHeight: '120px', resize: 'vertical' }} placeholder="What are we building?" required></textarea>
+                                    <label className="input-label" htmlFor="hireme-project-details">Project Details</label>
+                                    <textarea id="hireme-project-details" name="projectDetails" className="input" style={{ minHeight: '120px', resize: 'vertical' }} placeholder="What are we building?" required></textarea>
                                 </div>
                                 <button type="submit" className="btn btn-primary" style={{ width: '100%', gap: '10px', fontSize: '1.1rem', padding: '1.25rem' }}>
                                     Send Inquiry <Send size={20} />

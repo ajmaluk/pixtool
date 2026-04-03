@@ -244,8 +244,10 @@ export default function QrGenerator() {
                 <div className="input-group">
                   {activeType === 'url' && (
                     <div className="input-group">
-                      <label className="input-label">Enter Website URL</label>
+                      <label className="input-label" htmlFor="qr-url-input">Enter Website URL</label>
                       <input
+                        id="qr-url-input"
+                        name="url"
                         type="url"
                         className="input"
                         placeholder="https://example.com"
@@ -256,8 +258,10 @@ export default function QrGenerator() {
                   )}
                   {activeType === 'text' && (
                     <div className="input-group">
-                      <label className="input-label">Enter Plain Text</label>
+                      <label className="input-label" htmlFor="qr-text-input">Enter Plain Text</label>
                       <textarea
+                        id="qr-text-input"
+                        name="text"
                         className="input"
                         placeholder="Enter your text here..."
                         rows={6}
@@ -269,8 +273,10 @@ export default function QrGenerator() {
                   )}
                   {activeType === 'email' && (
                     <div className="input-group">
-                      <label className="input-label">Email Address</label>
+                      <label className="input-label" htmlFor="qr-email-input">Email Address</label>
                       <input
+                        id="qr-email-input"
+                        name="email"
                         type="email"
                         className="input"
                         placeholder="email@example.com"
@@ -281,8 +287,10 @@ export default function QrGenerator() {
                   )}
                   {activeType === 'phone' && (
                     <div className="input-group">
-                      <label className="input-label">Phone Number</label>
+                      <label className="input-label" htmlFor="qr-phone-input">Phone Number</label>
                       <input
+                        id="qr-phone-input"
+                        name="phone"
                         type="tel"
                         className="input"
                         placeholder="+1 234 567 890"

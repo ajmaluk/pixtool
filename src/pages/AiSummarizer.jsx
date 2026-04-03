@@ -44,10 +44,12 @@ ${text}`
       <div className="distiller-workspace" style={{ marginBottom: '1.5rem' }}>
         {/* Input Forge */}
         <div style={{ marginBottom: '3rem' }}>
-          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+          <label htmlFor="ai-summarizer-input" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
             Source Manuscript
           </label>
           <textarea 
+            id="ai-summarizer-input"
+            name="inputText"
             className="dalam-textarea"
             style={{ width: '100%', minHeight: '300px', padding: '2rem', fontSize: '1.2rem', background: '#fdfdfd', borderRadius: '32px', border: '1px solid #f4f4f5', outline: 'none', color: '#1a1a1a', lineHeight: 1.6 }}
             placeholder="Paste your long-form content here for distillation..."

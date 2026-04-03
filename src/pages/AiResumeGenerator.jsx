@@ -146,8 +146,10 @@ INSTRUCTIONS:
                      { label: 'LinkedIn URL', field: 'linkedin', placeholder: 'e.g. linkedin.com/in/johndoe' }
                    ].map(f => (
                      <div key={f.field} className="form-group">
-                       <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{f.label}</label>
+                       <label htmlFor={`ai-resume-personal-${f.field}`} style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{f.label}</label>
                        <input 
+                         id={`ai-resume-personal-${f.field}`}
+                         name={f.field}
                          type="text" 
                          className="dalam-input-field" 
                          style={{ width: '100%', padding: '1.25rem 1.5rem', borderRadius: '18px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1.1rem', color: '#1a1a1a', outline: 'none' }}
@@ -163,8 +165,10 @@ INSTRUCTIONS:
 
             {step === 2 && (
               <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-                 <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Philosophical Summary</label>
+                 <label htmlFor="ai-resume-summary" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Philosophical Summary</label>
                  <textarea 
+                   id="ai-resume-summary"
+                   name="summary"
                    className="dalam-textarea" 
                    style={{ width: '100%', minHeight: '300px', padding: '2rem', borderRadius: '32px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1.2rem', color: '#18181b', outline: 'none', lineHeight: 1.6 }}
                    placeholder="Describe your professional journey and key value propositions..."
@@ -182,21 +186,21 @@ INSTRUCTIONS:
                      <button onClick={() => removeExperience(idx)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', color: '#d4d4d8', cursor: 'pointer', transition: 'color 0.2s' }} onMouseEnter={(e) => e.target.style.color = '#ef4444'} onMouseLeave={(e) => e.target.style.color = '#d4d4d8'}><Trash2 size={20} /></button>
                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
                         <div className="form-group">
-                           <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Company</label>
-                           <input placeholder="e.g., SpaceX" className="dalam-input-field" value={exp.company} onChange={(e) => updateExperience(idx, 'company', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
+                          <label htmlFor={`ai-resume-exp-company-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Company</label>
+                          <input id={`ai-resume-exp-company-${idx}`} name={`experienceCompany${idx}`} placeholder="e.g., SpaceX" className="dalam-input-field" value={exp.company} onChange={(e) => updateExperience(idx, 'company', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
                         </div>
                         <div className="form-group">
-                           <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Role</label>
-                           <input placeholder="e.g., Propulsion Engineer" className="dalam-input-field" value={exp.role} onChange={(e) => updateExperience(idx, 'role', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
+                          <label htmlFor={`ai-resume-exp-role-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Role</label>
+                          <input id={`ai-resume-exp-role-${idx}`} name={`experienceRole${idx}`} placeholder="e.g., Propulsion Engineer" className="dalam-input-field" value={exp.role} onChange={(e) => updateExperience(idx, 'role', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
                         </div>
                      </div>
                      <div style={{ marginBottom: '1.5rem' }}>
-                        <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Timeline</label>
-                        <input placeholder="e.g., 2020 - Present" className="dalam-input-field" value={exp.duration} onChange={(e) => updateExperience(idx, 'duration', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
+                        <label htmlFor={`ai-resume-exp-duration-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Timeline</label>
+                        <input id={`ai-resume-exp-duration-${idx}`} name={`experienceDuration${idx}`} placeholder="e.g., 2020 - Present" className="dalam-input-field" value={exp.duration} onChange={(e) => updateExperience(idx, 'duration', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
                      </div>
                      <div>
-                        <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Legacy & Impact</label>
-                        <textarea placeholder="Bullet points of achievements..." className="dalam-input-pane" value={exp.description} onChange={(e) => updateExperience(idx, 'description', e.target.value)} style={{ width: '100%', minHeight: '120px', padding: '1.25rem', borderRadius: '18px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none', lineHeight: 1.6 }} />
+                        <label htmlFor={`ai-resume-exp-impact-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Legacy & Impact</label>
+                        <textarea id={`ai-resume-exp-impact-${idx}`} name={`experienceImpact${idx}`} placeholder="Bullet points of achievements..." className="dalam-input-pane" value={exp.description} onChange={(e) => updateExperience(idx, 'description', e.target.value)} style={{ width: '100%', minHeight: '120px', padding: '1.25rem', borderRadius: '18px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none', lineHeight: 1.6 }} />
                      </div>
                    </div>
                  ))}
@@ -214,17 +218,17 @@ INSTRUCTIONS:
                       <button onClick={() => removeEducation(idx)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', color: '#d4d4d8', cursor: 'pointer' }}><Trash2 size={20} /></button>
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
                          <div className="form-group">
-                            <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Institution</label>
-                            <input placeholder="e.g., MIT" className="dalam-input-field" value={edu.school} onChange={(e) => updateEducation(idx, 'school', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
+                           <label htmlFor={`ai-resume-edu-school-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Institution</label>
+                           <input id={`ai-resume-edu-school-${idx}`} name={`educationSchool${idx}`} placeholder="e.g., MIT" className="dalam-input-field" value={edu.school} onChange={(e) => updateEducation(idx, 'school', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
                          </div>
                          <div className="form-group">
-                            <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Degree</label>
-                            <input placeholder="e.g., MS Computer Science" className="dalam-input-field" value={edu.degree} onChange={(e) => updateEducation(idx, 'degree', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
+                           <label htmlFor={`ai-resume-edu-degree-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Degree</label>
+                           <input id={`ai-resume-edu-degree-${idx}`} name={`educationDegree${idx}`} placeholder="e.g., MS Computer Science" className="dalam-input-field" value={edu.degree} onChange={(e) => updateEducation(idx, 'degree', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
                          </div>
                       </div>
                       <div>
-                        <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Year of Completion</label>
-                        <input placeholder="e.g., 2018" className="dalam-input-field" value={edu.year} onChange={(e) => updateEducation(idx, 'year', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
+                        <label htmlFor={`ai-resume-edu-year-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Year of Completion</label>
+                        <input id={`ai-resume-edu-year-${idx}`} name={`educationYear${idx}`} placeholder="e.g., 2018" className="dalam-input-field" value={edu.year} onChange={(e) => updateEducation(idx, 'year', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
                       </div>
                     </div>
                  ))}
@@ -236,8 +240,10 @@ INSTRUCTIONS:
 
             {step === 5 && (
               <motion.div key="step5" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-                 <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Core Architectures & Skills</label>
+                 <label htmlFor="ai-resume-skills" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Core Architectures & Skills</label>
                  <textarea 
+                   id="ai-resume-skills"
+                   name="skills"
                    className="dalam-textarea" 
                    style={{ width: '100%', minHeight: '250px', padding: '2rem', borderRadius: '32px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1.2rem', color: '#18181b', outline: 'none', lineHeight: 1.6 }}
                    placeholder="e.g. JavaScript, React, System Architecture, Team Leadership..."

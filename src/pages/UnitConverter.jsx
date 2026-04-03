@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { Scale, RefreshCw, ArrowLeftRight, Activity, Zap, Shield, Globe, Copy, Check } from 'lucide-react'
+import { motion } from 'framer-motion'
 import SEO from '../components/SEO'
 import Breadcrumbs from '../components/Breadcrumbs'
 import ShareTool from '../components/ShareTool'
@@ -173,9 +174,11 @@ export default function UnitConverter() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '1rem', alignItems: 'flex-end', marginBottom: '2rem' }}>
                 {/* From */}
                 <div>
-                  <label style={{ display: 'block', marginBottom: '0.75rem', fontWeight: 800, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>From</label>
+                  <label htmlFor="unit-converter-value" style={{ display: 'block', marginBottom: '0.75rem', fontWeight: 800, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>From</label>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                     <input
+                      id="unit-converter-value"
+                      name="value"
                       type="number"
                       className="input"
                       value={value}
@@ -184,6 +187,8 @@ export default function UnitConverter() {
                       placeholder="0.00"
                     />
                     <select 
+                      id="unit-converter-from-unit"
+                      name="fromUnit"
                       className="input" 
                       value={fromUnit} 
                       onChange={(e) => setFromUnit(e.target.value)}
@@ -205,7 +210,7 @@ export default function UnitConverter() {
 
                 {/* To */}
                 <div>
-                  <label style={{ display: 'block', marginBottom: '0.75rem', fontWeight: 800, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>To</label>
+                  <label htmlFor="unit-converter-to-unit" style={{ display: 'block', marginBottom: '0.75rem', fontWeight: 800, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>To</label>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                     <div 
                       className="input" 
@@ -222,6 +227,8 @@ export default function UnitConverter() {
                       {result}
                     </div>
                     <select 
+                      id="unit-converter-to-unit"
+                      name="toUnit"
                       className="input" 
                       value={toUnit} 
                       onChange={(e) => setToUnit(e.target.value)}

@@ -39,10 +39,12 @@ OUTPUT REQUIREMENTS:
       <div className="hashtag-workspace" style={{ marginBottom: '1.5rem' }}>
         {/* Core Topic */}
         <div style={{ marginBottom: '3rem' }}>
-          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+          <label htmlFor="ai-hashtag-topic" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
             Core Topic or Post Description
           </label>
           <input 
+            id="ai-hashtag-topic"
+            name="topic"
             type="text"
             className="dalam-input-field"
             style={{ width: '100%', padding: '1.5rem 2rem', borderRadius: '24px', fontSize: '1.2rem', backgroundColor: '#fdfdfd', border: '1px solid #f4f4f5', outline: 'none', color: '#1a1a1a' }}
