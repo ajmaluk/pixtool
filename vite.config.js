@@ -23,18 +23,20 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            // Keep React runtime, router, framer-motion, and lucide-react in a stable core chunk.
+            // Keep only the absolute runtime core together.
             if (
               id.includes('/react/') ||
               id.includes('/react-dom/') ||
               id.includes('/scheduler/') ||
               id.includes('/react-router/') ||
-              id.includes('/react-router-dom/') ||
-              id.includes('framer-motion') ||
-              id.includes('lucide-react')
+              id.includes('/react-router-dom/')
             ) {
               return 'vendor-react-core';
             }
+
+            // Non-critical UI libraries can be loaded in separate chunks.
+            if (id.includes('framer-motion')) return 'vendor-motion';
+            if (id.includes('lucide-react')) return 'vendor-icons';
 
             // Data/visualization and compute-heavy libs.
             if (id.includes('/mathjs/') || id.includes('/complex.js/') || id.includes('/fraction.js/')) return 'vendor-math';
@@ -52,7 +54,8 @@ export default defineConfig({
             if (id.includes('/qrcode.react/')) return 'vendor-qr';
             if (id.includes('/react-image-crop/')) return 'vendor-image-crop';
 
-            return 'vendor-misc';
+            // Let Rollup place remaining deps automatically to avoid forcing cyclic vendor boundaries.
+            return;
           }
         },
         chunkFileNames: 'assets/[name]-[hash].js',

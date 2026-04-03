@@ -54,13 +54,13 @@
 
 # HTML.
 /*.html
-  Cache-Control: public, max-age=0, must-revalidate
+  Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
 
 # Root HTML.
 /
-  Cache-Control: public, max-age=0, must-revalidate
+  Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
 
