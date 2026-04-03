@@ -64,7 +64,7 @@ export default function About() {
     return (
         <div className="page-container">
             <SEO
-                title="About Us - Mission & Privacy | PixTool"
+                title="About PixTool — The Mission Behind Your Favorite Private Tools"
                 description="Our mission is to merge creativity with technology. Delivering fast, privacy-first online tools that process your data locally in your browser."
                 path="/about"
                 schema={aboutSchema}
@@ -158,6 +158,49 @@ export default function About() {
                             </p>
                         </motion.div>
                     </motion.div>
+
+                    <motion.section 
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        style={{
+                            marginTop: '8rem',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            textAlign: 'center'
+                        }}
+                    >
+                        <div className="status-badge" style={{ marginBottom: '1.5rem' }}>See the tools in action</div>
+                        <h2 style={{ fontSize: '2.5rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
+                            The PixTool <span style={{ color: 'var(--accent-blue)' }}>Experience</span>
+                        </h2>
+                        
+                        <div style={{
+                            position: 'relative',
+                            width: '100%',
+                            maxWidth: '400px',
+                            borderRadius: '32px',
+                            overflow: 'hidden',
+                            boxShadow: '0 20px 80px rgba(139, 92, 246, 0.15)',
+                            border: '1px solid rgba(255,255,255,0.05)',
+                            aspectRatio: '9/16',
+                            background: 'var(--bg-secondary)',
+                            marginTop: '2rem'
+                        }}>
+                            <iframe 
+                                width="100%" 
+                                height="100%" 
+                                src="https://www.youtube.com/embed/fzIhPN-gv_E?autoplay=0&mute=0&loop=1&playlist=fzIhPN-gv_E" 
+                                title="PixTool Experience" 
+                                frameBorder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerPolicy="strict-origin-when-cross-origin" 
+                                allowFullScreen
+                                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+                            ></iframe>
+                        </div>
+                    </motion.section>
 
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}

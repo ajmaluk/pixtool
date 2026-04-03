@@ -12,11 +12,11 @@ import {
 
 export const IMAGE_TOOLS = [
   { 
-    id: 'resize', title: 'Resize Image', icon: Maximize2, 
-    description: 'Quickly resize images to exact dimensions or percentages using professional-grade scaling algorithms.', 
+    id: 'resize', title: 'Best Free Image Resizer 2026', icon: Maximize2, 
+    description: 'The #1 professional image resizer online. Scale photos to exact dimensions or percentages with 100% privacy and no quality loss. Optimized for 4K.', 
     color: '#a855f7', path: '/image-tools/resize', screenshot: 'best-online-image-resizer-tool.png',
-    imageAlt: 'PixTool Image Resizer - Precision Scaling for High-Quality Photos',
-    imageTitle: 'Resize Images Online with PixTool',
+    imageAlt: 'PixTool Professional Image Resizer 2026 - High-Fidelity Scaling',
+    imageTitle: 'Best Free Image Resizer Online [Official]',
     features: ['Pixel-perfect scaling', 'Maintains aspect ratio', 'Support for bulk resizing', 'High-fidelity output'],
     howItWorks: ['Upload your image', 'Set your desired dimensions', 'Download the resized version']
   },
@@ -101,11 +101,11 @@ export const IMAGE_TOOLS = [
 
 export const PDF_TOOLS = [
   { 
-    id: 'merge', title: 'Merge PDF', icon: FilePlus, 
-    description: 'Merge PDF online for free. Combine multiple PDF documents into one professional file instantly without uploading. Reorder pages with ease, 100% secure.', 
+    id: 'merge', title: 'Merge PDF Online [Official]', icon: FilePlus, 
+    description: 'The fastest secure PDF merger for 2026. Combine multiple documents into one professional PDF instantly without uploading. Reorder pages with ease, 100% free.', 
     color: '#06b6d4', path: '/pdf-tools/merge', screenshot: 'fast-pdf-merger-no-upload-pixtool.png',
-    imageAlt: 'PixTool PDF Merger - Securely combine PDF files online without uploading',
-    imageTitle: 'Merge PDF Online for Free',
+    imageAlt: 'PixTool Professional PDF Merger - Secure Document Management',
+    imageTitle: 'Merge PDF Files Safely without Uploading',
     features: ['Instant local merging', 'No upload required', 'Drag-and-drop reordering', 'Maintains original quality'],
     howItWorks: ['Upload multiple PDF files', 'Drag to reorder pages', 'Merge and download instantly']
   },
@@ -201,11 +201,11 @@ export const PDF_TOOLS = [
 
 export const UTILITY_TOOLS = [
   { 
-    id: 'temp-mail', title: 'Temp Mail', icon: Mail, 
-    description: 'Free Temp Mail - Disposable Email Address Generator. Protect your real inbox from spam with a secure anonymous temporary email. Instant & Reddit-approved.', 
+    id: 'temp-mail', title: 'Free Temp Mail 2026 [Safe]', icon: Mail, 
+    description: 'Instant anonymous disposable email generator. Protect your privacy with a 100% secure temporary inbox. Perfect for signups and avoiding spam.', 
     color: '#ec4899', path: '/temp-mail', screenshot: 'disposable-temporary-email-generator.png',
-    imageAlt: 'PixTool Temp Mail - Instant secure anonymous inbox generator',
-    imageTitle: 'Free Temporary Email Service for Privacy',
+    imageAlt: 'PixTool Secure Temp Mail 2026 - Instant Anonymous Disposable Email',
+    imageTitle: 'Best Disposable Email Service Online',
     features: ['No registration required', 'Instant inbox creation', 'Auto-refreshing messages', 'Safe for forum signups'],
     howItWorks: ['Generate your unique address', 'Use it for any signup', 'Watch your inbox live']
   },
@@ -242,11 +242,11 @@ export const UTILITY_TOOLS = [
     howItWorks: ['Grant camera access or upload', 'Point at code or select image', 'Access the decoded content']
   },
   { 
-    id: 'qr-generator', title: 'QR Generator', icon: QrCode, 
-    description: 'The #1 free QR code generator for URLs, WiFi, vCards & text. Create high-resolution custom QR codes instantly. No signup required, 100% private tool.', 
+    id: 'qr-generator', title: 'Free QR Code Generator [Pro]', icon: QrCode, 
+    description: 'Create high-resolution, branded QR codes for URLs, WiFi, & vCards. No sign-up, no hidden fees, 100% private generation.', 
     color: '#f59e0b', path: '/qr-generator', screenshot: 'best-free-qr-code-generator-online.png',
-    imageAlt: 'PixTool QR Generator - Create custom branded QR codes online for free',
-    imageTitle: 'Free QR Code Generator Online',
+    imageAlt: 'PixTool Professional QR Generator - Custom Branded QR Codes',
+    imageTitle: 'Create High-Res QR Codes Online Free',
     features: ['Custom Link Support', 'WiFi/vCard generation', 'High-res PNG Export', 'Privacy-first generation'],
     howItWorks: ['Choose your data type', 'Input your content details', 'Download your custom QR code']
   },

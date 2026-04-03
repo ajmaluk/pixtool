@@ -135,7 +135,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="navbar">
-        <Link to="/" className="navbar-logo" title="PixTool Home - Professional Private Productivity Suite">
+        <Link to="/" className="navbar-logo" title="PixTool Home - Professional Private Productivity Suite" aria-label="PixTool Home">
           <img 
             src="/logo.webp" 
             alt="PixTool - Secure Private Browser Hub" 
@@ -144,6 +144,7 @@ export default function Navbar() {
             height="56"
             fetchPriority="high"
             loading="eager"
+            aria-hidden="true"
           />
           <span className="navbar-logo-text">PixTool</span>
         </Link>
@@ -269,10 +270,10 @@ export default function Navbar() {
 
         <div className="navbar-actions">
           <button className="icon-btn" aria-label="Toggle Theme" onClick={toggleTheme}>
-            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+            {isDark ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
           </button>
           <button className="icon-btn" aria-label="Share Tools" onClick={handleShare}>
-            <Share2 size={18} />
+            <Share2 size={18} aria-hidden="true" />
           </button>
 
           <div ref={searchRef} style={{ position: 'relative' }}>

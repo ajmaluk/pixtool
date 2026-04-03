@@ -124,7 +124,7 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="121+ Free Online AI Tools - Privacy-First Suite for Productivity [2026]"
+        title="PixTool — 125+ Best Free Online AI & Private Productivity Tools [2026]"
         description="🚀 Master your AI workflow with 121+ free tools: AI writing, PDF editor, image resizer, QR codes, temp mail & more. Zero data upload, 100% browser-based, works offline. No account needed. Used by 50,000+ professionals."
         keywords="free online tools, free ai tools, privacy first productivity suite, browser based tools, offline productivity software, free image editor online, secure pdf editor, free qr generator, temp mail generator, ai writing assistant free, kanban board software, drawing app online, calculator online, free coding tools, online productivity suite, all in one tool, web utilities"
         path="/"
@@ -605,8 +605,48 @@ export default function Home() {
               )}
             </div>
 
+            <section className="container-pro" style={{
+              marginTop: '4rem',
+              marginBottom: '4rem',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center'
+            }}>
+              <h2 style={{ fontSize: '2.5rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
+                See PixTool in <span style={{ color: 'var(--accent-blue)' }}>Action</span>
+              </h2>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '600px', marginBottom: '3rem' }}>
+                Watch our quick 60-second tour showcasing the incredible speed and privacy of our 121+ professional browser tools.
+              </p>
+              
+              <div style={{
+                position: 'relative',
+                width: '100%',
+                maxWidth: '400px',
+                borderRadius: '32px',
+                overflow: 'hidden',
+                boxShadow: '0 20px 80px rgba(139, 92, 246, 0.15)',
+                border: '1px solid rgba(255,255,255,0.05)',
+                aspectRatio: '9/16',
+                background: 'var(--bg-secondary)'
+              }}>
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/fzIhPN-gv_E?autoplay=0&mute=0&loop=1&playlist=fzIhPN-gv_E" 
+                  title="PixTool Productivity Suite" 
+                  frameBorder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  referrerPolicy="strict-origin-when-cross-origin" 
+                  allowFullScreen
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+                ></iframe>
+              </div>
+            </section>
+
             <div className="container-pro" style={{ 
-                marginTop: 'clamp(4rem, 10vw, 8rem)', 
+                marginTop: 'clamp(2rem, 5vw, 4rem)', 
                 padding: 'clamp(3rem, 5vw, 5rem) 2rem', 
                 background: 'linear-gradient(180deg, rgba(247, 249, 251, 0.02) 0%, rgba(107, 56, 212, 0.02) 100%)', 
                 borderRadius: '40px', 

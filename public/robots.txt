@@ -11,27 +11,27 @@ Disallow: /*?tool=
 Disallow: /pix-admin/
 Disallow: /api/
 
-# Modern AI Crawler Controls (Standard & Valid Directives)
+# Modern AI Crawler Controls (Allow for AI Search Traffic & Overviews)
 User-agent: GPTBot
-Disallow: /
+Allow: /
 
 User-agent: CCBot
-Disallow: /
+Allow: /
 
 User-agent: Google-Extended
-Disallow: /
+Allow: /
 
 User-agent: Anthropic-ai
-Disallow: /
+Allow: /
 
 User-agent: Claude-Web
-Disallow: /
+Allow: /
 
 User-agent: Omgilibot
-Disallow: /
+Allow: /
 
 User-agent: FacebookBot
-Disallow: /
+Allow: /
 
 # Specify sitemap location
 Sitemap: https://www.pixtool.in/sitemap.xml

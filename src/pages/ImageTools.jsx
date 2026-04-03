@@ -1146,7 +1146,11 @@ export default function ImageTools() {
 
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }} className="mobile-hide-header">
-                          <h2 style={{ fontSize: '1.05rem', fontWeight: 900, margin: 0 }}>
+                          <h1 style={{ fontSize: '1.25rem', fontWeight: 900, margin: 0, color: 'var(--accent-primary)' }}>
+                            {activeToolData?.title}
+                          </h1>
+                          <div style={{ width: '1px', height: '20px', background: 'var(--border-color)' }}></div>
+                          <h2 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text-secondary)' }}>
                             Files ({files.length})
                           </h2>
                         </div>

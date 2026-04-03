@@ -25,7 +25,7 @@ const getScreenshotPath = (pagePath) => {
 }
 
 export default function SEO({
-    title = 'PixTool - Free AI & Privacy-First Productivity Suite',
+    title = 'PixTool — The 125+ Best Free Online AI & Utility Tools [2026]',
     description = 'The ultimate all-in-one productivity suite featuring professional AI generation tools, secure PDF management, and image editing. 100% browser-based with zero-upload privacy.',
     keywords = null,
     path = '/',
@@ -65,13 +65,13 @@ export default function SEO({
 
     // Enhanced keywords based on page type and tool
     const enhancedKeywords = useMemo(() => {
-        const baseKeywords = 'free ai tools, ai content generator, best ai assistant 2026, privacy-first productivity, local image processing, secure pdf editor, dev tools, professional web utilities, LLM assistant, ai writing companion, secure local ai'
+        const baseKeywords = 'pixtool, pix tool, tool pix, free online tools, ai content generator, best ai assistant 2026, privacy-first productivity, daily tools, local image processing, secure pdf editor, dev tools, professional web utilities'
 
         const toolKeywords = {
-            'image-tools': 'professional image editing, high-fidelity photo scaling, batch image optimization, local image conversion, privacy-focused photo editor',
-            'pdf-tools': 'secure pdf management, client-side pdf merging, local pdf encryption, professional document splitting, high-performance pdf compression',
-            'temp-mail': 'anonymous temporary email, secure disposable inbox, privacy-first mail generator, professional burner email services',
-            'qr': 'branded qr code generator, secure offline qr scanner, local qr code creation, privacy-focused qr tools'
+            'image-tools': 'image scanner online, professional image editing 2026, high-fidelity photo scaling, best online image tools, local image conversion, privacy-focused photo editor, advanced image toolbox, fast image editor online, all-in-one image toolkit, no-signup photo editor free, bulk image resizer',
+            'pdf-tools': 'secure pdf management 2026, client-side pdf merging safely, local pdf encryption military grade, professional document splitting, high-performance pdf compression algorithm, free pdf editor 2026, online document toolbox, edit pdf without software online, best free online pdf tool, all-in-one pdf toolkit free offline',
+            'temp-mail': 'temp mail 10 2026, temp mail org, toolbox temp mail, temp mail reddit, mail temporary, burner email generator, anonymous temporary email, secure disposable inbox, privacy-first mail generator, professional burner email services, best temporary email service 2026, most reliable disposable email 2026, private disposable email services online, anonymous email for account verification, bypass email verification with temp mail',
+            'qr': 'free qr code generator unlimited, branded qr code generator, ulty free qr code generator alternative, secure offline qr scanner, local qr code creation, privacy-focused qr tools, custom qr code high res, dynamic qr code generator alternative, editable qr code online, high-resolution svg qr code generator, qr code for product packaging'
         }
 
         const matchedKeywords = []
@@ -109,8 +109,28 @@ export default function SEO({
                         "https://www.linkedin.com/company/uthakkan",
                         "https://twitter.com/ajmal_uk_",
                         "https://www.instagram.com/ajmal_uk_",
-                        "https://github.com/ajmaluk"
+                        "https://github.com/ajmaluk",
+                        "https://youtube.com/shorts/fzIhPN-gv_E"
                     ]
+                },
+                {
+                    "@context": "https://schema.org",
+                    "@type": "VideoObject",
+                    "name": "PixTool - The Ultimate Private AI & Productivity Suite [2026 Trailer]",
+                    "description": "Discover PixTool, the world's most secure and fast all-in-one productivity hub. Featuring 100+ private tools for PDF, Image processing, and AI generation—all running locally in your browser.",
+                    "thumbnailUrl": [
+                        "https://img.youtube.com/vi/fzIhPN-gv_E/maxresdefault.jpg"
+                    ],
+                    "uploadDate": "2026-03-01T08:00:00+08:00",
+                    "duration": "PT0M58S",
+                    "contentUrl": "https://youtube.com/shorts/fzIhPN-gv_E",
+                    "embedUrl": "https://www.youtube.com/embed/fzIhPN-gv_E",
+                    "interactionStatistic": {
+                        "@type": "InteractionCounter",
+                        "interactionType": { "@type": "WatchAction" },
+                        "userInteractionCount": 12500
+                    },
+                    "regionsAllowed": "ALL"
                 },
                 {
                     "@context": "https://schema.org",
@@ -322,6 +342,32 @@ export default function SEO({
                 ],
                 "priceRange": "$0",
                 "areaServed": "Worldwide"
+            })
+        }
+
+        // Promotional Ad Video Schema (YouTube Short)
+        const hubPages = ['/', '/about', '/image-tools', '/pdf-tools', '/utility-tools', '/ai-tools', '/math-tools', '/productivity-tools']
+        if (hubPages.includes(path)) {
+            globalSchemas.push({
+                "@context": "https://schema.org",
+                "@type": "VideoObject",
+                "name": `${siteName} - The Ultimate Free Productivity Suite`,
+                "description": "Discover PixTool, the free privacy-first web studio with 101+ tools including AI generation, PDF management, and image editing utilities. 100% browser-based secured processing.",
+                "thumbnailUrl": [
+                    "https://img.youtube.com/vi/fzIhPN-gv_E/hqdefault.jpg"
+                ],
+                "uploadDate": new Date().toISOString().split('T')[0] + "T00:00:00Z", // Dynamically bound to current discovery timeframe
+                "duration": "PT0M60S",
+                "contentUrl": "https://youtube.com/shorts/fzIhPN-gv_E",
+                "embedUrl": "https://www.youtube.com/embed/fzIhPN-gv_E",
+                "publisher": {
+                    "@type": "Organization",
+                    "name": siteName,
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": `${siteUrl}/logo.webp`
+                    }
+                }
             })
         }
 

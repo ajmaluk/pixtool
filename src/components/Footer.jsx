@@ -6,18 +6,18 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-grid">
         <div className="footer-brand">
-          <Link to="/" className="footer-logo">
+          <Link to="/" className="footer-logo" aria-label="PixTool Home">
             <span className="footer-logo-accent">Pix</span>Tool
           </Link>
           <p className="footer-tagline">
             The professional suite of 100% private, browser-based tools. No uploads, no tracking, just pure productivity.
           </p>
           <div className="footer-trust-badges">
-            <div className="trust-badge">
-              <Shield size={16} /> <span>100% Private</span>
+            <div className="trust-badge" aria-label="100% Private Tool">
+              <Shield size={16} aria-hidden="true" /> <span>100% Private</span>
             </div>
-            <div className="trust-badge">
-              <Zap size={16} /> <span>Edge Processing</span>
+            <div className="trust-badge" aria-label="High-Speed Edge Processing">
+              <Zap size={16} aria-hidden="true" /> <span>Edge Processing</span>
             </div>
           </div>
         </div>

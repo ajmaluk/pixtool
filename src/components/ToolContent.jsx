@@ -95,7 +95,7 @@ export default function ToolContent({
                     <header style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem', color: 'var(--accent-primary)' }}>
                         <Info size={24} />
                         <h2 id="about-tool" style={{ fontSize: '1.8rem', fontWeight: 900, margin: 0, letterSpacing: '-0.02em' }}>
-                            Advanced Online {title}
+                            About Our {title} Tool
                         </h2>
                     </header>
                     
@@ -122,7 +122,7 @@ export default function ToolContent({
                     <section id="tool-features" className="content-section-premium">
                         <h3 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                             <CheckCircle2 size={24} style={{ color: 'var(--accent-primary)' }} />
-                            Built for Performance & Privacy
+                            {title} Features & Capabilities
                         </h3>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.25rem' }}>
                             {benefits.map((benefit, i) => (
