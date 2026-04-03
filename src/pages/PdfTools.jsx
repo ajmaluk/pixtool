@@ -77,6 +77,12 @@ export default function PdfTools() {
   }, [selectedIndex])
   const [processing, setProcessing] = useState(false)
   const [showMobileSettings, setShowMobileSettings] = useState(false)
+
+  useEffect(() => {
+    document.body.classList.toggle('mobile-overlay-open', showMobileSettings)
+    return () => document.body.classList.remove('mobile-overlay-open')
+  }, [showMobileSettings])
+
   const [settings, setSettings] = useState({
     quality: 'medium',
     startPage: 1,
@@ -1103,12 +1109,16 @@ export default function PdfTools() {
         {/* Mobile Action Bar & Settings Drawer */}
         {files.length > 0 && (
           <>
-            <div className="mobile-bottom-bar">
+            <div className="mobile-bottom-bar tool-mobile-fixed-bar">
               <button className="btn btn-secondary" onClick={() => setShowMobileSettings(true)}>
-                <Sliders size={18} /> Settings
+                <Sliders size={18} />
+                <span className="mobile-action-label mobile-action-label-full">Settings</span>
+                <span className="mobile-action-label mobile-action-label-short">Set</span>
               </button>
               <button className="btn btn-primary" onClick={processPdf}>
-                <Download size={18} /> {processing ? 'Processing...' : 'Process PDF'}
+                <Download size={18} />
+                <span className="mobile-action-label mobile-action-label-full">{processing ? 'Processing...' : 'Process PDF'}</span>
+                <span className="mobile-action-label mobile-action-label-short">{processing ? '...' : 'Process'}</span>
               </button>
             </div>
 

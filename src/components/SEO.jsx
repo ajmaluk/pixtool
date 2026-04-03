@@ -1,6 +1,8 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { ALL_TOOLS_MAP } from '../data/tools'
 import { SITE_URL, SITE_NAME } from '../config/app.config'
+import { getOverallRating, getToolRatingStats } from '../services/supabaseService'
+import { hasSupabaseConfig } from '../lib/supabaseClient'
 
 const getScreenshotPath = (pagePath) => {
     const cleanPath = pagePath.endsWith('/') && pagePath.length > 1 ? pagePath.slice(0, -1) : pagePath
@@ -22,18 +24,6 @@ const getScreenshotPath = (pagePath) => {
     }
 
     return `/screenshots/${fallbackMap[cleanPath] || fallbackMap['/']}`
-}
-
-/**
- * Deterministic rating jitter to make rich snippets look organic and realistic across tools.
- * Returns stable values for a given tool ID/path to avoid frequent metadata thrashing.
- */
-const getRatingJitter = (id = '') => {
-    const seed = id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
-    const ratingValue = (4.7 + (seed % 3) * 0.1).toFixed(1) // 4.7, 4.8, or 4.9
-    const ratingCount = 750 + (seed % 450) // 750-1200
-    const reviewCount = Math.floor(ratingCount * 0.72) // Consistent ratio
-    return { ratingValue, ratingCount, reviewCount }
 }
 
 export default function SEO({
@@ -66,16 +56,85 @@ export default function SEO({
     const cleanPath = path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path
     const toolDataFromMap = ALL_TOOLS_MAP[cleanPath]
     const isToolPath = !!(toolDataFromMap && toolDataFromMap.id)
-    const shouldNoIndex = noIndex || path.startsWith('/pix-admin') || window.location.search.includes('q={search_term_string}') || window.location.search.includes('?q=')
+    const [liveRatings, setLiveRatings] = useState({ tool: null, overall: null })
+    const [liveRatingMeta, setLiveRatingMeta] = useState({ toolFetchedAt: null, overallFetchedAt: null })
+    const [showSchemaDiagnostics, setShowSchemaDiagnostics] = useState(false)
+    const [diagnosticsOffset, setDiagnosticsOffset] = useState({ x: 0, y: 0 })
+    const [diagnosticsCopied, setDiagnosticsCopied] = useState(false)
+    const dragStateRef = useRef(null)
+    const searchQuery = typeof window !== 'undefined' ? window.location.search : ''
+    const shouldNoIndex = noIndex || path.startsWith('/pix-admin') || searchQuery.includes('q={search_term_string}') || searchQuery.includes('?q=')
 
     const brandTitle = title.includes('PixTool') ? title : `${title} | PixTool`
 
     const defaultScreenshot = getScreenshotPath(path)
-    const ogImage = image ? (image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? image : `/${image}`}`) : `${siteUrl}${defaultScreenshot}`
-    const twImage = twitterImage ? (twitterImage.startsWith('http') ? twitterImage : `${siteUrl}${twitterImage.startsWith('/') ? twitterImage : `/${twitterImage}`}`) : `${siteUrl}${defaultScreenshot}`
+    const baseImagePath = image || screenshot || defaultScreenshot
+    const ogImage = baseImagePath.startsWith('http') ? baseImagePath : `${siteUrl}${baseImagePath.startsWith('/') ? baseImagePath : `/${baseImagePath}`}`
+    const twBaseImagePath = twitterImage || baseImagePath
+    const twImage = twBaseImagePath.startsWith('http') ? twBaseImagePath : `${siteUrl}${twBaseImagePath.startsWith('/') ? twBaseImagePath : `/${twBaseImagePath}`}`
     
     // Dynamic Alt text for images - critical for image SEO ranking
     const dynamicImageAlt = imageAlt || (toolName ? `Screenshot of PixTool ${toolName} - High-quality browser-based productivity tool` : `${title} - Professional online utility by UTHAKKAN`)
+
+    useEffect(() => {
+        let mounted = true
+
+        const loadRatings = async () => {
+            if (!hasSupabaseConfig || shouldNoIndex) {
+                if (mounted) setLiveRatings({ tool: null, overall: null })
+                if (mounted) setLiveRatingMeta({ toolFetchedAt: null, overallFetchedAt: null })
+                return
+            }
+
+            const next = { tool: null, overall: null }
+            const nextMeta = { toolFetchedAt: null, overallFetchedAt: null }
+
+            if (isToolPath && toolDataFromMap?.id) {
+                try {
+                    const toolStats = await getToolRatingStats(toolDataFromMap.id)
+                    if (toolStats && Number(toolStats.totalVotes || 0) > 0) {
+                        next.tool = toolStats
+                        nextMeta.toolFetchedAt = new Date().toISOString()
+                    }
+                } catch {
+                    // Keep schema clean when live rating fetch fails.
+                }
+            }
+
+            const isHubPath = path === '/' || path === '/image-tools' || path === '/pdf-tools' || path === '/ai-tools' || path === '/math-tools' || path === '/utility-tools'
+            if (isHubPath) {
+                try {
+                    const overallStats = await getOverallRating()
+                    if (overallStats && Number(overallStats.totalVotes || 0) > 0) {
+                        next.overall = overallStats
+                        nextMeta.overallFetchedAt = new Date().toISOString()
+                    }
+                } catch {
+                    // Keep schema clean when live rating fetch fails.
+                }
+            }
+
+            if (mounted) {
+                setLiveRatings(next)
+                setLiveRatingMeta(nextMeta)
+
+                if (import.meta.env.DEV && (nextMeta.toolFetchedAt || nextMeta.overallFetchedAt)) {
+                    console.info('[SEO] Live ratings refreshed', {
+                        path,
+                        toolSlug: toolDataFromMap?.id || null,
+                        toolRating: next.tool,
+                        overallRating: next.overall,
+                        fetchedAt: nextMeta,
+                    })
+                }
+            }
+        }
+
+        loadRatings()
+        return () => {
+            mounted = false
+        }
+    }, [isToolPath, toolDataFromMap?.id, path, shouldNoIndex])
 
     // Enhanced keywords based on page type and tool
     const enhancedKeywords = useMemo(() => {
@@ -85,7 +144,7 @@ export default function SEO({
             'image-tools': 'image scanner online, professional image editing 2026, high-fidelity photo scaling, best online image tools, local image conversion, privacy-focused photo editor, advanced image toolbox, fast image editor online, all-in-one image toolkit, no-signup photo editor free, bulk image resizer',
             'pdf-tools': 'secure pdf management 2026, client-side pdf merging safely, local pdf encryption military grade, professional document splitting, high-performance pdf compression algorithm, free pdf editor 2026, online document toolbox, edit pdf without software online, best free online pdf tool, all-in-one pdf toolkit free offline',
             'temp-mail': 'temp mail 10 2026, temp mail org, toolbox temp mail, temp mail reddit, mail temporary, burner email generator, anonymous temporary email, secure disposable inbox, privacy-first mail generator, professional burner email services, best temporary email service 2026, most reliable disposable email 2026, private disposable email services online, anonymous email for account verification, bypass email verification with temp mail',
-            'qr': 'free qr code generator unlimited, branded qr code generator, ulty free qr code generator alternative, secure offline qr scanner, local qr code creation, privacy-focused qr tools, custom qr code high res, dynamic qr code generator alternative, editable qr code online, high-resolution svg qr code generator, qr code for product packaging',
+            'qr': 'free qr code generator unlimited, branded qr code generator, best free qr code generator alternative, secure offline qr scanner, local qr code creation, privacy-focused qr tools, custom qr code high res, dynamic qr code generator alternative, editable qr code online, high-resolution svg qr code generator, qr code for product packaging',
             'ai-tools': 'best ai assistant 2026, private ai content generator, secure ai writing tool, local ai coding companion, deep mind ai chat, seo content forge free, ai grammar architect pro, ats-friendly resume builder ai, high-authority ai content drafting, professional ai correspondent, social pulse viral captions ai, seo architect keyword generator',
             'math-tools': 'advanced scientific calculator online, interactive graphing visualizer, professional matrix solver pro, high-precision algebraic engine, linear algebra studio digital, statistical data visualizer, expertly solve math equations online, number theory forge prime factorization, financial architect calculator tvm, vector magnitude visualizer 3d',
             'productivity-tools': 'private kanban board pro, secure todo list with persistence, browser-based notepad markdown, digital drawing board studio, local file vault indexeddb, focus clock pomodoro pro, virtual sticky notes board, habit tracker streak manager, all-in-one productivity hub free'
@@ -167,7 +226,7 @@ export default function SEO({
 
         // Include WebApplication only on actual tool pages.
         if (isToolPath) {
-            globalSchemas.push({
+            const webAppSchema = {
                 "@context": "https://schema.org",
                 "@type": "WebApplication",
                 "name": toolName ? `PixTool ${toolName}` : siteName,
@@ -189,7 +248,19 @@ export default function SEO({
                         { "@type": "Country", "name": "AU" }
                     ]
                 }
-            })
+            }
+
+            if (liveRatings.tool) {
+                webAppSchema.aggregateRating = {
+                    "@type": "AggregateRating",
+                    "ratingValue": Number(Number(liveRatings.tool.avgRating || 0).toFixed(1)),
+                    "bestRating": 5,
+                    "worstRating": 1,
+                    "ratingCount": Number(liveRatings.tool.totalVotes || 0)
+                }
+            }
+
+            globalSchemas.push(webAppSchema)
         }
 
         // BreadcrumbList
@@ -362,7 +433,6 @@ export default function SEO({
                 },
                 "contactPoint": {
                     "@type": "ContactPoint",
-                    "telephone": "+91-XXXXXXXXXX",
                     "contactType": "Customer Support",
                     "email": "support@pixtool.in"
                 },
@@ -389,7 +459,7 @@ export default function SEO({
                 "thumbnailUrl": [
                     "https://img.youtube.com/vi/fzIhPN-gv_E/hqdefault.jpg"
                 ],
-                "uploadDate": new Date().toISOString().split('T')[0] + "T00:00:00Z", // Dynamically bound to current discovery timeframe
+                "uploadDate": "2026-03-01T00:00:00Z",
                 "duration": "PT0M60S",
                 "contentUrl": "https://youtube.com/shorts/fzIhPN-gv_E",
                 "embedUrl": "https://www.youtube.com/embed/fzIhPN-gv_E",
@@ -406,7 +476,7 @@ export default function SEO({
 
         // AggregateOffer schema for tool listing pages
         if (path === '/image-tools' || path === '/pdf-tools' || path === '/ai-tools' || path === '/math-tools' || path === '/utility-tools') {
-            globalSchemas.push({
+            const aggregateOfferSchema = {
                 "@context": "https://schema.org",
                 "@type": "AggregateOffer",
                 "@id": `${fullUrl}/#aggregate-offer`,
@@ -419,117 +489,20 @@ export default function SEO({
                     "priceCurrency": "USD",
                     "availability": "https://schema.org/InStock",
                     "url": fullUrl
-                },
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.8",
-                    "bestRating": "5",
-                    "worstRating": "1",
-                    "ratingCount": "2500",
-                    "reviewCount": "1800"
                 }
-            })
-        }
+            }
 
-        // Product schema for individual tools (high-impact for e-commerce-style rankings)
-        const finalToolName = toolName || (toolDataFromMap?.title ? toolDataFromMap.title.split('|')[0].trim() : (title ? title.split('|')[0].trim() : 'Tool'))
-        const finalToolSteps = (toolSteps && Array.isArray(toolSteps)) ? toolSteps : (schema?.howTo && Array.isArray(schema.howTo) ? schema.howTo : [])
-
-        if (path !== '/' && isToolPath && finalToolName) {
-            globalSchemas.push({
-                "@context": "https://schema.org",
-                "@type": "Product",
-                "@id": `${fullUrl}/#product`,
-                "name": `${finalToolName} | PixTool`,
-                "description": description,
-                "image": ogImage,
-                "brand": {
-                    "@type": "Brand",
-                    "name": siteName,
-                    "url": siteUrl
-                },
-                "manufacturer": {
-                    "@type": "Organization",
-                    "name": siteName,
-                    "url": siteUrl
-                },
-                "url": fullUrl,
-                "offers": {
-                    "@type": "Offer",
-                    "price": "0",
-                    "priceCurrency": "USD",
-                    "availability": "https://schema.org/InStock",
-                    "url": fullUrl,
-                    "eligibleRegion": [
-                        {
-                            "@type": "Country",
-                            "name": "IN"
-                        },
-                        {
-                            "@type": "Country",
-                            "name": "US"
-                        },
-                        {
-                            "@type": "Country",
-                            "name": "GB"
-                        },
-                        {
-                            "@type": "Country",
-                            "name": "AU"
-                        }
-                    ],
-                    "shippingDetails": {
-                        "@type": "OfferShippingDetails",
-                        "shippingRate": {
-                            "@type": "MonetaryAmount",
-                            "value": "0",
-                            "currency": "USD"
-                        },
-                        "shippingDestination": [
-                            { "@type": "DefinedRegion", "addressCountry": "IN" },
-                            { "@type": "DefinedRegion", "addressCountry": "US" },
-                            { "@type": "DefinedRegion", "addressCountry": "GB" },
-                            { "@type": "DefinedRegion", "addressCountry": "AU" }
-                        ],
-                        "deliveryTime": {
-                            "@type": "ShippingDeliveryTime",
-                            "handlingTime": {
-                                "@type": "QuantitativeValue",
-                                "minValue": "0",
-                                "maxValue": "0",
-                                "unitCode": "DAY"
-                            },
-                            "transitTime": {
-                                "@type": "QuantitativeValue",
-                                "minValue": "0",
-                                "maxValue": "0",
-                                "unitCode": "DAY"
-                            }
-                        }
-                    }
-                },
-                "aggregateRating": {
+            if (liveRatings.overall) {
+                aggregateOfferSchema.aggregateRating = {
                     "@type": "AggregateRating",
-                    "ratingValue": getRatingJitter(toolDataFromMap?.id || path).ratingValue,
-                    "bestRating": "5",
-                    "worstRating": "1",
-                    "ratingCount": getRatingJitter(toolDataFromMap?.id || path).ratingCount,
-                    "reviewCount": getRatingJitter(toolDataFromMap?.id || path).reviewCount
-                },
-                "hasMerchantReturnPolicy": {
-                    "@type": "MerchantReturnPolicy",
-                    "applicableCountry": "US",
-                    "returnPolicyCategory": "https://schema.org/MerchantReturnFreeReturn",
-                    "merchantReturnDays": "0",
-                    "returnMethod": "https://schema.org/ReturnByMail",
-                    "returnFees": "https://schema.org/FreeReturn"
-                },
-                "instructions": finalToolSteps.map((step, idx) => ({
-                    "@type": "HowToStep",
-                    "position": idx + 1,
-                    "text": step
-                }))
-            })
+                    "ratingValue": Number(Number(liveRatings.overall.avgRating || 0).toFixed(1)),
+                    "bestRating": 5,
+                    "worstRating": 1,
+                    "ratingCount": Number(liveRatings.overall.totalVotes || 0)
+                }
+            }
+
+            globalSchemas.push(aggregateOfferSchema)
         }
 
         // Combine into schemasToInject
@@ -540,7 +513,7 @@ export default function SEO({
         }
 
         return schemasToInject
-    }, [title, description, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, articleSection, articleTags, readingTime, breadcrumbs, faqs, toolName, toolSteps, type, lastModified, screenshot, imageTitle, brandTitle, defaultScreenshot, dynamicImageAlt, isToolPath])
+    }, [title, description, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, articleSection, articleTags, readingTime, breadcrumbs, faqs, toolName, toolSteps, type, lastModified, screenshot, imageTitle, brandTitle, defaultScreenshot, dynamicImageAlt, isToolPath, liveRatings])
 
     useEffect(() => {
         document.title = brandTitle
@@ -553,6 +526,11 @@ export default function SEO({
                 document.head.appendChild(meta)
             }
             meta.setAttribute('content', content)
+        }
+
+        const removeMeta = (name, attribute = 'name') => {
+            const nodes = document.querySelectorAll(`meta[${attribute}="${name}"]`)
+            nodes.forEach(node => node.remove())
         }
 
         updateMeta('description', description)
@@ -568,6 +546,7 @@ export default function SEO({
         updateMeta('og:description', description, 'property')
         updateMeta('og:url', fullUrl, 'property')
         updateMeta('og:image', ogImage, 'property')
+        updateMeta('og:image:secure_url', ogImage, 'property')
         updateMeta('og:image:alt', dynamicImageAlt, 'property')
         updateMeta('og:image:width', '1280', 'property')
         updateMeta('og:image:height', '720', 'property')
@@ -575,14 +554,21 @@ export default function SEO({
         updateMeta('og:type', type, 'property')
         updateMeta('og:site_name', siteName, 'property')
         updateMeta('og:locale', 'en_US', 'property')
-        updateMeta('og:locale:alternate', 'en_GB', 'property')
-        updateMeta('og:locale:alternate', 'en_IN', 'property')
+        const existingLocaleAlternates = document.querySelectorAll('meta[property="og:locale:alternate"]')
+        existingLocaleAlternates.forEach(node => node.remove())
+        ;['en_GB', 'en_IN'].forEach((locale) => {
+            const localeMeta = document.createElement('meta')
+            localeMeta.setAttribute('property', 'og:locale:alternate')
+            localeMeta.setAttribute('content', locale)
+            document.head.appendChild(localeMeta)
+        })
 
         // Twitter
         updateMeta('twitter:card', 'summary_large_image')
         updateMeta('twitter:title', brandTitle)
         updateMeta('twitter:description', description)
         updateMeta('twitter:image', twImage)
+        updateMeta('twitter:image:alt', dynamicImageAlt)
         updateMeta('twitter:creator', '@ajmal_uk_')
         updateMeta('twitter:domain', 'pixtool.in')
 
@@ -594,6 +580,7 @@ export default function SEO({
             if (articleSection) {
                 updateMeta('article:section', articleSection, 'property')
             }
+            document.querySelectorAll('meta[property="article:tag"]').forEach(node => node.remove())
             if (articleTags && Array.isArray(articleTags)) {
                 articleTags.forEach((tag) => {
                     const tagMeta = document.createElement('meta')
@@ -602,6 +589,8 @@ export default function SEO({
                     document.head.appendChild(tagMeta)
                 })
             }
+        } else {
+            document.querySelectorAll('meta[property="article:tag"]').forEach(node => node.remove())
         }
 
         // GEO Tags for Local SEO
@@ -612,7 +601,19 @@ export default function SEO({
 
         // Additional meta tags for better indexing
         updateMeta('google', 'nositelinkssearchbox')
-        updateMeta('googlebot-news', 'nosnippet')
+
+        // Debug freshness markers for verifying schema rating recency.
+        if (liveRatingMeta.toolFetchedAt) {
+            updateMeta('pixtool:tool-rating-fetched-at', liveRatingMeta.toolFetchedAt)
+        } else {
+            removeMeta('pixtool:tool-rating-fetched-at')
+        }
+
+        if (liveRatingMeta.overallFetchedAt) {
+            updateMeta('pixtool:overall-rating-fetched-at', liveRatingMeta.overallFetchedAt)
+        } else {
+            removeMeta('pixtool:overall-rating-fetched-at')
+        }
 
         // Canonical Link
         let canonical = document.querySelector('link[rel="canonical"]')
@@ -649,9 +650,131 @@ export default function SEO({
             if (alternateDefault) alternateDefault.remove()
         }
 
-    }, [brandTitle, description, enhancedKeywords, shouldNoIndex, fullUrl, ogImage, type, siteName, twImage, articlePublishedTime, lastModified, articleAuthor, articleSection, articleTags, dynamicImageAlt])
+    }, [brandTitle, description, enhancedKeywords, shouldNoIndex, fullUrl, ogImage, type, siteName, twImage, articlePublishedTime, lastModified, articleAuthor, articleSection, articleTags, dynamicImageAlt, liveRatingMeta])
 
     const schemasToRender = shouldNoIndex ? [] : schemas
+    const schemaDiagnostics = useMemo(() => {
+        if (shouldNoIndex) {
+            return { issues: [], hasIssue: false }
+        }
+
+        const issues = []
+
+        if (schemasToRender.length === 0) {
+            issues.push('No JSON-LD schema was generated for an indexable page.')
+        }
+
+        schemasToRender.forEach((schemaItem, index) => {
+            if (!schemaItem || typeof schemaItem !== 'object') {
+                issues.push(`Schema #${index + 1} is not a valid object.`)
+                return
+            }
+
+            if (!schemaItem['@context']) {
+                issues.push(`Schema #${index + 1} is missing @context.`)
+            }
+
+            if (!schemaItem['@type']) {
+                issues.push(`Schema #${index + 1} is missing @type.`)
+            }
+        })
+
+        if (isToolPath && !schemasToRender.some(item => item?.['@type'] === 'WebApplication')) {
+            issues.push('Tool page is missing WebApplication schema.')
+        }
+
+        if ((path === '/' || path === '/image-tools' || path === '/pdf-tools' || path === '/ai-tools' || path === '/math-tools' || path === '/utility-tools')
+          && !schemasToRender.some(item => item?.['@type'] === 'AggregateOffer')) {
+            issues.push('Hub page is missing AggregateOffer schema.')
+        }
+
+        if (faqs && Array.isArray(faqs) && faqs.length > 0 && !schemasToRender.some(item => item?.['@type'] === 'FAQPage')) {
+            issues.push('FAQ content is present but FAQPage schema was not generated.')
+        }
+
+        if (toolSteps && Array.isArray(toolSteps) && toolSteps.length > 0 && !schemasToRender.some(item => item?.['@type'] === 'HowTo')) {
+            issues.push('Tool steps are present but HowTo schema was not generated.')
+        }
+
+        return { issues, hasIssue: issues.length > 0 }
+    }, [schemasToRender, shouldNoIndex, isToolPath, path, faqs, toolSteps])
+
+    useEffect(() => {
+        if (import.meta.env.DEV) {
+            setShowSchemaDiagnostics(schemaDiagnostics.hasIssue)
+        }
+    }, [schemaDiagnostics.hasIssue])
+
+    useEffect(() => {
+        if (!import.meta.env.DEV || !showSchemaDiagnostics) {
+            return
+        }
+
+        const handlePointerMove = (event) => {
+            if (!dragStateRef.current?.dragging) return
+            event.preventDefault()
+            const deltaX = event.clientX - dragStateRef.current.startX
+            const deltaY = event.clientY - dragStateRef.current.startY
+            setDiagnosticsOffset({
+                x: dragStateRef.current.baseX + deltaX,
+                y: dragStateRef.current.baseY + deltaY,
+            })
+        }
+
+        const handlePointerUp = () => {
+            if (dragStateRef.current) {
+                dragStateRef.current.dragging = false
+            }
+        }
+
+        window.addEventListener('pointermove', handlePointerMove, { passive: false })
+        window.addEventListener('pointerup', handlePointerUp)
+        window.addEventListener('pointercancel', handlePointerUp)
+
+        return () => {
+            window.removeEventListener('pointermove', handlePointerMove)
+            window.removeEventListener('pointerup', handlePointerUp)
+            window.removeEventListener('pointercancel', handlePointerUp)
+        }
+    }, [showSchemaDiagnostics])
+
+    useEffect(() => {
+        if (!diagnosticsCopied) return undefined
+        const timeoutId = window.setTimeout(() => setDiagnosticsCopied(false), 1400)
+        return () => window.clearTimeout(timeoutId)
+    }, [diagnosticsCopied])
+
+    const beginDiagnosticsDrag = (event) => {
+        if (!import.meta.env.DEV) return
+        dragStateRef.current = {
+            dragging: true,
+            startX: event.clientX,
+            startY: event.clientY,
+            baseX: diagnosticsOffset.x,
+            baseY: diagnosticsOffset.y,
+        }
+        event.currentTarget.setPointerCapture?.(event.pointerId)
+    }
+
+    const copySchemasToClipboard = async () => {
+        if (!schemasToRender.length) return
+
+        const payload = JSON.stringify(schemasToRender, null, 2)
+        try {
+            await navigator.clipboard.writeText(payload)
+            setDiagnosticsCopied(true)
+        } catch {
+            const fallbackTextarea = document.createElement('textarea')
+            fallbackTextarea.value = payload
+            fallbackTextarea.style.position = 'fixed'
+            fallbackTextarea.style.opacity = '0'
+            document.body.appendChild(fallbackTextarea)
+            fallbackTextarea.select()
+            document.execCommand('copy')
+            document.body.removeChild(fallbackTextarea)
+            setDiagnosticsCopied(true)
+        }
+    }
 
     return (
         <>
@@ -662,6 +785,117 @@ export default function SEO({
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(s) }}
                 />
             ))}
+            {import.meta.env.DEV && schemasToRender.length > 0 && (
+                <>
+                    <button
+                        type="button"
+                        onClick={() => setShowSchemaDiagnostics(prev => !prev)}
+                        style={{
+                            position: 'fixed',
+                            right: '0.75rem',
+                            bottom: '0.75rem',
+                            zIndex: 2147483647,
+                            border: '1px solid var(--border-color)',
+                            borderRadius: '999px',
+                            padding: '0.35rem 0.7rem',
+                            fontSize: '0.68rem',
+                            fontWeight: 800,
+                            letterSpacing: '0.08em',
+                            textTransform: 'uppercase',
+                            color: 'var(--text-primary)',
+                            background: 'var(--bg-glass)',
+                            backdropFilter: 'blur(18px)',
+                            WebkitBackdropFilter: 'blur(18px)',
+                            boxShadow: '0 12px 28px rgba(15, 23, 42, 0.18)',
+                            cursor: 'pointer'
+                        }}
+                        aria-label="Toggle schema diagnostics"
+                    >
+                        Schema
+                    </button>
+
+                    {showSchemaDiagnostics && (
+                        <div
+                            style={{
+                                position: 'fixed',
+                                right: '0.75rem',
+                                bottom: '3.4rem',
+                                width: 'min(360px, calc(100vw - 1.5rem))',
+                                maxHeight: '38vh',
+                                zIndex: 2147483647,
+                                border: '1px solid var(--border-color)',
+                                borderRadius: '14px',
+                                background: 'var(--bg-card)',
+                                boxShadow: '0 18px 40px rgba(15, 23, 42, 0.18)',
+                                overflow: 'hidden',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                transform: `translate(${diagnosticsOffset.x}px, ${diagnosticsOffset.y}px)`,
+                                touchAction: 'none'
+                            }}
+                        >
+                            <div
+                                onPointerDown={beginDiagnosticsDrag}
+                                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.6rem', padding: '0.65rem 0.8rem', borderBottom: '1px solid var(--border-color)', background: 'var(--bg-secondary)', cursor: 'grab', userSelect: 'none' }}
+                            >
+                                <strong style={{ fontSize: '0.76rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Schema Diagnostics</strong>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                                    <button
+                                        type="button"
+                                        onClick={copySchemasToClipboard}
+                                        style={{
+                                            border: '1px solid var(--border-color)',
+                                            background: 'var(--bg-primary)',
+                                            color: 'var(--text-primary)',
+                                            fontSize: '0.68rem',
+                                            fontWeight: 800,
+                                            cursor: 'pointer',
+                                            borderRadius: '999px',
+                                            padding: '0.28rem 0.55rem'
+                                        }}
+                                        aria-label="Copy schema JSON-LD"
+                                    >
+                                        {diagnosticsCopied ? 'Copied' : 'Copy'}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowSchemaDiagnostics(false)}
+                                        style={{
+                                            border: 'none',
+                                            background: 'transparent',
+                                            color: 'var(--text-secondary)',
+                                            fontSize: '0.85rem',
+                                            fontWeight: 700,
+                                            cursor: 'pointer'
+                                        }}
+                                        aria-label="Close schema diagnostics"
+                                    >
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                            <div style={{ padding: '0.7rem 0.8rem', borderBottom: '1px solid var(--border-color)', background: 'rgba(239, 68, 68, 0.05)', color: 'var(--text-primary)', fontSize: '0.72rem', lineHeight: 1.45 }}>
+                                {schemaDiagnostics.hasIssue ? (
+                                    <>
+                                        <strong>Issues found:</strong>
+                                        <ul style={{ margin: '0.35rem 0 0', paddingLeft: '1rem' }}>
+                                            {schemaDiagnostics.issues.slice(0, 4).map((issue) => (
+                                                <li key={issue}>{issue}</li>
+                                            ))}
+                                            {schemaDiagnostics.issues.length > 4 && <li>+{schemaDiagnostics.issues.length - 4} more</li>}
+                                        </ul>
+                                    </>
+                                ) : (
+                                    <strong>No schema issues detected for this route.</strong>
+                                )}
+                            </div>
+                            <pre style={{ margin: 0, padding: '0.75rem 0.8rem', fontSize: '0.68rem', lineHeight: 1.45, overflow: 'auto', whiteSpace: 'pre-wrap', wordBreak: 'break-word', color: 'var(--text-primary)' }}>
+{JSON.stringify(schemasToRender, null, 2)}
+                            </pre>
+                        </div>
+                    )}
+                </>
+            )}
         </>
     )
 }

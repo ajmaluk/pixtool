@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { Download, Copy, Link, Text, Mail, Phone, Wifi, Sliders, X, ChevronDown } from 'lucide-react'
 import SEO from '../components/SEO'
@@ -38,6 +38,11 @@ export default function QrGenerator() {
   const [showMobileSettings, setShowMobileSettings] = useState(false)
   const [toast, setToast] = useState({ show: false, message: '' })
 
+  useEffect(() => {
+    document.body.classList.toggle('mobile-overlay-open', showMobileSettings)
+    return () => document.body.classList.remove('mobile-overlay-open')
+  }, [showMobileSettings])
+
   const getQrValue = () => {
     switch (activeType) {
       case 'url':
@@ -49,7 +54,9 @@ export default function QrGenerator() {
       case 'phone':
         return data.phone ? `tel:${data.phone}` : '+1234567890'
       case 'wifi':
-        return data.wifi ? `WIFI:T:${data.wifiEncryption};S:${data.wifi};;` : 'WIFI:T:WPA;S:MyNetwork;;'
+        return data.wifi
+          ? `WIFI:T:${data.wifiEncryption};S:${data.wifi};P:${data.wifiPassword || ''};H:false;;`
+          : 'WIFI:T:WPA;S:MyNetwork;P:password123;H:false;;'
       default:
         return data.url || 'https://example.com'
     }
@@ -184,8 +191,8 @@ export default function QrGenerator() {
   return (
     <>
       <SEO
-        title="🎯 Free QR Code Generator 2026 - Create Custom Codes in 2 Seconds | PixTool"
-        description="Generate professional QR codes instantly. Supports URLs, WiFi QR, vCards, text & email. Customize colors, download 400x400px PNG. No signup. Zero data tracking. Better than QR-Server & QR.io for privacy & speed."
+        title="Free QR Code Generator 2026 - Create Custom QR Codes Online | PixTool"
+        description="Generate professional QR codes instantly. Supports URLs, WiFi, text, email, and phone QR. Customize colors, download 400x400px PNG. No signup. Zero data tracking. Better than QR-Server & QR.io for privacy & speed."
         keywords="free qr code generator, qr code maker, custom qr code generator, create qr code free, qr generator no app, high resolution qr code, branded qr code, wifi qr code generator, static qr codes, qr code for url, best qr generator 2026, private qr generator, qr code creator"
         path="/qr-generator"
         toolName="QR Generator"
@@ -219,9 +226,9 @@ export default function QrGenerator() {
 
             <div className="page-hero">
               <div className="page-hero-content">
-                <h1 className="page-title">QR Generator</h1>
+                <h1 className="page-title">Free QR Code Generator</h1>
                 <p className="page-subtitle">
-                  Create professional, high-resolution QR codes for links, WiFi, vCards, and more instantly.
+                  Create professional, high-resolution QR codes for links, WiFi, text, email, and phone instantly.
                 </p>
               </div>
             </div>
@@ -431,12 +438,16 @@ export default function QrGenerator() {
         </div>
 
         {/* Mobile Action Bar & Settings Drawer */}
-        <div className="mobile-bottom-bar">
+        <div className="mobile-bottom-bar tool-mobile-fixed-bar">
           <button className="btn btn-secondary" onClick={() => setShowMobileSettings(true)}>
-            <Sliders size={18} /> Settings
+            <Sliders size={18} />
+            <span className="mobile-action-label mobile-action-label-full">Settings</span>
+            <span className="mobile-action-label mobile-action-label-short">Set</span>
           </button>
           <button className="btn btn-primary" onClick={downloadQR}>
-            <Download size={18} /> Download
+            <Download size={18} />
+            <span className="mobile-action-label mobile-action-label-full">Download</span>
+            <span className="mobile-action-label mobile-action-label-short">Save</span>
           </button>
         </div>
 

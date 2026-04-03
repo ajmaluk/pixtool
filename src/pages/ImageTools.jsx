@@ -99,6 +99,11 @@ export default function ImageTools() {
   }, [selectedIndex])
   const [showMobileSettings, setShowMobileSettings] = useState(false)
 
+  useEffect(() => {
+    document.body.classList.toggle('mobile-overlay-open', showMobileSettings)
+    return () => document.body.classList.remove('mobile-overlay-open')
+  }, [showMobileSettings])
+
   // Redundant SettingsPanel removed to avoid logic duplication
   const [settings, setSettings] = useState({
     width: 800,
@@ -1314,12 +1319,16 @@ export default function ImageTools() {
         {/* Mobile Action Bar & Settings Drawer */}
         {preview && (
           <>
-            <div className="mobile-bottom-bar">
+            <div className="mobile-bottom-bar tool-mobile-fixed-bar">
               <button className="btn btn-secondary" onClick={() => setShowMobileSettings(true)}>
-                <Sliders size={18} /> Settings
+                <Sliders size={18} />
+                <span className="mobile-action-label mobile-action-label-full">Settings</span>
+                <span className="mobile-action-label mobile-action-label-short">Set</span>
               </button>
               <button className="btn btn-primary" onClick={processImage}>
-                <Download size={18} /> Export
+                <Download size={18} />
+                <span className="mobile-action-label mobile-action-label-full">Export</span>
+                <span className="mobile-action-label mobile-action-label-short">Save</span>
               </button>
             </div>
 
