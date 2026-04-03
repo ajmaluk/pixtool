@@ -76,7 +76,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/scientific-calculator-online.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/utility-tools-hub.png</image:loc>
       <image:title>PixTool Scientific Calculator - High-Precision Algebraic Engine</image:title>
       <image:caption>High-precision algebraic engine for complex engineering and scientific computations.</image:caption>
     </image:image>
@@ -87,7 +87,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/online-graphing-calculator-pixtool.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/utility-tools-hub.png</image:loc>
       <image:title>PixTool Graph Visualizer - Interactive Functional Plotting</image:title>
       <image:caption>Interactive functional plotting engine for 2D and 3D mathematical visualizations.</image:caption>
     </image:image>
@@ -98,7 +98,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/linear-algebra-matrix-solver.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/utility-tools-hub.png</image:loc>
       <image:title>PixTool Matrix Solver - Linear Algebra Studio</image:title>
       <image:caption>Professional linear algebra studio for matrix inversion, determinants, and rank calculations.</image:caption>
     </image:image>
@@ -131,7 +131,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/interactive-unit-circle-trigonometry.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/utility-tools-hub.png</image:loc>
       <image:title>PixTool Unit Circle - Trigonometry Visualizer</image:title>
       <image:caption>Interactive trigonometry visualizer for understanding sines, cosines, and angle rotations.</image:caption>
     </image:image>
@@ -142,7 +142,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/advanced-financial-calculator.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/utility-tools-hub.png</image:loc>
       <image:title>PixTool Finance Architect - Business Logic Engine</image:title>
       <image:caption>Advanced financial suite for TVM, Loan amortization, and ROI analysis.</image:caption>
     </image:image>
@@ -153,7 +153,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/number-theory-prime-forge.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/utility-tools-hub.png</image:loc>
       <image:title>PixTool Number Theory Forge - Prime Factorization</image:title>
       <image:caption>Analyze number properties including prime factorization, GCD, and modular arithmetic.</image:caption>
     </image:image>
@@ -164,7 +164,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/precise-fraction-calculator.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/utility-tools-hub.png</image:loc>
       <image:title>PixTool Fraction Pro - Precision Arithmetic</image:title>
       <image:caption>Precise fractional arithmetic with simplified results and step-by-step logic.</image:caption>
     </image:image>
@@ -758,7 +758,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/online-todo-list-pixtool.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.png</image:loc>
       <image:title>PixTool Todo List - Private Task Management</image:title>
       <image:caption>High-performance task management with priorities, categories, and browser-native persistence.</image:caption>
     </image:image>
@@ -769,7 +769,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/kanban-board-online-free.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.png</image:loc>
       <image:title>PixTool Kanban Board - Visual Workflow Management</image:title>
       <image:caption>Professional drag-and-drop board for visual project tracking. 100% private and on-device.</image:caption>
     </image:image>
@@ -780,7 +780,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/professional-online-notepad-pixtool.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.png</image:loc>
       <image:title>PixTool Notepad - Secure Markdown Editor</image:title>
       <image:caption>Focus-built markdown editor with syntax highlighting, auto-save, and instant text exports.</image:caption>
     </image:image>
@@ -791,7 +791,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/online-drawing-canvas-free.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.png</image:loc>
       <image:title>PixTool Drawing Board - Digital Sketching Studio</image:title>
       <image:caption>Full-featured digital canvas for sketching, wireframing, and creative design directly in your browser.</image:caption>
     </image:image>
@@ -802,7 +802,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/indexeddb-file-manager-online.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.png</image:loc>
       <image:title>PixTool File Manager - Local Storage Explorer</image:title>
       <image:caption>Browser-native file manager. Store, organize, and manage your virtual files securely in IndexedDB.</image:caption>
     </image:image>
@@ -813,7 +813,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/pomodoro-timer-focus-clock.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.png</image:loc>
       <image:title>PixTool Pomodoro Timer - productivity focus tool</image:title>
       <image:caption>Aesthetic Pomodoro timer designed to boost deep work through scientifically proven rest intervals.</image:caption>
     </image:image>
@@ -824,7 +824,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/virtual-sticky-notes-board.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.png</image:loc>
       <image:title>PixTool Sticky Notes - Digital Brainstorming Board</image:title>
       <image:caption>Virtual board for movable, color-coded sticky notes. Perfect for brainstorming and quick reminders.</image:caption>
     </image:image>
@@ -835,7 +835,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/habit-tracker-consistency-manager.png</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.png</image:loc>
       <image:title>PixTool Habit Tracker - Daily Routine Manager</image:title>
       <image:caption>Track your daily routines and build long-term consistency with our visual habit streak manager.</image:caption>
     </image:image>
@@ -846,7 +846,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/blog/claude-vs-gpt-vs-gemini.webp</image:loc>
+      <image:loc>https://www.pixtool.in/blog/claude-vs-gpt-vs-gemini.png</image:loc>
       <image:title>🤖 Claude vs ChatGPT vs Gemini: 2026 LLM Showdown - Which AI Wins?</image:title>
     </image:image>
   </url>
@@ -856,7 +856,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/blog/pixtool-ai-workflow.webp</image:loc>
+      <image:loc>https://www.pixtool.in/blog/pixtool-ai-workflow.png</image:loc>
       <image:title>⚡ 80% Productivity Boost: Master PixTool AI Workflow [Pro Guide]</image:title>
     </image:image>
   </url>
@@ -866,7 +866,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.png</image:loc>
       <image:title>🚀 Future of AI Productivity 2026: Edge AI Guide - Privacy Without Compromise</image:title>
     </image:image>
   </url>
@@ -876,7 +876,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.png</image:loc>
       <image:title>🔐 Browser-Based Tools = Zero Privacy Risk [2026 Security Guide]</image:title>
     </image:image>
   </url>
@@ -886,7 +886,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/professional-online-image-studio.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/professional-online-image-studio.png</image:loc>
       <image:title>🎉 PixTool vs ToolPix: Everything About Our New Privacy-First Suite [2026]</image:title>
     </image:image>
   </url>
@@ -896,7 +896,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/best-online-image-resizer-tool.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/best-online-image-resizer-tool.png</image:loc>
       <image:title>📱 Perfect Social Media Image Sizes 2026: Instagram, Facebook, X, LinkedIn &amp; TikTok Exact Dimensions</image:title>
     </image:image>
   </url>
@@ -906,7 +906,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/secure-pdf-management-suite.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/secure-pdf-management-suite.png</image:loc>
       <image:title>🔓 Best Free PDF Tools 2026 - Merge, Split, Compress WITHOUT Cloud Upload</image:title>
     </image:image>
   </url>
@@ -916,7 +916,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/high-quality-image-compressor-online.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/high-quality-image-compressor-online.png</image:loc>
       <image:title>🗜️ Image Compression 101: Lossless vs Lossy - Reduce Size 80% Without Quality Loss</image:title>
     </image:image>
   </url>
@@ -926,7 +926,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/secure-pdf-with-password-online.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/secure-pdf-with-password-online.png</image:loc>
       <image:title>🔐 PDF Security 101: Passwords, Encryption &amp; Safe Sharing for 2026</image:title>
     </image:image>
   </url>
@@ -936,7 +936,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/best-free-qr-code-generator-online.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/best-free-qr-code-generator-online.png</image:loc>
       <image:title>📲 Static vs Dynamic QR Codes 2026: Which One Should You Use?</image:title>
     </image:image>
   </url>
@@ -946,7 +946,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/convert-pdf-to-images-online-high-res.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/convert-pdf-to-images-online-high-res.png</image:loc>
       <image:title>📝 Convert PDF to Word Free 2026: Keep Tables, Fonts &amp; Formatting Intact</image:title>
     </image:image>
   </url>
@@ -956,7 +956,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/online-image-format-converter-webp-png-jpg.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/online-image-format-converter-webp-png-jpg.png</image:loc>
       <image:title>🎯 WebP vs AVIF vs JPEG 2026: Best Image Format for Web Performance &amp; SEO</image:title>
     </image:image>
   </url>
@@ -966,7 +966,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/burner-email-address-generator-privacy.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/burner-email-address-generator-privacy.png</image:loc>
       <image:title>📧 Secure Temporary Email Strategy: Stop Spam, Phishing &amp; Data Scraping</image:title>
     </image:image>
   </url>
@@ -976,7 +976,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/best-free-qr-code-generator-online.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/best-free-qr-code-generator-online.png</image:loc>
       <image:title>📊 Advanced QR Code Marketing 2026: 3x Conversion Rates with Smart Offline-to-Online Strategy</image:title>
     </image:image>
   </url>
@@ -986,7 +986,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/disposable-temporary-email-generator.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/disposable-temporary-email-generator.png</image:loc>
       <image:title>How to Bypass Email Spam: The 2026 Guide to Temporary Inboxes</image:title>
     </image:image>
   </url>
@@ -996,7 +996,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/secure-pdf-management-suite.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/secure-pdf-management-suite.png</image:loc>
       <image:title>📦 Ultimate PDF Toolkit 2026: Merge, Split &amp; Compress Like a Pro</image:title>
     </image:image>
   </url>
@@ -1006,7 +1006,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.png</image:loc>
       <image:title>🛡️ Why PixTool is the Safest Browser-Based Studio in 2026</image:title>
     </image:image>
   </url>
@@ -1016,7 +1016,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.png</image:loc>
       <image:title>🚀 Building PixTool: SEO, Product &amp; Privacy Lessons from Year One</image:title>
     </image:image>
   </url>
@@ -1026,7 +1026,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/professional-online-image-studio.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/professional-online-image-studio.png</image:loc>
       <image:title>🤖 Top 5 AI Trends Reshaping Productivity in 2026</image:title>
     </image:image>
   </url>
@@ -1036,7 +1036,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/all-in-one-web-utility-toolbox.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/all-in-one-web-utility-toolbox.png</image:loc>
       <image:title>⚔️ GPT-5 vs Gemini 3 vs Claude 4.5: Best AI Model for 2026?</image:title>
     </image:image>
   </url>
@@ -1046,7 +1046,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.webp</image:loc>
+      <image:loc>https://www.pixtool.in/screenshots/pixtool-all-in-one-productivity-suite.png</image:loc>
       <image:title>🧠 From Assistants to Agents: The Rise of Agentic AI in Software Development</image:title>
     </image:image>
   </url>

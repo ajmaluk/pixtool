@@ -422,7 +422,7 @@ export const MATH_TOOLS = [
   {
     id: 'scientific-calculator', title: 'Scientific Calculator', icon: Calculator,
     description: 'High-precision algebraic engine for complex engineering and scientific computations.',
-    color: '#3b82f6', path: '/math-tools/scientific-calculator', screenshot: 'scientific-calculator-online.png',
+    color: '#3b82f6', path: '/math-tools/scientific-calculator', screenshot: 'utility-tools-hub.png',
     imageAlt: 'PixTool Scientific Calculator - High-Precision Algebraic Engine',
     imageTitle: 'Advanced Scientific Calculator Online',
     features: ['Algebraic logic', 'Trigonometric functions', 'Logarithmic operations', 'Memory recall'],
@@ -431,7 +431,7 @@ export const MATH_TOOLS = [
   {
     id: 'graph-visualizer', title: 'Graph Visualizer', icon: TrendingUp,
     description: 'Interactive functional plotting engine for 2D and 3D mathematical visualizations.',
-    color: '#3b82f6', path: '/math-tools/graph-visualizer', screenshot: 'online-graphing-calculator-pixtool.png',
+    color: '#3b82f6', path: '/math-tools/graph-visualizer', screenshot: 'utility-tools-hub.png',
     imageAlt: 'PixTool Graph Visualizer - Interactive Functional Plotting',
     imageTitle: 'Expert Graphing Calculator Online',
     features: ['Multi-function plotting', 'Dynamic zooming', 'Coordinate tracking', 'High-res exports'],
@@ -440,7 +440,7 @@ export const MATH_TOOLS = [
   {
     id: 'matrix-solver', title: 'Matrix Solver', icon: Grid,
     description: 'Professional linear algebra studio for matrix inversion, determinants, and rank calculations.',
-    color: '#3b82f6', path: '/math-tools/matrix-solver', screenshot: 'linear-algebra-matrix-solver.png',
+    color: '#3b82f6', path: '/math-tools/matrix-solver', screenshot: 'utility-tools-hub.png',
     imageAlt: 'PixTool Matrix Solver - Linear Algebra Studio',
     imageTitle: 'Solve Matrix Equations Online',
     features: ['Inverse calculation', 'Determinant analysis', 'Matrix multiplication', 'Step-by-step logic'],
@@ -465,28 +465,28 @@ export const MATH_TOOLS = [
   {
     id: 'unit-circle', title: 'Unit Circle Studio', icon: Circle,
     description: 'Interactive trigonometry visualizer for understanding sines, cosines, and angle rotations.',
-    color: '#3b82f6', path: '/math-tools/unit-circle', screenshot: 'interactive-unit-circle-trigonometry.png',
+    color: '#3b82f6', path: '/math-tools/unit-circle', screenshot: 'utility-tools-hub.png',
     imageAlt: 'PixTool Unit Circle - Trigonometry Visualizer',
     imageTitle: 'Explore the Unit Circle Interactively'
   },
   {
     id: 'financial-calculator', title: 'Finance Architect', icon: DollarSign,
     description: 'Advanced financial suite for TVM, Loan amortization, and ROI analysis.',
-    color: '#3b82f6', path: '/math-tools/financial-calculator', screenshot: 'advanced-financial-calculator.png',
+    color: '#3b82f6', path: '/math-tools/financial-calculator', screenshot: 'utility-tools-hub.png',
     imageAlt: 'PixTool Finance Architect - Business Logic Engine',
     imageTitle: 'Professional Financial Calculator Online'
   },
   {
     id: 'number-theory', title: 'Number Theory Forge', icon: Binary,
     description: 'Analyze number properties including prime factorization, GCD, and modular arithmetic.',
-    color: '#3b82f6', path: '/math-tools/number-theory', screenshot: 'number-theory-prime-forge.png',
+    color: '#3b82f6', path: '/math-tools/number-theory', screenshot: 'utility-tools-hub.png',
     imageAlt: 'PixTool Number Theory Forge - Prime Factorization',
     imageTitle: 'Number Theory & Prime Tools Online'
   },
   {
     id: 'fraction-calculator', title: 'Fraction Pro', icon: Percent,
     description: 'Precise fractional arithmetic with simplified results and step-by-step logic.',
-    color: '#3b82f6', path: '/math-tools/fraction-calculator', screenshot: 'precise-fraction-calculator.png',
+    color: '#3b82f6', path: '/math-tools/fraction-calculator', screenshot: 'utility-tools-hub.png',
     imageAlt: 'PixTool Fraction Pro - Precision Arithmetic',
     imageTitle: 'Add and Subtract Fractions Online'
   },
@@ -503,7 +503,7 @@ export const PRODUCTIVITY_TOOLS = [
   {
     id: 'todo', title: 'Todo List', icon: ListTodo,
     description: 'High-performance task management with priorities, categories, and browser-native persistence.',
-    color: '#4f46e5', path: '/productivity-tools/todo', screenshot: 'online-todo-list-pixtool.png',
+    color: '#4f46e5', path: '/productivity-tools/todo', screenshot: 'pixtool-all-in-one-productivity-suite.png',
     imageAlt: 'PixTool Todo List - Private Task Management',
     imageTitle: 'Free Online Todo List with Persistence',
     features: ['Task priorities', 'Category grouping', 'Auto-save locally', 'One-click clearing'],
@@ -512,7 +512,7 @@ export const PRODUCTIVITY_TOOLS = [
   {
     id: 'kanban', title: 'Kanban Board', icon: Layout,
     description: 'Professional drag-and-drop board for visual project tracking. 100% private and on-device.',
-    color: '#8b5cf6', path: '/productivity-tools/kanban', screenshot: 'kanban-board-online-free.png',
+    color: '#8b5cf6', path: '/productivity-tools/kanban', screenshot: 'pixtool-all-in-one-productivity-suite.png',
     imageAlt: 'PixTool Kanban Board - Visual Workflow Management',
     imageTitle: 'Free Online Kanban Board Pro',
     features: ['Drag-and-drop workflow', 'Custom card notes', 'Visual progress tracking', 'Instant local save']
@@ -520,7 +520,7 @@ export const PRODUCTIVITY_TOOLS = [
   {
     id: 'notepad', title: 'NotePad Pro', icon: FileText,
     description: 'Focus-built markdown editor with syntax highlighting, auto-save, and instant text exports.',
-    color: '#06b6d4', path: '/productivity-tools/notepad', screenshot: 'professional-online-notepad-pixtool.png',
+    color: '#06b6d4', path: '/productivity-tools/notepad', screenshot: 'pixtool-all-in-one-productivity-suite.png',
     imageAlt: 'PixTool Notepad - Secure Markdown Editor',
     imageTitle: 'Free Online Notepad with Auto-save',
     features: ['Markdown support', 'Live word count', 'Auto-save to browser', 'Download as .txt / .md']
@@ -528,7 +528,7 @@ export const PRODUCTIVITY_TOOLS = [
   {
     id: 'drawing-board', title: 'Drawing Board', icon: Pencil,
     description: 'Full-featured digital canvas for sketching, wireframing, and creative design directly in your browser.',
-    color: '#ec4899', path: '/productivity-tools/drawing-board', screenshot: 'online-drawing-canvas-free.png',
+    color: '#ec4899', path: '/productivity-tools/drawing-board', screenshot: 'pixtool-all-in-one-productivity-suite.png',
     imageAlt: 'PixTool Drawing Board - Digital Sketching Studio',
     imageTitle: 'Free Online Drawing Tool for Sketching',
     features: ['Brush & Shape tools', 'Multi-color palette', 'High-res exports', 'Layer-like control']
@@ -536,7 +536,7 @@ export const PRODUCTIVITY_TOOLS = [
   {
     id: 'file-manager', title: 'File Vault', icon: Folder,
     description: 'Browser-native file manager. Store, organize, and manage your virtual files securely in IndexedDB.',
-    color: '#f59e0b', path: '/productivity-tools/file-manager', screenshot: 'indexeddb-file-manager-online.png',
+    color: '#f59e0b', path: '/productivity-tools/file-manager', screenshot: 'pixtool-all-in-one-productivity-suite.png',
     imageAlt: 'PixTool File Manager - Local Storage Explorer',
     imageTitle: 'Private Local File Manager Online',
     features: ['IndexedDB storage', 'Visual quota tracking', 'Folder organization', 'Import/Export system']
@@ -544,21 +544,21 @@ export const PRODUCTIVITY_TOOLS = [
   {
     id: 'pomodoro', title: 'Focus Clock', icon: Timer,
     description: 'Aesthetic Pomodoro timer designed to boost deep work through scientifically proven rest intervals.',
-    color: '#ef4444', path: '/productivity-tools/pomodoro', screenshot: 'pomodoro-timer-focus-clock.png',
+    color: '#ef4444', path: '/productivity-tools/pomodoro', screenshot: 'pixtool-all-in-one-productivity-suite.png',
     imageAlt: 'PixTool Pomodoro Timer - productivity focus tool',
     imageTitle: 'Free Online Pomodoro Timer'
   },
   {
     id: 'sticky-notes', title: 'Sticky Notes', icon: StickyNote,
     description: 'Virtual board for movable, color-coded sticky notes. Perfect for brainstorming and quick reminders.',
-    color: '#10b981', path: '/productivity-tools/sticky-notes', screenshot: 'virtual-sticky-notes-board.png',
+    color: '#10b981', path: '/productivity-tools/sticky-notes', screenshot: 'pixtool-all-in-one-productivity-suite.png',
     imageAlt: 'PixTool Sticky Notes - Digital Brainstorming Board',
     imageTitle: 'Online Virtual Sticky Notes Board'
   },
   {
     id: 'habit-tracker', title: 'Habit Tracker', icon: Activity,
     description: 'Track your daily routines and build long-term consistency with our visual habit streak manager.',
-    color: '#3b82f6', path: '/productivity-tools/habit-tracker', screenshot: 'habit-tracker-consistency-manager.png',
+    color: '#3b82f6', path: '/productivity-tools/habit-tracker', screenshot: 'pixtool-all-in-one-productivity-suite.png',
     imageAlt: 'PixTool Habit Tracker - Daily Routine Manager',
     imageTitle: 'Free Online Habit Tracker Pro'
   }
