@@ -79,7 +79,7 @@ export default function Blog() {
                         <div style={{ height: '200px', overflow: 'hidden', position: 'relative' }}>
                             <img
                                 src={post.image}
-                                alt={post.title}
+                                alt={post.imageAlt || post.title}
                                 width="400"
                                 height="200"
                                 loading="lazy"

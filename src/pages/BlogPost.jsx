@@ -164,9 +164,12 @@ export default function BlogPost() {
             <SEO
                 title={`${post.title} | PixTool Insights`}
                 description={post.excerpt}
+                keywords={Array.isArray(post.tags) ? post.tags.join(', ') : undefined}
                 path={`/blog/${post.slug}`}
                 type="article"
                 image={post.image}
+                screenshot={post.image}
+                imageAlt={post.imageAlt}
                 schema={blogPostSchema}
                 articlePublishedTime={post.dateISO || post.date}
                 articleAuthor={post.author}
@@ -268,7 +271,7 @@ export default function BlogPost() {
                         <AdSpace type="top" style={{ marginBottom: '3rem' }} />
                         <img
                             src={post.image}
-                            alt={post.title}
+                            alt={post.imageAlt || post.title}
                             width="1200"
                             height="630"
                             loading="lazy"

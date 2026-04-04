@@ -1,8 +1,189 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { ALL_TOOLS_MAP } from '../data/tools'
+import { ALL_TOOLS_MAP, IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS, MATH_TOOLS, PRODUCTIVITY_TOOLS } from '../data/tools'
 import { SITE_URL, SITE_NAME } from '../config/app.config'
 import { getOverallRating, getToolRatingStats } from '../services/supabaseService'
 import { hasSupabaseConfig } from '../lib/supabaseClient'
+
+const SITE_DEFAULT_DESCRIPTION = 'Free online AI, image, PDF, math, and productivity tools that run in your browser with privacy-first processing.'
+
+const ROUTE_SECTIONS = [
+    {
+        path: '/image-tools',
+        name: 'Image Tools',
+        title: 'Free Online Image Tools',
+        description: 'Resize, crop, convert, compress, flip, and enhance images in your browser with privacy-first processing.',
+        keywords: 'image tools, image editor online, resize image, crop image, compress image, convert image, watermark image, browser image editor',
+        tools: IMAGE_TOOLS,
+    },
+    {
+        path: '/pdf-tools',
+        name: 'PDF Tools',
+        title: 'Free Online PDF Tools',
+        description: 'Merge, split, compress, protect, unlock, and convert PDF files locally in your browser without uploads.',
+        keywords: 'pdf tools, pdf editor online, merge pdf, split pdf, compress pdf, protect pdf, unlock pdf, browser pdf tools',
+        tools: PDF_TOOLS,
+    },
+    {
+        path: '/utility-tools',
+        name: 'Utility Tools',
+        title: 'Free Online Utility Tools',
+        description: 'Use disposable email, QR tools, typing practice, and developer utilities with fast browser-based privacy.',
+        keywords: 'utility tools, temp mail, qr generator, qr scanner, typing test, json formatter, unit converter, password generator',
+        tools: UTILITY_TOOLS,
+    },
+    {
+        path: '/ai-tools',
+        name: 'AI Tools',
+        title: 'Free AI Tools',
+        description: 'Browse focused AI writing, coding, marketing, and productivity tools designed for fast browser use.',
+        keywords: 'ai tools, ai writing tools, ai content generator, ai chat, ai resume generator, ai coding tools, ai marketing tools',
+        tools: AI_TOOLS,
+    },
+    {
+        path: '/math-tools',
+        name: 'Math Tools',
+        title: 'Free Online Math Tools',
+        description: 'Solve equations, visualize graphs, and work through algebra, finance, and statistics in your browser.',
+        keywords: 'math tools, scientific calculator, equation solver, graph visualizer, matrix solver, fraction calculator, financial calculator',
+        tools: MATH_TOOLS,
+    },
+    {
+        path: '/productivity-tools',
+        name: 'Productivity Tools',
+        title: 'Free Productivity Tools',
+        description: 'Stay organized with kanban boards, timers, notes, habits, and other browser-based productivity apps.',
+        keywords: 'productivity tools, kanban board, todo list, pomodoro timer, habit tracker, notepad, drawing board, file manager',
+        tools: PRODUCTIVITY_TOOLS,
+    },
+]
+
+const dedupeKeywords = (values) => {
+    const seen = new Set()
+    const output = []
+
+    values
+        .flatMap((value) => {
+            if (!value) return []
+            if (Array.isArray(value)) return value
+            return String(value).split(',')
+        })
+        .map((value) => String(value).trim())
+        .filter(Boolean)
+        .forEach((keyword) => {
+            const normalized = keyword.toLowerCase()
+            if (seen.has(normalized)) return
+            seen.add(normalized)
+            output.push(keyword)
+        })
+
+    return output
+}
+
+const normalizeText = (value) => String(value || '').replace(/\s+/g, ' ').trim()
+
+const ensureBrandSuffix = (value, siteName) => {
+    const normalized = normalizeText(value)
+    if (!normalized) return siteName
+    if (normalized.toLowerCase().includes(siteName.toLowerCase())) return normalized
+    return `${normalized} | ${siteName}`
+}
+
+const humanizePathSegment = (segment) => segment
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+
+const getRouteSection = (path) => {
+    const normalizedPath = path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path
+    return ROUTE_SECTIONS.find((section) => {
+        if (normalizedPath === section.path) return true
+        if (normalizedPath.startsWith(`${section.path}/`)) return true
+        if (section.path === '/utility-tools') {
+            return section.tools.some((tool) => tool.path === normalizedPath)
+        }
+        return false
+    }) || null
+}
+
+const getDefaultBreadcrumbs = ({ path, section, title, toolTitle }) => {
+    if (path === '/') return []
+
+    const crumbs = [{ name: 'Home', item: '/' }]
+    if (section) {
+        crumbs.push({ name: section.name, item: section.path })
+    }
+
+    if (path !== section?.path) {
+        const finalLabel = toolTitle || title || humanizePathSegment(path.split('/').filter(Boolean).at(-1) || 'Overview')
+        crumbs.push({ name: finalLabel, item: path })
+    }
+
+    return crumbs
+}
+
+const getRouteSeoDefaults = ({ path, toolData, title, description }) => {
+    const section = getRouteSection(path)
+
+    if (path === '/') {
+        return {
+            title: title || 'Free Online AI, Image, PDF & Productivity Tools',
+            description: description || SITE_DEFAULT_DESCRIPTION,
+            keywords: 'free online tools, ai tools, image tools, pdf tools, utility tools, math tools, productivity tools, privacy-first browser tools',
+            section,
+            toolTitle: null,
+        }
+    }
+
+    if (toolData?.id) {
+        return {
+            title: title || toolData.title,
+            description: description || toolData.description || SITE_DEFAULT_DESCRIPTION,
+            keywords: dedupeKeywords([
+                toolData.title,
+                toolData.description,
+                section?.name,
+                section?.keywords,
+                toolData.features,
+                toolData.howItWorks,
+                'free online tool',
+                'browser-based tool',
+                'privacy-first processing',
+            ]).join(', '),
+            section,
+            toolTitle: toolData.title,
+        }
+    }
+
+    if (section) {
+        return {
+            title: title || section.title,
+            description: description || section.description,
+            keywords: dedupeKeywords([
+                section.keywords,
+                section.tools?.map((tool) => tool.title),
+                title,
+                description,
+                'free online tools',
+            ]).join(', '),
+            section,
+            toolTitle: null,
+        }
+    }
+
+    return {
+        title: title || SITE_NAME,
+        description: description || SITE_DEFAULT_DESCRIPTION,
+        keywords: dedupeKeywords([
+            title,
+            description,
+            'free online tools',
+            'privacy-first browser tools',
+            'productivity suite',
+        ]).join(', '),
+        section: null,
+        toolTitle: null,
+    }
+}
 
 const getScreenshotPath = (pagePath) => {
     const cleanPath = pagePath.endsWith('/') && pagePath.length > 1 ? pagePath.slice(0, -1) : pagePath
@@ -27,8 +208,8 @@ const getScreenshotPath = (pagePath) => {
 }
 
 export default function SEO({
-    title = 'PixTool — The 125+ Best Free Online AI & Utility Tools [2026]',
-    description = 'The ultimate all-in-one productivity suite featuring professional AI generation tools, secure PDF management, and image editing. 100% browser-based with zero-upload privacy.',
+    title = null,
+    description = null,
     keywords = null,
     path = '/',
     type = 'website',
@@ -52,10 +233,22 @@ export default function SEO({
 }) {
     const siteUrl = SITE_URL
     const siteName = SITE_NAME
-    const fullUrl = path === '/' ? siteUrl : `${siteUrl}${path.startsWith('/') ? path : `/${path}`}`
     const cleanPath = path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path
+    const fullUrl = cleanPath === '/' ? siteUrl : `${siteUrl}${cleanPath.startsWith('/') ? cleanPath : `/${cleanPath}`}`
     const toolDataFromMap = ALL_TOOLS_MAP[cleanPath]
     const isToolPath = !!(toolDataFromMap && toolDataFromMap.id)
+    const routeDefaults = getRouteSeoDefaults({
+        path: cleanPath,
+        toolData: toolDataFromMap,
+        title,
+        description,
+    })
+    const resolvedTitle = routeDefaults.title
+    const resolvedDescription = normalizeText(routeDefaults.description)
+    const resolvedToolName = toolName || routeDefaults.toolTitle || toolDataFromMap?.title || null
+    const resolvedToolSteps = toolSteps || toolDataFromMap?.howItWorks || null
+    const resolvedImageAlt = imageAlt || toolDataFromMap?.imageAlt || `${resolvedTitle} - PixTool`
+    const resolvedImageTitle = imageTitle || toolDataFromMap?.imageTitle || resolvedTitle
     const [liveRatings, setLiveRatings] = useState({ tool: null, overall: null })
     const [liveRatingMeta, setLiveRatingMeta] = useState({ toolFetchedAt: null, overallFetchedAt: null })
     const [showSchemaDiagnostics, setShowSchemaDiagnostics] = useState(false)
@@ -65,16 +258,14 @@ export default function SEO({
     const searchQuery = typeof window !== 'undefined' ? window.location.search : ''
     const shouldNoIndex = noIndex || path.startsWith('/pix-admin') || searchQuery.includes('q={search_term_string}') || searchQuery.includes('?q=')
 
-    const brandTitle = title.includes('PixTool') ? title : `${title} | PixTool`
+    const brandTitle = ensureBrandSuffix(resolvedTitle, siteName)
 
     const defaultScreenshot = getScreenshotPath(path)
     const baseImagePath = image || screenshot || defaultScreenshot
     const ogImage = baseImagePath.startsWith('http') ? baseImagePath : `${siteUrl}${baseImagePath.startsWith('/') ? baseImagePath : `/${baseImagePath}`}`
     const twBaseImagePath = twitterImage || baseImagePath
     const twImage = twBaseImagePath.startsWith('http') ? twBaseImagePath : `${siteUrl}${twBaseImagePath.startsWith('/') ? twBaseImagePath : `/${twBaseImagePath}`}`
-    
-    // Dynamic Alt text for images - critical for image SEO ranking
-    const dynamicImageAlt = imageAlt || (toolName ? `Screenshot of PixTool ${toolName} - High-quality browser-based productivity tool` : `${title} - Professional online utility by UTHAKKAN`)
+    const dynamicImageAlt = resolvedImageAlt
 
     useEffect(() => {
         let mounted = true
@@ -138,31 +329,46 @@ export default function SEO({
 
     // Enhanced keywords based on page type and tool
     const enhancedKeywords = useMemo(() => {
-        const baseKeywords = 'pixtool, pix tool, tool pix, free online tools, ai content generator, best ai assistant 2026, privacy-first productivity, daily tools, local image processing, secure pdf editor, dev tools, professional web utilities'
+        const routeKeywords = routeDefaults.keywords
+        const contentKeywords = []
 
-        const toolKeywords = {
-            'image-tools': 'image scanner online, professional image editing 2026, high-fidelity photo scaling, best online image tools, local image conversion, privacy-focused photo editor, advanced image toolbox, fast image editor online, all-in-one image toolkit, no-signup photo editor free, bulk image resizer',
-            'pdf-tools': 'secure pdf management 2026, client-side pdf merging safely, local pdf encryption military grade, professional document splitting, high-performance pdf compression algorithm, free pdf editor 2026, online document toolbox, edit pdf without software online, best free online pdf tool, all-in-one pdf toolkit free offline',
-            'temp-mail': 'temp mail 10 2026, temp mail org, toolbox temp mail, temp mail reddit, mail temporary, burner email generator, anonymous temporary email, secure disposable inbox, privacy-first mail generator, professional burner email services, best temporary email service 2026, most reliable disposable email 2026, private disposable email services online, anonymous email for account verification, bypass email verification with temp mail',
-            'qr': 'free qr code generator unlimited, branded qr code generator, best free qr code generator alternative, secure offline qr scanner, local qr code creation, privacy-focused qr tools, custom qr code high res, dynamic qr code generator alternative, editable qr code online, high-resolution svg qr code generator, qr code for product packaging',
-            'ai-tools': 'best ai assistant 2026, private ai content generator, secure ai writing tool, local ai coding companion, deep mind ai chat, seo content forge free, ai grammar architect pro, ats-friendly resume builder ai, high-authority ai content drafting, professional ai correspondent, social pulse viral captions ai, seo architect keyword generator',
-            'math-tools': 'advanced scientific calculator online, interactive graphing visualizer, professional matrix solver pro, high-precision algebraic engine, linear algebra studio digital, statistical data visualizer, expertly solve math equations online, number theory forge prime factorization, financial architect calculator tvm, vector magnitude visualizer 3d',
-            'productivity-tools': 'private kanban board pro, secure todo list with persistence, browser-based notepad markdown, digital drawing board studio, local file vault indexeddb, focus clock pomodoro pro, virtual sticky notes board, habit tracker streak manager, all-in-one productivity hub free'
-        }
+        if (resolvedToolName) contentKeywords.push(resolvedToolName)
+        if (resolvedDescription) contentKeywords.push(resolvedDescription)
+        if (toolDataFromMap?.features?.length) contentKeywords.push(toolDataFromMap.features)
+        if (resolvedToolSteps?.length) contentKeywords.push(resolvedToolSteps)
 
-        const matchedKeywords = []
-        Object.keys(toolKeywords).forEach(key => {
-            if (path.includes(key)) {
-                matchedKeywords.push(toolKeywords[key])
-            }
-        })
-
-        return [keywords, ...matchedKeywords, baseKeywords].filter(Boolean).join(', ')
-    }, [keywords, path])
+        return dedupeKeywords([
+            keywords,
+            routeKeywords,
+            contentKeywords,
+            'PixTool',
+            'free online tools',
+            'privacy-first browser tools',
+            'browser-based productivity suite',
+        ]).join(', ')
+    }, [keywords, routeDefaults.keywords, resolvedToolName, resolvedDescription, resolvedToolSteps, toolDataFromMap])
 
     // Generate JSON-LD schemas
     const schemas = useMemo(() => {
         const globalSchemas = []
+
+        globalSchemas.push(
+            {
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "@id": `${fullUrl}#webpage`,
+                "url": fullUrl,
+                "name": brandTitle,
+                "description": resolvedDescription,
+                "inLanguage": "en",
+                "isPartOf": { "@id": `${siteUrl}/#website` },
+                "primaryImageOfPage": {
+                    "@type": "ImageObject",
+                    "url": ogImage,
+                },
+                "publisher": { "@id": `${siteUrl}/#organization` }
+            }
+        )
 
         // Only include Organization and WebSite schemas on the homepage to avoid duplication
         if (path === '/') {
@@ -180,7 +386,7 @@ export default function SEO({
                         "height": "512"
                     },
                     "image": ogImage,
-                    "description": description || "All-in-one productivity suite with privacy-first tools.",
+                    "description": resolvedDescription,
                     "sameAs": [
                         "https://www.linkedin.com/company/uthakkan",
                         "https://twitter.com/ajmal_uk_",
@@ -224,12 +430,37 @@ export default function SEO({
             )
         }
 
+        if (routeDefaults.section && path === routeDefaults.section.path) {
+            globalSchemas.push(
+                {
+                    "@context": "https://schema.org",
+                    "@type": "CollectionPage",
+                    "name": routeDefaults.section.title,
+                    "description": resolvedDescription,
+                    "url": fullUrl,
+                    "isPartOf": { "@id": `${siteUrl}/#website` },
+                    "about": routeDefaults.section.name
+                },
+                {
+                    "@context": "https://schema.org",
+                    "@type": "ItemList",
+                    "name": routeDefaults.section.name,
+                    "itemListElement": routeDefaults.section.tools.map((tool, idx) => ({
+                        "@type": "ListItem",
+                        "position": idx + 1,
+                        "name": tool.title,
+                        "url": `${siteUrl}${tool.path}`
+                    }))
+                }
+            )
+        }
+
         // Include WebApplication only on actual tool pages.
         if (isToolPath) {
             const webAppSchema = {
                 "@context": "https://schema.org",
                 "@type": "WebApplication",
-                "name": toolName ? `PixTool ${toolName}` : siteName,
+                "name": resolvedToolName || brandTitle || siteName,
                 "url": fullUrl,
                 "applicationCategory": path.includes('/pdf') ? "BusinessApplication" : "UtilitiesApplication",
                 "operatingSystem": "All",
@@ -264,31 +495,25 @@ export default function SEO({
         }
 
         // BreadcrumbList
-        const breadcrumbList = Array.isArray(breadcrumbs) ? [...breadcrumbs] : []
-        if (breadcrumbList.length === 0 && path !== '/') {
-            const parts = path.split('/').filter(Boolean)
-            let currentPath = ''
-            parts.forEach((part) => {
-                currentPath += `/${part}`
-                const name = part.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
-                breadcrumbList.push({ name, item: currentPath })
-            })
-        }
+        const breadcrumbList = Array.isArray(breadcrumbs) ? [...breadcrumbs] : getDefaultBreadcrumbs({
+            path: cleanPath,
+            section: routeDefaults.section,
+            title: resolvedTitle,
+            toolTitle: resolvedToolName,
+        })
 
         if (breadcrumbList.length > 0) {
+            const breadcrumbItems = breadcrumbList[0]?.item === '/' || breadcrumbList[0]?.name === 'Home'
+                ? breadcrumbList
+                : [{ name: 'Home', item: siteUrl }, ...breadcrumbList]
+
             globalSchemas.push({
                 "@context": "https://schema.org",
                 "@type": "BreadcrumbList",
                 "itemListElement": [
-                    {
+                    ...breadcrumbItems.map((crumb, idx) => ({
                         "@type": "ListItem",
-                        "position": 1,
-                        "name": "Home",
-                        "item": siteUrl
-                    },
-                    ...breadcrumbList.map((crumb, idx) => ({
-                        "@type": "ListItem",
-                        "position": idx + 2,
+                        "position": idx + 1,
                         "name": crumb.name,
                         "item": crumb.item.startsWith('http') ? crumb.item : `${siteUrl}${crumb.item}`
                     }))
@@ -315,12 +540,12 @@ export default function SEO({
 
         // SoftwareApplication (Tool specific)
         if (path !== '/' && isToolPath) {
-            const toolTitle = toolName || brandTitle || title
+            const toolTitle = resolvedToolName || brandTitle || resolvedTitle
             globalSchemas.push({
                 "@context": "https://schema.org",
                 "@type": "SoftwareApplication",
                 "name": toolTitle,
-                "description": description,
+                "description": resolvedDescription,
                 "applicationCategory": path.includes('/pdf') ? "BusinessApplication" : "UtilitiesApplication",
                 "url": fullUrl,
                 "image": ogImage,
@@ -347,7 +572,7 @@ export default function SEO({
             })
 
             // Add HowTo schema for tool steps if provided
-            if (toolSteps && Array.isArray(toolSteps) && toolSteps.length > 0) {
+            if (resolvedToolSteps && Array.isArray(resolvedToolSteps) && resolvedToolSteps.length > 0) {
                 globalSchemas.push({
                     "@context": "https://schema.org",
                     "@type": "HowTo",
@@ -362,7 +587,7 @@ export default function SEO({
                     "tool": [
                         { "@type": "HowToTool", "name": "PixTool Browser Studio" }
                     ],
-                    "step": toolSteps.map((step, idx) => ({
+                    "step": resolvedToolSteps.map((step, idx) => ({
                         "@type": "HowToStep",
                         "position": idx + 1,
                         "name": `Step ${idx + 1}: ${step.split('.')[0]}`,
@@ -378,7 +603,7 @@ export default function SEO({
             const articleSchema = {
                 "@context": "https://schema.org",
                 "@type": "Article",
-                "headline": title,
+                "headline": resolvedTitle,
                 "datePublished": articlePublishedTime,
                 "dateModified": lastModified || new Date().toISOString(),
                 "author": {
@@ -409,7 +634,7 @@ export default function SEO({
                 "@context": "https://schema.org",
                 "@type": "ImageObject",
                 "contentUrl": finalScreenshot,
-                "name": imageTitle || toolName || title,
+                "name": resolvedImageTitle,
                 "caption": dynamicImageAlt
             })
         }
@@ -475,13 +700,13 @@ export default function SEO({
         }
 
         // AggregateOffer schema for tool listing pages
-        if (path === '/image-tools' || path === '/pdf-tools' || path === '/ai-tools' || path === '/math-tools' || path === '/utility-tools') {
+        if (routeDefaults.section && path === routeDefaults.section.path) {
             const aggregateOfferSchema = {
                 "@context": "https://schema.org",
                 "@type": "AggregateOffer",
                 "@id": `${fullUrl}/#aggregate-offer`,
                 "name": `${brandTitle} Collection`,
-                "description": description,
+                "description": resolvedDescription,
                 "image": ogImage,
                 "offer": {
                     "@type": "Offer",
@@ -513,7 +738,7 @@ export default function SEO({
         }
 
         return schemasToInject
-    }, [title, description, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, articleSection, articleTags, readingTime, breadcrumbs, faqs, toolName, toolSteps, type, lastModified, screenshot, imageTitle, brandTitle, defaultScreenshot, dynamicImageAlt, isToolPath, liveRatings])
+    }, [resolvedTitle, resolvedDescription, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, articleSection, articleTags, readingTime, breadcrumbs, faqs, resolvedToolName, resolvedToolSteps, type, lastModified, screenshot, resolvedImageTitle, brandTitle, defaultScreenshot, dynamicImageAlt, isToolPath, liveRatings, routeDefaults.section, cleanPath])
 
     useEffect(() => {
         document.title = brandTitle
@@ -533,7 +758,7 @@ export default function SEO({
             nodes.forEach(node => node.remove())
         }
 
-        updateMeta('description', description)
+        updateMeta('description', resolvedDescription)
         updateMeta('keywords', enhancedKeywords)
         const robotsContent = shouldNoIndex
             ? 'noindex, nofollow, noarchive, nosnippet, noimageindex'
@@ -543,7 +768,7 @@ export default function SEO({
         
         // Open Graph
         updateMeta('og:title', brandTitle, 'property')
-        updateMeta('og:description', description, 'property')
+        updateMeta('og:description', resolvedDescription, 'property')
         updateMeta('og:url', fullUrl, 'property')
         updateMeta('og:image', ogImage, 'property')
         updateMeta('og:image:secure_url', ogImage, 'property')
@@ -566,7 +791,7 @@ export default function SEO({
         // Twitter
         updateMeta('twitter:card', 'summary_large_image')
         updateMeta('twitter:title', brandTitle)
-        updateMeta('twitter:description', description)
+        updateMeta('twitter:description', resolvedDescription)
         updateMeta('twitter:image', twImage)
         updateMeta('twitter:image:alt', dynamicImageAlt)
         updateMeta('twitter:creator', '@ajmal_uk_')
@@ -650,9 +875,9 @@ export default function SEO({
             if (alternateDefault) alternateDefault.remove()
         }
 
-    }, [brandTitle, description, enhancedKeywords, shouldNoIndex, fullUrl, ogImage, type, siteName, twImage, articlePublishedTime, lastModified, articleAuthor, articleSection, articleTags, dynamicImageAlt, liveRatingMeta])
+    }, [brandTitle, resolvedDescription, enhancedKeywords, shouldNoIndex, fullUrl, ogImage, type, siteName, twImage, articlePublishedTime, lastModified, articleAuthor, articleSection, articleTags, dynamicImageAlt, liveRatingMeta])
 
-    const schemasToRender = shouldNoIndex ? [] : schemas
+    const schemasToRender = useMemo(() => (shouldNoIndex ? [] : schemas), [shouldNoIndex, schemas])
     const schemaDiagnostics = useMemo(() => {
         if (shouldNoIndex) {
             return { issues: [], hasIssue: false }
@@ -683,8 +908,7 @@ export default function SEO({
             issues.push('Tool page is missing WebApplication schema.')
         }
 
-        if ((path === '/' || path === '/image-tools' || path === '/pdf-tools' || path === '/ai-tools' || path === '/math-tools' || path === '/utility-tools')
-          && !schemasToRender.some(item => item?.['@type'] === 'AggregateOffer')) {
+        if (routeDefaults.section && path === routeDefaults.section.path && !schemasToRender.some(item => item?.['@type'] === 'AggregateOffer')) {
             issues.push('Hub page is missing AggregateOffer schema.')
         }
 
@@ -692,12 +916,12 @@ export default function SEO({
             issues.push('FAQ content is present but FAQPage schema was not generated.')
         }
 
-        if (toolSteps && Array.isArray(toolSteps) && toolSteps.length > 0 && !schemasToRender.some(item => item?.['@type'] === 'HowTo')) {
+        if (resolvedToolSteps && Array.isArray(resolvedToolSteps) && resolvedToolSteps.length > 0 && !schemasToRender.some(item => item?.['@type'] === 'HowTo')) {
             issues.push('Tool steps are present but HowTo schema was not generated.')
         }
 
         return { issues, hasIssue: issues.length > 0 }
-    }, [schemasToRender, shouldNoIndex, isToolPath, path, faqs, toolSteps])
+    }, [schemasToRender, shouldNoIndex, isToolPath, path, faqs, resolvedToolSteps, routeDefaults.section])
 
     useEffect(() => {
         if (import.meta.env.DEV) {

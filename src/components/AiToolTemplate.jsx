@@ -36,6 +36,10 @@ export default function AiToolTemplate({
   const toolMetadata = ALL_TOOLS_MAP[path] || {}
   const displayFeatures = features.length > 0 ? features : (toolMetadata.features || [])
   const displayHowItWorks = howItWorks.length > 0 ? howItWorks : (toolMetadata.howItWorks || [])
+  const breadcrumbItems = [
+    { name: 'AI Tools', item: '/ai-tools' },
+    { name: title, item: path }
+  ]
 
   const handleGenerate = async () => {
     if (onGenerate) {
@@ -104,6 +108,11 @@ export default function AiToolTemplate({
         keywords={seoKeywords}
         path={path}
         toolName={title}
+        toolSteps={displayHowItWorks}
+        screenshot={toolMetadata.screenshot ? `/screenshots/${toolMetadata.screenshot}` : null}
+        imageAlt={toolMetadata.imageAlt}
+        imageTitle={toolMetadata.imageTitle}
+        breadcrumbs={breadcrumbItems}
       />
       
       <div className="tool-page-v2" style={{ background: 'var(--bg-secondary)', minHeight: '100vh', display: 'flex', flexDirection: 'column', color: 'var(--text-primary)' }}>

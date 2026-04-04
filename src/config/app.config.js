@@ -9,7 +9,7 @@
 // ========================================
 export const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'
 export const SITE_NAME = 'PixTool'
-export const SITE_DESCRIPTION = 'Free online tools for image editing, PDF manipulation, AI writing, and more'
+export const SITE_DESCRIPTION = 'Free online AI, image, PDF, math, and productivity tools that run in your browser with privacy-first processing.'
 export const TWITTER_HANDLE = '@pixtool_in'
 
 // ========================================

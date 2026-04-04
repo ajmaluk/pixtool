@@ -10,6 +10,8 @@ const __dirname = path.dirname(__filename);
 const SITE_URL = process.env.VITE_SITE_URL || 'https://www.pixtool.in';
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 const SITEMAP_PATH = path.join(PUBLIC_DIR, 'sitemap.xml');
+const DEFAULT_SITEMAP_IMAGE = '/screenshots/pixtool-all-in-one-productivity-suite.png';
+const IMAGE_EXTENSIONS = ['.png', '.webp', '.jpg', '.jpeg'];
 
 const lastmod = new Date().toISOString().split('T')[0];
 const escapeXml = (unsafe) => {
@@ -22,6 +24,32 @@ const escapeXml = (unsafe) => {
       case '"': return '&quot;';
     }
   });
+};
+
+const resolveImagePath = (rawPath, { allowDefault = true } = {}) => {
+  if (!rawPath) {
+    if (!allowDefault) return null;
+    const defaultFsPath = path.join(PUBLIC_DIR, DEFAULT_SITEMAP_IMAGE.replace(/^\//, ''));
+    return fs.existsSync(defaultFsPath) ? DEFAULT_SITEMAP_IMAGE : null;
+  }
+
+  const normalized = rawPath.startsWith('/') ? rawPath : `/${rawPath}`;
+  const directFsPath = path.join(PUBLIC_DIR, normalized.replace(/^\//, ''));
+  if (fs.existsSync(directFsPath)) return normalized;
+
+  const ext = path.extname(normalized);
+  if (ext) {
+    const base = normalized.slice(0, -ext.length);
+    for (const candidateExt of IMAGE_EXTENSIONS) {
+      const candidate = `${base}${candidateExt}`;
+      const candidateFsPath = path.join(PUBLIC_DIR, candidate.replace(/^\//, ''));
+      if (fs.existsSync(candidateFsPath)) return candidate;
+    }
+  }
+
+  if (!allowDefault) return null;
+  const fallbackFsPath = path.join(PUBLIC_DIR, DEFAULT_SITEMAP_IMAGE.replace(/^\//, ''));
+  return fs.existsSync(fallbackFsPath) ? DEFAULT_SITEMAP_IMAGE : null;
 };
 
 function generateSitemap() {
@@ -41,6 +69,8 @@ function generateSitemap() {
   </url>`;
 
   const addUrl = (relPath, priority = '0.8', freq = 'weekly', imagePath = null, imageTitle = null, imageCaption = null) => {
+    const resolvedImagePath = resolveImagePath(imagePath);
+
     xml += `
   <url>
     <loc>${SITE_URL}${relPath}</loc>
@@ -48,10 +78,10 @@ function generateSitemap() {
     <changefreq>${freq}</changefreq>
     <priority>${priority}</priority>`;
     
-    if (imagePath) {
+    if (resolvedImagePath) {
       xml += `
     <image:image>
-      <image:loc>${SITE_URL}${imagePath}</image:loc>
+      <image:loc>${SITE_URL}${resolvedImagePath}</image:loc>
       <image:title>${escapeXml(imageTitle || 'PixTool Interface')}</image:title>`;
       
       if (imageCaption) {
@@ -69,12 +99,12 @@ function generateSitemap() {
 
 
   // Main Hubs
-  addUrl('/image-tools', '0.9', 'weekly', '/screenshots/image-tools-hub.webp', 'PixTool Image Studio Hub');
-  addUrl('/pdf-tools', '0.9', 'weekly', '/screenshots/pdf-tools-hub.webp', 'PixTool PDF Expert Suite');
-  addUrl('/utility-tools', '0.9', 'weekly', '/screenshots/utility-tools-hub.webp', 'PixTool Utility Suite');
-  addUrl('/ai-tools', '0.9', 'weekly', '/screenshots/home.webp', 'PixTool AI Tools Hub');
-  addUrl('/math-tools', '0.9', 'weekly', '/screenshots/scientific-calculator-online.webp', 'PixTool Math & Scientific Hub');
-  addUrl('/productivity-tools', '0.9', 'weekly', '/screenshots/pomodoro-timer-focus-clock.png', 'PixTool Productivity Suite Hub');
+  addUrl('/image-tools', '0.9', 'weekly', '/screenshots/professional-online-image-studio.png', 'PixTool Image Studio Hub');
+  addUrl('/pdf-tools', '0.9', 'weekly', '/screenshots/secure-pdf-management-suite.png', 'PixTool PDF Expert Suite');
+  addUrl('/utility-tools', '0.9', 'weekly', '/screenshots/utility-tools-hub.png', 'PixTool Utility Suite');
+  addUrl('/ai-tools', '0.9', 'weekly', '/screenshots/home.png', 'PixTool AI Tools Hub');
+  addUrl('/math-tools', '0.9', 'weekly', '/screenshots/pixtool-all-in-one-productivity-suite.png', 'PixTool Math & Scientific Hub');
+  addUrl('/productivity-tools', '0.9', 'weekly', '/screenshots/pixtool-all-in-one-productivity-suite.png', 'PixTool Productivity Suite Hub');
 
   // MATH Tools
   MATH_TOOLS.forEach(tool => {
@@ -83,7 +113,7 @@ function generateSitemap() {
 
   // Image Tools
   IMAGE_TOOLS.forEach(tool => {
-    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot.replace('.webp', '.webp')}`, tool.imageAlt || `${tool.title} | Free Online PixTool`, tool.description);
+    addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | Free Online PixTool`, tool.description);
   });
 
   // PDF Tools

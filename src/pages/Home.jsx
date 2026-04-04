@@ -628,7 +628,7 @@ export default function Home() {
                 overflow: 'hidden',
                 boxShadow: '0 20px 80px rgba(139, 92, 246, 0.15)',
                 border: '1px solid rgba(255,255,255,0.05)',
-                aspectRatio: '9/16',
+                aspectRatio: '16/9',
                 background: 'var(--bg-secondary)'
               }}>
                 <iframe 
@@ -640,7 +640,15 @@ export default function Home() {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                   referrerPolicy="strict-origin-when-cross-origin" 
                   allowFullScreen
-                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '56.25%',
+                    height: '177.78%',
+                    transform: 'translate(-50%, -50%) rotate(-90deg)',
+                    transformOrigin: 'center center'
+                  }}
                 ></iframe>
               </div>
             </section>
