@@ -477,7 +477,29 @@ export default function SEO({
                         { "@type": "Country", "name": "US" },
                         { "@type": "Country", "name": "GB" },
                         { "@type": "Country", "name": "AU" }
-                    ]
+                    ],
+                    "shippingDetails": {
+                        "@type": "OfferShippingDetails",
+                        "shippingRate": {
+                            "@type": "MonetaryAmount",
+                            "value": "0",
+                            "currency": "USD"
+                        },
+                        "shippingDestination": [
+                            { "@type": "DefinedRegion", "addressCountry": "IN" },
+                            { "@type": "DefinedRegion", "addressCountry": "US" },
+                            { "@type": "DefinedRegion", "addressCountry": "GB" },
+                            { "@type": "DefinedRegion", "addressCountry": "AU" }
+                        ]
+                    },
+                    "hasMerchantReturnPolicy": {
+                        "@type": "MerchantReturnPolicy",
+                        "applicableCountry": "IN",
+                        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnPeriod",
+                        "merchantReturnDays": 30,
+                        "returnMethod": "https://schema.org/ReturnByMail",
+                        "returnFees": "https://schema.org/FreeReturn"
+                    }
                 }
             }
 
@@ -560,7 +582,29 @@ export default function SEO({
                         { "@type": "Country", "name": "US" },
                         { "@type": "Country", "name": "GB" },
                         { "@type": "Country", "name": "AU" }
-                    ]
+                    ],
+                    "shippingDetails": {
+                        "@type": "OfferShippingDetails",
+                        "shippingRate": {
+                            "@type": "MonetaryAmount",
+                            "value": "0",
+                            "currency": "USD"
+                        },
+                        "shippingDestination": [
+                            { "@type": "DefinedRegion", "addressCountry": "IN" },
+                            { "@type": "DefinedRegion", "addressCountry": "US" },
+                            { "@type": "DefinedRegion", "addressCountry": "GB" },
+                            { "@type": "DefinedRegion", "addressCountry": "AU" }
+                        ]
+                    },
+                    "hasMerchantReturnPolicy": {
+                        "@type": "MerchantReturnPolicy",
+                        "applicableCountry": "IN",
+                        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnPeriod",
+                        "merchantReturnDays": 30,
+                        "returnMethod": "https://schema.org/ReturnByMail",
+                        "returnFees": "https://schema.org/FreeReturn"
+                    }
                 },
                 "softwareVersion": "2026.04",
                 "operatingSystem": "All (Web-based Browser Studio)",
@@ -718,7 +762,29 @@ export default function SEO({
                     "price": "0",
                     "priceCurrency": "USD",
                     "availability": "https://schema.org/InStock",
-                    "url": fullUrl
+                    "url": fullUrl,
+                    "shippingDetails": {
+                        "@type": "OfferShippingDetails",
+                        "shippingRate": {
+                            "@type": "MonetaryAmount",
+                            "value": "0",
+                            "currency": "USD"
+                        },
+                        "shippingDestination": [
+                            { "@type": "DefinedRegion", "addressCountry": "IN" },
+                            { "@type": "DefinedRegion", "addressCountry": "US" },
+                            { "@type": "DefinedRegion", "addressCountry": "GB" },
+                            { "@type": "DefinedRegion", "addressCountry": "AU" }
+                        ]
+                    },
+                    "hasMerchantReturnPolicy": {
+                        "@type": "MerchantReturnPolicy",
+                        "applicableCountry": "IN",
+                        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnPeriod",
+                        "merchantReturnDays": 30,
+                        "returnMethod": "https://schema.org/ReturnByMail",
+                        "returnFees": "https://schema.org/FreeReturn"
+                    }
                 }
             }
 
