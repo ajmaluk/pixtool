@@ -1,8 +1,9 @@
  
 import { Link } from 'react-router-dom'
 import { Navigation } from 'lucide-react'
+import { posts } from '../data/posts'
 
-export default function BlogSection({ posts }) {
+export default function BlogSection() {
   return (
     <div className="container-pro" style={{ marginTop: '8rem', textAlign: 'center' }}>
       <div style={{ marginBottom: '4rem' }}>
@@ -41,7 +42,7 @@ export default function BlogSection({ posts }) {
               <p className="blog-card-excerpt">
                 {post.excerpt}
               </p>
-              <Link to={`/blog/${post.slug}`} className="blog-card-link" aria-label={`Read full article: ${post.title}`}>
+              <Link to={`/blog/${post.slug}`} className="blog-card-link" aria-label={`Read Article: ${post.title}`}>
                 Read Article <Navigation size={16} style={{ transform: 'rotate(90deg)' }} aria-hidden="true" />
               </Link>
             </div>

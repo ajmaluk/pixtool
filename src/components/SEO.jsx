@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { ALL_TOOLS_MAP, IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS, MATH_TOOLS, PRODUCTIVITY_TOOLS } from '../data/tools'
 import { SITE_URL, SITE_NAME } from '../config/app.config'
 import { getOverallRating, getToolRatingStats } from '../services/supabaseService'
@@ -80,6 +80,14 @@ const dedupeKeywords = (values) => {
 }
 
 const normalizeText = (value) => String(value || '').replace(/\s+/g, ' ').trim()
+
+const isUsableImageValue = (value) => {
+    if (!value) return false
+    const normalized = String(value).trim()
+    if (!normalized) return false
+    if (normalized.includes('undefined') || normalized.includes('null')) return false
+    return true
+}
 
 const ensureBrandSuffix = (value, siteName) => {
     const normalized = normalizeText(value)
@@ -251,17 +259,15 @@ export default function SEO({
     const resolvedImageTitle = imageTitle || toolDataFromMap?.imageTitle || resolvedTitle
     const [liveRatings, setLiveRatings] = useState({ tool: null, overall: null })
     const [liveRatingMeta, setLiveRatingMeta] = useState({ toolFetchedAt: null, overallFetchedAt: null })
-    const [showSchemaDiagnostics, setShowSchemaDiagnostics] = useState(false)
-    const [diagnosticsOffset, setDiagnosticsOffset] = useState({ x: 0, y: 0 })
-    const [diagnosticsCopied, setDiagnosticsCopied] = useState(false)
-    const dragStateRef = useRef(null)
     const searchQuery = typeof window !== 'undefined' ? window.location.search : ''
     const shouldNoIndex = noIndex || path.startsWith('/pix-admin') || searchQuery.includes('q={search_term_string}') || searchQuery.includes('?q=')
 
     const brandTitle = ensureBrandSuffix(resolvedTitle, siteName)
 
     const defaultScreenshot = getScreenshotPath(path)
-    const baseImagePath = image || screenshot || defaultScreenshot
+    const baseImagePath = isUsableImageValue(image)
+        ? image
+        : (isUsableImageValue(screenshot) ? screenshot : defaultScreenshot)
     const ogImage = baseImagePath.startsWith('http') ? baseImagePath : `${siteUrl}${baseImagePath.startsWith('/') ? baseImagePath : `/${baseImagePath}`}`
     const twBaseImagePath = twitterImage || baseImagePath
     const twImage = twBaseImagePath.startsWith('http') ? twBaseImagePath : `${siteUrl}${twBaseImagePath.startsWith('/') ? twBaseImagePath : `/${twBaseImagePath}`}`
@@ -460,6 +466,8 @@ export default function SEO({
                 "applicationCategory": path.includes('/pdf') ? "BusinessApplication" : "UtilitiesApplication",
                 "operatingSystem": "All",
                 "isAccessibleForFree": true,
+                "permissions": "No registration required, 100% Private local browser processing",
+                "publisher": { "@id": `${siteUrl}/#organization` },
                 "author": { "@id": `${siteUrl}/#organization` },
                 "offers": {
                     "@type": "Offer",
@@ -498,7 +506,7 @@ export default function SEO({
                 }
             }
 
-            if (liveRatings.tool) {
+            if (liveRatings.tool && Number(liveRatings.tool.totalVotes || 0) > 0) {
                 webAppSchema.aggregateRating = {
                     "@type": "AggregateRating",
                     "ratingValue": Number(Number(liveRatings.tool.avgRating || 0).toFixed(1)),
@@ -566,6 +574,9 @@ export default function SEO({
                 "applicationCategory": path.includes('/pdf') ? "BusinessApplication" : "UtilitiesApplication",
                 "url": fullUrl,
                 "image": ogImage,
+                "screenshot": ogImage,
+                "permissions": "No registration required, Privacy-first browser processing",
+                "publisher": { "@id": `${siteUrl}/#organization` },
                 "offers": {
                     "@type": "Offer",
                     "price": "0",
@@ -619,6 +630,7 @@ export default function SEO({
                     "description": `Step-by-step tutorial on using the ${toolTitle} to achieve professional results locally in your browser.`,
                     "url": fullUrl,
                     "image": ogImage,
+                    "publisher": { "@id": `${siteUrl}/#organization` },
                     "totalTime": "PT1M",
                     "supply": [
                         { "@type": "HowToSupply", "name": "Source File" }
@@ -783,7 +795,7 @@ export default function SEO({
                 }
             }
 
-            if (liveRatings.overall) {
+            if (liveRatings.overall && Number(liveRatings.overall.totalVotes || 0) > 0) {
                 hubSoftwareSchema.aggregateRating = {
                     "@type": "AggregateRating",
                     "ratingValue": Number(Number(liveRatings.overall.avgRating || 0).toFixed(1)),
@@ -944,127 +956,6 @@ export default function SEO({
     }, [brandTitle, resolvedDescription, enhancedKeywords, shouldNoIndex, fullUrl, ogImage, type, siteName, twImage, articlePublishedTime, lastModified, articleAuthor, articleSection, articleTags, dynamicImageAlt, liveRatingMeta])
 
     const schemasToRender = useMemo(() => (shouldNoIndex ? [] : schemas), [shouldNoIndex, schemas])
-    const schemaDiagnostics = useMemo(() => {
-        if (shouldNoIndex) {
-            return { issues: [], hasIssue: false }
-        }
-
-        const issues = []
-
-        if (schemasToRender.length === 0) {
-            issues.push('No JSON-LD schema was generated for an indexable page.')
-        }
-
-        schemasToRender.forEach((schemaItem, index) => {
-            if (!schemaItem || typeof schemaItem !== 'object') {
-                issues.push(`Schema #${index + 1} is not a valid object.`)
-                return
-            }
-
-            if (!schemaItem['@context']) {
-                issues.push(`Schema #${index + 1} is missing @context.`)
-            }
-
-            if (!schemaItem['@type']) {
-                issues.push(`Schema #${index + 1} is missing @type.`)
-            }
-        })
-
-        if (isToolPath && !schemasToRender.some(item => item?.['@type'] === 'WebApplication')) {
-            issues.push('Tool page is missing WebApplication schema.')
-        }
-
-        if (routeDefaults.section && path === routeDefaults.section.path && !schemasToRender.some(item => item?.['@type'] === 'SoftwareApplication')) {
-            issues.push('Hub page is missing SoftwareApplication suite schema.')
-        }
-
-        if (faqs && Array.isArray(faqs) && faqs.length > 0 && !schemasToRender.some(item => item?.['@type'] === 'FAQPage')) {
-            issues.push('FAQ content is present but FAQPage schema was not generated.')
-        }
-
-        if (resolvedToolSteps && Array.isArray(resolvedToolSteps) && resolvedToolSteps.length > 0 && !schemasToRender.some(item => item?.['@type'] === 'HowTo')) {
-            issues.push('Tool steps are present but HowTo schema was not generated.')
-        }
-
-        return { issues, hasIssue: issues.length > 0 }
-    }, [schemasToRender, shouldNoIndex, isToolPath, path, faqs, resolvedToolSteps, routeDefaults.section])
-
-    useEffect(() => {
-        if (import.meta.env.DEV) {
-            setShowSchemaDiagnostics(schemaDiagnostics.hasIssue)
-        }
-    }, [schemaDiagnostics.hasIssue])
-
-    useEffect(() => {
-        if (!import.meta.env.DEV || !showSchemaDiagnostics) {
-            return
-        }
-
-        const handlePointerMove = (event) => {
-            if (!dragStateRef.current?.dragging) return
-            event.preventDefault()
-            const deltaX = event.clientX - dragStateRef.current.startX
-            const deltaY = event.clientY - dragStateRef.current.startY
-            setDiagnosticsOffset({
-                x: dragStateRef.current.baseX + deltaX,
-                y: dragStateRef.current.baseY + deltaY,
-            })
-        }
-
-        const handlePointerUp = () => {
-            if (dragStateRef.current) {
-                dragStateRef.current.dragging = false
-            }
-        }
-
-        window.addEventListener('pointermove', handlePointerMove, { passive: false })
-        window.addEventListener('pointerup', handlePointerUp)
-        window.addEventListener('pointercancel', handlePointerUp)
-
-        return () => {
-            window.removeEventListener('pointermove', handlePointerMove)
-            window.removeEventListener('pointerup', handlePointerUp)
-            window.removeEventListener('pointercancel', handlePointerUp)
-        }
-    }, [showSchemaDiagnostics])
-
-    useEffect(() => {
-        if (!diagnosticsCopied) return undefined
-        const timeoutId = window.setTimeout(() => setDiagnosticsCopied(false), 1400)
-        return () => window.clearTimeout(timeoutId)
-    }, [diagnosticsCopied])
-
-    const beginDiagnosticsDrag = (event) => {
-        if (!import.meta.env.DEV) return
-        dragStateRef.current = {
-            dragging: true,
-            startX: event.clientX,
-            startY: event.clientY,
-            baseX: diagnosticsOffset.x,
-            baseY: diagnosticsOffset.y,
-        }
-        event.currentTarget.setPointerCapture?.(event.pointerId)
-    }
-
-    const copySchemasToClipboard = async () => {
-        if (!schemasToRender.length) return
-
-        const payload = JSON.stringify(schemasToRender, null, 2)
-        try {
-            await navigator.clipboard.writeText(payload)
-            setDiagnosticsCopied(true)
-        } catch {
-            const fallbackTextarea = document.createElement('textarea')
-            fallbackTextarea.value = payload
-            fallbackTextarea.style.position = 'fixed'
-            fallbackTextarea.style.opacity = '0'
-            document.body.appendChild(fallbackTextarea)
-            fallbackTextarea.select()
-            document.execCommand('copy')
-            document.body.removeChild(fallbackTextarea)
-            setDiagnosticsCopied(true)
-        }
-    }
 
     return (
         <>
@@ -1075,117 +966,6 @@ export default function SEO({
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(s) }}
                 />
             ))}
-            {import.meta.env.DEV && schemasToRender.length > 0 && (
-                <>
-                    <button
-                        type="button"
-                        onClick={() => setShowSchemaDiagnostics(prev => !prev)}
-                        style={{
-                            position: 'fixed',
-                            right: '0.75rem',
-                            bottom: '0.75rem',
-                            zIndex: 2147483647,
-                            border: '1px solid var(--border-color)',
-                            borderRadius: '999px',
-                            padding: '0.35rem 0.7rem',
-                            fontSize: '0.68rem',
-                            fontWeight: 800,
-                            letterSpacing: '0.08em',
-                            textTransform: 'uppercase',
-                            color: 'var(--text-primary)',
-                            background: 'var(--bg-glass)',
-                            backdropFilter: 'blur(18px)',
-                            WebkitBackdropFilter: 'blur(18px)',
-                            boxShadow: '0 12px 28px rgba(15, 23, 42, 0.18)',
-                            cursor: 'pointer'
-                        }}
-                        aria-label="Toggle schema diagnostics"
-                    >
-                        Schema
-                    </button>
-
-                    {showSchemaDiagnostics && (
-                        <div
-                            style={{
-                                position: 'fixed',
-                                right: '0.75rem',
-                                bottom: '3.4rem',
-                                width: 'min(360px, calc(100vw - 1.5rem))',
-                                maxHeight: '38vh',
-                                zIndex: 2147483647,
-                                border: '1px solid var(--border-color)',
-                                borderRadius: '14px',
-                                background: 'var(--bg-card)',
-                                boxShadow: '0 18px 40px rgba(15, 23, 42, 0.18)',
-                                overflow: 'hidden',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                transform: `translate(${diagnosticsOffset.x}px, ${diagnosticsOffset.y}px)`,
-                                touchAction: 'none'
-                            }}
-                        >
-                            <div
-                                onPointerDown={beginDiagnosticsDrag}
-                                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.6rem', padding: '0.65rem 0.8rem', borderBottom: '1px solid var(--border-color)', background: 'var(--bg-secondary)', cursor: 'grab', userSelect: 'none' }}
-                            >
-                                <strong style={{ fontSize: '0.76rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Schema Diagnostics</strong>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-                                    <button
-                                        type="button"
-                                        onClick={copySchemasToClipboard}
-                                        style={{
-                                            border: '1px solid var(--border-color)',
-                                            background: 'var(--bg-primary)',
-                                            color: 'var(--text-primary)',
-                                            fontSize: '0.68rem',
-                                            fontWeight: 800,
-                                            cursor: 'pointer',
-                                            borderRadius: '999px',
-                                            padding: '0.28rem 0.55rem'
-                                        }}
-                                        aria-label="Copy schema JSON-LD"
-                                    >
-                                        {diagnosticsCopied ? 'Copied' : 'Copy'}
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowSchemaDiagnostics(false)}
-                                        style={{
-                                            border: 'none',
-                                            background: 'transparent',
-                                            color: 'var(--text-secondary)',
-                                            fontSize: '0.85rem',
-                                            fontWeight: 700,
-                                            cursor: 'pointer'
-                                        }}
-                                        aria-label="Close schema diagnostics"
-                                    >
-                                        Close
-                                    </button>
-                                </div>
-                            </div>
-                            <div style={{ padding: '0.7rem 0.8rem', borderBottom: '1px solid var(--border-color)', background: 'rgba(239, 68, 68, 0.05)', color: 'var(--text-primary)', fontSize: '0.72rem', lineHeight: 1.45 }}>
-                                {schemaDiagnostics.hasIssue ? (
-                                    <>
-                                        <strong>Issues found:</strong>
-                                        <ul style={{ margin: '0.35rem 0 0', paddingLeft: '1rem' }}>
-                                            {schemaDiagnostics.issues.slice(0, 4).map((issue) => (
-                                                <li key={issue}>{issue}</li>
-                                            ))}
-                                            {schemaDiagnostics.issues.length > 4 && <li>+{schemaDiagnostics.issues.length - 4} more</li>}
-                                        </ul>
-                                    </>
-                                ) : (
-                                    <strong>No schema issues detected for this route.</strong>
-                                )}
-                            </div>
-                            <pre style={{ margin: 0, padding: '0.75rem 0.8rem', fontSize: '0.68rem', lineHeight: 1.45, overflow: 'auto', whiteSpace: 'pre-wrap', wordBreak: 'break-word', color: 'var(--text-primary)' }}>
-{JSON.stringify(schemasToRender, null, 2)}
-                            </pre>
-                        </div>
-                    )}
-                </>
-            )}
         </>
     )
 }

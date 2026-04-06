@@ -1,0 +1,22 @@
+{
+  "short_name": "PixTool",
+  "name": "PixTool - Private AI & Productivity Suite",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo.webp",
+      "type": "image/webp",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0f172a",
+  "background_color": "#0f172a",
+  "description": "All-in-one free online productivity suite with AI tools, PDF management, and image editing. 100% private browser processing."
+}

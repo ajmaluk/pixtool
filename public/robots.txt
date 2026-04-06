@@ -5,18 +5,34 @@ Disallow: /*?search=
 Disallow: /*?tool=
 Disallow: /pix-admin/
 Disallow: /api/
+
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: Yandex
+Allow: /
+Clean-param: q&search&tool /
+Host: www.pixtool.in
+
 User-agent: GPTBot
 Allow: /
+
 User-agent: CCBot
 Allow: /
+
 User-agent: Google-Extended
 Allow: /
+
 User-agent: Anthropic-ai
 Allow: /
+
 User-agent: Claude-Web
 Allow: /
+
 User-agent: Omgilibot
 Allow: /
+
 User-agent: FacebookBot
 Allow: /
+
 Sitemap: https://www.pixtool.in/sitemap.xml

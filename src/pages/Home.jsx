@@ -12,7 +12,6 @@ import LazyYouTubeEmbed from '../components/LazyYouTubeEmbed'
 import { SITE_URL } from '../config/app.config'
 import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS, MATH_TOOLS, PRODUCTIVITY_TOOLS } from '../data/tools'
 import { GLOBAL_FAQS } from '../data/faqs'
-import { posts } from '../data/posts'
 import { Calculator } from 'lucide-react'
 
 // Lazy Load subsections for performance
@@ -148,27 +147,15 @@ export default function Home() {
                 </div>
                 <h1 className="hero-main-title">
                   Best Free Online <br/>
-                  <span className="text-gradient-hero" style={{ 
-                    display: 'inline-block',
-                    padding: '0.1em 0',
-                    position: 'relative'
-                  }}>
-                    AI & Privacy Tools
+                  <span className="hero-title-highlight">
+                    <span className="text-gradient-hero hero-title-highlight-text">
+                      AI & Privacy Tools
+                    </span>
+                    <span
+                      className="hero-glow-effect"
+                      aria-hidden="true"
+                    />
                   </span>
-                  <div
-                    className="hero-glow-effect"
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%)',
-                      width: '140%',
-                      height: '140%',
-                      background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)',
-                      zIndex: -1,
-                      pointerEvents: 'none'
-                    }}
-                  />
                 </h1>
                 <p className="hero-text-description">
                   The world's most powerful browser-native AI suite. 121+ professional tools for 
@@ -294,6 +281,63 @@ export default function Home() {
               </div>
             </div>
           </div>
+ 
+          <section className="mission-block-premium" style={{ 
+            padding: '4rem 0', 
+            borderBottom: '1px solid var(--border-color)',
+            background: 'rgba(255,255,255,0.01)'
+          }}>
+            <div className="container-pro">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
+                <div>
+                  <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1.5rem', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
+                    The <span style={{ color: 'var(--accent-primary)' }}>PixTool</span> Privacy Paradigm
+                  </h2>
+                  <div style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: 1.8 }}>
+                    <p style={{ marginBottom: '1.25rem' }}>
+                      In 2026, data privacy isn't just a feature—it's a human right. Traditional "free online tools" operate on a dangerous model: they require you to upload your sensitive PDFs, private photos, and corporate documents to their cloud servers before processing them. 
+                    </p>
+                    <p style={{ marginBottom: '1.25rem' }}>
+                      <strong>PixTool is different.</strong> Our entire suite is re-engineered from the ground up using <strong>WebAssembly (WASM)</strong> and high-performance browser-native APIs. When you click 'Compress', 'Merge', or 'Translate', the underlying algorithms are delivered to your device, and the actual processing happens entirely within your <strong>local CPU and RAM</strong>. 
+                    </p>
+                    <p>
+                      Your files <strong>never leave your machine</strong>. This results in 100% data sovereignty, zero upload latency, and absolute immunity from server-side data breaches.
+                    </p>
+                  </div>
+                </div>
+                <div style={{ 
+                  background: 'var(--bg-secondary)', 
+                  padding: '3rem', 
+                  borderRadius: '32px', 
+                  border: '1px solid var(--border-color)',
+                  boxShadow: 'var(--shadow-premium)'
+                }}>
+                  <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <Shield size={24} style={{ color: 'var(--accent-primary)' }} /> Enterprise-Grade Compliance
+                  </h3>
+                  <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '0.95rem' }}>
+                    Because PixTool never "collects" or "transfers" your data to a third party, we are inherently compliant with the world's strictest data regulations:
+                  </p>
+                  <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: 0, listStyle: 'none' }}>
+                    {[
+                      { title: 'GPDR Ready', desc: 'No data controller to data processor transfer occurs.' },
+                      { title: 'HIPAA Compliant', desc: 'Medical records stay strictly on your local hardware.' },
+                      { title: 'CCPA/CPRA', desc: 'Your personal information is never harvested or sold.' },
+                      { title: 'Air-Gapped Safety', desc: 'Once loaded, tools work entirely without internet access.' }
+                    ].map((item, i) => (
+                      <li key={i} style={{ display: 'flex', gap: '12px' }}>
+                        <div style={{ color: 'var(--accent-primary)', fontWeight: 900 }}>✓</div>
+                        <div>
+                          <div style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text-primary)' }}>{item.title}</div>
+                          <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{item.desc}</div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
 
           <section className="content-section" style={{ paddingBottom: 'clamp(4rem, 10vw, 10rem)' }}>
             <div className="container-pro">
@@ -694,7 +738,7 @@ export default function Home() {
               <div style={{ minHeight: '600px' }}><UseCaseSection /></div>
               <div style={{ minHeight: '800px' }}><FAQSection /></div>
               <div style={{ minHeight: '1200px' }}><TechnicalAuthority /></div>
-              <div style={{ minHeight: '600px' }}><BlogSection posts={posts} /></div>
+              <div style={{ minHeight: '600px' }}><BlogSection /></div>
             </Suspense>
           </section>
         </div>

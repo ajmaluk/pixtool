@@ -333,7 +333,7 @@ export const PDF_SEO_CONTENT = {
     'unlock': [
       { title: 'PDF Security 101: Understanding Encryption', path: '/blog/pdf-security-101-passwords-encryption-sharing' },
       { title: 'Privacy at Scale: Avoiding Cloud Decryption', path: '/blog/browser-based-privacy' },
-      { title: 'Safe Document Sharing in the AI Era', path: '/blog/priority-first-why-pixtool-safest-studio' }
+      { title: 'Safe Document Sharing in the AI Era', path: '/blog/privacy-first-why-pixtool-safest-studio' }
     ],
     'ocr': [
       { title: 'Extracting Data from Scanned Documents locally', path: '/blog/browser-based-privacy' },

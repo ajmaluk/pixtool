@@ -138,11 +138,13 @@ export default function Blog() {
                                                 setShowMoreTags(!showMoreTags);
                                             }}
                                             style={{ 
-                                                fontSize: '0.7rem', 
+                                                fontSize: '0.78rem', 
                                                 fontWeight: 800, 
                                                 background: 'var(--accent-glow)', 
                                                 color: 'var(--accent-primary)', 
-                                                padding: '3px 8px', 
+                                                padding: '8px 10px', 
+                                                minWidth: '40px',
+                                                minHeight: '36px',
                                                 borderRadius: '100px', 
                                                 border: 'none',
                                                 cursor: 'pointer'
@@ -229,12 +231,30 @@ export default function Blog() {
             <section style={{ padding: '0 1.5rem 10rem', width: '100%', overflowX: 'hidden' }}>
                 <div style={{ width: '100%', maxWidth: '1400px', margin: '0 auto' }}>
                     <AdSpace type="top" style={{ marginBottom: '3rem' }} />
+
+                    <section className="info-card" style={{ marginBottom: '2rem', padding: '1.5rem' }}>
+                        <h2 style={{ fontSize: '1.4rem', fontWeight: 900, marginBottom: '0.75rem' }}>Editorial Standards</h2>
+                        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, margin: 0 }}>
+                            Our articles are reviewed for practical accuracy, clear evidence, and user-first utility. We prioritize original examples,
+                            transparent updates, and internal references to relevant tools so readers can verify and apply each workflow.
+                        </p>
+                    </section>
+
                     <div className="blog-tags-scroll" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'nowrap', overflowX: 'auto', paddingBottom: '1rem', marginBottom: '1.5rem', WebkitOverflowScrolling: 'touch' }}>
                         {[null, ...allTags].map(tag => (
                             <button
                                 key={tag || 'all'}
                                 className={`btn ${selectedTag === tag ? 'btn-primary' : 'btn-secondary'}`}
-                                style={{ padding: '0.4rem 1.25rem', fontSize: '0.85rem', flexShrink: 0, whiteSpace: 'nowrap', borderRadius: '100px', ...(selectedTag === tag ? { background: 'var(--accent-primary)', borderColor: 'var(--accent-primary)', color: 'white' } : {}) }}
+                                style={{
+                                    padding: '0.55rem 1.25rem',
+                                    fontSize: '0.85rem',
+                                    flexShrink: 0,
+                                    whiteSpace: 'nowrap',
+                                    borderRadius: '100px',
+                                    color: selectedTag === tag ? 'white' : 'var(--text-primary)',
+                                    background: selectedTag === tag ? 'var(--accent-primary)' : 'var(--bg-card)',
+                                    borderColor: selectedTag === tag ? 'var(--accent-primary)' : 'var(--border-color)'
+                                }}
                                 onClick={() => setSelectedTag(tag)}
                             >
                                 {tag ? tag : 'All'}

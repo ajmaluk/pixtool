@@ -1292,17 +1292,47 @@ export default function ImageTools() {
 
                 <div style={{ marginTop: '5rem' }}>
                   <ToolContent
-                    title={activeToolData?.title || 'Image Tool'}
-                    description={activeToolData?.description || (activeTool ? `Our ${activeToolData?.title} is a professional browser-based utility for photo editing.` : 'Professional Online Image Studio')}
+                    title={activeToolData?.title || 'Image Studio'}
+                    description={activeToolData?.description || (activeTool ? `Our ${activeToolData?.title} is a professional browser-based utility for photo editing.` : 'The PixTool Image Studio is a comprehensive suite of professional-grade, privacy-first photo editing utilities. Unlike traditional online editors, PixTool processes 100% of your data locally using WebAssembly (WASM), ensuring that your sensitive photos never touch a cloud server. From rapid compression to advanced cropping and background removal, our tools are optimized for both high-end hardware and mobile devices.')}
                     toolId={activeTool}
-                    benefits={activeToolData?.features || ["100% Privacy — files never leave your device", "No registration required", "Batch processing support", "All major formats supported"]}
-                    howTo={activeToolData?.howItWorks || ["Upload your photos via drag & drop", "Configure your desired settings", "Preview the results in real-time", "Download high-quality images"]}
-                    relatedTools={IMAGE_RELATED_TOOLS[activeTool] || []}
-                    readNext={IMAGE_READ_NEXT[activeTool] || []}
-                    alternativeTo={seoContent?.alternativeTo || []}
-                    faq={seoContent?.faq || []}
-                    tips={seoContent?.tips || []}
-                    useCases={seoContent?.useCases || []}
+                    benefits={activeToolData?.features || [
+                      "Zero-Upload Privacy: Files are processed 100% in your browser using WASM technology.",
+                      "Universal Format Support: Seamlessly work with JPEG, PNG, WebP, AVIF, and HEIC.",
+                      "Enterprise-Grade Speed: Instant processing with sub-second response times.",
+                      "No Data Scraping: We don't train AI models on your photos or store metadata.",
+                      "Lossless Optimization: Reduce file sizes by up to 80% without visible quality loss."
+                    ]}
+                    howTo={activeToolData?.howItWorks || [
+                      "Select a tool from the Image Studio sidebar (e.g., Compressor, Resizer, or Cropper).",
+                      "Drag and drop your images into the secure processing zone.",
+                      "Use the settings sidebar to configure dimensions, quality, and rotation.",
+                      "Review the real-time preview to ensure pixel-perfect results.",
+                      "Click Export All to save your optimized images locally."
+                    ]}
+                    relatedTools={IMAGE_RELATED_TOOLS[activeTool] || [
+                        { name: 'Merge PDF', path: '/pdf-tools/merge' },
+                        { name: 'QR Generator', path: '/qr-generator' },
+                        { name: 'Temp Mail', path: '/temp-mail' }
+                    ]}
+                    readNext={IMAGE_READ_NEXT[activeTool] || [
+                        { title: '🎯 WebP vs AVIF vs JPEG 2026: Best Image Format for Web Performance & SEO', path: '/blog/best-image-format-webp-avif-jpeg-2026' },
+                        { title: '🗜️ Image Compression 101: Lossless vs Lossy - Guidance for 2026', path: '/blog/image-compression-lossless-vs-lossy-2026' }
+                    ]}
+                    alternativeTo={seoContent?.alternativeTo || ["Adobe Photoshop Express", "Canva Photo Editor", "iLoveImg", "TinyPNG"]}
+                    faq={seoContent?.faq || [
+                        { q: "Are my images uploaded to any server?", a: "No. PixTool uses browser-based processing (WebAssembly). All transformations happen on your machine's CPU/GPU, and your files never leave your device." },
+                        { q: "Is there a file size limit?", a: "While we support files up to 50MB, performance depends on your device's RAM. Most modern browsers handle standard DLSR/Phone photos instantly." },
+                        { q: "Which formats are best for web performance?", a: "For 2026, we recommend WebP or AVIF. Our 'Convert' tool allows you to transform legacy JPEGs into these high-efficiency formats effortlessly." }
+                    ]}
+                    tips={seoContent?.tips || [
+                        "Use the 'Batch Export' feature to process hundreds of social media assets at once.",
+                        "Switch to 'WebP' in the Convert settings for 30% better compression than traditional JPEG.",
+                        "Lock the Aspect Ratio when resizing to maintain visual integrity across different devices."
+                    ]}
+                    useCases={seoContent?.useCases || [
+                        { title: "Social Media Managers", description: "Batch resize high-res photography into exact dimensions for Instagram, X, and LinkedIn in seconds." },
+                        { title: "Web Developers", description: "Optimize assets using the Compressor to achieve perfect Lighthouse scores without compromising visual quality." }
+                    ]}
                   />
                 </div>
               </div>

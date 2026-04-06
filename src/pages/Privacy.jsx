@@ -51,19 +51,53 @@ export default function Privacy() {
                             <ShieldCheck size={20} style={{ color: 'var(--accent-primary)' }} /> 3. Security Framework
                         </h2>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-                            PixTool leverages <strong>Content Security Policy (CSP)</strong> and <strong>HTTPS encryption</strong> to ensure that your interaction with our tools remains secure. Our browser-based model is inherently compliant with <strong>GDPR, HIPAA, and CCPA</strong> because the data controller (you) never transfers data to a third-party processor (us).
+                            PixTool leverages <strong>Content Security Policy (CSP)</strong> and <strong>HTTPS encryption</strong> to ensure that your interaction with our tools remains secure. Our browser-first architecture is designed to support privacy-by-default practices aligned with frameworks like <strong>GDPR and CCPA</strong> because user files are processed locally and are not uploaded to our servers.
                         </p>
+
+                        <h2 id="advertising" style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            <FileText size={20} style={{ color: 'var(--accent-primary)' }} /> 4. Third-Party Services & Advertising
+                        </h2>
+                        <div style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+                            <p style={{ marginBottom: '1rem' }}>
+                                We may use third-party advertising partners (like <strong>Google AdSense</strong>) to keep our tools free for everyone. These partners may use cookies, web beacons, or similar technologies to serve ads based on your interests.
+                            </p>
+                            
+                            <h3 style={{ fontSize: '1.2rem', color: 'var(--text-primary)', marginBottom: '0.75rem' }}>Google AdSense & DoubleClick DART Cookie</h3>
+                            <ul style={{ paddingLeft: '1.5rem', marginBottom: '1.5rem' }}>
+                                <li style={{ marginBottom: '0.5rem' }}>Google, as a third-party vendor, uses cookies to serve ads on PixTool.</li>
+                                <li style={{ marginBottom: '0.5rem' }}>Google's use of the DART cookie enables it to serve ads to our users based on their visit to PixTool and other sites on the Internet.</li>
+                                <li style={{ marginBottom: '0.5rem' }}>Users may opt-out of the use of the DART cookie by visiting the <strong>Google Ad and Content Network privacy policy</strong>.</li>
+                            </ul>
+
+                            <h3 style={{ fontSize: '1.2rem', color: 'var(--text-primary)', marginBottom: '0.75rem' }}>Opting Out of Personalized Ads</h3>
+                            <p style={{ marginBottom: '1rem' }}>
+                                You can choose to disable or selectively turn off our cookies or third-party cookies in your browser settings. Alternatively, you can opt-out of some third-party vendor's use of cookies for personalized advertising by visiting:
+                            </p>
+                            <ul style={{ paddingLeft: '1.5rem', marginBottom: '1.5rem' }}>
+                                <li><a href="https://www.aboutads.info" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-primary)' }}>www.aboutads.info</a></li>
+                                <li><a href="https://optout.networkadvertising.org" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-primary)' }}>networkadvertising.org</a></li>
+                            </ul>
+                        </div>
 
                         <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                            <FileText size={20} style={{ color: 'var(--accent-primary)' }} /> 3. Third-Party Services
+                            <ShieldCheck size={20} style={{ color: 'var(--accent-primary)' }} /> 5. Data Privacy Rights (GDPR & CCPA)
                         </h2>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
+                            Depending on your location, you may have the following rights regarding your personal data:
+                        </p>
+                        <ul style={{ color: 'var(--text-secondary)', marginBottom: '2.5rem', paddingLeft: '1.5rem' }}>
+                            <li style={{ marginBottom: '0.75rem' }}><strong>Right to Access:</strong> You can request copies of your personal data.</li>
+                            <li style={{ marginBottom: '0.75rem' }}><strong>Right to Rectification:</strong> You can request that we correct any information you believe is inaccurate.</li>
+                            <li style={{ marginBottom: '0.75rem' }}><strong>Right to Erasure:</strong> You can request that we erase your personal data, under certain conditions.</li>
+                            <li style={{ marginBottom: '0.75rem' }}><strong>Right to Object:</strong> You have the right to object to our processing of your personal data.</li>
+                        </ul>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-                            We may use third-party advertising partners (like Google AdSense) to keep our tools free. These partners may use cookies to serve ads based on your interests. You can opt-out of personalized advertising through your browser settings or Google's ad preferences.
+                            Note: Since PixTool is a <strong>Zero-Registration</strong> platform and processes files <strong>locally</strong>, we do not store your files or personal identity on our servers, making exercise of these rights naturally inherit in our design.
                         </p>
 
-                        <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>4. Contact</h2>
+                        <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>6. Contact</h2>
                         <p style={{ color: 'var(--text-secondary)' }}>
-                            If you have any questions about our privacy practices, please contact us at <a href="mailto:contact@uthakkan.com" style={{ color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 600 }}>contact@uthakkan.com</a>.
+                            If you have any questions about this Privacy Policy, please contact us at <a href="mailto:contact@uthakkan.com" style={{ color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 600 }}>contact@uthakkan.com</a>.
                         </p>
                     </div>
                 </div>

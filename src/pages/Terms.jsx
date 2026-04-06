@@ -12,7 +12,7 @@ export default function Terms() {
             />
 
             <section className="hero" style={{ padding: '6rem 2rem 3rem', background: 'var(--bg-secondary)' }}>
-                <div style={{ maxWidth: '100%', margin: '0 auto', textAlign: 'center' }}>
+                <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
                     <div style={{ display: 'inline-flex', padding: '12px', background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-primary)', borderRadius: '50%', marginBottom: '1.5rem' }}>
                         <Scale size={32} />
                     </div>
@@ -22,7 +22,7 @@ export default function Terms() {
             </section>
 
             <section style={{ padding: '4rem 2rem 8rem' }}>
-                <div style={{ maxWidth: '100%', margin: '0 auto' }}>
+                <div style={{ maxWidth: '800px', margin: '0 auto' }}>
                     <div className="tool-card" style={{ padding: '3rem', fontSize: '1.05rem', lineHeight: 1.8 }}>
                         <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>1. Acceptance of Terms</h2>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
@@ -45,18 +45,31 @@ export default function Terms() {
                         </div>
 
                         <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>3. Disclaimer of Warranties</h2>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
+                            Our tools are provided "as is" and "as available" without any warranty of any kind, either express or implied. While we strive for 100% accuracy and uptime, UTHAKKAN does not warrant that the service will be uninterrupted, timely, secure, or error-free.
+                        </p>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-                            Our tools are provided "as is" without any warranty. While we strive for 100% accuracy and uptime, UTHAKKAN is not responsible for any data loss, errors, or damages resulting from the use of our services.
+                            You understand and agree that any material and/or data downloaded or otherwise obtained through the use of the service is done at your own discretion and risk and that you will be solely responsible for any damage to your computer system or loss of data that results from the download of such material and/or data.
                         </p>
 
-                        <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>4. Intellectual Property</h2>
+                        <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>4. Limitation of Liability</h2>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-                            The design, code, and content of UTHAKKAN tools are the intellectual property of Ajmal U K / UTHAKKAN. All rights reserved.
+                            In no event shall UTHAKKAN, its directors, employees, or partners be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from (i) your access to or use of or inability to access or use the services; (ii) any conduct or content of any third-party on the services; or (iii) unauthorized access, use, or alteration of your transmissions or content.
                         </p>
 
-                        <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>5. Modifications</h2>
+                        <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>5. Intellectual Property</h2>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+                            The design, code, and content of UTHAKKAN tools are the intellectual property of Ajmal U K / UTHAKKAN. You may not copy, modify, distribute, or sell any part of our services or included software, nor may you reverse engineer or attempt to extract the source code of that software.
+                        </p>
+
+                        <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>6. Governing Law</h2>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+                            These Terms shall be governed and construed in accordance with the laws of the United Kingdom, without regard to its conflict of law provisions.
+                        </p>
+
+                        <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>7. Modifications</h2>
                         <p style={{ color: 'var(--text-secondary)' }}>
-                            We reserve the right to modify these terms or any part of our services at any time. Continued use of the service constitutes acceptance of the updated terms.
+                            We reserve the right to modify these terms or any part of our services at any time. Continued use of the service constitutes acceptance of the updated terms. We recommend checking this page periodically for changes.
                         </p>
                     </div>
                 </div>

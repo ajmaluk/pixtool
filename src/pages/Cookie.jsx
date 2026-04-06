@@ -43,9 +43,30 @@ export default function Cookie() {
                             <li><strong>Advertising Cookies:</strong> Third-party partners like Google AdSense may use cookies to show you more relevant ads.</li>
                         </ul>
 
-                        <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>3. Managing Cookies</h2>
+                        <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>3. Controlling and Managing Cookies</h2>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
+                            You have the right to decide whether to accept or reject cookies. You can set or amend your web browser controls to accept or refuse cookies. If you choose to reject cookies, you may still use our website though your access to some functionality and areas of our website may be restricted.
+                        </p>
+                        
+                        <h3 style={{ fontSize: '1.2rem', color: 'var(--text-primary)', marginBottom: '0.75rem' }}>Opting Out of Advertising Cookies</h3>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+                            To opt-out of the use of cookies for personalized advertising, please visit:
+                        </p>
+                        <ul style={{ color: 'var(--text-secondary)', marginBottom: '2rem', paddingLeft: '1.5rem' }}>
+                            <li style={{ marginBottom: '0.5rem' }}>
+                                <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-primary)' }}>Google Ad Settings</a>
+                            </li>
+                            <li style={{ marginBottom: '0.5rem' }}>
+                                <a href="https://www.aboutads.info/choices" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-primary)' }}>Digital Advertising Alliance (DAA)</a>
+                            </li>
+                            <li style={{ marginBottom: '0.5rem' }}>
+                                <a href="https://www.networkadvertising.org/choices/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-primary)' }}>Network Advertising Initiative (NAI)</a>
+                            </li>
+                        </ul>
+
+                        <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>4. Updates to this Policy</h2>
                         <p style={{ color: 'var(--text-secondary)' }}>
-                            You can control and/or delete cookies as you wish through your browser settings. You can delete all cookies that are already on your computer and you can set most browsers to prevent them from being placed. However, if you do this, you may have to manually adjust some preferences every time you visit a site and some services and functionalities may not work.
+                            We may update this Cookie Policy from time to time in order to reflect, for example, changes to the cookies we use or for other operational, legal, or regulatory reasons. Please therefore re-visit this Cookie Policy regularly to stay informed about our use of cookies and related technologies.
                         </p>
                     </div>
                 </div>

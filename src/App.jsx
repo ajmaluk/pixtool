@@ -275,6 +275,7 @@ const MainLayout = () => {
   }, [location.pathname, isRateableToolPath, triggerRating])
 
   const isAdminPath = location.pathname === '/pix-admin'
+  const hideAuxWidgets = location.pathname === '/' || location.pathname === '/blog'
 
   return (
     <div className="app">
@@ -289,7 +290,7 @@ const MainLayout = () => {
           </Suspense>
         </ErrorBoundary>
 
-        {!isAdminPath && (
+        {!isAdminPath && !hideAuxWidgets && (
           <div className="container-pro" style={{ marginTop: '6rem', paddingBottom: '4rem' }}>
             <div className="bottom-widgets-grid">
               

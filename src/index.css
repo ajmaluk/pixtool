@@ -2706,6 +2706,13 @@ h6 {
   flex-direction: column;
 }
 
+/* Keep title blocks tight on tool pages where a top banner ad sits above the hero */
+.landing-center > .ad-region-top + .page-hero {
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
+  min-height: unset;
+}
+
 .desktop-only {
   display: flex;
 }
@@ -3879,10 +3886,10 @@ body.mobile-overlay-open {
 /* Hero Section Styles */
 .hero-hub-container {
   text-align: center;
-  padding: clamp(4rem, 10vh, 7rem) 1.5rem clamp(1.5rem, 8vh, 3rem);
-  margin-bottom: clamp(4rem, 8vw, 6rem);
+  padding: clamp(3rem, 7vh, 5rem) 1.5rem clamp(1rem, 5vh, 2rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
   position: relative;
-  min-height: 400px;
+  min-height: 320px;
 }
 
 .hero-status-badge {
@@ -3903,18 +3910,45 @@ body.mobile-overlay-open {
   font-size: clamp(2.5rem, 8vw, 4.8rem);
   font-weight: 900;
   font-family: 'Manrope', sans-serif;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   letter-spacing: -0.06em;
-  line-height: 0.95;
+  line-height: 0.92;
   position: relative;
   display: inline-block;
+}
+
+.hero-title-highlight {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 0.08em 0.02em;
+}
+
+.hero-title-highlight-text {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  line-height: 1;
+}
+
+.hero-glow-effect {
+  position: absolute;
+  inset: -0.35em;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.18) 0%, transparent 72%);
+  filter: blur(6px);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .hero-text-description {
   font-size: 1.15rem;
   color: var(--text-secondary);
   max-width: 800px;
-  margin: 0 auto 3.5rem;
+  margin: 0 auto 2.25rem;
   line-height: 1.6;
   font-weight: 500;
 }
@@ -3953,7 +3987,7 @@ body.mobile-overlay-open {
   justify-content: center;
   gap: 1.5rem;
   opacity: 0.7;
-  margin-top: clamp(1.5rem, 5vw, 3rem);
+  margin-top: clamp(1rem, 3vw, 1.75rem);
 }
 
 /* Navbar & Footer Utilities */

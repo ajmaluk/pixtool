@@ -172,6 +172,19 @@ export default function About() {
                         </div>
                     </section>
 
+                    <section className="info-card" style={{ marginTop: '6rem', padding: '2.5rem' }}>
+                        <h2 style={{ fontSize: '1.9rem', fontWeight: 900, marginBottom: '1rem' }}>Editorial Standards</h2>
+                        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1rem' }}>
+                            PixTool content is written to prioritize practical accuracy, transparency, and user benefit. We avoid thin, auto-generated pages and focus on testable tutorials, clear comparisons, and actionable workflows.
+                        </p>
+                        <ul style={{ color: 'var(--text-secondary)', lineHeight: 1.7, paddingLeft: '1.2rem' }}>
+                            <li>Claims are reviewed against current product behavior and documented updates.</li>
+                            <li>Posts include concrete steps, examples, and links to relevant tools/pages.</li>
+                            <li>Outdated or ambiguous guidance is revised when tools or standards change.</li>
+                            <li>We label promotional context clearly and keep user trust above CTR tactics.</li>
+                        </ul>
+                    </section>
+
                     <div
                         style={{ marginTop: '8rem', padding: '5rem 3rem', background: 'var(--bg-secondary)', borderRadius: '48px', border: '1px solid var(--border-color)' }}
                     >

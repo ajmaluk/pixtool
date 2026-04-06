@@ -57,6 +57,28 @@ export default function Footer() {
         </div>
 
         <div className="footer-links-group">
+          <h3 className="footer-heading">AI Intelligence</h3>
+          <ul className="footer-links">
+            <li><Link to="/ai-tools/chat" title="Deep Mind AI for professional consulting and strategic ideation">Deep Mind AI</Link></li>
+            <li><Link to="/ai-tools/content-generator" title="Generate SEO blogs and articles with AI">Content Forge</Link></li>
+            <li><Link to="/ai-tools/coding-chat" title="AI programming assistant for 20+ languages">Code Intelligence</Link></li>
+            <li><Link to="/ai-tools/summarizer" title="Summarize documents into actionable intelligence">Intel Distiller</Link></li>
+            <li><Link to="/ai-tools/keyword-generator" title="Find high-intent SEO keywords with AI">SEO Architect</Link></li>
+          </ul>
+        </div>
+
+        <div className="footer-links-group">
+          <h3 className="footer-heading">Math Engine</h3>
+          <ul className="footer-links">
+            <li><Link to="/math-tools/scientific-calculator" title="High-precision scientific calculator online">Scientific Calc</Link></li>
+            <li><Link to="/math-tools/graph-visualizer" title="Interactive 2D/3D functional plotting">Graph Visualizer</Link></li>
+            <li><Link to="/math-tools/equation-solver" title="Solve linear and quadratic equations instantly">Equation Solver</Link></li>
+            <li><Link to="/math-tools/statistics-visualizer" title="Generate statistical charts and data analysis">Data Visualizer</Link></li>
+            <li><Link to="/math-tools/matrix-solver" title="Solve matrix equations and linear algebra">Matrix Solver</Link></li>
+          </ul>
+        </div>
+
+        <div className="footer-links-group">
           <h3 className="footer-heading">Productivity</h3>
           <ul className="footer-links">
             <li><Link to="/productivity-tools/todo" title="Manage your daily tasks with our private todo list">Private Todo List</Link></li>
@@ -76,6 +98,25 @@ export default function Footer() {
             <li><Link to="/showcase" title="View screenshots of our professional tool interfaces">Visual Showcase</Link></li>
             <li><Link to="/contact" title="Get in touch for support or feedback">Support Center</Link></li>
             <li><Link to="/sitemap" title="View the comprehensive HTML sitemap for PixTool">HTML Sitemap</Link></li>
+            <li><a href="/sitemap.xml" title="View the XML sitemap for search engines">XML Sitemap</a></li>
+          </ul>
+        </div>
+
+        <div className="footer-links-group">
+          <h3 className="footer-heading">Site Links</h3>
+          <ul className="footer-links">
+            <li><Link to="/" title="Go to the PixTool home page">Home</Link></li>
+            <li><Link to="/blog" title="Browse the PixTool blog">Blog</Link></li>
+            <li><Link to="/about" title="Learn more about PixTool">About</Link></li>
+            <li><Link to="/contact" title="Contact PixTool support">Contact</Link></li>
+            <li><Link to="/faq" title="Read frequently asked questions">FAQ</Link></li>
+            <li><Link to="/status" title="View site status and updates">Status</Link></li>
+            <li><Link to="/showcase" title="See product screenshots and demos">Showcase</Link></li>
+            <li><Link to="/documentation" title="Read platform documentation">Documentation</Link></li>
+            <li><Link to="/news" title="Read PixTool news and updates">News</Link></li>
+            <li><Link to="/testimonials" title="See customer testimonials">Testimonials</Link></li>
+            <li><Link to="/careers" title="Explore career opportunities">Careers</Link></li>
+            <li><Link to="/case-studies" title="Read customer case studies">Case Studies</Link></li>
           </ul>
         </div>
 
@@ -83,30 +124,44 @@ export default function Footer() {
           <h3 className="footer-heading">Legal & Privacy</h3>
           <ul className="footer-links">
             <li><Link to="/privacy-policy" title="Read our strict zero-data collection policy">Privacy Policy</Link></li>
+            <li><Link to="/privacy-policy#advertising" title="Learn how ads are served and how privacy is protected">About Our Ads</Link></li>
             <li><Link to="/terms-of-service" title="View our terms of service and usage guidelines">Terms of Service</Link></li>
             <li><Link to="/cookie-policy" title="Learn how we use minimal cookies for preferences">Cookie Policy</Link></li>
           </ul>
         </div>
       </div>
 
-      <div className="footer-bottom">
-        <p className="copyright">
-          © {new Date().getFullYear()} PixTool by <a href="https://uthakkan.in" target="_blank" rel="noopener noreferrer">UTHAKKAN</a>. All rights reserved.
-        </p>
-        <div className="footer-meta-links" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <span>Built for Professionals</span>
-          <span className="dot-separator">•</span>
-          <span>Zero-Upload Technology</span>
-          <span className="dot-separator">•</span>
-          <span style={{ 
-            fontSize: '0.75rem', 
-            background: 'var(--bg-secondary)', 
-            padding: '2px 8px', 
-            borderRadius: '6px', 
-            border: '1px solid var(--border-color)',
-            fontWeight: 800,
-            color: 'var(--accent-primary)'
-          }}>v1.1.0</span>
+      <div className="footer-bottom" style={{ flexDirection: 'column', gap: '2rem' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center', opacity: 0.88, fontSize: '0.8rem', lineHeight: 1.6 }}>
+          <p style={{ marginBottom: '1rem' }}>
+            <strong>Platform Disclaimer:</strong> PixTool (by UTHAKKAN) provides free online utility tools processed locally in your browser. While we strive for absolute accuracy, we provide these tools "as is" without any warranty. We do not store or see your files. By using our tools, you agree to our 
+            <Link to="/terms-of-service" style={{ color: 'var(--accent-primary)', textDecoration: 'underline', margin: '0 4px' }}>Terms of Service</Link> and 
+            <Link to="/privacy-policy" style={{ color: 'var(--accent-primary)', textDecoration: 'underline', margin: '0 4px' }}>Privacy Policy</Link>.
+          </p>
+          <p>
+            Google, as a third-party vendor, uses cookies to serve ads on this site. You can opt-out of personalized advertising by visiting Google's ad settings.
+          </p>
+        </div>
+        
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', flexWrap: 'wrap', gap: '1rem', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+          <p className="copyright">
+            © {new Date().getFullYear()} PixTool by <a href="https://uthakkan.in" target="_blank" rel="noopener noreferrer">UTHAKKAN</a>. All rights reserved.
+          </p>
+          <div className="footer-meta-links" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <span>Built for Professionals</span>
+            <span className="dot-separator">•</span>
+            <span>Zero-Upload Technology</span>
+            <span className="dot-separator">•</span>
+            <span style={{ 
+              fontSize: '0.75rem', 
+              background: 'var(--bg-secondary)', 
+              padding: '2px 8px', 
+              borderRadius: '6px', 
+              border: '1px solid var(--border-color)',
+              fontWeight: 800,
+              color: 'var(--accent-primary)'
+            }}>v1.1.0</span>
+          </div>
         </div>
       </div>
     </footer>
