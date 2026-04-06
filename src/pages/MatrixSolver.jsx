@@ -1,6 +1,5 @@
 import { useState } from 'react'
  
-import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Grid, RefreshCw, Trash2, Maximize2, 
   Settings, Info, Download, Trash, Layers
@@ -184,24 +183,19 @@ export default function MatrixSolver() {
                 </div>
 
                 {/* Result Section */}
-                <AnimatePresence>
-                    {result && (
-                        <motion.div 
-                            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                            style={{ 
-                                marginTop: '2.5rem', 
-                                padding: '3rem', 
-                                background: 'var(--bg-card)', 
-                                borderRadius: '32px',
-                                border: '1px solid var(--accent-blue)',
-                                boxShadow: '0 20px 40px rgba(59, 130, 246, 0.1)',
-                                textAlign: 'center',
-                                position: 'relative',
-                                overflow: 'hidden'
-                            }}
-                        >
+                {result && (
+                    <div 
+                        style={{ 
+                            marginTop: '2.5rem', 
+                            padding: '3rem', 
+                            background: 'var(--bg-card)', 
+                            borderRadius: '32px',
+                            border: '1px solid var(--accent-blue)',
+                            boxShadow: '0 20px 40px rgba(59, 130, 246, 0.1)',
+                            textAlign: 'center',
+                            position: 'relative'
+                        }}
+                    >
                             <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '4px', background: 'var(--accent-blue)', opacity: 0.5 }}></div>
                             <h2 style={{ fontWeight: 900, marginBottom: '2rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.2em', fontSize: '0.8rem' }}>Operation: <span style={{ color: 'var(--accent-blue)' }}>{result.type}</span></h2>
                             
@@ -240,9 +234,8 @@ export default function MatrixSolver() {
                                     }))}
                                 </div>
                             )}
-                        </motion.div>
+                        </div>
                     )}
-                </AnimatePresence>
             </div>
 
             <AdSpace type="bottom" />

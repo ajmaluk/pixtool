@@ -171,7 +171,7 @@ export default function TempMail({
   seoPath = "/temp-mail",
   seoTitle = "🔥 Free Temp Mail with Password - Temporary Email & OTP | PixTool",
   seoDescription = "Get instant free temp mail with password. Temporary email and password for login, OTP verification, Facebook & Instagram signups. Best tempmail alternative to 10MinuteMail & Guerrilla Mail. No registration, 100% anonymous.",
-  seoKeywords = "temp mail, temporary email, tempmail, temp email, temp mail with password, temporary email and password, temporary email and password free, temp mail free, temp mail for facebook, 10 minute mail, fake email generator, throwaway email, free temporary email, temp mail generator, temp gmail, temp mail otp, burner email, disposable email, temp inbox, anonymous email, temp mail india, email generator, fake email and password, temp mail gmail, best temp mail, one time email, temp email with password, temp mail for instagram, temp mail for discord, temporary mail, free temp mail",
+  seoKeywords = "temp mail, temporary email, tempmail, temp email, temp mail with password, temporary email and password, temporary email and password free, temp mail free, temp mail for facebook, 10 minute mail, fake email generator, throwaway email, free temporary email, temp mail generator, temp gmail, temp mail otp, burner email, disposable email, temp inbox, anonymous email, temp mail india, email generator, fake email and password, temp mail gmail, best temp mail, one time email, temp email with password, temp mail for instagram, temp mail for discord, temporary mail, free temp mail, temp mail org, temp mail login",
   breadcrumbs: customBreadcrumbs = [
     { name: 'Utility Tools', item: '/utility-tools' },
     { name: 'Temp Mail', item: '/temp-mail' }
@@ -556,7 +556,7 @@ export default function TempMail({
         toolSteps={tempMailSteps}
         breadcrumbs={customBreadcrumbs}
         faqs={tempMailFaqs}
-        screenshot={`${import.meta.env.VITE_SITE_URL}/screenshots/disposable-temporary-email-generator.png`}
+        screenshot={`${import.meta.env.VITE_SITE_URL}/screenshots/disposable-temporary-email-generator.webp`}
         imageAlt="PixTool Temp Mail - Instant anonymous inbox interface"
         imageTitle="Free Temporary Email Service"
       />

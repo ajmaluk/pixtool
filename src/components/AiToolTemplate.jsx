@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import SEO from './SEO'
 import AdSpace from './AdSpace'
 import { Send, Copy, RefreshCw, CheckCircle, Sparkles, Terminal, ArrowRight } from 'lucide-react'
@@ -125,30 +124,23 @@ export default function AiToolTemplate({
         {/* Compact Tool Header */}
         <header style={{ padding: '2rem 1.5rem', textAlign: 'center', background: 'var(--bg-card)', borderBottom: '1px solid var(--border-color)', flexShrink: 0 }}>
           <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem' }}>
-            <motion.div 
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
+            <div 
               style={{ display: 'flex', padding: '1rem', borderRadius: '24px', background: 'var(--bg-secondary)', color: 'var(--accent-purple)' }}
             >
               <ToolIcon size={32} strokeWidth={1.5} />
-            </motion.div>
+            </div>
             
             <div style={{ textAlign: 'left' }}>
-              <motion.h1 
-                initial={{ x: -10, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
+              <h1 
                 style={{ fontSize: '1.75rem', fontWeight: 950, margin: 0, letterSpacing: '-0.03em', color: 'var(--text-primary)', lineHeight: 1.1 }}
               >
                 {title}
-              </motion.h1>
-              <motion.p 
-                initial={{ x: -10, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 0.1 }}
+              </h1>
+              <p 
                 style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: '0.25rem 0 0', maxWidth: '500px' }}
               >
                 {description}
-              </motion.p>
+              </p>
             </div>
           </div>
         </header>
@@ -156,10 +148,8 @@ export default function AiToolTemplate({
         {/* Floating Studio Workspace - Managed Height */}
         <main style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column', padding: '1.5rem 0' }}>
           <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
-            <motion.div 
+            <div 
               className="studio-card"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
               style={{ 
                   background: 'var(--bg-card)', 
                   borderRadius: '32px', 
@@ -193,13 +183,11 @@ export default function AiToolTemplate({
                 </div>
 
                 {/* Result Area - Now inside scrollable zone */}
-                <AnimatePresence>
-                  {displayResponse && (
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      style={{ marginTop: '2rem', padding: '3.5rem', background: 'var(--bg-secondary)', borderRadius: '40px', border: '1px solid var(--border-color)', position: 'relative' }}
-                    >
+                {displayResponse && (
+                  <div 
+                    className="studio-result-area"
+                    style={{ marginTop: '2rem', padding: '3.5rem', background: 'var(--bg-secondary)', borderRadius: '40px', border: '1px solid var(--border-color)', position: 'relative' }}
+                  >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
                         <div style={{ fontSize: '0.85rem', fontWeight: 900, color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '0.25em', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                           <Terminal size={16} /> Result Atmosphere
@@ -219,9 +207,8 @@ export default function AiToolTemplate({
                         {displayResponse}
                         {isStreaming && <span className="dalam-cursor" />}
                       </div>
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
               </div>
 
               {/* Main Action Button - FIXED AT BOTTOM OF CARD */}
@@ -262,7 +249,7 @@ export default function AiToolTemplate({
                     <AdSpace type="bottom" />
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* NEW: SEO Rich Content Section */}
             <div style={{ marginTop: '4rem', paddingBottom: '4rem' }}>

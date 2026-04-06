@@ -1,6 +1,3 @@
- 
-import { motion } from 'framer-motion'
-
 export default function UseCaseSection() {
   const useCases = [
     {
@@ -78,9 +75,9 @@ export default function UseCaseSection() {
 
       <div className="use-case-grid">
         {useCases.map((useCase, idx) => (
-          <motion.div
+          <div
             key={idx}
-            whileHover={{ y: -5 }}
+            className="use-case-card-animated"
             style={{
               background: 'var(--bg-glass)',
               padding: '2.5rem',
@@ -110,7 +107,7 @@ export default function UseCaseSection() {
                 </span>
               ))}
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>

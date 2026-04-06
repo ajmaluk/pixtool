@@ -1,6 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from 'react'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
 import SEO from '../components/SEO'
 import {
   Image, FileText,
@@ -9,6 +8,7 @@ import {
 } from 'lucide-react'
 import ToolCard from '../components/ToolCard'
 import OverallRatingBadge from '../components/OverallRatingBadge'
+import LazyYouTubeEmbed from '../components/LazyYouTubeEmbed'
 import { SITE_URL } from '../config/app.config'
 import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS, MATH_TOOLS, PRODUCTIVITY_TOOLS } from '../data/tools'
 import { GLOBAL_FAQS } from '../data/faqs'
@@ -125,8 +125,8 @@ export default function Home() {
     <>
       <SEO
         title="PixTool — 125+ Best Free Online AI & Private Productivity Tools [2026]"
-        description="🚀 Master your AI workflow with 121+ free tools: AI writing, PDF editor, image resizer, QR codes, temp mail & more. Zero data upload, 100% browser-based, works offline. No account needed. Used by 50,000+ professionals."
-        keywords="free online tools, free ai tools, privacy first productivity suite, browser based tools, offline productivity software, free image editor online, secure pdf editor, free qr generator, temp mail generator, ai writing assistant free, kanban board software, drawing app online, calculator online, free coding tools, online productivity suite, all in one tool, web utilities"
+        description="🚀 Access 125+ free online tools: AI writing, PDF editor, image resizer, QR code generator, temp mail & more. 100% browser-based privacy—no data uploads, no account needed. Trusted by 50,000+ professionals worldwide."
+        keywords="pixtool, best free online tools, free ai tools, privacy-first productivity suite, browser based tools, offline productivity software, free image editor online, secure pdf editor, free qr generator, temp mail generator, 10 minute mail, ai writing assistant free, kanban board software, drawing app online, calculator online, free coding tools, online productivity suite, all in one tool, web utilities, toolpix"
         path="/"
         schema={homeSchema}
         faqs={homeFaqs}
@@ -142,29 +142,21 @@ export default function Home() {
 
           <div className="category-hub">
             <div className="hero-hub-container">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-              >
+              <div className="hero-content-wrapper">
                 <div className="hero-status-badge">
                   <span style={{ marginRight: '8px' }}>🚀</span> 2026 AI Innovation Suite
                 </div>
                 <h1 className="hero-main-title">
-                  Master Your <br/>
+                  Best Free Online <br/>
                   <span className="text-gradient-hero" style={{ 
                     display: 'inline-block',
                     padding: '0.1em 0',
                     position: 'relative'
                   }}>
-                    AI Workflow
+                    AI & Privacy Tools
                   </span>
-                  <motion.div
-                    animate={{ 
-                      scale: [1, 1.2, 1],
-                      opacity: [0.3, 0.6, 0.3],
-                    }}
-                    transition={{ duration: 4, repeat: Infinity }}
+                  <div
+                    className="hero-glow-effect"
                     style={{
                       position: 'absolute',
                       top: '50%',
@@ -212,7 +204,7 @@ export default function Home() {
 
                 <div className="search-container hero-search-wrapper">
                   <div className="search-icon-wrapper" style={{ left: '24px', opacity: 0.7 }}>
-                    <Search size={28} />
+                    <Search size={28} aria-hidden="true" />
                   </div>
                   <input
                     type="text"
@@ -222,6 +214,7 @@ export default function Home() {
                     onChange={handleSearchChange}
                     onKeyDown={handleKeyDown}
                     onFocus={() => setShowSuggestions(searchTerm.length > 0)}
+                    aria-label="Search across all 121+ professional tools"
                   />
                   {searchTerm && (
                     <button
@@ -232,81 +225,73 @@ export default function Home() {
                     </button>
                   )}
 
-                  <AnimatePresence>
-                    {showSuggestions && filteredTools.length > 0 && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.98 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.98 }}
-                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                        className="hero-search-suggestions-box"
-                      >
-                        <div style={{ padding: '0.75rem 1.25rem', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                          Suggested Tools
-                        </div>
-                        {filteredTools.slice(0, 5).map((tool, index) => (
-                          <Link
-                            key={tool.path}
-                            to={tool.path}
-                            onClick={() => setShowSuggestions(false)}
-                            style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: '1.25rem',
-                              padding: '1rem 1.25rem',
-                              textDecoration: 'none',
-                              color: 'var(--text-primary)',
-                              transition: 'all 0.3s ease',
-                              background: selectedIndex === index ? 'var(--bg-secondary)' : 'transparent',
-                              borderRadius: '20px',
-                              margin: '2px 0'
-                            }}
-                            onMouseEnter={() => setSelectedIndex(index)}
-                          >
-                            <div style={{
-                              width: '44px',
-                              height: '44px',
-                              borderRadius: '12px',
-                              background: 'var(--bg-primary)',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              color: 'var(--accent-primary)',
-                              boxShadow: 'var(--shadow-sm)'
-                            }}>
-                              <tool.icon size={20} />
-                            </div>
-                            <div style={{ flex: 1 }}>
-                              <div style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text-primary)' }}>{tool.title}</div>
-                              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '2px', opacity: 0.8 }}>{tool.description.substring(0, 60)}...</div>
-                            </div>
-                            <div style={{
-                              opacity: selectedIndex === index ? 1 : 0,
-                              transform: selectedIndex === index ? 'translateX(0)' : 'translateX(-10px)',
-                              transition: 'all 0.3s ease',
-                              color: 'var(--accent-primary)',
-                              fontSize: '1.2rem',
-                              fontWeight: 900
-                            }}>→</div>
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  {showSuggestions && filteredTools.length > 0 && (
+                    <div className="hero-search-suggestions-box">
+                      <div style={{ padding: '0.75rem 1.25rem', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                        Suggested Tools
+                      </div>
+                      {filteredTools.slice(0, 5).map((tool, index) => (
+                        <Link
+                          key={tool.path}
+                          to={tool.path}
+                          onClick={() => setShowSuggestions(false)}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '1.25rem',
+                            padding: '1rem 1.25rem',
+                            textDecoration: 'none',
+                            color: 'var(--text-primary)',
+                            transition: 'all 0.3s ease',
+                            background: selectedIndex === index ? 'var(--bg-secondary)' : 'transparent',
+                            borderRadius: '20px',
+                            margin: '2px 0'
+                          }}
+                          onMouseEnter={() => setSelectedIndex(index)}
+                        >
+                          <div style={{
+                            width: '44px',
+                            height: '44px',
+                            borderRadius: '12px',
+                            background: 'var(--bg-primary)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: 'var(--accent-primary)',
+                            boxShadow: 'var(--shadow-sm)'
+                          }}>
+                            {tool.icon && <tool.icon size={20} />}
+                          </div>
+                          <div style={{ flex: 1 }}>
+                            <div style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text-primary)' }}>{tool.title}</div>
+                            <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '2px', opacity: 0.8 }}>{tool.description ? `${tool.description.substring(0, 60)}...` : ''}</div>
+                          </div>
+                          <div style={{
+                            opacity: selectedIndex === index ? 1 : 0,
+                            transform: selectedIndex === index ? 'translateX(0)' : 'translateX(-10px)',
+                            transition: 'all 0.3s ease',
+                            color: 'var(--accent-primary)',
+                            fontSize: '1.2rem',
+                            fontWeight: 900
+                          }}>→</div>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div className="hero-feature-tags">
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
-                    <Shield size={18} style={{ color: 'var(--accent-green)' }} /> 100% Private
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: 'var(--text-secondary)' }} aria-label="100% Private Tool">
+                    <Shield size={18} style={{ color: 'var(--accent-green)' }} aria-hidden="true" /> 100% Private
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
-                    <Zap size={18} style={{ color: 'var(--accent-orange)' }} /> Instant
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: 'var(--text-secondary)' }} aria-label="Instant Browser Processing">
+                    <Zap size={18} style={{ color: 'var(--accent-orange)' }} aria-hidden="true" /> Instant
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
-                    <Lock size={18} style={{ color: 'var(--accent-purple)' }} /> Secure
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: 'var(--text-secondary)' }} aria-label="Secure Data Management">
+                    <Lock size={18} style={{ color: 'var(--accent-purple)' }} aria-hidden="true" /> Secure
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
 
@@ -628,28 +613,14 @@ export default function Home() {
                 overflow: 'hidden',
                 boxShadow: '0 20px 80px rgba(139, 92, 246, 0.15)',
                 border: '1px solid rgba(255,255,255,0.05)',
-                aspectRatio: '16/9',
+                aspectRatio: '9/16',
                 background: 'var(--bg-secondary)'
               }}>
-                <iframe 
-                  width="100%" 
-                  height="100%" 
-                  src="https://www.youtube.com/embed/fzIhPN-gv_E?autoplay=0&mute=0&loop=1&playlist=fzIhPN-gv_E" 
-                  title="PixTool Productivity Suite" 
-                  frameBorder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                  referrerPolicy="strict-origin-when-cross-origin" 
-                  allowFullScreen
-                  style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    width: '56.25%',
-                    height: '177.78%',
-                    transform: 'translate(-50%, -50%) rotate(-90deg)',
-                    transformOrigin: 'center center'
-                  }}
-                ></iframe>
+                <LazyYouTubeEmbed
+                  videoId="fzIhPN-gv_E"
+                  title="PixTool Productivity Suite Demo"
+                  rounded="32px"
+                />
               </div>
             </section>
 
@@ -754,6 +725,40 @@ export default function Home() {
         .text-gradient-hero:hover {
           filter: drop-shadow(0 0 25px rgba(139, 92, 246, 0.5));
           transform: scale(1.03) translateY(-2px);
+        }
+        .search-input:focus {
+          border-color: var(--accent-primary) !important;
+          box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1) !important;
+          background: var(--bg-card) !important;
+        }
+        .hero-search-suggestions-box {
+          position: absolute;
+          top: 105%;
+          left: 0;
+          right: 0;
+          background: var(--bg-card);
+          border: 1px solid var(--border-color);
+          border-radius: 24px;
+          box-shadow: var(--shadow-premium);
+          z-index: 1000;
+          padding: 0.75rem;
+          max-height: 450px;
+          overflow-y: auto;
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+        }
+        @media (max-width: 768px) {
+          .hero-main-title {
+            font-size: 2.8rem !important;
+          }
+          .search-input {
+            padding: 1.25rem 1.5rem 1.25rem 4rem !important;
+            font-size: 1rem !important;
+          }
+          .hero-feature-tags {
+            gap: 1rem !important;
+            font-size: 0.75rem !important;
+          }
         }
       `}</style>
     </>

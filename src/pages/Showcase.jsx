@@ -1,55 +1,50 @@
 import React, { useState } from 'react';
  
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ExternalLink, Camera, Image as ImageIcon, FileText, Settings, ArrowRight } from 'lucide-react';
 import SEO from '../components/SEO';
 
 const SCREENSHOTS = [
   // Hubs
-  { id: 'home', title: 'PixTool Homepage', category: 'General', path: '/', img: '/screenshots/pixtool-all-in-one-productivity-suite.png' },
-  { id: 'image-tools', title: 'Image Studio Hub', category: 'Image', path: '/image-tools', img: '/screenshots/professional-online-image-studio.png' },
-  { id: 'pdf-tools', title: 'PDF Expert Hub', category: 'PDF', path: '/pdf-tools', img: '/screenshots/secure-pdf-management-suite.png' },
-  { id: 'utility-tools', title: 'Utility Suite Hub', category: 'Utility', path: '/utility-tools', img: '/screenshots/all-in-one-web-utility-toolbox.png' },
+  { id: 'home', title: 'PixTool Homepage', category: 'General', path: '/', img: '/screenshots/pixtool-all-in-one-productivity-suite.webp' },
+  { id: 'image-tools', title: 'Image Studio Hub', category: 'Image', path: '/image-tools', img: '/screenshots/professional-online-image-studio.webp' },
+  { id: 'pdf-tools', title: 'PDF Expert Hub', category: 'PDF', path: '/pdf-tools', img: '/screenshots/secure-pdf-management-suite.webp' },
+  { id: 'utility-tools', title: 'Utility Suite Hub', category: 'Utility', path: '/utility-tools', img: '/screenshots/all-in-one-web-utility-toolbox.webp' },
   
   // Image Tools
-  { id: 'image-resize', title: 'Image Resizer', category: 'Image', path: '/image-tools/resize', img: '/screenshots/best-online-image-resizer-tool.png' },
-  { id: 'image-crop', title: 'Image Cropper', category: 'Image', path: '/image-tools/crop', img: '/screenshots/professional-image-cropper-online.png' },
-  { id: 'image-rotate', title: 'Image Rotator', category: 'Image', path: '/image-tools/rotate', img: '/screenshots/free-online-image-rotator.png' },
-  { id: 'image-compress', title: 'Image Compressor', category: 'Image', path: '/image-tools/compress', img: '/screenshots/high-quality-image-compressor-online.png' },
-  { id: 'image-convert', title: 'Format Converter', category: 'Image', path: '/image-tools/convert', img: '/screenshots/online-image-format-converter-webp-png-jpg.png' },
-  { id: 'image-watermark', title: 'Watermark Tool', category: 'Image', path: '/image-tools/watermark', img: '/screenshots/add-watermark-to-photos-online-free.png' },
-  { id: 'image-flip', title: 'Image Flipper', category: 'Image', path: '/image-tools/flip', img: '/screenshots/flip-and-mirror-images-online-instantly.png' },
-  { id: 'image-grayscale', title: 'Grayscale Editor', category: 'Image', path: '/image-tools/grayscale', img: '/screenshots/convert-image-to-grayscale-online.png' },
+  { id: 'image-resize', title: 'Image Resizer', category: 'Image', path: '/image-tools/resize', img: '/screenshots/best-online-image-resizer-tool.webp' },
+  { id: 'image-crop', title: 'Image Cropper', category: 'Image', path: '/image-tools/crop', img: '/screenshots/professional-image-cropper-online.webp' },
+  { id: 'image-rotate', title: 'Image Rotator', category: 'Image', path: '/image-tools/rotate', img: '/screenshots/free-online-image-rotator.webp' },
+  { id: 'image-compress', title: 'Image Compressor', category: 'Image', path: '/image-tools/compress', img: '/screenshots/high-quality-image-compressor-online.webp' },
+  { id: 'image-convert', title: 'Format Converter', category: 'Image', path: '/image-tools/convert', img: '/screenshots/online-image-format-converter-webp-png-jpg.webp' },
+  { id: 'image-watermark', title: 'Watermark Tool', category: 'Image', path: '/image-tools/watermark', img: '/screenshots/add-watermark-to-photos-online-free.webp' },
+  { id: 'image-flip', title: 'Image Flipper', category: 'Image', path: '/image-tools/flip', img: '/screenshots/flip-and-mirror-images-online-instantly.webp' },
+  { id: 'image-grayscale', title: 'Grayscale Editor', category: 'Image', path: '/image-tools/grayscale', img: '/screenshots/convert-image-to-grayscale-online.webp' },
   
   // PDF Tools
-  { id: 'pdf-merge', title: 'Merge PDF', category: 'PDF', path: '/pdf-tools/merge', img: '/screenshots/fast-pdf-merger-no-upload-pixtool.png' },
-  { id: 'pdf-split', title: 'Split PDF', category: 'PDF', path: '/pdf-tools/split', img: '/screenshots/split-pdf-pages-online-securely.png' },
-  { id: 'pdf-compress', title: 'Compress PDF', category: 'PDF', path: '/pdf-tools/compress', img: '/screenshots/optimize-pdf-file-size-online.png' },
-  { id: 'pdf-convert', title: 'PDF to Image', category: 'PDF', path: '/pdf-tools/convert', img: '/screenshots/convert-pdf-to-images-online-high-res.png' },
-  { id: 'pdf-protect', title: 'Protect PDF', category: 'PDF', path: '/pdf-tools/protect', img: '/screenshots/secure-pdf-with-password-online.png' },
-  { id: 'pdf-watermark', title: 'Watermark PDF', category: 'PDF', path: '/pdf-tools/watermark', img: '/screenshots/add-text-watermark-to-pdf-online.png' },
-  { id: 'pdf-reorder', title: 'Reorder PDF', category: 'PDF', path: '/pdf-tools/reorder', img: '/screenshots/reorder-pdf-pages-online-free.png' },
+  { id: 'pdf-merge', title: 'Merge PDF', category: 'PDF', path: '/pdf-tools/merge', img: '/screenshots/fast-pdf-merger-no-upload-pixtool.webp' },
+  { id: 'pdf-split', title: 'Split PDF', category: 'PDF', path: '/pdf-tools/split', img: '/screenshots/split-pdf-pages-online-securely.webp' },
+  { id: 'pdf-compress', title: 'Compress PDF', category: 'PDF', path: '/pdf-tools/compress', img: '/screenshots/optimize-pdf-file-size-online.webp' },
+  { id: 'pdf-convert', title: 'PDF to Image', category: 'PDF', path: '/pdf-tools/convert', img: '/screenshots/convert-pdf-to-images-online-high-res.webp' },
+  { id: 'pdf-protect', title: 'Protect PDF', category: 'PDF', path: '/pdf-tools/protect', img: '/screenshots/secure-pdf-with-password-online.webp' },
+  { id: 'pdf-watermark', title: 'Watermark PDF', category: 'PDF', path: '/pdf-tools/watermark', img: '/screenshots/add-text-watermark-to-pdf-online.webp' },
+  { id: 'pdf-reorder', title: 'Reorder PDF', category: 'PDF', path: '/pdf-tools/reorder', img: '/screenshots/reorder-pdf-pages-online-free.webp' },
   
   // Utility Tools
-  { id: 'temp-mail', title: 'Temp Mail', category: 'Utility', path: '/temp-mail', img: '/screenshots/disposable-temporary-email-generator.png' },
-  { id: '10-min-mail', title: '10 Minute Mail', category: 'Utility', path: '/temp-mail/10-minute-mail', img: '/screenshots/10-minute-mail-free-disposable-inbox.png' },
-  { id: 'change-email', title: 'Change Email', category: 'Utility', path: '/temp-mail/change-email', img: '/screenshots/change-temporary-email-address-online.png' },
-  { id: 'fake-email', title: 'Fake Email', category: 'Utility', path: '/fake-email', img: '/screenshots/generate-fake-email-for-testing.png' },
-  { id: 'disposable-email', title: 'Disposable Email', category: 'Utility', path: '/disposable-email', img: '/screenshots/burner-email-address-generator-privacy.png' },
-  { id: 'throwaway-email', title: 'Throwaway Email', category: 'Utility', path: '/throwaway-email', img: '/screenshots/throwaway-email-inbox-online-free.png' },
-  { id: 'qr-generator', title: 'QR Generator', category: 'Utility', path: '/qr-generator', img: '/screenshots/best-free-qr-code-generator-online.png' },
-  { id: 'qr-scanner', title: 'QR Scanner', category: 'Utility', path: '/qr-scanner', img: '/screenshots/fast-online-qr-code-scanner-browser.png' },
-  { id: 'typing-test', title: 'Typing Test', category: 'Utility', path: '/typing-test', img: '/screenshots/professional-typing-speed-test-online.png' },
+  { id: 'temp-mail', title: 'Temp Mail', category: 'Utility', path: '/temp-mail', img: '/screenshots/disposable-temporary-email-generator.webp' },
+  { id: '10-min-mail', title: '10 Minute Mail', category: 'Utility', path: '/temp-mail/10-minute-mail', img: '/screenshots/10-minute-mail-free-disposable-inbox.webp' },
+  { id: 'change-email', title: 'Change Email', category: 'Utility', path: '/temp-mail/change-email', img: '/screenshots/change-temporary-email-address-online.webp' },
+  { id: 'fake-email', title: 'Fake Email', category: 'Utility', path: '/fake-email', img: '/screenshots/generate-fake-email-for-testing.webp' },
+  { id: 'disposable-email', title: 'Disposable Email', category: 'Utility', path: '/disposable-email', img: '/screenshots/burner-email-address-generator-privacy.webp' },
+  { id: 'throwaway-email', title: 'Throwaway Email', category: 'Utility', path: '/throwaway-email', img: '/screenshots/throwaway-email-inbox-online-free.webp' },
+  { id: 'qr-generator', title: 'QR Generator', category: 'Utility', path: '/qr-generator', img: '/screenshots/best-free-qr-code-generator-online.webp' },
+  { id: 'qr-scanner', title: 'QR Scanner', category: 'Utility', path: '/qr-scanner', img: '/screenshots/fast-online-qr-code-scanner-browser.webp' },
+  { id: 'typing-test', title: 'Typing Test', category: 'Utility', path: '/typing-test', img: '/screenshots/professional-typing-speed-test-online.webp' },
 ];
 
-const ShowcaseCard = ({ item, index }) => {
+const ShowcaseCard = ({ item }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.05, duration: 0.5 }}
-    >
+    <div className="showcase-card-container">
       <div style={{ position: 'relative', height: '100%' }}>
         <Link
           to={item.path}
@@ -71,7 +66,7 @@ const ShowcaseCard = ({ item, index }) => {
           <div style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
             <img
               src={item.img}
-              alt={item.title}
+              alt={`User interface preview of ${item.title}`}
               width="400"
               height="220"
               loading="lazy"
@@ -98,20 +93,13 @@ const ShowcaseCard = ({ item, index }) => {
             <p className="blog-card-excerpt" style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '1.5rem', flex: 1 }}>
               Professional UI preview for the {item.title}. Engineered for speed and 100% browser-based local processing.
             </p>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              color: 'var(--accent-primary)',
-              fontWeight: 800,
-              fontSize: '0.9rem'
-            }} className="read-article">
-              Open Tool <ArrowRight size={16} className="arrow" />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontWeight: 700, fontSize: '0.9rem' }}>
+              Launch Tool <ArrowRight size={16} />
             </div>
           </div>
         </Link>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -133,11 +121,7 @@ export default function Showcase() {
 
       <section className="hero" style={{ padding: 'clamp(5rem, 15vh, 8rem) 1.5rem 5rem', background: 'var(--bg-secondary)', marginBottom: '4rem' }}>
         <div style={{ maxWidth: '100%', margin: '0 auto', textAlign: 'center' }}>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div>
             <div className="status-badge" style={{ margin: '0 auto 1.5rem', width: 'fit-content', background: 'var(--accent-glow)', color: 'var(--accent-primary)', fontWeight: 700 }}>
               VISUAL GALLERY
             </div>
@@ -145,7 +129,7 @@ export default function Showcase() {
             <p className="hero-subtitle" style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
               A comprehensive gallery of our professional tool interfaces, engineered for efficiency and privacy.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -165,8 +149,8 @@ export default function Showcase() {
           </div>
 
           <div className="blog-grid">
-            {filtered.map((item, index) => (
-              <ShowcaseCard key={item.id} item={item} index={index} />
+            {filtered.map((item) => (
+              <ShowcaseCard key={item.id} item={item} />
             ))}
           </div>
 

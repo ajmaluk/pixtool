@@ -53,6 +53,7 @@ export default function Founder() {
                                     height="240"
                                     loading="lazy"
                                     style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.05)' }}
+                                    onError={(e) => { e.target.src = 'https://ui-avatars.com/api/?name=Ajmal+UK&background=3b82f6&color=fff'; }}
                                 />
                             </div>
                         </div>

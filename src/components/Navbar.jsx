@@ -137,11 +137,13 @@ export default function Navbar() {
       <nav className="navbar">
         <Link to="/" className="navbar-logo" title="PixTool Home - Professional Private Productivity Suite" aria-label="PixTool Home">
           <img 
-            src="/logo.webp" 
+            src="/logo-32.png"
+            srcSet="/logo-32.png 32w, /logo-56.png 56w, /logo.webp 128w"
+            sizes="32px"
             alt="PixTool - Secure Private Browser Hub" 
             className="navbar-logo-img navbar-logo-icon" 
-            width="56"
-            height="56"
+            width="32"
+            height="32"
             fetchPriority="high"
             loading="eager"
             aria-hidden="true"
@@ -156,9 +158,8 @@ export default function Navbar() {
           <NavLink to="/utility-tools" className="navbar-link">Utility</NavLink>
           <NavLink to="/ai-tools" className="navbar-link">AI</NavLink>
           <NavLink to="/math-tools" className="navbar-link">Math</NavLink>
-          <NavLink to="/productivity-tools" className="navbar-link" style={{ position: 'relative' }}>
+          <NavLink to="/productivity-tools" className="navbar-link">
             Productivity
-            <span className="navbar-new-badge">New</span>
           </NavLink>
           
           <div className="nav-dropdown" ref={moreRef}>
@@ -353,9 +354,8 @@ export default function Navbar() {
           <NavLink to="/utility-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Utility Tools</NavLink>
           <NavLink to="/ai-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>AI Tools</NavLink>
           <NavLink to="/math-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>Math Tools</NavLink>
-          <NavLink to="/productivity-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <NavLink to="/productivity-tools" className="mobile-menu-link" onClick={() => setMobileOpen(false)}>
             Productivity Tools
-            <span className="navbar-new-badge" style={{ position: 'static', transform: 'none' }}>New</span>
           </NavLink>
           
           <div className="mobile-section-title">Resources</div>

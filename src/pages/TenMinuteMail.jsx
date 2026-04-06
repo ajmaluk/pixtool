@@ -30,7 +30,7 @@ export default function TenMinuteMail() {
       seoPath="/temp-mail/10-minute-mail"
       seoTitle="10 Minute Mail - Auto-Expiring Disposable Email | PixTool"
       seoDescription="Free 10 minute mail with auto-expiring disposable inbox. Get verification codes, OTPs, and confirmation emails instantly. No signup needed. Best 10MinuteMail, 10minutemail & Guerrilla Mail alternative."
-      seoKeywords="10 minute mail, 10minutemail, 10 minute email, 10 minutes mail, 10 min mail, 5 minute mail, 10min mail, 10 minute mail with password, disposable email 10 minutes, throwaway email, temp mail 10 minutes, one-time email, auto expiring email, timed temporary email"
+      seoKeywords="10 minute mail, 10minutemail, 10 minute email, 10 minutes mail, 10 min mail, 5 minute mail, 10min mail, 10 minute mail with password, disposable email 10 minutes, throwaway email, temp mail 10 minutes, one-time email, auto expiring email, timed temporary email, 10 min email, 9 minutes email, 10 mail, 10mail"
       storageNamespace="tenmin-mail"
       rotateTrigger={rotateCount}
       breadcrumbs={[

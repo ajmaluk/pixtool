@@ -169,13 +169,6 @@ export default function ImageTools() {
     }
   }
 
-  const handleRemoveFile = (index) => {
-    removeFile(index)
-    if (selectedIndex >= files.length - 1) {
-      setSelectedIndex(Math.max(0, files.length - 2))
-    }
-  }
-
   const onImageLoad = (e) => {
     const { width, height } = e.currentTarget;
     // Initialize crop with 90% width/height in pixel units
@@ -1171,8 +1164,8 @@ export default function ImageTools() {
                           }} style={{ padding: '0.6rem 1rem', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderColor: 'transparent' }}>
                             <X size={18} /> Clear
                           </button>
-                          <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.6rem 1.25rem' }}>
-                            <Upload size={18} /> Add More
+                          <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.6rem 1.25rem' }} aria-label="Upload more images">
+                            <Upload size={18} aria-hidden="true" /> Add More
                           </button>
                           <button className="btn btn-primary" onClick={processImage} style={{ padding: '0.6rem 2rem' }}>
                             <Download size={18} /> Export All
@@ -1244,15 +1237,17 @@ export default function ImageTools() {
                               className="btn-icon"
                               onClick={() => setSelectedIndex(prev => (prev > 0 ? prev - 1 : files.length - 1))}
                               style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'var(--bg-glass)', borderRadius: '50%', padding: '0.75rem' }}
+                              aria-label="Previous image"
                             >
-                              <ChevronLeft size={24} />
+                              <ChevronLeft size={24} aria-hidden="true" />
                             </button>
                             <button
                               className="btn-icon"
                               onClick={() => setSelectedIndex(prev => (prev < files.length - 1 ? prev + 1 : 0))}
                               style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'var(--bg-glass)', borderRadius: '50%', padding: '0.75rem' }}
+                              aria-label="Next image"
                             >
-                              <ChevronRight size={24} />
+                              <ChevronRight size={24} aria-hidden="true" />
                             </button>
                           </>
                         )}
@@ -1277,15 +1272,15 @@ export default function ImageTools() {
                               <div className="thumb-label">{file.name}</div>
                             </div>
                             <button
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                handleRemoveFile(i)
-                              }}
-                              className="gallery-thumb-remove"
-                              aria-label="Remove"
-                            >
-                              <X size={12} />
-                            </button>
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              removeFile(i)
+                            }}
+                            className="gallery-thumb-remove"
+                            aria-label={`Remove ${file.name}`}
+                          >
+                            <X size={12} aria-hidden="true" />
+                          </button>
                           </div>
                         ))}
                       </div>

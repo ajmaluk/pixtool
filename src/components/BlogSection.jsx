@@ -1,5 +1,4 @@
  
-import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Navigation } from 'lucide-react'
 
@@ -15,20 +14,23 @@ export default function BlogSection({ posts }) {
 
       <div className="blog-grid">
         {posts.slice(0, 4).map((post) => (
-          <motion.div
+          <div
             key={post.slug}
-            whileHover={{ y: -10 }}
-            className="blog-card"
+            className="blog-card blog-card-animated"
           >
             <div className="blog-card-img-container">
-              <img 
-                src={post.image} 
-                alt={post.title} 
-                width="600"
-                height="315"
-                loading="lazy"
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-              />
+              <picture>
+                {post.imageWebp ? <source srcSet={post.imageWebp} type="image/webp" /> : null}
+                <img 
+                  src={post.image} 
+                  alt={post.title} 
+                  width="600"
+                  height="315"
+                  loading="lazy"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                  onError={(e) => { e.target.src = '/og-image.webp'; }}
+                />
+              </picture>
             </div>
             <div className="blog-card-content">
               <div className="blog-card-meta">
@@ -43,7 +45,7 @@ export default function BlogSection({ posts }) {
                 Read Article <Navigation size={16} style={{ transform: 'rotate(90deg)' }} aria-hidden="true" />
               </Link>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 

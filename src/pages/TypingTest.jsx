@@ -143,7 +143,7 @@ export default function TypingTest() {
           "Press SPACE or ENTER after each word to move to the next.",
           "Review your final WPM and accuracy metrics instantly."
         ]}
-        screenshot="/screenshots/professional-typing-speed-test-online.png"
+        screenshot="/screenshots/professional-typing-speed-test-online.webp"
         imageAlt="PixTool Typing Test - Professional WPM and accuracy tracking interface"
         imageTitle="MonkeyType Alternative Typing Test Online"
         breadcrumbs={[

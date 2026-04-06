@@ -1,7 +1,5 @@
 import { HelpCircle, Info, CheckCircle2, ArrowRight, Shield, Zap, Lock } from 'lucide-react'
 import { Link } from 'react-router-dom'
- 
-import { motion } from 'framer-motion'
 
 export default function ToolContent({
     title,
@@ -161,9 +159,9 @@ export default function ToolContent({
                             </div>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
                                 {readNext.map((item, i) => (
-                                    <Link key={i} to={item.path} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                        <motion.div
-                                            whileHover={{ y: -5, borderColor: 'var(--accent-primary)', boxShadow: '0 20px 40px var(--accent-glow)' }}
+                                    <Link key={i} to={item.path} style={{ textDecoration: 'none', color: 'inherit' }} className="expert-guide-card-wrapper">
+                                        <div
+                                            className="expert-guide-card"
                                             style={{
                                                 background: 'var(--bg-glass)',
                                                 border: '1px solid var(--border-color)',
@@ -172,7 +170,7 @@ export default function ToolContent({
                                                 height: '100%',
                                                 display: 'flex',
                                                 flexDirection: 'column',
-                                                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+                                                transition: 'all 0.3s ease'
                                             }}
                                         >
                                             <div style={{ fontSize: '0.7rem', fontWeight: 900, color: 'var(--accent-primary)', textTransform: 'uppercase', marginBottom: '1rem', letterSpacing: '0.1em' }}>
@@ -184,7 +182,7 @@ export default function ToolContent({
                                                     <ArrowRight size={20} style={{ color: 'var(--accent-primary)' }} />
                                                 </div>
                                             </div>
-                                        </motion.div>
+                                        </div>
                                     </Link>
                                 ))}
                             </div>

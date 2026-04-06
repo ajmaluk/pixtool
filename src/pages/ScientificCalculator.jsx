@@ -1,6 +1,5 @@
 import { useState } from 'react'
  
-import { motion } from 'framer-motion'
 import { 
   Calculator, History, Trash2, Copy, Check, 
   RotateCcw, Delete, Info, ArrowLeft

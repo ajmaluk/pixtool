@@ -1,5 +1,4 @@
 import { Suspense, lazy, Component } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
 import { Routes, Route, Outlet, useLocation, Link, Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
@@ -294,46 +293,32 @@ const MainLayout = () => {
           <div className="container-pro" style={{ marginTop: '6rem', paddingBottom: '4rem' }}>
             <div className="bottom-widgets-grid">
               
-              {/* Recent Tools - Dynamic with Layout Animation */}
-              <AnimatePresence mode="popLayout">
-                {recentTools.length > 0 && (
-                  <motion.div
-                    layout
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                    className="layout-widget layout-widget-premium"
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-                      <div style={{ padding: '8px', background: 'var(--accent-glow)', borderRadius: '12px' }}>
-                        <span style={{ fontSize: '1.2rem' }}>🕒</span>
-                      </div>
-                      <h3 style={{ fontSize: '1.25rem', fontWeight: 900, letterSpacing: '-0.02em', margin: 0 }}>Recent Tools</h3>
+              {/* Recent Tools - Simplified */}
+              {recentTools.length > 0 && (
+                <div className="layout-widget layout-widget-premium">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
+                    <div style={{ padding: '8px', background: 'var(--accent-glow)', borderRadius: '12px' }}>
+                      <span style={{ fontSize: '1.2rem' }}>🕒</span>
                     </div>
-                    <div style={{ display: 'grid', gap: '0.75rem' }}>
-                      {recentTools.map(tool => (
-                        <Link key={tool.path} to={tool.path} style={{ textDecoration: 'none', color: 'inherit' }}>
-                          <motion.div
-                            layout
-                            className="widget-item-interactive"
-                          >
-                            <span style={{ fontSize: '1.3rem', display: 'flex', alignItems: 'center' }}>
-                              {tool.icon ? (typeof tool.icon === 'string' ? tool.icon : (typeof tool.icon === 'function' ? <tool.icon size={20} /> : '🛠️')) : '🛠️'}
-                            </span>
-                            <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>{tool.title || tool.name}</span>
-                          </motion.div>
-                        </Link>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 900, letterSpacing: '-0.02em', margin: 0 }}>Recent Tools</h3>
+                  </div>
+                  <div style={{ display: 'grid', gap: '0.75rem' }}>
+                    {recentTools.map(tool => (
+                      <Link key={tool.path} to={tool.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <div className="widget-item-interactive">
+                          <span style={{ fontSize: '1.3rem', display: 'flex', alignItems: 'center' }}>
+                            {tool.icon ? (typeof tool.icon === 'string' ? tool.icon : (typeof tool.icon === 'function' ? <tool.icon size={20} /> : '🛠️')) : '🛠️'}
+                          </span>
+                          <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>{tool.title || tool.name}</span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
 
-              {/* Popular Tools - Static Enhanced */}
-              <motion.div
-                className="layout-widget layout-widget-standard"
-              >
+              {/* Popular Tools - Simplified */}
+              <div className="layout-widget layout-widget-standard">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
                   <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '12px' }}>
                      <span style={{ fontSize: '1.2rem' }}>🔥</span>
@@ -349,25 +334,17 @@ const MainLayout = () => {
                     { name: 'Typing Test', path: '/typing-test', icon: '⌨️' }
                   ].map(tool => (
                     <Link key={tool.path} to={tool.path} style={{ textDecoration: 'none', color: 'inherit' }}>
-                      <motion.div
-                        whileHover={{ x: 5, background: 'var(--bg-secondary)' }}
-                        className="widget-item-interactive"
-                      >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                          <span style={{ fontSize: '1.1rem' }}>{tool.icon}</span>
-                          <span style={{ fontWeight: 700, fontSize: '0.9rem' }}>{tool.name}</span>
-                        </div>
-                        <span style={{ color: 'var(--accent-primary)', fontWeight: 900 }}>→</span>
-                      </motion.div>
+                      <div className="widget-item-interactive">
+                        <span style={{ fontSize: '1.3rem' }}>{tool.icon}</span>
+                        <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>{tool.name}</span>
+                      </div>
                     </Link>
                   ))}
                 </div>
-              </motion.div>
+              </div>
 
               {/* Premium Expert Guides */}
-              <motion.div
-                className="layout-widget layout-widget-gradient"
-              >
+              <div className="layout-widget layout-widget-gradient">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
                   <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '12px' }}>
                      <span style={{ fontSize: '1.2rem' }}>📚</span>
@@ -380,18 +357,17 @@ const MainLayout = () => {
                     { name: 'Max Privacy with Temp Mail', path: '/blog/secure-temp-mail-business-privacy-2026' }
                   ].map(guide => (
                     <Link key={guide.path} to={guide.path} style={{ textDecoration: 'none', color: 'inherit' }}>
-                      <motion.div
-                        whileHover={{ scale: 1.02, background: 'var(--bg-primary)', borderColor: 'var(--accent-primary)' }}
+                      <div
                         className="layout-widget-standard"
                         style={{ padding: '1.2rem' }}
                       >
                         <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-primary)', textTransform: 'uppercase', marginBottom: '0.5rem', letterSpacing: '0.05em' }}>TUTORIAL</div>
                         <div style={{ fontWeight: 800, fontSize: '1rem', lineHeight: 1.3 }}>{guide.name}</div>
-                      </motion.div>
+                      </div>
                     </Link>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
         )}

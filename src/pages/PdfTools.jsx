@@ -15,7 +15,7 @@ import { PDF_SEO_CONTENT, PDF_RELATED_TOOLS, PDF_READ_NEXT } from '../data/pdfTo
 import ComingSoon from '../components/ComingSoon'
 import ToolCard from '../components/ToolCard'
 import { mergePdfs, splitPdf, watermarkPdf, compressPdf, unlockPdfWithPassword, extractPdfText, extractPdfTextWithTesseract, downloadBlob, protectPdf, reorderPdfPages, convertPdfToImages } from '../utils/pdfUtils'
-import { SITE_URL, SITE_NAME } from '../data/constants'
+import { SITE_URL, SITE_NAME } from '../config/app.config'
 
 const tools = PDF_TOOLS;
 
@@ -134,13 +134,6 @@ export default function PdfTools() {
   const handleFileSelect = (e) => {
     if (e.target.files.length > 0) {
       handleFiles(Array.from(e.target.files))
-    }
-  }
-
-  const handleRemoveFile = (index) => {
-    removeFile(index)
-    if (selectedIndex >= files.length - 1) {
-      setSelectedIndex(Math.max(0, files.length - 2))
     }
   }
 
@@ -979,8 +972,8 @@ export default function PdfTools() {
                          }} style={{ padding: '0.6rem 1rem', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderColor: 'transparent' }}>
                            <X size={18} /> Clear
                          </button>
-                         <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.6rem 1.25rem' }}>
-                           <Upload size={18} /> Add More
+                         <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.6rem 1.25rem' }} aria-label="Upload more PDF files">
+                           <Upload size={18} aria-hidden="true" /> Add More
                          </button>
                         <button className="btn btn-primary" onClick={processPdf} style={{ padding: '0.6rem 2rem' }}>
                           <Download size={18} /> {processing ? 'Processing...' : `${activeToolData?.title} Now`}
@@ -1006,7 +999,7 @@ export default function PdfTools() {
                           justifyContent: 'center',
                           margin: '0 auto 2rem',
                           color: 'var(--accent-blue)'
-                        }}>
+                        }} aria-hidden="true">
                           <FileText size={64} />
                         </div>
                         <h2 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
@@ -1068,12 +1061,12 @@ export default function PdfTools() {
                           <button
                             onClick={(e) => {
                               e.stopPropagation()
-                              handleRemoveFile(i)
+                              removeFile(i)
                             }}
                             className="gallery-thumb-remove"
-                            aria-label="Remove"
+                            aria-label={`Remove ${file.name}`}
                           >
-                            <X size={12} />
+                            <X size={12} aria-hidden="true" />
                           </button>
                         </div>
                       ))}

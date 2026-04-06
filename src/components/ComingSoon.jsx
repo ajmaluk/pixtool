@@ -1,12 +1,8 @@
- 
-import { motion } from 'framer-motion';
 import { Rocket, Clock, Zap, Lock } from 'lucide-react';
 
 const ComingSoon = ({ toolName, description }) => {
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+    <div 
       style={{
         padding: '4rem 2rem',
         textAlign: 'center',
@@ -71,7 +67,7 @@ const ComingSoon = ({ toolName, description }) => {
           </div>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 };
 

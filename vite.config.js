@@ -1,8 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: {
+      'framer-motion': fileURLToPath(new URL('./src/lib/motionShim.js', import.meta.url))
+    }
+  },
   build: {
     target: 'esnext',
     minify: 'terser',
@@ -35,7 +41,6 @@ export default defineConfig({
             }
 
             // Non-critical UI libraries can be loaded in separate chunks.
-            if (id.includes('framer-motion')) return 'vendor-motion';
             if (id.includes('lucide-react')) return 'vendor-icons';
 
             // Data/visualization and compute-heavy libs.
@@ -66,7 +71,7 @@ export default defineConfig({
     chunkSizeWarningLimit: 2000
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', 'lucide-react', 'framer-motion', 'qrcode.react'],
+    include: ['react', 'react-dom', 'react-router-dom', 'lucide-react', 'qrcode.react'],
     exclude: ['pdfjs-dist']
   },
   server: {

@@ -4,7 +4,6 @@ import { posts } from '../data/posts';
 import SEO from '../components/SEO';
 import { Calendar, ArrowLeft, Share2, Clock, ArrowRight } from 'lucide-react';
 import { useAlert } from '../context/ConfirmContext';
-import { motion } from 'framer-motion';
 import AdSpace from '../components/AdSpace';
 import { SITE_URL } from '../config/app.config';
 
@@ -13,6 +12,7 @@ export default function BlogPost() {
     const { slug } = useParams();
 
     const post = useMemo(() => posts.find(p => p.slug === slug), [slug]);
+    const preferredImage = post?.imageWebp || post?.image;
     const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
     const headings = useMemo(() => {
         if (!post?.content) return [];
@@ -103,10 +103,10 @@ export default function BlogPost() {
             "@type": "HowTo",
             "name": post.title,
             "description": post.excerpt,
-            "image": post.image,
+            "image": preferredImage,
             "step": steps
         };
-    }, [post, headings]);
+    }, [post, headings, preferredImage]);
     const blogPostSchema = useMemo(() => {
         if (!post) return [];
         
@@ -117,7 +117,7 @@ export default function BlogPost() {
                 "@type": "BlogPosting",
                 "headline": post.title,
                 "description": post.excerpt,
-                "image": post.image ? (post.image.startsWith('http') ? post.image : `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}${post.image}`) : `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.webp`,
+                "image": preferredImage ? (preferredImage.startsWith('http') ? preferredImage : `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}${preferredImage}`) : `${import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'}/logo.webp`,
                 "author": {
                     "@type": "Person",
                     "name": post.author || "UTHAKKAN"
@@ -147,7 +147,7 @@ export default function BlogPost() {
         }
 
         return schemaList;
-    }, [post, faqEntities, howToSchema]);
+    }, [post, faqEntities, howToSchema, preferredImage]);
 
     if (!post) {
         return (
@@ -167,8 +167,8 @@ export default function BlogPost() {
                 keywords={Array.isArray(post.tags) ? post.tags.join(', ') : undefined}
                 path={`/blog/${post.slug}`}
                 type="article"
-                image={post.image}
-                screenshot={post.image}
+                image={preferredImage}
+                screenshot={preferredImage}
                 imageAlt={post.imageAlt}
                 schema={blogPostSchema}
                 articlePublishedTime={post.dateISO || post.date}
@@ -184,10 +184,8 @@ export default function BlogPost() {
                         <ArrowLeft size={18} /> Back to Insights
                     </Link>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
+                    <div
+                        style={{ opacity: 1 }}
                     >
                         <span style={{
                             display: 'inline-block',
@@ -244,17 +242,15 @@ export default function BlogPost() {
                                 <span>{humanizeDate(post.dateISO || post.date)}</span>
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
             {/* Article Content */}
             <section style={{ padding: '4rem 2rem 10rem' }}>
                 <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.3, duration: 0.8 }}
+                    <div
+                        style={{ opacity: 1 }}
                     >
                         {headings.length >= 4 && (
                             <div style={{ marginBottom: '2rem', padding: '1.25rem', background: 'var(--bg-secondary)', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
@@ -269,22 +265,26 @@ export default function BlogPost() {
                             </div>
                         )}
                         <AdSpace type="top" style={{ marginBottom: '3rem' }} />
-                        <img
-                            src={post.image}
-                            alt={post.imageAlt || post.title}
-                            width="1200"
-                            height="630"
-                            loading="lazy"
-                            style={{
-                                width: '100%',
-                                height: 'auto',
-                                maxHeight: '500px',
-                                objectFit: 'cover',
-                                borderRadius: '32px',
-                                marginBottom: '4rem',
-                                boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
-                            }}
-                        />
+                        <picture>
+                            {post.imageWebp ? <source srcSet={post.imageWebp} type="image/webp" /> : null}
+                            <img
+                                src={post.image}
+                                alt={post.imageAlt || post.title}
+                                width="1200"
+                                height="630"
+                                loading="lazy"
+                                style={{
+                                    width: '100%',
+                                    height: 'auto',
+                                    maxHeight: '500px',
+                                    objectFit: 'cover',
+                                    borderRadius: '32px',
+                                    marginBottom: '4rem',
+                                    boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
+                                }}
+                                onError={(e) => { e.target.src = '/og-image.webp'; }}
+                            />
+                        </picture>
 
                         <div
                             className="blog-content"
@@ -443,7 +443,7 @@ export default function BlogPost() {
                                 </Link>
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 

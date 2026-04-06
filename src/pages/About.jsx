@@ -1,10 +1,25 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
 import { SITE_URL } from '../config/app.config'
 import { Target, Eye, Rocket, Shield, Zap, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion'
 import uthakkanLogo from '../assets/uthakkan.webp';
+import LazyYouTubeEmbed from '../components/LazyYouTubeEmbed';
+
+const containerVariants = {
+    hidden: {},
+    visible: {
+        transition: {
+            staggerChildren: 0.08
+        }
+    }
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 8 },
+    visible: { opacity: 1, y: 0 }
+};
 
 export default function About() {
     const aboutSchema = [
@@ -42,25 +57,6 @@ export default function About() {
         }
     ];
 
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.15
-            }
-        }
-    };
-
-    const itemVariants = {
-        hidden: { y: 30, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: { duration: 0.6, ease: "easeOut" }
-        }
-    };
-
     return (
         <div className="page-container">
             <SEO
@@ -97,6 +93,7 @@ export default function About() {
                             width="200"
                             height="100"
                             style={{ height: '100px', width: 'auto', objectFit: 'contain' }} 
+                            onError={(e) => { e.target.src = 'https://ui-avatars.com/api/?name=Uthakkan&background=3b82f6&color=fff'; }}
                         />
                     </motion.div>
                     <h1 className="page-title">
@@ -159,53 +156,23 @@ export default function About() {
                         </motion.div>
                     </motion.div>
 
-                    <motion.section 
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        style={{
-                            marginTop: '8rem',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            textAlign: 'center'
-                        }}
-                    >
-                        <div className="status-badge" style={{ marginBottom: '1.5rem' }}>See the tools in action</div>
-                        <h2 style={{ fontSize: '2.5rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
-                            The PixTool <span style={{ color: 'var(--accent-blue)' }}>Experience</span>
-                        </h2>
-                        
-                        <div style={{
-                            position: 'relative',
-                            width: '100%',
-                            maxWidth: '400px',
-                            borderRadius: '32px',
-                            overflow: 'hidden',
-                            boxShadow: '0 20px 80px rgba(139, 92, 246, 0.15)',
-                            border: '1px solid rgba(255,255,255,0.05)',
-                            aspectRatio: '9/16',
-                            background: 'var(--bg-secondary)',
-                            marginTop: '2rem'
-                        }}>
-                            <iframe 
-                                width="100%" 
-                                height="100%" 
-                                src="https://www.youtube.com/embed/fzIhPN-gv_E?autoplay=0&mute=0&loop=1&playlist=fzIhPN-gv_E" 
-                                title="PixTool Experience" 
-                                frameBorder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerPolicy="strict-origin-when-cross-origin" 
-                                allowFullScreen
-                                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-                            ></iframe>
+                    <section style={{ marginTop: '8rem' }}>
+                        <div style={{ marginBottom: '4rem' }}>
+                            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1rem', letterSpacing: '-0.02em' }}>Platform <span style={{ color: 'var(--accent-primary)' }}>Architecture</span></h2>
+                            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '600px' }}>
+                                Watch our technical overview to understand how PixTool leverages WebAssembly and browser-native processing to keep your data 100% private.
+                            </p>
                         </div>
-                    </motion.section>
+                        <div style={{ position: 'relative', width: '100%', borderRadius: '40px', overflow: 'hidden', aspectRatio: '16/9', boxShadow: 'var(--shadow-premium)', border: '1px solid var(--border-color)' }}>
+                            <LazyYouTubeEmbed
+                                videoId="fzIhPN-gv_E"
+                                title="PixTool Technical Overview"
+                                rounded="40px"
+                            />
+                        </div>
+                    </section>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                    <div
                         style={{ marginTop: '8rem', padding: '5rem 3rem', background: 'var(--bg-secondary)', borderRadius: '48px', border: '1px solid var(--border-color)' }}
                     >
                         <div className="profile-flex">
@@ -218,6 +185,7 @@ export default function About() {
                                     height="200"
                                     loading="lazy"
                                     style={{ transform: 'rotate(2deg)', objectFit: 'cover' }} 
+                                    onError={(e) => { e.target.src = 'https://ui-avatars.com/api/?name=Ajmal+UK&background=3b82f6&color=fff'; }}
                                 />
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -232,12 +200,9 @@ export default function About() {
                                 </div>
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                    <div
                         className="page-cta"
                         style={{ marginTop: '8rem' }}
                     >
@@ -252,7 +217,7 @@ export default function About() {
                             <Link to="/image-tools" className="btn btn-primary" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>Image Studio</Link>
                             <Link to="/pdf-tools" className="btn btn-primary" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>PDF Expert</Link>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
         </div>

@@ -1,6 +1,5 @@
  
 import { useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { AlertCircle, X } from 'lucide-react';
 
 export default function ConfirmModal({ 
@@ -39,13 +38,10 @@ export default function ConfirmModal({
     return () => window.removeEventListener('keydown', handleEscape);
   }, [isOpen, onCancel]);
 
+  if (!isOpen) return null;
+
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+        <div
           style={{
             position: 'fixed',
             inset: 0,
@@ -59,11 +55,7 @@ export default function ConfirmModal({
           }}
           onClick={onCancel}
         >
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+          <div
             style={{
               background: 'var(--bg-primary)',
               width: '100%',
@@ -146,9 +138,7 @@ export default function ConfirmModal({
                 {confirmText}
               </button>
             </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          </div>
+        </div>
   );
 }

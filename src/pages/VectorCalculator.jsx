@@ -4,7 +4,6 @@ import {
 } from 'lucide-react'
 import { create, all } from 'mathjs'
  
-import { motion } from 'framer-motion'
 import SEO from '../components/SEO'
 import Breadcrumbs from '../components/Breadcrumbs'
 import AdSpace from '../components/AdSpace'
@@ -135,9 +134,7 @@ export default function VectorCalculator() {
 
                 {/* Results UI */}
                 {results && (
-                    <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                    <div 
                         style={{ marginTop: '3rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '2rem' }}
                     >
                         <div className="math-oled-display" style={{ padding: '2.5rem', borderRadius: '32px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -158,7 +155,7 @@ export default function VectorCalculator() {
                                 <div style={{ fontWeight: 900, fontSize: '1.4rem', color: 'var(--text-primary)', fontFamily: 'monospace' }}>{results.mag2}</div>
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
                 )}
             </div>
 

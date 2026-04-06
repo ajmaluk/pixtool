@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
 import { 
   Equal, Zap, Info, Search, 
   Settings, Download, Trash, Activity
@@ -111,30 +110,25 @@ export default function EquationSolver() {
                         <div style={{ color: 'var(--accent-red)', marginTop: '2rem', textAlign: 'center', fontWeight: 800, padding: '1rem', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '12px', border: '1px solid rgba(239, 68, 68, 0.3)' }}>{result.error}</div>
                     )}
 
-                    <AnimatePresence>
-                        {result && (
-                            <motion.div 
-                                initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                                animate={{ opacity: 1, y: 0, scale: 1 }}
-                                exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                                style={{ 
-                                    marginTop: '3rem', 
-                                    padding: '2.5rem', 
-                                    background: 'var(--bg-secondary)', 
-                                    borderRadius: '24px',
-                                    border: '1px solid var(--border-color)',
-                                    boxShadow: 'inset 0 4px 20px rgba(0, 0, 0, 0.05)',
-                                    textAlign: 'center'
-                                }}
-                            >
-                                <div style={{ fontWeight: 900, fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Simplified Form</div>
-                                <div className="math-text-glow" style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '2.5rem', fontFamily: 'monospace', color: 'var(--text-primary)' }}>{result.simplified} = 0</div>
-                                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem', color: 'var(--accent-blue)', fontWeight: 800, padding: '0.75rem 1.5rem', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '100px', fontSize: '0.85rem' }}>
-                                    <Activity size={16} /> Instant Logic Active
-                                </div>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                    {result && (
+                        <div 
+                            style={{ 
+                                marginTop: '3rem', 
+                                padding: '2.5rem', 
+                                background: 'var(--bg-secondary)', 
+                                borderRadius: '24px',
+                                border: '1px solid var(--border-color)',
+                                boxShadow: 'inset 0 4px 20px rgba(0, 0, 0, 0.05)',
+                                textAlign: 'center'
+                            }}
+                        >
+                            <div style={{ fontWeight: 900, fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Simplified Form</div>
+                            <div className="math-text-glow" style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '2.5rem', fontFamily: 'monospace', color: 'var(--text-primary)' }}>{result.simplified} = 0</div>
+                            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem', color: 'var(--accent-blue)', fontWeight: 800, padding: '0.75rem 1.5rem', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '100px', fontSize: '0.85rem' }}>
+                                <Activity size={16} /> Instant Logic Active
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
 

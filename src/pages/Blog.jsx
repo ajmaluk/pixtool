@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { posts } from '../data/posts';
 import { PenTool, Calendar, ArrowRight, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
 import AdSpace from '../components/AdSpace';
 import { SITE_URL } from '../config/app.config';
@@ -48,16 +47,12 @@ export default function Blog() {
         } catch (e) { void e; return d; }
     };
 
-    const BlogCard = ({ post, index, humanizeDate }) => {
+    const BlogCard = ({ post, humanizeDate }) => {
         const [showMoreTags, setShowMoreTags] = useState(false);
         const tags = post.tags || [];
 
         return (
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-            >
+            <div className="blog-card-animated">
                 <div style={{ position: 'relative', height: '100%' }}>
                     <Link
                         to={`/blog/${post.slug}`}
@@ -77,15 +72,19 @@ export default function Blog() {
                         }}
                     >
                         <div style={{ height: '200px', overflow: 'hidden', position: 'relative' }}>
-                            <img
-                                src={post.image}
-                                alt={post.imageAlt || post.title}
-                                width="400"
-                                height="200"
-                                loading="lazy"
-                                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
-                                className="blog-image"
-                            />
+                            <picture>
+                                {post.imageWebp ? <source srcSet={post.imageWebp} type="image/webp" /> : null}
+                                <img
+                                    src={post.image}
+                                    alt={post.imageAlt || post.title}
+                                    width="400"
+                                    height="200"
+                                    loading="lazy"
+                                    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
+                                    className="blog-image"
+                                    onError={(e) => { e.target.src = '/og-image.webp'; }}
+                                />
+                            </picture>
                             <div style={{ position: 'absolute', top: '1rem', left: '1rem' }}>
                                 <span className="blog-card-category" style={{
                                     background: '#ffffff',
@@ -197,7 +196,7 @@ export default function Blog() {
                         </div>
                     </Link>
                 </div>
-            </motion.div>
+            </div>
         );
     };
 
@@ -213,10 +212,8 @@ export default function Blog() {
 
             <section className="hero" style={{ padding: 'clamp(5rem, 15vh, 8rem) 1.5rem 5rem', background: 'var(--bg-secondary)', marginBottom: '4rem' }}>
                 <div style={{ maxWidth: '100%', margin: '0 auto', textAlign: 'center' }}>
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5 }}
+                    <div
+                        style={{ opacity: 1 }}
                     >
                         <div className="status-badge" style={{ margin: '0 auto 1.5rem', width: 'fit-content', background: 'var(--accent-glow)', color: 'var(--accent-primary)', fontWeight: 700 }}>
                             INSIGHTS & UPDATES
@@ -225,7 +222,7 @@ export default function Blog() {
                         <p className="hero-subtitle" style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
                             Exploring technology, creativity, and the tools that power the modern digital workflow.
                         </p>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 

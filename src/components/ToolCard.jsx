@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom'
  
-import { motion } from 'framer-motion'
-
 import { ArrowUpRight } from 'lucide-react'
 
 export default function ToolCard({ tool }) {
@@ -9,10 +7,7 @@ export default function ToolCard({ tool }) {
   const category = tool.category || tool.path?.split('/')[1]?.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') || 'General'
 
   return (
-    <motion.div
-      whileHover={{ y: -8, scale: 1.01, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }}
-      style={{ height: '100%' }}
-    >
+    <div className="tool-card-container">
       <Link
         to={tool.path}
         className="tool-card-premium"
@@ -27,7 +22,7 @@ export default function ToolCard({ tool }) {
               color: tool.color || 'var(--accent-primary)'
             }}
           >
-            <tool.icon size={24} strokeWidth={2.5} />
+            {tool.icon && <tool.icon size={24} strokeWidth={2.5} />}
           </div>
           <div className="tool-card-arrow">
             <ArrowUpRight size={20} />
@@ -39,11 +34,7 @@ export default function ToolCard({ tool }) {
           <h3 className="tool-card-title">{tool.title}</h3>
           <p className="tool-card-description">{tool.description}</p>
         </div>
-
-        <div className="tool-card-footer">
-          {tool.typeLabel && <div className="tool-tag type-tag">{tool.typeLabel}</div>}
-        </div>
       </Link>
-    </motion.div>
+    </div>
   )
 }

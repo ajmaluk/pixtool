@@ -1,7 +1,5 @@
 import { useState } from 'react'
 import { Share2, Check, Copy, Twitter, Linkedin, Facebook, X } from 'lucide-react'
- 
-import { AnimatePresence, motion } from 'framer-motion'
 
 export default function ShareTool({ title, url = window.location.href }) {
     const [showMenu, setShowMenu] = useState(false)
@@ -57,38 +55,33 @@ export default function ShareTool({ title, url = window.location.href }) {
             </button>
 
             {/* Share Menu Popup */}
-            <AnimatePresence>
-                {showMenu && (
-                    <>
-                        <div
-                            style={{
-                                position: 'fixed',
-                                inset: 0,
-                                zIndex: 950,
-                            }}
-                            onClick={() => setShowMenu(false)}
-                        />
-                        <motion.div
-                            initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: 20, scale: 0.9 }}
-                            transition={{ duration: 0.2, ease: 'easeOut' }}
-                            style={{
-                                position: 'fixed',
-                                bottom: '5.5rem',
-                                right: '2rem',
-                                width: '240px',
-                                background: 'var(--bg-card)',
-                                border: '1px solid var(--border-color)',
-                                borderRadius: '20px',
-                                padding: '1rem',
-                                boxShadow: 'var(--shadow-lg)',
-                                zIndex: 1000,
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: '0.5rem'
-                            }}
-                        >
+            {showMenu && (
+                <>
+                    <div
+                        style={{
+                            position: 'fixed',
+                            inset: 0,
+                            zIndex: 950,
+                        }}
+                        onClick={() => setShowMenu(false)}
+                    />
+                    <div
+                        style={{
+                            position: 'fixed',
+                            bottom: '5.5rem',
+                            right: '2rem',
+                            width: '240px',
+                            background: 'var(--bg-card)',
+                            border: '1px solid var(--border-color)',
+                            borderRadius: '20px',
+                            padding: '1rem',
+                            boxShadow: 'var(--shadow-lg)',
+                            zIndex: 1000,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '0.5rem'
+                        }}
+                    >
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 0.5rem 0.5rem' }}>
                                 <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                                     Spread the word
@@ -152,10 +145,9 @@ export default function ShareTool({ title, url = window.location.href }) {
                                     <span style={{ fontWeight: 600 }}>Share on {option.name}</span>
                                 </a>
                             ))}
-                        </motion.div>
+                        </div>
                     </>
                 )}
-            </AnimatePresence>
 
             <style dangerouslySetInnerHTML={{
                 __html: `

@@ -37,7 +37,7 @@ ${text}`
       <div className="chat-workspace" style={{ marginBottom: '1.5rem' }}>
         {/* Intelligence Forge */}
         <div style={{ marginBottom: '3.5rem' }}>
-          <label htmlFor="ai-chat-prompt" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+          <label htmlFor="ai-chat-prompt" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
             Thought Input Forge
           </label>
           <div style={{ position: 'relative' }}>
@@ -45,12 +45,12 @@ ${text}`
                 id="ai-chat-prompt"
                 name="prompt"
                 className="dalam-textarea"
-                style={{ width: '100%', minHeight: '300px', padding: '2.5rem', fontSize: '1.25rem', background: '#fdfdfd', borderRadius: '32px', border: '1px solid #f4f4f5', outline: 'none', color: '#1a1a1a', lineHeight: 1.7, transition: 'all 0.3s ease' }}
+                style={{ width: '100%', minHeight: '300px', padding: '2.5rem', fontSize: '1.25rem', background: 'var(--bg-card)', borderRadius: '32px', border: '1px solid var(--border-color)', outline: 'none', color: 'var(--text-primary)', lineHeight: 1.7, transition: 'all 0.3s ease' }}
                 placeholder="Submit your query to the Deep Mind core..."
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
             />
-            <div style={{ position: 'absolute', bottom: '2rem', right: '2rem', color: '#d4d4d8' }}>
+            <div style={{ position: 'absolute', bottom: '2rem', right: '2rem', color: 'var(--text-muted)' }}>
                 <Mic size={24} strokeWidth={1.5} style={{ cursor: 'pointer' }} />
             </div>
           </div>
@@ -58,7 +58,7 @@ ${text}`
 
         {/* Suggestion Clusters */}
         <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
             Heuristic Starters
           </label>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
@@ -69,8 +69,8 @@ ${text}`
                 style={{ 
                   padding: '1.75rem', 
                   borderRadius: '28px', 
-                  border: '1px solid #f4f4f5', 
-                  background: '#fafafa',
+                  border: '1px solid var(--border-color)', 
+                  background: 'var(--bg-secondary)',
                   textAlign: 'left',
                   cursor: 'pointer',
                   transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -79,28 +79,28 @@ ${text}`
                   alignItems: 'flex-start'
                 }}
                 onMouseEnter={(e) => {
-                    e.currentTarget.style.background = '#fff';
-                    e.currentTarget.style.borderColor = '#8b5cf6';
-                    e.currentTarget.style.boxShadow = '0 10px 30px rgba(139, 92, 246, 0.05)';
+                    e.currentTarget.style.background = 'var(--bg-card)';
+                    e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-premium)';
                 }}
                 onMouseLeave={(e) => {
-                    e.currentTarget.style.background = '#fafafa';
-                    e.currentTarget.style.borderColor = '#f4f4f5';
+                    e.currentTarget.style.background = 'var(--bg-secondary)';
+                    e.currentTarget.style.borderColor = 'var(--border-color)';
                     e.currentTarget.style.boxShadow = 'none';
                 }}
               >
-                <div style={{ color: '#8b5cf6', marginTop: '0.2rem' }}>
+                <div style={{ color: 'var(--accent-primary)', marginTop: '0.2rem' }}>
                   <s.icon size={22} strokeWidth={1.5} />
                 </div>
-                <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#3f3f46', lineHeight: 1.5 }}>{s.text}</div>
+                <div style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-primary)', lineHeight: 1.5 }}>{s.text}</div>
               </button>
             ))}
           </div>
         </div>
 
-        <div style={{ marginTop: '3.5rem', padding: '2rem', background: 'linear-gradient(135deg, #fafafa 0%, #fdfdfd 100%)', borderRadius: '32px', border: '1px solid #f4f4f5', display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-            <div style={{ color: '#8b5cf6' }}><Zap size={28} strokeWidth={1.5} /></div>
-            <div style={{ fontSize: '1rem', color: '#71717a', lineHeight: 1.6 }}>
+        <div style={{ marginTop: '3.5rem', padding: '2rem', background: 'var(--bg-glass)', borderRadius: '32px', border: '1px solid var(--border-color)', display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+            <div style={{ color: 'var(--accent-primary)' }}><Zap size={28} strokeWidth={1.5} /></div>
+            <div style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
                 Deep Mind leverages multi-model synthesis to deliver high-authority intelligence for every interaction.
             </div>
         </div>

@@ -10,8 +10,8 @@ const __dirname = path.dirname(__filename);
 const SITE_URL = process.env.VITE_SITE_URL || 'https://www.pixtool.in';
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 const SITEMAP_PATH = path.join(PUBLIC_DIR, 'sitemap.xml');
-const DEFAULT_SITEMAP_IMAGE = '/screenshots/pixtool-all-in-one-productivity-suite.png';
-const IMAGE_EXTENSIONS = ['.png', '.webp', '.jpg', '.jpeg'];
+const DEFAULT_SITEMAP_IMAGE = '/screenshots/pixtool-all-in-one-productivity-suite.webp';
+const IMAGE_EXTENSIONS = ['.webp', '.png', '.jpg', '.jpeg'];
 
 const lastmod = new Date().toISOString().split('T')[0];
 const escapeXml = (unsafe) => {
@@ -34,6 +34,14 @@ const resolveImagePath = (rawPath, { allowDefault = true } = {}) => {
   }
 
   const normalized = rawPath.startsWith('/') ? rawPath : `/${rawPath}`;
+
+  const normalizedExt = path.extname(normalized);
+  if (normalizedExt) {
+    const preferredWebp = `${normalized.slice(0, -normalizedExt.length)}.webp`;
+    const preferredWebpFsPath = path.join(PUBLIC_DIR, preferredWebp.replace(/^\//, ''));
+    if (fs.existsSync(preferredWebpFsPath)) return preferredWebp;
+  }
+
   const directFsPath = path.join(PUBLIC_DIR, normalized.replace(/^\//, ''));
   if (fs.existsSync(directFsPath)) return normalized;
 
@@ -99,12 +107,12 @@ function generateSitemap() {
 
 
   // Main Hubs
-  addUrl('/image-tools', '0.9', 'weekly', '/screenshots/professional-online-image-studio.png', 'PixTool Image Studio Hub');
-  addUrl('/pdf-tools', '0.9', 'weekly', '/screenshots/secure-pdf-management-suite.png', 'PixTool PDF Expert Suite');
-  addUrl('/utility-tools', '0.9', 'weekly', '/screenshots/utility-tools-hub.png', 'PixTool Utility Suite');
-  addUrl('/ai-tools', '0.9', 'weekly', '/screenshots/home.png', 'PixTool AI Tools Hub');
-  addUrl('/math-tools', '0.9', 'weekly', '/screenshots/pixtool-all-in-one-productivity-suite.png', 'PixTool Math & Scientific Hub');
-  addUrl('/productivity-tools', '0.9', 'weekly', '/screenshots/pixtool-all-in-one-productivity-suite.png', 'PixTool Productivity Suite Hub');
+  addUrl('/image-tools', '0.9', 'weekly', '/screenshots/professional-online-image-studio.webp', 'PixTool Image Studio Hub');
+  addUrl('/pdf-tools', '0.9', 'weekly', '/screenshots/secure-pdf-management-suite.webp', 'PixTool PDF Expert Suite');
+  addUrl('/utility-tools', '0.9', 'weekly', '/screenshots/utility-tools-hub.webp', 'PixTool Utility Suite');
+  addUrl('/ai-tools', '0.9', 'weekly', '/screenshots/home.webp', 'PixTool AI Tools Hub');
+  addUrl('/math-tools', '0.9', 'weekly', '/screenshots/pixtool-all-in-one-productivity-suite.webp', 'PixTool Math & Scientific Hub');
+  addUrl('/productivity-tools', '0.9', 'weekly', '/screenshots/pixtool-all-in-one-productivity-suite.webp', 'PixTool Productivity Suite Hub');
 
   // MATH Tools
   MATH_TOOLS.forEach(tool => {
@@ -139,7 +147,7 @@ function generateSitemap() {
 
   // Blog Posts
   posts.forEach(post => {
-    addUrl(`/blog/${post.slug}`, '0.7', 'monthly', post.image, post.title);
+    addUrl(`/blog/${post.slug}`, '0.7', 'monthly', post.imageWebp || post.image, post.title, post.excerpt);
   });
 
   // Company & Legal & Others

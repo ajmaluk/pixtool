@@ -130,14 +130,17 @@ async function prerender() {
       process.exit(0); // Exit successfully so build doesn't fail
     }
 
-    const page = await browser.newPage();
+    const failedRoutes = [];
 
     for (const route of routes) {
       const url = `http://localhost:${PORT}${route}`;
       console.log(`🧶 Prerendering: ${route}`);
+      let page;
 
       try {
-        await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
+        page = await browser.newPage();
+        await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+        await page.waitForSelector('#root', { timeout: 10000 });
         
         // Wait for React to execute and SEO meta tags to be injected
         await new Promise(r => setTimeout(r, 2000));
@@ -154,12 +157,28 @@ async function prerender() {
         fs.writeFileSync(outputPath, content);
         console.log(`✅ Saved: ${outputPath}`);
       } catch (err) {
+        failedRoutes.push(route);
         console.error(`❌ Failed route ${route}:`, err.message);
+      } finally {
+        if (page) {
+          try {
+            await page.close();
+          } catch {
+            // Ignore page-close errors to keep prerender progressing.
+          }
+        }
       }
     }
 
     await browser.close();
     server.close();
+
+    if (failedRoutes.length > 0) {
+      console.error(`❌ Prerendering finished with ${failedRoutes.length} failed routes.`);
+      console.error(`Failed routes: ${failedRoutes.join(', ')}`);
+      process.exit(1);
+    }
+
     console.log('✨ Prerendering complete!');
     process.exit(0);
   });

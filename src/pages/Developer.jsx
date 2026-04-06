@@ -37,7 +37,7 @@ export default function Developer() {
             <section className="page-hero">
                 <div className="page-hero-content container-wide">
                     <div className="profile-flex" style={{ justifyContent: 'center' }}>
-                        <div className="profile-image-wrapper">
+                        <div className="profile-image-wrapper" style={{ position: 'relative' }}>
                             <img
                                 src={profileImg}
                                 alt="Muhammed Ajmal U K - Lead Developer"
@@ -48,7 +48,7 @@ export default function Developer() {
                                 style={{ borderRadius: '50%' }}
                                 onError={(e) => { e.target.src = 'https://ui-avatars.com/api/?name=Ajmal+UK&background=3b82f6&color=fff'; }}
                             />
-                            <div style={{ position: 'absolute', bottom: '20px', right: '20px', background: 'var(--accent-primary)', color: 'white', width: '40px', height: '40px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 'var(--shadow-premium)' }}>
+                            <div style={{ position: 'absolute', bottom: '20px', right: '20px', background: 'var(--accent-primary)', color: 'white', width: '40px', height: '40px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 'var(--shadow-premium)' }} aria-hidden="true">
                                 <Code size={20} />
                             </div>
                         </div>

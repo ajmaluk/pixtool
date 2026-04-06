@@ -95,8 +95,8 @@ export default function QrScanner() {
     <>
       <SEO
         title="📱 Free Online QR Code Scanner [2026] - Scan Camera or Image Instantly | PixTool"
-        description="🚀 Fastest browser QR scanner. Scan from phone camera or upload image. Decode URLs, WiFi, vCards, email instantly. No app needed. 100% private—local processing only. Mobile & desktop."
-        keywords="online qr scanner, scan qr code online, qr code reader, scan qr from image, browser qr scanner, free qr scanner no app, qr code decoder online, fast qr scanner, qr scanner online camera, mobile qr code scanner, qr reader free, instant qr scanner"
+        description="🚀 Fastest browser QR scanner. Scan from phone camera or upload image/photo. Decode URLs, WiFi, vCards, email instantly. No app needed. 100% private—local processing only. Mobile & desktop."
+        keywords="online qr scanner, scan qr code online, qr code reader, scan qr from image, scan qr code from photo, qr reader from image, browser qr scanner, free qr scanner no app, qr code decoder online, fast qr scanner, qr scanner online camera, mobile qr code scanner, qr reader free, instant qr scanner, upload qr code scanner, image scanner online"
         path="/qr-scanner"
         toolName="QR Scanner"
         toolSteps={[
@@ -105,7 +105,7 @@ export default function QrScanner() {
           "Point your lens at any QR code and wait for instant decoding.",
           "Copy the result to clipboard or open the link directly in one click."
         ]}
-        screenshot="/screenshots/fast-online-qr-code-scanner-browser.png"
+        screenshot="/screenshots/fast-online-qr-code-scanner-browser.webp"
         imageAlt="PixTool QR Scanner - Instant browser-based QR decoding interface"
         imageTitle="Scan QR Codes Online Free"
         breadcrumbs={[
@@ -267,7 +267,7 @@ export default function QrScanner() {
                   { name: 'PDF Tools', path: '/pdf-tools' }
                 ]}
                 readNext={UTILITY_READ_NEXT['qr-scanner']}
-                alternativeTo={["Scan.me", "Zxing", "WebQR", "QR Code Reader"]}
+                alternativeTo={["Scan.me", "Zxing", "WebQR", "QR Code Reader", "Online QR Scanner"]}
               />
             </div>
           </div>

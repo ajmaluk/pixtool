@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { 
-  Plus, Trash2, CheckCircle, Circle, AlertCircle, 
-  Clock, Tag, Filter, ChevronDown, Check, X,
+  Plus, Trash2, CheckCircle, Circle, Tag,
   Briefcase, User, GraduationCap, Zap
 } from 'lucide-react'
 import Breadcrumbs from '../components/Breadcrumbs'
@@ -224,15 +222,10 @@ export default function Todo() {
 
             {/* Task List */}
             <div style={{ display: 'grid', gap: '0.75rem' }}>
-              <AnimatePresence initial={false} mode="popLayout">
                 {filteredTasks.length > 0 ? (
                   filteredTasks.map(task => (
-                    <motion.div
+                    <div
                       key={task.id}
-                      layout
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
                       className={`todo-item ${task.completed ? 'completed' : ''}`}
                       style={{
                         background: 'var(--bg-card)',
@@ -295,20 +288,15 @@ export default function Todo() {
                       >
                         <Trash2 size={18} />
                       </button>
-                    </motion.div>
+                    </div>
                   ))
                 ) : (
-                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    style={{ textAlign: 'center', padding: '4rem 2rem', color: 'var(--text-muted)' }}
-                  >
+                  <div style={{ textAlign: 'center', padding: '4rem 2rem', color: 'var(--text-muted)' }}>
                     <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎉</div>
                     <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>All Caught Up!</h3>
                     <p style={{ fontSize: '0.9rem' }}>No tasks found in this category. Time to relax or add a new goal.</p>
-                  </motion.div>
+                  </div>
                 )}
-              </AnimatePresence>
             </div>
           </div>
 

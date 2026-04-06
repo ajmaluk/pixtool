@@ -1,6 +1,4 @@
- 
 import { useState, useRef, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { MessageSquare, X, Send, Webhook } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { fetchTextResponse } from '../services/aiApi'
@@ -122,13 +120,8 @@ User: ${input}
     <>
       {/* Floating Action Button */}
       <div className="pix-ai-fab-container" style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 9999 }}>
-        <AnimatePresence>
           {isOpen && (
-            <motion.div 
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 20, scale: 0.95 }}
-              transition={{ duration: 0.2 }}
+            <div 
               className="pix-ai-window"
             >
               {/* Header */}
@@ -189,19 +182,16 @@ User: ${input}
                   <Send size={18} />
                 </button>
               </div>
-            </motion.div>
+            </div>
           )}
-        </AnimatePresence>
 
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        <button
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "Close Pix AI Chat" : "Open Pix AI Chat"}
           className="pix-ai-fab"
         >
           {isOpen ? <X size={28} /> : <MessageSquare size={28} />}
-        </motion.button>
+        </button>
       </div>
     </>
   )

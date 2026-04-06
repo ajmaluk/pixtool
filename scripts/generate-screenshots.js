@@ -52,7 +52,7 @@ async function generateScreenshots() {
 
   for (const tool of tools) {
     const url = `${BASE_URL}${tool.path}`;
-    const filePath = path.join(SCREENSHOT_DIR, `${tool.slug}.png`);
+    const filePath = path.join(SCREENSHOT_DIR, `${tool.slug}.webp`);
 
     try {
       console.log(`📸 Capturing: ${tool.slug} (${url})`);
@@ -61,11 +61,11 @@ async function generateScreenshots() {
       // Wait a bit for animations
       await new Promise(r => setTimeout(r, 1000));
       
-      await page.screenshot({ path: filePath });
+      await page.screenshot({ path: filePath, type: 'webp', quality: 80 });
       
-      // Special case for home page to also save as og-image.png
+      // Special case for home page to also save as og-image.webp
       if (tool.slug === 'home') {
-        fs.copyFileSync(filePath, path.join(process.cwd(), 'public', 'og-image.png'));
+        fs.copyFileSync(filePath, path.join(process.cwd(), 'public', 'og-image.webp'));
       }
     } catch (err) {
       console.error(`❌ Failed to capture ${tool.slug}:`, err.message);

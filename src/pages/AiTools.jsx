@@ -11,8 +11,9 @@ export default function AiTools() {
     return (
         <>
             <SEO 
-                title="Premium AI Productivity Suite - Specialized Intelligence | PixTool"
-                description="Access a world-class suite of 14 specialized AI tools. From Deep Mind reasoning to Narrative Forge storytelling, engineered for performance."
+                title="Premium Free AI Productivity Suite - Specialized Intelligence | PixTool"
+                description="🚀 Access 14+ specialized free AI tools: writing, coding, marketing, and storytelling. Powered by high-authority reasoning and privacy-first processing. No account needed."
+                keywords="free ai tools, ai productivity suite, ai writing assistant, ai content generator, toolpix ai, ai resume generator, ai coding assistant, best free ai tools 2026, privacy-first ai, ai tools online, no signup ai tools"
                 path="/ai-tools"
                 breadcrumbs={[
                     { name: 'AI Tools', item: '/ai-tools' }

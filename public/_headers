@@ -1,28 +1,28 @@
-# Cloudflare Pages response headers
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: unsafe-none
+  Cross-Origin-Resource-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com https://www.google-analytics.com https://ssl.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://i.ytimg.com https://www.google-analytics.com https://ui-avatars.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com; connect-src 'self' https://www.google-analytics.com https://api.pixtool.in; upgrade-insecure-requests;
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
 
-# Admin routes: noindex + strict no-store and security headers.
 /pix-admin
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
   Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
   X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: geolocation=(), microphone=(), camera=()
 
 /pix-admin/*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
   Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
   X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: geolocation=(), microphone=(), camera=()
 
-# Static hashed bundles.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
-  X-Content-Type-Options: nosniff
 
-# Images.
 /*.jpg
   Cache-Control: public, max-age=31536000, immutable
 /*.jpeg
@@ -36,7 +36,6 @@
 /*.ico
   Cache-Control: public, max-age=31536000, immutable
 
-# Fonts.
 /*.woff
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
@@ -44,33 +43,25 @@
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
 
-# JS/CSS.
 /*.js
   Cache-Control: public, max-age=31536000, immutable
-  X-Content-Type-Options: nosniff
 /*.css
   Cache-Control: public, max-age=31536000, immutable
-  X-Content-Type-Options: nosniff
 
-# HTML.
 /*.html
   Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
-  X-Content-Type-Options: nosniff
-  X-Frame-Options: SAMEORIGIN
 
-# Root HTML.
 /
   Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
-  X-Content-Type-Options: nosniff
-  X-Frame-Options: SAMEORIGIN
 
-# Security and crawler files.
 /.well-known/security.txt
   Cache-Control: public, max-age=86400
   Content-Type: text/plain
+
 /sitemap.xml
   Cache-Control: public, max-age=3600
   Content-Type: application/xml
+
 /robots.txt
   Cache-Control: public, max-age=3600
   Content-Type: text/plain
