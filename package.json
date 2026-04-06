@@ -20,13 +20,12 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "screenshots": "node scripts/generate-screenshots.js",
-    "postbuild": "[ -z \"$SKIP_PRERENDER\" ] && [ -z \"$CF_PAGES\" ] && [ -z \"$NETLIFY\" ] && node scripts/prerender.js || echo \"Skipping prerender (CI/Environment check)\""
+    "postbuild": "if [ -n \"$SKIP_PRERENDER\" ] || [ -n \"$CF_PAGES\" ] || [ -n \"$NETLIFY\" ]; then echo \"Skipping prerender (CI/Environment check)\"; else node scripts/prerender.js; fi"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.99.3",
-    "framer-motion": "^12.34.3",
     "html5-qrcode": "^2.3.8",
-    "lucide-react": "^0.575.0",
+    "lucide-react": "0.574.0",
     "mathjs": "^15.1.1",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^5.4.624",
@@ -35,7 +34,7 @@
     "react-dom": "^19.2.0",
     "react-image-crop": "^11.0.10",
     "react-router-dom": "^7.13.0",
-    "recharts": "^3.8.1",
+    "recharts": "3.7.0",
     "tesseract.js": "^7.0.0"
   },
   "devDependencies": {
@@ -44,11 +43,12 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
     "dotenv": "^17.3.1",
-    "eslint": "^9.39.1",
+    "eslint": "9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "puppeteer": "^24.40.0",
+    "sharp": "^0.34.5",
     "terser": "^5.46.1",
     "vite": "^7.3.1"
   }
