@@ -377,9 +377,35 @@ const MainLayout = () => {
   )
 }
 
+// Component to normalize URLs (lowercase and no trailing slashes) for SEO consistency
+const URLNormalizer = () => {
+  const location = useLocation()
+  const pathname = location.pathname
+  const search = location.search
+  const hash = location.hash
+
+  // 1. Handle trailing slashes (except for home page)
+  if (pathname !== '/' && pathname.endsWith('/')) {
+    const normalizedPath = pathname.slice(0, -1)
+    return <Navigate to={normalizedPath + search + hash} replace />
+  }
+
+  // 2. Handle uppercase characters in URLs
+  if (/[A-Z]/.test(pathname)) {
+    const normalizedPath = pathname.toLowerCase()
+    // Avoid infinite loop if somehow it keeps matching (shouldn't happen with Navigate replace)
+    if (normalizedPath !== pathname) {
+      return <Navigate to={normalizedPath + search + hash} replace />
+    }
+  }
+
+  return null
+}
+
 function App() {
   return (
     <ConfirmProvider>
+      <URLNormalizer />
       <Routes>
         {/* All standard pages wrapped in MainLayout */}
         <Route element={<MainLayout />}>
