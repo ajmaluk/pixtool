@@ -699,16 +699,21 @@ export default function SEO({
             })
         }
 
-        // AggregateOffer schema for tool listing pages
+        // SoftwareApplication schema for tool category collections (Fix for Merchant/Review Snippet errors)
         if (routeDefaults.section && path === routeDefaults.section.path) {
-            const aggregateOfferSchema = {
+            const hubSoftwareSchema = {
                 "@context": "https://schema.org",
-                "@type": "AggregateOffer",
-                "@id": `${fullUrl}/#aggregate-offer`,
-                "name": `${brandTitle} Collection`,
+                "@type": "SoftwareApplication",
+                "@id": `${fullUrl}/#software-suite`,
+                "name": `${brandTitle} Suite`,
                 "description": resolvedDescription,
+                "applicationCategory": path.includes('/pdf') ? "BusinessApplication" : "UtilitiesApplication",
+                "operatingSystem": "All (Web-based Browser Studio)",
+                "url": fullUrl,
                 "image": ogImage,
-                "offer": {
+                "isAccessibleForFree": true,
+                "author": { "@id": `${siteUrl}/#organization` },
+                "offers": {
                     "@type": "Offer",
                     "price": "0",
                     "priceCurrency": "USD",
@@ -718,7 +723,7 @@ export default function SEO({
             }
 
             if (liveRatings.overall) {
-                aggregateOfferSchema.aggregateRating = {
+                hubSoftwareSchema.aggregateRating = {
                     "@type": "AggregateRating",
                     "ratingValue": Number(Number(liveRatings.overall.avgRating || 0).toFixed(1)),
                     "bestRating": 5,
@@ -727,7 +732,7 @@ export default function SEO({
                 }
             }
 
-            globalSchemas.push(aggregateOfferSchema)
+            globalSchemas.push(hubSoftwareSchema)
         }
 
         // Combine into schemasToInject
@@ -908,8 +913,8 @@ export default function SEO({
             issues.push('Tool page is missing WebApplication schema.')
         }
 
-        if (routeDefaults.section && path === routeDefaults.section.path && !schemasToRender.some(item => item?.['@type'] === 'AggregateOffer')) {
-            issues.push('Hub page is missing AggregateOffer schema.')
+        if (routeDefaults.section && path === routeDefaults.section.path && !schemasToRender.some(item => item?.['@type'] === 'SoftwareApplication')) {
+            issues.push('Hub page is missing SoftwareApplication suite schema.')
         }
 
         if (faqs && Array.isArray(faqs) && faqs.length > 0 && !schemasToRender.some(item => item?.['@type'] === 'FAQPage')) {
