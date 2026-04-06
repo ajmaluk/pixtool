@@ -1,20 +1,42 @@
-export default function AdSpace({ type, className = "", style = {} }) {
+import { useEffect, useRef } from 'react';
+
+const AD_CLIENT = 'ca-pub-1506704627672992';
+const AD_SLOTS = {
+    top: '8821351882',
+    bottom: '8821351882',
+    side: '6362709508'
+};
+
+export default function AdSpace({ type, className = '', style = {} }) {
     const showAds = true;
-    
-    // Define heights for CLS mitigation
+    const adRef = useRef(null);
+
+    useEffect(() => {
+        if (!showAds || !adRef.current || !AD_SLOTS[type]) return;
+
+        // Avoid duplicate pushes when React re-renders or in StrictMode dev re-mounts.
+        if (adRef.current.getAttribute('data-adsbygoogle-status')) return;
+
+        try {
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (_error) {
+            // Ignore push errors and allow AdSense script to retry on next mount.
+        }
+    }, [type, showAds]);
+
+    if (!showAds || !AD_SLOTS[type]) return null;
+
     const heights = {
         top: '90px',
         bottom: '90px',
         side: '600px'
     };
 
-    if (!showAds) return null;
-
     const styles = {
-        top: "ad-region-top",
-        bottom: "ad-region-bottom",
-        side: "ad-region-side"
-    }
+        top: 'ad-region-top',
+        bottom: 'ad-region-bottom',
+        side: 'ad-region-side'
+    };
 
     const adMargins = {
         top: '2.5rem auto',
@@ -23,38 +45,25 @@ export default function AdSpace({ type, className = "", style = {} }) {
     };
 
     return (
-        <div 
-            className={`${styles[type]} ${className}`} 
-            style={{ 
+        <div
+            className={`${styles[type]} ${className}`}
+            style={{
                 minHeight: heights[type],
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                background: 'rgba(255,255,255,0.02)',
-                borderRadius: '16px',
-                border: '1px dashed var(--border-color)',
+                width: '100%',
+                maxWidth: type === 'side' ? '300px' : '100%',
                 margin: adMargins[type] || '2rem auto',
-                padding: '2rem',
-                ...style 
+                ...style
             }}
         >
-            <span className="ad-label" style={{ 
-                fontSize: '0.7rem', 
-                fontWeight: 900, 
-                textTransform: 'uppercase', 
-                opacity: 0.82, 
-                letterSpacing: '0.2em',
-                marginBottom: '1rem',
-                color: 'var(--text-secondary)'
-            }}>
-                ADVERTISEMENT
-            </span>
-            <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', opacity: 0.82 }}>
-                {type === 'top' && '730x92 Banner'}
-                {type === 'bottom' && '730x92 Banner'}
-                {type === 'side' && '162x602 Skyscraper'}
-            </div>
+            <ins
+                ref={adRef}
+                className="adsbygoogle"
+                style={{ display: 'block', width: '100%' }}
+                data-ad-client={AD_CLIENT}
+                data-ad-slot={AD_SLOTS[type]}
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+            />
         </div>
-    )
+    );
 }
