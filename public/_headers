@@ -54,6 +54,11 @@
 /
   Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
 
+/yandex_9add59f17faf30bc.html
+  Content-Type: text/html; charset=UTF-8
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Robots-Tag: all
+
 /.well-known/security.txt
   Cache-Control: public, max-age=86400
   Content-Type: text/plain
