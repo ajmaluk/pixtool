@@ -48,6 +48,10 @@ export default function RatingOverlay() {
 
   const handleRate = async (value) => {
     if (isSubmitting || isSuccess) return;
+    if (!toolSlug) {
+      setError('Technical issue: Tool identity unknown.');
+      return;
+    }
     
     setRating(value);
     setIsSubmitting(true);
@@ -183,9 +187,18 @@ export default function RatingOverlay() {
                 </div>
 
                 {error && (
-                  <p style={{ color: 'var(--accent-red)', fontSize: '0.85rem', marginBottom: '1rem' }}>
+                  <div style={{ 
+                    color: 'var(--accent-red)', 
+                    fontSize: '0.85rem', 
+                    marginBottom: '1rem',
+                    background: 'rgba(239, 68, 68, 0.08)',
+                    padding: '0.75rem',
+                    borderRadius: '12px',
+                    border: '1px solid rgba(239, 68, 68, 0.15)',
+                    lineHeight: 1.4
+                  }}>
                     {error}
-                  </p>
+                  </div>
                 )}
 
                 <button

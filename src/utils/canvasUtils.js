@@ -101,21 +101,39 @@ export const processImageFile = async (file, activeTool, settings) => {
     ctx.putImageData(imageData, 0, 0);
   };
 
+  if (width <= 0 || height <= 0) {
+    throw new Error(`Invalid dimensions: ${Math.round(width)}x${Math.round(height)}. Please check your settings.`);
+  }
+
+  canvas.width = width;
+  canvas.height = height;
+
+  // Apply smoothing for better quality
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+
   // 2. Perform Transform
   if (activeTool === 'rotate') {
-    ctx.translate(width / 2, height / 2);
+    ctx.translate(canvas.width / 2, canvas.height / 2);
     ctx.rotate((settings.rotation * Math.PI) / 180);
     ctx.drawImage(img, -img.width / 2, -img.height / 2);
   } else if (activeTool === 'flip') {
-    if (settings.flipDirection === 'horizontal') {
-      ctx.translate(width, 0);
-      ctx.scale(-1, 1);
-    } else {
-      ctx.translate(0, height);
-      ctx.scale(1, -1);
-    }
-    ctx.drawImage(img, 0, 0, width, height);
+    ctx.translate(settings.flipDirection === 'horizontal' ? canvas.width : 0, settings.flipDirection === 'vertical' ? canvas.height : 0);
+    ctx.scale(settings.flipDirection === 'horizontal' ? -1 : 1, settings.flipDirection === 'vertical' ? 1 : -1);
+    ctx.drawImage(img, 0, 0);
   } else if (activeTool === 'crop') {
+    // Validate crop bounds
+    if (sourceWidth <= 0 || sourceHeight <= 0) {
+       throw new Error('Crop selection is too small. Please select a larger area.');
+    }
+    if (sourceX < 0 || sourceY < 0 || sourceX + sourceWidth > img.width || sourceY + sourceHeight > img.height) {
+       console.warn('Crop out of bounds, adjusting...', { sourceX, sourceY, sourceWidth, sourceHeight, imgW: img.width, imgH: img.height });
+       // Defensive adjustment
+       sourceX = Math.max(0, sourceX);
+       sourceY = Math.max(0, sourceY);
+       sourceWidth = Math.min(img.width - sourceX, sourceWidth);
+       sourceHeight = Math.min(img.height - sourceY, sourceHeight);
+    }
     ctx.drawImage(img, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, width, height);
   } else if (activeTool === 'grayscale') {
     ctx.drawImage(img, 0, 0, width, height);

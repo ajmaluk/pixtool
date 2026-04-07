@@ -278,12 +278,14 @@ export default function PdfTools() {
       }
       
       // Trigger rating popup after successful tool use
-      triggerRating(`pdf-tools/${activeTool}`)
+      if (activeTool) {
+        triggerRating(`pdf-tools/${activeTool}`)
+      }
     } catch (err) {
       console.error('PDF Error:', err);
       await alert({
         title: 'Processing Error',
-        message: 'Error processing PDF: ' + err.message,
+        message: 'Error processing PDF: ' + (err.message || 'Unknown error'),
         type: 'danger'
       });
     } finally {

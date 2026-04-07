@@ -310,12 +310,14 @@ export default function ImageTools() {
       }
 
       // Trigger rating popup after successful tool use
-      triggerRating(`image-tools/${activeTool}`)
+      if (activeTool) {
+        triggerRating(`image-tools/${activeTool}`)
+      }
     } catch (error) {
       console.error('Processing error:', error)
       await alert({
         title: 'Processing Error',
-        message: 'Error processing images. Please ensure your dimensions are within image bounds.',
+        message: error.message || 'Error processing images. Please ensure your dimensions are within image bounds.',
         type: 'danger'
       });
     } finally {

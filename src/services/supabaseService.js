@@ -42,7 +42,14 @@ const clearStoredValue = (key) => {
 
 const formatSupabaseError = (error, fallbackMessage = 'Request failed') => {
   if (!error) return fallbackMessage;
-  const message = String(error.message || fallbackMessage);
+  
+  // Standardize browser-thrown network errors (e.g. from fetch when blocked/offline)
+  const message = String(error.message || error || fallbackMessage);
+  
+  if (/fetch|network|failed to connect|dns/i.test(message)) {
+    return 'Network connection issue. Please check your internet or disable ad blockers.';
+  }
+  
   if (error.code === 'PGRST116' || /no rows returned/i.test(message)) {
     return 'Record not found.';
   }
@@ -94,7 +101,11 @@ const sha256 = async (value) => {
   return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
 };
 
+let ipifyDisabled = false;
+
 const fetchIpAddress = async () => {
+  if (ipifyDisabled) return null;
+
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 3000);
   try {
@@ -104,7 +115,11 @@ const fetchIpAddress = async () => {
     if (!response.ok) return null;
     const payload = await response.json();
     return payload.ip || null;
-  } catch {
+  } catch (err) {
+    // If it's a network error (like blocked by adblock), don't try again in this session
+    if (/fetch|abort|blocked/i.test(err?.message || '')) {
+      ipifyDisabled = true;
+    }
     return null;
   } finally {
     clearTimeout(timeout);
@@ -200,16 +215,24 @@ export const submitToolRating = async ({ toolSlug, rating }) => {
   const userId = getOrCreateUserId();
   const ipHash = await getIpHash();
 
-  const { data, error } = await supabase.rpc('submit_tool_rating', {
-    p_tool_slug: toolSlug,
-    p_user_id: userId,
-    p_ip_hash: ipHash,
-    p_rating: rating,
-    p_window_seconds: 10,
-  });
+  let rpcData, rpcError;
+  try {
+    const { data, error } = await supabase.rpc('submit_tool_rating', {
+      p_tool_slug: toolSlug,
+      p_user_id: userId,
+      p_ip_hash: ipHash,
+      p_rating: rating,
+      p_window_seconds: 10,
+    });
+    rpcData = data;
+    rpcError = error;
+  } catch (err) {
+    // Catch-all for network errors thrown by the supabase client itself
+    throw new Error(formatSupabaseError(err, 'Unable to reach the server.'));
+  }
 
-  if (error) {
-    const normalized = formatSupabaseError(error, 'Unable to submit rating.');
+  if (rpcError) {
+    const normalized = formatSupabaseError(rpcError, 'Unable to submit rating.');
     if (/already/i.test(normalized)) {
       markToolAsRated(toolSlug);
       throw new Error('You already rated this tool.');
@@ -220,7 +243,7 @@ export const submitToolRating = async ({ toolSlug, rating }) => {
     throw new Error(normalized);
   }
 
-  const row = Array.isArray(data) ? data[0] : null;
+  const row = Array.isArray(rpcData) ? rpcData[0] : (rpcData || null);
   if (!row) {
     throw new Error('Unable to submit rating. Please retry.');
   }

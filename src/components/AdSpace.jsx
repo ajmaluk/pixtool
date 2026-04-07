@@ -50,15 +50,23 @@ export default function AdSpace({ type, className = '', style = {} }) {
             style={{
                 minHeight: heights[type],
                 width: '100%',
-                maxWidth: type === 'side' ? '300px' : '100%',
-                margin: adMargins[type] || '2rem auto',
+                maxWidth: type === 'side' ? '160px' : '100%',
+                margin: type === 'side' ? '1.5rem auto' : '0 auto',
+                display: 'flex',
+                justifyContent: 'center',
+                overflow: 'hidden',
+                borderRadius: '12px',
                 ...style
             }}
         >
             <ins
                 ref={adRef}
                 className="adsbygoogle"
-                style={{ display: 'block', width: '100%' }}
+                style={{ 
+                    display: 'block',
+                    width: type === 'side' ? '160px' : '100%',
+                    height: type === 'side' ? '600px' : '90px' 
+                }}
                 data-ad-client={AD_CLIENT}
                 data-ad-slot={AD_SLOTS[type]}
                 data-ad-format="auto"

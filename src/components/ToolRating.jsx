@@ -60,8 +60,9 @@ export default function ToolRating({ toolSlug }) {
       setAlreadyRated(true);
       setMessage('Thanks for rating this tool.');
     } catch (error) {
-      setMessage(error.message || 'Unable to submit rating right now.');
-      if (/already rated/i.test(error.message || '')) {
+      const msg = error.message || 'Unable to submit rating right now.';
+      setMessage(msg);
+      if (/already rated/i.test(msg)) {
         setAlreadyRated(true);
       }
     } finally {
