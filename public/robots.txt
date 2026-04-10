@@ -6,22 +6,22 @@ Disallow: /*?tool=
 Disallow: /pix-admin/
 Disallow: /api/
 
+# Specialized crawlers - Allow AdSense
 User-agent: Mediapartners-Google
 Allow: /
 
-User-agent: Yandex
-Allow: /
-Clean-param: q&search&tool /
-Host: www.pixtool.in
-
+# Security & Privacy - Prevent LLM/Scrapers from hitting heavy API routes
 User-agent: GPTBot
-Allow: /
+Disallow: /api/
+Disallow: /pix-admin/
 
 User-agent: CCBot
-Allow: /
+Disallow: /api/
+Disallow: /pix-admin/
 
 User-agent: Google-Extended
-Allow: /
+Disallow: /api/
+Disallow: /pix-admin/
 
 User-agent: Anthropic-ai
 Allow: /
@@ -29,7 +29,8 @@ Allow: /
 User-agent: Claude-Web
 Allow: /
 
-User-agent: Omgilibot
+# Search Engine specific optimizations
+User-agent: Yandex
 Allow: /
 
 User-agent: FacebookBot

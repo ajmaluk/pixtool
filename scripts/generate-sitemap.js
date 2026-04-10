@@ -115,32 +115,32 @@ function generateSitemap() {
   addUrl('/productivity-tools', '0.9', 'weekly', '/screenshots/pixtool-all-in-one-productivity-suite.webp', 'PixTool Productivity Suite Hub');
 
   // MATH Tools
-  MATH_TOOLS.forEach(tool => {
+  MATH_TOOLS.filter(t => t.status !== 'coming-soon').forEach(tool => {
     addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | Advance Math PixTool`, tool.description);
   });
 
   // Image Tools
-  IMAGE_TOOLS.forEach(tool => {
+  IMAGE_TOOLS.filter(t => t.status !== 'coming-soon').forEach(tool => {
     addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | Free Online PixTool`, tool.description);
   });
 
   // PDF Tools
-  PDF_TOOLS.forEach(tool => {
+  PDF_TOOLS.filter(t => t.status !== 'coming-soon').forEach(tool => {
     addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | Professional PDF PixTool`, tool.description);
   });
 
   // Utility Tools
-  UTILITY_TOOLS.forEach(tool => {
+  UTILITY_TOOLS.filter(t => t.status !== 'coming-soon').forEach(tool => {
     addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | Anonymous Tool PixTool`, tool.description);
   });
 
   // AI Tools
-  AI_TOOLS.forEach(tool => {
+  AI_TOOLS.filter(t => t.status !== 'coming-soon').forEach(tool => {
     addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | AI Generated PixTool`, tool.description);
   });
 
   // Productivity Tools
-  PRODUCTIVITY_TOOLS.forEach(tool => {
+  PRODUCTIVITY_TOOLS.filter(t => t.status !== 'coming-soon').forEach(tool => {
     addUrl(tool.path, '0.8', 'weekly', `/screenshots/${tool.screenshot}`, tool.imageAlt || `${tool.title} | Productivity PixTool`, tool.description);
   });
 

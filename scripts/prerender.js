@@ -48,12 +48,12 @@ const staticRoutes = [
 ];
 
 const toolRoutes = [
-  ...IMAGE_TOOLS.map((t) => t.path),
-  ...PDF_TOOLS.map((t) => t.path),
-  ...UTILITY_TOOLS.map((t) => t.path),
-  ...AI_TOOLS.map((t) => t.path),
-  ...MATH_TOOLS.map((t) => t.path),
-  ...PRODUCTIVITY_TOOLS.map((t) => t.path)
+  ...IMAGE_TOOLS.filter(t => t.status !== 'coming-soon').map((t) => t.path),
+  ...PDF_TOOLS.filter(t => t.status !== 'coming-soon').map((t) => t.path),
+  ...UTILITY_TOOLS.filter(t => t.status !== 'coming-soon').map((t) => t.path),
+  ...AI_TOOLS.filter(t => t.status !== 'coming-soon').map((t) => t.path),
+  ...MATH_TOOLS.filter(t => t.status !== 'coming-soon').map((t) => t.path),
+  ...PRODUCTIVITY_TOOLS.filter(t => t.status !== 'coming-soon').map((t) => t.path)
 ];
 
 const blogRoutes = posts.map((post) => `/blog/${post.slug}`);

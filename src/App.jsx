@@ -378,16 +378,24 @@ const URLNormalizer = () => {
   const search = location.search
   const hash = location.hash
 
-  // 1. Handle trailing slashes (except for home page)
+  // 1. Handle domain canonicalization (Redirect specifically to www.pixtool.in if on root or mirror)
+  useEffect(() => {
+    if (import.meta.env.PROD && 
+        window.location.hostname !== 'www.pixtool.in' && 
+        !window.location.hostname.includes('vercel.app')) {
+      window.location.replace(`https://www.pixtool.in${pathname}${search}${hash}`)
+    }
+  }, [pathname, search, hash])
+
+  // 2. Handle trailing slashes (except for home page)
   if (pathname !== '/' && pathname.endsWith('/')) {
     const normalizedPath = pathname.slice(0, -1)
     return <Navigate to={normalizedPath + search + hash} replace />
   }
 
-  // 2. Handle uppercase characters in URLs
+  // 3. Handle uppercase characters in URLs
   if (/[A-Z]/.test(pathname)) {
     const normalizedPath = pathname.toLowerCase()
-    // Avoid infinite loop if somehow it keeps matching (shouldn't happen with Navigate replace)
     if (normalizedPath !== pathname) {
       return <Navigate to={normalizedPath + search + hash} replace />
     }

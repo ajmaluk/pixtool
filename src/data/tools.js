@@ -107,7 +107,7 @@ export const IMAGE_TOOLS = [
     imageAlt: 'PixTool Image Rotator - Precise 90/180 Degree Orientation Restoration',
     imageTitle: 'Rotate Photos Online Free with Zero Quality Loss',
     seo: {
-      title: "Rotate Image Online — Flip & Rotate Photo 90 Degrees Free",
+      title: "Rotate & Flip Image Online — Best Free Utility",
       keywords: "rotate image, rotate photo, rotate image 90 degrees, flip image, mirror image, rotate picture, image rotator, flip photo, rotate image online, rotate photo free, rotate image clockwise, flip image horizontal, rotate image vertical",
       description: "Rotate and flip images instantly online. Free rotate photo 90 degrees, horizontal flip, vertical flip. No upload required, 100% browser-based privacy processing."
     },
@@ -247,7 +247,7 @@ export const IMAGE_TOOLS = [
     imageAlt: 'PixTool Asset Shield - Professional IP Protection and Branding',
     imageTitle: 'Add Text Watermark to Images Online Free',
     seo: {
-      title: "Add Watermark to Image — Free Text Watermark Generator [Online]",
+      title: "Add Watermark to Image Online — Free Text Shield",
       keywords: "watermark, add watermark, watermark image, text watermark, watermark generator, watermark creator, image watermark, photo watermark, watermark online, watermark free, add text watermark, watermark tool",
       description: "Add text watermarks to images instantly. Free online watermark tool with custom text, opacity, and positioning. No upload, 100% private browser processing."
     },
@@ -340,7 +340,7 @@ export const IMAGE_TOOLS = [
     imageAlt: 'PixTool Monochrome Studio - Professional Black & White filtration',
     imageTitle: 'Best Black and White Photo Converter Online',
     seo: {
-      title: "Grayscale Image Converter — Convert to Black & White Online Free",
+      title: "Grayscale Image Converter — Black & White Filter Online",
       keywords: "grayscale, grayscale image, convert to grayscale, image to black and white, grayscale converter, grayscale tool, black and white image converter, sepia filter, vintage photo filter, photo grayscale online, convert image to grayscale free, grayscale images online, grayscale tool, invert colors, lunapic alternative",
       description: "Convert images to grayscale, black & white, or sepia instantly. Free online grayscale tool with sepia and vintage filters. No upload required, 100% private browser processing."
     },
@@ -388,6 +388,11 @@ export const IMAGE_TOOLS = [
     color: '#a855f7', status: 'coming-soon', path: '/image-tools/upscale', screenshot: 'best-online-image-resizer-tool.png',
     imageAlt: 'PixTool AI Resolution Master - Neural Network Image Upscaling',
     imageTitle: 'AI Image Resizer and Upscaler Online',
+    seo: {
+      title: "AI Image Upscaler — Increase Image Resolution Free",
+      keywords: "ai upscaler, image upscaler, ai image resizer, increase resolution, super resolution, enhance image quality, upscale photo ai, free ai upscaler",
+      description: "Increase image resolution up to 8x with AI. Professional super-resolution upscaler for photos and graphics. 100% free online AI tool."
+    },
     benefits: [
       'Advanced Super-Resolution generative AI architecture',
       'Intelligent noise reduction and JPEG artifact removal',
@@ -432,6 +437,11 @@ export const IMAGE_TOOLS = [
     color: '#a855f7', status: 'coming-soon', path: '/image-tools/restore', screenshot: 'professional-online-image-studio.png',
     imageAlt: 'PixTool AI Photo Revival - Historical Document and Image Healing',
     imageTitle: 'Restore Old Photos Online Free with AI',
+    seo: {
+      title: "AI Photo Restorer — Restore Old & Blurry Photos",
+      keywords: "photo restoration, restore old photos, fix blurry photos, ai photo restorer, repair scanned photos, photo healer, historical photo restoration, free ai photo restorer",
+      description: "Restore old, blurry, or scratched photos with AI. Professional historical photo healing and face enhancement. 100% private browser-based restoration."
+    },
     benefits: [
       'Industrial-grade scratch and dust removal logic',
       'Intelligent face enhancement for blurry portraits',
@@ -788,7 +798,7 @@ export const PDF_TOOLS = [
     imageAlt: 'PixTool PDF Watermark - Document Branding and Security',
     imageTitle: 'Add Watermark to PDF Online Free [Professional]',
     seo: {
-      title: "Add Watermark to PDF — Free PDF Watermark Generator [Online]",
+      title: "Add Watermark to PDF — Free Online PDF Shield",
       keywords: "pdf watermark, watermark pdf, add watermark to pdf, pdf watermark tool, watermark generator pdf, add text to pdf, pdf watermark online, watermark pdf free",
       description: "Add text watermarks to PDF files. Free online PDF watermark tool with custom text, opacity, and diagonal positioning. No upload, 100% private."
     },
@@ -837,7 +847,7 @@ export const PDF_TOOLS = [
     imageAlt: 'PixTool PDF Reorder - Visual Page Management',
     imageTitle: 'Rearrange PDF Pages Online [Drag & Drop]',
     seo: {
-      title: "Reorder PDF Pages — Rearrange, Delete, Merge PDF Pages [Free]",
+      title: "Reorder PDF Pages — Visual Page Manager Online",
       keywords: "reorder pdf, reorder pdf pages, pdf page reorder, rearrange pdf, pdf reorder pages, delete pdf pages, move pdf pages, pdf page order, reorder pdf online, reorder pages, pdf reorder, reorder pages pdf",
       description: "Reorder, delete, and rearrange PDF pages instantly. Visual drag-and-drop interface. Free online PDF page manager. No upload, 100% private."
     },
@@ -880,14 +890,18 @@ export const PDF_TOOLS = [
     ]
   },
   { 
-    id: 'to-word', title: 'PDF to Word [Pro]', icon: FileText, 
-    description: 'Convert PDF files to editable Word documents (.docx) with intelligent layout preservation. Edit your PDF content in Microsoft Word instantly.', 
+    id: 'to-word', title: 'PDF to Word Converter', icon: FileText, 
+    description: 'Transform static PDF documents into fully editable Microsoft Word (DOCX) files with 100% accurate layout preservation. Our browser-native engine reconstructs fonts, tables, and images for seamless editing.', 
     color: '#06b6d4', status: 'coming-soon', path: '/pdf-tools/to-word', screenshot: 'secure-pdf-management-suite.png',
-    imageAlt: 'PixTool PDF to Word Transformer',
+    imageAlt: 'PixTool PDF to Word Converter - Precision Layout Reconstruction',
     imageTitle: 'Convert PDF to Word Online Free [Editable]',
+    seo: {
+      title: "PDF to Word Converter — Convert PDF to DOCX Free",
+      keywords: "pdf to word, convert pdf to word, pdf to docx, editable pdf converter, pdf to word free, online pdf to word, convert pdf to editable word",
+      description: "Convert PDF to editable Word (DOCX) files with 100% layout accuracy. Free online PDF to Word converter with on-device privacy."
+    },
     benefits: [
-      'Semantic structure recognition for accurate layout recovery',
-      'High-fidelity text and table extraction',
+      'Industrial-grade layout and font reconstruction engine',
       'Preservation of headers, footers, and page numbers',
       'On-device processing for absolute document privacy'
     ],
@@ -929,6 +943,11 @@ export const PDF_TOOLS = [
     color: '#06b6d4', status: 'coming-soon', path: '/pdf-tools/to-excel', screenshot: 'secure-pdf-management-suite.png',
     imageAlt: 'PixTool PDF to Excel Data Extractor',
     imageTitle: 'Convert PDF to Excel Online Free [XLSX]',
+    seo: {
+      title: "PDF to Excel Converter — Extract Tables to XLSX Free",
+      keywords: "pdf to excel, convert pdf to excel, pdf to xlsx, extract tables from pdf, pdf table extractor, online pdf to excel, pdf to csv",
+      description: "Extract tables from PDF to Excel (XLSX) instantly. Professional-grade table detection and numeric format preservation. 100% private."
+    },
     benefits: [
       'Intelligent grid-detection mapping tables to Excel cells',
       'Precise numeric and financial format preservation',
@@ -973,6 +992,11 @@ export const PDF_TOOLS = [
     color: '#06b6d4', status: 'coming-soon', path: '/pdf-tools/to-ppt', screenshot: 'secure-pdf-management-suite.png',
     imageAlt: 'PixTool PDF to PowerPoint Transformer',
     imageTitle: 'Convert PDF to PowerPoint Online Free [PPTX]',
+    seo: {
+      title: "PDF to PowerPoint Converter — PDF to PPTX Free",
+      keywords: "pdf to ppt, pdf to pptx, convert pdf to powerpoint, pdf slide deck, editable pdf to ppt, online pdf to powerpoint, pdf to slides",
+      description: "Convert PDF pages into editable PowerPoint (PPTX) slides. Professional slide hierarchy preservation and vector reconstruction."
+    },
     benefits: [
       'Slide-by-page mapping preserving visual hierarchy',
       'Editable text and vector element reconstruction',
@@ -1105,6 +1129,11 @@ export const PDF_TOOLS = [
     color: '#06b6d4', status: 'coming-soon', path: '/pdf-tools/edit', screenshot: 'secure-pdf-management-suite.png',
     imageAlt: 'PixTool PDF Editor - Professional Editing Suite',
     imageTitle: 'Edit PDF Online Free [No Install]',
+    seo: {
+      title: "Online PDF Editor — Edit PDF Text & Images Free",
+      keywords: "pdf editor, edit pdf online, free pdf editor, modify pdf, annotate pdf, fill out pdf forms, online pdf editor pro, edit pdf text",
+      description: "Edit PDF text, images, and shapes directly in your browser. Professional document manipulation with 100% privacy and no installation."
+    },
     benefits: [
       'Direct text editing within existing PDF blocks',
       'Image replacement and resizing tools',
@@ -1153,7 +1182,7 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Secure Temp Mail 2026 - Instant Anonymous Disposable Email',
     imageTitle: 'Best Disposable Email Service Online',
     seo: {
-      title: "Free Temp Mail — Instant Anonymous Disposable Email [No Registration]",
+      title: "Free Temp Mail — Secure Anonymous Disposable Email",
       keywords: "temp mail, temporary email, disposable email, free temp mail, temp mail generator, fake email, throwaway email, temp email, temporary email address, 10 minute mail, temp mail reddit, mailinator alternative, temp mail org, fake email generator, anonymous email, temp mail with password, temporary mail with password, temp mail for otp, fake email and password, temp mail login, one time email, fake email address, toolpix, pixtool temp mail, tempmail, temp mail otp login",
       description: "Get instant free temporary email for signups, verifications, and OTP codes. No registration required—use immediately. 100% private disposable email with auto-refresh inbox."
     },
@@ -1212,7 +1241,7 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool 10 Minute Mail - Secure Expiring Inbox for Rapid Verification',
     imageTitle: 'Best 10 Minute Disposable Email Service Online',
     seo: {
-      title: "10 Minute Mail — Free Anonymous Temporary Email [Instant]",
+      title: "10 Minute Mail — Anonymous Temporary Email Instant",
       keywords: "10 minute mail, 10 min mail, 10minutemail, 10min mail, temporary email 10 minutes, 10 min temp mail, free 10 minute mail, disposable email 10 minutes, burner email 10 min, temp mail auto expiring, 10 minute mail alternative, 10minutemail one, temp mail reddit, temp mail org, free temp mail 10 min",
       description: "Get a free 10-minute disposable email instantly. Perfect for quick verification and signups. Auto-expires for complete privacy. No registration, no spam, 100% free."
     },
@@ -1268,7 +1297,7 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Identity Switch - Instant Temporary Email Rotation Studio',
     imageTitle: 'Change Temporary Email Address Instantly Online',
     seo: {
-      title: "Change Temp Email — Generate New Anonymous Inboxes Instantly",
+      title: "Change Temp Email — Instant Identity Switch Tool",
       keywords: "change temp email, rotate email, new temp email, switch email, get new temp mail, change email address, generate new email, refresh temp mail, new disposable email, temp mail rotate, custom temp email, temp mail with password",
       description: "Generate a new temporary email address instantly. Rotate identities for multiple signups or testing. Fresh inbox with every click, 100% private and free."
     },
@@ -1330,7 +1359,7 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Fake Email Generator - Create Anonymous Burner Inboxes Free',
     imageTitle: 'Fake Email Generator Online - No Signup Required',
     seo: {
-      title: "Fake Email Generator — Free Fake Email with Password [Instant]",
+      title: "Fake Email Generator — Anonymous Email & Password",
       keywords: "fake email, fake email generator, fake email and password, fake gmail, fake email with password, fake mail, fake email address, fake email id, free fake email, dummy email, disposable fake email, fake email for testing, fake email generator with password, fake email password generator, create fake email, random email generator, fake email creator, fake email password, fake mail generator, fake mail creator, fake mail sender with attachment",
       description: "Generate free fake email addresses instantly with password support. Perfect for testing, signups, and privacy protection. No registration required, 100% anonymous."
     },
@@ -1380,7 +1409,7 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Disposable Email Address - Secure One-Time Burner Inbox Free',
     imageTitle: 'Disposable Email Service Online - Fast & Private',
     seo: {
-      title: "Disposable Email — Free One-Time Temporary Email [Instant]",
+      title: "Disposable Email — Free One-Time Temporary Mail",
       keywords: "disposable email, disposable email address, one time email, burner email, free disposable email, temporary email address, temp email, temporary disposable email, one-time email, anonymous email, mailinator alternative, disposable email generator, temp mail disposable, single use email",
       description: "Create free one-time disposable email instantly. Perfect for signups, verifications, and downloads. No registration, fully anonymous, protects your real inbox from spam."
     },
@@ -1432,7 +1461,7 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Throwaway Email Inbox - Instant Secure Temporary Mail 2026',
     imageTitle: 'Free Throwaway Inbox Online - Anonymous & Secure',
     seo: {
-      title: "Throwaway Email — Free Anonymous Disposable Inbox [Instant]",
+      title: "Throwaway Email — Instant Anonymous Burner Inbox",
       keywords: "throwaway email, disposable email, temporary email, anonymous email, burner email, free temp mail, throwaway email generator, one time email, temp email, temp mail, mailinator alternative, throwaway email inbox, privacy email, fake email, temporary mail address",
       description: "Get instant throwaway email for signups and verifications. 100% free, no registration, fully anonymous disposable inbox. Protect your privacy with instant temp mail."
     },
@@ -1485,7 +1514,7 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Typing Master - Professional WPM and Accuracy Diagnostics Studio',
     imageTitle: 'Online typing speed test pro - Track WPM and Accuracy',
     seo: {
-      title: "Typing Speed Test: Master Your WPM with Pro Speed Test [Ad-Free]",
+      title: "Typing Speed Test — Master Your WPM Online Pro",
       keywords: "typing test, typing test online, monkeytype, monkeytype alternative, typing speed test, wpm test, typing speed test free, improve wpm, typing accuracy test, typing test 1 minute, free typing test",
       description: "Master your keyboard skills with our professional, highly accurate typing speed test. Featuring a stunning, minimalist 'MonkeyType' style interface, you can effortlessly track your Words Per Minute (WPM) and exact accuracy in real-time with zero disruptive ads and 100% telemetry-free privacy."
     },
@@ -1542,7 +1571,7 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Universal QR Scanner - Pro-Level Flash Decoding and Browser-Native Upload',
     imageTitle: 'Best Online QR Code Scanner - Secure & Fast',
     seo: {
-      title: "Best Free QR Code Scanner Online 2026 — Scan from Image & Camera",
+      title: "QR Code Scanner Online — Scan Image & Camera Free",
       keywords: "qr code scanner online, scan qr code from image, qr scanner online, qr code scanner from image, scan qr code online, free qr scanner, qr code scanner free, online qr reader, scan qr code from photo, qr scanner from image, qr code scanner browser, qr code scanner no app, scan qr image, qr reader online, qr scanner app alternative, qr code reader from image, read qr code from image, scan qr from photo, qr scanner photo, qr code scanner photo, scan any qr code online, qr scanner from image online, photo qr code scanner online, qr image reader online, online qr image reader, convert qr code to link, qr to link converter",
       description: "Scan QR codes instantly from camera or uploaded images. 100% free, no app download required, fully private browser-based QR scanner. Supports all devices and formats."
     },
@@ -1599,7 +1628,7 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Professional QR Generator - Custom Branded QR Codes',
     imageTitle: 'Create High-Res QR Codes Online Free',
     seo: {
-      title: "QR Code Generator — Free QR Code Maker [No Signup, No Expiry]",
+      title: "QR Code Generator — Free QR Maker [No Expiry]",
       keywords: "qr code generator, qr code generator free, create qr code, generate qr code, free qr code, qr code maker, qr code creator, qr generator, make qr code, online qr code generator, qr code generator no watermark, qr code generator unlimited, custom qr code, qr code for wifi, qr code for menu, qr code generator svg, free qr code online, uitly, uitly alternative, uitly.com, free qr code generator no expiry",
       description: "Create free QR codes instantly. No signup, no watermarks, no expiration. Generate QR codes for URLs, WiFi, text, vCard and more. 100% private browser-based generator."
     },
@@ -2050,6 +2079,11 @@ export const AI_TOOLS = [
     color: '#8b5cf6', path: '/ai-tools/chat', screenshot: 'ai-chat-assistant.png',
     imageAlt: 'PixTool Deep Mind - High-Authority General Intelligence Assistant',
     imageTitle: 'Professional AI Chat Assistant for Business',
+    seo: {
+      title: "Deep Mind AI Chat — Advanced AI Assistant [Free]",
+      keywords: "ai chat, deep mind ai, ai assistant, free ai chat, ai chatbot, professional ai assistant, ai problem solving, knowledge synthesis ai, ai consulting, ai chat online, best free ai chat",
+      description: "Access Deep Mind AI for complex problem-solving and knowledge synthesis. Professional AI chat assistant for business and technical challenges. 100% free and private."
+    },
     benefits: [
       'Context-aware reasoning engine for high-authority logical synthesis',
       'Comprehensive multilingual support across 50+ global dialects',
@@ -2143,6 +2177,11 @@ export const AI_TOOLS = [
     color: '#8b5cf6', path: '/ai-tools/grammar-fixer', screenshot: 'ai-grammar-checker.png',
     imageAlt: 'PixTool Grammar Architect - Professional Proofreading Studio for Business',
     imageTitle: 'Fix Grammar and Style with AI precision',
+    seo: {
+      title: "Grammar Architect — Free AI Grammar & Style Checker",
+      keywords: "grammar checker, ai grammar fixer, grammar architect, free grammar check, spell checker, professional proofreading ai, fix grammar online, ai writing style checker, online grammar corrector",
+      description: "Achieve linguistic perfection with Grammar Architect. Professional AI grammar, spelling, and style checker for business and academic writing. Free and context-aware proofreading."
+    },
     benefits: [
       'Advanced syntactic correction engine for professional business writing',
       'Deep context-aware spellcheck beyond simple dictionary matching',
@@ -2187,6 +2226,11 @@ export const AI_TOOLS = [
     color: '#8b5cf6', path: '/ai-tools/resume-generator', screenshot: 'ai-resume-builder.png',
     imageAlt: 'PixTool Resume Architect - Professional Career Builder for 2026',
     imageTitle: 'Build ATS-Friendly Resumes with AI assistance',
+    seo: {
+      title: "Resume Architect — Free AI Resume Builder [ATS-Friendly]",
+      keywords: "resume builder, ai resume generator, resume architect, free resume maker, ats friendly resume, build resume with ai, professional resume builder, career mapping ai, resume templates free",
+      description: "Build a career-winning, ATS-friendly resume with Resume Architect. Interactive AI interview process for professional career-mapping and high-fidelity PDF exports."
+    },
     benefits: [
       'Industrial-grade ATS-optimized structures for modern HR systems',
       'Smart keyword density analysis tailored to specific job descriptions',
@@ -2231,6 +2275,11 @@ export const AI_TOOLS = [
     color: '#8b5cf6', path: '/ai-tools/coding-chat', screenshot: 'ai-code-assistant.png',
     imageAlt: 'PixTool Code Intelligence - Pro Developer AI Assistant with 20+ languages',
     imageTitle: 'Professional AI Programming assistance',
+    seo: {
+      title: "Code Intelligence — AI Coding Assistant [20+ Languages]",
+      keywords: "ai coding assistant, code intelligence, free ai programmer, write code with ai, debug code ai, ai refactoring tool, programming assistant, github copilot alternative free, ai for developers",
+      description: "Your 24/7 senior developer AI. Write, debug, and refactor code across 20+ languages with high-authority logic. Secure and private coding assistance."
+    },
     benefits: [
       'Senior-level full-stack logic solving for modern framework architectures',
       'Advanced syntax optimization and algorithmic efficiency verification',
@@ -2275,6 +2324,11 @@ export const AI_TOOLS = [
     color: '#8b5cf6', path: '/ai-tools/email-writer', screenshot: 'ai-email-drafter.png',
     imageAlt: 'PixTool Professional Correspondence - Business Communication',
     imageTitle: 'Write Business Emails with AI',
+    seo: {
+      title: "Professional Correspondence — AI Email Writer [Free]",
+      keywords: "ai email writer, professional correspondence, write email with ai, business email generator, ai follow up email, persuasive email ai, free email writer tool, email drafter ai",
+      description: "Draft high-conversion professional emails and persuasive follow-ups with our AI email writer. Tailored scenarios for business, sales, and executive communication."
+    },
     benefits: [
       'Context-aware drafting for high-stakes business communication',
       'Dynamic tone of voice selection from persuasive to empathetic',
@@ -2319,6 +2373,11 @@ export const AI_TOOLS = [
     color: '#8b5cf6', path: '/ai-tools/ad-copy-generator', screenshot: 'ai-ad-copy.png',
     imageAlt: 'PixTool Marketing Pulse - Performance Copy Engine',
     imageTitle: 'Create Converting Ads with AI',
+    seo: {
+      title: "Marketing Pulse — AI Ad Copy Generator [Google & Meta]",
+      keywords: "ai ad copy generator, marketing pulse, create ads with ai, google ads generator, meta ads copy ai, facebook ad writer, high conversion ad copy, marketing copy ai, free ad writer",
+      description: "Generate high-performance marketing copy optimized for Google, Meta, and LinkedIn with Marketing Pulse. Professional A/B versioning and conversion-focused AI writer."
+    },
     benefits: [
       'Platform-specific conversion templates for Google, Meta, and X',
       'Automated A/B versioning logic to test multiple hook strategies',
@@ -2364,9 +2423,9 @@ export const AI_TOOLS = [
     imageAlt: 'PixTool Social Pulse - Social Media Viral Engine',
     imageTitle: 'Trending Social Captions with AI',
     seo: {
-      title: "AI Caption Generator — Social Media Captions Free",
-      keywords: "ai caption generator, caption generator, social media captions, instagram captions, tiktok captions, ai social captions, free captions generator",
-      description: "Generate viral social media captions for Instagram, TikTok, and X. Free AI caption generator with hashtags."
+      title: "Social Pulse — AI Social Media Caption Generator",
+      keywords: "ai caption generator, social pulse, instagram caption ai, tiktok caption generator, viral social captions, social media captions free, hashtag generator, social media reaching ai",
+      description: "Scale your reach with viral, platform-optimized captions for Instagram, TikTok, and X. Social Pulse generates trending captions and smart hashtag clusters."
     },
     benefits: [
       'Real-time viral trend integration for high-engagement social posts',
@@ -2608,6 +2667,11 @@ export const AI_TOOLS = [
     color: '#8b5cf6', path: '/ai-tools/hashtag-generator', screenshot: 'ai-hashtag-discovery.png',
     imageAlt: 'PixTool Viral Density - Algorithm Optimization',
     imageTitle: 'Generate Viral Hashtags with AI',
+    seo: {
+      title: "Viral Density — AI Hashtag Generator [Viral Reach]",
+      keywords: "hashtag generator, ai hashtag tool, viral density, find hashtags with ai, trending hashtags, instagram hashtags, tiktok hashtags, social media reach tool, free hashtag finder",
+      description: "Find high-velocity hashtags for your niche with Viral Density. Beat the algorithms and expand your social media footprint with AI-powered hashtag discovery."
+    },
     benefits: [
       'Real-time high-velocity detection for trending social media clusters',
       'Niche-specific hashtag generation tailored to your content category',
@@ -2704,6 +2768,11 @@ export const MATH_TOOLS = [
     color: '#3b82f6', path: '/math-tools/scientific-calculator', screenshot: 'utility-tools-hub.png',
     imageAlt: 'PixTool Scientific Calculator - High-Precision Algebraic Engine',
     imageTitle: 'Advanced Scientific Calculator Online',
+    seo: {
+      title: "Scientific Calculator — High Precision Online Calculator",
+      keywords: "scientific calculator, online calculator, scientific calculator free, high precision calculator, algebraic calculator, engineering calculator, trig calculator, log calculator, math solver online",
+      description: "High-precision scientific calculator for complex engineering and scientific computations. Features advanced trigonometry, logarithms, and algebraic logic. 100% free and browser-native."
+    },
     benefits: [
       'High-precision algebraic logic engine for reliable scientific results',
       'Advanced trigonometric and logarithmic calculation capabilities',
@@ -2748,8 +2817,25 @@ export const MATH_TOOLS = [
     color: '#3b82f6', path: '/math-tools/graph-visualizer', screenshot: 'utility-tools-hub.png',
     imageAlt: 'PixTool Graph Visualizer - Interactive Functional Plotting',
     imageTitle: 'Expert Graphing Calculator Online',
-    benefits: ['Multi-function plotting', 'Dynamic zooming', 'Coordinate tracking', 'High-res exports'],
-    howTo: ['Add a function (e.g., sin(x))', 'Adjust view range', 'Analyze intersections'],
+    seo: {
+      title: "Graph Visualizer — Interactive Graphing Calculator Online",
+      keywords: "graph visualizer, graphing calculator, online graph maker, function plotter, 2d grapher, interactive math graphs, desmos alternative free, mathematical visualization tool",
+      description: "Interactive functional plotting engine for mathematical visualizations. Map out derivatives and integrals with real-time parameter adjustments. High-res exports for research and education."
+    },
+    benefits: [
+      'Multi-function plotting capabilities for simultaneous functional analysis',
+      'Dynamic zooming and spatial navigation for surgical coordinate tracking',
+      'Coordinate tracking with high-precision decimal readout',
+      'High-resolution PNG and SVG exports for professional publications',
+      'Real-time parameter adjustment for interactive calculus visualization'
+    ],
+    howTo: [
+      'Add a mathematical function (e.g., sin(x) or x^2) to the plotting forge.',
+      'Adjust the view range and domain to focus on specific intersections.',
+      'Analyze root points and intersections using the interactive cursor.',
+      'Toggle multiple functions to visualize complex system relationships.',
+      'Download high-resolution visuals for your technical documentation.'
+    ],
     alternativeTo: ['GraphToy', 'Desmos', 'GeoGebra'],
     tips: [
       'Use the scroll wheel to zoom into specific intersection points for high-precision reading.',
@@ -2782,6 +2868,11 @@ export const MATH_TOOLS = [
     color: '#3b82f6', path: '/math-tools/matrix-solver', screenshot: 'utility-tools-hub.png',
     imageAlt: 'PixTool Matrix Solver - Linear Algebra Studio with Step-by-Step Logic',
     imageTitle: 'Solve Matrix Equations Online Instantly',
+    seo: {
+      title: "Matrix Solver — Linear Algebra Calculator [Step-by-Step]",
+      keywords: "matrix solver, linear algebra calculator, matrix inversion, calculate determinant, matrix rank, gaussian elimination, matrix multiplication, math solver step by step, solve systems of equations",
+      description: "Professional linear algebra studio for matrix inversion, determinants, and rank calculations. Features high-precision rational arithmetic and step-by-step logic."
+    },
     benefits: [
       'Industrial-grade Linear Algebra kernel for complex matrix operations',
       'Advanced determinant, rank, and trace calculation protocols',
@@ -2826,6 +2917,11 @@ export const MATH_TOOLS = [
     color: '#3b82f6', path: '/math-tools/statistics-visualizer', screenshot: 'expert-data-visualization-studio.png',
     imageAlt: 'PixTool Data Visualizer - Statistical Charting Studio with PNG Exports',
     imageTitle: 'Generate Statistical Charts Online for Free',
+    seo: {
+      title: "Data Visualizer — Statistical Chart Generator Online",
+      keywords: "data visualizer, chart generator, statistical calculator, make bar chart online, line graph maker, pie chart generator, scatter plot creator, business data visualization, academic charts",
+      description: "Transform raw data into high-authority statistical charts. Generate bar, line, pie, and scatter plots with zero server-side exposure. Perfect for research and corporate reporting."
+    },
     benefits: [
       'Comprehensive statistical analysis including Mean, Median, and Std Dev',
       'High-authority visual generation for Bar, Line, Pie, and Scatter plots',
@@ -2870,6 +2966,11 @@ export const MATH_TOOLS = [
     color: '#3b82f6', path: '/math-tools/equation-solver', screenshot: 'algebraic-equation-solver.png',
     imageAlt: 'PixTool Equation Solver - Root Finding Engine with Variable Isolation',
     imageTitle: 'Solve Equations Online instantly with Step-by-Step Logic',
+    seo: {
+      title: "Equation Solver — Algebra Solver with Step-by-Step Logic",
+      keywords: "equation solver, algebra solver, solve for x, quadratic equation solver, linear equation solver, math solver step by step, algebraic simplification, root finder online",
+      description: "Instant root finding and algebraic simplification with step-by-step logic. Solve linear and quadratic equations with high-authority derivation and mathematical transparency."
+    },
     benefits: [
       'Surgical algebraic simplification for complex linear and quadratic forms',
       'Precision root finding engine for identifying variables instantly',
@@ -2914,6 +3015,11 @@ export const MATH_TOOLS = [
     color: '#3b82f6', path: '/math-tools/unit-circle', screenshot: 'utility-tools-hub.png',
     imageAlt: 'PixTool Unit Circle - Trigonometry Visualizer with Quadrant Analysis',
     imageTitle: 'Explore the Unit Circle Interactively for Trig Mastery',
+    seo: {
+      title: "Unit Circle Studio — Interactive Trigonometry Visualizer",
+      keywords: "unit circle, trigonometry visualizer, sine cosine tangent, trig circle, radian degree converter, unit circle interactive, math visualizer, sine curve visualization",
+      description: "Interactive trigonometry visualizer for understanding sines, cosines, and angle rotations. Real-time coordinate mapping and quadrant analysis for trig mastery."
+    },
     benefits: [
       'Interactive angle rotation with degree and radian precision toggles',
       'Real-time Sine, Cosine, and Tangent coordinate visualization',
@@ -2958,6 +3064,11 @@ export const MATH_TOOLS = [
     color: '#3b82f6', path: '/math-tools/financial-calculator', screenshot: 'utility-tools-hub.png',
     imageAlt: 'PixTool Finance Architect - Business Logic Engine with Amortization Tables',
     imageTitle: 'Professional Financial Calculator Online with Zero-Knowledge Privacy',
+    seo: {
+      title: "Finance Architect — Professional Financial Calculator Suite",
+      keywords: "financial calculator, loan calculator, investment calculator, roi calculator, amortization schedule, compound interest calculator, business finance tools, mortage planner free",
+      description: "Professional financial suite for TVM, loan amortization, and ROI analysis. Zero server tracking ensures your personal financial data remains strictly local and private."
+    },
     benefits: [
       'High-precision Time Value of Money (TVM) calculation kernel',
       'Industrial-grade Loan Amortization schedule generation with PDF-ready data',
@@ -3002,6 +3113,11 @@ export const MATH_TOOLS = [
     color: '#3b82f6', path: '/math-tools/number-theory', screenshot: 'utility-tools-hub.png',
     imageAlt: 'PixTool Number Theory Forge - Prime Factorization and GCD Analysis',
     imageTitle: 'Online Number Theory & Prime Tools for Research',
+    seo: {
+      title: "Number Theory Forge — Prime Factorization & GCD Calculator",
+      keywords: "number theory, prime factorization calculator, gcd calculator, lcm calculator, modular arithmetic, primality test, cryptograpy math, math research tools",
+      description: "Analyze number properties including prime factorization, GCD, and modular arithmetic. High-authority logic for cryptographic analysis and mathematical research."
+    },
     benefits: [
       'High-velocity prime factorization logic for large integer analysis',
       'Advanced GCD and LCM computation for fractional synchronization',
@@ -3046,6 +3162,11 @@ export const MATH_TOOLS = [
     color: '#3b82f6', path: '/math-tools/fraction-calculator', screenshot: 'utility-tools-hub.png',
     imageAlt: 'PixTool Fraction Pro - Precision Arithmetic with Mixed Number Support',
     imageTitle: 'Add, Subtract, Multiply and Divide Fractions Online',
+    seo: {
+      title: "Fraction Pro — Advanced Fraction Calculator [Step-by-Step]",
+      keywords: "fraction calculator, solve fractions, simplify fractions, mixed number calculator, fractional arithmetic, fraction to decimal, math homework helper free",
+      description: "Precise fractional arithmetic with simplified results and step-by-step logic. Add, subtract, multiply, and divide fractions and mixed numbers with high precision."
+    },
     benefits: [
       'Architectural rational math avoiding fractional floating-point errors',
       'Automatic mixed number conversion and improper fraction detection',
@@ -3090,8 +3211,25 @@ export const MATH_TOOLS = [
     color: '#3b82f6', path: '/math-tools/vector-calculator', screenshot: '3d-vector-calculator-visualizer.png',
     imageAlt: 'PixTool Vector Forge - 3D Magnitude Calculator',
     imageTitle: 'Solve Vector Equations Online',
-    benefits: ['3D visualization', 'Dot & Cross products', 'Magnitude and unit vectors', 'Angle calculation'],
-    howTo: ['Input vector coordinates (x, y, z)', 'Choose vector operation', 'Visualize the result in 3D'],
+    seo: {
+      title: "Vector Forge — 3D Vector Calculator & Visualizer",
+      keywords: "vector calculator, cross product calculator, dot product calculator, 3d vector visualizer, vector magnitude, math calculator 3d, vector math online",
+      description: "Calculate dot products, cross products, and magnitudes with interactive 3D vector visualization. Engineered for physics simulations and game development workflows."
+    },
+    benefits: [
+      'Interactive 3D vector visualization for spatial precision',
+      'High-authority dot and cross product algorithmic kernels',
+      'Instant magnitude and unit vector (normalization) computation',
+      'Angle calculation between vectors with industrial accuracy',
+      'Zero-latency browser-native processing for game dev and physics'
+    ],
+    howTo: [
+      'Enter your vector coordinates (x, y, z) into the primary 3D buffer.',
+      'Select the vector operation (Dot Product, Cross Product, or Magnitude).',
+      'Analyze the resulting spatial transformation in the interactive 3D render.',
+      'Review the calculated results for magnitude and directional unit vectors.',
+      'Copy the precise mathematical output for your research documentation.'
+    ],
     alternativeTo: ['Online Vector Calculator', 'Symbolab Vectors'],
     tips: [
       'Ensure your coordinates are in (x, y, z) format for 3D visualizations.',

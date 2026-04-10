@@ -93,6 +93,13 @@ const ensureBrandSuffix = (value, siteName) => {
     const normalized = normalizeText(value)
     if (!normalized) return siteName
     if (normalized.toLowerCase().includes(siteName.toLowerCase())) return normalized
+    
+    // SEO optimization: Only append brand if title is short enough to avoid truncation
+    // Target: ~55 characters total (Standard SERP limit is 60)
+    if (normalized.length > 50) {
+        return normalized
+    }
+    
     return `${normalized} | ${siteName}`
 }
 
@@ -260,7 +267,13 @@ export default function SEO({
     const [liveRatings, setLiveRatings] = useState({ tool: null, overall: null })
     const [liveRatingMeta, setLiveRatingMeta] = useState({ toolFetchedAt: null, overallFetchedAt: null })
     const searchQuery = typeof window !== 'undefined' ? window.location.search : ''
-    const shouldNoIndex = noIndex || path.startsWith('/pix-admin') || searchQuery.includes('q={search_term_string}') || searchQuery.includes('?q=')
+    const shouldNoIndex = 
+        noIndex || 
+        toolDataFromMap?.status === 'coming-soon' || 
+        path.startsWith('/pix-admin') || 
+        path.includes('/test-') ||
+        searchQuery.includes('q={search_term_string}') || 
+        searchQuery.includes('?q=')
 
     const brandTitle = ensureBrandSuffix(resolvedTitle, siteName)
 
@@ -404,8 +417,8 @@ export default function SEO({
                 {
                     "@context": "https://schema.org",
                     "@type": "VideoObject",
-                    "name": "PixTool - The Ultimate Private AI & Productivity Suite [2026 Trailer]",
-                    "description": "Discover PixTool, the world's most secure and fast all-in-one productivity hub. Featuring 100+ private tools for PDF, Image processing, and AI generation—all running locally in your browser.",
+                    "name": `${siteName} - The Ultimate Private AI & Productivity Suite [2026 Trailer]`,
+                    "description": `Discover ${siteName}, the world's most secure and fast all-in-one productivity hub. Featuring 100+ private tools for PDF, Image processing, and AI generation—all running locally in your browser.`,
                     "thumbnailUrl": [
                         "https://img.youtube.com/vi/fzIhPN-gv_E/maxresdefault.jpg"
                     ],
@@ -424,7 +437,7 @@ export default function SEO({
                     "@context": "https://schema.org",
                     "@type": "WebSite",
                     "@id": `${siteUrl}/#website`,
-                    "name": "PixTool",
+                    "name": siteName,
                     "url": siteUrl,
                     "publisher": { "@id": `${siteUrl}/#organization` }
                 }
@@ -456,16 +469,22 @@ export default function SEO({
             )
         }
 
-        // Include WebApplication only on actual tool pages.
+        // Include WebApplication/SoftwareApplication on actual tool pages.
         if (isToolPath) {
+            const toolTitle = resolvedToolName || brandTitle || siteName
+            
+            // Primary Application Schema (Consolidated)
             const webAppSchema = {
                 "@context": "https://schema.org",
                 "@type": "WebApplication",
-                "name": resolvedToolName || brandTitle || siteName,
+                "name": toolTitle,
+                "description": resolvedDescription,
                 "url": fullUrl,
+                "image": ogImage,
                 "applicationCategory": (path.includes('/pdf') || path.includes('/utility')) ? "BusinessApplication" : "UtilitiesApplication",
-                "operatingSystem": "All (Web-based Browser Studio)",
+                "operatingSystem": "All (Modern Web Browser)",
                 "isAccessibleForFree": true,
+                "browserRequirements": "Requires JavaScript",
                 "featureList": toolDataFromMap?.benefits || [],
                 "permissions": "No registration required, 100% Private local browser processing",
                 "publisher": { "@id": `${siteUrl}/#organization` },
@@ -475,13 +494,7 @@ export default function SEO({
                     "price": "0",
                     "priceCurrency": "USD",
                     "url": fullUrl,
-                    "availability": "https://schema.org/InStock",
-                    "eligibleRegion": [
-                        { "@type": "Country", "name": "IN" },
-                        { "@type": "Country", "name": "US" },
-                        { "@type": "Country", "name": "GB" },
-                        { "@type": "Country", "name": "AU" }
-                    ]
+                    "availability": "https://schema.org/InStock"
                 }
             }
 
@@ -496,6 +509,27 @@ export default function SEO({
             }
 
             globalSchemas.push(webAppSchema)
+
+            // Add HowTo schema for tool steps if provided (minimum 3 steps for quality)
+            if (resolvedToolSteps && Array.isArray(resolvedToolSteps) && resolvedToolSteps.length >= 3) {
+                globalSchemas.push({
+                    "@context": "https://schema.org",
+                    "@type": "HowTo",
+                    "name": `How to use ${toolTitle} - Step by Step Guide`,
+                    "description": `Quick tutorial on using the ${toolTitle} to achieve professional results instantly in your browser.`,
+                    "url": fullUrl,
+                    "image": ogImage,
+                    "publisher": { "@id": `${siteUrl}/#organization` },
+                    "totalTime": "PT1M",
+                    "step": resolvedToolSteps.map((step, idx) => ({
+                        "@type": "HowToStep",
+                        "position": idx + 1,
+                        "name": `Step ${idx + 1}: ${step.split('.')[0]}`,
+                        "text": step,
+                        "url": `${fullUrl}#step-${idx + 1}`
+                    }))
+                })
+            }
         }
 
         // BreadcrumbList
@@ -507,104 +541,16 @@ export default function SEO({
         })
 
         if (breadcrumbList.length > 0) {
-            const breadcrumbItems = breadcrumbList[0]?.item === '/' || breadcrumbList[0]?.name === 'Home'
-                ? breadcrumbList
-                : [{ name: 'Home', item: siteUrl }, ...breadcrumbList]
-
             globalSchemas.push({
                 "@context": "https://schema.org",
                 "@type": "BreadcrumbList",
-                "itemListElement": [
-                    ...breadcrumbItems.map((crumb, idx) => ({
-                        "@type": "ListItem",
-                        "position": idx + 1,
-                        "name": crumb.name,
-                        "item": crumb.item.startsWith('http') ? crumb.item : `${siteUrl}${crumb.item}`
-                    }))
-                ]
-            })
-        }
-
-        // FAQPage
-        const finalFaqs = (faqs && Array.isArray(faqs)) ? faqs : (schema?.faq && Array.isArray(schema.faq) ? schema.faq : null)
-        if (finalFaqs && finalFaqs.length > 0) {
-            globalSchemas.push({
-                "@context": "https://schema.org",
-                "@type": "FAQPage",
-                "mainEntity": finalFaqs.map(f => ({
-                    "@type": "Question",
-                    "name": f.q,
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": f.a
-                    }
+                "itemListElement": breadcrumbList.map((crumb, idx) => ({
+                    "@type": "ListItem",
+                    "position": idx + 1,
+                    "name": crumb.name,
+                    "item": crumb.item.startsWith('http') ? crumb.item : `${siteUrl}${crumb.item.startsWith('/') ? crumb.item : `/${crumb.item}`}`
                 }))
             })
-        }
-
-        // SoftwareApplication (Tool specific)
-        if (path !== '/' && isToolPath) {
-            const toolTitle = resolvedToolName || brandTitle || resolvedTitle
-            globalSchemas.push({
-                "@context": "https://schema.org",
-                "@type": "SoftwareApplication",
-                "name": toolTitle,
-                "description": resolvedDescription,
-                "applicationCategory": (path.includes('/pdf') || path.includes('/utility')) ? "BusinessApplication" : "UtilitiesApplication",
-                "url": fullUrl,
-                "image": ogImage,
-                "featureList": toolDataFromMap?.benefits || [],
-                "screenshot": ogImage,
-                "permissions": "No registration required, Privacy-first browser processing",
-                "publisher": { "@id": `${siteUrl}/#organization` },
-                "offers": {
-                    "@type": "Offer",
-                    "price": "0",
-                    "priceCurrency": "USD",
-                    "availability": "https://schema.org/InStock",
-                    "url": fullUrl,
-                    "eligibleRegion": [
-                        { "@type": "Country", "name": "IN" },
-                        { "@type": "Country", "name": "US" },
-                        { "@type": "Country", "name": "GB" },
-                        { "@type": "Country", "name": "AU" }
-                    ]
-                },
-                "softwareVersion": "2026.04",
-                "operatingSystem": "All (Web-based Browser Studio)",
-                "author": {
-                    "@type": "Organization",
-                    "name": siteName,
-                    "url": siteUrl
-                }
-            })
-
-            // Add HowTo schema for tool steps if provided
-            if (resolvedToolSteps && Array.isArray(resolvedToolSteps) && resolvedToolSteps.length > 0) {
-                globalSchemas.push({
-                    "@context": "https://schema.org",
-                    "@type": "HowTo",
-                    "name": `How to use ${toolTitle} | PixTool Guide`,
-                    "description": `Step-by-step tutorial on using the ${toolTitle} to achieve professional results locally in your browser.`,
-                    "url": fullUrl,
-                    "image": ogImage,
-                    "publisher": { "@id": `${siteUrl}/#organization` },
-                    "totalTime": "PT1M",
-                    "supply": [
-                        { "@type": "HowToSupply", "name": "Source File" }
-                    ],
-                    "tool": [
-                        { "@type": "HowToTool", "name": "PixTool Browser Studio" }
-                    ],
-                    "step": resolvedToolSteps.map((step, idx) => ({
-                        "@type": "HowToStep",
-                        "position": idx + 1,
-                        "name": `Step ${idx + 1}: ${step.split('.')[0]}`,
-                        "text": step,
-                        "url": `${fullUrl}#step-${idx + 1}`
-                    }))
-                })
-            }
         }
 
         // Article fallback only when no custom article schema is provided

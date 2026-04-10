@@ -326,7 +326,19 @@ export default function ImageTools() {
   }
 
   const activeToolData = activeTool ? ALL_TOOLS_MAP[`/image-tools/${activeTool}`] : (ALL_TOOLS_MAP['/image-tools'] || null)
-  const seoContent = activeToolData?.seo || activeToolData || {}
+  const seoContent = {
+    title: '',
+    description: '',
+    benefits: [],
+    howTo: [],
+    faq: [],
+    tips: [],
+    useCases: [],
+    relatedTools: [],
+    readNext: [],
+    alternativeTo: [],
+    ...(activeToolData?.seo || activeToolData || {})
+  }
 
   // Hub metadata for the main /image-tools page
   const hubMetadata = {

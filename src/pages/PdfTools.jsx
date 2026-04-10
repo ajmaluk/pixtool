@@ -294,7 +294,19 @@ export default function PdfTools() {
   }
 
   const activeToolData = activeTool ? ALL_TOOLS_MAP[`/pdf-tools/${activeTool}`] : (ALL_TOOLS_MAP['/pdf-tools'] || null)
-  const seoContent = activeToolData?.seo || activeToolData || {}
+  const seoContent = {
+    title: '',
+    description: '',
+    benefits: [],
+    howTo: [],
+    faq: [],
+    tips: [],
+    useCases: [],
+    relatedTools: [],
+    readNext: [],
+    alternativeTo: [],
+    ...(activeToolData?.seo || activeToolData || {})
+  }
 
   // Hub metadata for the main /pdf-tools page
   const hubMetadata = {

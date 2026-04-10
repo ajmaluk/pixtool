@@ -4,4 +4,4 @@
 http://pixtool.in/* https://www.pixtool.in/:splat 301
 http://www.pixtool.in/* https://www.pixtool.in/:splat 301
 
-/assets/* /assets/:splat 200
+/assets/* /assets/:splat 200/* /index.html 200
