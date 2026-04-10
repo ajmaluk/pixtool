@@ -17,6 +17,11 @@ export const IMAGE_TOOLS = [
     color: '#a855f7', path: '/image-tools/resize', screenshot: 'best-online-image-resizer-tool.png',
     imageAlt: 'PixTool Professional Image Resizer 2026 - High-Fidelity Scaling',
     imageTitle: 'Best Free Image Resizer Online [Official]',
+    seo: {
+      title: "Image Resizer — Resize Image Free [Online]",
+      keywords: "image resizer, resize image, resize photo, image resize free, resize image online, photo resizer, resize image percentage, bulk resize images",
+      description: "Resize images to exact dimensions or percentages. Free online image resizer with no quality loss. 100% browser-based privacy."
+    },
     benefits: [
       'Industrial-grade pixel-perfect scaling for professional photography',
       'Advanced aspect ratio preservation engine to prevent image distortion',
@@ -52,6 +57,11 @@ export const IMAGE_TOOLS = [
     color: '#a855f7', path: '/image-tools/crop', screenshot: 'professional-image-cropper-online.png',
     imageAlt: 'PixTool Image Cropper - Pixel-Perfect Aspect Ratio Selection',
     imageTitle: 'Crop Photos for Social Media',
+    seo: {
+      title: "Crop Image Online — Free Photo Cropper",
+      keywords: "crop image, crop photo, image cropper, crop picture, crop image free, free crop tool, crop image online, aspect ratio crop",
+      description: "Crop images to any aspect ratio. Free online photo cropper for Instagram, YouTube, and social media. No upload required."
+    },
     benefits: [
       'Professional custom aspect ratio presets for all social platforms',
       'Freehand precision crop tool for surgical compositional control',
@@ -96,6 +106,11 @@ export const IMAGE_TOOLS = [
     color: '#a855f7', path: '/image-tools/rotate', screenshot: 'free-online-image-rotator.png',
     imageAlt: 'PixTool Image Rotator - Precise 90/180 Degree Orientation Restoration',
     imageTitle: 'Rotate Photos Online Free with Zero Quality Loss',
+    seo: {
+      title: "Rotate Image Online — Flip & Rotate Photo 90 Degrees Free",
+      keywords: "rotate image, rotate photo, rotate image 90 degrees, flip image, mirror image, rotate picture, image rotator, flip photo, rotate image online, rotate photo free, rotate image clockwise, flip image horizontal, rotate image vertical",
+      description: "Rotate and flip images instantly online. Free rotate photo 90 degrees, horizontal flip, vertical flip. No upload required, 100% browser-based privacy processing."
+    },
     benefits: [
       'High-velocity 90° clockwise and anti-clockwise rotation',
       'Instant horizontal and vertical mirror flipping protocols',
@@ -231,6 +246,11 @@ export const IMAGE_TOOLS = [
     color: '#a855f7', path: '/image-tools/watermark', screenshot: 'add-watermark-to-photos-online-free.png',
     imageAlt: 'PixTool Asset Shield - Professional IP Protection and Branding',
     imageTitle: 'Add Text Watermark to Images Online Free',
+    seo: {
+      title: "Add Watermark to Image — Free Text Watermark Generator [Online]",
+      keywords: "watermark, add watermark, watermark image, text watermark, watermark generator, watermark creator, image watermark, photo watermark, watermark online, watermark free, add text watermark, watermark tool",
+      description: "Add text watermarks to images instantly. Free online watermark tool with custom text, opacity, and positioning. No upload, 100% private browser processing."
+    },
     benefits: [
       'Dynamic text input forge with real-time preview logic',
       'Professional font selection and high-fidelity typography options',
@@ -319,6 +339,11 @@ export const IMAGE_TOOLS = [
     color: '#a855f7', path: '/image-tools/grayscale', screenshot: 'convert-image-to-grayscale-online.png',
     imageAlt: 'PixTool Monochrome Studio - Professional Black & White filtration',
     imageTitle: 'Best Black and White Photo Converter Online',
+    seo: {
+      title: "Grayscale Image Converter — Convert to Black & White Online Free",
+      keywords: "grayscale, grayscale image, convert to grayscale, image to black and white, grayscale converter, grayscale tool, black and white image converter, sepia filter, vintage photo filter, photo grayscale online, convert image to grayscale free, grayscale images online, grayscale tool, invert colors, lunapic alternative",
+      description: "Convert images to grayscale, black & white, or sepia instantly. Free online grayscale tool with sepia and vintage filters. No upload required, 100% private browser processing."
+    },
     benefits: [
       'Precision Grayscale conversion with luminance adjustment',
       'Professional Sepia and Vintage artistic filter presets',
@@ -762,6 +787,11 @@ export const PDF_TOOLS = [
     color: '#06b6d4', path: '/pdf-tools/watermark', screenshot: 'add-text-watermark-to-pdf-online.png',
     imageAlt: 'PixTool PDF Watermark - Document Branding and Security',
     imageTitle: 'Add Watermark to PDF Online Free [Professional]',
+    seo: {
+      title: "Add Watermark to PDF — Free PDF Watermark Generator [Online]",
+      keywords: "pdf watermark, watermark pdf, add watermark to pdf, pdf watermark tool, watermark generator pdf, add text to pdf, pdf watermark online, watermark pdf free",
+      description: "Add text watermarks to PDF files. Free online PDF watermark tool with custom text, opacity, and diagonal positioning. No upload, 100% private."
+    },
     benefits: [
       'Universal bulk watermarking for multi-page documents',
       'Precision opacity and font-style controls',
@@ -806,6 +836,11 @@ export const PDF_TOOLS = [
     color: '#06b6d4', path: '/pdf-tools/reorder', screenshot: 'reorder-pdf-pages-online-free.png',
     imageAlt: 'PixTool PDF Reorder - Visual Page Management',
     imageTitle: 'Rearrange PDF Pages Online [Drag & Drop]',
+    seo: {
+      title: "Reorder PDF Pages — Rearrange, Delete, Merge PDF Pages [Free]",
+      keywords: "reorder pdf, reorder pdf pages, pdf page reorder, rearrange pdf, pdf reorder pages, delete pdf pages, move pdf pages, pdf page order, reorder pdf online, reorder pages, pdf reorder, reorder pages pdf",
+      description: "Reorder, delete, and rearrange PDF pages instantly. Visual drag-and-drop interface. Free online PDF page manager. No upload, 100% private."
+    },
     benefits: [
       'High-fidelity visual page thumbnails',
       'Fluid drag-and-drop page resequencing',
@@ -1118,9 +1153,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Secure Temp Mail 2026 - Instant Anonymous Disposable Email',
     imageTitle: 'Best Disposable Email Service Online',
     seo: {
-      title: "Free Temporary Email: Instant Anonymous 10 Minute Mail [No Spam]",
-      keywords: "temp mail 2026, best temporary email service 2026, most reliable disposable email, free temporary email address generator, anonymous email for account verification, bypass email verification with temp mail, private disposable email services online, protect primary email from spam inbox",
-      description: "Get a highly reliable temporary email address instantly. Protect your primary inbox from aggressive spam, targeted marketing, and trackers with our completely free disposable 10 minute mail service. Perfect for bypassing strict email verifications and anonymous signups with an ironclad zero-log privacy policy."
+      title: "Free Temp Mail — Instant Anonymous Disposable Email [No Registration]",
+      keywords: "temp mail, temporary email, disposable email, free temp mail, temp mail generator, fake email, throwaway email, temp email, temporary email address, 10 minute mail, temp mail reddit, mailinator alternative, temp mail org, fake email generator, anonymous email, temp mail with password, temporary mail with password, temp mail for otp, fake email and password, temp mail login, one time email, fake email address, toolpix, pixtool temp mail, tempmail, temp mail otp login",
+      description: "Get instant free temporary email for signups, verifications, and OTP codes. No registration required—use immediately. 100% private disposable email with auto-refresh inbox."
     },
     benefits: [
       "Instant Email Generation in 1 Second",
@@ -1177,9 +1212,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool 10 Minute Mail - Secure Expiring Inbox for Rapid Verification',
     imageTitle: 'Best 10 Minute Disposable Email Service Online',
     seo: {
-      title: "10 Minute Mail: Get a Free Anonymous Temporary Email [Instant]",
-      keywords: "10 minute mail, free disposable email, temporary email address, burner email, anonymous inbox service, protect from spam, secure temp mail, fake email for signups, 10 min mail free",
-      description: "Generate a secure 10 minute mail address instantly. Perfect for protecting your identity and bypassing spam filters with a free, disposable temporary email inbox. No registration required, 100% private and secure."
+      title: "10 Minute Mail — Free Anonymous Temporary Email [Instant]",
+      keywords: "10 minute mail, 10 min mail, 10minutemail, 10min mail, temporary email 10 minutes, 10 min temp mail, free 10 minute mail, disposable email 10 minutes, burner email 10 min, temp mail auto expiring, 10 minute mail alternative, 10minutemail one, temp mail reddit, temp mail org, free temp mail 10 min",
+      description: "Get a free 10-minute disposable email instantly. Perfect for quick verification and signups. Auto-expires for complete privacy. No registration, no spam, 100% free."
     },
     benefits: [
       "Precise 10-minute session management",
@@ -1234,8 +1269,8 @@ export const UTILITY_TOOLS = [
     imageTitle: 'Change Temporary Email Address Instantly Online',
     seo: {
       title: "Change Temp Email — Generate New Anonymous Inboxes Instantly",
-      keywords: "change email, rotate temp mail, new anonymous inbox, burner mail switcher, unlimited temporary email, multiple email addresses free, switch temp mail online",
-      description: "Rotate and change your temporary email addresses instantly. Ideal for multiple signups or testing environments requiring fresh burner inboxes with zero wait time and 100% privacy."
+      keywords: "change temp email, rotate email, new temp email, switch email, get new temp mail, change email address, generate new email, refresh temp mail, new disposable email, temp mail rotate, custom temp email, temp mail with password",
+      description: "Generate a new temporary email address instantly. Rotate identities for multiple signups or testing. Fresh inbox with every click, 100% private and free."
     },
     benefits: [
       "Infinite email rotation",
@@ -1295,9 +1330,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Fake Email Generator - Create Anonymous Burner Inboxes Free',
     imageTitle: 'Fake Email Generator Online - No Signup Required',
     seo: {
-      title: "Fake Email Generator — Create Anonymous Burner Inboxes [Free]",
-      keywords: "fake email, burner email generator, anonymous mail, dummy inbox, test email address, free fake mail online, fake email for testing",
-      description: "Generate high-quality fake email addresses for testing, registration, and privacy. Secure, anonymous, and completely browser-controlled burner inboxes."
+      title: "Fake Email Generator — Free Fake Email with Password [Instant]",
+      keywords: "fake email, fake email generator, fake email and password, fake gmail, fake email with password, fake mail, fake email address, fake email id, free fake email, dummy email, disposable fake email, fake email for testing, fake email generator with password, fake email password generator, create fake email, random email generator, fake email creator, fake email password, fake mail generator, fake mail creator, fake mail sender with attachment",
+      description: "Generate free fake email addresses instantly with password support. Perfect for testing, signups, and privacy protection. No registration required, 100% anonymous."
     },
     benefits: [
       "High-speed generation",
@@ -1345,9 +1380,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Disposable Email Address - Secure One-Time Burner Inbox Free',
     imageTitle: 'Disposable Email Service Online - Fast & Private',
     seo: {
-      title: "Disposable Email Address — Secure One-Time Burner Inbox [Free]",
-      keywords: "disposable email, burner email, one-time email, anonymous inbox, temporary mail address, protect from spam, secure disposable mail, free burner email online",
-      description: "Create a secure, one-time disposable email address instantly. Perfect for protecting your primary inbox from marketing spam and trackers during one-off signups. Our disposable mail service ensures your real identity remains private with zero data logging."
+      title: "Disposable Email — Free One-Time Temporary Email [Instant]",
+      keywords: "disposable email, disposable email address, one time email, burner email, free disposable email, temporary email address, temp email, temporary disposable email, one-time email, anonymous email, mailinator alternative, disposable email generator, temp mail disposable, single use email",
+      description: "Create free one-time disposable email instantly. Perfect for signups, verifications, and downloads. No registration, fully anonymous, protects your real inbox from spam."
     },
     benefits: [
       "Instant one-click generation",
@@ -1397,9 +1432,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Throwaway Email Inbox - Instant Secure Temporary Mail 2026',
     imageTitle: 'Free Throwaway Inbox Online - Anonymous & Secure',
     seo: {
-      title: "Throwaway Email Inbox — Instant Secure Temporary Mail [2026]",
-      keywords: "throwaway email, instant email inbox, temporary mail, fake mail for testing, anonymous throwaway address, secure burner mail, free throwaway inbox online",
-      description: "Get an instant throwaway email inbox for secure and anonymous communication. Bypassing registration forms and protecting your privacy has never been easier. Our high-speed throwaway mail service is 100% free and requires no personal information."
+      title: "Throwaway Email — Free Anonymous Disposable Inbox [Instant]",
+      keywords: "throwaway email, disposable email, temporary email, anonymous email, burner email, free temp mail, throwaway email generator, one time email, temp email, temp mail, mailinator alternative, throwaway email inbox, privacy email, fake email, temporary mail address",
+      description: "Get instant throwaway email for signups and verifications. 100% free, no registration, fully anonymous disposable inbox. Protect your privacy with instant temp mail."
     },
     benefits: [
       "High-speed inbox refreshing",
@@ -1451,7 +1486,7 @@ export const UTILITY_TOOLS = [
     imageTitle: 'Online typing speed test pro - Track WPM and Accuracy',
     seo: {
       title: "Typing Speed Test: Master Your WPM with Pro Speed Test [Ad-Free]",
-      keywords: "typing test online 2026, monkeytype alternative free ad free, typing speed test wpm 1 minute, best online typing practice accurate, typing accuracy test browser native, improve wpm fast programmers, professional keyboard typing test",
+      keywords: "typing test, typing test online, monkeytype, monkeytype alternative, typing speed test, wpm test, typing speed test free, improve wpm, typing accuracy test, typing test 1 minute, free typing test",
       description: "Master your keyboard skills with our professional, highly accurate typing speed test. Featuring a stunning, minimalist 'MonkeyType' style interface, you can effortlessly track your Words Per Minute (WPM) and exact accuracy in real-time with zero disruptive ads and 100% telemetry-free privacy."
     },
     benefits: [
@@ -1507,9 +1542,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Universal QR Scanner - Pro-Level Flash Decoding and Browser-Native Upload',
     imageTitle: 'Best Online QR Code Scanner - Secure & Fast',
     seo: {
-      title: "Best Online QR Code Scanner [2026] — No App Needed & 100% Private",
-      keywords: "qr scanner online 2026, free qr code reader browser, best online qr scanner secure, scan qr from camera online free, browser qr scanner no app, fast qr decoder online, safe qr reader",
-      description: "Scan QR codes instantly with the world's fastest browser-native QR reader. No app download required—100% private and secure local scanning using your webcam or mobile camera. The safest way to preview and scan links online."
+      title: "Best Free QR Code Scanner Online 2026 — Scan from Image & Camera",
+      keywords: "qr code scanner online, scan qr code from image, qr scanner online, qr code scanner from image, scan qr code online, free qr scanner, qr code scanner free, online qr reader, scan qr code from photo, qr scanner from image, qr code scanner browser, qr code scanner no app, scan qr image, qr reader online, qr scanner app alternative, qr code reader from image, read qr code from image, scan qr from photo, qr scanner photo, qr code scanner photo, scan any qr code online, qr scanner from image online, photo qr code scanner online, qr image reader online, online qr image reader, convert qr code to link, qr to link converter",
+      description: "Scan QR codes instantly from camera or uploaded images. 100% free, no app download required, fully private browser-based QR scanner. Supports all devices and formats."
     },
     benefits: [
       "No App Download Required",
@@ -1564,9 +1599,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Professional QR Generator - Custom Branded QR Codes',
     imageTitle: 'Create High-Res QR Codes Online Free',
     seo: {
-      title: "Free QR Code Generator - No Expiry & No Signup | Successor to Uitly",
-      keywords: "uitly alternative, uitly replacement, free qr code generator unlimited, custom qr code creator 2026, dynamic qr code alternative, bulk qr codes for print, high-resolution svg qr generator, permanent qr code generator, qr code for menus, pixtool qr",
-      description: "The professional successor to Uitly. Create 100% free, unlimited, and permanent QR codes for websites, WiFi, or menus instantly. No registration, no watermarks, and no expiration—PixTool runs locally in your browser for maximum privacy."
+      title: "QR Code Generator — Free QR Code Maker [No Signup, No Expiry]",
+      keywords: "qr code generator, qr code generator free, create qr code, generate qr code, free qr code, qr code maker, qr code creator, qr generator, make qr code, online qr code generator, qr code generator no watermark, qr code generator unlimited, custom qr code, qr code for wifi, qr code for menu, qr code generator svg, free qr code online, uitly, uitly alternative, uitly.com, free qr code generator no expiry",
+      description: "Create free QR codes instantly. No signup, no watermarks, no expiration. Generate QR codes for URLs, WiFi, text, vCard and more. 100% private browser-based generator."
     },
     benefits: [
       "Official professional successor to Uitly — All your favourite features, now 100% free.",
@@ -1622,9 +1657,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Identity Forge - Secure Fake Email Persona Generator',
     imageTitle: 'Generate Professional Fake Email Identities for Quality Assurance',
     seo: {
-      title: "Fake Email Generator: Anonymous Identity Forge [2026]",
-      keywords: "fake email generator 2026, generate unlimited fake emails free, burner email identity maker, fake email for signups online, anonymous email generator secure, privacy inbox creator, fake mail account generator no registration",
-      description: "Securely forge anonymous email identities with our professional fake email generator. Ideal for testing environments and privacy protection, PixTool allows you to instantly create high-authority personas with zero server-side logging and 100% browser-internal data generation."
+      title: "Fake Email Generator with Password — Anonymous Identity Forge",
+      keywords: "fake email generator, fake email and password, fake email with password, fake email generator with password, fake gmail password, fake email password generator, random email generator, identity forge, fake email identity, burner email generator, free fake email, anonymous email generator, test email generator",
+      description: "Generate fake email with password for secure testing and signups. Create unlimited anonymous identities with our free browser-based fake email generator. No registration required."
     },
     benefits: [
       "High-authority randomized address orchestration",
@@ -1732,9 +1767,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Ghost Inbox - High-Velocity Secure Ephemeral Storage',
     imageTitle: 'Best Throwaway Email Inbox Online Free',
     seo: {
-      title: "Throwaway Email Inbox: Anonymous Ghost Inboxes [2026]",
-      keywords: "throwaway email inbox 2026, free anonymous throwaway email, ghost inbox generator, temporary mail for registration, untraceable email address, throwaway email service best, private throwaway mail free",
-      description: "Shield your identity with our ghost inbox generator. Designed for high-stakes privacy, PixTool provides high-velocity throwaway email addresses that leave zero trace. Ideal for secure verifications and anonymous communication with 100% ephemeral data storage."
+      title: "Throwaway Email — Free Anonymous Disposable Inbox [Instant]",
+      keywords: "throwaway email, disposable email, free throwaway email, temp mail, temporary email, throwaway email inbox, anonymous email, ghost inbox, burner email, temp email, fake email, disposable email free, one time email, mailinator alternative, throwaway email generator",
+      description: "Get instant throwaway email for signups and verifications. Free, no registration, fully anonymous disposable inbox. Protect your privacy with instant temp mail."
     },
     benefits: [
       "Secure ephemeral RAM storage for zero-trace message handling",
@@ -2059,6 +2094,11 @@ export const AI_TOOLS = [
     color: '#8b5cf6', path: '/ai-tools/content-generator', screenshot: 'ai-content-creation.png',
     imageAlt: 'PixTool Content Forge - High-Authority Writing Studio with AI',
     imageTitle: 'Generate High-Quality AI Content Professionally',
+    seo: {
+      title: "AI Content Generator — Free AI Writer [Blog & Article]",
+      keywords: "ai content generator, ai writer, content generator, ai writing, free ai writer, blog writer, article generator, ai copywriter, ai content writer, generate content with ai, free content generator",
+      description: "Generate unlimited AI content for blogs, articles, and marketing. Free AI-powered writer for professional content. No signup required."
+    },
     benefits: [
       'SEO-optimized drafting engine aligned with current search algorithms',
       'Precision linguistic tone control from academic to viral social styles',
@@ -2323,6 +2363,11 @@ export const AI_TOOLS = [
     color: '#8b5cf6', path: '/ai-tools/caption-generator', screenshot: 'ai-captions.png',
     imageAlt: 'PixTool Social Pulse - Social Media Viral Engine',
     imageTitle: 'Trending Social Captions with AI',
+    seo: {
+      title: "AI Caption Generator — Social Media Captions Free",
+      keywords: "ai caption generator, caption generator, social media captions, instagram captions, tiktok captions, ai social captions, free captions generator",
+      description: "Generate viral social media captions for Instagram, TikTok, and X. Free AI caption generator with hashtags."
+    },
     benefits: [
       'Real-time viral trend integration for high-engagement social posts',
       'Smart emoji optimization engine for visual resonance and scroll-stopping',
@@ -2367,6 +2412,11 @@ export const AI_TOOLS = [
     color: '#8b5cf6', path: '/ai-tools/paraphraser', screenshot: 'ai-paraphrasing-tool.png',
     imageAlt: 'PixTool Nuance Engine - Advanced Stylistic Transformation',
     imageTitle: 'Professional AI Text Paraphraser',
+    seo: {
+      title: "AI Paraphraser — Rephrase Text Free [Free]",
+      keywords: "ai paraphraser, paraphrase, rephrase text, rephraser, text rephraser, free paraphraser, paraphrase tool",
+      description: "Rephrase and paraphrase text instantly with AI. Free online paraphraser tool."
+    },
     benefits: [
       'Advanced semantic preservation engine preventing logic loss during rephrasing',
       'Versatile transformation modes including Creative, Formal, and Simplified',
@@ -2411,6 +2461,11 @@ export const AI_TOOLS = [
     color: '#8b5cf6', path: '/ai-tools/summarizer', screenshot: 'ai-text-summarizer.png',
     imageAlt: 'PixTool Intelligence Distiller - Document Intelligence and Summarization',
     imageTitle: 'Summarize Long Documents with AI Intelligence',
+    seo: {
+      title: "AI Summarizer — Summarize Text Free [Long Document]",
+      keywords: "ai summarizer, summarize text, text summarizer, ai summary, summary generator, shorten text free, document summarizer",
+      description: "Summarize long text and documents instantly with AI. Free online summarizer. No upload required."
+    },
     benefits: [
       'Latent Semantic Indexing (LSI) extraction for core keyword discovery',
       'Hierarchical bullet-point synthesis for rapid executive knowledge',
@@ -2455,6 +2510,11 @@ export const AI_TOOLS = [
     color: '#8b5cf6', path: '/ai-tools/translator', screenshot: 'ai-translation.png',
     imageAlt: 'PixTool Linguist Intelligence - Accurate Translation',
     imageTitle: 'Professional Language Translation with AI',
+    seo: {
+      title: "AI Translator — Translate Text Free [50+ Languages]",
+      keywords: "ai translator, translate, language translator, free translator, text translator, translate text, ai translation, translate online, translate free, language converter",
+      description: "Translate text to 50+ languages instantly with AI. Free online translator preserving context and nuances. No upload required."
+    },
     benefits: [
       'Deep context-aware accuracy preserving cultural nuances and tech terms',
       'Universal support for 50+ global languages and regional dialects',
@@ -2499,6 +2559,11 @@ export const AI_TOOLS = [
     color: '#8b5cf6', path: '/ai-tools/keyword-generator', screenshot: 'ai-seo-keywords.png',
     imageAlt: 'PixTool SEO Architect - Search Ranking Dominance',
     imageTitle: 'Find High-Intent SEO Keywords',
+    seo: {
+      title: "SEO Keyword Generator — Free Keyword Tool",
+      keywords: "seo keyword generator, keyword generator, seo keywords, free keyword tool, keyword finder, keyword research tool",
+      description: "Generate high-intent SEO keywords for free. Find keywords to rank higher in search."
+    },
     benefits: [
       'Latent Semantic Indexing discovery for broad topical authority',
       'Search intent classification (Informational, Transactional, Navigational)',
@@ -2587,6 +2652,11 @@ export const AI_TOOLS = [
     color: '#8b5cf6', path: '/ai-tools/story-generator', screenshot: 'ai-creative-writing.png',
     imageAlt: 'PixTool Narrative Forge - Literary Architecture Partner',
     imageTitle: 'Write Engaging Stories with AI',
+    seo: {
+      title: "AI Story Generator — Create Stories with AI [Free Writing Tool]",
+      keywords: "ai story generator, story generator, creative writing ai, ai writer, write story with ai, free story maker, narrative generator, ai storytelling, fiction generator, ai creative writing, story writer, plot generator",
+      description: "Generate unlimited stories with AI. Create engaging narratives, plot arcs, and character development instantly. Free AI-powered story writer for authors and content creators."
+    },
     benefits: [
       'Deep plot arc generation based on classic narrative structures',
       'Psychological character profiling for realistic fictional interaction',

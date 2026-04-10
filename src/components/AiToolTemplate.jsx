@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import SEO from './SEO'
-import AdSpace from './AdSpace'
 import { Send, Copy, RefreshCw, CheckCircle, Sparkles, Terminal, ArrowRight, Trash2, AlertCircle } from 'lucide-react'
 import { fetchTextResponse } from '../services/aiApi'
 import { useEffect, useRef } from 'react'
-import ToolRating from './ToolRating'
 import ToolContent from './ToolContent'
 import MarkdownRenderer from './MarkdownRenderer'
 import { ALL_TOOLS_MAP } from '../data/tools'
+import { useRatePopup } from '../hooks/useRatePopup'
 
 export default function AiToolTemplate({ 
   title, 
@@ -33,6 +32,7 @@ export default function AiToolTemplate({
   const [isStreaming, setIsStreaming] = useState(false)
   const timerRef = useRef(null)
   const outputRef = useRef(null)
+  const { triggerRating } = useRatePopup()
 
   // Auto-fetch metadata from global map for SEO enhancement
   const toolMetadata = ALL_TOOLS_MAP[path] || {}
@@ -91,6 +91,8 @@ export default function AiToolTemplate({
         } else {
           clearInterval(timerRef.current);
           setIsStreaming(false);
+          // Trigger rating after successful AI interaction
+          triggerRating(path.replace(/^\//, ''));
         }
       }, 25);
     } catch (err) {
@@ -133,12 +135,10 @@ export default function AiToolTemplate({
       
       <div className="landing-layout" style={{ background: 'var(--bg-secondary)', minHeight: '100vh', padding: '2rem 1rem', width: '100%', maxWidth: '1800px', margin: '0 auto' }}>
         
-        {/* Left Side Ad */}
-        <AdSpace type="side" className="desktop-only" />
+
 
         <div className="landing-center" style={{ flex: 1, minWidth: 0 }}>
-            {/* Ad Space: Top Header */}
-            <AdSpace type="top" style={{ marginBottom: '2rem' }} />
+
 
             {/* Compact Tool Header */}
             <header style={{ padding: '0 0 2.5rem', textAlign: 'left' }}>
@@ -214,9 +214,7 @@ export default function AiToolTemplate({
                         </button>
                     </div>
 
-                    <div style={{ marginTop: '0.5rem' }}>
-                          <ToolRating toolSlug={toolMetadata.id || path.replace(/^\//, '')} />
-                    </div>
+
                 </aside>
 
                 {/* MAIN INTERACTION AREA */}
@@ -224,7 +222,7 @@ export default function AiToolTemplate({
                     <div 
                         className="studio-card"
                         style={{ 
-                            background: 'var(--bg-card)', 
+                            background: 'var(--bg-glass)', 
                             borderRadius: '24px', 
                             padding: '2rem',
                             boxShadow: 'var(--shadow-lg)',
@@ -233,7 +231,6 @@ export default function AiToolTemplate({
                             display: 'flex',
                             flexDirection: 'column',
                             minHeight: '600px',
-                            background: 'var(--bg-glass)',
                             backdropFilter: 'blur(20px)'
                         }}
                     >
@@ -338,17 +335,14 @@ export default function AiToolTemplate({
                 </main>
             </div>
 
-            {/* Bottom Ad Section */}
-            <div style={{ marginTop: '4rem' }}>
-                <AdSpace type="bottom" />
-            </div>
+
 
             {/* SEO & Tool Content Area */}
             <div style={{ marginTop: '6rem', paddingBottom: '4rem' }}>
               <ToolContent 
                 title={title}
                 description={description}
-                toolSlug={toolMetadata.id || path.replace(/^\//, '')}
+                toolSlug={path.replace(/^\//, '')}
                 seoTitle={`${title} - Platinum AI Tool`}
                 seoDescription={description}
                 seoKeywords={seoKeywords}
@@ -362,8 +356,7 @@ export default function AiToolTemplate({
             </div>
         </div>
 
-        {/* Right Side Ad */}
-        <AdSpace type="side" className="desktop-only" />
+
 
       </div>
     </>

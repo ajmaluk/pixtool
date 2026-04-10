@@ -1,7 +1,7 @@
 # PixTool Full AI Tool Index
 
 This file is auto-generated from source data.
-Generated At: 2026-04-08T18:01:40.761Z
+Generated At: 2026-04-10T10:16:34.573Z
 Canonical URL: https://www.pixtool.in
 Sitemap: https://www.pixtool.in/sitemap.xml
 
@@ -119,13 +119,13 @@ Total Blog Posts: 22
   - URL: https://www.pixtool.in/qr-generator
   - Description: Professional ISO-standard QR code generator engineered for high-fidelity marketing and localized data sovereignty. PixTool generates QR codes entirely within your browser's local sandbox, ensuring your URLs, credentials, and WiFi passwords never leave your machine or persist on a server.
 - Identity Forge
-  - URL: https://www.pixtool.in/fake-email
+  - URL: https://www.pixtool.in/identity-forge
   - Description: Generate a high-authority fake email identity for deep-layer privacy and industrial testing. Shield your primary digital footprint by using localized identity tokens that stay 100% private.
 - Burner Inbox
-  - URL: https://www.pixtool.in/disposable-email
+  - URL: https://www.pixtool.in/burner-inbox
   - Description: Create a one-time burner email identity for anonymous signups and high-velocity privacy protection. Engineered to bypass standard spam-traps and maintain localized anonymity.
 - Ghost Inbox
-  - URL: https://www.pixtool.in/throwaway-email
+  - URL: https://www.pixtool.in/ghost-inbox
   - Description: A high-velocity throwaway inbox engineered for temporary, zero-trace communication. Designed for high-stakes privacy where data persistence is a security liability.
 - Code Diff
   - URL: https://www.pixtool.in/code-diff
@@ -252,7 +252,7 @@ Total Blog Posts: 22
   - Excerpt: Epic AI battle! We tested Claude 4.5, GPT-5 & Gemini 3 Pro head-to-head. See which LLM dominates for coding, writing, analysis. Complete benchmarks & recommendations inside.
 - ⚡ 80% Productivity Boost: Master PixTool AI Workflow [Pro Guide]
   - URL: https://www.pixtool.in/blog/maximizing-productivity-pixtool-ai
-  - Excerpt: Automate 80% of admin tasks: AI resume builder, content generator, grammar fixer. Save 20+ hours/week. Step-by-step tutorial for 2026 professionals.
+  - Excerpt: The master guide to building a high-authority AI-powered workspace in 2026. Learn how to use PixTool's local-first AI Studio to automate content, resumes, and code while maintaining 100% data privacy. Step-by-step efficiency workflows for professionals.
 - 🚀 Future of AI Productivity 2026: Edge AI Guide - Privacy Without Compromise
   - URL: https://www.pixtool.in/blog/future-of-ai-productivity
   - Excerpt: How Edge AI in your browser eliminates cloud privacy concerns while boosting productivity 10x. Local image compression, PDF processing & more without upload risk.

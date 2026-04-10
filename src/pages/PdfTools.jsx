@@ -779,8 +779,8 @@ export default function PdfTools() {
                   faq={seoContent.faq}
                   tips={seoContent.tips}
                   useCases={seoContent.useCases}
-                  relatedTools={PDF_RELATED_TOOLS[activeTool] || []}
-                  readNext={PDF_READ_NEXT[activeTool] || []}
+                  relatedTools={seoContent.relatedTools || []}
+                  readNext={seoContent.readNext || []}
                   alternativeTo={seoContent.alternativeTo || []}
                 />
               ) : (

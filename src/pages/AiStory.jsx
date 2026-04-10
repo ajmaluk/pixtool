@@ -6,6 +6,7 @@ export default function AiStory() {
   const [premise, setPremise] = useState('')
   const [genre, setGenre] = useState('sci-fi')
   const [arc, setArc] = useState('standard')
+  const [density, setDensity] = useState('medium')
 
   const genres = [
     { id: 'sci-fi', name: 'Sci-Fi', icon: Sparkles },

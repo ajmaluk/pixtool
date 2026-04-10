@@ -19,7 +19,7 @@ export default function AdSpace({ type, className = '', style = {} }) {
 
         try {
             (window.adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (_error) {
+        } catch {
             // Ignore push errors and allow AdSense script to retry on next mount.
         }
     }, [type, showAds]);

@@ -3,8 +3,8 @@ import { Routes, Route, Outlet, useLocation, Link, Navigate } from 'react-router
 import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import CookieConsent from './components/CookieConsent'
 import ScrollToTop from './components/ScrollToTop'
-import ToolRating from './components/ToolRating'
 import RatingOverlay from './components/RatingOverlay'
 import PixAiOverlay from './components/PixAiOverlay'
 import { ALL_TOOLS_MAP } from './data/tools'
@@ -263,16 +263,9 @@ const MainLayout = () => {
 
   const { triggerRating } = useRatePopup()
   
-  // Trigger rating overlay gracefully after a short delay on rateable tools
-  useEffect(() => {
-    if (isRateableToolPath) {
-      const slug = location.pathname.replace(/^\//, '')
-      const timer = setTimeout(() => {
-        triggerRating(slug)
-      }, 5000) // Show popup 5 seconds after visiting the tool
-      return () => clearTimeout(timer)
-    }
-  }, [location.pathname, isRateableToolPath, triggerRating])
+  // Logic removed: Rating is now interaction-triggered within individual tool components
+  // to avoid automatic popups that can interfere with AdSense reviews.
+
 
   const isAdminPath = location.pathname === '/pix-admin'
   const hideAuxWidgets = location.pathname === '/' || location.pathname === '/blog'
@@ -505,6 +498,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
+      <CookieConsent />
     </ConfirmProvider>
   )
 }

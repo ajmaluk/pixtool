@@ -974,8 +974,8 @@ export default function ImageTools() {
                   faq={seoContent.faq}
                   tips={seoContent.tips}
                   useCases={seoContent.useCases}
-                  relatedTools={IMAGE_RELATED_TOOLS[activeTool] || []}
-                  readNext={IMAGE_READ_NEXT[activeTool] || []}
+                  relatedTools={seoContent.relatedTools || []}
+                  readNext={seoContent.readNext || []}
                   alternativeTo={seoContent.alternativeTo || []}
                 />
               ) : (

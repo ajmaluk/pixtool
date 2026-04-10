@@ -288,7 +288,7 @@ export default function SEO({
 
             if (isToolPath && toolDataFromMap?.id) {
                 try {
-                    const toolStats = await getToolRatingStats(toolDataFromMap.id)
+                    const toolStats = await getToolRatingStats(path.replace(/^\//, ''))
                     if (toolStats && Number(toolStats.totalVotes || 0) > 0) {
                         next.tool = toolStats
                         nextMeta.toolFetchedAt = new Date().toISOString()
