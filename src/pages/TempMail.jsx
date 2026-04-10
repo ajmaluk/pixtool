@@ -4,9 +4,8 @@ import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
 import Breadcrumbs from '../components/Breadcrumbs'
-import { UTILITY_READ_NEXT } from '../data/utilityToolsData'
-import { TOOL_SPECIFIC_FAQS } from '../data/faqs'
 import ShareTool from '../components/ShareTool'
+import { ALL_TOOLS_MAP } from '../data/tools'
 import { useRatePopup } from '../hooks/useRatePopup'
 import { useConfirm } from '../context/ConfirmContext'
 import { getErrorMessage } from '../utils/errorHandling'
@@ -168,20 +167,28 @@ class TempMailReceiver {
 }
 
 export default function TempMail({
+  toolId = 'temp-mail',
   seoPath = "/temp-mail",
-  seoTitle = "🔥 Free Temp Mail with Password - Temporary Email & OTP | PixTool",
-  seoDescription = "Get instant free temp mail with password. Temporary email and password for login, OTP verification, Facebook & Instagram signups. Best tempmail alternative to 10MinuteMail & Guerrilla Mail. No registration, 100% anonymous.",
-  seoKeywords = "temp mail, temporary email, tempmail, temp email, temp mail with password, temporary email and password, temporary email and password free, temp mail free, temp mail for facebook, 10 minute mail, fake email generator, throwaway email, free temporary email, temp mail generator, temp gmail, temp mail otp, burner email, disposable email, temp inbox, anonymous email, temp mail india, email generator, fake email and password, temp mail gmail, best temp mail, one time email, temp email with password, temp mail for instagram, temp mail for discord, temporary mail, free temp mail, temp mail org, temp mail login",
-  breadcrumbs: customBreadcrumbs = [
-    { name: 'Utility Tools', item: '/utility-tools' },
-    { name: 'Temp Mail', item: '/temp-mail' }
-  ],
-  heroTitle = "Temp Mail — Temporary Email",
-  heroSubtitle = "Free temporary email with password for instant login, OTP verification, and anonymous signups. No registration — best alternative to 10MinuteMail, Guerrilla Mail & Temp-Mail.org.",
+  seoTitle = null,
+  breadcrumbs: customBreadcrumbs = null,
+  heroTitle = null,
+  heroSubtitle = null,
   heroBadge = null,
   storageNamespace = 'temp-mail',
   rotateTrigger = null
 }) {
+  const toolData = ALL_TOOLS_MAP[seoPath] || ALL_TOOLS_MAP['/temp-mail'] || {}
+  const toolTitle = toolData?.title || 'Temp Mail'
+  const toolDescription = toolData?.description || 'Secure temporary email service.'
+  
+  // Use toolData for SEO and Breadcrumbs if not provided
+  const finalSeoPath = seoPath || toolData?.path || '/temp-mail'
+  const finalSeoTitle = seoTitle || toolData?.seo?.title || `${toolTitle} - Online Privacy Tool`
+  const finalBreadcrumbs = customBreadcrumbs || [
+    { name: 'Utility Tools', item: '/utility-tools' },
+    { name: toolTitle, item: finalSeoPath }
+  ]
+
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(true)
   const [messages, setMessages] = useState([])
@@ -221,15 +228,16 @@ export default function TempMail({
     } catch (e) { void e; return }
   }
 
-  const toolTitle = seoTitle.replace(' - PixTool', '')
-  const tempMailFaqs = TOOL_SPECIFIC_FAQS['temp-mail']
-
-  const tempMailSteps = [
+  const tempMailFaqs = toolData.faq || []
+  const tempMailSteps = toolData.howItWorks || toolData.howTo || [
     "Visit the page - a temporary email address is generated automatically.",
     "Click on the email address or Copy button to copy it to your clipboard.",
     "Paste the email wherever you need to sign up or verify.",
     "Return to this page to see incoming messages - inbox refreshes automatically."
   ]
+  const tempMailReadNext = toolData.readNext || []
+  const tempMailRelatedTools = toolData.relatedTools || []
+
 
   useEffect(() => {
     let mounted = true
@@ -548,22 +556,17 @@ export default function TempMail({
   return (
     <>
       <SEO
-        title={seoTitle}
-        description={seoDescription}
-        keywords={seoKeywords}
-        path={seoPath}
-        toolName={toolTitle}
-        toolSteps={tempMailSteps}
-        breadcrumbs={customBreadcrumbs}
-        faqs={tempMailFaqs}
-        screenshot={`${import.meta.env.VITE_SITE_URL}/screenshots/disposable-temporary-email-generator.webp`}
-        imageAlt="PixTool Temp Mail - Instant anonymous inbox interface"
-        imageTitle="Free Temporary Email Service"
+        {...toolData.seo}
+        title={finalSeoTitle}
+        description={toolDescription}
+        path={finalSeoPath}
+        breadcrumbs={finalBreadcrumbs}
       />
 
 
+
       <div className="page-container">
-        <Breadcrumbs items={customBreadcrumbs} />
+        <Breadcrumbs items={finalBreadcrumbs} />
         <div className="landing-layout">
           <AdSpace type="side" className="desktop-only" />
 
@@ -573,16 +576,17 @@ export default function TempMail({
             <div className="page-hero">
               <div className="page-hero-content">
                 <h1 className="page-title">
-                  {heroTitle.split(' ').length > 1 ? (
+                  {(heroTitle || toolTitle).split(' ').length > 1 ? (
                     <>
-                      {heroTitle.split(' ').slice(0, -1).join(' ')} <span style={{ color: 'var(--accent-pink)' }}>{heroTitle.split(' ').slice(-1)[0]}</span>
+                      {(heroTitle || toolTitle).split(' ').slice(0, -1).join(' ')} <span style={{ color: 'var(--accent-pink)' }}>{(heroTitle || toolTitle).split(' ').slice(-1)[0]}</span>
                     </>
-                  ) : heroTitle}
+                  ) : (heroTitle || toolTitle)}
                 </h1>
-                <p className="page-subtitle">{heroSubtitle}</p>
+                <p className="page-subtitle">{heroSubtitle || toolDescription}</p>
                 {heroBadge}
               </div>
             </div>
+
 
             {/* Email Generator Card */}
             <div className="tool-panel" style={{ marginBottom: '2rem' }}>
@@ -795,46 +799,9 @@ export default function TempMail({
             <AdSpace type="bottom" />
 
             <div style={{ marginTop: '5rem' }}>
-              <ToolContent
-                title="Professional Disposable Email Intelligence"
-                description="The PixTool Temp Mail service is a high-authority privacy utility engineered for secure, anonymous communication in an era of aggressive data harvesting and digital tracking. Unlike standard disposable email services that may log your incoming messages or sell metadata, our studio provides a zero-upload 'Privacy-First' inbox experience. All temporary addresses are generated using high-reputation domains to ensure maximum deliverability for OTPs, verification codes, and trial signups, while keeping your primary inbox strictly isolated from spam and security breaches."
-                benefits={[
-                  "Zero-Log Privacy: We do not store your identity, IP, or message metadata—private by design.",
-                  "High-Reputation Domains: Optimized addresses that bypass common 'disposable email' blocks.",
-                  "Instant Activation: No registration required—get a fully functional inbox in sub-second time.",
-                  "Auto-Refresh Infrastructure: Real-time message polling ensures you see incoming mail instantly.",
-                  "Unlimited Mailbox Rotation: Generate and discard as many unique addresses as your project requires."
-                ]}
-                howTo={[
-                  "Navigate to the Temp Mail studio—a unique, high-authority email address is generated for you instantly.",
-                  "Copy the address in one tap and use it for signups, verifications, or gated content access.",
-                  "Monitor the 'Your Inbox' panel—messages appear automatically without needing to refresh the page.",
-                  "Open messages to view HTML or Plain Text content safely within our sanitized preview window.",
-                  "Click 'New Email' at any time to instantly rotate to a fresh identity and discard the current one."
-                ]}
-                tips={[
-                  "Keep this browser tab open while waiting for verification codes—for maximum privacy, sessions are cleared on close.",
-                  "If a specific service blocks one domain, use the 'New Email' feature to instantly get an address on a different domain.",
-                  "Use temp mail for 'Free Trial' signups on software platforms to prevent post-trial marketing spam in your real inbox.",
-                  "Avoid using temporary addresses for critical recovery accounts (banking/primary social media) as these mailboxes are volatile."
-                ]}
-                useCases={[
-                  { title: "Safe Developer Testing", description: "Audit onboarding flows, email notification triggers, and user verification logic without cluttering your professional or team inboxes." },
-                  { title: "Gated Content Access", description: "Unlock whitepapers, case studies, and free software downloads without exposing your real identity to marketing automation lists." },
-                  { title: "Public WiFi Authentication", description: "Use disposable emails to log into airport, hotel, or cafe WiFi captive portals, maintaining your privacy on untrusted networks." }
-                ]}
-                alternativeTo={["10MinuteMail", "Temp-Mail.org", "Guerrilla Mail", "Mailinator", "ThrowAwayMail", "YOPmail"]}
-                readNext={[
-                  { title: '🔒 Secure Temporary Email Strategy for Privacy and Spam Defense', path: '/blog/secure-temp-mail-business-privacy-2026' },
-                  { title: '📂 Building a Local-First Privacy Shield with PixTool', path: '/blog/browser-based-privacy' }
-                ]}
-                faq={[
-                  { q: "How long does a temporary email address last?", a: "Your address remains active as long as you keep the browser tab open. This ensures you have full control over the session's duration." },
-                  { q: "Is it safe to receive sensitive verification codes?", a: "Yes. Because we use sanitized local previews and do not log incoming data, your codes are visible only to you during your active session." },
-                  { q: "Can I send emails from this temporary address?", a: "Currently, our service is optimized for receiving mail to protect our domain reputation and ensure your incoming messages are never blocked." }
-                ]}
-              />
+              <ToolContent {...toolData} />
             </div>
+
 
             <section className="tool-panel" style={{ marginTop: '3rem' }} aria-labelledby="spam-mitigation-2026">
               <h2 id="spam-mitigation-2026" style={{ fontSize: '1.9rem', fontWeight: 900, marginBottom: '1rem' }}>
@@ -1201,7 +1168,8 @@ export default function TempMail({
         </div>
 
       </div>
-      <ShareTool title={seoTitle} />
+      <ShareTool title={toolTitle} url={finalSeoPath} text={toolDescription} />
+
     </>
   )
 }

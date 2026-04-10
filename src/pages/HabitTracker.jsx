@@ -9,8 +9,10 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
-import { PRODUCTIVITY_SEO_CONTENT } from '../data/productivityToolsData'
+import { ALL_TOOLS_MAP } from '../data/tools'
 import { readStoredJson, writeStoredJson } from '../utils/browserStorage'
+
+const toolData = ALL_TOOLS_MAP['habit-tracker']
 
 export default function HabitTracker() {
   const [habits, setHabits] = useState(() => readStoredJson('pt_habit_tracker', []))
@@ -92,13 +94,13 @@ export default function HabitTracker() {
   return (
     <>
       <SEO 
-        {...PRODUCTIVITY_SEO_CONTENT['habit-tracker']}
-        path="/productivity-tools/habit-tracker"
-        breadcrumbs={[{ name: 'Productivity', item: '/productivity-tools' }, { name: 'Habit Tracker', item: '/productivity-tools/habit-tracker' }]}
+        {...toolData.seo}
+        path={toolData.path}
+        breadcrumbs={[{ name: 'Productivity', item: '/productivity-tools' }, { name: toolData.title, item: toolData.path }]}
       />
 
       <div className="page-container" style={{ paddingTop: '2rem' }}>
-        <Breadcrumbs items={[{ name: 'Productivity', item: '/productivity-tools' }, { name: 'Habit Tracker', item: '/productivity-tools/habit-tracker' }]} />
+        <Breadcrumbs items={[{ name: 'Productivity', item: '/productivity-tools' }, { name: toolData.title, item: toolData.path }]} />
         <div className="landing-layout">
           <AdSpace type="side" className="desktop-only" />
           <div className="landing-center" style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
@@ -245,7 +247,7 @@ export default function HabitTracker() {
 
           <AdSpace type="bottom" style={{ marginTop: '4rem' }} />
           <div style={{ marginTop: '6rem' }}>
-            <ToolContent {...PRODUCTIVITY_SEO_CONTENT['habit-tracker']} />
+            <ToolContent {...toolData} />
           </div>
               </div>
             <AdSpace type="side" className="desktop-only" />

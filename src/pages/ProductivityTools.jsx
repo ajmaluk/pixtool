@@ -3,26 +3,18 @@ import ToolCard from '../components/ToolCard'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
 import { SITE_URL } from '../config/app.config'
-import { PRODUCTIVITY_TOOLS } from '../data/tools'
-import { PRODUCTIVITY_SEO_CONTENT } from '../data/productivityToolsData'
+import { PRODUCTIVITY_TOOLS, ALL_TOOLS_MAP } from '../data/tools'
 
 const tools = PRODUCTIVITY_TOOLS;
+const categoryMetadata = ALL_TOOLS_MAP['/productivity-tools'];
 
 export default function ProductivityTools() {
-    const seoContentMap = PRODUCTIVITY_SEO_CONTENT;
-    const activeTool = null; // Category hub mode
-    const seoContent = activeTool ? seoContentMap[activeTool] : {
-        title: "Free Online Productivity Tools | Todo, Kanban, Notepad & More - PixTool",
-        description: "Professional browser-based productivity suite. Manage tasks with our Todo List, track projects with a Kanban Board, edit Markdown in our Notepad, or sketch ideas on the Drawing Board—100% private and secure.",
-        keywords: "productivity tools online 2026, free todo list browser, kanban board free, online notepad markdown, secure file manager, browser-based drawing board"
-    };
-
     const productivitySchema = [
         {
             "@context": "https://schema.org",
             "@type": "CollectionPage",
             "name": "Free Web Productivity Tools - PixTool",
-            "description": seoContent.description,
+            "description": categoryMetadata.seo.description,
             "url": `${SITE_URL}/productivity-tools`
         },
         {
@@ -44,9 +36,9 @@ export default function ProductivityTools() {
     return (
         <>
             <SEO
-                title={seoContent.title}
-                description={seoContent.description}
-                keywords={seoContent.keywords}
+                title={categoryMetadata.seo.title}
+                description={categoryMetadata.seo.description}
+                keywords={categoryMetadata.seo.keywords}
                 path="/productivity-tools"
                 schema={productivitySchema}
                 breadcrumbs={[
@@ -98,49 +90,11 @@ export default function ProductivityTools() {
                     </div>
 
                     <div style={{ marginTop: '5rem' }}>
-                        <ToolContent
-                            title="Integrated Productivity Studio"
-                            description="The Productivity Studio is designed for practical day-to-day execution: planning, writing, tracking, and focused delivery. Instead of forcing users into one generic workspace, PixTool separates workflows into purpose-built tools with clear output. This improves completion rate, usability, and content value for both people and search engines."
-                            benefits={[
-                                "Local-First Reliability: Notes and tasks remain available even during network instability.",
-                                "Focused Tool Surfaces: Kanban, todo, notes, and timers are optimized for distinct jobs.",
-                                "Fast Interaction Loops: Minimal friction from capture to completion.",
-                                "Portable Outputs: Export-ready formats simplify team collaboration and backup.",
-                                "Privacy-Centered Design: Sensitive planning data stays on user-controlled devices."
-                            ]}
-                            howTo={[
-                                "Select the tool matching your current phase: capture, organize, execute, or review.",
-                                "Define a short daily objective and map tasks by priority and effort.",
-                                "Track progress in focused time blocks, then update status immediately.",
-                                "Review incomplete items and convert carry-over tasks into explicit next actions.",
-                                "Export snapshots for reporting, archiving, or cross-device continuity."
-                            ]}
-                            tips={[
-                                "Use a weekly review cadence to clean stale tasks and preserve board quality.",
-                                "Break large tasks into outcomes that can be completed in one focus session.",
-                                "Capture decisions in notes immediately after meetings to avoid context loss.",
-                                "Track only a small set of core habits to improve consistency and signal quality."
-                            ]}
-                            useCases={[
-                                { title: "Confidential Project Planning", description: "Design complex project roadmaps on our Kanban boards with absolute confidence that sensitive milestones remain private." },
-                                { title: "Strategic Brainstorming", description: "Map out chaotic ideas using Sticky Notes and Drawing Boards, then export them as professional design assets." },
-                                { title: "Deep Work Management", description: "Architect a distraction-free environment using our integrated focus timers and task priority systems." }
-                            ]}
-                            alternativeTo={["Trello", "Notion", "Todoist", "Excalidraw"]}
-                            readNext={[
-                                { title: '📂 Building a Private Digital Workspace in 2026', path: '/blog/building-toolpix-journey' },
-                                { title: '🧠 The Science of Deep Work and Focus Intervals', path: '/blog/future-of-ai-productivity' },
-                                { title: '🔒 Why Local-First is the Future of Professional Software', path: '/blog/browser-based-privacy' }
-                            ]}
-                            faq={[
-                                { q: "Where is my productivity data saved?", a: "Your data is stored strictly in your browser's local storage (IndexedDB). No one else—not even PixTool admins—can access your tasks or notes." },
-                                { q: "Can I use these tools on my phone?", a: "Yes. The entire Productivity Studio is responsive and utilizes modern touch-gestures for mobile task management." },
-                                { q: "Is there a limit to how many tasks I can create?", a: "The only limit is your device's storage capacity. Our IndexedDB architecture can comfortably handle thousands of tasks and notes locally." }
-                            ]}
-                        />
+                        <ToolContent {...categoryMetadata.editorial} />
                     </div>
                 </div>
             </div>
         </>
     )
 }
+

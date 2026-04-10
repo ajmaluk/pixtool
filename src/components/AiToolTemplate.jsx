@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import SEO from './SEO'
 import AdSpace from './AdSpace'
-import { Send, Copy, RefreshCw, CheckCircle, Sparkles, Terminal, ArrowRight } from 'lucide-react'
+import { Send, Copy, RefreshCw, CheckCircle, Sparkles, Terminal, ArrowRight, Trash2, AlertCircle } from 'lucide-react'
 import { fetchTextResponse } from '../services/aiApi'
 import { useEffect, useRef } from 'react'
 import ToolRating from './ToolRating'
 import ToolContent from './ToolContent'
+import MarkdownRenderer from './MarkdownRenderer'
 import { ALL_TOOLS_MAP } from '../data/tools'
 
 export default function AiToolTemplate({ 
@@ -27,9 +28,11 @@ export default function AiToolTemplate({
   const [response, setResponse] = useState('')
   const [displayResponse, setDisplayResponse] = useState('')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
   const [copied, setCopied] = useState(false)
   const [isStreaming, setIsStreaming] = useState(false)
   const timerRef = useRef(null)
+  const outputRef = useRef(null)
 
   // Auto-fetch metadata from global map for SEO enhancement
   const toolMetadata = ALL_TOOLS_MAP[path] || {}
@@ -40,6 +43,12 @@ export default function AiToolTemplate({
     { name: title, item: path }
   ]
 
+  const handleClear = () => {
+    setPrompt('');
+    setResponse('');
+    setDisplayResponse('');
+  }
+
   const handleGenerate = async () => {
     if (onGenerate) {
       await onGenerate();
@@ -48,6 +57,7 @@ export default function AiToolTemplate({
 
     if (!prompt.trim() && !children) return;
     setLoading(true);
+    setError(null);
     setResponse('');
     setDisplayResponse('');
     setIsStreaming(false);
@@ -59,6 +69,8 @@ export default function AiToolTemplate({
     
     try {
       const res = await fetchTextResponse(finalPrompt);
+      if (!res) throw new Error("Our neural engine returned an empty response. Please try reframing your prompt.");
+      
       setResponse(res);
       setLoading(false);
       
@@ -72,6 +84,10 @@ export default function AiToolTemplate({
         if (index < words.length) {
           setDisplayResponse(prev => prev + (index === 0 ? '' : ' ') + words[index]);
           index++;
+          // Scroll output into view as it streams
+          if (outputRef.current) {
+            outputRef.current.scrollTop = outputRef.current.scrollHeight;
+          }
         } else {
           clearInterval(timerRef.current);
           setIsStreaming(false);
@@ -79,6 +95,7 @@ export default function AiToolTemplate({
       }, 25);
     } catch (err) {
       console.error('AI Error:', err);
+      setError(err.message || "Stability interruption detected. Our AI engine is currently under high load. Please try again in a moment.");
       setLoading(false);
     }
   }
@@ -114,190 +131,240 @@ export default function AiToolTemplate({
         breadcrumbs={breadcrumbItems}
       />
       
-      <div className="tool-page-v2" style={{ background: 'var(--bg-secondary)', minHeight: '100vh', display: 'flex', flexDirection: 'column', color: 'var(--text-primary)' }}>
+      <div className="landing-layout" style={{ background: 'var(--bg-secondary)', minHeight: '100vh', padding: '2rem 1rem', width: '100%', maxWidth: '1800px', margin: '0 auto' }}>
         
-        {/* Ad Space: Top Header */}
-        <div style={{ background: 'var(--bg-card)', borderBottom: '1px solid var(--border-color)', padding: '0.75rem 0', flexShrink: 0 }}>
-            <AdSpace type="top" style={{ maxWidth: '1000px', margin: '0 auto' }} />
-        </div>
+        {/* Left Side Ad */}
+        <AdSpace type="side" className="desktop-only" />
 
-        {/* Compact Tool Header */}
-        <header style={{ padding: '2rem 1.5rem', textAlign: 'center', background: 'var(--bg-card)', borderBottom: '1px solid var(--border-color)', flexShrink: 0 }}>
-          <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem' }}>
-            <div 
-              style={{ display: 'flex', padding: '1rem', borderRadius: '24px', background: 'var(--bg-secondary)', color: 'var(--accent-purple)' }}
-            >
-              <ToolIcon size={32} strokeWidth={1.5} />
-            </div>
-            
-            <div style={{ textAlign: 'left' }}>
-              <h1 
-                style={{ fontSize: '1.75rem', fontWeight: 950, margin: 0, letterSpacing: '-0.03em', color: 'var(--text-primary)', lineHeight: 1.1 }}
-              >
-                {title}
-              </h1>
-              <p 
-                style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: '0.25rem 0 0', maxWidth: '500px' }}
-              >
-                {description}
-              </p>
-            </div>
-          </div>
-        </header>
+        <div className="landing-center" style={{ flex: 1, minWidth: 0 }}>
+            {/* Ad Space: Top Header */}
+            <AdSpace type="top" style={{ marginBottom: '2rem' }} />
 
-        {/* Floating Studio Workspace - Managed Height */}
-        <main style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column', padding: '1.5rem 0' }}>
-          <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
-            <div 
-              className="studio-card"
-              style={{ 
-                  background: 'var(--bg-card)', 
-                  borderRadius: '32px', 
-                  padding: '2.5rem',
-                  boxShadow: 'var(--shadow-premium)',
-                  border: '1px solid var(--border-color)',
-                  position: 'relative',
-                  flex: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  overflow: 'hidden'
-              }}
-            >
-              <div style={{ flex: 1, overflowY: 'auto', paddingRight: '0.75rem', marginBottom: '1.5rem' }} className="custom-scrollbar">
-                {/* Tool Interaction Area */}
-                <div style={{ marginBottom: '2rem' }}>
-                  {children ? children : (
-                    <div className="simple-input">
-                      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-                        Data Input Forge
-                      </label>
-                      <textarea 
-                        className="dalam-textarea"
-                        style={{ width: '100%', minHeight: '220px', padding: '2rem', fontSize: '1.25rem', background: 'var(--bg-secondary)', borderRadius: '28px', color: 'var(--text-primary)', outline: 'none', boxShadow: 'inset 0 0 20px rgba(0,0,0,0.01)', border: '1px solid var(--border-color)' }}
-                        placeholder={placeholder}
-                        value={prompt}
-                        onChange={(e) => setPrompt(e.target.value)}
-                      />
-                    </div>
-                  )}
-                </div>
-
-                {/* Result Area - Now inside scrollable zone */}
-                {displayResponse && (
-                  <div 
-                    className="studio-result-area"
-                    style={{ marginTop: '2rem', padding: '3.5rem', background: 'var(--bg-secondary)', borderRadius: '40px', border: '1px solid var(--border-color)', position: 'relative' }}
-                  >
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
-                        <div style={{ fontSize: '0.85rem', fontWeight: 900, color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '0.25em', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                          <Terminal size={16} /> Result Atmosphere
-                        </div>
-                        {!isStreaming && (
-                             <button 
-                                onClick={handleCopy}
-                                style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)', padding: '0.75rem 1.25rem', borderRadius: '16px', fontSize: '0.9rem', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-primary)', boxShadow: 'var(--shadow-sm)' }}
-                             >
-                                {copied ? <CheckCircle size={18} color="var(--accent-emerald)" /> : <Copy size={18} />}
-                                {copied ? 'Copied' : 'Copy'}
-                             </button>
-                        )}
-                      </div>
-
-                      <div className="output-rich-content" style={{ fontSize: '1.2rem', lineHeight: 1.85, color: 'var(--text-primary)', whiteSpace: 'pre-wrap', fontWeight: 500 }}>
-                        {displayResponse}
-                        {isStreaming && <span className="dalam-cursor" />}
-                      </div>
-                    </div>
-                  )}
-              </div>
-
-              {/* Main Action Button - FIXED AT BOTTOM OF CARD */}
-              <div style={{ flexShrink: 0 }}>
-                <button 
-                  className="dalam-generate-btn"
-                  onClick={handleGenerate}
-                  disabled={loading || isStreaming || (!children && !prompt.trim())}
+            {/* Compact Tool Header */}
+            <header style={{ padding: '0 0 2.5rem', textAlign: 'left' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+                <div 
                   style={{ 
-                      width: '100%', 
-                      padding: '1.5rem', 
-                      borderRadius: '30px', 
-                      background: 'var(--bg-secondary)', 
-                      color: 'var(--text-primary)', 
-                      fontSize: '1.3rem', 
-                      fontWeight: 800, 
-                      border: '1px solid var(--border-color)', 
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '0.75rem',
-                      boxShadow: 'var(--shadow-sm)',
-                      transition: 'all 0.3s ease'
+                    display: 'flex', 
+                    padding: '0.75rem', 
+                    borderRadius: '14px', 
+                    background: 'var(--bg-card)', 
+                    color: 'var(--accent-primary)', 
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)', 
+                    border: '1px solid var(--border-color)' 
                   }}
                 >
-                  {loading ? <RefreshCw className="spin" size={24} /> : isStreaming ? <Sparkles className="spin" size={24} /> : <ArrowRight size={24} />}
-                  {loading ? 'Thinking...' : isStreaming ? 'Architecting...' : buttonText}
-                </button>
-
-                {/* Tool Rating */}
-                <div style={{ marginTop: '2rem' }}>
-                    <ToolRating toolSlug={path.replace(/^\//, '')} />
+                  <ToolIcon size={24} strokeWidth={1.5} />
                 </div>
-
-                {/* Ad Space: Bottom of Interaction */}
-                <div style={{ marginTop: '1.5rem' }}>
-                    <AdSpace type="bottom" />
+                
+                <div>
+                  <h1 
+                    style={{ fontSize: '1.5rem', fontWeight: 950, margin: 0, letterSpacing: '-0.02em', color: 'var(--text-primary)', lineHeight: 1.1 }}
+                  >
+                    {title}
+                  </h1>
+                  <p 
+                    style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: '0.2rem 0 0', maxWidth: '500px', opacity: 0.8 }}
+                  >
+                    {description}
+                  </p>
                 </div>
               </div>
+            </header>
+
+            <div className="ai-studio-grid" style={{ width: '100%' }}>
+                {/* SETTINGS SIDEBAR */}
+                <aside className="sidebar-settings" style={{ 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  gap: '1.5rem', 
+                  width: '100%', 
+                  position: 'sticky', 
+                  top: '100px',
+                  height: 'fit-content'
+                }}>
+                    <div className="sidebar-section">
+                        <div className="sidebar-section-title">Studio Config</div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                            {children}
+                        </div>
+                    </div>
+
+                    <div style={{ marginTop: 'auto', paddingTop: '1.5rem', borderTop: '1px solid var(--border-color)' }}>
+                        <button 
+                            className="btn btn-primary"
+                            onClick={handleGenerate}
+                            disabled={loading || isStreaming || (!children && !prompt.trim())}
+                            style={{ 
+                                width: '100%', 
+                                padding: '1.25rem', 
+                                borderRadius: '14px',
+                                fontSize: '1rem',
+                                fontWeight: 800,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: '0.75rem',
+                                boxShadow: 'var(--shadow-premium)',
+                                background: 'var(--accent-gradient)'
+                            }}
+                        >
+                            {loading ? <RefreshCw className="spin" size={20} /> : isStreaming ? <Sparkles className="spin" size={20} /> : <Send size={20} />}
+                            {loading ? 'Thinking...' : isStreaming ? 'Synthesizing...' : buttonText}
+                        </button>
+                    </div>
+
+                    <div style={{ marginTop: '0.5rem' }}>
+                          <ToolRating toolSlug={path.replace(/^\//, '')} />
+                    </div>
+                </aside>
+
+                {/* MAIN INTERACTION AREA */}
+                <main className="preview-main" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: 0, background: 'transparent', border: 'none', width: '100%' }}>
+                    <div 
+                        className="studio-card"
+                        style={{ 
+                            background: 'var(--bg-card)', 
+                            borderRadius: '24px', 
+                            padding: '2rem',
+                            boxShadow: 'var(--shadow-lg)',
+                            border: '1px solid var(--border-color)',
+                            flex: 1,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            minHeight: '600px',
+                            background: 'var(--bg-glass)',
+                            backdropFilter: 'blur(20px)'
+                        }}
+                    >
+                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                            {/* Input Area */}
+                            <div style={{ marginBottom: '1.5rem', position: 'relative' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                                    <label style={{ fontSize: '0.7rem', fontWeight: 900, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.15em' }}>
+                                        Prompt Engineering
+                                    </label>
+                                    {prompt && (
+                                        <button 
+                                            onClick={handleClear}
+                                            style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: 600 }}
+                                        >
+                                            <Trash2 size={12} /> Clear Engine
+                                        </button>
+                                    )}
+                                </div>
+                                <textarea 
+                                    className="dalam-textarea"
+                                    style={{ 
+                                        width: '100%', 
+                                        minHeight: displayResponse ? '150px' : '350px', 
+                                        padding: '1.75rem', 
+                                        fontSize: '1.05rem', 
+                                        background: 'var(--bg-secondary)', 
+                                        borderRadius: '20px', 
+                                        color: 'var(--text-primary)', 
+                                        outline: 'none', 
+                                        border: '1px solid var(--border-color)',
+                                        transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                                        lineHeight: 1.6,
+                                        fontWeight: 500
+                                    }}
+                                    placeholder={placeholder || "Type your instructions here..."}
+                                    value={prompt}
+                                    onChange={(e) => setPrompt(e.target.value)}
+                                />
+                            </div>
+
+                            {/* Error Display */}
+                            {error && (
+                                <div style={{ 
+                                    background: 'var(--accent-red-50)', 
+                                    border: '1px solid var(--accent-red)', 
+                                    padding: '1.25rem', 
+                                    borderRadius: '16px', 
+                                    color: 'var(--accent-red)', 
+                                    marginBottom: '1.5rem',
+                                    display: 'flex',
+                                    gap: '0.75rem',
+                                    alignItems: 'flex-start',
+                                    fontSize: '0.9rem',
+                                    lineHeight: 1.5
+                                }}>
+                                    <AlertCircle size={20} style={{ flexShrink: 0 }} />
+                                    <div>{error}</div>
+                                </div>
+                            )}
+
+                            {/* Result Area */}
+                            {displayResponse && (
+                                <div 
+                                    className="studio-result-area"
+                                    style={{ 
+                                        padding: '2rem', 
+                                        background: 'var(--bg-primary)', 
+                                        borderRadius: '24px', 
+                                        border: '1px solid var(--border-color)', 
+                                        position: 'relative',
+                                        flex: 1,
+                                        boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.02)',
+                                        overflow: 'auto',
+                                        maxHeight: '600px'
+                                    }}
+                                    ref={outputRef}
+                                >
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', position: 'sticky', top: 0, background: 'var(--bg-primary)', padding: '0.5rem 0', zIndex: 10 }}>
+                                        <div style={{ fontSize: '0.7rem', fontWeight: 900, color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.15em', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                            <Terminal size={14} /> Output Matrix
+                                        </div>
+                                        {!isStreaming && (
+                                            <button 
+                                                onClick={handleCopy}
+                                                style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)', padding: '0.6rem 1.25rem', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.6rem', color: 'var(--text-primary)', boxShadow: 'var(--shadow-sm)' }}
+                                            >
+                                                {copied ? <CheckCircle size={14} color="var(--accent-emerald)" /> : <Copy size={14} />}
+                                                {copied ? 'Copied to Clipboard' : 'Copy Output'}
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    <div className="output-rich-content">
+                                        <MarkdownRenderer content={displayResponse} />
+                                        {isStreaming && <span className="dalam-cursor" />}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </main>
             </div>
 
-            {/* NEW: SEO Rich Content Section */}
-            <div style={{ marginTop: '4rem', paddingBottom: '4rem' }}>
-                <ToolContent 
-                    title={title}
-                    description={description}
-                    toolId={path.split('/').pop()}
-                    path={path}
-                    benefits={displayFeatures}
-                    howTo={displayHowItWorks}
-                />
+            {/* Bottom Ad Section */}
+            <div style={{ marginTop: '4rem' }}>
+                <AdSpace type="bottom" />
             </div>
-          </div>
-        </main>
 
-        {/* Global Styles for the new "Dalam" UI */}
-        <style>{`
-            .dalam-generate-btn:hover {
-                transform: translateY(-2px);
-                background: var(--bg-card-hover);
-            }
-            .dalam-generate-btn:active {
-                transform: translateY(0);
-            }
-            .dalam-generate-btn:disabled {
-                opacity: 0.6;
-                cursor: not-allowed;
-                transform: none;
-            }
-            .dalam-cursor {
-                display: inline-block;
-                width: 8px;
-                height: 1.3em;
-                background: var(--accent-purple);
-                margin-left: 6px;
-                vertical-align: middle;
-                animation: dalam-blink 1s infinite;
-                border-radius: 4px;
-            }
-            @keyframes dalam-blink {
-                0%, 100% { opacity: 1; }
-                50% { opacity: 0; }
-            }
-            .dalam-textarea::placeholder {
-                color: var(--text-muted);
-                font-weight: 500;
-            }
-        `}</style>
+            {/* SEO & Tool Content Area */}
+            <div style={{ marginTop: '6rem', paddingBottom: '4rem' }}>
+              <ToolContent 
+                title={title}
+                description={description}
+                toolSlug={path.replace(/^\//, '')}
+                seoTitle={`${title} - Platinum AI Tool`}
+                seoDescription={description}
+                seoKeywords={seoKeywords}
+                faq={toolMetadata.faq}
+                tips={toolMetadata.tips}
+                useCases={toolMetadata.useCases}
+                alternativeTo={toolMetadata.alternativeTo}
+                benefits={displayFeatures}
+                howTo={displayHowItWorks}
+              />
+            </div>
+        </div>
+
+        {/* Right Side Ad */}
+        <AdSpace type="side" className="desktop-only" />
+
       </div>
     </>
   )

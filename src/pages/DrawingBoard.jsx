@@ -10,7 +10,9 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
-import { PRODUCTIVITY_SEO_CONTENT } from '../data/productivityToolsData'
+import { ALL_TOOLS_MAP } from '../data/tools'
+
+const toolData = ALL_TOOLS_MAP['drawing-board']
 
 const COLORS = [
   '#000000', '#ffffff', '#ef4444', '#f59e0b', 
@@ -117,13 +119,13 @@ export default function DrawingBoard() {
   return (
     <>
       <SEO 
-        {...PRODUCTIVITY_SEO_CONTENT['drawing-board']}
-        path="/productivity-tools/drawing-board"
-        breadcrumbs={[{ name: 'Productivity', item: '/productivity-tools' }, { name: 'Drawing Board', item: '/productivity-tools/drawing-board' }]}
+        {...toolData.seo}
+        path={toolData.path}
+        breadcrumbs={[{ name: 'Productivity', item: '/productivity-tools' }, { name: toolData.title, item: toolData.path }]}
       />
 
       <div className="page-container" style={{ paddingTop: '2rem' }}>
-        <Breadcrumbs items={[{ name: 'Productivity', item: '/productivity-tools' }, { name: 'Drawing Board', item: '/productivity-tools/drawing-board' }]} />
+        <Breadcrumbs items={[{ name: 'Productivity', item: '/productivity-tools' }, { name: toolData.title, item: toolData.path }]} />
         <div className="landing-layout">
           <AdSpace type="side" className="desktop-only" />
           <div className="landing-center" style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
@@ -260,7 +262,7 @@ export default function DrawingBoard() {
 
           <AdSpace type="bottom" style={{ marginTop: '4rem' }} />
           <div style={{ marginTop: '6rem' }}>
-            <ToolContent {...PRODUCTIVITY_SEO_CONTENT['drawing']} />
+            <ToolContent {...toolData} />
           </div>
               </div>
             <AdSpace type="side" className="desktop-only" />

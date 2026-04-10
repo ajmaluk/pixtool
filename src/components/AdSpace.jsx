@@ -38,24 +38,23 @@ export default function AdSpace({ type, className = '', style = {} }) {
         side: 'ad-region-side'
     };
 
-    const adMargins = {
-        top: '2.5rem auto',
-        bottom: '2.5rem auto',
-        side: '2.5rem 0'
-    };
-
     return (
         <div
             className={`${styles[type]} ${className}`}
             style={{
                 minHeight: heights[type],
-                width: '100%',
-                maxWidth: type === 'side' ? '160px' : '100%',
-                margin: type === 'side' ? '1.5rem auto' : '0 auto',
+                width: type === 'side' ? '120px' : '100%',
+                maxWidth: type === 'side' ? '120px' : '100%',
+                margin: type === 'side' ? '0' : '0 auto',
                 display: 'flex',
+                alignItems: 'center',
                 justifyContent: 'center',
                 overflow: 'hidden',
                 borderRadius: '12px',
+                background: 'rgba(148, 163, 184, 0.05)',
+                border: type === 'side' ? '1px dashed var(--border-color)' : 'none',
+                position: 'relative',
+                flexShrink: 0,
                 ...style
             }}
         >
@@ -64,14 +63,24 @@ export default function AdSpace({ type, className = '', style = {} }) {
                 className="adsbygoogle"
                 style={{ 
                     display: 'block',
-                    width: type === 'side' ? '160px' : '100%',
+                    width: type === 'side' ? '120px' : '100%',
                     height: type === 'side' ? '600px' : '90px' 
                 }}
                 data-ad-client={AD_CLIENT}
                 data-ad-slot={AD_SLOTS[type]}
-                data-ad-format="auto"
+                data-ad-format={type === 'side' ? 'rectangle' : 'horizontal'}
                 data-full-width-responsive="true"
             />
+            <div className="ad-label" style={{ 
+              position: 'absolute', 
+              top: '4px', 
+              right: '8px', 
+              fontSize: '9px', 
+              opacity: 0.4, 
+              textTransform: 'uppercase', 
+              letterSpacing: '0.1em',
+              pointerEvents: 'none'
+            }}>AD</div>
         </div>
     );
 }

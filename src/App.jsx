@@ -418,9 +418,14 @@ function App() {
           <Route path="/temp-mail/change-email" element={<ChangeEmail />} />
           <Route path="/qr-scanner" element={<QrScanner />} />
           <Route path="/qr-generator" element={<QrGenerator />} />
-          <Route path="/fake-email" element={<FakeEmail />} />
-          <Route path="/disposable-email" element={<DisposableEmail />} />
-          <Route path="/throwaway-email" element={<ThrowawayEmail />} />
+          <Route path="/identity-forge" element={<FakeEmail />} />
+          <Route path="/burner-inbox" element={<DisposableEmail />} />
+          <Route path="/ghost-inbox" element={<ThrowawayEmail />} />
+          
+          {/* Redirects for legacy SEO paths */}
+          <Route path="/fake-email" element={<Navigate to="/identity-forge" replace />} />
+          <Route path="/disposable-email" element={<Navigate to="/burner-inbox" replace />} />
+          <Route path="/throwaway-email" element={<Navigate to="/ghost-inbox" replace />} />
           <Route path="/typing-test" element={<TypingTest />} />
           <Route path="/code-diff" element={<CodeDiff />} />
           <Route path="/json-formatter" element={<JsonFormatter />} />

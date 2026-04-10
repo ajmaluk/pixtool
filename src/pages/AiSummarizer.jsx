@@ -41,87 +41,66 @@ ${text}`
       customPromptBuilder={customPromptBuilder}
       seoKeywords="ai summarizer, text distiller, executive summary generator, document tldr"
     >
-      <div className="distiller-workspace" style={{ marginBottom: '1.5rem' }}>
-        {/* Input Forge */}
-        <div style={{ marginBottom: '3rem' }}>
-          <label htmlFor="ai-summarizer-input" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-            Source Manuscript
-          </label>
-          <textarea 
-            id="ai-summarizer-input"
-            name="inputText"
-            className="dalam-textarea"
-            style={{ width: '100%', minHeight: '300px', padding: '2rem', fontSize: '1.2rem', background: '#fdfdfd', borderRadius: '32px', border: '1px solid #f4f4f5', outline: 'none', color: '#1a1a1a', lineHeight: 1.6 }}
-            placeholder="Paste your long-form content here for distillation..."
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-          />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        {/* Mode Selector */}
+        <div className="sidebar-section">
+          <div className="sidebar-section-title">Archetype</div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.75rem' }}>
+            {modes.map(m => (
+              <button
+                key={m.id}
+                onClick={() => setMode(m.id)}
+                className={`btn ${mode === m.id ? 'btn-primary' : 'btn-secondary'}`}
+                style={{ 
+                  padding: '1rem', 
+                  fontSize: '0.85rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  gap: '1rem',
+                  height: 'auto',
+                  textAlign: 'left'
+                }}
+              >
+                <m.icon size={18} strokeWidth={1.5} />
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <span style={{ fontWeight: 800 }}>{m.name}</span>
+                    <span style={{ fontSize: '0.7rem', opacity: 0.7, fontWeight: 500 }}>{m.desc}</span>
+                </div>
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Mode & Density Controls */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem', marginBottom: '1.5rem' }}>
-          
-          <div className="mode-selector">
-            <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-              Structural Archetype
-            </label>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.75rem' }}>
-                {modes.map(m => (
-                    <button
-                        key={m.id}
-                        onClick={() => setMode(m.id)}
-                        style={{ 
-                            padding: '1.25rem 0.5rem', 
-                            borderRadius: '20px', 
-                            border: '2px solid', 
-                            borderColor: mode === m.id ? '#8b5cf6' : '#f4f4f5',
-                            background: mode === m.id ? '#fff' : '#fafafa',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            gap: '0.5rem',
-                            transition: 'all 0.2s',
-                            boxShadow: mode === m.id ? '0 8px 20px rgba(139, 92, 246, 0.05)' : 'none'
-                        }}
-                    >
-                        <m.icon size={22} color={mode === m.id ? '#8b5cf6' : '#d4d4d8'} strokeWidth={1.5} />
-                        <span style={{ fontSize: '0.85rem', fontWeight: 800, color: mode === m.id ? '#09090b' : '#a1a1aa' }}>{m.name}</span>
-                    </button>
-                ))}
-            </div>
+        {/* Density Selector */}
+        <div className="sidebar-section">
+          <div className="sidebar-section-title">Distillation Density</div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.5rem', background: 'var(--bg-secondary)', padding: '0.5rem', borderRadius: '12px' }}>
+            {densities.map(d => (
+              <button
+                key={d.id}
+                onClick={() => setDensity(d.id)}
+                style={{ 
+                  padding: '0.75rem', 
+                  borderRadius: '10px', 
+                  border: 'none', 
+                  background: density === d.id ? 'var(--bg-card)' : 'transparent',
+                  color: density === d.id ? 'var(--text-primary)' : 'var(--text-muted)',
+                  fontWeight: 800,
+                  fontSize: '0.85rem',
+                  cursor: 'pointer',
+                  boxShadow: density === d.id ? 'var(--shadow-sm)' : 'none',
+                  textAlign: 'left',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center'
+                }}
+              >
+                {d.label}
+                <span style={{ fontSize: '0.7rem', opacity: 0.6, fontWeight: 500 }}>{d.sub}</span>
+              </button>
+            ))}
           </div>
-
-          <div className="density-selector">
-            <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-              Information Density
-            </label>
-            <div style={{ display: 'flex', background: '#f4f4f5', padding: '0.5rem', borderRadius: '24px' }}>
-                {densities.map(d => (
-                    <button
-                        key={d.id}
-                        onClick={() => setDensity(d.id)}
-                        style={{ 
-                            flex: 1, 
-                            padding: '1rem', 
-                            borderRadius: '18px', 
-                            border: 'none', 
-                            background: density === d.id ? '#fff' : 'transparent',
-                            color: density === d.id ? '#09090b' : '#71717a',
-                            fontWeight: 800,
-                            fontSize: '0.9rem',
-                            cursor: 'pointer',
-                            transition: 'all 0.2s',
-                            boxShadow: density === d.id ? '0 5px 15px rgba(0,0,0,0.03)' : 'none'
-                        }}
-                    >
-                        {d.label}
-                        <span style={{ display: 'block', fontSize: '0.65rem', opacity: 0.6, fontWeight: 500 }}>{d.sub}</span>
-                    </button>
-                ))}
-            </div>
-          </div>
-
         </div>
       </div>
     </AiToolTemplate>

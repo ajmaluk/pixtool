@@ -5,7 +5,9 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
-import { PRODUCTIVITY_SEO_CONTENT } from '../data/productivityToolsData'
+import { ALL_TOOLS_MAP } from '../data/tools'
+
+const toolData = ALL_TOOLS_MAP['pomodoro']
 
 const MODES = {
   work: { label: 'Deep Work', minutes: 25, color: '#6366f1' },
@@ -74,13 +76,13 @@ export default function PomodoroTimer() {
   return (
     <>
       <SEO 
-        {...PRODUCTIVITY_SEO_CONTENT['pomodoro']}
-        path="/productivity-tools/pomodoro"
-        breadcrumbs={[{ name: 'Productivity', item: '/productivity-tools' }, { name: 'Focus Clock', item: '/productivity-tools/pomodoro' }]}
+        {...toolData.seo}
+        path={toolData.path}
+        breadcrumbs={[{ name: 'Productivity', item: '/productivity-tools' }, { name: toolData.title, item: toolData.path }]}
       />
 
       <div className="page-container" style={{ paddingTop: '2rem' }}>
-        <Breadcrumbs items={[{ name: 'Productivity', item: '/productivity-tools' }, { name: 'Focus Clock', item: '/productivity-tools/pomodoro' }]} />
+        <Breadcrumbs items={[{ name: 'Productivity', item: '/productivity-tools' }, { name: toolData.title, item: toolData.path }]} />
         <div className="landing-layout">
           <AdSpace type="side" className="desktop-only" />
           <div className="landing-center" style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
@@ -211,7 +213,7 @@ export default function PomodoroTimer() {
 
           <AdSpace type="bottom" style={{ marginTop: '4rem' }} />
           <div style={{ marginTop: '6rem' }}>
-            <ToolContent {...PRODUCTIVITY_SEO_CONTENT['pomodoro']} />
+            <ToolContent {...toolData} />
           </div>
               </div>
             <AdSpace type="side" className="desktop-only" />

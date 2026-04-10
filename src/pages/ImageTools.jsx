@@ -4,13 +4,13 @@ import { Maximize2, Shield, Zap, Upload, Loader, Download, Sliders, X, ChevronLe
 import ReactCrop, { centerCrop, makeAspectCrop } from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 import SEO from '../components/SEO'
+import ToolRating from '../components/ToolRating'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
 import Breadcrumbs from '../components/Breadcrumbs'
 import ShareTool from '../components/ShareTool'
 import { useFileDrop } from '../hooks/useFileDrop'
-import { IMAGE_TOOLS } from '../data/tools'
-import { IMAGE_SEO_CONTENT, IMAGE_RELATED_TOOLS, IMAGE_READ_NEXT } from '../data/imageToolsData'
+import { IMAGE_TOOLS, ALL_TOOLS_MAP } from '../data/tools'
 import ComingSoon from '../components/ComingSoon'
 import { processImageFile } from '../utils/canvasUtils'
 import { imageFilesToPdf, downloadBlob } from '../utils/pdfUtils'
@@ -325,20 +325,19 @@ export default function ImageTools() {
     }
   }
 
-  const activeToolData = activeTool ? tools.find(t => t.id === activeTool) : null
+  const activeToolData = activeTool ? ALL_TOOLS_MAP[activeTool] : null
 
-
-  const seoContentMap = IMAGE_SEO_CONTENT;
-  const seoContent = activeTool ? seoContentMap[activeTool] : null;
+  // Hub metadata for the main /image-tools page
+  const hubMetadata = {
+    title: 'Professional Image Studio [Official] - 100% Secure',
+    description: 'The PixTool Image Studio is a comprehensive suite of professional-grade, privacy-first photo editing utilities. Processes 100% of your data locally using WebAssembly (WASM), ensuring that your sensitive photos never touch a cloud server.',
+    keywords: 'free image resizer, online photo editor, compress image, resize image free, image compression online, photo cropper, background remover free'
+  }
 
   // Dynamic SEO descriptions - enhanced for better SEO
-  const pageTitle = activeToolData ? `Free Online ${activeToolData.title} Tool | PixTool` : "Free Image Resizer & Photo Editor Online | PixTool"
-  const pageDescription = activeToolData ?
-    seoContentMap[activeTool]?.description :
-    "Free online image tools including image resizer, photo cropper, and compressor. No upload required, 100% browser-based and secure."
-  const pageKeywords = activeToolData ?
-    seoContentMap[activeTool]?.keywords :
-    "free image resizer, online photo editor, compress image, resize image free, image compression online, photo cropper"
+  const pageTitle = activeToolData ? `${activeToolData.title} | PixTool` : hubMetadata.title
+  const pageDescription = activeToolData ? activeToolData.description : hubMetadata.description
+  const pageKeywords = activeToolData ? (activeToolData.seoKeywords || hubMetadata.keywords) : hubMetadata.keywords
   const canonicalPath = activeTool ? `/image-tools/${activeTool}` : "/image-tools"
 
   const imageHubSchema = activeTool ? null : [
@@ -1080,6 +1079,9 @@ export default function ImageTools() {
                         <p className="page-subtitle">
                           {activeToolData.description}
                         </p>
+                        <div style={{ marginTop: '1.5rem', maxWidth: '280px' }}>
+                          <ToolRating toolSlug={`image-tools/${toolId}`} />
+                        </div>
                       </div>
                     </div>
 
@@ -1294,8 +1296,8 @@ export default function ImageTools() {
 
                 <div style={{ marginTop: '5rem' }}>
                   <ToolContent
-                    title={activeToolData?.title || 'Image Studio'}
-                    description={activeToolData?.description || (activeTool ? `Our ${activeToolData?.title} is a professional browser-based utility for photo editing.` : 'The PixTool Image Studio is a comprehensive suite of professional-grade, privacy-first photo editing utilities. Unlike traditional online editors, PixTool processes 100% of your data locally using WebAssembly (WASM), ensuring that your sensitive photos never touch a cloud server. From rapid compression to advanced cropping and background removal, our tools are optimized for both high-end hardware and mobile devices.')}
+                    title={activeToolData?.title || 'Professional Image Studio'}
+                    description={activeToolData?.description || hubMetadata.description}
                     toolId={activeTool}
                     benefits={activeToolData?.features || [
                       "Zero-Upload Privacy: Files are processed 100% in your browser using WASM technology.",
@@ -1311,27 +1313,27 @@ export default function ImageTools() {
                       "Review the real-time preview to ensure pixel-perfect results.",
                       "Click Export All to save your optimized images locally."
                     ]}
-                    relatedTools={IMAGE_RELATED_TOOLS[activeTool] || [
-                        { name: 'Merge PDF', path: '/pdf-tools/merge' },
-                        { name: 'QR Generator', path: '/qr-generator' },
-                        { name: 'Temp Mail', path: '/temp-mail' }
+                    relatedTools={activeToolData?.relatedTools || [
+                      { name: 'Merge PDF', path: '/pdf-tools/merge' },
+                      { name: 'QR Generator', path: '/qr-generator' },
+                      { name: 'Temp Mail', path: '/temp-mail' }
                     ]}
-                    readNext={IMAGE_READ_NEXT[activeTool] || [
-                        { title: '🎯 WebP vs AVIF vs JPEG 2026: Best Image Format for Web Performance & SEO', path: '/blog/best-image-format-webp-avif-jpeg-2026' },
-                        { title: '🗜️ Image Compression 101: Lossless vs Lossy - Guidance for 2026', path: '/blog/image-compression-lossless-vs-lossy-2026' }
+                    readNext={activeToolData?.readNext || [
+                      { title: '🎯 WebP vs AVIF vs JPEG 2026: Best Image Format for Web Performance & SEO', path: '/blog/best-image-format-webp-avif-jpeg-2026' },
+                      { title: '🗜️ Image Compression 101: Lossless vs Lossy - Guidance for 2026', path: '/blog/image-compression-lossless-vs-lossy-2026' }
                     ]}
-                    alternativeTo={seoContent?.alternativeTo || ["Adobe Photoshop Express", "Canva Photo Editor", "iLoveImg", "TinyPNG"]}
-                    faq={seoContent?.faq || [
+                    alternativeTo={activeToolData?.alternativeTo || ["Adobe Photoshop Express", "Canva Photo Editor", "iLoveImg", "TinyPNG"]}
+                    faq={activeToolData?.faq || [
                         { q: "Are my images uploaded to any server?", a: "No. PixTool uses browser-based processing (WebAssembly). All transformations happen on your machine's CPU/GPU, and your files never leave your device." },
                         { q: "Is there a file size limit?", a: "While we support files up to 50MB, performance depends on your device's RAM. Most modern browsers handle standard DLSR/Phone photos instantly." },
                         { q: "Which formats are best for web performance?", a: "For 2026, we recommend WebP or AVIF. Our 'Convert' tool allows you to transform legacy JPEGs into these high-efficiency formats effortlessly." }
                     ]}
-                    tips={seoContent?.tips || [
+                    tips={activeToolData?.tips || [
                         "Use the 'Batch Export' feature to process hundreds of social media assets at once.",
                         "Switch to 'WebP' in the Convert settings for 30% better compression than traditional JPEG.",
                         "Lock the Aspect Ratio when resizing to maintain visual integrity across different devices."
                     ]}
-                    useCases={seoContent?.useCases || [
+                    useCases={activeToolData?.useCases || [
                         { title: "Social Media Managers", description: "Batch resize high-res photography into exact dimensions for Instagram, X, and LinkedIn in seconds." },
                         { title: "Web Developers", description: "Optimize assets using the Compressor to achieve perfect Lighthouse scores without compromising visual quality." }
                     ]}

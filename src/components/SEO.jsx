@@ -463,9 +463,10 @@ export default function SEO({
                 "@type": "WebApplication",
                 "name": resolvedToolName || brandTitle || siteName,
                 "url": fullUrl,
-                "applicationCategory": path.includes('/pdf') ? "BusinessApplication" : "UtilitiesApplication",
-                "operatingSystem": "All",
+                "applicationCategory": (path.includes('/pdf') || path.includes('/utility')) ? "BusinessApplication" : "UtilitiesApplication",
+                "operatingSystem": "All (Web-based Browser Studio)",
                 "isAccessibleForFree": true,
+                "featureList": toolDataFromMap?.benefits || [],
                 "permissions": "No registration required, 100% Private local browser processing",
                 "publisher": { "@id": `${siteUrl}/#organization` },
                 "author": { "@id": `${siteUrl}/#organization` },
@@ -480,29 +481,7 @@ export default function SEO({
                         { "@type": "Country", "name": "US" },
                         { "@type": "Country", "name": "GB" },
                         { "@type": "Country", "name": "AU" }
-                    ],
-                    "shippingDetails": {
-                        "@type": "OfferShippingDetails",
-                        "shippingRate": {
-                            "@type": "MonetaryAmount",
-                            "value": "0",
-                            "currency": "USD"
-                        },
-                        "shippingDestination": [
-                            { "@type": "DefinedRegion", "addressCountry": "IN" },
-                            { "@type": "DefinedRegion", "addressCountry": "US" },
-                            { "@type": "DefinedRegion", "addressCountry": "GB" },
-                            { "@type": "DefinedRegion", "addressCountry": "AU" }
-                        ]
-                    },
-                    "hasMerchantReturnPolicy": {
-                        "@type": "MerchantReturnPolicy",
-                        "applicableCountry": "IN",
-                        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnPeriod",
-                        "merchantReturnDays": 30,
-                        "returnMethod": "https://schema.org/ReturnByMail",
-                        "returnFees": "https://schema.org/FreeReturn"
-                    }
+                    ]
                 }
             }
 
@@ -571,9 +550,10 @@ export default function SEO({
                 "@type": "SoftwareApplication",
                 "name": toolTitle,
                 "description": resolvedDescription,
-                "applicationCategory": path.includes('/pdf') ? "BusinessApplication" : "UtilitiesApplication",
+                "applicationCategory": (path.includes('/pdf') || path.includes('/utility')) ? "BusinessApplication" : "UtilitiesApplication",
                 "url": fullUrl,
                 "image": ogImage,
+                "featureList": toolDataFromMap?.benefits || [],
                 "screenshot": ogImage,
                 "permissions": "No registration required, Privacy-first browser processing",
                 "publisher": { "@id": `${siteUrl}/#organization` },
@@ -588,29 +568,7 @@ export default function SEO({
                         { "@type": "Country", "name": "US" },
                         { "@type": "Country", "name": "GB" },
                         { "@type": "Country", "name": "AU" }
-                    ],
-                    "shippingDetails": {
-                        "@type": "OfferShippingDetails",
-                        "shippingRate": {
-                            "@type": "MonetaryAmount",
-                            "value": "0",
-                            "currency": "USD"
-                        },
-                        "shippingDestination": [
-                            { "@type": "DefinedRegion", "addressCountry": "IN" },
-                            { "@type": "DefinedRegion", "addressCountry": "US" },
-                            { "@type": "DefinedRegion", "addressCountry": "GB" },
-                            { "@type": "DefinedRegion", "addressCountry": "AU" }
-                        ]
-                    },
-                    "hasMerchantReturnPolicy": {
-                        "@type": "MerchantReturnPolicy",
-                        "applicableCountry": "IN",
-                        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnPeriod",
-                        "merchantReturnDays": 30,
-                        "returnMethod": "https://schema.org/ReturnByMail",
-                        "returnFees": "https://schema.org/FreeReturn"
-                    }
+                    ]
                 },
                 "softwareVersion": "2026.04",
                 "operatingSystem": "All (Web-based Browser Studio)",

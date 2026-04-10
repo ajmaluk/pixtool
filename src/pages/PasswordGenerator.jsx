@@ -6,6 +6,7 @@ import ShareTool from '../components/ShareTool'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
 import { useRatePopup } from '../hooks/useRatePopup'
+import { ALL_TOOLS_MAP } from '../data/tools'
 
 export default function PasswordGenerator() {
   const [length, setLength] = useState(16)
@@ -19,6 +20,7 @@ export default function PasswordGenerator() {
   const [showPassword, setShowPassword] = useState(true)
   const [copied, setCopied] = useState(false)
   const { triggerRating } = useRatePopup()
+  const toolData = ALL_TOOLS_MAP['password-generator']
 
   const generatePassword = () => {
     const charset = {
@@ -87,27 +89,15 @@ export default function PasswordGenerator() {
   return (
     <>
       <SEO
-        title="Secure Password Generator Online | Random & Strong - PixTool"
-        description="Generate strong, random, and secure passwords instantly with PixTool. Customize length and character types for maximum entropy. 100% private and browser-based password creation."
-        keywords="password generator 2026, generate secure password online, random password creator, strong password maker free, best password generator browser, secure keys online, random string generator, secure alphanumeric password"
-        path="/password-generator"
-        toolName="Password Generator"
-        toolSteps={[
-          'Choose your desired password length (up to 64 characters).',
-          'Select character types (Uppercase, Lowercase, Numbers, Symbols).',
-          'Review the real-time generated password and its strength rating.',
-          'Copy your secure password to the clipboard.'
-        ]}
-        breadcrumbs={[
-          { name: 'Utility Tools', item: '/utility-tools' },
-          { name: 'Password Generator', item: '/password-generator' }
-        ]}
+        {...toolData.seo}
+        path={toolData.path}
+        breadcrumbs={[{ name: 'Utility Tools', item: '/utility-tools' }, { name: toolData.title, item: toolData.path }]}
       />
 
       <div className="page-container">
         <Breadcrumbs items={[
           { name: 'Utility Tools', item: '/utility-tools' },
-          { name: 'Password Generator', item: '/password-generator' }
+          { name: toolData.title, item: toolData.path }
         ]} />
 
         <div className="landing-layout">
@@ -118,9 +108,9 @@ export default function PasswordGenerator() {
 
             <div className="page-hero">
               <div className="page-hero-content">
-                <h1 className="page-title">Password <span style={{ color: 'var(--accent-orange)' }}>Generator</span></h1>
+                <h1 className="page-title">{toolData.title}</h1>
                 <p className="page-subtitle">
-                  Create cryptographically secure, random passwords instantly. Protect your online accounts with high-entropy keys that never leave your device.
+                  {toolData.description}
                 </p>
               </div>
             </div>
@@ -247,29 +237,10 @@ export default function PasswordGenerator() {
               ))}
             </div>
 
-            <ShareTool
-              title="Password Generator"
-              url="/password-generator"
-              text="Generate secure, high-entropy passwords on PixTool - 100% private and browser-based"
-            />
+            <ShareTool title={`${toolData.title} | Random & Strong - PixTool`} />
 
             <div style={{ marginTop: '5rem' }}>
-              <ToolContent
-                title="Professional Security for Everyone"
-                description="Our Password Generator uses cryptographically secure pseudo-random number generators (CSPRNG) via the WebCrypto API. This ensures that every password created has the highest possible level of entropy, which is the gold standard for digital security. Because it runs locally, you can trust that your new keys are never shared with anyone."
-                benefits={[
-                  "Adjustable length up to 64 characters for ultra-secure keys",
-                  "Customizable character sets including symbols and numbers",
-                  "Real-time visual strength meter for instant feedback",
-                  "Blur mode to prevent 'shoulder surfing' in public places",
-                  "One-click copying for seamless integration with password managers"
-                ]}
-                useCases={[
-                  { title: "Social Media & Email", description: "Secure your primary online identities with long, complex passwords that are resistant to common hacks." },
-                  { title: "Developer & Server Security", description: "Generate secure environment variables, API keys, and database passwords instantly." },
-                  { title: "Wi-Fi & IoT Protection", description: "Create strong passwords for your home network and connected devices to prevent unauthorized access." }
-                ]}
-              />
+              <ToolContent {...toolData} />
             </div>
           </div>
 

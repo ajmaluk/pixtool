@@ -6,8 +6,9 @@ import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
 import Breadcrumbs from '../components/Breadcrumbs'
 import { useRatePopup } from '../hooks/useRatePopup'
-import { UTILITY_READ_NEXT } from '../data/utilityToolsData'
 import ShareTool from '../components/ShareTool'
+import { ALL_TOOLS_MAP } from '../data/tools'
+
 
 const qrTypes = [
   { id: 'url', label: 'URL', icon: Link },
@@ -19,6 +20,7 @@ const qrTypes = [
 
 export default function QrGenerator() {
   const { triggerRating } = useRatePopup()
+  const toolData = ALL_TOOLS_MAP['qr-generator']
   const [activeType, setActiveType] = useState('url')
   const [data, setData] = useState({
     url: '',
@@ -191,31 +193,15 @@ export default function QrGenerator() {
   return (
     <>
       <SEO
-        title="🔥 Best Free Online QR Code Generator [2026] - No Signup, No Tracking | PixTool"
-        description="🚀 Generate professional, custom QR codes instantly. Create QR codes for URLs, WiFi, emails, phone numbers & text. High-resolution PNG output. 100% private, browser-based, and no signup needed. Fast alternative to QR-Server & QR.io."
-        keywords="free qr code generator, qr code maker, custom qr code generator, create qr code free, qr generator no app, high resolution qr code, branded qr code, wifi qr code generator, static qr codes, qr code for url, best qr generator 2026, private qr generator, qr code creator, uitly alternative, qr code generator with logo free"
-        path="/qr-generator"
-        toolName="QR Generator"
-        toolSteps={[
-          "Choose the data type: URL, WiFi, Email, Phone, or Plain Text.",
-          "Input the information you want to encode into the QR code.",
-          "Adjust size, foreground/background colors, and error correction levels.",
-          "Click 'Download PNG' to save your high-resolution QR code instantly."
-        ]}
-        screenshot="/screenshots/best-free-qr-code-generator-online.webp"
-        imageAlt="PixTool QR Generator - Professional custom QR code creation tool"
-        imageTitle="Generate QR Codes Instantly"
-        breadcrumbs={[
-          { name: 'Utility Tools', item: '/utility-tools' },
-          { name: 'QR Generator', item: '/qr-generator' }
-        ]}
-        faqs={qrGeneratorFaqs}
+        {...toolData.seo}
+        path={toolData.path}
+        breadcrumbs={[{ name: 'Utility Tools', item: '/utility-tools' }, { name: toolData.title, item: toolData.path }]}
       />
 
       <div className="page-container">
         <Breadcrumbs items={[
           { name: 'Utility Tools', item: '/utility-tools' },
-          { name: 'QR Generator', item: '/qr-generator' }
+          { name: toolData.title, item: toolData.path }
         ]} />
 
         <div className="landing-layout">
@@ -226,9 +212,9 @@ export default function QrGenerator() {
 
             <div className="page-hero">
               <div className="page-hero-content">
-                <h1 className="page-title">Free QR Code Generator</h1>
+                <h1 className="page-title">{toolData.title}</h1>
                 <p className="page-subtitle">
-                  Create professional, high-resolution QR codes for links, WiFi, text, email, and phone instantly.
+                  {toolData.description}
                 </p>
               </div>
             </div>
@@ -377,46 +363,45 @@ export default function QrGenerator() {
 
             <AdSpace type="bottom" />
 
+            <div className="editorial-container" style={{ marginTop: '6rem', padding: '3rem', background: 'var(--bg-glass)', borderRadius: '32px', border: '1px solid var(--border-color)', position: 'relative', overflow: 'hidden' }}>
+              <div style={{ position: 'absolute', top: '-50px', right: '-50px', width: '200px', height: '200px', background: 'var(--accent-glow)', filter: 'blur(100px)', opacity: 0.5, zIndex: 0 }}></div>
+              
+              <div style={{ position: 'relative', zIndex: 1 }}>
+                <h2 style={{ fontSize: '2.25rem', fontWeight: 900, letterSpacing: '-0.03em', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
+                  The Professional Successor to <span style={{ color: 'var(--accent-primary)' }}>Uitly</span>
+                </h2>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem', marginTop: '3rem' }}>
+                  <div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                      <Shield size={22} style={{ color: '#10b981' }} />
+                      100% Privacy, Zero Servers
+                    </h3>
+                    <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: '1.05rem' }}>
+                      Unlike other generators that store your URLs on their servers, PixTool works entirely in your browser. Your sensitive data, WiFi passwords, and private links never leave your machine.
+                    </p>
+                  </div>
+                  <div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                      <Zap size={22} style={{ color: '#fbbf24' }} />
+                      Permanent Static Codes
+                    </h3>
+                    <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: '1.05rem' }}>
+                      The biggest pain point with "Free" QR generators is code expiration. PixTool generates pure ISO-standard static codes that encode data directly into the matrix. They will <b>never expire</b>.
+                    </p>
+                  </div>
+                </div>
+
+                <div style={{ marginTop: '4rem', padding: '2rem', background: 'var(--bg-primary)', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
+                  <h3 style={{ fontSize: '1.1rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', color: 'var(--accent-primary)' }}>Note for Uitly Users</h3>
+                  <p style={{ color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6 }}>
+                    If you were a regular user of the original Uitly suite, you'll find everything you loved here—but faster and more secure. We've optimized the encoding algorithms to ensure sub-second scan times even on legacy hardware.
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <div style={{ marginTop: '5rem' }}>
-              <ToolContent
-                title="Professional QR Intelligence Studio"
-                description="The PixTool QR Code Generator is a high-authority desktop and mobile utility engineered for professional marketing and localized data distribution. Unlike cloud-based generators that track your destination links and usage metrics, our studio generates high-fidelity, ISO-standard QR codes entirely within your browser's local sandbox. Whether you are creating branding-aligned URLs for physical flyers, secure WiFi credentials for guest networks, or vCard proxies for business cards, our studio ensures absolute data sovereignty with professional-grade error correction and zero scan limits."
-                benefits={[
-                  "Zero-Tracking Privacy: Your destination URLs and WiFi passwords never leave your local machine.",
-                  "High-Resolution PNG: Professional-grade 300 DPI output perfect for physical print media.",
-                  "Branding Alignment: Custom foreground and background colors to match your corporate identity.",
-                  "Static QR Persistence: Codes never expire, have no scan limits, and work forever for free.",
-                  "Robust Error Correction: Adjustable ECC levels (L, M, Q, H) for maximum scan reliability."
-                ]}
-                howTo={[
-                  "Select the data architecture (URL, WiFi, Text, Email, or Phone) for your QR code.",
-                  "Enter the data you wish to encode—WiFi SSIDs and passwords stay 100% private.",
-                  "Use the 'Aesthetics' panel to adjust size and branding-specific color tokens.",
-                  "Adjust the 'Error Correction' level based on your surface durability requirements.",
-                  "Instantly download the high-resolution PNG or copy the graphic to your clipboard."
-                ]}
-                tips={[
-                  "For physical print (flyers/posters), use 'High (30%)' error correction to ensure scanning even if the surface is scratched.",
-                  "Always maintain a high-contrast ratio between the QR dots and the background for sub-second scan latency.",
-                  "Shorten your marketing URLs before generating the code to maintain a clean, high-density pattern.",
-                  "Test your QR code on both iOS and Android native camera apps to verify multi-platform compatibility."
-                ]}
-                useCases={[
-                  { title: "Marketing & Print Media", description: "Incorporate high-resolution QR codes into flyers, posters, and business cards to bridge the offline-to-online customer journey." },
-                  { title: "Secure Guest Access", description: "Generate localized WiFi QR codes for offices or guest rooms, allowing visitors to connect without sharing raw passwords." },
-                  { title: "Contactless Distribution", description: "Share digital menus, event schedules, or PDF documents via direct-link QR codes for a safe, modern touch-free experience." }
-                ]}
-                alternativeTo={["QR Code Monkey", "Bitly QR", "GoQR.me", "Beaconstac", "QR Tiger"]}
-                readNext={[
-                  { title: '📂 The Future of Offline Marketing with Static QR Codes', path: '/blog/qr-static-vs-dynamic-2026' },
-                  { title: '🔒 Maintaining Data Sovereignty in the QR Ecosystem', path: '/blog/browser-based-privacy' }
-                ]}
-                faq={[
-                  { q: "Is registration required for unlimited scans?", a: "No. PixTool QR codes are standard static codes. We do not require an account, and we do not impose any scan limits or expiry dates." },
-                  { q: "Can I use these QR codes for commercial projects?", a: "Yes. All graphics generated are 100% royalty-free and yours to use for personal, commercial, or enterprise-level distribution." },
-                  { q: "Why choose high error correction?", a: "Higher ECC allows the code to be scanned even if up to 30% of its surface is obscured or damaged, making it ideal for outdoor advertising." }
-                ]}
-              />
+              <ToolContent {...toolData} />
             </div>
           </div>
 
@@ -462,7 +447,12 @@ export default function QrGenerator() {
           {toast.message}
         </div>
       </div>
-      <ShareTool title="Free QR Code Generator | Custom QR Maker - PixTool" />
+      <ShareTool
+        title={toolData.title}
+        url={toolData.path}
+        text={toolData.description}
+      />
+
     </>
   )
 }

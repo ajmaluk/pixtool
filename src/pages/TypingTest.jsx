@@ -3,7 +3,8 @@ import { Type, TimerReset, RefreshCw, Trophy, Keyboard, Copy } from 'lucide-reac
 import SEO from '../components/SEO'
 import ShareTool from '../components/ShareTool'
 import Breadcrumbs from '../components/Breadcrumbs'
-import { UTILITY_READ_NEXT } from '../data/utilityToolsData'
+import { ALL_TOOLS_MAP } from '../data/tools'
+const toolData = ALL_TOOLS_MAP['typing-test']
 import { useRatePopup } from '../hooks/useRatePopup'
 import AdSpace from '../components/AdSpace'
 import ToolContent from '../components/ToolContent'
@@ -132,32 +133,18 @@ export default function TypingTest() {
   return (
     <>
       <SEO
-        title="Free Online Typing Test | Check WPM Speed (MonkeyType Alternative)"
-        description="Take our free online typing test to check your WPM (Words Per Minute). A fast, privacy-first MonkeyType alternative with distraction-free typing practice."
-        keywords="online typing test, free typing test online, wpm test run, typing speed test, MonkeyType alternative, typing practice"
-        path="/typing-test"
-        toolName="Typing Test"
-        toolSteps={[
-          "Choose your preferred test duration: 15s, 30s, or 60s.",
-          "Click the input field and start typing the words shown.",
-          "Press SPACE or ENTER after each word to move to the next.",
-          "Review your final WPM and accuracy metrics instantly."
-        ]}
-        screenshot="/screenshots/professional-typing-speed-test-online.webp"
-        imageAlt="PixTool Typing Test - Professional WPM and accuracy tracking interface"
-        imageTitle="MonkeyType Alternative Typing Test Online"
-        breadcrumbs={[
-          { name: 'Utility Tools', item: '/utility-tools' },
-          { name: 'Typing Test', item: '/typing-test' }
-        ]}
+        {...toolData.seo}
+        path={toolData.path}
+        breadcrumbs={[{ name: 'Utility Tools', item: '/utility-tools' }, { name: toolData.title, item: toolData.path }]}
       />
 
 
       <div className="page-container">
         <Breadcrumbs items={[
           { name: 'Utility Tools', item: '/utility-tools' },
-          { name: 'Typing Test', item: '/typing-test' }
+          { name: toolData.title, item: toolData.path }
         ]} />
+
 
         <div className="landing-layout">
           <AdSpace type="side" className="desktop-only" />
@@ -167,9 +154,9 @@ export default function TypingTest() {
 
             <div className="page-hero">
               <div className="page-hero-content">
-                <h1 className="page-title">Typing Test</h1>
+                <h1 className="page-title">{toolData.title}</h1>
                 <p className="page-subtitle">
-                  Practice typing like a pro. Track your speed (WPM) and accuracy in real-time. Completely free.
+                  {toolData.description}
                 </p>
               </div>
             </div>
@@ -323,51 +310,18 @@ export default function TypingTest() {
             </div>
 
             <div style={{ marginTop: '5rem' }}>
-              <ToolContent
-                title="Professional Typing Intelligence Studio"
-                description="The PixTool Typing Test is a high-authority performance utility engineered for developers, writers, and digital professionals seeking peak input efficiency. Built as a distraction-free, privacy-first alternative to commercial platforms, our studio provides real-time WPM (Words Per Minute) and accuracy tracking entirely within your browser's local V8 engine. Whether you are benchmarking your touch-typing speed for professional certifications or training muscle memory for high-velocity coding, our studio ensures absolute data sovereignty with zero tracking and sub-millisecond latency."
-                benefits={[
-                  "Zero-Tracking Privacy: Your typing patterns and results stay 100% in your local browser.",
-                  "Precision WPM Engine: Standardized 5-character word calculation for professional accuracy.",
-                  "Real-Time Analytics: Instant feedback on accuracy percentages and character-level errors.",
-                  "Adaptive Test Sprints: Choose 15s, 30s, or 60s durations to match your training goals.",
-                  "High-Focus Interface: Minimalist, ad-buffered design optimized for deep concentration."
-                ]}
-                howTo={[
-                  "Select your test duration—15s for raw speed, 60s for endurance benchmarking.",
-                  "Click the input field and begin typing the randomized word stream displayed above.",
-                  "Use the SPACE or ENTER keys to finalize each word—characters change color based on accuracy.",
-                  "Monitor the live WPM and Timer counters to maintain your rhythmic flow.",
-                  "Review your final scorecard and share your results to challenge teammates or track progress."
-                ]}
-                tips={[
-                  "Prioritize accuracy (95%+) over raw speed; speed naturally accelerates as muscle memory stabilizes.",
-                  "Keep your eyes focused 2-3 words ahead of your current position to maintain a continuous typing cadence.",
-                  "Practice in short, high-intensity 5-minute sessions daily to see maximum cognitive improvement over time.",
-                  "Use the 'Escape' key as a professional shortcut to instantly restart any test session."
-                ]}
-                useCases={[
-                  { title: "Developer Velocity Training", description: "Improve your coding throughput by mastering touch-typing, reducing the cognitive load of keyboard interaction during intense dev sessions." },
-                  { title: "Professional Benchmarking", description: "Verify your typing credentials for data entry, transcription, or administrative roles requiring verified WPM standards." },
-                  { title: "Cognitive Focus Training", description: "Use rhythmic typing as a 'warm-up' exercise to synchronize hand-eye coordination and sharpen mental focus before deep work." }
-                ]}
-                alternativeTo={["MonkeyType", "10FastFingers", "TypeRacer", "Keybr"]}
-                readNext={[
-                  { title: '📂 Building Better Focus and Speed Through Repeatable Practice', path: '/blog/future-of-ai-productivity' },
-                  { title: '🔒 Why Your Browser is the Safest Place for Performance Tests', path: '/blog/browser-based-privacy' }
-                ]}
-                faq={[
-                  { q: "How do you calculate WPM?", a: "We use the professional standard: (Total Characters / 5) / Time in Minutes. This ensures a fair comparison regardless of word length complexity." },
-                  { q: "Is this test suitable for absolute beginners?", a: "Yes. The simplified word bank allows beginners to focus on key placement, while the high-velocity engine scales with professional speeds." },
-                  { q: "Are my results saved for tracking?", a: "No. For maximum privacy, results are only stored in your current session. We recommend sharing or screenshotting your best scores to track long-term progress." }
-                ]}
-              />
+              <ToolContent {...toolData} />
             </div>
           </div>
           <AdSpace type="side" className="desktop-only" />
         </div>
       </div>
-      <ShareTool title="Free Typing Test | MonkeyType Alternative - PixTool" />
+      <ShareTool
+        title={toolData.title}
+        url={toolData.path}
+        text={toolData.description}
+      />
+
     </>
   )
 }

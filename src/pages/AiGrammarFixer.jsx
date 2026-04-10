@@ -19,32 +19,12 @@ export default function AiGrammarFixer() {
       customPromptBuilder={customPromptBuilder}
       seoKeywords="ai grammar checker, professional editor ai, fix grammar online, linguistic analysis tool"
     >
-      <div className="grammar-workspace" style={{ marginBottom: '1.5rem' }}>
-        <div style={{ marginBottom: '3rem' }}>
-          <label htmlFor="ai-grammar-input" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-            Source Manuscript
-          </label>
-          <textarea 
-            id="ai-grammar-input"
-            name="inputText"
-            className="dalam-textarea"
-            style={{ width: '100%', minHeight: '300px', padding: '2rem', fontSize: '1.2rem', border: '1px solid #f4f4f5', background: '#fdfdfd', borderRadius: '32px', color: '#1a1a1a', outline: 'none', lineHeight: 1.6 }}
-            placeholder="Paste your text here for linguistic architecting..."
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-          />
-        </div>
+      <div className="sidebar-section">
+        <div className="sidebar-section-title">Linguistic Precision</div>
+        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>
+          Your text will be analyzed for grammatical accuracy, syntactic flow, and stylistic consistency. Correction is applied in real-time through the neural engine.
+        </p>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .side-by-side {
-            grid-template-columns: 1fr !important;
-          }
-          .hide-on-mobile { display: none !important; }
-          .show-on-mobile { display: block !important; }
-        }
-      `}</style>
     </AiToolTemplate>
   )
 }

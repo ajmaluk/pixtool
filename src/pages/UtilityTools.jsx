@@ -4,27 +4,20 @@ import ToolCard from '../components/ToolCard'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
-import { UTILITY_TOOLS } from '../data/tools'
-import { UTILITY_SEO_CONTENT } from '../data/utilityToolsData'
+import { UTILITY_TOOLS, ALL_TOOLS_MAP } from '../data/tools'
 import { SITE_URL } from '../config/app.config'
 
 const tools = UTILITY_TOOLS;
+const categoryMetadata = ALL_TOOLS_MAP['/utility-tools'];
 
 export default function UtilityTools() {
-    const seoContentMap = UTILITY_SEO_CONTENT;
-    const activeTool = null; // Category hub mode
-    const seoContent = activeTool ? seoContentMap[activeTool] : {
-        title: "Free Utility Tools | Temp Mail, Typing Test & QR Generator - PixTool",
-        description: "Handy free online utility tools for daily productivity and security. Generate temp mail online, take a free typing test online, or use our custom QR code generator.",
-        keywords: "free typing test online, temp mail online, qr code generator, online tools free, disposable email, utility tools"
-    };
 
     const utilitySchema = [
         {
             "@context": "https://schema.org",
             "@type": "CollectionPage",
             "name": "Free Web Utility Tools - PixTool",
-            "description": seoContent.description,
+            "description": categoryMetadata.seo.description,
             "url": `${SITE_URL}/utility-tools`
         },
         {
@@ -46,9 +39,9 @@ export default function UtilityTools() {
     return (
         <>
             <SEO
-                title={seoContent.title}
-                description={seoContent.description}
-                keywords={seoContent.keywords}
+                title={categoryMetadata.seo.title}
+                description={categoryMetadata.seo.description}
+                keywords={categoryMetadata.seo.keywords}
                 path="/utility-tools"
                 schema={utilitySchema}
                 breadcrumbs={[
@@ -100,39 +93,7 @@ export default function UtilityTools() {
                     </div>
 
                     <div style={{ marginTop: '5rem' }}>
-                        <ToolContent
-                            title="Utility & Privacy Suite"
-                            description="Protect your privacy and optimize your workflow with our local-first utility studio. Every tool in this suite runs strictly within your browser's sandboxed environment, meaning your temporary emails, QR scan results, and typing data never touch a database or server. High-speed, high-security, and high-productivity tools at your fingertips."
-                            benefits={[
-                                "100% Browser-Based — absolute data privacy",
-                                "Zero Latency — instant results without server delay",
-                                "No Account Required — use everything anonymously",
-                                "Expert Grade — built for daily professional use",
-                                "Cross-Device Sync — access from any device instantly"
-                            ]}
-                            howTo={[
-                                "Select a primary utility tool from the studio",
-                                "Provide your input data or grant necessary permissions",
-                                "Fine-tune settings for your specific requirements",
-                                "Get your output instantly and securely"
-                            ]}
-                            tips={[
-                                "Bookmark this page to have a quick-access privacy toolkit ready whenever you encounter suspicious websites or apps.",
-                                "Use our 'Temp Mail' together with a 'QR Generator' to quickly create one-time contact points for events or marketing experiments.",
-                                "Check your typing speed regularly to monitor your productivity levels as a developer or writer.",
-                                "Always look for the 'local processing' badge on our tools—it ensures your data never leaves your computer."
-                            ]}
-                            useCases={[
-                                { title: "Secure Account Verifications", description: "Use our utility suite to sign up for trials and forums without risking your primary identity or data." },
-                                { title: "Field Marketing & Events", description: "Generate scannable codes and manage temporary communications at trade shows or meetups with ease." },
-                                { title: "Student & Developer Practice", description: "Improve your typing efficiency and handle common data tasks like QR generation for project documentation." }
-                            ]}
-                            readNext={[
-                                { title: 'The Ultimate Guide to Digital Privacy 2026', path: '/blog/browser-based-privacy' },
-                                { title: 'Why Secure Temp Mail is Essential for Business', path: '/blog/secure-temp-mail-business-privacy-2026' },
-                                { title: 'Mastering Productivity with PixTool Studio', path: '/blog/future-of-ai-productivity' }
-                            ]}
-                        />
+                        <ToolContent {...categoryMetadata.editorial} />
                     </div>
                 </div>
             </div>

@@ -9,8 +9,10 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
-import { PRODUCTIVITY_SEO_CONTENT } from '../data/productivityToolsData'
+import { ALL_TOOLS_MAP } from '../data/tools'
 import { readStoredJson, writeStoredJson } from '../utils/browserStorage'
+
+const toolData = ALL_TOOLS_MAP['notepad']
 
 export default function Notepad() {
   const [content, setContent] = useState(() => readStoredJson('pt_notepad_content', ''))
@@ -66,13 +68,13 @@ export default function Notepad() {
   return (
     <>
       <SEO 
-        {...PRODUCTIVITY_SEO_CONTENT['notepad']}
-        path="/productivity-tools/notepad"
-        breadcrumbs={[{ name: 'Productivity', item: '/productivity-tools' }, { name: 'NotePad', item: '/productivity-tools/notepad' }]}
+        {...toolData.seo}
+        path={toolData.path}
+        breadcrumbs={[{ name: 'Productivity', item: '/productivity-tools' }, { name: toolData.title, item: toolData.path }]}
       />
 
       <div className="page-container" style={{ paddingTop: '2rem' }}>
-        <Breadcrumbs items={[{ name: 'Productivity', item: '/productivity-tools' }, { name: 'NotePad', item: '/productivity-tools/notepad' }]} />
+        <Breadcrumbs items={[{ name: 'Productivity', item: '/productivity-tools' }, { name: toolData.title, item: toolData.path }]} />
         <div className="landing-layout">
           <AdSpace type="side" className="desktop-only" />
           <div className="landing-center" style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
@@ -224,7 +226,7 @@ export default function Notepad() {
 
           <AdSpace type="bottom" style={{ marginTop: '4rem' }} />
           <div style={{ marginTop: '6rem' }}>
-            <ToolContent {...PRODUCTIVITY_SEO_CONTENT['notepad']} />
+            <ToolContent {...toolData} />
           </div>
               </div>
             <AdSpace type="side" className="desktop-only" />

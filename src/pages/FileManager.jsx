@@ -10,8 +10,10 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
-import { PRODUCTIVITY_SEO_CONTENT } from '../data/productivityToolsData'
+import { ALL_TOOLS_MAP } from '../data/tools'
 import { pixDB, STORES } from '../lib/db'
+
+const toolData = ALL_TOOLS_MAP['file-manager']
 
 export default function FileManager() {
   const [items, setItems] = useState([])
@@ -147,13 +149,13 @@ export default function FileManager() {
   return (
     <>
       <SEO 
-        {...PRODUCTIVITY_SEO_CONTENT['file-manager']}
-        path="/productivity-tools/file-manager"
-        breadcrumbs={[{ name: 'Productivity', item: '/productivity-tools' }, { name: 'File Vault', item: '/productivity-tools/file-manager' }]}
+        {...toolData.seo}
+        path={toolData.path}
+        breadcrumbs={[{ name: 'Productivity', item: '/productivity-tools' }, { name: toolData.title, item: toolData.path }]}
       />
 
       <div className="page-container" style={{ paddingTop: '2rem' }}>
-        <Breadcrumbs items={[{ name: 'Productivity', item: '/productivity-tools' }, { name: 'File Vault', item: '/productivity-tools/files' }]} />
+        <Breadcrumbs items={[{ name: 'Productivity', item: '/productivity-tools' }, { name: toolData.title, item: toolData.path }]} />
         <div className="landing-layout">
           <AdSpace type="side" className="desktop-only" />
           <div className="landing-center" style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
@@ -338,7 +340,7 @@ export default function FileManager() {
 
           <AdSpace type="bottom" style={{ marginTop: '4rem' }} />
           <div style={{ marginTop: '6rem' }}>
-            <ToolContent {...PRODUCTIVITY_SEO_CONTENT['file-manager']} />
+            <ToolContent {...toolData} />
           </div>
               </div>
             <AdSpace type="side" className="desktop-only" />

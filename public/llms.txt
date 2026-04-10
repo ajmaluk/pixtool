@@ -6,12 +6,12 @@ Canonical URL: https://www.pixtool.in
 Sitemap: https://www.pixtool.in/sitemap.xml
 Full Manifest: https://www.pixtool.in/llms-full.txt
 
-Total Tool Count: 70
+Total Tool Count: 73
 
 Tool Hubs:
 - Image Tools: https://www.pixtool.in/image-tools (12 tools)
 - PDF Tools: https://www.pixtool.in/pdf-tools (13 tools)
-- Utility Tools: https://www.pixtool.in/utility-tools (13 tools)
+- Utility Tools: https://www.pixtool.in/utility-tools (16 tools)
 - AI Tools: https://www.pixtool.in/ai-tools (14 tools)
 - Math Tools: https://www.pixtool.in/math-tools (10 tools)
 - Productivity Tools: https://www.pixtool.in/productivity-tools (8 tools)

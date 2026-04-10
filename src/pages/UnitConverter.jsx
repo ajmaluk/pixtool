@@ -7,6 +7,9 @@ import ShareTool from '../components/ShareTool'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
 import { useRatePopup } from '../hooks/useRatePopup'
+import { ALL_TOOLS_MAP } from '../data/tools'
+
+const toolData = ALL_TOOLS_MAP['unit-converter']
 
 const UNITS_DATA = {
   length: {
@@ -108,21 +111,9 @@ export default function UnitConverter() {
   return (
     <>
       <SEO
-        title="Free Online Unit Converter | Precision Length, Weight, Temperature - PixTool"
-        description="Convert instantly between Length, Weight, Temperature, and Volume units. PixTool provides high-precision calculations with zero delays. 100% private, secure, and mobile-friendly measurement tool for 2026."
-        keywords="unit converter 2026, convert meters to miles online, weight converter free, temperature converter celsius to fahrenheit, volume conversion online, best unit converter browser, online measurement converter, precise unit calculator, free web conversion suite"
-        path="/unit-converter"
-        toolName="Unit Converter"
-        toolSteps={[
-          'Select a measurement category (e.g., Length or Weight).',
-          'Enter the value you wish to convert.',
-          'Choose the source (From) and target (To) units.',
-          'The converted result appears instantly below.'
-        ]}
-        breadcrumbs={[
-          { name: 'Utility Tools', item: '/utility-tools' },
-          { name: 'Unit Converter', item: '/unit-converter' }
-        ]}
+        {...toolData.seo}
+        path={toolData.path}
+        breadcrumbs={[{ name: 'Utility Tools', item: '/utility-tools' }, { name: toolData.title, item: toolData.path }]}
       />
 
       <motion.div 
@@ -133,7 +124,7 @@ export default function UnitConverter() {
       >
         <Breadcrumbs items={[
           { name: 'Utility Tools', item: '/utility-tools' },
-          { name: 'Unit Converter', item: '/unit-converter' }
+          { name: toolData.title, item: toolData.path }
         ]} />
 
         <div className="landing-layout">
@@ -144,9 +135,9 @@ export default function UnitConverter() {
 
             <div className="page-hero">
               <div className="page-hero-content">
-                <h1 className="page-title">Unit <span style={{ color: 'var(--accent-emerald)' }}>Converter</span></h1>
+                <h1 className="page-title">{toolData.title}</h1>
                 <p className="page-subtitle">
-                  Universal measurement conversion at your fingertips. High-precision calculations for length, mass, thermodynamics, and more.
+                  {toolData.description}
                 </p>
               </div>
             </div>
@@ -275,28 +266,13 @@ export default function UnitConverter() {
             </div>
 
             <ShareTool
-              title="Unit Converter"
-              url="/unit-converter"
-              text="Convert Length, Weight, and Temperature instantly with PixTool's high-precision measurement utility"
+              title={toolData.title}
+              url={toolData.path}
+              text={toolData.description}
             />
 
             <div style={{ marginTop: '5rem' }}>
-              <ToolContent
-                title="Fast, Precise & Private Conversions"
-                description="Our Unit Converter is designed for efficiency. Whether you're a student, professional, or casual user, you need accurate conversions without the bloat of traditional websites. PixTool runs all calculations client-side, ensuring your data remains private while providing results at lightning speed."
-                benefits={[
-                  "Comprehensive support for Length, Weight, Temperature, and Volume",
-                  "Swap functionality for bidirectional conversions",
-                  "Mobile-responsive design for on-the-go measuring",
-                  "Works offline once loaded - no server requests",
-                  "Zero tracking and 100% free usage"
-                ]}
-                useCases={[
-                  { title: "Academic & Science", description: "Quickly convert between Celsius and Kelvin or Grams and Kilograms for lab reports and homework." },
-                  { title: "Cooking & Household", description: "Convert US Gallons to Liters or Pounds to Kilograms for recipes and shopping." },
-                  { title: "Engineering & DIY", description: "Switch between Feet, Meters, and Inches with high precision for construction and design projects." }
-                ]}
-              />
+              <ToolContent {...toolData} />
             </div>
           </div>
 

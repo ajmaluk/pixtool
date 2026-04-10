@@ -2203,6 +2203,20 @@ h6 {
   text-align: left;
 }
 
+.ai-studio-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .ai-studio-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
 .sidebar-settings {
   display: flex;
   flex-direction: column;
@@ -2214,6 +2228,67 @@ h6 {
   height: fit-content;
   position: sticky;
   top: 100px;
+}
+
+.dalam-cursor {
+    display: inline-block;
+    width: 6px;
+    height: 1.1em;
+    background: var(--accent-purple);
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: dalam-blink 1s infinite;
+    border-radius: 2px;
+}
+
+@keyframes dalam-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.dalam-textarea {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.dalam-textarea:focus {
+    border-color: var(--accent-primary) !important;
+    background: var(--bg-primary) !important;
+    box-shadow: 0 0 0 4px var(--accent-glow), var(--shadow-md) !important;
+}
+
+.dalam-textarea::placeholder {
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+.output-rich-content {
+    animation: fadeIn 0.4s ease-out;
+}
+
+.output-rich-content h1, 
+.output-rich-content h2, 
+.output-rich-content h3 {
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.output-rich-content p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.output-rich-content ul {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.output-rich-content li {
+    margin-bottom: 0.75rem;
+    color: var(--text-secondary);
 }
 
 .sidebar-section {
@@ -2654,7 +2729,6 @@ h6 {
   align-items: center;
   justify-content: center;
   background: var(--bg-secondary);
-  border: 1px dashed var(--border-color);
   border-radius: var(--radius-md);
   position: relative;
 }
@@ -2668,7 +2742,6 @@ h6 {
   align-items: center;
   justify-content: center;
   background: var(--bg-secondary);
-  border: 1px dashed var(--border-color);
   border-radius: var(--radius-md);
   position: relative;
 }
@@ -2679,8 +2752,7 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-secondary);
-  border: 1px dashed var(--border-color);
+  background: rgba(148, 163, 184, 0.03);
   border-radius: var(--radius-md);
   position: sticky;
   top: 100px;
@@ -2691,11 +2763,11 @@ h6 {
 /* Page Layout for Ad Integration */
 .landing-layout {
   display: flex;
-  gap: 2rem;
-  max-width: 1550px;
+  gap: 2.5rem;
+  max-width: 1800px;
   margin: 0 auto;
   align-items: flex-start;
-  padding: 0 1.5rem;
+  padding: 0 2rem;
   width: 100%;
 }
 

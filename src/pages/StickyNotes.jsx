@@ -5,8 +5,10 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
-import { PRODUCTIVITY_SEO_CONTENT } from '../data/productivityToolsData'
+import { ALL_TOOLS_MAP } from '../data/tools'
 import { readStoredJson, writeStoredJson } from '../utils/browserStorage'
+
+const toolData = ALL_TOOLS_MAP['sticky-notes']
 
 const COLORS = [
   { id: 'yellow', bg: '#fef3c7', text: '#92400e', border: '#fcd34d' },
@@ -50,13 +52,13 @@ export default function StickyNotes() {
   return (
     <>
       <SEO 
-        {...PRODUCTIVITY_SEO_CONTENT['sticky-notes']}
-        path="/productivity-tools/sticky-notes"
-        breadcrumbs={[{ name: 'Productivity', item: '/productivity-tools' }, { name: 'Sticky Notes', item: '/productivity-tools/sticky-notes' }]}
+        {...toolData.seo}
+        path={toolData.path}
+        breadcrumbs={[{ name: 'Productivity', item: '/productivity-tools' }, { name: toolData.title, item: toolData.path }]}
       />
 
       <div className="page-container" style={{ paddingTop: '2rem' }}>
-        <Breadcrumbs items={[{ name: 'Productivity', item: '/productivity-tools' }, { name: 'Sticky Notes', item: '/productivity-tools/sticky-notes' }]} />
+        <Breadcrumbs items={[{ name: 'Productivity', item: '/productivity-tools' }, { name: toolData.title, item: toolData.path }]} />
         <div className="landing-layout">
           <AdSpace type="side" className="desktop-only" />
           <div className="landing-center" style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
@@ -188,7 +190,7 @@ export default function StickyNotes() {
 
           <AdSpace type="bottom" style={{ marginTop: '4rem' }} />
           <div style={{ marginTop: '6rem' }}>
-            <ToolContent {...PRODUCTIVITY_SEO_CONTENT['sticky-notes']} />
+            <ToolContent {...toolData} />
           </div>
               </div>
             <AdSpace type="side" className="desktop-only" />

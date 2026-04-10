@@ -47,70 +47,49 @@ ${text}`
       customPromptBuilder={customPromptBuilder}
       seoKeywords="ai translator, context aware translation, professional translator online, neural translation"
     >
-      <div className="translator-workspace" style={{ marginBottom: '1rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)', gap: '1.5rem' }}>
-          
-          {/* Source Area */}
-          <div style={{ background: '#fff', borderRadius: '32px', border: '1px solid #f4f4f5', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
-            <div style={{ padding: '1rem 2rem', borderBottom: '1px solid #f4f4f5', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <select 
-                value={sourceLang} 
-                onChange={(e) => setSourceLang(e.target.value)}
-                style={{ background: 'transparent', border: 'none', color: '#8b5cf6', fontWeight: 900, fontSize: '0.75rem', cursor: 'pointer', outline: 'none', textTransform: 'uppercase', letterSpacing: '0.1em' }}
-              >
-                {languages.map(l => <option key={l.id} value={l.id}>{l.name}</option>)}
-              </select>
-              <Languages size={18} color="#d4d4d8" strokeWidth={1.5} />
-            </div>
-            <textarea 
-              id="ai-translator-input"
-              name="text"
-              className="dalam-textarea"
-              style={{ width: '100%', minHeight: '220px', background: 'transparent', border: 'none', color: '#18181b', padding: '2rem', fontSize: '1.25rem', resize: 'none', outline: 'none', lineHeight: 1.6 }}
-              placeholder="Enter text to translate..."
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-            />
-          </div>
-
-          {/* Controls / Divider */}
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '-1.5rem 0', position: 'relative', zIndex: 10 }}>
-            <button 
-              onClick={handleSwap}
-              disabled={sourceLang === 'auto'}
-              style={{ width: '52px', height: '52px', borderRadius: '50%', background: '#09090b', border: '6px solid #fff', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: sourceLang === 'auto' ? 'not-allowed' : 'pointer', transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)', boxShadow: '0 10px 25px rgba(0,0,0,0.1)' }}
-              className="swap-btn-v2"
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        {/* Source Language */}
+        <div className="sidebar-section">
+          <div className="sidebar-section-title">Source Language</div>
+          <div className="input-group">
+            <select 
+              className="input"
+              value={sourceLang} 
+              onChange={(e) => setSourceLang(e.target.value)}
+              style={{ fontWeight: 800, cursor: 'pointer' }}
             >
-              <ArrowRightLeft size={20} />
-            </button>
+              {languages.map(l => <option key={l.id} value={l.id}>{l.name}</option>)}
+            </select>
           </div>
+        </div>
 
-          {/* Target Area */}
-          <div style={{ background: '#fafafa', borderRadius: '32px', border: '1px solid #f4f4f5', position: 'relative' }}>
-             <div style={{ padding: '1rem 2rem', borderBottom: '1px solid #f4f4f5', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <select 
-                value={targetLang} 
-                onChange={(e) => setTargetLang(e.target.value)}
-                style={{ background: 'transparent', border: 'none', color: '#8b5cf6', fontWeight: 900, fontSize: '0.75rem', cursor: 'pointer', outline: 'none', textTransform: 'uppercase', letterSpacing: '0.1em' }}
-              >
-                {languages.filter(l => l.id !== 'auto').map(l => <option key={l.id} value={l.id}>{l.name}</option>)}
-              </select>
-              <Volume2 size={18} color="#d4d4d8" strokeWidth={1.5} />
-            </div>
-            <div 
-              style={{ width: '100%', minHeight: '220px', padding: '2rem', fontSize: '1.25rem', color: '#71717a', whiteSpace: 'pre-wrap', position: 'relative', lineHeight: 1.6 }}
+        {/* Swap Control */}
+        <div style={{ display: 'flex', justifyContent: 'center', margin: '-1rem 0' }}>
+          <button 
+            onClick={handleSwap}
+            disabled={sourceLang === 'auto'}
+            className="btn btn-secondary"
+            style={{ width: '48px', height: '48px', borderRadius: '50%', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >
+            <ArrowRightLeft size={18} />
+          </button>
+        </div>
+
+        {/* Target Language */}
+        <div className="sidebar-section">
+          <div className="sidebar-section-title">Target Language</div>
+          <div className="input-group">
+            <select 
+              className="input"
+              value={targetLang} 
+              onChange={(e) => setTargetLang(e.target.value)}
+              style={{ fontWeight: 800, cursor: 'pointer' }}
             >
-              {!inputText && <span>Atmospheric translation will appear below after processing...</span>}
-            </div>
+              {languages.filter(l => l.id !== 'auto').map(l => <option key={l.id} value={l.id}>{l.name}</option>)}
+            </select>
           </div>
-
         </div>
       </div>
-
-      <style>{`
-        .swap-btn-v2:hover { transform: rotate(180deg) scale(1.1); }
-        .swap-btn-v2:disabled { opacity: 0.3; cursor: not-allowed; }
-      `}</style>
     </AiToolTemplate>
   )
 }

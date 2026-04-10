@@ -3,6 +3,7 @@ import { PDFDocument } from 'pdf-lib'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { FileText, Upload, Download, Loader, X, ChevronDown, Share2, Eye, EyeOff, Sliders } from 'lucide-react'
 import SEO from '../components/SEO'
+import ToolRating from '../components/ToolRating'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
 import Breadcrumbs from '../components/Breadcrumbs'
@@ -10,8 +11,7 @@ import ShareTool from '../components/ShareTool'
 import { useFileDrop } from '../hooks/useFileDrop'
 import { useRatePopup } from '../hooks/useRatePopup'
 import { useConfirm, useAlert } from '../context/ConfirmContext'
-import { PDF_TOOLS } from '../data/tools'
-import { PDF_SEO_CONTENT, PDF_RELATED_TOOLS, PDF_READ_NEXT } from '../data/pdfToolsData'
+import { PDF_TOOLS, ALL_TOOLS_MAP } from '../data/tools'
 import ComingSoon from '../components/ComingSoon'
 import ToolCard from '../components/ToolCard'
 import { mergePdfs, splitPdf, watermarkPdf, compressPdf, unlockPdfWithPassword, extractPdfText, extractPdfTextWithTesseract, downloadBlob, protectPdf, reorderPdfPages, convertPdfToImages } from '../utils/pdfUtils'
@@ -293,18 +293,19 @@ export default function PdfTools() {
     }
   }
 
-  const activeToolData = activeTool ? tools.find(t => t.id === activeTool) : null
+  const activeToolData = activeTool ? ALL_TOOLS_MAP[activeTool] : null
 
-  const seoContentMap = PDF_SEO_CONTENT;
-  const seoContent = activeTool ? seoContentMap[activeTool] : null;
+  // Hub metadata for the main /pdf-tools page
+  const hubMetadata = {
+    title: 'Professional PDF Studio [Official] - 100% Secure',
+    description: 'The PixTool PDF Studio is a comprehensive suite of professional-grade, privacy-first PDF utilities. Processes 100% of your data locally, ensuring your sensitive documents never touch a cloud server.',
+    keywords: 'free pdf merger online, split pdf without upload, compress pdf securely, online pdf tools free, merge pdf files, secure pdf editor, protect pdf free'
+  }
 
-  const pageTitle = activeToolData ? `Free Online ${activeToolData.title} Tool | PixTool` : "Free PDF Merger & Splitter Online | Secure PDF Tools"
-  const pageDescription = activeToolData ?
-    seoContentMap[activeTool]?.description :
-    "Free online PDF tools to merge PDFs, split pages, and compress PDF securely. No upload required, absolutely zero privacy risk."
-  const pageKeywords = activeToolData ?
-    seoContentMap[activeTool]?.keywords :
-    "free pdf merger online, split pdf without upload, compress pdf securely, online pdf tools free, merge pdf files, secure pdf editor"
+  // Dynamic SEO descriptions - enhanced for better SEO
+  const pageTitle = activeToolData ? `${activeToolData.title} | PixTool` : hubMetadata.title
+  const pageDescription = activeToolData ? activeToolData.description : hubMetadata.description
+  const pageKeywords = activeToolData ? (activeToolData.seoKeywords || hubMetadata.keywords) : hubMetadata.keywords
   const canonicalPath = activeTool ? `/pdf-tools/${activeTool}` : "/pdf-tools"
 
   const pdfHubSchema = activeTool ? null : [
@@ -889,6 +890,9 @@ export default function PdfTools() {
                       <p className="page-subtitle">
                         {activeToolData.description}
                       </p>
+                      <div style={{ marginTop: '1.5rem', maxWidth: '280px' }}>
+                        <ToolRating toolSlug={`pdf-tools/${toolId}`} />
+                      </div>
                     </div>
                   </div>
 
@@ -1103,25 +1107,41 @@ export default function PdfTools() {
 
                 <div style={{ marginTop: '5rem' }}>
                   <ToolContent
-                    title={activeToolData?.title || 'PDF Tool'}
-                    description={activeToolData?.description || (activeTool ? `Our ${activeToolData?.title} is a professional browser-based utility for secure PDF management.` : 'Professional Online PDF Studio')}
+                    title={activeToolData?.title || 'Professional PDF Studio'}
+                    description={activeToolData?.description || hubMetadata.description}
                     toolId={activeTool}
                     benefits={activeToolData?.features || ["100% Privacy — files stay on your device", "No registration or signup required", "Local client-side processing", "High-fidelity results"]}
                     howTo={activeToolData?.howItWorks || ["Upload your PDF files via drag & drop", "Pick your desired settings", "Process instantly in your browser", "Download the secured results"]}
-                    relatedTools={PDF_RELATED_TOOLS[activeTool] || []}
-                    readNext={PDF_READ_NEXT[activeTool] || []}
-                    alternativeTo={seoContent?.alternativeTo || []}
-                    faq={seoContent?.faq || []}
-                    tips={seoContent?.tips || []}
-                    useCases={seoContent?.useCases || []}
+                    relatedTools={activeToolData?.relatedTools || [
+                      { name: 'Image Compressor', path: '/image-tools/compress' },
+                      { name: 'QR Generator', path: '/qr-generator' },
+                      { name: 'Temp Mail', path: '/temp-mail' }
+                    ]}
+                    readNext={activeToolData?.readNext || [
+                      { title: '📑 The Ultimate Guide to PDF Security in 2026', path: '/blog/pdf-security-guide-2026' },
+                      { title: '🚀 Optimizing PDFs for Web Performance & SEO', path: '/blog/optimizing-pdfs-for-web-2026' }
+                    ]}
+                    alternativeTo={activeToolData?.alternativeTo || ["Adobe Acrobat Pro", "SmallPDF", "iLovePDF", "ILoveImg"]}
+                    faq={activeToolData?.faq || [
+                      { q: "Are my PDF files uploaded to any server?", a: "No. PixTool uses local browser-based processing (WASM). All transformations happen on your machine's CPU, and your files never leave your device." },
+                      { q: "Is there a limit on file size or number of pages?", a: "We support large documents, but performance depends on your device's memory. Most standard business PDFs are processed instantly." },
+                      { q: "Can I use these tools on mobile devices?", a: "Yes! Our PDF tools are fully responsive and optimized for mobile browser environments." }
+                    ]}
+                    tips={activeToolData?.tips || [
+                      "Use the 'Merge PDF' tool to combine multiple reports into a single organized document.",
+                      "Password protect your sensitive files using the 'Protect' tool before sharing them via email.",
+                      "Compress large PDFs to meet email attachment limits while maintaining high visual quality."
+                    ]}
+                    useCases={activeToolData?.useCases || [
+                      { title: "Legal Professionals", description: "Securely redact, merge, and protect sensitive legal documents without risking cloud data exposure." },
+                      { title: "Students & Academic Researchers", description: "Combine research papers and split chapters for easier annotation and study workflows." }
+                    ]}
                   />
                 </div>
+              </div>
+              <AdSpace type="side" className="desktop-only" />
             </div>
-
-            <AdSpace type="side" className="desktop-only" />
-          </div>
-        )
-}
+          )}
 
         {/* Mobile Action Bar & Settings Drawer */}
         {files.length > 0 && (

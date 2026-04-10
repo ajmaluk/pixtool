@@ -165,9 +165,11 @@ const getToolBySlug = async (toolSlug) => {
     .from('tools')
     .select('id, name, slug')
     .eq('slug', toolSlug)
-    .single();
+    .maybeSingle();
 
   if (error) throw new Error(formatSupabaseError(error, 'Unable to resolve tool.'));
+  if (!data) return null;
+
   toolSlugCache.set(toolSlug, { ts: now, value: data });
   return data;
 };
@@ -178,6 +180,10 @@ export const getToolRatingStats = async (toolSlug) => {
   }
 
   const tool = await getToolBySlug(toolSlug);
+  if (!tool) {
+    return { avgRating: 0, totalVotes: 0, distribution: [0, 0, 0, 0, 0] };
+  }
+
   const { data, error } = await supabase
     .from('tool_stats')
     .select('avg_rating, total_votes, rating_1, rating_2, rating_3, rating_4, rating_5')

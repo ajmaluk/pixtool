@@ -67,9 +67,9 @@ const sitemapSections = [
         links: [
             { name: "All Temp Mail Tools", path: "/temp-mail", description: "Generate anonymous inbox to avoid spam and trackers." },
             { name: "10 Minute Mail", path: "/temp-mail/10-minute-mail", description: "Disposable email that auto-expires in 10 minutes." },
-            { name: "Fake Email Generator", path: "/fake-email", description: "Random fake emails for testing and development." },
-            { name: "Disposable Email", path: "/disposable-email", description: "One-time use email to protect your primary identity." },
-            { name: "Throwaway Email", path: "/throwaway-email", description: "Burn-after-reading inbox for absolute privacy." }
+            { name: "Identity Forge", path: "/identity-forge", description: "Random fake emails for testing and development." },
+            { name: "Burner Inbox", path: "/burner-inbox", description: "One-time use email to protect your primary identity." },
+            { name: "Ghost Inbox", path: "/ghost-inbox", description: "Burn-after-reading inbox for absolute privacy." }
         ]
     },
     {
