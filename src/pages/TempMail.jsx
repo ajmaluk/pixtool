@@ -329,8 +329,8 @@ export default function TempMail({
     setRefreshing(true)
     try {
       const msgs = await tempMailRef.current.checkInbox()
-      if (msgs !== null && msgs !== undefined) {
-        setMessages(msgs || [])
+      if (msgs && Array.isArray(msgs)) {
+        setMessages(msgs)
         if (email) {
           try { localStorage.setItem(INBOX_PREFIX + email, JSON.stringify(msgs)) } catch (e) { void e }
         }
@@ -742,7 +742,7 @@ export default function TempMail({
                             overflow: 'hidden',
                             textOverflow: 'ellipsis'
                           }}>
-                            {msg.from?.address?.split('@')[0] || 'Unknown Sender'}
+                            {msg.from?.address?.split('@')?.[0] || 'Unknown Sender'}
                           </span>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                             <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 700 }}>
@@ -1001,7 +1001,7 @@ export default function TempMail({
                             fontSize: '0.9rem',
                             color: msg.seen ? 'var(--text-secondary)' : 'var(--text-primary)'
                           }}>
-                            {msg.from?.address?.split('@')[0] || 'Unknown'}
+                            {msg.from?.address?.split('@')?.[0] || 'Unknown'}
                           </div>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <div style={{ color: 'var(--text-muted)', fontSize: '0.7rem', fontWeight: 600, flexShrink: 0 }}>
@@ -1075,9 +1075,7 @@ export default function TempMail({
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
                         <div>
-                          <div style={{ fontWeight: 900, fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
-                            {selectedMessage.from?.name || selectedMessage.from?.address?.split('@')[0] || 'Unknown Sender'}
-                          </div>
+                            {selectedMessage.from?.name || selectedMessage.from?.address?.split('@')?.[0] || 'Unknown Sender'}
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 600 }}>
                             <span style={{ background: 'var(--bg-primary)', padding: '4px 12px', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
                               From: {selectedMessage.from?.address}

@@ -215,7 +215,7 @@ export default function AiToolTemplate({
                     </div>
 
                     <div style={{ marginTop: '0.5rem' }}>
-                          <ToolRating toolSlug={path.replace(/^\//, '')} />
+                          <ToolRating toolSlug={toolMetadata.id || path.replace(/^\//, '')} />
                     </div>
                 </aside>
 
@@ -348,7 +348,7 @@ export default function AiToolTemplate({
               <ToolContent 
                 title={title}
                 description={description}
-                toolSlug={path.replace(/^\//, '')}
+                toolSlug={toolMetadata.id || path.replace(/^\//, '')}
                 seoTitle={`${title} - Platinum AI Tool`}
                 seoDescription={description}
                 seoKeywords={seoKeywords}

@@ -164,9 +164,12 @@ export const IMAGE_TOOLS = [
       { title: 'Cloud Storage Savings', description: 'Shrink your personal photo library before uploading to Google Drive or iCloud.' }
     ],
     faq: [
-      { q: 'What is the best format?', a: 'WebP offers the best balance of compression and visual quality for modern web development.' },
-      { q: 'Does it work with 4K images?', a: 'Yes! Our high-performance engine can handle large-scale photographic assets with ease.' },
-      { q: 'Are my photos uploaded?', a: 'No. Compression is 100% on-device. Your sensitive files never touch our servers.' }
+      { q: 'What is the best format for web compression?', a: 'WebP offers the best balance of compression and visual quality for modern web development, often reducing file sizes by 30-50% more than JPEG.' },
+      { q: 'Does it work with 4K or large-scale images?', a: 'Yes! Our high-performance engine can handle large-scale photographic assets and high-resolution 4K images with ease, provided your device has sufficient local RAM.' },
+      { q: 'Are my photos ever uploaded to a server?', a: 'Strictly no. Compression is 100% on-device. We utilize local browser CPU power to process your files, ensuring your sensitive data never leaves your computer.' },
+      { q: 'What is the "Industrial-Grade" slider?', a: 'This is a precision tuning tool that allows you to specify the exact balance between file size and visual fidelity. At 80%, you get massive savings with zero perceptible quality loss.' },
+      { q: 'Can I batch compress multiple files at once?', a: 'Absolutely. You can select dozens of images simultaneously. Our parallel processing kernel handles multiple compressions in the background to save you time.' },
+      { q: 'Will the image dimensions (width/height) change?', a: 'No. Compression only reduces the file size (bytes). If you need to change the physical dimensions, please use our dedicated Image Resizer tool.' }
     ],
     relatedTools: [
       { name: 'Resize Image', path: '/image-tools/resize' },
