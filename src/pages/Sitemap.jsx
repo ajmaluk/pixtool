@@ -172,7 +172,9 @@ const sitemapSections = [
         icon: Shield,
         links: [
             { name: "Privacy Policy", path: "/privacy-policy", description: "How we protect your data with 100% browser-based processing." },
+            { name: "KallanCop Privacy", path: "/uthakkan/apps/kallan-cop", description: "Privacy policy and P2P security for the KallanCop mobile game." },
             { name: "Terms of Service", path: "/terms-of-service", description: "The rules and guidelines for using our free tool suite." },
+
             { name: "Cookie Policy", path: "/cookie-policy", description: "Details on how we use local storage for performance." }
         ]
     }

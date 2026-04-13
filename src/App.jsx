@@ -91,6 +91,8 @@ const FileManager = lazy(() => import('./pages/FileManager'))
 const PomodoroTimer = lazy(() => import('./pages/PomodoroTimer'))
 const StickyNotes = lazy(() => import('./pages/StickyNotes'))
 const HabitTracker = lazy(() => import('./pages/HabitTracker'))
+const KallanCopPrivacy = lazy(() => import('./pages/apps/KallanCopPrivacy'))
+
 
 // Loading component — stays visible inside the layout
 const PageLoader = () => (
@@ -486,7 +488,9 @@ function App() {
           <Route path="/refund-policy" element={<Refund />} />
           <Route path="/cookie-policy" element={<Cookie />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/uthakkan/apps/kallan-cop" element={<KallanCopPrivacy />} />
           <Route path="/news" element={<News />} />
+
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/documentation" element={<Documentation />} />
           <Route path="/careers" element={<Careers />} />
