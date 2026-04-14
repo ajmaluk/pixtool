@@ -132,9 +132,11 @@ export default function ImageTools() {
     bgUseColorPicker: false,
     bgCustomColor: { r: 255, g: 255, b: 255, a: 255 },
     bgShowAdvanced: false,
+    bgMode: 'auto', // 'auto', 'ai', or 'advanced'
     brushSize: 30,
     brushMode: 'erase' // 'erase' or 'restore'
   })
+
   const fileInputRef = useRef(null)
 
   useEffect(() => {
@@ -746,15 +748,29 @@ export default function ImageTools() {
               <label className="input-label">Removal Mode</label>
               <select
                 className="select"
-                value={settings.bgShowAdvanced ? 'advanced' : 'auto'}
-                onChange={(e) => setSettings(s => ({ ...s, bgShowAdvanced: e.target.value === 'advanced' }))}
+                value={settings.bgMode}
+                onChange={(e) => {
+                  const mode = e.target.value;
+                  setSettings(s => ({ 
+                    ...s, 
+                    bgMode: mode, 
+                    bgShowAdvanced: mode === 'advanced' 
+                  }))
+                }}
               >
+                <option value="ai">AI Removal (High Quality)</option>
                 <option value="auto">Automatic (Corner Detection)</option>
                 <option value="advanced">Advanced (Color Picker + Brush)</option>
               </select>
             </div>
 
-            {!settings.bgShowAdvanced && (
+            {settings.bgMode === 'ai' && (
+              <div style={{ background: 'var(--bg-secondary)', padding: '0.85rem 1rem', borderRadius: '12px', border: '1px solid var(--border-color)', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                ✓ AI uses Freepik Neural Removal to detect and extract subjects with precise edges. No server storage.
+              </div>
+            )}
+
+            {settings.bgMode === 'auto' && (
               <>
                 <div className="input-group">
                   <label className="input-label">Background Tolerance: {settings.bgTolerance}</label>
@@ -783,6 +799,7 @@ export default function ImageTools() {
                 </div>
               </>
             )}
+
 
             {settings.bgShowAdvanced && (
               <>
@@ -1304,7 +1321,7 @@ export default function ImageTools() {
 
                 <AdSpace type="bottom" />
 
-                <div style={{ marginTop: '5rem' }}>
+                <div style={{ marginTop: '2.5rem' }}>
                   <ToolContent
                     title={activeToolData?.title || 'Professional Image Studio'}
                     description={activeToolData?.description || hubMetadata.description}

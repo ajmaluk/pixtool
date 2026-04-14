@@ -187,8 +187,47 @@ export const processImageFile = async (file, activeTool, settings) => {
     ctx.fillText(text, x, y);
     ctx.globalAlpha = 1;
   } else if (activeTool === 'remove-background') {
-    ctx.drawImage(img, 0, 0, width, height);
-    removeBackground();
+    if (settings.bgMode === 'ai') {
+      // AI Removal via Proxy
+      try {
+        const reader = new FileReader();
+        const base64Promise = new Promise((resolve, reject) => {
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+        const base64 = await base64Promise;
+        
+        const proxyUrl = '/api/freepik-remove-bg';
+        const response = await fetch(proxyUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ image_base64: base64 })
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.error || `AI removal failed: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        const finalImageUrl = data.data?.url || data.url;
+        
+        if (!finalImageUrl) throw new Error('AI returned no image URL');
+        
+        // Load the resulting image back into canvas
+        const aiImg = await loadImageFromUrl(finalImageUrl);
+        ctx.clearRect(0, 0, width, height);
+        ctx.drawImage(aiImg, 0, 0, width, height);
+      } catch (err) {
+        console.error('AI Removal failed, falling back to auto:', err);
+        ctx.drawImage(img, 0, 0, width, height);
+        removeBackground();
+      }
+    } else {
+      ctx.drawImage(img, 0, 0, width, height);
+      removeBackground();
+    }
   } else {
     ctx.drawImage(img, 0, 0, width, height);
   }
@@ -214,6 +253,20 @@ export const processImageFile = async (file, activeTool, settings) => {
     type: mimeType
   };
 };
+
+/**
+ * Loads an image from a URL, bypassing CORS where possible or assuming proxy handles it
+ */
+export const loadImageFromUrl = (url) => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = url;
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error('Failed to load image from URL'));
+  });
+};
+
 
 /**
  * Color picker - extract color value from canvas at specific point

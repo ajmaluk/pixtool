@@ -59,14 +59,14 @@ export default function Privacy() {
                         </h2>
                         <div style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
                             <p style={{ marginBottom: '1rem' }}>
-                                We may use third-party advertising partners (like <strong>Google AdSense</strong>) to keep our tools free for everyone. These partners may use cookies, web beacons, or similar technologies to serve ads based on your interests.
+                                We may use third-party advertising partners (like <strong>Adsterra</strong>) to keep our tools free for everyone. These partners may use cookies, web beacons, or similar technologies to serve ads based on your interests.
                             </p>
                             
-                            <h3 style={{ fontSize: '1.2rem', color: 'var(--text-primary)', marginBottom: '0.75rem' }}>Google AdSense & DoubleClick DART Cookie</h3>
+                            <h3 style={{ fontSize: '1.2rem', color: 'var(--text-primary)', marginBottom: '0.75rem' }}>Advertising Networks</h3>
                             <ul style={{ paddingLeft: '1.5rem', marginBottom: '1.5rem' }}>
-                                <li style={{ marginBottom: '0.5rem' }}>Google, as a third-party vendor, uses cookies to serve ads on PixTool.</li>
-                                <li style={{ marginBottom: '0.5rem' }}>Google's use of the DART cookie enables it to serve ads to our users based on their visit to PixTool and other sites on the Internet.</li>
-                                <li style={{ marginBottom: '0.5rem' }}>Users may opt-out of the use of the DART cookie by visiting the <strong>Google Ad and Content Network privacy policy</strong>.</li>
+                                <li style={{ marginBottom: '0.5rem' }}>Our advertising partners use technology to serve the advertisements and links that appear on PixTool.</li>
+                                <li style={{ marginBottom: '0.5rem' }}>They automatically receive your IP address when this happens. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.</li>
+                                <li style={{ marginBottom: '0.5rem' }}>Note that PixTool has no access to or control over these cookies that are used by third-party advertisers.</li>
                             </ul>
 
                             <h3 style={{ fontSize: '1.2rem', color: 'var(--text-primary)', marginBottom: '0.75rem' }}>Opting Out of Personalized Ads</h3>

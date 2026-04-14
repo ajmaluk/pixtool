@@ -139,7 +139,7 @@ export default function Footer() {
             <Link to="/privacy-policy" style={{ color: 'var(--accent-primary)', textDecoration: 'underline', margin: '0 4px' }}>Privacy Policy</Link>.
           </p>
           <p>
-            Google, as a third-party vendor, uses cookies to serve ads on this site. You can opt-out of personalized advertising by visiting Google's ad settings.
+            Adsterra and our third-party advertising partners use cookies and similar technologies to serve relevant advertisements. These partners may collect anonymized data such as your IP address to measure ad effectiveness.
           </p>
         </div>
         

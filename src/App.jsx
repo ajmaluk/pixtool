@@ -259,7 +259,7 @@ const MainLayout = () => {
   }, [location.pathname])
 
   // Logic removed: Rating is now interaction-triggered within individual tool components
-  // to avoid automatic popups that can interfere with AdSense reviews.
+  // to avoid automatic popups that can interfere with the user experience and ad visibility.
 
   const isAdminPath = location.pathname === '/pix-admin'
   const hideAuxWidgets = location.pathname === '/' || location.pathname === '/blog'
@@ -295,7 +295,11 @@ const MainLayout = () => {
                       <Link key={tool.path} to={tool.path} style={{ textDecoration: 'none', color: 'inherit' }}>
                         <div className="widget-item-interactive">
                           <span style={{ fontSize: '1.3rem', display: 'flex', alignItems: 'center' }}>
-                            {tool.icon ? (typeof tool.icon === 'string' ? tool.icon : (typeof tool.icon === 'function' ? <tool.icon size={20} /> : '🛠️')) : '🛠️'}
+                            {tool.icon ? (
+                              typeof tool.icon === 'string' ? tool.icon : 
+                              (typeof tool.icon === 'function' || typeof tool.icon === 'object') ? <tool.icon size={20} /> : 
+                              '🛠️'
+                            ) : '🛠️'}
                           </span>
                           <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>{tool.title || tool.name}</span>
                         </div>

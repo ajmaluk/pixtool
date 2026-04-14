@@ -40,7 +40,7 @@ export default function Cookie() {
                         <ul style={{ color: 'var(--text-secondary)', marginBottom: '2rem', paddingLeft: '1.5rem' }}>
                             <li><strong>Essential Cookies:</strong> Used to remember your site preferences, such as dark mode or search history within the session.</li>
                             <li><strong>Analytical Cookies:</strong> Helps us understand how many people use our tools and which tools are most popular. This data is anonymized.</li>
-                            <li><strong>Advertising Cookies:</strong> Third-party partners like Google AdSense may use cookies to show you more relevant ads.</li>
+                            <li><strong>Advertising Cookies:</strong> Third-party partners like Adsterra may use cookies to show you more relevant ads.</li>
                         </ul>
 
                         <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>3. Controlling and Managing Cookies</h2>
@@ -54,7 +54,7 @@ export default function Cookie() {
                         </p>
                         <ul style={{ color: 'var(--text-secondary)', marginBottom: '2rem', paddingLeft: '1.5rem' }}>
                             <li style={{ marginBottom: '0.5rem' }}>
-                                <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-primary)' }}>Google Ad Settings</a>
+                                <a href="https://youradchoices.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-primary)' }}>YourAdChoices (Global Opt-out)</a>
                             </li>
                             <li style={{ marginBottom: '0.5rem' }}>
                                 <a href="https://www.aboutads.info/choices" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-primary)' }}>Digital Advertising Alliance (DAA)</a>
