@@ -3,14 +3,12 @@ import AiToolTemplate from '../components/AiToolTemplate'
 import { Edit3, ArrowRight, ArrowDown, Trash2 } from 'lucide-react'
 
 export default function AiGrammarFixer() {
-  const [inputText, setInputText] = useState('')
-
   const customPromptBuilder = (text) => {
     return `You are an expert linguist and editor. Review the following text for grammar, spelling, punctuation, and style. Correct all errors and improve clarity while maintaining the original meaning. Output ONLY the corrected text without any conversational filler or meta-talk.\n\nText to Correct:\n${text}`
   }
 
   return (
-    <AiToolTemplate 
+    <AiToolTemplate
       title="Grammar Architect"
       description="Professional-grade linguistic correction and style enhancement for your manuscripts."
       icon={Edit3}

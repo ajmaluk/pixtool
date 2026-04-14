@@ -5,19 +5,13 @@ import { BookOpen, Sparkles, Feather, Scroll } from 'lucide-react'
 export default function AiStory() {
   const [premise, setPremise] = useState('')
   const [genre, setGenre] = useState('sci-fi')
-  const [arc, setArc] = useState('standard')
+  const [arc] = useState('standard')
   const [density, setDensity] = useState('medium')
 
   const genres = [
     { id: 'sci-fi', name: 'Sci-Fi', icon: Sparkles },
     { id: 'fantasy', name: 'Fantasy', icon: Feather },
     { id: 'noir', name: 'Noir', icon: Scroll }
-  ]
-
-  const arcs = [
-    { id: 'standard', label: 'Linear', sub: 'Classic narrative' },
-    { id: 'experimental', label: 'Fragmented', sub: 'Non-linear flow' },
-    { id: 'minimalist', label: 'Flash', sub: 'High impact brev' }
   ]
 
   const customPromptBuilder = (text) => {
@@ -37,7 +31,7 @@ OUTPUT REQUIREMENTS:
   }
 
   return (
-    <AiToolTemplate 
+    <AiToolTemplate
       title="Narrative Forge"
       description="Architect cinematic story arcs and sophisticated fictional landscapes."
       icon={BookOpen}
@@ -52,16 +46,16 @@ OUTPUT REQUIREMENTS:
             <div className="input-group">
               <label className="input-label">Plot Twist Density</label>
               <div style={{ display: 'flex', gap: '0.5rem', background: 'var(--bg-secondary)', padding: '0.4rem', borderRadius: '12px' }}>
-                  {['low', 'medium', 'high'].map(d => (
-                      <button 
-                          key={d}
-                          onClick={() => setDensity(d)}
-                          className={`btn ${density === d ? 'btn-primary' : 'btn-secondary'}`}
-                          style={{ flex: 1, padding: '0.6rem', fontSize: '0.75rem', borderRadius: '8px' }}
-                      >
-                          {d.charAt(0).toUpperCase() + d.slice(1)}
-                      </button>
-                  ))}
+                {['low', 'medium', 'high'].map(d => (
+                  <button
+                    key={d}
+                    onClick={() => setDensity(d)}
+                    className={`btn ${density === d ? 'btn-primary' : 'btn-secondary'}`}
+                    style={{ flex: 1, padding: '0.6rem', fontSize: '0.75rem', borderRadius: '8px' }}
+                  >
+                    {d.charAt(0).toUpperCase() + d.slice(1)}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
@@ -74,8 +68,8 @@ OUTPUT REQUIREMENTS:
                   key={g.id}
                   onClick={() => setGenre(g.id)}
                   className={`btn ${genre === g.id ? 'btn-primary' : 'btn-secondary'}`}
-                  style={{ 
-                    padding: '1rem 0.5rem', 
+                  style={{
+                    padding: '1rem 0.5rem',
                     fontSize: '0.8rem',
                     display: 'flex',
                     flexDirection: 'column',
@@ -98,7 +92,7 @@ OUTPUT REQUIREMENTS:
           <label htmlFor="ai-story-premise" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
             Core Narrative Premise
           </label>
-          <textarea 
+          <textarea
             id="ai-story-premise"
             name="premise"
             className="dalam-textarea"

@@ -130,10 +130,17 @@ class ErrorBoundary extends Component {
 
   componentDidCatch(error, errorInfo) {
     console.error('Page render error:', error, errorInfo)
+
+    // Check if it's a chunk loading error (common in production during new deployments)
+    if (error?.name === 'ChunkLoadError' || /loading.*chunk/i.test(error?.message || '')) {
+      this.setState({ isChunkError: true })
+    }
   }
 
   render() {
     if (this.state.hasError) {
+      const isChunk = this.state.isChunkError || /chunk/i.test(this.state.error?.message || '')
+
       return (
         <div style={{
           display: 'flex',
@@ -149,42 +156,32 @@ class ErrorBoundary extends Component {
             width: '64px',
             height: '64px',
             borderRadius: '50%',
-            background: 'var(--accent-red-50, #fef2f2)',
-            color: 'var(--accent-red, #ef4444)',
+            background: isChunk ? 'var(--accent-emerald-50, #ecfdf5)' : 'var(--accent-red-50, #fef2f2)',
+            color: isChunk ? 'var(--accent-emerald, #10b981)' : 'var(--accent-red, #ef4444)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: '1.5rem',
             fontWeight: 700
-          }}>!</div>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>Something went wrong</h2>
+          }}>{isChunk ? '↺' : '!'}</div>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>
+            {isChunk ? 'New Version Available' : 'Something went wrong'}
+          </h2>
           <p style={{ color: 'var(--text-secondary)', maxWidth: '400px', lineHeight: 1.6 }}>
-            This page encountered an error. Please try refreshing or go back to the home page.
+            {isChunk
+              ? 'We have just updated PixTool. Please refresh your browser to load the latest version.'
+              : 'This page encountered an error. Please try refreshing or go back to the home page.'}
           </p>
-          {this.state.error && (
-            <pre style={{ 
-              background: 'var(--bg-secondary)', 
-              padding: '1rem', 
-              borderRadius: '8px', 
-              fontSize: '0.8rem', 
-              color: 'var(--accent-red)',
-              maxWidth: '90%',
-              overflow: 'auto',
-              textAlign: 'left'
-            }}>
-              {this.state.error.toString()}
-            </pre>
-          )}
           <div style={{ display: 'flex', gap: '1rem' }}>
             <button
               onClick={() => window.location.reload()}
               className="btn btn-primary"
               style={{ padding: '0.75rem 1.5rem', borderRadius: '12px' }}
             >
-              Refresh Page
+              Refresh & Reload
             </button>
             <button
-              onClick={() => { this.setState({ hasError: false }); window.location.href = '/' }}
+              onClick={() => { this.setState({ hasError: false, isChunkError: false }); window.location.href = '/' }}
               className="btn"
               style={{ padding: '0.75rem 1.5rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}
             >
@@ -219,55 +216,50 @@ const MainLayout = () => {
     }
   })
   const currentToolMeta = ALL_TOOLS_MAP[location.pathname]
-  const isRateableToolPath = Boolean(
-    currentToolMeta &&
-    !['/image-tools', '/pdf-tools', '/utility-tools', '/math-tools', '/ai-tools', '/'].includes(location.pathname) &&
-    currentToolMeta.id // Only actual tools have an 'id', suites don't
-  )
 
   useEffect(() => {
     try {
       const path = location.pathname
       const storageKey = 'pt_recent_tools'
-      
+
       // Only track if it's a valid tool path
       if (!ALL_TOOLS_MAP[path]) return
 
-      const saved = localStorage.getItem(storageKey) ? JSON.parse(localStorage.getItem(storageKey)) : []
-      if (!Array.isArray(saved)) {
-        localStorage.setItem(storageKey, '[]')
-        return
-      }
+      // Use a brief timeout to avoid tracking rapid navigation or "bounces"
+      const timeout = setTimeout(() => {
+        const raw = localStorage.getItem(storageKey)
+        const saved = raw ? JSON.parse(raw) : []
+        if (!Array.isArray(saved)) return
 
-      // Map to paths to avoid object serialization issues
-      const filtered = saved.map(p => (p && typeof p === 'object' ? p.path : p)).filter(p => p && p !== path)
-      const updated = [path, ...filtered].slice(0, 4)
-      
-      // Update localStorage only if changed
-      const currentSavedStr = JSON.stringify(saved.map(p => (p && typeof p === 'object' ? p.path : p)))
-      if (currentSavedStr !== JSON.stringify(updated)) {
-        localStorage.setItem(storageKey, JSON.stringify(updated))
-        
-        // Map back to tool objects for display
-        const displayTools = updated.map(p => ({ path: p, ...ALL_TOOLS_MAP[p] })).filter(t => t.title || t.name)
-        
-        // Use a functional update to avoid unnecessary re-renders and potential lint triggers
-         
-        setRecentTools(prev => {
-          if (JSON.stringify(prev.map(t => t.path)) === JSON.stringify(displayTools.map(t => t.path))) return prev;
-          return displayTools;
-        })
-      }
+        // Map to paths to avoid object serialization issues
+        const filtered = saved.map(p => (p && typeof p === 'object' ? p.path : p)).filter(p => p && p !== path)
+        const updated = [path, ...filtered].slice(0, 4)
+
+        // Update localStorage only if changed
+        const currentSavedStr = JSON.stringify(saved.map(p => (p && typeof p === 'object' ? p.path : p)))
+        if (currentSavedStr !== JSON.stringify(updated)) {
+          localStorage.setItem(storageKey, JSON.stringify(updated))
+
+          // Map back to tool objects for display
+          const displayTools = updated.map(p => ({ path: p, ...ALL_TOOLS_MAP[p] })).filter(t => t.title || t.name)
+
+          setRecentTools(prev => {
+            const prevPaths = JSON.stringify(prev.map(t => t.path))
+            const nextPaths = JSON.stringify(displayTools.map(t => t.path))
+            if (prevPaths === nextPaths) return prev
+            return displayTools
+          })
+        }
+      }, 300)
+
+      return () => clearTimeout(timeout)
     } catch (err) {
       console.error('Error tracking recent tools:', err)
     }
   }, [location.pathname])
 
-  const { triggerRating } = useRatePopup()
-  
   // Logic removed: Rating is now interaction-triggered within individual tool components
   // to avoid automatic popups that can interfere with AdSense reviews.
-
 
   const isAdminPath = location.pathname === '/pix-admin'
   const hideAuxWidgets = location.pathname === '/' || location.pathname === '/blog'
@@ -288,7 +280,7 @@ const MainLayout = () => {
         {!isAdminPath && !hideAuxWidgets && (
           <div className="container-pro" style={{ marginTop: '6rem', paddingBottom: '4rem' }}>
             <div className="bottom-widgets-grid">
-              
+
               {/* Recent Tools - Simplified */}
               {recentTools.length > 0 && (
                 <div className="layout-widget layout-widget-premium">
@@ -317,7 +309,7 @@ const MainLayout = () => {
               <div className="layout-widget layout-widget-standard">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
                   <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '12px' }}>
-                     <span style={{ fontSize: '1.2rem' }}>🔥</span>
+                    <span style={{ fontSize: '1.2rem' }}>🔥</span>
                   </div>
                   <h3 style={{ fontSize: '1.25rem', fontWeight: 900, letterSpacing: '-0.02em', margin: 0 }}>Popular Tools</h3>
                 </div>
@@ -343,7 +335,7 @@ const MainLayout = () => {
               <div className="layout-widget layout-widget-gradient">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
                   <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '12px' }}>
-                     <span style={{ fontSize: '1.2rem' }}>📚</span>
+                    <span style={{ fontSize: '1.2rem' }}>📚</span>
                   </div>
                   <h3 style={{ fontSize: '1.25rem', fontWeight: 900, letterSpacing: '-0.02em', margin: 0 }}>Expert Guides</h3>
                 </div>
@@ -382,9 +374,9 @@ const URLNormalizer = () => {
 
   // 1. Handle domain canonicalization (Redirect specifically to www.pixtool.in if on root or mirror)
   useEffect(() => {
-    if (import.meta.env.PROD && 
-        window.location.hostname !== 'www.pixtool.in' && 
-        !window.location.hostname.includes('vercel.app')) {
+    if (import.meta.env.PROD &&
+      window.location.hostname !== 'www.pixtool.in' &&
+      !window.location.hostname.includes('vercel.app')) {
       window.location.replace(`https://www.pixtool.in${pathname}${search}${hash}`)
     }
   }, [pathname, search, hash])
@@ -424,7 +416,7 @@ function App() {
           <Route path="/identity-forge" element={<FakeEmail />} />
           <Route path="/burner-inbox" element={<DisposableEmail />} />
           <Route path="/ghost-inbox" element={<ThrowawayEmail />} />
-          
+
           {/* Redirects for legacy SEO paths */}
           <Route path="/fake-email" element={<Navigate to="/identity-forge" replace />} />
           <Route path="/disposable-email" element={<Navigate to="/burner-inbox" replace />} />

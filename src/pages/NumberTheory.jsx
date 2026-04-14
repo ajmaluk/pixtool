@@ -1,16 +1,11 @@
 import { useState, useMemo } from 'react'
-import { 
-  Binary, Zap, Info, Hash, 
-  RotateCw, Download, Trash, Activity
-} from 'lucide-react'
-import { create, all } from 'mathjs'
+import { Binary, Activity } from 'lucide-react'
+import math from '../utils/mathUtils'
 import SEO from '../components/SEO'
 import Breadcrumbs from '../components/Breadcrumbs'
 import AdSpace from '../components/AdSpace'
 import ToolContent from '../components/ToolContent'
 import ShareTool from '../components/ShareTool'
-
-const math = create(all)
 
 export default function NumberTheory() {
   const [number, setNumber] = useState('1234')

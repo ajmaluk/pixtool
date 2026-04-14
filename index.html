@@ -5,39 +5,45 @@
   <meta charset="UTF-8" />
   <meta name="google-site-verification" content="83f8616f6a5b1974" />
   <meta name="yandex-verification" content="9add59f17faf30bc" />
-  <meta name="google-adsense-account" content="ca-pub-1506704627672992">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1506704627672992"
-     crossorigin="anonymous"></script>
+
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Primary Meta Tags -->
   <title>PixTool | Free AI, Image, PDF & Productivity Tools</title>
-  <meta name="description" content="PixTool offers free AI, image, PDF, math, and productivity tools that run in your browser with privacy-first processing. No upload required for most tools.">
+  <meta name="description"
+    content="PixTool offers free AI, image, PDF, math, and productivity tools that run in your browser with privacy-first processing. No upload required for most tools.">
+  <meta name="author" content="Muhammed Ajmal U K" />
+  <meta name="creator" content="PixTool" />
   <meta name="version" content="1.1.0" />
-  <meta name="theme-color" content="#0f172a" />
+  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="language" content="English" />
   <meta name="revisit-after" content="7 days" />
   <meta name="msapplication-TileColor" content="#6366f1" />
   <meta name="format-detection" content="telephone=no" />
-  
+
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com https://www.google-analytics.com https://ssl.google-analytics.com https://static.cloudflareinsights.com https://pagead2.googlesyndication.com https://www.googletagservices.com https://adservice.google.com https://googleads.g.doubleclick.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://i.ytimg.com https://img.youtube.com https://www.google-analytics.com https://ui-avatars.com https://xubaprenupvispvpelyn.supabase.co https://pagead2.googlesyndication.com https://www.google.com; connect-src 'self' https://www.google-analytics.com https://api.pixtool.in https://xubaprenupvispvpelyn.supabase.co https://fonts.googleapis.com https://fonts.gstatic.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; frame-src 'self' https://www.youtube.com https://googleads.g.doubleclick.net https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+
   <!-- Performance Hints -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+  <link rel="preconnect" href="https://xubaprenupvispvpelyn.supabase.co" />
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
   <link rel="dns-prefetch" href="https://mc.yandex.ru" />
-  <link rel="dns-prefetch" href="https://yandex.ru" />
-  <link rel="dns-prefetch" href="https://mc.webmaster.yandex.ru" />
-  
+
   <!-- Preload Critical Assets -->
-  <link rel="prefetch" href="/icons/favicon.ico" as="image" />
-  <link rel="prefetch" href="/icons/pixtool-logo-v2.png" as="image" />
-  
+  <link rel="prefetch" href="/favicon.ico" as="image" />
+  <link rel="prefetch" href="/logo.webp" as="image" />
+  <link rel="modulepreload" href="/src/main.jsx" />
+  <link rel="modulepreload" href="/src/pages/Home.jsx" />
+  <link rel="modulepreload" href="/src/components/Navbar.jsx" />
+
   <!-- Additional SEO Meta Tags -->
   <meta name="subject" content="Free Online Tools, Image Processing, PDF Management, Productivity, AI" />
   <meta name="rating" content="General" />
@@ -48,7 +54,8 @@
   <meta name="application-name" content="PixTool" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="pinterest-rich-pin" content="true" />
-  
+
+
   <!-- Social Meta tags are handled dynamically by SEO.jsx -->
   <meta property="og:site_name" content="PixTool" />
   <meta property="twitter:site" content="@ajmal_uk_" />
@@ -66,12 +73,51 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap"
+    media="print" onload="this.media='all'; this.onload=null;" />
   <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" />
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" />
   </noscript>
+  <!-- Critical CSS for above-the-fold content -->
+  <style>
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: #ffffff;
+      color: #0f172a;
+    }
+
+    .hero-loading {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #e2e8f0;
+      border-top: 3px solid #4f46e5;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+
   <script>
-    (function() {
+    (function () {
       try {
         const savedTheme = localStorage.getItem('theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -80,7 +126,30 @@
         } else {
           document.documentElement.classList.remove('dark');
         }
-      } catch (e) {}
+      } catch (e) { }
+
+      // Add loading spinner safe for head execution
+      const injectLoading = () => {
+        if (!document.body) return setTimeout(injectLoading, 10);
+        const loadingDiv = document.createElement('div');
+        loadingDiv.className = 'hero-loading';
+        loadingDiv.innerHTML = '<div class="hero-loading-spinner"></div>';
+        document.body.appendChild(loadingDiv);
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', injectLoading);
+      } else {
+        injectLoading();
+      }
+
+      // Remove loading spinner when React mounts
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const spinner = document.querySelector('.hero-loading');
+          if (spinner) spinner.remove();
+        }, 100);
+      });
     })();
   </script>
 </head>

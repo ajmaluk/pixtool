@@ -20,7 +20,7 @@ create extension if not exists pgcrypto;
 create table if not exists tools (
   id uuid primary key default gen_random_uuid(),
   name text not null,
-  slug text not null unique,
+  slug text not null unique check (slug ~ '^[a-z0-9\-/]+$'),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -76,9 +76,6 @@ create table if not exists rate_limits (
   action text not null,
   created_at timestamptz not null default now()
 );
-
-alter table rate_limits
-  add column if not exists ip_hash text;
 
 create index if not exists idx_tools_slug on tools(slug);
 create index if not exists idx_ratings_tool_id on ratings(tool_id);
@@ -398,9 +395,9 @@ create policy testimonials_read_approved on testimonials
 for select using (approved = true);
 
 -- public insert policies
+-- ratings insert is PROTECTED: must use submit_tool_rating() RPC which enforces rate limits
 drop policy if exists ratings_insert_public on ratings;
-create policy ratings_insert_public on ratings
-for insert with check (rating between 1 and 5 and char_length(user_id) > 0);
+-- (No replacement policy: disallow direct public insert)
 
 drop policy if exists testimonials_insert_public on testimonials;
 create policy testimonials_insert_public on testimonials

@@ -4,10 +4,10 @@ import { Layout, CheckCircle2, TrendingUp, Users } from 'lucide-react';
 
 const cases = [
     {
-        title: "Optimizing Creator Workflows with ToolPix",
+        title: "Optimizing Creator Workflows with PixTool",
         client: "Digital Content Studio",
         impact: "40% reduction in image processing time",
-        description: "How a leading content studio used ToolPix's bulk processing and AI enhancement to streamline their YouTube thumbnail creation process."
+        description: "How a leading content studio used PixTool's bulk processing and AI enhancement to streamline their YouTube thumbnail creation process."
     },
     {
         title: "SaaS Scaling with Custom AI Integration",

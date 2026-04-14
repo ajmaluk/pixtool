@@ -1,16 +1,11 @@
 import { useState } from 'react'
-import { 
-  Equal, Zap, Info, Search, 
-  Settings, Download, Trash, Activity
-} from 'lucide-react'
-import { create, all } from 'mathjs'
+import { Zap, Search, Activity } from 'lucide-react'
+import math from '../utils/mathUtils'
 import SEO from '../components/SEO'
 import Breadcrumbs from '../components/Breadcrumbs'
 import AdSpace from '../components/AdSpace'
 import ToolContent from '../components/ToolContent'
 import ShareTool from '../components/ShareTool'
-
-const math = create(all)
 
 export default function EquationSolver() {
   const [equation, setEquation] = useState('x^2 - 4 = 0')

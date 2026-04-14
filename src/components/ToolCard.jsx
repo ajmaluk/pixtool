@@ -9,6 +9,7 @@ export default function ToolCard({ tool }) {
   return (
     <div className="tool-card-container">
       <Link
+        id={`tool-card-link-${tool.id || tool.path?.split('/').pop()}`}
         to={tool.path}
         className="tool-card-premium"
       >

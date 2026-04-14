@@ -9,7 +9,7 @@ const newsItems = [
         content: "We are thrilled to announce that our productivity suite has hit a major milestone. Thank you for trusting us with your daily tasks!"
     },
     {
-        title: "New AI Engine for ToolPix Launched",
+        title: "New AI Engine for PixTool Launched",
         date: "Feb 10, 2026",
         content: "Our image processing tool now features a more powerful AI engine, offering 2x faster results and improved enhancement quality."
     },

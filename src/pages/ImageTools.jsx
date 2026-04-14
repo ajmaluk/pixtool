@@ -4,7 +4,7 @@ import { Maximize2, Shield, Zap, Upload, Loader, Download, Sliders, X, ChevronLe
 import ReactCrop, { centerCrop, makeAspectCrop } from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 import SEO from '../components/SEO'
-import ToolRating from '../components/ToolRating'
+// Rating is handled by the global RatingOverlay (triggered after processing via useRatePopup)
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
 import Breadcrumbs from '../components/Breadcrumbs'
@@ -1092,9 +1092,6 @@ export default function ImageTools() {
                         <p className="page-subtitle">
                           {activeToolData.description}
                         </p>
-                        <div style={{ marginTop: '1.5rem', maxWidth: '280px' }}>
-                          <ToolRating toolSlug={`image-tools/${toolId}`} />
-                        </div>
                       </div>
                     </div>
 

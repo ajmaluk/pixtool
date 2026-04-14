@@ -150,11 +150,16 @@ export const IMAGE_TOOLS = [
     ]
   },
   { 
-    id: 'compress', title: 'Image Compressor Pro', icon: FileArchive, 
+    id: 'image-compress', title: 'Image Compressor Pro', icon: FileArchive, 
     description: 'Intelligent high-velocity image compression. Shield your web performance by reducing file sizes by up to 80% while retaining original visual authority.', 
     color: '#a855f7', path: '/image-tools/compress', screenshot: 'high-quality-image-compressor-online.png',
     imageAlt: 'PixTool Image Compressor - Professional LSI-based Size Optimization',
     imageTitle: 'Compress Images for Web without Quality Loss',
+    seo: {
+      title: "Best Free Image Compressor 2026 | Reduce Photo Size No Quality Loss",
+      keywords: "image compressor, compress image, reduce image size, photo compressor, online image compression, image size reducer, webp compressor, jpeg compressor",
+      description: "Compress images with high-fidelity algorithms. Reduce file size by up to 90% while maintaining 4K clarity. 100% private browser processing."
+    },
     benefits: [
       'Industrial-grade lossy and lossless compression kernels',
       'Intelligent high-fidelity quality-level slider for precision tuning',
@@ -197,11 +202,16 @@ export const IMAGE_TOOLS = [
     ]
   },
   { 
-    id: 'convert', title: 'Universal Format Studio', icon: RefreshCw, 
+    id: 'image-convert', title: 'Universal Format Studio', icon: RefreshCw, 
     description: 'The definitive high-authority image converter. Seamlessly transition between JPEG, PNG, WebP, and GIF with industrial precision and zero data leakage.', 
     color: '#a855f7', path: '/image-tools/convert', screenshot: 'online-image-format-converter-webp-png-jpg.png',
     imageAlt: 'PixTool Image Converter - Professional Format Migration Engine',
     imageTitle: 'Convert JPEG/PNG to WebP Instantly',
+    seo: {
+      title: "Universal Image Converter 2026 | Convert PNG, JPG, WebP, AVIF Securely",
+      keywords: "image converter, convert png to webp, convert jpg to png, convert image online, bulk image converter, avif converter, free photo converter",
+      description: "Convert images to any format instantly. Supports WebP, AVIF, PNG, and JPEG. High-speed batch processing without cloud uploads."
+    },
     benefits: [
       'Universal format bridge supporting JPG, PNG, WebP, and GIF',
       'Advanced transparency preservation for high-fidelity PNG-to-WebP conversion',
@@ -241,7 +251,7 @@ export const IMAGE_TOOLS = [
     ]
   },
   { 
-    id: 'watermark', title: 'Asset Shield', icon: Type, 
+    id: 'image-watermark', title: 'Asset Shield', icon: Type, 
     description: 'Add custom high-authority text watermarks to protect your intellectual property. Professional branding with adjustable opacity and surgical positioning.', 
     color: '#a855f7', path: '/image-tools/watermark', screenshot: 'add-watermark-to-photos-online-free.png',
     imageAlt: 'PixTool Asset Shield - Professional IP Protection and Branding',
@@ -295,6 +305,11 @@ export const IMAGE_TOOLS = [
     color: '#a855f7', path: '/image-tools/flip', screenshot: 'flip-and-mirror-images-online-instantly.png',
     imageAlt: 'PixTool Mirror Forge - Instant Symmetry and Orientation Correction',
     imageTitle: 'Flip Photos Horizontally or Vertically Online',
+    seo: {
+      title: "Mirror Flip Image Online | Horizontal & Vertical Photo Rotator",
+      keywords: "flip image, mirror image, rotate image, flip photo online, horizontal flip, vertical flip, reflect image free",
+      description: "Flip images horizontally or vertically with one click. Professional mirror effect tool for photographers and creators. 100% private."
+    },
     benefits: [
       'One-click horizontal mirroring for selfie and orientation correction',
       'Instant vertical flipping for reflection and artistic inversion',
@@ -486,6 +501,11 @@ export const IMAGE_TOOLS = [
     color: '#a855f7', path: '/image-tools/image-to-pdf', screenshot: 'secure-pdf-management-suite.png',
     imageAlt: 'PixTool Portfolio Builder - High-Res Image to PDF creation',
     imageTitle: 'Convert Multiple Images to PDF Fast',
+    seo: {
+      title: "Image to PDF Converter 2026 | Turn Photos into High-Quality PDF",
+      keywords: "image to pdf, convert jpg to pdf, combine images to pdf, photo to pdf, batch image to pdf converter, create pdf from photos",
+      description: "Convert JPG, PNG, and WebP to professional PDF documents. Add multiple images, reorder pages, and export securely in seconds."
+    },
     benefits: [
       'High-velocity bulk image conversion (JPG, PNG, WebP to PDF)',
       'Intelligent page scaling and layout calibration',
@@ -530,6 +550,11 @@ export const IMAGE_TOOLS = [
     color: '#a855f7', path: '/image-tools/remove-background', screenshot: 'professional-online-image-studio.png',
     imageAlt: 'PixTool AI Transparency Studio - Automatic Background Extraction',
     imageTitle: 'Remove Image Background Online Free AI',
+    seo: {
+      title: "AI Background Remover 2026 | Remove Image Background Free",
+      keywords: "image background remover, remove background online, transparency maker, erase background ai, free background removal, png maker",
+      description: "Instantly remove backgrounds from photos using high-precision AI. Professional transparent PNG output for e-commerce and design."
+    },
     benefits: [
       'Industrial-grade automatic background identification',
       'Surgical edge detection for hair, fur, and complex transparent objects',
@@ -577,6 +602,11 @@ export const PDF_TOOLS = [
     color: '#06b6d4', path: '/pdf-tools/merge', screenshot: 'fast-pdf-merger-no-upload-pixtool.png',
     imageAlt: 'PixTool PDF Merger - Industrial-Grade Document Consolidation',
     imageTitle: 'Combine PDF Files Online for Free [Official]',
+    seo: {
+      title: "Merge PDF Free 2026 | Combine PDF Files Online Instantly",
+      keywords: "merge pdf, combine pdf, join pdf files, online pdf merger, secure pdf merge, merge multiple pdfs, free tool to combine pdf",
+      description: "Combine multiple PDF documents into one. Secure, fast, and 100% private. No limits on file size or number of pages."
+    },
     benefits: [
       'Infinite file merging architecture with zero wait times',
       'Drag-and-drop structural organization for precise page sequencing',
@@ -621,6 +651,11 @@ export const PDF_TOOLS = [
     color: '#06b6d4', path: '/pdf-tools/split', screenshot: 'split-pdf-pages-online-securely.png',
     imageAlt: 'PixTool PDF Slicer - Precision Page Extraction Interface',
     imageTitle: 'Split PDF Pages Online Free - Selective Extraction',
+    seo: {
+      title: "Split PDF Online 2026 | Extract PDF Pages Securely",
+      keywords: "split pdf, extract pdf pages, divide pdf, pdf splitter, separate pdf pages, pdf page extractor free, online pdf divider",
+      description: "Split PDF documents into individual pages or extract specific ranges. High-precision PDF divider for professional document management."
+    },
     benefits: [
       'Selective page extraction (e.g., Pages 1-5, 12, 18-20)',
       'High-velocity "Split All" protocol for converting pages to individual files',
@@ -660,11 +695,16 @@ export const PDF_TOOLS = [
     ]
   },
   { 
-    id: 'compress', title: 'PDF Shrink Studio', icon: FileCheck, 
+    id: 'pdf-compress', title: 'PDF Shrink Studio', icon: FileCheck, 
     description: 'Reduce PDF file size by up to 90% while maintaining professional readability. Optimize documents for email attachments and web hosting with zero data retention.', 
     color: '#06b6d4', path: '/pdf-tools/compress', screenshot: 'optimize-pdf-file-size-online.png',
     imageAlt: 'PixTool PDF Compressor - High-LSI Size Optimization engine',
     imageTitle: 'Reduce PDF File Size Online for Free [Official]',
+    seo: {
+      title: "Secure PDF Compressor 2026 | Reduce PDF Size for Email",
+      keywords: "compress pdf, reduce pdf size, optimize pdf online, secure pdf compression, pdf shrink tool free, lower pdf file size",
+      description: "Reduce PDF file size without losing text quality. Perfect for emailing large documents and meeting state portal requirements."
+    },
     benefits: [
       'Three-tier compression architecture (Extreme, Recommended, High Quality)',
       'Intelligent image downsampling for massive size reduction',
@@ -704,11 +744,16 @@ export const PDF_TOOLS = [
     ]
   },
   { 
-    id: 'convert', title: 'PDF Format Master', icon: FileImage, 
+    id: 'pdf-convert', title: 'PDF Format Master', icon: FileImage, 
     description: 'Transform PDF documents into high-resolution images or vice versa. High-fidelity conversion between PDF, JPG, and PNG with zero data leakage.', 
     color: '#06b6d4', path: '/pdf-tools/convert', screenshot: 'convert-pdf-to-images-online-high-res.png',
     imageAlt: 'PixTool PDF Converter - Multi-Format Document Migration',
     imageTitle: 'Convert PDF to JPG and PNG Online [High-Res]',
+    seo: {
+      title: "Universal PDF Converter 2026 | Convert PDF to Word, Excel, JPG",
+      keywords: "pdf converter, convert pdf to word, convert pdf to jpg, convert pdf to excel, online pdf converter free, secure document conversion",
+      description: "Convert PDF documents to editable Word, Excel, and Image files. Professional formatting retention and 100% data privacy."
+    },
     benefits: [
       'High-velocity PDF-to-Image (JPG/PNG) page rendering',
       'Image-to-PDF conversion with automatic margin and size calibration',
@@ -753,6 +798,11 @@ export const PDF_TOOLS = [
     color: '#06b6d4', path: '/pdf-tools/protect', screenshot: 'secure-pdf-with-password-online.png',
     imageAlt: 'PixTool PDF Vault - Enterprise-Grade Document Encryption',
     imageTitle: 'Password Protect PDF Online Free [2026]',
+    seo: {
+      title: "Password Protect PDF 2026 | Secure PDF with AES-256 Encryption",
+      keywords: "password protect pdf, encrypt pdf online, secure pdf with password, aes-256 pdf encryption, lock pdf file, private pdf security",
+      description: "Encrypt your PDF documents with military-grade passwords. Prevent unauthorized viewing, printing, or copying. 100% browser-side security."
+    },
     benefits: [
       'Military-grade AES-256 bit document encryption architecture',
       'Universal password locking recognized by all PDF readers',
@@ -792,7 +842,7 @@ export const PDF_TOOLS = [
     ]
   },
   { 
-    id: 'watermark', title: 'PDF Brand Manager', icon: Type, 
+    id: 'pdf-watermark', title: 'PDF Brand Manager', icon: Type, 
     description: 'Add professional text watermarks across all PDF pages. Protect your intellectual property with customizable "DRAFT," "CONFIDENTIAL," or brand-specific overlays.', 
     color: '#06b6d4', path: '/pdf-tools/watermark', screenshot: 'add-text-watermark-to-pdf-online.png',
     imageAlt: 'PixTool PDF Watermark - Document Branding and Security',
@@ -1041,6 +1091,11 @@ export const PDF_TOOLS = [
     color: '#06b6d4', path: '/pdf-tools/unlock', screenshot: 'secure-pdf-with-password-online.png',
     imageAlt: 'PixTool PDF Unlocker - Document Freedom Suite',
     imageTitle: 'Remove PDF Password Online [Official]',
+    seo: {
+      title: "Unlock PDF Online 2026 | Remove PDF Password & Restrictions",
+      keywords: "unlock pdf, remove pdf password, decrpt pdf online, remove pdf restrictions, bypass pdf password free, unlock secure pdf",
+      description: "Remove passwords and restrictions from your PDF files instantly. Re-enable printing, copying, and editing for authorized users."
+    },
     benefits: [
       'Instant owner-password removal protocol',
       'Enables printing and content copying permissions',
@@ -1085,6 +1140,11 @@ export const PDF_TOOLS = [
     color: '#06b6d4', path: '/pdf-tools/ocr', screenshot: 'secure-pdf-management-suite.png',
     imageAlt: 'PixTool PDF OCR - AI Text Recognition Studio',
     imageTitle: 'Searchable PDF Online Free [OCR]',
+    seo: {
+      title: "Free Online OCR 2026 | Extract Text from Images & PDF",
+      keywords: "ocr online, extract text from image, ocr pdf to text, optical character recognition free, scanned pdf to text converter, secure ocr online",
+      description: "Convert images and scanned PDFs into editable text. Supports 100+ languages with high-accuracy AI text recognition. 100% private."
+    },
     benefits: [
       'Multilingual AI text recognition (Latin, Cyrillic, Asian scripts)',
       'Searchable text-layer injection for scanned documents',
@@ -1182,9 +1242,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Secure Temp Mail 2026 - Instant Anonymous Disposable Email',
     imageTitle: 'Best Disposable Email Service Online',
     seo: {
-      title: "Free Temp Mail — Secure Anonymous Disposable Email",
-      keywords: "temp mail, temporary email, disposable email, free temp mail, temp mail generator, fake email, throwaway email, temp email, temporary email address, 10 minute mail, temp mail reddit, mailinator alternative, temp mail org, fake email generator, anonymous email, temp mail with password, temporary mail with password, temp mail for otp, fake email and password, temp mail login, one time email, fake email address, toolpix, pixtool temp mail, tempmail, temp mail otp login",
-      description: "Get instant free temporary email for signups, verifications, and OTP codes. No registration required—use immediately. 100% private disposable email with auto-refresh inbox."
+      title: "Free Temp Mail with Password — Secure Disposable Email",
+      keywords: "temp mail, temporary email, disposable email, free temp mail, temp mail generator, fake email, throwaway email, temp email, temporary email address, 10 minute mail, temp mail reddit, mailinator alternative, temp mail org, fake email generator, anonymous email, temp mail with password, temporary mail with password, temp mail for otp, fake email and password, temp mail login, one time email, fake email address, toolpix, pixtool temp mail, tempmail, temp mail otp login, temp mail and password for login",
+      description: "Get instant free temporary email with auto-generated passwords for signups, verifications, and OTP codes. 100% private disposable email with auto-refresh inbox."
     },
     benefits: [
       "Instant Email Generation in 1 Second",
@@ -1241,9 +1301,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool 10 Minute Mail - Secure Expiring Inbox for Rapid Verification',
     imageTitle: 'Best 10 Minute Disposable Email Service Online',
     seo: {
-      title: "10 Minute Mail — Anonymous Temporary Email Instant",
-      keywords: "10 minute mail, 10 min mail, 10minutemail, 10min mail, temporary email 10 minutes, 10 min temp mail, free 10 minute mail, disposable email 10 minutes, burner email 10 min, temp mail auto expiring, 10 minute mail alternative, 10minutemail one, temp mail reddit, temp mail org, free temp mail 10 min",
-      description: "Get a free 10-minute disposable email instantly. Perfect for quick verification and signups. Auto-expires for complete privacy. No registration, no spam, 100% free."
+      title: "10 Minute Mail with Password — Anonymous Temporary Email",
+      keywords: "10 minute mail, 10 min mail, 10minutemail, 10min mail, temporary email 10 minutes, 10 min temp mail, free 10 minute mail, disposable email 10 minutes, burner email 10 min, temp mail auto expiring, 10 minute mail alternative, 10minutemail one, temp mail reddit, temp mail org, free temp mail 10 min, 10 minute mail with password, 10 minute mail and password, temp mail password",
+      description: "Get a free 10-minute disposable email instantly with an auto-generated password. Perfect for quick verification and signups. Auto-expires for complete privacy."
     },
     benefits: [
       "Precise 10-minute session management",
@@ -1359,9 +1419,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Fake Email Generator - Create Anonymous Burner Inboxes Free',
     imageTitle: 'Fake Email Generator Online - No Signup Required',
     seo: {
-      title: "Fake Email Generator — Anonymous Email & Password",
-      keywords: "fake email, fake email generator, fake email and password, fake gmail, fake email with password, fake mail, fake email address, fake email id, free fake email, dummy email, disposable fake email, fake email for testing, fake email generator with password, fake email password generator, create fake email, random email generator, fake email creator, fake email password, fake mail generator, fake mail creator, fake mail sender with attachment",
-      description: "Generate free fake email addresses instantly with password support. Perfect for testing, signups, and privacy protection. No registration required, 100% anonymous."
+      title: "Fake Email and Password Generator — Instant Anonymous Inbox",
+      keywords: "fake email, fake email generator, fake email and password, fake gmail, fake email with password, fake gmail password, fake email password generator, fake mail, fake email address, fake email id, free fake email, dummy email, disposable fake email, fake email for testing, fake email generator with password, create fake email, random email generator, fake email creator, fake email password, fake mail generator, fake mail creator, fake mail sender with attachment, tool pix",
+      description: "Generate fake email addresses with passwords instantly. Create fake email and password combinations for testing, signups, and privacy. Get your anonymous inbox with auto-generated credentials."
     },
     benefits: [
       "High-speed generation",
@@ -1389,8 +1449,10 @@ export const UTILITY_TOOLS = [
       { title: 'Spam Prevention', description: 'Protect your primary address from aggressive marketing bots and newsletters.' }
     ],
     faq: [
-      { q: "Is this legal?", a: "Yes, temporary and fake emails are standard privacy tools for protecting individual identity and preventing spam online." },
-      { q: "Do the emails expire?", a: "Yes, they are temporary and will be discarded once you close your browser tab or the session times out." }
+      { q: "How do I create a fake email with password?", a: "Click the 'Generate Email' button to instantly create a unique fake email address with an auto-generated secure password. The credentials are ready to use immediately for testing or signups." },
+      { q: "Is creating fake emails legal?", a: "Yes, temporary and fake emails are standard privacy tools for protecting individual identity and preventing spam online." },
+      { q: "Do the fake emails expire?", a: "Yes, they are temporary and will be discarded once you close your browser tab or the session times out." },
+      { q: "Can I use fake email for important accounts?", a: "Fake emails are best for testing, temporary signups, and privacy protection. For important accounts requiring long-term access, use a permanent email service." }
     ],
     relatedTools: [
       { name: 'Temp Mail', path: '/temp-mail' },
@@ -1409,9 +1471,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Disposable Email Address - Secure One-Time Burner Inbox Free',
     imageTitle: 'Disposable Email Service Online - Fast & Private',
     seo: {
-      title: "Disposable Email — Free One-Time Temporary Mail",
-      keywords: "disposable email, disposable email address, one time email, burner email, free disposable email, temporary email address, temp email, temporary disposable email, one-time email, anonymous email, mailinator alternative, disposable email generator, temp mail disposable, single use email",
-      description: "Create free one-time disposable email instantly. Perfect for signups, verifications, and downloads. No registration, fully anonymous, protects your real inbox from spam."
+      title: "Disposable Email with Password — Free One-Time Temporary Mail",
+      keywords: "disposable email, disposable email address, one time email, burner email, free disposable email, temporary email address, temp email, temporary disposable email, one-time email, anonymous email, mailinator alternative, disposable email generator, temp mail disposable, single use email, disposable email and password, disposable email login",
+      description: "Create free one-time disposable email instantly with a secure password. Perfect for signups, verifications, and downloads. Fully anonymous, protects your real inbox from spam."
     },
     benefits: [
       "Instant one-click generation",
@@ -1461,9 +1523,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Throwaway Email Inbox - Instant Secure Temporary Mail 2026',
     imageTitle: 'Free Throwaway Inbox Online - Anonymous & Secure',
     seo: {
-      title: "Throwaway Email — Instant Anonymous Burner Inbox",
-      keywords: "throwaway email, disposable email, temporary email, anonymous email, burner email, free temp mail, throwaway email generator, one time email, temp email, temp mail, mailinator alternative, throwaway email inbox, privacy email, fake email, temporary mail address",
-      description: "Get instant throwaway email for signups and verifications. 100% free, no registration, fully anonymous disposable inbox. Protect your privacy with instant temp mail."
+      title: "Throwaway Email — Post & Password Anonymous Burner Inbox",
+      keywords: "throwaway email, disposable email, temporary email, anonymous email, burner email, throwaway email and password, free temp mail, throwaway email generator, one time email, temp email, temp mail, mailinator alternative, throwaway email inbox, privacy email, fake email, temporary mail address",
+      description: "Get instant throwaway email and password for signups and verifications. 100% free, no registration, fully anonymous disposable inbox. Protect your privacy."
     },
     benefits: [
       "High-speed inbox refreshing",
@@ -1560,7 +1622,7 @@ export const UTILITY_TOOLS = [
     ],
     readNext: [
       { title: 'The Future of AI-Powered Productivity 2026', path: '/blog/future-of-ai-productivity' },
-      { title: 'Building ToolPix: The Journey So Far', path: '/blog/building-toolpix-journey' },
+      { title: 'Building PixTool: The Journey So Far', path: '/blog/building-toolpix-journey' },
       { title: 'Why Privacy-First Tools are the New Gold Standard', path: '/blog/browser-based-privacy' }
     ]
   },
@@ -1571,9 +1633,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Universal QR Scanner - Pro-Level Flash Decoding and Browser-Native Upload',
     imageTitle: 'Best Online QR Code Scanner - Secure & Fast',
     seo: {
-      title: "QR Code Scanner Online — Scan Image & Camera Free",
-      keywords: "qr code scanner online, scan qr code from image, qr scanner online, qr code scanner from image, scan qr code online, free qr scanner, qr code scanner free, online qr reader, scan qr code from photo, qr scanner from image, qr code scanner browser, qr code scanner no app, scan qr image, qr reader online, qr scanner app alternative, qr code reader from image, read qr code from image, scan qr from photo, qr scanner photo, qr code scanner photo, scan any qr code online, qr scanner from image online, photo qr code scanner online, qr image reader online, online qr image reader, convert qr code to link, qr to link converter",
-      description: "Scan QR codes instantly from camera or uploaded images. 100% free, no app download required, fully private browser-based QR scanner. Supports all devices and formats."
+      title: "QR Code Scanner Online — Scan QR Code from Image & Camera Free",
+      keywords: "qr code scanner online, online scanner qr code, scan qr code online, scan qr code from image, qr scanner online, qr code scanner from image, free qr scanner, qr code scanner free, online qr reader, scan qr code from photo, qr scanner from image, qr code scanner browser, qr code scanner no app, scan qr image, qr reader online, qr scanner app alternative, qr code reader from image, read qr code from image, scan qr from photo, qr scanner photo, qr code scanner photo, scan any qr code online, qr scanner from image online, photo qr code scanner online, qr image reader online, online qr image reader, convert qr code to link, qr to link converter, tool pix scanner",
+      description: "Fast QR code scanner online. Scan QR codes instantly from camera or upload an image. 100% free online scanner qr code, no app download required, fully private."
     },
     benefits: [
       "No App Download Required",
@@ -1604,6 +1666,7 @@ export const UTILITY_TOOLS = [
       { title: 'Encrypted Message Access', description: 'Decode private text-strings or PGP public keys stored in QR formats securely.' }
     ],
     faq: [
+      { q: "How do I scan QR codes online free?", a: "Simply visit our QR scanner page, grant camera permissions, and point your device at any QR code. It decodes instantly without any cost or app download." },
       { q: "Do I need to download an app to scan QR codes?", a: "No! PixTool works directly in your web browser using modern HTML5 camera technology, so no installation is required." },
       { q: "Is it safe to scan unknown QR codes?", a: "Our scanner previews the URL for you, allowing you to see exactly where the link goes before you choose to visit it." },
       { q: "Does it work on iPhones and Androids?", a: "Yes, it is fully compatible with Safari on iOS, Chrome on Android, and all modern desktop browsers." },
@@ -1672,7 +1735,7 @@ export const UTILITY_TOOLS = [
     relatedTools: [
       { name: 'The Ultimate Guide to Static vs Dynamic QR Codes 2026', path: '/blog/qr-static-vs-dynamic-2026' },
       { name: 'Advanced QR Code Marketing Strategies 2026', path: '/blog/advanced-qr-code-marketing-2026' },
-      { name: 'Building ToolPix: Our 2026 Journey', path: '/blog/building-toolpix-journey' }
+      { name: 'Building PixTool: Our 2026 Journey', path: '/blog/building-toolpix-journey' }
     ],
     readNext: [
       { title: 'Designing High-Impact QR Codes', path: '/blog/high-impact-qr-codes' },
@@ -1896,7 +1959,7 @@ export const UTILITY_TOOLS = [
     ],
     readNext: [
       { title: 'Modern Developer Workflows 2026', path: '/blog/modern-developer-workflows' },
-      { title: 'Building ToolPix: The Journey So Far', path: '/blog/building-toolpix-journey' },
+      { title: 'Building PixTool: The Journey So Far', path: '/blog/building-toolpix-journey' },
       { title: 'Why Privacy-First Tools are the New Gold Standard', path: '/blog/browser-based-privacy' }
     ]
   },
@@ -2009,7 +2072,7 @@ export const UTILITY_TOOLS = [
     readNext: [
       { title: 'The Ultimate Guide to Browser-Based Privacy', path: '/blog/browser-based-privacy' },
       { title: 'Modern Developer Workflows 2026', path: '/blog/modern-developer-workflows' },
-      { title: 'Building ToolPix: Our 2026 Journey', path: '/blog/building-toolpix-journey' }
+      { title: 'Building PixTool: Our 2026 Journey', path: '/blog/building-toolpix-journey' }
     ]
   },
   {
@@ -2065,7 +2128,7 @@ export const UTILITY_TOOLS = [
     readNext: [
       { title: 'The Ultimate Guide to Browser-Based Privacy', path: '/blog/browser-based-privacy' },
       { title: 'How to Manage Passwords Securely in 2026', path: '/blog/password-management-security' },
-      { title: 'Building ToolPix: Our 2026 Journey', path: '/blog/building-toolpix-journey' }
+      { title: 'Building PixTool: Our 2026 Journey', path: '/blog/building-toolpix-journey' }
     ]
   }
 ];

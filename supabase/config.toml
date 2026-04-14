@@ -1,4 +1,4 @@
-project_id = "pixtool"
+project_id = "xubaprenupvispvpelyn"
 
 [functions.admin-login]
 verify_jwt = false

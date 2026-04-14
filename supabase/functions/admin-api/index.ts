@@ -258,12 +258,17 @@ serve(async (req) => {
       });
     }
 
-    return new Response(JSON.stringify({ error: 'Unsupported action' }), {
+    return new Response(JSON.stringify({ error: 'Unsupported action', code: 'UNSUPPORTED_ACTION' }), {
       status: 400,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    return new Response(JSON.stringify({ error: String(error?.message || error) }), {
+    const message = String(error?.message || error);
+    return new Response(JSON.stringify({ 
+      error: message, 
+      code: error.code || 'INTERNAL_ERROR',
+      details: error.details || null
+    }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });

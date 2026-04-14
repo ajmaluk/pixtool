@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Copy, RefreshCw, Trash2, Loader, Mail, Search, Shield, Zap, Clock, X, Inbox, CheckCircle2, ArrowLeft, ArrowRight, Eye, EyeOff } from 'lucide-react'
+import { Copy, RefreshCw, Trash2, Loader, Mail, Search, Shield, Zap, Clock, X, Inbox, CheckCircle2, ArrowLeft, ArrowRight, Eye, EyeOff, Key } from 'lucide-react'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
@@ -167,7 +167,6 @@ class TempMailReceiver {
 }
 
 export default function TempMail({
-  toolId = 'temp-mail',
   seoPath = "/temp-mail",
   seoTitle = null,
   breadcrumbs: customBreadcrumbs = null,
@@ -180,7 +179,7 @@ export default function TempMail({
   const toolData = ALL_TOOLS_MAP[seoPath] || ALL_TOOLS_MAP['/temp-mail'] || {}
   const toolTitle = toolData?.title || 'Temp Mail'
   const toolDescription = toolData?.description || 'Secure temporary email service.'
-  
+
   // Use toolData for SEO and Breadcrumbs if not provided
   const finalSeoPath = seoPath || toolData?.path || '/temp-mail'
   const finalSeoTitle = seoTitle || toolData?.seo?.title || `${toolTitle} - Online Privacy Tool`
@@ -190,6 +189,7 @@ export default function TempMail({
   ]
 
   const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(true)
   const [messages, setMessages] = useState([])
   const [selectedMessage, setSelectedMessage] = useState(null)
@@ -198,6 +198,8 @@ export default function TempMail({
   const [toast, setToast] = useState({ show: false, message: '', type: 'success' })
   const [refreshing, setRefreshing] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [copiedPassword, setCopiedPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   const { triggerRating } = useRatePopup()
   const confirm = useConfirm()
 
@@ -228,17 +230,6 @@ export default function TempMail({
     } catch (e) { void e; return }
   }
 
-  const tempMailFaqs = toolData.faq || []
-  const tempMailSteps = toolData.howItWorks || toolData.howTo || [
-    "Visit the page - a temporary email address is generated automatically.",
-    "Click on the email address or Copy button to copy it to your clipboard.",
-    "Paste the email wherever you need to sign up or verify.",
-    "Return to this page to see incoming messages - inbox refreshes automatically."
-  ]
-  const tempMailReadNext = toolData.readNext || []
-  const tempMailRelatedTools = toolData.relatedTools || []
-
-
   useEffect(() => {
     let mounted = true
     const init = async () => {
@@ -266,6 +257,7 @@ export default function TempMail({
         }
         if (mounted) {
           setEmail(saved.email)
+          setPassword(saved.password)
           const raw = localStorage.getItem(INBOX_PREFIX + saved.email)
           const cached = raw ? JSON.parse(raw) : []
           if (cached && cached.length) setMessages(cached)
@@ -274,6 +266,7 @@ export default function TempMail({
         const newEmail = await tempMailRef.current.generateEmail()
         if (newEmail && mounted) {
           setEmail(newEmail)
+          setPassword(tempMailRef.current.password)
           saveAccount({
             email: tempMailRef.current.email,
             password: tempMailRef.current.password,
@@ -325,6 +318,16 @@ export default function TempMail({
     })
   }
 
+  const copyPassword = (e) => {
+    e.stopPropagation()
+    navigator.clipboard.writeText(password).then(() => {
+      setCopiedPassword(true)
+      showToast('Password copied to clipboard!')
+      triggerRating('temp-mail')
+      setTimeout(() => setCopiedPassword(false), 3000)
+    })
+  }
+
   const refreshInbox = async () => {
     setRefreshing(true)
     try {
@@ -359,6 +362,7 @@ export default function TempMail({
     const newEmail = await tempMailRef.current.generateEmail()
     if (newEmail) {
       setEmail(newEmail)
+      setPassword(tempMailRef.current.password)
       setMessages([])
       setSelectedMessage(null)
       if (oldEmail) clearInbox(oldEmail)
@@ -422,6 +426,7 @@ export default function TempMail({
     if (!ok) return
     const oldEmail = email
     setEmail('')
+    setPassword('')
     setMessages([])
     setSelectedMessage(null)
     try { localStorage.removeItem(STORAGE_KEY) } catch (e) { void e }
@@ -610,21 +615,55 @@ export default function TempMail({
               ) : (
                 <div className="tempmail-display-container">
                   <div className="tempmail-glow" />
-                  <div
-                    onClick={copyEmail}
-                    className="tempmail-address-card"
-                  >
-                    <div className="tempmail-icon-glow">
-                      <Mail size={28} />
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', maxWidth: '800px', margin: '0 auto', zIndex: 2, position: 'relative' }}>
+                    <div
+                      onClick={copyEmail}
+                      className="tempmail-address-card"
+                    >
+                      <div className="tempmail-icon-glow">
+                        <Mail size={28} />
+                      </div>
+                      <div className="tempmail-address-wrapper">
+                        <span className="tempmail-label">Your Secure Email Address</span>
+                        <span className="tempmail-address">
+                          {email || 'Generating...'}
+                        </span>
+                      </div>
+                      <div className={`tempmail-copy-btn ${copied ? 'copied' : ''}`}>
+                        {copied ? <CheckCircle2 size={24} /> : <Copy size={24} />}
+                      </div>
                     </div>
-                    <div className="tempmail-address-wrapper">
-                      <span className="tempmail-label">Your Secure Address</span>
-                      <span className="tempmail-address">
-                        {email || 'Generating...'}
-                      </span>
-                    </div>
-                    <div className={`tempmail-copy-btn ${copied ? 'copied' : ''}`}>
-                      {copied ? <CheckCircle2 size={24} /> : <Copy size={24} />}
+
+                    <div
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="tempmail-address-card"
+                      style={{ padding: '1rem 1.5rem', minHeight: '80px', cursor: 'pointer' }}
+                    >
+                      <div className="tempmail-icon-glow" style={{ width: '48px', height: '48px', padding: '12px' }}>
+                        <Key size={24} />
+                      </div>
+                      <div className="tempmail-address-wrapper">
+                        <span className="tempmail-label">Auto-Generated Password</span>
+                        <span className="tempmail-address" style={{ fontSize: '1.2rem', letterSpacing: showPassword ? 'normal' : '0.2em' }}>
+                          {password ? (showPassword ? password : '••••••••••••••') : 'Generating...'}
+                        </span>
+                      </div>
+                      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                        <div
+                          className="tempmail-copy-btn"
+                          onClick={(e) => { e.stopPropagation(); setShowPassword(!showPassword) }}
+                          style={{ width: '40px', height: '40px' }}
+                        >
+                          {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                        </div>
+                        <div
+                          className={`tempmail-copy-btn ${copiedPassword ? 'copied' : ''}`}
+                          onClick={copyPassword}
+                          style={{ width: '40px', height: '40px' }}
+                        >
+                          {copiedPassword ? <CheckCircle2 size={20} /> : <Copy size={20} />}
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -1075,7 +1114,7 @@ export default function TempMail({
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
                         <div>
-                            {selectedMessage.from?.name || selectedMessage.from?.address?.split('@')?.[0] || 'Unknown Sender'}
+                          {selectedMessage.from?.name || selectedMessage.from?.address?.split('@')?.[0] || 'Unknown Sender'}
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 600 }}>
                             <span style={{ background: 'var(--bg-primary)', padding: '4px 12px', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
                               From: {selectedMessage.from?.address}

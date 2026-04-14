@@ -2,15 +2,13 @@ import { useState, useMemo } from 'react'
 import { 
   Box
 } from 'lucide-react'
-import { create, all } from 'mathjs'
+import math from '../utils/mathUtils'
  
 import SEO from '../components/SEO'
 import Breadcrumbs from '../components/Breadcrumbs'
 import AdSpace from '../components/AdSpace'
 import ToolContent from '../components/ToolContent'
 import ShareTool from '../components/ShareTool'
-
-const math = create(all)
 
 export default function VectorCalculator() {
   const [v1, setV1] = useState({ x: '1', y: '2', z: '3' })

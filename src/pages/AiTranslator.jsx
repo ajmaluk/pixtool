@@ -3,7 +3,6 @@ import AiToolTemplate from '../components/AiToolTemplate'
 import { Globe, ArrowRightLeft, Languages, Volume2 } from 'lucide-react'
 
 export default function AiTranslator() {
-  const [inputText, setInputText] = useState('')
   const [sourceLang, setSourceLang] = useState('auto')
   const [targetLang, setTargetLang] = useState('spanish')
 
@@ -38,7 +37,7 @@ ${text}`
   }
 
   return (
-    <AiToolTemplate 
+    <AiToolTemplate
       title="Linguist Intelligence"
       description="Professional-grade neural translation across 100+ languages with cultural awareness."
       icon={Globe}
@@ -52,9 +51,9 @@ ${text}`
         <div className="sidebar-section">
           <div className="sidebar-section-title">Source Language</div>
           <div className="input-group">
-            <select 
+            <select
               className="input"
-              value={sourceLang} 
+              value={sourceLang}
               onChange={(e) => setSourceLang(e.target.value)}
               style={{ fontWeight: 800, cursor: 'pointer' }}
             >
@@ -65,7 +64,7 @@ ${text}`
 
         {/* Swap Control */}
         <div style={{ display: 'flex', justifyContent: 'center', margin: '-1rem 0' }}>
-          <button 
+          <button
             onClick={handleSwap}
             disabled={sourceLang === 'auto'}
             className="btn btn-secondary"
@@ -79,9 +78,9 @@ ${text}`
         <div className="sidebar-section">
           <div className="sidebar-section-title">Target Language</div>
           <div className="input-group">
-            <select 
+            <select
               className="input"
-              value={targetLang} 
+              value={targetLang}
               onChange={(e) => setTargetLang(e.target.value)}
               style={{ fontWeight: 800, cursor: 'pointer' }}
             >

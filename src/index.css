@@ -1,5 +1,34 @@
 :root {
   /* Modern Premium Palette - 2026 Edition */
+
+/* Performance Optimizations */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Prevent layout shifts */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Reserve space for images */
+img[loading="lazy"] {
+  aspect-ratio: 16/9;
+}
+
+/* Smooth loading */
+img {
+  transition: opacity 0.3s ease;
+}
+
+img:not([src]) {
+  opacity: 0;
+}
+
+img[src] {
+  opacity: 1;
+}
   --bg-primary: #ffffff;
   --bg-secondary: #f8fafc;
   --bg-card: #ffffff;
@@ -4125,4 +4154,18 @@ body.mobile-overlay-open {
   height: 32px;
   width: 32px;
   object-fit: contain;
+}
+
+/* Footer CLS Optimization */
+.footer {
+  min-height: 450px;
+  content-visibility: auto;
+  contain-intrinsic-size: 450px;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    min-height: 1000px; /* Accounts for stacked layout on mobile */
+    contain-intrinsic-size: 1000px;
+  }
 }

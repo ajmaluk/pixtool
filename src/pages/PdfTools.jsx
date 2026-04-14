@@ -3,7 +3,7 @@ import { PDFDocument } from 'pdf-lib'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { FileText, Upload, Download, Loader, X, ChevronDown, Share2, Eye, EyeOff, Sliders } from 'lucide-react'
 import SEO from '../components/SEO'
-import ToolRating from '../components/ToolRating'
+// Rating is handled by the global RatingOverlay (triggered after processing via useRatePopup)
 import ToolContent from '../components/ToolContent'
 import AdSpace from '../components/AdSpace'
 import Breadcrumbs from '../components/Breadcrumbs'
@@ -903,9 +903,6 @@ export default function PdfTools() {
                       <p className="page-subtitle">
                         {activeToolData.description}
                       </p>
-                      <div style={{ marginTop: '1.5rem', maxWidth: '280px' }}>
-                        <ToolRating toolSlug={`pdf-tools/${toolId}`} />
-                      </div>
                     </div>
                   </div>
 

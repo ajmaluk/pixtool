@@ -34,12 +34,15 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState(initialSearch)
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(-1)
+  const [showAllImageTools, setShowAllImageTools] = useState(false)
+  const [showAllPdfTools, setShowAllPdfTools] = useState(false)
+  const [showAllAiTools, setShowAllAiTools] = useState(false)
 
   useEffect(() => {
     const q = searchParams.get('q') || ''
     if (q !== searchTerm) {
       // Sync search input when URL query changes from outside this page.
-       
+
       setSearchTerm(q)
     }
   }, [searchParams, searchTerm])
@@ -146,7 +149,7 @@ export default function Home() {
                   <span style={{ marginRight: '8px' }}>🚀</span> 2026 AI Innovation Suite
                 </div>
                 <h1 className="hero-main-title">
-                  Best Free Online <br/>
+                  Best Free Online <br />
                   <span className="hero-title-highlight">
                     <span className="text-gradient-hero hero-title-highlight-text">
                       AI & Privacy Tools
@@ -158,24 +161,24 @@ export default function Home() {
                   </span>
                 </h1>
                 <p className="hero-text-description">
-                  The world's most powerful browser-native AI suite. 121+ professional tools for 
-                  <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> task management </span>, 
-                  <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> content generation </span>, 
-                  <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> secure PDF management </span>, 
+                  The world's most powerful browser-native AI suite. 121+ professional tools for
+                  <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> task management </span>,
+                  <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> content generation </span>,
+                  <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> secure PDF management </span>,
                   <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> scientific mathematics </span>,
                   and <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> image studio operations </span>
                   —all with absolute privacy.
-                  <span style={{ 
-                    display: 'flex', 
+                  <span style={{
+                    display: 'flex',
                     flexWrap: 'wrap',
                     justifyContent: 'center',
                     gap: '1rem',
-                    marginTop: '2rem', 
-                    fontSize: '0.85rem', 
-                    fontWeight: 900, 
-                    textTransform: 'uppercase', 
-                    color: 'var(--accent-primary)', 
-                    letterSpacing: '0.2em' 
+                    marginTop: '2rem',
+                    fontSize: '0.85rem',
+                    fontWeight: 900,
+                    textTransform: 'uppercase',
+                    color: 'var(--accent-primary)',
+                    letterSpacing: '0.2em'
                   }}>
                     <span>✦ Zero-Upload AI</span>
                     <span style={{ opacity: 0.6 }}>|</span>
@@ -281,9 +284,9 @@ export default function Home() {
               </div>
             </div>
           </div>
- 
-          <section className="mission-block-premium" style={{ 
-            padding: '4rem 0', 
+
+          <section className="mission-block-premium" style={{
+            padding: '4rem 0',
             borderBottom: '1px solid var(--border-color)',
             background: 'rgba(255,255,255,0.01)'
           }}>
@@ -295,20 +298,20 @@ export default function Home() {
                   </h2>
                   <div style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: 1.8 }}>
                     <p style={{ marginBottom: '1.25rem' }}>
-                      In 2026, data privacy isn't just a feature—it's a human right. Traditional "free online tools" operate on a dangerous model: they require you to upload your sensitive PDFs, private photos, and corporate documents to their cloud servers before processing them. 
+                      In 2026, data privacy isn't just a feature—it's a human right. Traditional "free online tools" operate on a dangerous model: they require you to upload your sensitive PDFs, private photos, and corporate documents to their cloud servers before processing them.
                     </p>
                     <p style={{ marginBottom: '1.25rem' }}>
-                      <strong>PixTool is different.</strong> Our entire suite is re-engineered from the ground up using <strong>WebAssembly (WASM)</strong> and high-performance browser-native APIs. When you click 'Compress', 'Merge', or 'Translate', the underlying algorithms are delivered to your device, and the actual processing happens entirely within your <strong>local CPU and RAM</strong>. 
+                      <strong>PixTool is different.</strong> Our entire suite is re-engineered from the ground up using <strong>WebAssembly (WASM)</strong> and high-performance browser-native APIs. When you click 'Compress', 'Merge', or 'Translate', the underlying algorithms are delivered to your device, and the actual processing happens entirely within your <strong>local CPU and RAM</strong>.
                     </p>
                     <p>
                       Your files <strong>never leave your machine</strong>. This results in 100% data sovereignty, zero upload latency, and absolute immunity from server-side data breaches.
                     </p>
                   </div>
                 </div>
-                <div style={{ 
-                  background: 'var(--bg-secondary)', 
-                  padding: '3rem', 
-                  borderRadius: '32px', 
+                <div style={{
+                  background: 'var(--bg-secondary)',
+                  padding: '3rem',
+                  borderRadius: '32px',
                   border: '1px solid var(--border-color)',
                   boxShadow: 'var(--shadow-premium)'
                 }}>
@@ -476,13 +479,24 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="tools-grid">
-                        {imageTools.map((tool) => (
+                        {(showAllImageTools ? imageTools : imageTools.slice(0, 6)).map((tool) => (
                           <ToolCard
                             key={tool.path}
                             tool={tool}
                           />
                         ))}
                       </div>
+                      {imageTools.length > 6 && (
+                        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+                          <button
+                            onClick={() => setShowAllImageTools(!showAllImageTools)}
+                            className="btn btn-secondary"
+                            style={{ minWidth: '120px' }}
+                          >
+                            {showAllImageTools ? 'Show Less' : `Show ${imageTools.length - 6} More`}
+                          </button>
+                        </div>
+                      )}
                     </section>
                   )}
 
@@ -513,10 +527,21 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="tools-grid">
-                        {pdfTools.map((tool) => (
+                        {(showAllPdfTools ? pdfTools : pdfTools.slice(0, 6)).map((tool) => (
                           <ToolCard key={tool.path} tool={tool} />
                         ))}
                       </div>
+                      {pdfTools.length > 6 && (
+                        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+                          <button
+                            onClick={() => setShowAllPdfTools(!showAllPdfTools)}
+                            className="btn btn-secondary"
+                            style={{ minWidth: '120px' }}
+                          >
+                            {showAllPdfTools ? 'Show Less' : `Show ${pdfTools.length - 6} More`}
+                          </button>
+                        </div>
+                      )}
                     </section>
                   )}
 
@@ -584,13 +609,24 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="tools-grid">
-                        {aiTools.map((tool) => (
+                        {(showAllAiTools ? aiTools : aiTools.slice(0, 6)).map((tool) => (
                           <ToolCard
                             key={tool.path}
                             tool={tool}
                           />
                         ))}
                       </div>
+                      {aiTools.length > 6 && (
+                        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+                          <button
+                            onClick={() => setShowAllAiTools(!showAllAiTools)}
+                            className="btn btn-secondary"
+                            style={{ minWidth: '120px' }}
+                          >
+                            {showAllAiTools ? 'Show Less' : `Show ${aiTools.length - 6} More`}
+                          </button>
+                        </div>
+                      )}
                     </section>
                   )}
 
@@ -648,7 +684,7 @@ export default function Home() {
               <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '600px', marginBottom: '3rem' }}>
                 Watch our quick 60-second tour showcasing the incredible speed and privacy of our 121+ professional browser tools.
               </p>
-              
+
               <div style={{
                 position: 'relative',
                 width: '100%',
@@ -668,14 +704,14 @@ export default function Home() {
               </div>
             </section>
 
-            <div className="container-pro" style={{ 
-                marginTop: 'clamp(2rem, 5vw, 4rem)', 
-                padding: 'clamp(3rem, 5vw, 5rem) 2rem', 
-                background: 'linear-gradient(180deg, rgba(247, 249, 251, 0.02) 0%, rgba(107, 56, 212, 0.02) 100%)', 
-                borderRadius: '40px', 
-                border: '1px solid rgba(255,255,255,0.05)',
-                textAlign: 'left' 
-              }}>
+            <div className="container-pro" style={{
+              marginTop: 'clamp(2rem, 5vw, 4rem)',
+              padding: 'clamp(3rem, 5vw, 5rem) 2rem',
+              background: 'linear-gradient(180deg, rgba(247, 249, 251, 0.02) 0%, rgba(107, 56, 212, 0.02) 100%)',
+              borderRadius: '40px',
+              border: '1px solid rgba(255,255,255,0.05)',
+              textAlign: 'left'
+            }}>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '4rem' }}>
                 <div>
                   <h2 style={{ fontSize: '2rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>

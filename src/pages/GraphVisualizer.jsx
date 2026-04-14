@@ -1,17 +1,12 @@
 import { useState, useMemo } from 'react'
-import { 
-  TrendingUp, Plus, Trash2, Maximize2, 
-  Settings, Info, Download, Trash
-} from 'lucide-react'
+import { TrendingUp, Plus, Trash2 } from 'lucide-react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
-import { create, all } from 'mathjs'
+import math from '../utils/mathUtils'
 import SEO from '../components/SEO'
 import Breadcrumbs from '../components/Breadcrumbs'
 import AdSpace from '../components/AdSpace'
 import ToolContent from '../components/ToolContent'
 import ShareTool from '../components/ShareTool'
-
-const math = create(all)
 
 export default function GraphVisualizer() {
   const [functions, setFunctions] = useState([{ id: 1, expr: 'sin(x)', color: '#3b82f6' }])

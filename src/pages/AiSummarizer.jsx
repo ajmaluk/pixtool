@@ -3,7 +3,6 @@ import AiToolTemplate from '../components/AiToolTemplate'
 import { FileText, List, AlignLeft, Zap, Layers } from 'lucide-react'
 
 export default function AiSummarizer() {
-  const [inputText, setInputText] = useState('')
   const [mode, setMode] = useState('structural') // structural, executive, deep
   const [density, setDensity] = useState('medium') // low, medium, high
 
@@ -32,7 +31,7 @@ ${text}`
   }
 
   return (
-    <AiToolTemplate 
+    <AiToolTemplate
       title="Intelligence Distiller"
       description="Condense complex manuscripts into high-density strategic insights."
       icon={FileText}
@@ -51,8 +50,8 @@ ${text}`
                 key={m.id}
                 onClick={() => setMode(m.id)}
                 className={`btn ${mode === m.id ? 'btn-primary' : 'btn-secondary'}`}
-                style={{ 
-                  padding: '1rem', 
+                style={{
+                  padding: '1rem',
                   fontSize: '0.85rem',
                   display: 'flex',
                   alignItems: 'center',
@@ -64,8 +63,8 @@ ${text}`
               >
                 <m.icon size={18} strokeWidth={1.5} />
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <span style={{ fontWeight: 800 }}>{m.name}</span>
-                    <span style={{ fontSize: '0.7rem', opacity: 0.7, fontWeight: 500 }}>{m.desc}</span>
+                  <span style={{ fontWeight: 800 }}>{m.name}</span>
+                  <span style={{ fontSize: '0.7rem', opacity: 0.7, fontWeight: 500 }}>{m.desc}</span>
                 </div>
               </button>
             ))}
@@ -80,10 +79,10 @@ ${text}`
               <button
                 key={d.id}
                 onClick={() => setDensity(d.id)}
-                style={{ 
-                  padding: '0.75rem', 
-                  borderRadius: '10px', 
-                  border: 'none', 
+                style={{
+                  padding: '0.75rem',
+                  borderRadius: '10px',
+                  border: 'none',
                   background: density === d.id ? 'var(--bg-card)' : 'transparent',
                   color: density === d.id ? 'var(--text-primary)' : 'var(--text-muted)',
                   fontWeight: 800,

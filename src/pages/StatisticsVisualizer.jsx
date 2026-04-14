@@ -1,22 +1,16 @@
 import { useState, useMemo } from 'react'
-import { 
-  BarChart, PieChart, TrendingUp, Info, 
-  Settings, Download, Trash, Activity, 
-  BarChart3, PieChart as PieIcon, LineChart as LineIcon
-} from 'lucide-react'
+import { TrendingUp, BarChart3, PieChart as PieIcon, LineChart as LineIcon } from 'lucide-react'
 import { 
   BarChart as ReBar, Bar, XAxis, YAxis, CartesianGrid, Tooltip, 
   ResponsiveContainer, Cell, PieChart as RePie, Pie, 
   LineChart as ReLine, Line
 } from 'recharts'
-import { create, all } from 'mathjs'
+import math from '../utils/mathUtils'
 import SEO from '../components/SEO'
 import Breadcrumbs from '../components/Breadcrumbs'
 import AdSpace from '../components/AdSpace'
 import ToolContent from '../components/ToolContent'
 import ShareTool from '../components/ShareTool'
-
-const math = create(all)
 
 export default function StatisticsVisualizer() {
   const [rawData, setRawData] = useState('January: 400, February: 300, March: 600, April: 800, May: 500')

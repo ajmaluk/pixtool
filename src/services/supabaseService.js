@@ -9,6 +9,7 @@ const PUBLIC_METRICS_CACHE_KEY = 'pix_public_metrics_cache';
 const PUBLIC_METRICS_CACHE_TTL_MS = 5 * 60 * 1000;
 
 const toolSlugCache = new Map();
+let sessionIpHash = null;
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_FETCH_TIMEOUT_MS = 12000;
@@ -25,14 +26,23 @@ const getStoredJson = (key, fallback) => {
     if (!raw) return fallback;
     const parsed = JSON.parse(raw);
     return parsed ?? fallback;
-  } catch {
+  } catch (err) {
+    console.warn(`Storage read error for ${key}:`, err);
     return fallback;
   }
 };
 
 const setStoredJson = (key, value) => {
   if (!isBrowser) return;
-  localStorage.setItem(key, JSON.stringify(value));
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (err) {
+    console.warn(`Storage write error for ${key}:`, err);
+    // Handle QuotaExceededError by clearing old limits if necessary
+    if (err.name === 'QuotaExceededError') {
+      localStorage.removeItem(RATE_LIMIT_KEY);
+    }
+  }
 };
 
 const clearStoredValue = (key) => {
@@ -42,26 +52,31 @@ const clearStoredValue = (key) => {
 
 const formatSupabaseError = (error, fallbackMessage = 'Request failed') => {
   if (!error) return fallbackMessage;
-  
-  // Standardize browser-thrown network errors (e.g. from fetch when blocked/offline)
+
   const message = String(error.message || error || fallbackMessage);
-  
+
   if (/fetch|network|failed to connect|dns/i.test(message)) {
     return 'Network connection issue. Please check your internet or disable ad blockers.';
   }
-  
+
+  // Supabase specific error codes
+  // https://postgrest.org/en/stable/references/errors.html
   if (error.code === 'PGRST116' || /no rows returned/i.test(message)) {
     return 'Record not found.';
   }
   if (error.code === '23505' || /duplicate|unique/i.test(message)) {
     return 'Already submitted.';
   }
-  if (/row-level security policy/i.test(message)) {
-    return 'Permission denied. Please ensure your message is at least 5 characters long.';
+  if (error.code === '42P01') {
+    return 'Database configuration error (table missing).';
   }
-  if (/rate limited/i.test(message)) {
+  if (/row-level security policy/i.test(message)) {
+    return 'Permission denied. Please ensure your submission meets valid criteria.';
+  }
+  if (error.code === 'P0001' || /rate limited|too many/i.test(message)) {
     return 'Too many requests. Please try again shortly.';
   }
+  
   return message;
 };
 
@@ -82,23 +97,40 @@ const fetchWithTimeout = async (url, options, timeoutMs = DEFAULT_FETCH_TIMEOUT_
 
 export const getOrCreateUserId = () => {
   if (!isBrowser) return 'server-render';
-  const existing = localStorage.getItem(USER_ID_KEY);
-  if (existing) return existing;
-  const generated = (typeof crypto !== 'undefined' && crypto.randomUUID)
-    ? crypto.randomUUID()
-    : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
-  localStorage.setItem(USER_ID_KEY, generated);
-  return generated;
+  try {
+    const existing = localStorage.getItem(USER_ID_KEY);
+    if (existing && existing.length > 10) return existing;
+    const generated = (typeof crypto !== 'undefined' && crypto.randomUUID)
+      ? crypto.randomUUID()
+      : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    localStorage.setItem(USER_ID_KEY, generated);
+    return generated;
+  } catch {
+    return 'anonymous-user';
+  }
 };
 
 const sha256 = async (value) => {
-  if (!value || typeof crypto === 'undefined' || !crypto.subtle) {
-    return null;
+  if (!value) return null;
+
+  if (typeof crypto !== 'undefined' && crypto.subtle) {
+    try {
+      const data = new TextEncoder().encode(value);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+    } catch (e) {
+      console.warn('Crypto.subtle failed, falling back to basic hash', e);
+    }
   }
-  const data = new TextEncoder().encode(value);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+
+  // Robust deterministic fallback (FNV-1a inspired)
+  let h = 0x811c9dc5;
+  for (let i = 0; i < value.length; i++) {
+    h ^= value.charCodeAt(i);
+    h += (h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24);
+  }
+  return `f-${(h >>> 0).toString(16)}`;
 };
 
 let ipifyDisabled = false;
@@ -127,9 +159,13 @@ const fetchIpAddress = async () => {
 };
 
 export const getIpHash = async () => {
+  if (sessionIpHash) return sessionIpHash;
+
   const ip = await fetchIpAddress();
   if (!ip) return null;
-  return sha256(ip);
+  
+  sessionIpHash = await sha256(ip);
+  return sessionIpHash;
 };
 
 export const enforceClientRateLimit = (action, windowMs = 10000) => {
@@ -179,30 +215,38 @@ export const getToolRatingStats = async (toolSlug) => {
     return { avgRating: 0, totalVotes: 0, distribution: [0, 0, 0, 0, 0] };
   }
 
-  const tool = await getToolBySlug(toolSlug);
-  if (!tool) {
+  try {
+    const tool = await getToolBySlug(toolSlug);
+    if (!tool) {
+      return { avgRating: 0, totalVotes: 0, distribution: [0, 0, 0, 0, 0] };
+    }
+
+    const { data, error } = await supabase
+      .from('tool_stats')
+      .select('avg_rating, total_votes, rating_1, rating_2, rating_3, rating_4, rating_5')
+      .eq('tool_id', tool.id)
+      .maybeSingle();
+
+    if (error) {
+      // Silently return default values instead of throwing
+      return { avgRating: 0, totalVotes: 0, distribution: [0, 0, 0, 0, 0] };
+    }
+
+    return {
+      avgRating: data?.avg_rating || 0,
+      totalVotes: data?.total_votes || 0,
+      distribution: [
+        data?.rating_1 || 0,
+        data?.rating_2 || 0,
+        data?.rating_3 || 0,
+        data?.rating_4 || 0,
+        data?.rating_5 || 0,
+      ],
+    };
+  } catch {
+    // Return default values on any error
     return { avgRating: 0, totalVotes: 0, distribution: [0, 0, 0, 0, 0] };
   }
-
-  const { data, error } = await supabase
-    .from('tool_stats')
-    .select('avg_rating, total_votes, rating_1, rating_2, rating_3, rating_4, rating_5')
-    .eq('tool_id', tool.id)
-    .maybeSingle();
-
-  if (error) throw new Error(formatSupabaseError(error, 'Unable to load tool ratings.'));
-
-  return {
-    avgRating: data?.avg_rating || 0,
-    totalVotes: data?.total_votes || 0,
-    distribution: [
-      data?.rating_1 || 0,
-      data?.rating_2 || 0,
-      data?.rating_3 || 0,
-      data?.rating_4 || 0,
-      data?.rating_5 || 0,
-    ],
-  };
 };
 
 export const submitToolRating = async ({ toolSlug, rating }) => {
@@ -284,21 +328,29 @@ export const getOverallRating = async () => {
     // Fallback to direct view query when endpoint is unavailable.
   }
 
-  const { data, error } = await supabase
-    .from('overall_tool_rating')
-    .select('avg_rating, total_votes')
-    .maybeSingle();
+  try {
+    const { data, error } = await supabase
+      .from('overall_tool_rating')
+      .select('avg_rating, total_votes')
+      .maybeSingle();
 
-  if (error) throw new Error(formatSupabaseError(error, 'Unable to load overall rating.'));
+    if (error) {
+      // Silently return default values instead of throwing
+      return { avgRating: 0, totalVotes: 0 };
+    }
 
-  if (!data) {
+    if (!data) {
+      return { avgRating: 0, totalVotes: 0 };
+    }
+
+    return {
+      avgRating: data.avg_rating || 0,
+      totalVotes: data.total_votes || 0,
+    };
+  } catch {
+    // Return default values on any error
     return { avgRating: 0, totalVotes: 0 };
   }
-
-  return {
-    avgRating: data.avg_rating || 0,
-    totalVotes: data.total_votes || 0,
-  };
 };
 
 export const getPublicSeoMetrics = async ({ forceRefresh = false } = {}) => {
@@ -315,26 +367,31 @@ export const getPublicSeoMetrics = async ({ forceRefresh = false } = {}) => {
 
   const url = getSupabaseFunctionUrl('public-metrics');
   if (!url) {
-    throw new Error('Public metrics endpoint is unavailable.');
+    return null;
   }
 
-  const response = await fetchWithTimeout(url, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
-      Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-    },
-  });
+  try {
+    const response = await fetchWithTimeout(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+      },
+    });
 
-  const payload = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    throw new Error(payload.error || 'Public metrics request failed.');
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      return null;
+    }
+
+    const metrics = payload?.metrics || null;
+    setStoredJson(PUBLIC_METRICS_CACHE_KEY, { ts: Date.now(), value: metrics });
+    return metrics;
+  } catch {
+    // Silently fail - the caller will use fallback
+    return null;
   }
-
-  const metrics = payload?.metrics || null;
-  setStoredJson(PUBLIC_METRICS_CACHE_KEY, { ts: Date.now(), value: metrics });
-  return metrics;
 };
 
 export const getApprovedTestimonials = async ({ toolSlug = null, page = 1, pageSize = DEFAULT_PAGE_SIZE } = {}) => {

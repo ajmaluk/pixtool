@@ -134,11 +134,11 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="navbar">
-        <Link to="/" className="navbar-logo" title="PixTool Home - Professional Private Productivity Suite" aria-label="PixTool Home">
+      <nav className="navbar" role="navigation" aria-label="Main Navigation">
+        <Link id="nav-logo" to="/" className="navbar-logo" title="PixTool Home - Professional Private Productivity Suite" aria-label="PixTool Home">
           <img 
-            src="/logo-32.png"
-            srcSet="/logo-32.png 32w, /logo-56.png 56w, /logo.webp 128w"
+            src="/logo.webp"
+            srcSet="/logo.webp 32w, /logo.webp 56w, /logo.webp 128w"
             sizes="32px"
             alt="PixTool - Secure Private Browser Hub" 
             className="navbar-logo-img navbar-logo-icon" 
@@ -152,18 +152,19 @@ export default function Navbar() {
         </Link>
 
         <div className="navbar-links">
-          <NavLink to="/" className="navbar-link" end>Home</NavLink>
-          <NavLink to="/pdf-tools" className="navbar-link">PDF</NavLink>
-          <NavLink to="/image-tools" className="navbar-link">Image</NavLink>
-          <NavLink to="/utility-tools" className="navbar-link">Utility</NavLink>
-          <NavLink to="/ai-tools" className="navbar-link">AI</NavLink>
-          <NavLink to="/math-tools" className="navbar-link">Math</NavLink>
-          <NavLink to="/productivity-tools" className="navbar-link">
+          <NavLink id="nav-link-home" to="/" className="navbar-link" end>Home</NavLink>
+          <NavLink id="nav-link-pdf" to="/pdf-tools" className="navbar-link">PDF</NavLink>
+          <NavLink id="nav-link-image" to="/image-tools" className="navbar-link">Image</NavLink>
+          <NavLink id="nav-link-utility" to="/utility-tools" className="navbar-link">Utility</NavLink>
+          <NavLink id="nav-link-ai" to="/ai-tools" className="navbar-link">AI</NavLink>
+          <NavLink id="nav-link-math" to="/math-tools" className="navbar-link">Math</NavLink>
+          <NavLink id="nav-link-productivity" to="/productivity-tools" className="navbar-link">
             Productivity
           </NavLink>
           
           <div className="nav-dropdown" ref={moreRef}>
             <button 
+              id="nav-btn-more"
               className={`nav-dropdown-trigger ${isMoreActive ? 'nav-more-active' : ''}`}
               onClick={() => setShowMore(!showMore)}
               aria-haspopup="true"

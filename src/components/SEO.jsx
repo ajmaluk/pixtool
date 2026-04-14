@@ -120,17 +120,17 @@ const getRouteSection = (path) => {
     }) || null
 }
 
-const getDefaultBreadcrumbs = ({ path, section, title, toolTitle }) => {
+const getDefaultBreadcrumbs = ({ path, section, title, toolTitle, siteUrl }) => {
     if (path === '/') return []
 
-    const crumbs = [{ name: 'Home', item: '/' }]
+    const crumbs = [{ name: 'Home', item: siteUrl || '/' }]
     if (section) {
-        crumbs.push({ name: section.name, item: section.path })
+        crumbs.push({ name: section.name, item: `${siteUrl}${section.path}` })
     }
 
     if (path !== section?.path) {
         const finalLabel = toolTitle || title || humanizePathSegment(path.split('/').filter(Boolean).at(-1) || 'Overview')
-        crumbs.push({ name: finalLabel, item: path })
+        crumbs.push({ name: finalLabel, item: `${siteUrl}${path}` })
     }
 
     return crumbs
@@ -244,7 +244,8 @@ export default function SEO({
     lastModified = null,
     screenshot = null,
     imageAlt = null,
-    imageTitle = null
+    imageTitle = null,
+    includeFaqSchema = true
 }) {
     const siteUrl = SITE_URL
     const siteName = SITE_NAME
@@ -346,6 +347,22 @@ export default function SEO({
         }
     }, [isToolPath, toolDataFromMap?.id, path, shouldNoIndex])
 
+    const resolvedReadingTime = useMemo(() => {
+        if (readingTime) return readingTime
+        if (type !== 'article') return null
+        
+        // Calibrate reading time based on description and title length if no body provided
+        // Average person reads ~225 wpm.
+        const totalText = `${resolvedTitle} ${resolvedDescription} ${articleTags?.join(' ') || ''}`
+        const words = totalText.split(/\s+/).length
+        const baseMinutes = Math.max(1, Math.ceil(words / 225))
+        
+        // If it's a tool page with how-to steps, it's usually at least a 3-minute read
+        if (resolvedToolSteps?.length > 0) return Math.max(baseMinutes, 3)
+        
+        return baseMinutes
+    }, [readingTime, type, resolvedTitle, resolvedDescription, articleTags, resolvedToolSteps])
+
     // Enhanced keywords based on page type and tool
     const enhancedKeywords = useMemo(() => {
         const routeKeywords = routeDefaults.keywords
@@ -366,6 +383,16 @@ export default function SEO({
             'browser-based productivity suite',
         ]).join(', ')
     }, [keywords, routeDefaults.keywords, resolvedToolName, resolvedDescription, resolvedToolSteps, toolDataFromMap])
+
+    const resolvedBreadcrumbs = useMemo(() => {
+        const baseCrumbs = breadcrumbs || getDefaultBreadcrumbs({ path: cleanPath, section: routeDefaults.section, title: resolvedTitle, toolTitle: resolvedToolName, siteUrl })
+        
+        // Ensure all breadcrumb items have absolute URLs
+        return baseCrumbs.map(crumb => ({
+            ...crumb,
+            item: crumb.item.startsWith('http') ? crumb.item : `${siteUrl}${crumb.item.startsWith('/') ? '' : '/'}${crumb.item}`
+        }))
+    }, [breadcrumbs, cleanPath, routeDefaults.section, resolvedTitle, resolvedToolName, siteUrl])
 
     // Generate JSON-LD schemas
     const schemas = useMemo(() => {
@@ -481,8 +508,8 @@ export default function SEO({
                 "description": resolvedDescription,
                 "url": fullUrl,
                 "image": ogImage,
-                "applicationCategory": (path.includes('/pdf') || path.includes('/utility')) ? "BusinessApplication" : "UtilitiesApplication",
-                "operatingSystem": "All (Modern Web Browser)",
+                "applicationCategory": "BrowserApplication",
+                "operatingSystem": "Any",
                 "isAccessibleForFree": true,
                 "browserRequirements": "Requires JavaScript",
                 "featureList": toolDataFromMap?.benefits || [],
@@ -533,18 +560,11 @@ export default function SEO({
         }
 
         // BreadcrumbList
-        const breadcrumbList = Array.isArray(breadcrumbs) ? [...breadcrumbs] : getDefaultBreadcrumbs({
-            path: cleanPath,
-            section: routeDefaults.section,
-            title: resolvedTitle,
-            toolTitle: resolvedToolName,
-        })
-
-        if (breadcrumbList.length > 0) {
+        if (resolvedBreadcrumbs.length > 0) {
             globalSchemas.push({
                 "@context": "https://schema.org",
                 "@type": "BreadcrumbList",
-                "itemListElement": breadcrumbList.map((crumb, idx) => ({
+                "itemListElement": resolvedBreadcrumbs.map((crumb, idx) => ({
                     "@type": "ListItem",
                     "position": idx + 1,
                     "name": crumb.name,
@@ -582,6 +602,36 @@ export default function SEO({
             })
         }
 
+        // Add FAQPage schema if faqs are provided
+        if (includeFaqSchema && faqs && Array.isArray(faqs) && faqs.length > 0) {
+            globalSchemas.push({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": faqs.map(faq => ({
+                    "@type": "Question",
+                    "name": faq.question,
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": faq.answer
+                    }
+                }))
+            })
+        } else if (includeFaqSchema && toolDataFromMap?.faqs && Array.isArray(toolDataFromMap.faqs)) {
+            // Fallback to faqs from tool data map if not provided as prop
+            globalSchemas.push({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": toolDataFromMap.faqs.map(faq => ({
+                    "@type": "Question",
+                    "name": faq.question,
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": faq.answer
+                    }
+                }))
+            })
+        }
+
         // ImageObject
         const finalScreenshot = screenshot ? (screenshot.startsWith('http') ? screenshot : `${siteUrl}${screenshot}`) : (path !== '/' ? `${siteUrl}${defaultScreenshot}` : null)
         if (finalScreenshot) {
@@ -592,6 +642,26 @@ export default function SEO({
                 "name": resolvedImageTitle,
                 "caption": dynamicImageAlt
             })
+        }
+
+        // FAQPage schema for FAQ sections
+        if (faqs && Array.isArray(faqs) && faqs.length > 0) {
+            const faqEntities = faqs.map(faq => ({
+                "@type": "Question",
+                "name": faq.q || faq.question || faq.name || '',
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": faq.a || faq.answer || faq.text || ''
+                }
+            })).filter(faq => faq.name && faq.acceptedAnswer.text)
+
+            if (faqEntities.length > 0) {
+                globalSchemas.push({
+                    "@context": "https://schema.org",
+                    "@type": "FAQPage",
+                    "mainEntity": faqEntities
+                })
+            }
         }
 
         // LocalBusiness schema (added to homepage only to avoid duplication)
@@ -720,7 +790,7 @@ export default function SEO({
         }
 
         return schemasToInject
-    }, [resolvedTitle, resolvedDescription, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, articleSection, articleTags, readingTime, breadcrumbs, faqs, resolvedToolName, resolvedToolSteps, type, lastModified, screenshot, resolvedImageTitle, brandTitle, defaultScreenshot, dynamicImageAlt, isToolPath, liveRatings, routeDefaults.section, cleanPath])
+    }, [resolvedTitle, resolvedDescription, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, articleSection, articleTags, readingTime, breadcrumbs, faqs, resolvedToolName, resolvedToolSteps, type, lastModified, screenshot, resolvedImageTitle, brandTitle, defaultScreenshot, dynamicImageAlt, isToolPath, liveRatings, routeDefaults.section, cleanPath, toolDataFromMap])
 
     useEffect(() => {
         document.title = brandTitle
@@ -779,24 +849,28 @@ export default function SEO({
         updateMeta('twitter:creator', '@ajmal_uk_')
         updateMeta('twitter:domain', 'pixtool.in')
 
-        // Article specific meta tags for blog posts
         if (type === 'article' && articlePublishedTime) {
             updateMeta('article:published_time', articlePublishedTime, 'property')
             updateMeta('article:modified_time', lastModified || articlePublishedTime, 'property')
-            updateMeta('article:author', articleAuthor || 'UTHAKKAN', 'property')
-            if (articleSection) {
-                updateMeta('article:section', articleSection, 'property')
-            }
+            updateMeta('article:author', articleAuthor || 'PixTool Team', 'property')
+            if (articleSection) updateMeta('article:section', articleSection, 'property')
+            
+            // Handle multiple article tags
             document.querySelectorAll('meta[property="article:tag"]').forEach(node => node.remove())
-            if (articleTags && Array.isArray(articleTags)) {
-                articleTags.forEach((tag) => {
+            if (articleTags) {
+                const tags = Array.isArray(articleTags) ? articleTags : String(articleTags).split(',')
+                tags.forEach(tag => {
                     const tagMeta = document.createElement('meta')
                     tagMeta.setAttribute('property', 'article:tag')
-                    tagMeta.setAttribute('content', tag)
+                    tagMeta.setAttribute('content', tag.trim())
                     document.head.appendChild(tagMeta)
                 })
             }
         } else {
+            removeMeta('article:published_time', 'property')
+            removeMeta('article:modified_time', 'property')
+            removeMeta('article:author', 'property')
+            removeMeta('article:section', 'property')
             document.querySelectorAll('meta[property="article:tag"]').forEach(node => node.remove())
         }
 
@@ -809,7 +883,7 @@ export default function SEO({
         // Additional meta tags for better indexing
         updateMeta('google', 'nositelinkssearchbox')
 
-        // Debug freshness markers for verifying schema rating recency.
+        // Debug freshness markers
         if (liveRatingMeta.toolFetchedAt) {
             updateMeta('pixtool:tool-rating-fetched-at', liveRatingMeta.toolFetchedAt)
         } else {
@@ -822,9 +896,8 @@ export default function SEO({
             removeMeta('pixtool:overall-rating-fetched-at')
         }
 
-        // Canonical Link
+        // Canonical & Language Alternates
         let canonical = document.querySelector('link[rel="canonical"]')
-        // Language Alternates (hreflang)
         let alternateEn = document.querySelector('link[hreflang="en"]')
         let alternateDefault = document.querySelector('link[hreflang="x-default"]')
 

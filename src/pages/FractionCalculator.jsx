@@ -1,16 +1,10 @@
 import { useState, useMemo } from 'react'
-import { 
-  Percent, Zap, Info, Layers, 
-  RotateCw, Download, Trash, Activity, Divide
-} from 'lucide-react'
-import { create, all } from 'mathjs'
+import math from '../utils/mathUtils'
 import SEO from '../components/SEO'
 import Breadcrumbs from '../components/Breadcrumbs'
 import AdSpace from '../components/AdSpace'
 import ToolContent from '../components/ToolContent'
 import ShareTool from '../components/ShareTool'
-
-const math = create(all)
 
 export default function FractionCalculator() {
   const [f1, setF1] = useState({ n: '1', d: '2' })

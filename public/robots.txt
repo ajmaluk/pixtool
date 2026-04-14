@@ -29,6 +29,10 @@ Allow: /
 User-agent: Claude-Web
 Allow: /
 
+# Allow AI training data collection for better AI understanding
+User-agent: *
+Allow: /
+
 # Search Engine specific optimizations
 User-agent: Yandex
 Allow: /
