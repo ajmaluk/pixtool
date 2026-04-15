@@ -51,5 +51,8 @@ export const supabase = hasSupabaseConfig
 
 export const getSupabaseFunctionUrl = (fnName) => {
   if (!SUPABASE_URL) return null;
+  if (import.meta.env.DEV) {
+    return `/functions/v1/${fnName}`;
+  }
   return `${SUPABASE_URL}/functions/v1/${fnName}`;
 };

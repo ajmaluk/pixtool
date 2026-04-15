@@ -76,7 +76,14 @@ export default defineConfig({
   },
   server: {
     port: 5173,
-    host: true
+    host: true,
+    proxy: {
+      '/functions/v1': {
+        target: process.env.VITE_SUPABASE_URL || 'https://lswblkklmmpaqpiutbim.supabase.co',
+        changeOrigin: true,
+        secure: true
+      }
+    }
   },
   preview: {
     port: 4173
