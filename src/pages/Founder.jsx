@@ -24,7 +24,7 @@ export default function Founder() {
                 "@id": `${SITE_URL}/#organization`
             },
             "sameAs": [
-                "https://github.com/ajmal-uk",
+                "https://github.com/ajmaluk",
                 "https://linkedin.com/in/ajmaluk",
                 "https://x.com/ajmal_uk_"
             ],
@@ -80,7 +80,7 @@ export default function Founder() {
                                 <a href="https://linkedin.com/in/ajmaluk" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: '1rem 2.5rem', borderRadius: '16px' }}>
                                     <Linkedin size={20} style={{ marginRight: '10px' }} /> LinkedIn
                                 </a>
-                                <a href="https://github.com/ajmal-uk" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ padding: '1rem 2.5rem', borderRadius: '16px' }}>
+                                <a href="https://github.com/ajmaluk" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ padding: '1rem 2.5rem', borderRadius: '16px' }}>
                                     <Github size={20} style={{ marginRight: '10px' }} /> GitHub
                                 </a>
                             </div>

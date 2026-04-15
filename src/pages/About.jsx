@@ -44,7 +44,7 @@ export default function About() {
                     "jobTitle": "Founder & Lead Engineer",
                     "sameAs": [
                         "https://linkedin.com/in/ajmaluk",
-                        "https://github.com/ajmal-uk"
+                        "https://github.com/ajmaluk"
                     ]
                 },
                 "address": {
@@ -87,12 +87,12 @@ export default function About() {
                         transition={{ delay: 0.3, duration: 0.5 }}
                         style={{ marginBottom: '2.5rem' }}
                     >
-                        <img 
-                            src={uthakkanLogo} 
-                            alt="Uthakkan - Professional Software Development Studio" 
+                        <img
+                            src={uthakkanLogo}
+                            alt="Uthakkan - Professional Software Development Studio"
                             width="200"
                             height="100"
-                            style={{ height: '100px', width: 'auto', objectFit: 'contain' }} 
+                            style={{ height: '100px', width: 'auto', objectFit: 'contain' }}
                             onError={(e) => { e.target.src = 'https://ui-avatars.com/api/?name=Uthakkan&background=3b82f6&color=fff'; }}
                         />
                     </motion.div>
@@ -190,14 +190,14 @@ export default function About() {
                     >
                         <div className="profile-flex">
                             <div className="profile-image-wrapper">
-                                <img 
-                                    src="/ajmaluk.png" 
-                                    alt="Ajmal U K - Founder of PixTool & Lead Engineer at Uthakkan" 
-                                    className="profile-image" 
+                                <img
+                                    src="/ajmaluk.png"
+                                    alt="Ajmal U K - Founder of PixTool & Lead Engineer at Uthakkan"
+                                    className="profile-image"
                                     width="200"
                                     height="200"
                                     loading="lazy"
-                                    style={{ transform: 'rotate(2deg)', objectFit: 'cover' }} 
+                                    style={{ transform: 'rotate(2deg)', objectFit: 'cover' }}
                                     onError={(e) => { e.target.src = 'https://ui-avatars.com/api/?name=Ajmal+UK&background=3b82f6&color=fff'; }}
                                 />
                             </div>
@@ -209,7 +209,7 @@ export default function About() {
                                 </p>
                                 <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
                                     <a href="https://linkedin.com/in/ajmaluk" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">LinkedIn</a>
-                                    <a href="https://github.com/ajmal-uk" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">GitHub</a>
+                                    <a href="https://github.com/ajmaluk" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">GitHub</a>
                                 </div>
                             </div>
                         </div>

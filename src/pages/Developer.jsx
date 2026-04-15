@@ -18,7 +18,7 @@ export default function Developer() {
                 "@id": `${SITE_URL}/#organization`
             },
             "sameAs": [
-                "https://github.com/ajmal-uk",
+                "https://github.com/ajmaluk",
                 "https://linkedin.com/in/ajmaluk",
                 "https://x.com/ajmal_uk_"
             ]
@@ -64,7 +64,7 @@ export default function Developer() {
                             </p>
 
                             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '2.5rem' }}>
-                                <a href="https://github.com/ajmal-uk" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ gap: '10px' }}>
+                                <a href="https://github.com/ajmaluk" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ gap: '10px' }}>
                                     <Github size={20} /> GitHub
                                 </a>
                                 <a href="https://linkedin.com/in/ajmaluk" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ gap: '10px' }}>

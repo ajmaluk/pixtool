@@ -92,7 +92,7 @@ export default function Contact() {
                   <div>
                     <h2 style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)' }}>Social</h2>
                     <div style={{ display: 'flex', gap: '10px', marginTop: '6px' }}>
-                      <a href="https://github.com/ajmal-uk" className="icon-btn" style={{ width: '32px', height: '32px' }}><Github size={16} /></a>
+                      <a href="https://github.com/ajmaluk" className="icon-btn" style={{ width: '32px', height: '32px' }}><Github size={16} /></a>
                       <a href="https://linkedin.com/in/ajmaluk" className="icon-btn" style={{ width: '32px', height: '32px' }}><Linkedin size={16} /></a>
                       <a href="https://x.com/ajmal_uk_" className="icon-btn" style={{ width: '32px', height: '32px' }}><Twitter size={16} /></a>
                     </div>
@@ -191,7 +191,7 @@ export default function Contact() {
             <p style={{ color: 'var(--text-muted)', marginBottom: '3rem', maxWidth: '600px', margin: '0 auto 3rem' }}>
               Explore our most popular sections and find the tools you need instantly.
             </p>
-            
+
             <div className="page-grid">
               {[
                 { to: '/pdf-tools', icon: <FileText size={24} />, label: 'PDF Tools', desc: 'Merge, Split, Compress & Convert', color: 'rgba(59, 130, 246, 0.1)', textColor: '#3b82f6' },
@@ -199,13 +199,13 @@ export default function Contact() {
                 { to: '/testimonials', icon: <Star size={24} />, label: 'Testimonials', desc: 'Read what our users are saying', color: 'rgba(245, 158, 11, 0.1)', textColor: '#f59e0b' },
                 { to: '/temp-mail', icon: <Zap size={24} />, label: 'Temp Mail', desc: 'Secure disposable email inbox', color: 'rgba(16, 185, 129, 0.1)', textColor: '#10b981' },
               ].map((item, idx) => (
-                <Link 
+                <Link
                   key={idx}
-                  to={item.to} 
-                  className="info-card" 
-                  style={{ 
-                    padding: '2rem', 
-                    textDecoration: 'none', 
+                  to={item.to}
+                  className="info-card"
+                  style={{
+                    padding: '2rem',
+                    textDecoration: 'none',
                     textAlign: 'left',
                     display: 'flex',
                     flexDirection: 'column',
@@ -213,11 +213,11 @@ export default function Contact() {
                     transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
                   }}
                 >
-                  <div style={{ 
-                    background: item.color, 
-                    color: item.textColor, 
-                    width: '52px', 
-                    height: '52px', 
+                  <div style={{
+                    background: item.color,
+                    color: item.textColor,
+                    width: '52px',
+                    height: '52px',
                     borderRadius: '14px',
                     display: 'flex',
                     alignItems: 'center',

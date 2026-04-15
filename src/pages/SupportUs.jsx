@@ -40,7 +40,7 @@ export default function SupportUs() {
                             <Star size={40} style={{ color: 'var(--accent-primary)', marginBottom: '1.5rem', margin: '0 auto 1.5rem' }} />
                             <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1rem' }}>GitHub Sponsor</h3>
                             <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Join our community of monthly supporters and get exclusive updates.</p>
-                            <a href="https://github.com/sponsors/ajmal-uk" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ width: '100%' }}>Become a Sponsor</a>
+                            <a href="https://github.com/sponsors/ajmaluk" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ width: '100%' }}>Become a Sponsor</a>
                         </div>
 
                         {/* Business */}
