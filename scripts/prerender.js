@@ -95,7 +95,7 @@ async function prerender() {
       } else {
         const ext = path.extname(filePath);
         let contentType = 'text/html';
-        if (ext === '.js') contentType = 'text/javascript';
+        if (ext === '.js' || ext === '.jsx') contentType = 'application/javascript';
         if (ext === '.css') contentType = 'text/css';
         if (ext === '.json') contentType = 'application/json';
         if (ext === '.xml') contentType = 'application/xml';
@@ -145,7 +145,10 @@ async function prerender() {
         // Wait for React to execute and SEO meta tags to be injected
         await new Promise(r => setTimeout(r, 2000));
 
-        const content = await page.content();
+        let content = await page.content();
+
+        // Replace the script src with the built main script
+        content = content.replace('/src/main.jsx', '/assets/index-CJA7XKzz.js');
 
         // Save as pretty URL (route/index.html)
         const outputDir = path.join(DIST_DIR, route === '/' ? '' : route);
