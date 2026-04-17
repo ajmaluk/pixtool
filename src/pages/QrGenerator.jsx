@@ -368,7 +368,7 @@ export default function QrGenerator() {
               
               <div style={{ position: 'relative', zIndex: 1 }}>
                 <h2 style={{ fontSize: '2.25rem', fontWeight: 900, letterSpacing: '-0.03em', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
-                  The Professional Successor to <span style={{ color: 'var(--accent-primary)' }}>Uitly</span>
+                  Professional Privacy-First <span style={{ color: 'var(--accent-primary)' }}>QR Suite</span>
                 </h2>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem', marginTop: '3rem' }}>
                   <div>
@@ -392,9 +392,9 @@ export default function QrGenerator() {
                 </div>
 
                 <div style={{ marginTop: '4rem', padding: '2rem', background: 'var(--bg-primary)', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
-                  <h3 style={{ fontSize: '1.1rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', color: 'var(--accent-primary)' }}>Note for Uitly Users</h3>
+                  <h3 style={{ fontSize: '1.1rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', color: 'var(--accent-primary)' }}>Engineered for Reliability</h3>
                   <p style={{ color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6 }}>
-                    If you were a regular user of the original Uitly suite, you'll find everything you loved here—but faster and more secure. We've optimized the encoding algorithms to ensure sub-second scan times even on legacy hardware.
+                    PixTool was built to offer the fastest and most secure QR generation experience in 2026. We've optimized the encoding algorithms to ensure sub-second scan times even on legacy hardware, with 100% local processing.
                   </p>
                 </div>
               </div>

@@ -602,34 +602,38 @@ export default function SEO({
             })
         }
 
-        // Add FAQPage schema if faqs are provided
-        if (includeFaqSchema && faqs && Array.isArray(faqs) && faqs.length > 0) {
-            globalSchemas.push({
-                "@context": "https://schema.org",
-                "@type": "FAQPage",
-                "mainEntity": faqs.map(faq => ({
-                    "@type": "Question",
-                    "name": faq.question,
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": faq.answer
-                    }
-                }))
-            })
-        } else if (includeFaqSchema && toolDataFromMap?.faqs && Array.isArray(toolDataFromMap.faqs)) {
-            // Fallback to faqs from tool data map if not provided as prop
-            globalSchemas.push({
-                "@context": "https://schema.org",
-                "@type": "FAQPage",
-                "mainEntity": toolDataFromMap.faqs.map(faq => ({
-                    "@type": "Question",
-                    "name": faq.question,
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": faq.answer
-                    }
-                }))
-            })
+        // Consolidated FAQPage schema (resolves duplicates and missing field errors)
+        // Check if an FAQPage already exists in the provided schema prop to avoid duplicates
+        const manualSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+        const hasManualFaq = manualSchemas.some(s => s && (s["@type"] === 'FAQPage' || s.type === 'FAQPage'));
+
+        if (includeFaqSchema && !hasManualFaq) {
+            const rawFaqs = (faqs && Array.isArray(faqs) && faqs.length > 0) 
+                ? faqs 
+                : (toolDataFromMap?.faqs && Array.isArray(toolDataFromMap.faqs) ? toolDataFromMap.faqs : []);
+
+            const faqEntities = rawFaqs
+                .map(faq => {
+                    const question = faq.q || faq.question || faq.name || '';
+                    const answer = faq.a || faq.answer || faq.text || '';
+                    return {
+                        "@type": "Question",
+                        "name": question,
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": answer
+                        }
+                    };
+                })
+                .filter(faq => faq.name && faq.acceptedAnswer.text);
+
+            if (faqEntities.length > 0) {
+                globalSchemas.push({
+                    "@context": "https://schema.org",
+                    "@type": "FAQPage",
+                    "mainEntity": faqEntities
+                });
+            }
         }
 
         // ImageObject
@@ -642,26 +646,6 @@ export default function SEO({
                 "name": resolvedImageTitle,
                 "caption": dynamicImageAlt
             })
-        }
-
-        // FAQPage schema for FAQ sections
-        if (faqs && Array.isArray(faqs) && faqs.length > 0) {
-            const faqEntities = faqs.map(faq => ({
-                "@type": "Question",
-                "name": faq.q || faq.question || faq.name || '',
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": faq.a || faq.answer || faq.text || ''
-                }
-            })).filter(faq => faq.name && faq.acceptedAnswer.text)
-
-            if (faqEntities.length > 0) {
-                globalSchemas.push({
-                    "@context": "https://schema.org",
-                    "@type": "FAQPage",
-                    "mainEntity": faqEntities
-                })
-            }
         }
 
         // LocalBusiness schema (added to homepage only to avoid duplication)
@@ -782,14 +766,31 @@ export default function SEO({
             globalSchemas.push(hubSoftwareSchema)
         }
 
-        // Combine into schemasToInject
+        // Combine and final deduplication
         let schemasToInject = [...globalSchemas]
         if (schema) {
             const extraSchemas = Array.isArray(schema) ? schema : [schema]
             schemasToInject = schemasToInject.concat(extraSchemas)
         }
 
-        return schemasToInject
+        // Final safety deduplication for critical types (like FAQPage)
+        const finalSchemas = []
+        const typesSeen = new Set()
+        
+        for (const s of schemasToInject) {
+            if (!s) continue
+            const sType = s["@type"] || s.type
+            if (sType === 'FAQPage') {
+                if (!typesSeen.has('FAQPage')) {
+                    finalSchemas.push(s)
+                    typesSeen.add('FAQPage')
+                }
+            } else {
+                finalSchemas.push(s)
+            }
+        }
+
+        return finalSchemas
     }, [resolvedTitle, resolvedDescription, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, articleSection, articleTags, readingTime, breadcrumbs, faqs, resolvedToolName, resolvedToolSteps, type, lastModified, screenshot, resolvedImageTitle, brandTitle, defaultScreenshot, dynamicImageAlt, isToolPath, liveRatings, routeDefaults.section, cleanPath, toolDataFromMap])
 
     useEffect(() => {

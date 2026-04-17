@@ -69,7 +69,7 @@ export default function ScientificCalculator() {
   return (
     <>
       <SEO 
-        title="Expert Scientific Calculator - High-Precision Algebraic Engine | PixTool"
+        title="Scientific Calculator | High-Precision Math Engine"
         description="Professional-grade scientific calculator online. Solve complex equations with trigonometric, logarithmic, and hyperbolic functions. High-precision and 100% private."
         path="/math-tools/scientific-calculator"
         toolName="Scientific Calculator"

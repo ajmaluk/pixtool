@@ -1370,7 +1370,7 @@ export const posts = [
         `
   },
   {
-    slug: "building-toolpix-journey",
+    slug: "building-pixtool-journey",
     title: "🚀 Building PixTool: SEO, Product & Privacy Lessons from Year One",
     excerpt: "A behind-the-scenes look at the product decisions, SEO wins, and mistakes that shaped a browser-first utility suite.",
     date: "Mar 22, 2026",

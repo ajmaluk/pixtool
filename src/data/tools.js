@@ -156,7 +156,7 @@ export const IMAGE_TOOLS = [
     imageAlt: 'PixTool Image Compressor - Professional LSI-based Size Optimization',
     imageTitle: 'Compress Images for Web without Quality Loss',
     seo: {
-      title: "Best Free Image Compressor 2026 | Reduce Photo Size No Quality Loss",
+      title: "Free Image Compressor 2026 | Reduce Photo Size",
       keywords: "image compressor, compress image, reduce image size, photo compressor, online image compression, image size reducer, webp compressor, jpeg compressor",
       description: "Compress images with high-fidelity algorithms. Reduce file size by up to 90% while maintaining 4K clarity. 100% private browser processing."
     },
@@ -1242,8 +1242,8 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Secure Temp Mail 2026 - Instant Anonymous Disposable Email',
     imageTitle: 'Best Disposable Email Service Online',
     seo: {
-      title: "Free Temp Mail with Password — Secure Disposable Email",
-      keywords: "temp mail, temporary email, disposable email, free temp mail, temp mail generator, fake email, throwaway email, temp email, temporary email address, 10 minute mail, temp mail reddit, mailinator alternative, temp mail org, fake email generator, anonymous email, temp mail with password, temporary mail with password, temp mail for otp, fake email and password, temp mail login, one time email, fake email address, toolpix, pixtool temp mail, tempmail, temp mail otp login, temp mail and password for login",
+      title: "Temp Mail | Free Secure Disposable Email & Password",
+      keywords: "temp mail, temporary email, disposable email, free temp mail, temp mail generator, fake email, throwaway email, temp email, temporary email address, 10 minute mail, anonymous email, temp mail with password, temporary mail with password, temp mail for otp, fake email and password, temp mail login, one time email, fake email address, pixtool temp mail, tempmail, temp mail otp login, temp mail and password for login",
       description: "Get instant free temporary email with auto-generated passwords for signups, verifications, and OTP codes. 100% private disposable email with auto-refresh inbox."
     },
     benefits: [
@@ -1301,8 +1301,8 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool 10 Minute Mail - Secure Expiring Inbox for Rapid Verification',
     imageTitle: 'Best 10 Minute Disposable Email Service Online',
     seo: {
-      title: "10 Minute Mail with Password — Anonymous Temporary Email",
-      keywords: "10 minute mail, 10 min mail, 10minutemail, 10min mail, temporary email 10 minutes, 10 min temp mail, free 10 minute mail, disposable email 10 minutes, burner email 10 min, temp mail auto expiring, 10 minute mail alternative, 10minutemail one, temp mail reddit, temp mail org, free temp mail 10 min, 10 minute mail with password, 10 minute mail and password, temp mail password",
+      title: "10 Minute Mail | Anonymous Temporary Email & Password",
+      keywords: "10 minute mail, 10 min mail, 10minutemail, 10min mail, temporary email 10 minutes, 10 min temp mail, free 10 minute mail, disposable email 10 minutes, burner email 10 min, temp mail auto expiring, 10 minute mail alternative, 10minutemail one, free temp mail 10 min, 10 minute mail with password, 10 minute mail and password, temp mail password",
       description: "Get a free 10-minute disposable email instantly with an auto-generated password. Perfect for quick verification and signups. Auto-expires for complete privacy."
     },
     benefits: [
@@ -1409,7 +1409,7 @@ export const UTILITY_TOOLS = [
     readNext: [
       { title: 'Why Secure Temp Mail is Essential for Business', path: '/blog/secure-temp-mail-business-privacy-2026' },
       { title: 'The Ultimate Guide to Browser-Based Privacy', path: '/blog/browser-based-privacy' },
-      { title: 'Building the Future of Digital Privacy', path: '/blog/building-toolpix-journey' }
+      { title: 'Building the Future of Digital Privacy', path: '/blog/building-pixtool-journey' }
     ]
   },
   {
@@ -1622,7 +1622,7 @@ export const UTILITY_TOOLS = [
     ],
     readNext: [
       { title: 'The Future of AI-Powered Productivity 2026', path: '/blog/future-of-ai-productivity' },
-      { title: 'Building PixTool: The Journey So Far', path: '/blog/building-toolpix-journey' },
+      { title: 'Building PixTool: The Journey So Far', path: '/blog/building-pixtool-journey' },
       { title: 'Why Privacy-First Tools are the New Gold Standard', path: '/blog/browser-based-privacy' }
     ]
   },
@@ -1691,12 +1691,12 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Professional QR Generator - Custom Branded QR Codes',
     imageTitle: 'Create High-Res QR Codes Online Free',
     seo: {
-      title: "QR Code Generator — Free QR Maker [No Expiry]",
-      keywords: "qr code generator, qr code generator free, create qr code, generate qr code, free qr code, qr code maker, qr code creator, qr generator, make qr code, online qr code generator, qr code generator no watermark, qr code generator unlimited, custom qr code, qr code for wifi, qr code for menu, qr code generator svg, free qr code online, uitly, uitly alternative, uitly.com, free qr code generator no expiry",
+      title: "QR Code Generator | Free QR Maker (No Expiry)",
+      keywords: "qr code generator, qr code generator free, create qr code, generate qr code, free qr code, qr code maker, qr code creator, qr generator, make qr code, online qr code generator, qr code generator no watermark, qr code generator unlimited, custom qr code, qr code for wifi, qr code for menu, qr code generator svg, free qr code online, free qr code generator no expiry",
       description: "Create free QR codes instantly. No signup, no watermarks, no expiration. Generate QR codes for URLs, WiFi, text, vCard and more. 100% private browser-based generator."
     },
     benefits: [
-      "Official professional successor to Uitly — All your favourite features, now 100% free.",
+      "Privacy-First Professional Performance — Secure, browser-native processing.",
       "100% Customisable Text, Website URLs, and Contact Cards with real-time preview.",
       "Finely Adjustable QR Data Density and Error Correction Levels (L, M, Q, H).",
       "Ultra-High-Resolution PNG and Vector SVG Ready Downloads for professional print.",
@@ -1735,7 +1735,7 @@ export const UTILITY_TOOLS = [
     relatedTools: [
       { name: 'The Ultimate Guide to Static vs Dynamic QR Codes 2026', path: '/blog/qr-static-vs-dynamic-2026' },
       { name: 'Advanced QR Code Marketing Strategies 2026', path: '/blog/advanced-qr-code-marketing-2026' },
-      { name: 'Building PixTool: Our 2026 Journey', path: '/blog/building-toolpix-journey' }
+      { name: 'Building PixTool: Our 2026 Journey', path: '/blog/building-pixtool-journey' }
     ],
     readNext: [
       { title: 'Designing High-Impact QR Codes', path: '/blog/high-impact-qr-codes' },
@@ -1794,7 +1794,7 @@ export const UTILITY_TOOLS = [
     ],
     readNext: [
       { title: 'The Ultimate Guide to Browser-Based Privacy', path: '/blog/browser-based-privacy' },
-      { title: 'Building the Future of Digital Privacy', path: '/blog/building-toolpix-journey' }
+      { title: 'Building the Future of Digital Privacy', path: '/blog/building-pixtool-journey' }
     ]
   },
   { 
@@ -1959,7 +1959,7 @@ export const UTILITY_TOOLS = [
     ],
     readNext: [
       { title: 'Modern Developer Workflows 2026', path: '/blog/modern-developer-workflows' },
-      { title: 'Building PixTool: The Journey So Far', path: '/blog/building-toolpix-journey' },
+      { title: 'Building PixTool: The Journey So Far', path: '/blog/building-pixtool-journey' },
       { title: 'Why Privacy-First Tools are the New Gold Standard', path: '/blog/browser-based-privacy' }
     ]
   },
@@ -2072,7 +2072,7 @@ export const UTILITY_TOOLS = [
     readNext: [
       { title: 'The Ultimate Guide to Browser-Based Privacy', path: '/blog/browser-based-privacy' },
       { title: 'Modern Developer Workflows 2026', path: '/blog/modern-developer-workflows' },
-      { title: 'Building PixTool: Our 2026 Journey', path: '/blog/building-toolpix-journey' }
+      { title: 'Building PixTool: Our 2026 Journey', path: '/blog/building-pixtool-journey' }
     ]
   },
   {
@@ -2128,7 +2128,7 @@ export const UTILITY_TOOLS = [
     readNext: [
       { title: 'The Ultimate Guide to Browser-Based Privacy', path: '/blog/browser-based-privacy' },
       { title: 'How to Manage Passwords Securely in 2026', path: '/blog/password-management-security' },
-      { title: 'Building PixTool: Our 2026 Journey', path: '/blog/building-toolpix-journey' }
+      { title: 'Building PixTool: Our 2026 Journey', path: '/blog/building-pixtool-journey' }
     ]
   }
 ];
@@ -2328,7 +2328,7 @@ export const AI_TOOLS = [
       { name: 'PDF Merger', path: '/pdf-tools/merge' }
     ],
     readNext: [
-      { title: 'Building the Future of Digital Privacy', path: '/blog/building-toolpix-journey' },
+      { title: 'Building the Future of Digital Privacy', path: '/blog/building-pixtool-journey' },
       { title: 'Modern Career Strategies 2026', path: '/blog/modern-career-strategies' }
     ]
   },
@@ -2819,7 +2819,7 @@ export const AI_TOOLS = [
     ],
     readNext: [
       { title: 'The Ultimate Guide to Browser-Based Privacy', path: '/blog/browser-based-privacy' },
-      { title: 'Building the Future of Digital Privacy', path: '/blog/building-toolpix-journey' }
+      { title: 'Building the Future of Digital Privacy', path: '/blog/building-pixtool-journey' }
     ]
   }
 ];
@@ -2871,7 +2871,7 @@ export const MATH_TOOLS = [
     ],
     readNext: [
       { title: 'The Ultimate Guide to Browser-Based Privacy', path: '/blog/browser-based-privacy' },
-      { title: 'Building the Future of Digital Privacy', path: '/blog/building-toolpix-journey' }
+      { title: 'Building the Future of Digital Privacy', path: '/blog/building-pixtool-journey' }
     ]
   },
   {
@@ -3329,7 +3329,7 @@ export const PRODUCTIVITY_TOOLS = [
     imageAlt: 'PixTool Todo List - Private Task Management with Local Persistence',
     imageTitle: 'Free Online Todo List with Zero-Transmission Privacy',
     seo: {
-      title: "Free Online Todo List | Private Task Management with Priorities - PixTool",
+      title: "Todo List — Private Online Task Management",
       keywords: "todo list online 2026, free task manager browser, private todo list no signup, secure task tracking online, best online todo list with categories",
       description: "Manage your daily tasks with our professional, private-first Todo List. Featuring priority levels, category grouping, and instant local persistence. Your tasks never leave your browser, ensuring absolute privacy for your workflow."
     },
@@ -3383,7 +3383,7 @@ export const PRODUCTIVITY_TOOLS = [
     imageAlt: 'PixTool Kanban Board - Visual Workflow Management Studio',
     imageTitle: 'Free Online Kanban Board Pro with Drag-and-Drop',
     seo: {
-      title: "Free Online Kanban Board | Visual Project Management Tool - PixTool",
+      title: "Kanban Board — Visual Project Management Tool",
       keywords: "kanban board online 2026, free trello alternative online, visual project tracking browser, secure kanban board no signup, drag and drop project management free",
       description: "Organize your projects visually with our professional Kanban Board. Drag and drop tasks between columns, track progress in real-time, and maintain 100% data privacy with our local-first architecture."
     },
@@ -3435,7 +3435,7 @@ export const PRODUCTIVITY_TOOLS = [
     imageAlt: 'PixTool Notepad - Secure Markdown Editor with Syntax Highlighting',
     imageTitle: 'Free Online Notepad with Auto-save and Markdown Pro',
     seo: {
-      title: "Online Notepad Pro | Free Markdown Editor with Auto-save - PixTool",
+      title: "NotePad Pro — Private Online Markdown Editor",
       keywords: "online notepad 2026, free markdown editor browser, secure notepad no signup, best online text editor auto save, private notes browser free",
       description: "Write, edit, and format notes instantly with our professional Markdown-enabled Notepad. Featuring real-time auto-save, live word counts, and instant text exports. 100% private and browser-based."
     },
@@ -3487,7 +3487,7 @@ export const PRODUCTIVITY_TOOLS = [
     imageAlt: 'PixTool Drawing Board - Digital Sketching Studio',
     imageTitle: 'Free Online Drawing Tool for Sketching',
     seo: {
-      title: "Free Online Drawing Board | Digital Sketching & Canvas Tool - PixTool",
+      title: "Drawing Board — Online Digital Sketchpad",
       keywords: "drawing board online 2026, free digital canvas browser, online sketching tool no signup, best browser drawing app free, secure digital sketchpad",
       description: "Sketch, wireframe, and design with our professional Drawing Board. A full-featured digital canvas with multiple brushes, shapes, and color options. Export your creations as high-resolution images instantly."
     },
@@ -3540,7 +3540,7 @@ export const PRODUCTIVITY_TOOLS = [
     imageAlt: 'PixTool File Manager - Local Storage Explorer and Organization Studio',
     imageTitle: 'Private Local File Manager Online - No Upload Required',
     seo: {
-      title: "Free Online File Manager | Secure Browser Storage Vault - PixTool",
+      title: "File Vault — Secure Local File Manager Online",
       keywords: "file manager online 2026, browser file explorer free, indexeddb storage manager, private file vault browser, secure local file storage online",
       description: "Manage your virtual files securely in your browser with our IndexedDB-powered File Vault. Store, organize, and preview files locally with zero server interaction. High-performance privacy for your digital assets."
     },
@@ -3592,7 +3592,7 @@ export const PRODUCTIVITY_TOOLS = [
     imageAlt: 'PixTool Pomodoro Timer - Scientific Deep Work Focus Tool',
     imageTitle: 'Free Online Pomodoro Timer with Custom Intervals',
     seo: {
-      title: "Free Pomodoro Timer | Online Focus & Productivity Clock - PixTool",
+      title: "Focus Clock — Online Pomodoro Timer",
       keywords: "pomodoro timer online 2026, free focus clock browser, best online study timer, productivity timer no ads, secure pomodoro clock online",
       description: "Boost your productivity with our aesthetic Pomodoro Timer. Designed for deep work and scientific rest intervals. Custom intervals, notification alerts, and progress tracking for professional focus sessions."
     },
@@ -3645,7 +3645,7 @@ export const PRODUCTIVITY_TOOLS = [
     imageAlt: 'PixTool Sticky Notes - Digital Brainstorming Board with Grouping Logic',
     imageTitle: 'Online Virtual Sticky Notes Board for Teams',
     seo: {
-      title: "Online Sticky Notes Board | Free Virtual Brainstorming - PixTool",
+      title: "Sticky Notes — Online Virtual Brainstorming",
       keywords: "sticky notes online 2026, virtual post-it notes free, online brainstorming board, secure sticky notes no signup, best digital notice board",
       description: "Brainstorm and organize ideas with our interactive Sticky Notes Board. Create color-coded virtual notes, move them freely, and save your board state locally. The perfect digital whiteboard for quick reminders."
     },
@@ -3697,7 +3697,7 @@ export const PRODUCTIVITY_TOOLS = [
     imageAlt: 'PixTool Habit Tracker - Daily Routine Manager with Streak Logic',
     imageTitle: 'Free Online Habit Tracker Pro for Consistency',
     seo: {
-      title: "Free Online Habit Tracker | Daily Routine & Streak Manager - PixTool",
+      title: "Habit Tracker — Online Routine & Streak Manager",
       keywords: "habit tracker online 2026, free routine manager browser, daily habit streak tracker, best habit tracker no signup, secure goal tracking online",
       description: "Build consistency and track your daily routines with our professional Habit Tracker. Monitor your streaks, visualize your progress, and maintain your privacy with 100% local data storage."
     },
@@ -3756,7 +3756,7 @@ export const ALL_TOOLS_MAP = {
     title: 'Utility Suite', 
     icon: Sliders,
     seo: {
-      title: "Free Utility Tools | Temp Mail, Typing Test & QR Generator - PixTool",
+      title: "Utility Suite — Free Productivity & Privacy Tools",
       description: "Handy free online utility tools for daily productivity and security. Generate temp mail online, take a free typing test online, or use our custom QR code generator.",
       keywords: "free typing test online, temp mail online, qr code generator, online tools free, disposable email, utility tools"
     },
@@ -3798,9 +3798,9 @@ export const ALL_TOOLS_MAP = {
     title: 'AI Suite', 
     icon: MessageSquare,
     seo: {
-      title: "Premium Free AI Productivity Suite - Specialized Intelligence | PixTool",
+      title: "AI Suite — Premium Specialized Intelligence Tools",
       description: "🚀 Access 14+ specialized free AI tools: writing, coding, marketing, and storytelling. Powered by high-authority reasoning and privacy-first processing. No account needed.",
-      keywords: "free ai tools, ai productivity suite, ai writing assistant, ai content generator, toolpix ai, ai resume generator, ai coding assistant, best free ai tools 2026, privacy-first ai, ai tools online, no signup ai tools"
+      keywords: "free ai tools, ai productivity suite, ai writing assistant, ai content generator, pixtool ai, ai resume generator, ai coding assistant, best free ai tools 2026, privacy-first ai, ai tools online, no signup ai tools"
     },
     editorial: {
       title: "PixTool Intelligence Studio",
@@ -3847,7 +3847,7 @@ export const ALL_TOOLS_MAP = {
     title: 'Math Suite', 
     icon: Calculator,
     seo: {
-      title: "Premium Mathematical Suite - Advanced Visualization & Logic | PixTool",
+      title: "Math Suite — Advanced Scientific & Logic Tools",
       description: "Access a world-class suite of 10 specialized mathematical tools. From Scientific Calculation to Graph Visualization and Matrix Solving, engineered for elite performance.",
       keywords: "scientific calculator online, graph visualizer free, matrix solver linear algebra, financial calculator online, unit circle trigonometry, free math tools online 2026"
     },
@@ -3895,7 +3895,7 @@ export const ALL_TOOLS_MAP = {
     title: 'Productivity Suite', 
     icon: Zap,
     seo: {
-      title: "Free Online Productivity Tools | Todo, Kanban, Notepad & More - PixTool",
+      title: "Productivity Suite — Online Planning & Tracking",
       description: "Professional browser-based productivity suite. Manage tasks with our Todo List, track projects with a Kanban Board, edit Markdown in our Notepad, or sketch ideas on the Drawing Board—100% private and secure.",
       keywords: "productivity tools online 2026, free todo list browser, kanban board free, online notepad markdown, secure file manager, browser-based drawing board"
     },
@@ -3929,7 +3929,7 @@ export const ALL_TOOLS_MAP = {
       ],
       alternativeTo: ["Trello", "Notion", "Todoist", "Excalidraw"],
       readNext: [
-        { title: '📂 Building a Private Digital Workspace in 2026', path: '/blog/building-toolpix-journey' },
+        { title: '📂 Building a Private Digital Workspace in 2026', path: '/blog/building-pixtool-journey' },
         { title: '🧠 The Science of Deep Work and Focus Intervals', path: '/blog/future-of-ai-productivity' },
         { title: '🔒 Why Local-First is the Future of Professional Software', path: '/blog/browser-based-privacy' }
       ],

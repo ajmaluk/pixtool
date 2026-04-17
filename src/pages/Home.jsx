@@ -126,9 +126,9 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="PixTool — 125+ Best Free Online AI & Privacy Tools [2026] | Toolpix"
-        description="Free online tools: AI writing, PDF editor, image resizer, QR code generator, temp mail, 10 minute mail & more. 100% browser-based privacy—no uploads. The best uitly alternative. Trusted by 50,000+ professionals."
-        keywords="pixtool, toolpix, best free online tools, free ai tools, privacy-first productivity suite, browser based tools, offline productivity software, free image editor online, free qr generator, temp mail generator, 10 minute mail, fake email generator, uitly, uitly alternative, 10minutemail, temp mail, disposable email, free qr code generator, qr code generator no watermark, web utilities"
+        title="PixTool — 121+ Free Private AI, Image & PDF Tools"
+        description="Access 125+ free online tools for AI writing, PDF editing, image processing, and more. 100% private, browser-based, and no uploads required. Trusted by professionals."
+        keywords="pixtool, free online tools, privacy-first tools, browser based tools, free ai tools, pdf editor online, image resizer, qr code generator, temp mail, 10 minute mail, secure utilities"
         path="/"
         schema={homeSchema}
         faqs={homeFaqs}
