@@ -79,7 +79,7 @@ export default defineConfig({
     host: true,
     proxy: {
       '/functions/v1': {
-        target: process.env.VITE_SUPABASE_URL || 'https://lswblkklmmpaqpiutbim.supabase.co',
+        target: (typeof process !== 'undefined' && process.env && process.env.VITE_SUPABASE_URL) ? process.env.VITE_SUPABASE_URL : 'https://lswblkklmmpaqpiutbim.supabase.co', // eslint-disable-line no-undef
         changeOrigin: true,
         secure: true
       }
