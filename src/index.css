@@ -30,15 +30,14 @@ img[src] {
   opacity: 1;
 }
   --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
+  --bg-secondary: #f3f4f6;
   --bg-card: #ffffff;
-  --bg-card-hover: #ffffff;
-  --bg-glass: rgba(255, 255, 255, 0.75);
-  --bg-glass-dark: rgba(15, 23, 42, 0.85);
+  --bg-card-hover: #f9fafb;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --bg-glass-dark: rgba(15, 23, 42, 0.90);
 
-  --accent-primary: #4f46e5; /* Tailwind Indigo 600 - WCAG AA compliant on White */
-  /* Deep Indigo */
-  --accent-secondary: #818cf8;
+  --accent-primary: #0ea5e9; /* Vibrant cerulean */
+  --accent-secondary: #38bdf8;
   --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
   --accent-gradient-soft: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
   --accent-glow: rgba(99, 102, 241, 0.12);
@@ -130,8 +129,8 @@ button:focus-visible {
   --text-primary: #f8fafc;
   --text-secondary: #cbd5e1;
   --text-muted: #cbd5e1;
-  --accent-primary: #818cf8; /* Lighten for contrast on dark backgrounds */
-  --accent-glow: rgba(129, 140, 248, 0.12);
+  --accent-primary: #38bdf8; /* Lighter cerulean for dark mode */
+  --accent-glow: rgba(56, 189, 248, 0.12);
   --shadow-premium: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
