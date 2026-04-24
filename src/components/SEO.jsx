@@ -791,7 +791,7 @@ export default function SEO({
         }
 
         return finalSchemas
-    }, [resolvedTitle, resolvedDescription, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, articleSection, articleTags, readingTime, breadcrumbs, faqs, resolvedToolName, resolvedToolSteps, type, lastModified, screenshot, resolvedImageTitle, brandTitle, defaultScreenshot, dynamicImageAlt, isToolPath, liveRatings, routeDefaults.section, cleanPath, toolDataFromMap])
+    }, [resolvedTitle, resolvedDescription, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, articleSection, articleTags, readingTime, faqs, resolvedToolName, resolvedToolSteps, type, lastModified, screenshot, resolvedImageTitle, brandTitle, defaultScreenshot, dynamicImageAlt, isToolPath, liveRatings, routeDefaults.section, toolDataFromMap, includeFaqSchema, resolvedBreadcrumbs])
 
     useEffect(() => {
         document.title = brandTitle

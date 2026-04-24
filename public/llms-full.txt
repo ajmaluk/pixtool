@@ -1,7 +1,7 @@
 # PixTool Full AI Tool Index
 
 This file is auto-generated from source data.
-Generated At: 2026-04-15T05:08:39.927Z
+Generated At: 2026-04-23T18:56:43.762Z
 Canonical URL: https://www.pixtool.in
 Sitemap: https://www.pixtool.in/sitemap.xml
 
@@ -305,7 +305,7 @@ Total Blog Posts: 27
   - URL: https://www.pixtool.in/blog/privacy-first-why-pixtool-safest-studio
   - Excerpt: See how zero-upload tools and WebAssembly keep files on your device. Learn why local processing is the future of private productivity.
 - 🚀 Building PixTool: SEO, Product & Privacy Lessons from Year One
-  - URL: https://www.pixtool.in/blog/building-toolpix-journey
+  - URL: https://www.pixtool.in/blog/building-pixtool-journey
   - Excerpt: A behind-the-scenes look at the product decisions, SEO wins, and mistakes that shaped a browser-first utility suite.
 - 🤖 Top 5 AI Trends Reshaping Productivity in 2026
   - URL: https://www.pixtool.in/blog/top-ai-trends-2026-productivity-tools
