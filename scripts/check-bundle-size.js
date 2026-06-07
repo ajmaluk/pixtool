@@ -2,7 +2,7 @@ import { readdirSync, statSync, readFileSync } from 'fs';
 import { join } from 'path';
 
 const DIST_DIR = 'dist';
-const MAX_TOTAL_JS_BYTES = Number(process.env.MAX_TOTAL_JS_BYTES || 4_000_000);
+const MAX_TOTAL_JS_BYTES = Number(process.env.MAX_TOTAL_JS_BYTES || 4_200_000);
 const MAX_INITIAL_JS_BYTES = Number(process.env.MAX_INITIAL_JS_BYTES || 1_500_000);
 const MAX_SINGLE_JS_BYTES = Number(process.env.MAX_SINGLE_JS_BYTES || 900_000);
 

@@ -45,7 +45,7 @@ export const IMAGE_TOOLS = [
       { title: 'Social Media Assets', description: 'Quickly scale photos for Instagram, Facebook, and X while maintaining clarity.' },
       { title: 'Print Media', description: 'Increase dimensions for posters and banners with high-fidelity pixel retention.' }
     ],
-    faq: [
+    faqs: [
       { q: 'Is my data safe when resizing images?', a: 'Yes. PixTool uses 100% browser-native processing. Your images never leave your computer and are never uploaded to any server.' },
       { q: 'Does resizing reduce image quality?', a: 'PixTool uses high-fidelity interpolation algorithms to ensure your images remain sharp and professional even after scaling.' },
       { q: 'Can I resize multiple images at once?', a: 'Absolutely. Use our bulk processing feature to select and resize entire collections in seconds.' }
@@ -85,7 +85,7 @@ export const IMAGE_TOOLS = [
       { title: 'Blog Headers', description: 'Crop landscape photos to wide aspect ratios for hero sections.' },
       { title: 'Marketing Material', description: 'Focus on specific products by removing distracting background elements.' }
     ],
-    faq: [
+    faqs: [
       { q: 'Will cropping my image make it blurry?', a: 'No, cropping only removes the outer edges of the image. The internal resolution of the selected area remains original.' },
       { q: 'Can I crop images for Instagram specifically?', a: 'Yes, we have built-in presets for 1:1, 4:5, and 16:9 to match all Instagram format requirements.' },
       { q: 'Are my photos uploaded during cropping?', a: 'Never. All cropping operations happen locally in your browser for 100% privacy.' }
@@ -134,7 +134,7 @@ export const IMAGE_TOOLS = [
       { title: 'Mirror Photography', description: 'Create stunning mirror effects by flipping landscape shots horizontally.' },
       { title: 'Batch Alignment', description: 'Quickly correct entire galleries of scanned photos before official archival.' }
     ],
-    faq: [
+    faqs: [
       { q: 'Does rotating reduce quality?', a: 'No. Our rotation engine uses lossless transformation logic that preserves every original pixel.' },
       { q: 'Can I rotate by 45 degrees?', a: 'This tool is optimized for 90-degree increments and flipping. For custom angles, use our Resize tool.' },
       { q: 'Is it safe for private photos?', a: 'Yes. Rotation happens entirely in your local browser sandbox.' }
@@ -183,7 +183,7 @@ export const IMAGE_TOOLS = [
       { title: 'Email Attachments', description: 'Reduce bulky photo attachments to fit within strict enterprise email size limits.' },
       { title: 'Cloud Storage Savings', description: 'Shrink your personal photo library before uploading to Google Drive or iCloud.' }
     ],
-    faq: [
+    faqs: [
       { q: 'What is the best format for web compression?', a: 'WebP offers the best balance of compression and visual quality for modern web development, often reducing file sizes by 30-50% more than JPEG.' },
       { q: 'Does it work with 4K or large-scale images?', a: 'Yes! Our high-performance engine can handle large-scale photographic assets and high-resolution 4K images with ease, provided your device has sufficient local RAM.' },
       { q: 'Are my photos ever uploaded to a server?', a: 'Strictly no. Compression is 100% on-device. We utilize local browser CPU power to process your files, ensuring your sensitive data never leaves your computer.' },
@@ -235,7 +235,7 @@ export const IMAGE_TOOLS = [
       { title: 'Design Compatibility', description: 'Convert PNG graphics to JPEG when transparency is not required to save disk space.' },
       { title: 'Graphic Interchange', description: 'Generate high-fidelity animated GIF variants from sequential image sets.' }
     ],
-    faq: [
+    faqs: [
       { q: 'Does it support transparency?', a: 'Yes. Converting PNG to WebP or GIF preserves all alpha channels and transparency.' },
       { q: 'Can I convert to ICO?', a: 'We focus on primary web formats. For icons, we recommend our specialized Favicon tool.' },
       { q: 'Is there a file size limit?', a: 'Only your browser RAM limits you—most users can convert 100MB+ images easily.' }
@@ -284,7 +284,7 @@ export const IMAGE_TOOLS = [
       { title: 'Corporate Branding', description: 'Ensure your internal training slides and marketing graphics are correctly branded.' },
       { title: 'Sample Delivery', description: 'Mark high-res concepts as "DRAFT" or "SAMPLE" before final client payment.' }
     ],
-    faq: [
+    faqs: [
       { q: 'Can the watermark be removed?', a: 'Our engine burns the text into the image pixels, making it difficult to remove without artifacting.' },
       { q: 'Do you support logo watermarks?', a: 'Currently, the Asset Shield is optimized for high-authority text branding. Logo support is in R&D.' },
       { q: 'Can I watermark bulk images?', a: 'Coming soon! Our next update includes a batch-shield protocol for entire folders.' }
@@ -333,7 +333,7 @@ export const IMAGE_TOOLS = [
       { title: 'Symmetry Design', description: 'Create perfectly symmetrical patterns for website backgrounds and social banners.' },
       { title: 'Content Variance', description: 'Create "Fresh" social posts by subtly mirroring older assets to catch the eye.' }
     ],
-    faq: [
+    faqs: [
       { q: 'Difference between rotate and flip?', a: 'Rotation spins the canvas; Flipping mirrors the pixels across a central axis (X or Y).' },
       { q: 'Is it safe?', a: '100%. Flipping happens locally in your RAM. No persistent files are created on our servers.' },
       { q: 'Can I flip RAW files?', a: 'We support standard web formats (JPG, PNG, WebP). For RAW, convert to JPG first.' }
@@ -382,7 +382,7 @@ export const IMAGE_TOOLS = [
       { title: 'Vintage Mockups', description: 'Aged digital photos for retro-designed websites and social media campaigns.' },
       { title: 'Minimalist Branding', description: 'Strip color distraction from corporate headshots for a clean, uniform "Meet the Team" page.' }
     ],
-    faq: [
+    faqs: [
       { q: 'Can I go back to color?', a: 'Our engine is non-destructive—simply refresh or re-upload to start over with the original.' },
       { q: 'Is Sepia just brown?', a: 'It is a scientifically balanced warm-tint filtration that mimics historical darkroom toning.' },
       { q: 'Will it work on transparent PNGs?', a: 'Yes. The monochrome effect applies only to colored pixels, preserving the transparency.' }

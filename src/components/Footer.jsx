@@ -152,7 +152,7 @@ export default function Footer() {
             <span className="dot-separator">•</span>
             <span>Zero-Upload Technology</span>
             <span className="dot-separator">•</span>
-            <span style={{ 
+            <span              style={{ 
               fontSize: '0.75rem', 
               background: 'var(--bg-secondary)', 
               padding: '2px 8px', 
@@ -160,7 +160,7 @@ export default function Footer() {
               border: '1px solid var(--border-color)',
               fontWeight: 800,
               color: 'var(--accent-primary)'
-            }}>v1.1.0</span>
+            }}>v2.1.0</span>
           </div>
         </div>
       </div>

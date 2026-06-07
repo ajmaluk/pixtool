@@ -7,7 +7,8 @@
     "dev": "vite",
     "generate:llms": "node scripts/generate-llms.js",
     "generate:sitemap": "node scripts/generate-sitemap.js",
-    "prebuild": "npm run generate:llms && npm run generate:sitemap",
+    "generate:rss": "node scripts/generate-rss.js",
+    "prebuild": "npm run generate:llms && npm run generate:sitemap && npm run generate:rss",
     "build": "vite build",
     "prerender": "node scripts/prerender.js",
     "validate": "node scripts/validate-build.js",
@@ -20,7 +21,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "screenshots": "node scripts/generate-screenshots.js",
-    "postbuild": "if [ -n \"$SKIP_PRERENDER\" ] || [ -n \"$CF_PAGES\" ] || [ -n \"$NETLIFY\" ]; then echo \"Skipping prerender (CI/Environment check)\"; else node scripts/prerender.js; fi"
+    "postbuild": "if [ -n \"$SKIP_PRERENDER\" ]; then echo \"Skipping prerender (SKIP_PRERENDER enabled)\"; else node scripts/prerender.js; fi"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.99.3",

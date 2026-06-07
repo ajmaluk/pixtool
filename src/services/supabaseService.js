@@ -16,6 +16,16 @@ const DEFAULT_FETCH_TIMEOUT_MS = 12000;
 
 const isBrowser = typeof window !== 'undefined';
 
+const normalizeToolSlug = (toolSlug) => {
+  if (!toolSlug) return '';
+  return String(toolSlug)
+    .trim()
+    .replace(/[?#].*$/g, '')
+    .replace(/^\/+/g, '')
+    .replace(/\/{2,}/g, '/')
+    .toLowerCase();
+};
+
 const b64url = (input) =>
   btoa(input).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
 
@@ -183,16 +193,23 @@ export const enforceClientRateLimit = (action, windowMs = 10000) => {
 const getRatedToolsSet = () => new Set(getStoredJson(RATED_TOOLS_KEY, []));
 
 const markToolAsRated = (toolSlug) => {
+  const normalized = normalizeToolSlug(toolSlug);
+  if (!normalized) return;
   const rated = getRatedToolsSet();
-  rated.add(toolSlug);
+  rated.add(normalized);
   setStoredJson(RATED_TOOLS_KEY, Array.from(rated));
+  if (isBrowser) {
+    localStorage.setItem('pix_has_rated_any', 'true');
+  }
 };
 
-export const hasRatedToolLocally = (toolSlug) => getRatedToolsSet().has(toolSlug);
+export const hasRatedToolLocally = (toolSlug) => getRatedToolsSet().has(normalizeToolSlug(toolSlug));
 
 const getToolBySlug = async (toolSlug) => {
+  const normalized = normalizeToolSlug(toolSlug);
+  if (!normalized) return null;
   const now = Date.now();
-  const cached = toolSlugCache.get(toolSlug);
+  const cached = toolSlugCache.get(normalized);
   if (cached && now - cached.ts < TOOL_CACHE_TTL_MS) {
     return cached.value;
   }
@@ -200,23 +217,24 @@ const getToolBySlug = async (toolSlug) => {
   const { data, error } = await supabase
     .from('tools')
     .select('id, name, slug')
-    .eq('slug', toolSlug)
+    .eq('slug', normalized)
     .maybeSingle();
 
   if (error) throw new Error(formatSupabaseError(error, 'Unable to resolve tool.'));
   if (!data) return null;
 
-  toolSlugCache.set(toolSlug, { ts: now, value: data });
+  toolSlugCache.set(normalized, { ts: now, value: data });
   return data;
 };
 
 export const getToolRatingStats = async (toolSlug) => {
-  if (!hasSupabaseConfig || !toolSlug) {
+  const normalized = normalizeToolSlug(toolSlug);
+  if (!hasSupabaseConfig || !normalized) {
     return { avgRating: 0, totalVotes: 0, distribution: [0, 0, 0, 0, 0] };
   }
 
   try {
-    const tool = await getToolBySlug(toolSlug);
+    const tool = await getToolBySlug(normalized);
     if (!tool) {
       return { avgRating: 0, totalVotes: 0, distribution: [0, 0, 0, 0, 0] };
     }
@@ -250,17 +268,18 @@ export const getToolRatingStats = async (toolSlug) => {
 };
 
 export const submitToolRating = async ({ toolSlug, rating }) => {
+  const normalized = normalizeToolSlug(toolSlug);
   if (!hasSupabaseConfig) {
     throw new Error('Supabase is not configured.');
   }
-  if (!toolSlug) {
+  if (!normalized) {
     throw new Error('Tool is required.');
   }
   if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
     throw new Error('Rating must be between 1 and 5.');
   }
 
-  enforceClientRateLimit(`rating:${toolSlug}`, 10000);
+  enforceClientRateLimit(`rating:${normalized}`, 10000);
 
   const userId = getOrCreateUserId();
   const ipHash = await getIpHash();
@@ -268,7 +287,7 @@ export const submitToolRating = async ({ toolSlug, rating }) => {
   let rpcData, rpcError;
   try {
     const { data, error } = await supabase.rpc('submit_tool_rating', {
-      p_tool_slug: toolSlug,
+      p_tool_slug: normalized,
       p_user_id: userId,
       p_ip_hash: ipHash,
       p_rating: rating,
@@ -282,15 +301,15 @@ export const submitToolRating = async ({ toolSlug, rating }) => {
   }
 
   if (rpcError) {
-    const normalized = formatSupabaseError(rpcError, 'Unable to submit rating.');
-    if (/already/i.test(normalized)) {
-      markToolAsRated(toolSlug);
+    const normalizedError = formatSupabaseError(rpcError, 'Unable to submit rating.');
+    if (/already/i.test(normalizedError)) {
+      markToolAsRated(normalized);
       throw new Error('You already rated this tool.');
     }
-    if (/rate limited|too many/i.test(normalized)) {
+    if (/rate limited|too many/i.test(normalizedError)) {
       throw new Error('Rate limited. Try again in a few seconds.');
     }
-    throw new Error(normalized);
+    throw new Error(normalizedError);
   }
 
   const row = Array.isArray(rpcData) ? rpcData[0] : (rpcData || null);
@@ -299,11 +318,11 @@ export const submitToolRating = async ({ toolSlug, rating }) => {
   }
 
   if (row.already_rated) {
-    markToolAsRated(toolSlug);
+    markToolAsRated(normalized);
     throw new Error('You already rated this tool.');
   }
 
-  markToolAsRated(toolSlug);
+  markToolAsRated(normalized);
   return {
     avgRating: row.avg_rating || 0,
     totalVotes: row.total_votes || 0,

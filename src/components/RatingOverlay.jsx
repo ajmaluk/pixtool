@@ -33,7 +33,8 @@ export default function RatingOverlay() {
     const handleTrigger = (event) => {
       const { toolSlug: slug } = event.detail;
       if (slug) {
-        setToolSlug(slug);
+        const normalized = String(slug).trim().replace(/[?#].*$/g, '').replace(/^\/+/g, '').replace(/\/{2,}/g, '/').toLowerCase();
+        setToolSlug(normalized);
         setIsVisible(true);
         // Reset state for new tool
         setRating(0);

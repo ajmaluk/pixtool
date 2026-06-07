@@ -9,10 +9,13 @@ const POPUP_SEEN_PREFIX = 'pix_popup_seen_';
  */
 export const useRatePopup = () => {
   const triggerRating = useCallback((toolSlug) => {
-    if (!toolSlug) return;
+    const normalized = toolSlug
+      ? String(toolSlug).trim().replace(/[?#].*$/g, '').replace(/^\/+/g, '').replace(/\/{2,}/g, '/').toLowerCase()
+      : '';
+    if (!normalized) return;
 
     // Check if already rated locally
-    if (hasRatedToolLocally(toolSlug)) {
+    if (hasRatedToolLocally(normalized)) {
       return;
     }
 
@@ -29,7 +32,7 @@ export const useRatePopup = () => {
 
     // Dispatch custom event to trigger the overlay
     const event = new CustomEvent('trigger-pix-rating', {
-      detail: { toolSlug }
+      detail: { toolSlug: normalized }
     });
     window.dispatchEvent(event);
     

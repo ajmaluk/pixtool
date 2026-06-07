@@ -61,15 +61,17 @@ const resolveImagePath = (rawPath, { allowDefault = true } = {}) => {
 };
 
 function generateSitemap() {
-  console.log('🚀 Starting sitemap generation...');
+  console.log('Starting sitemap generation...');
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>${SITE_URL}/</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="${SITE_URL}/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_URL}/" />
     <image:image>
       <image:loc>${SITE_URL}/og-image.webp</image:loc>
       <image:title>PixTool - All-in-one Free Online Productivity Suite</image:title>
@@ -78,13 +80,16 @@ function generateSitemap() {
 
   const addUrl = (relPath, priority = '0.8', freq = 'weekly', imagePath = null, imageTitle = null, imageCaption = null) => {
     const resolvedImagePath = resolveImagePath(imagePath);
+    const fullUrl = `${SITE_URL}${relPath}`;
 
     xml += `
   <url>
-    <loc>${SITE_URL}${relPath}</loc>
+    <loc>${fullUrl}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${freq}</changefreq>
-    <priority>${priority}</priority>`;
+    <priority>${priority}</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="${fullUrl}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${fullUrl}" />`;
     
     if (resolvedImagePath) {
       xml += `
@@ -150,17 +155,53 @@ function generateSitemap() {
     addUrl(`/blog/${post.slug}`, '0.7', 'monthly', post.imageWebp || post.image, post.title, post.excerpt);
   });
 
+  // Blog Tag Pages - Generate tag pages for SEO
+  const allTags = Array.from(new Set(posts.flatMap(p => p.tags || [])));
+  allTags.forEach(tag => {
+    const slugifiedTag = tag.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    addUrl(`/blog/tag/${slugifiedTag}`, '0.6', 'weekly');
+  });
+
+  // Blog Category Pages
+  const allCategories = Array.from(new Set(posts.map(p => p.category).filter(Boolean)));
+  allCategories.forEach(category => {
+    const slugifiedCategory = category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    addUrl(`/blog/category/${slugifiedCategory}`, '0.6', 'weekly');
+  });
+
   // Company & Legal & Others
   const otherPages = [
     '/about', '/founder', '/developer', '/services', '/products', 
     '/privacy-policy', '/terms-of-service', '/contact', '/faq', 
     '/refund-policy', '/cookie-policy', '/blog', '/testimonials', 
     '/documentation', '/sitemap', '/status', '/news', '/careers', '/case-studies',
-    '/support-us', '/promotions', '/hire-me', '/showcase', '/thank-you'
+    '/support-us', '/promotions', '/hire-me', '/showcase', '/thank-you',
+    '/code-diff', '/json-formatter', '/unit-converter', '/password-generator',
+    '/qr-scanner', '/qr-generator', '/typing-test',
+    '/temp-mail', '/temp-mail/10-minute-mail', '/temp-mail/change-email',
+    '/temp-mail/fake-email', '/temp-mail/disposable-email', '/temp-mail/throwaway-email',
+    '/identity-forge', '/burner-inbox', '/ghost-inbox',
+    '/fake-email', '/disposable-email', '/throwaway-email',
+    '/10-minute-mail', '/change-email',
+    '/apps/kallan-cop-privacy',
+    '/ai-tools/chat', '/ai-tools/content-generator', '/ai-tools/grammar-fixer',
+    '/ai-tools/resume-generator', '/ai-tools/coding-chat', '/ai-tools/email-writer',
+    '/ai-tools/ad-copy-generator', '/ai-tools/caption-generator', '/ai-tools/paraphraser',
+    '/ai-tools/summarizer', '/ai-tools/translator', '/ai-tools/keyword-generator',
+    '/ai-tools/hashtag-generator', '/ai-tools/story-generator',
+    '/math-tools/scientific-calculator', '/math-tools/graph-visualizer',
+    '/math-tools/matrix-solver', '/math-tools/statistics-visualizer',
+    '/math-tools/equation-solver', '/math-tools/unit-circle',
+    '/math-tools/financial-calculator', '/math-tools/number-theory',
+    '/math-tools/fraction-calculator', '/math-tools/vector-calculator',
+    '/productivity-tools/todo', '/productivity-tools/kanban',
+    '/productivity-tools/notepad', '/productivity-tools/drawing-board',
+    '/productivity-tools/file-manager', '/productivity-tools/pomodoro',
+    '/productivity-tools/sticky-notes', '/productivity-tools/habit-tracker'
   ];
 
-  otherPages.forEach(path => {
-    addUrl(path, '0.6', 'monthly');
+  otherPages.forEach(pagePath => {
+    addUrl(pagePath, '0.6', 'monthly');
   });
 
   xml += '\n</urlset>';

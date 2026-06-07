@@ -23,6 +23,16 @@ CREATE POLICY tool_stats_read_all ON tool_stats FOR SELECT USING (true);
 DROP POLICY IF EXISTS testimonials_read_approved ON testimonials;
 CREATE POLICY testimonials_read_approved ON testimonials FOR SELECT USING (approved = true);
 
+DROP POLICY IF EXISTS testimonials_insert_public ON testimonials;
+CREATE POLICY testimonials_insert_public ON testimonials
+FOR INSERT WITH CHECK (approved = false AND char_length(name) > 1 AND char_length(message) > 4);
+
+DROP POLICY IF EXISTS contacts_insert_public ON contacts;
+CREATE POLICY contacts_insert_public ON contacts
+FOR INSERT WITH CHECK (status = 'new' AND position('@' in email) > 1 AND char_length(name) > 1 AND char_length(message) > 4);
+
+DROP POLICY IF EXISTS ratings_insert_public ON ratings;
+
 -- Disallow updates/deletes explicitly (though RLS does this by default if no policy exists)
 DROP POLICY IF EXISTS tools_no_update ON tools;
 CREATE POLICY tools_no_update ON tools FOR UPDATE USING (false);

@@ -294,9 +294,13 @@ declare
   v_window_seconds int;
 begin
   v_effective_slug := lower(trim(coalesce(p_tool_slug, '')));
+  v_effective_slug := split_part(v_effective_slug, '?', 1);
+  v_effective_slug := split_part(v_effective_slug, '#', 1);
+  v_effective_slug := regexp_replace(v_effective_slug, '^/+|/+$', '', 'g');
+  v_effective_slug := regexp_replace(v_effective_slug, '/{2,}', '/', 'g');
   v_window_seconds := greatest(1, least(coalesce(p_window_seconds, 10), 300));
 
-  if v_effective_slug = '' then
+  if v_effective_slug = '' or char_length(v_effective_slug) > 120 then
     raise exception 'Tool not found';
   end if;
 
@@ -314,7 +318,13 @@ begin
   limit 1;
 
   if v_tool_id is null then
-    raise exception 'Tool not found';
+    insert into tools (name, slug)
+    values (
+      initcap(regexp_replace(replace(replace(replace(v_effective_slug, '/', ' '), '-', ' '), '_', ' '), '\\s+', ' ', 'g')),
+      v_effective_slug
+    )
+    on conflict (slug) do update set updated_at = now()
+    returning id into v_tool_id;
   end if;
 
   select created_at
@@ -340,6 +350,7 @@ begin
     values (v_tool_id, p_user_id, p_ip_hash, p_rating);
   exception
     when unique_violation then
+      perform recalc_tool_stats(v_tool_id);
       return query
       select
         ts.avg_rating,
@@ -355,6 +366,7 @@ begin
       return;
   end;
 
+  perform recalc_tool_stats(v_tool_id);
   return query
   select
     ts.avg_rating,
@@ -401,11 +413,11 @@ drop policy if exists ratings_insert_public on ratings;
 
 drop policy if exists testimonials_insert_public on testimonials;
 create policy testimonials_insert_public on testimonials
-for insert with check (char_length(name) > 1 and char_length(message) > 4);
+for insert with check (approved = false and char_length(name) > 1 and char_length(message) > 4);
 
 drop policy if exists contacts_insert_public on contacts;
 create policy contacts_insert_public on contacts
-for insert with check (position('@' in email) > 1 and char_length(name) > 1 and char_length(message) > 4);
+for insert with check (status = 'new' and position('@' in email) > 1 and char_length(name) > 1 and char_length(message) > 4);
 
 drop policy if exists rate_limits_insert_public on rate_limits;
 create policy rate_limits_insert_public on rate_limits

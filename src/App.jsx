@@ -9,7 +9,6 @@ import RatingOverlay from './components/RatingOverlay'
 import PixAiOverlay from './components/PixAiOverlay'
 import { ALL_TOOLS_MAP } from './data/tools'
 import { ConfirmProvider } from './context/ConfirmContext'
-import { useRatePopup } from './hooks/useRatePopup'
 
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home'))
@@ -195,6 +194,14 @@ class ErrorBoundary extends Component {
   }
 }
 
+// Performance: Preconnect critical origins
+const PreconnectHints = () => (
+  <>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+  </>
+)
+
 // Layout wrapper — Suspense is INSIDE the layout so Navbar/Footer stay visible
 // Feature-rich Layout with Recent Tools tracking
 const MainLayout = () => {
@@ -215,7 +222,6 @@ const MainLayout = () => {
       return []
     }
   })
-  const currentToolMeta = ALL_TOOLS_MAP[location.pathname]
 
   useEffect(() => {
     try {

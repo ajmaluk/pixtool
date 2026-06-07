@@ -1,25 +1,46 @@
 User-agent: *
 Allow: /
-Disallow: /*?q=
-Disallow: /*?search=
-Disallow: /*?tool=
 Disallow: /pix-admin/
 Disallow: /api/
+Disallow: /temp-mail/inbox/
+Disallow: /temp-mail/message/
 
-# Specialized crawlers - Allow AdSense
+# Block parameter URLs to prevent duplicate content
+Disallow: /*?q=*
+Disallow: /*?search=*
+Disallow: /*?tag=*
+Disallow: /*?category=*
+Disallow: /*?page=*
+
+# Googlebot - full access
+User-agent: Googlebot
+Allow: /
+
+# Bingbot - full access
+User-agent: Bingbot
+Allow: /
+
+# Yandex - full access
+User-agent: Yandex
+Allow: /
+
+# AdSense partner
 User-agent: Mediapartners-Google
 Allow: /
 
-# Security & Privacy - Prevent LLM/Scrapers from hitting heavy API routes
+# AI Crawlers - allow for AI search features
 User-agent: GPTBot
-Disallow: /api/
-Disallow: /pix-admin/
-
-User-agent: CCBot
+Allow: /
 Disallow: /api/
 Disallow: /pix-admin/
 
 User-agent: Google-Extended
+Allow: /
+Disallow: /api/
+Disallow: /pix-admin/
+
+User-agent: CCBot
+Allow: /
 Disallow: /api/
 Disallow: /pix-admin/
 
@@ -29,15 +50,14 @@ Allow: /
 User-agent: Claude-Web
 Allow: /
 
-# Allow AI training data collection for better AI understanding
-User-agent: *
-Allow: /
-
-# Search Engine specific optimizations
-User-agent: Yandex
-Allow: /
-
+# Social crawlers
 User-agent: FacebookBot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Twitterbot
 Allow: /
 
 Sitemap: https://www.pixtool.in/sitemap.xml

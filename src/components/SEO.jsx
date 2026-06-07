@@ -89,6 +89,25 @@ const isUsableImageValue = (value) => {
     return true
 }
 
+const normalizeScreenshotFilename = (value) => {
+    if (!value) return null
+    const raw = String(value).trim()
+    if (!raw) return null
+    const normalized = raw.replace(/\.(png|jpg|jpeg)$/i, '.webp')
+    if (normalized.startsWith('ai-')) return 'pixtool-all-in-one-productivity-suite.webp'
+    return normalized
+}
+
+const normalizeInternalImagePath = (value) => {
+    if (!value) return null
+    const raw = String(value).trim()
+    if (!raw) return null
+    const noQuery = raw.split('?')[0].split('#')[0]
+    const normalized = noQuery.replace(/\.(png|jpg|jpeg)$/i, '.webp')
+    if (normalized.includes('/screenshots/ai-')) return '/screenshots/pixtool-all-in-one-productivity-suite.webp'
+    return normalized
+}
+
 const ensureBrandSuffix = (value, siteName) => {
     const normalized = normalizeText(value)
     if (!normalized) return siteName
@@ -206,17 +225,21 @@ const getScreenshotPath = (pagePath) => {
     // Dynamic lookup from global tools map - This is the single source of truth
     const toolData = ALL_TOOLS_MAP[cleanPath]
     if (toolData && toolData.screenshot) {
-        return `/screenshots/${toolData.screenshot}`
+        const normalized = normalizeScreenshotFilename(toolData.screenshot)
+        if (normalized) {
+            return `/screenshots/${normalized}`
+        }
     }
 
-    // Fallback for category hubs or special pages
+    // Fallback for category hubs or special pages (all screenshots are webp)
     const fallbackMap = {
-        '/': 'pixtool-all-in-one-productivity-suite.png',
-        '/image-tools': 'professional-online-image-studio.png',
-        '/pdf-tools': 'secure-pdf-management-suite.png',
-        '/utility-tools': 'all-in-one-web-utility-toolbox.png',
-        '/ai-tools': 'pixtool-all-in-one-productivity-suite.png',
-        '/math-tools': 'pixtool-all-in-one-productivity-suite.png'
+        '/': 'pixtool-all-in-one-productivity-suite.webp',
+        '/image-tools': 'professional-online-image-studio.webp',
+        '/pdf-tools': 'secure-pdf-management-suite.webp',
+        '/utility-tools': 'all-in-one-web-utility-toolbox.webp',
+        '/ai-tools': 'pixtool-all-in-one-productivity-suite.webp',
+        '/math-tools': 'pixtool-all-in-one-productivity-suite.webp',
+        '/productivity-tools': 'pixtool-all-in-one-productivity-suite.webp'
     }
 
     return `/screenshots/${fallbackMap[cleanPath] || fallbackMap['/']}`
@@ -273,17 +296,24 @@ export default function SEO({
         toolDataFromMap?.status === 'coming-soon' || 
         path.startsWith('/pix-admin') || 
         path.includes('/test-') ||
-        searchQuery.includes('q={search_term_string}') || 
-        searchQuery.includes('?q=')
+        searchQuery.includes('q={search_term_string}')
 
-    const brandTitle = ensureBrandSuffix(resolvedTitle, siteName)
+const clampTitle = (str, max = 60) => {
+    const s = normalizeText(str)
+    if (!s) return s
+    if (s.length <= max) return s
+    return s.slice(0, max - 1).trimEnd() + '…'
+}
+
+    const brandTitle = clampTitle(ensureBrandSuffix(resolvedTitle, siteName), 60)
 
     const defaultScreenshot = getScreenshotPath(path)
     const baseImagePath = isUsableImageValue(image)
         ? image
         : (isUsableImageValue(screenshot) ? screenshot : defaultScreenshot)
-    const ogImage = baseImagePath.startsWith('http') ? baseImagePath : `${siteUrl}${baseImagePath.startsWith('/') ? baseImagePath : `/${baseImagePath}`}`
-    const twBaseImagePath = twitterImage || baseImagePath
+    const normalizedBaseImagePath = normalizeInternalImagePath(baseImagePath) || defaultScreenshot
+    const ogImage = normalizedBaseImagePath.startsWith('http') ? normalizedBaseImagePath : `${siteUrl}${normalizedBaseImagePath.startsWith('/') ? normalizedBaseImagePath : `/${normalizedBaseImagePath}`}`
+    const twBaseImagePath = normalizeInternalImagePath(twitterImage || baseImagePath) || normalizedBaseImagePath
     const twImage = twBaseImagePath.startsWith('http') ? twBaseImagePath : `${siteUrl}${twBaseImagePath.startsWith('/') ? twBaseImagePath : `/${twBaseImagePath}`}`
     const dynamicImageAlt = resolvedImageAlt
 
@@ -312,7 +342,7 @@ export default function SEO({
                 }
             }
 
-            const isHubPath = path === '/' || path === '/image-tools' || path === '/pdf-tools' || path === '/ai-tools' || path === '/math-tools' || path === '/utility-tools'
+            const isHubPath = path === '/' || path === '/image-tools' || path === '/pdf-tools' || path === '/ai-tools' || path === '/math-tools' || path === '/utility-tools' || path === '/productivity-tools'
             if (isHubPath) {
                 try {
                     const overallStats = await getOverallRating()
@@ -450,14 +480,10 @@ export default function SEO({
                         "https://img.youtube.com/vi/fzIhPN-gv_E/maxresdefault.jpg"
                     ],
                     "uploadDate": "2026-03-01T08:00:00+08:00",
-                    "duration": "PT0M58S",
+                    "duration": "PT58S",
                     "contentUrl": "https://youtube.com/shorts/fzIhPN-gv_E",
                     "embedUrl": "https://www.youtube.com/embed/fzIhPN-gv_E",
-                    "interactionStatistic": {
-                        "@type": "InteractionCounter",
-                        "interactionType": { "@type": "WatchAction" },
-                        "userInteractionCount": 12500
-                    },
+
                     "regionsAllowed": "ALL"
                 },
                 {
@@ -466,7 +492,15 @@ export default function SEO({
                     "@id": `${siteUrl}/#website`,
                     "name": siteName,
                     "url": siteUrl,
-                    "publisher": { "@id": `${siteUrl}/#organization` }
+                    "publisher": { "@id": `${siteUrl}/#organization` },
+                    "potentialAction": {
+                        "@type": "SearchAction",
+                        "target": {
+                            "@type": "EntryPoint",
+                            "urlTemplate": `${siteUrl}/?q={search_term_string}`
+                        },
+                        "query-input": "required name=search_term_string"
+                    }
                 }
             )
         }
@@ -578,13 +612,26 @@ export default function SEO({
             const articleSchema = {
                 "@context": "https://schema.org",
                 "@type": "Article",
+                "@id": `${fullUrl}#article`,
                 "headline": resolvedTitle,
+                "description": resolvedDescription,
+                "url": fullUrl,
+                "image": ogImage,
                 "datePublished": articlePublishedTime,
-                "dateModified": lastModified || new Date().toISOString(),
+                "dateModified": lastModified || articlePublishedTime,
                 "author": {
                     "@type": "Person",
-                    "name": articleAuthor || "UTHAKKAN"
-                }
+                    "name": articleAuthor || "UTHAKKAN",
+                    "url": `${siteUrl}/founder`
+                },
+                "publisher": {
+                    "@id": `${siteUrl}/#organization`
+                },
+                "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": `${fullUrl}#webpage`
+                },
+                "inLanguage": "en"
             }
 
             if (articleSection) {
@@ -593,12 +640,21 @@ export default function SEO({
             if (articleTags) {
                 articleSchema.keywords = Array.isArray(articleTags) ? articleTags.join(', ') : articleTags
             }
-            if (readingTime) {
-                articleSchema.timeRequired = `PT${readingTime}M`
+            if (resolvedReadingTime) {
+                articleSchema.timeRequired = `PT${resolvedReadingTime}M`
             }
 
+            globalSchemas.push(articleSchema)
+
+            // Add speakable schema for voice search optimization
             globalSchemas.push({
-                ...articleSchema
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "@id": `${fullUrl}#webpage`,
+                "speakable": {
+                    "@type": "SpeakableSpecification",
+                    "cssSelector": ["article h1", "article .lead", "article .summary"]
+                }
             })
         }
 
@@ -648,65 +704,9 @@ export default function SEO({
             })
         }
 
-        // LocalBusiness schema (added to homepage only to avoid duplication)
-        if (path === '/') {
-            globalSchemas.push({
-                "@context": "https://schema.org",
-                "@type": "LocalBusiness",
-                "@id": `${siteUrl}/#local-business`,
-                "name": siteName,
-                "image": `${siteUrl}/logo.webp`,
-                "description": "All-in-one free online productivity suite with AI tools, PDF management, image editing, and privacy-first email services.",
-                "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "Kannur",
-                    "addressLocality": "Kannur",
-                    "addressRegion": "KL",
-                    "postalCode": "670001",
-                    "addressCountry": "IN"
-                },
-                "contactPoint": {
-                    "@type": "ContactPoint",
-                    "contactType": "Customer Support",
-                    "email": "support@pixtool.in"
-                },
-                "url": siteUrl,
-                "sameAs": [
-                    "https://www.linkedin.com/company/uthakkan",
-                    "https://twitter.com/ajmal_uk_",
-                    "https://www.instagram.com/ajmal_uk_",
-                    "https://github.com/ajmaluk"
-                ],
-                "priceRange": "$0",
-                "areaServed": "Worldwide"
-            })
-        }
 
-        // Promotional Ad Video Schema (YouTube Short)
-        const hubPages = ['/', '/about', '/image-tools', '/pdf-tools', '/utility-tools', '/ai-tools', '/math-tools', '/productivity-tools']
-        if (hubPages.includes(path)) {
-            globalSchemas.push({
-                "@context": "https://schema.org",
-                "@type": "VideoObject",
-                "name": `${siteName} - The Ultimate Free Productivity Suite`,
-                "description": "Discover PixTool, the free privacy-first web studio with 101+ tools including AI generation, PDF management, and image editing utilities. 100% browser-based secured processing.",
-                "thumbnailUrl": [
-                    "https://img.youtube.com/vi/fzIhPN-gv_E/hqdefault.jpg"
-                ],
-                "uploadDate": "2026-03-01T00:00:00Z",
-                "duration": "PT0M60S",
-                "contentUrl": "https://youtube.com/shorts/fzIhPN-gv_E",
-                "embedUrl": "https://www.youtube.com/embed/fzIhPN-gv_E",
-                "publisher": {
-                    "@type": "Organization",
-                    "name": siteName,
-                    "logo": {
-                        "@type": "ImageObject",
-                        "url": `${siteUrl}/logo.webp`
-                    }
-                }
-            })
-        }
+
+
 
         // SoftwareApplication schema for tool category collections (Fix for Merchant/Review Snippet errors)
         if (routeDefaults.section && path === routeDefaults.section.path) {
@@ -721,35 +721,12 @@ export default function SEO({
                 "url": fullUrl,
                 "image": ogImage,
                 "isAccessibleForFree": true,
-                "author": { "@id": `${siteUrl}/#organization` },
-                "offers": {
+                "author": { "@id": `${siteUrl}/#organization` },                    "offers": {
                     "@type": "Offer",
                     "price": "0",
                     "priceCurrency": "USD",
                     "availability": "https://schema.org/InStock",
-                    "url": fullUrl,
-                    "shippingDetails": {
-                        "@type": "OfferShippingDetails",
-                        "shippingRate": {
-                            "@type": "MonetaryAmount",
-                            "value": "0",
-                            "currency": "USD"
-                        },
-                        "shippingDestination": [
-                            { "@type": "DefinedRegion", "addressCountry": "IN" },
-                            { "@type": "DefinedRegion", "addressCountry": "US" },
-                            { "@type": "DefinedRegion", "addressCountry": "GB" },
-                            { "@type": "DefinedRegion", "addressCountry": "AU" }
-                        ]
-                    },
-                    "hasMerchantReturnPolicy": {
-                        "@type": "MerchantReturnPolicy",
-                        "applicableCountry": "IN",
-                        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnPeriod",
-                        "merchantReturnDays": 30,
-                        "returnMethod": "https://schema.org/ReturnByMail",
-                        "returnFees": "https://schema.org/FreeReturn"
-                    }
+                    "url": fullUrl
                 }
             }
 
@@ -791,7 +768,7 @@ export default function SEO({
         }
 
         return finalSchemas
-    }, [resolvedTitle, resolvedDescription, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, articleSection, articleTags, readingTime, breadcrumbs, faqs, resolvedToolName, resolvedToolSteps, type, lastModified, screenshot, resolvedImageTitle, brandTitle, defaultScreenshot, dynamicImageAlt, isToolPath, liveRatings, routeDefaults.section, cleanPath, toolDataFromMap])
+    }, [resolvedTitle, resolvedDescription, path, fullUrl, ogImage, siteUrl, siteName, schema, articlePublishedTime, articleAuthor, articleSection, articleTags, faqs, resolvedToolName, resolvedToolSteps, type, lastModified, screenshot, resolvedImageTitle, brandTitle, defaultScreenshot, dynamicImageAlt, isToolPath, liveRatings, routeDefaults.section, toolDataFromMap, includeFaqSchema, resolvedBreadcrumbs, resolvedReadingTime])
 
     useEffect(() => {
         document.title = brandTitle

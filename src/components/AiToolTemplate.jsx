@@ -218,7 +218,7 @@ export default function AiToolTemplate({
                 </aside>
 
                 {/* MAIN INTERACTION AREA */}
-                <main className="preview-main" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: 0, background: 'transparent', border: 'none', width: '100%' }}>
+                <section className="preview-main" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: 0, background: 'transparent', border: 'none', width: '100%' }}>
                     <div 
                         className="studio-card"
                         style={{ 
@@ -332,7 +332,7 @@ export default function AiToolTemplate({
                             )}
                         </div>
                     </div>
-                </main>
+                </section>
             </div>
 
 

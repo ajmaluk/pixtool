@@ -1,0 +1,23 @@
+/* TEAM */
+Founder & Lead Engineer: Muhammed Ajmal U K
+Contact: support@pixtool.in
+Twitter: @ajmal_uk_
+LinkedIn: linkedin.com/in/ajmaluk
+GitHub: github.com/ajmaluk
+From: Kannur, Kerala, India
+
+/* THANKS */
+Cloudflare Pages -- Hosting & CDN
+Supabase -- Database & Auth
+Google Fonts -- Typography
+Lucide -- Iconography
+Vite -- Build tooling
+
+/* SITE */
+Last update: 2026-04-25
+Language: English
+Standards: HTML5, CSS3, ES2022
+Components: React 19, React Router 7
+Software: VS Code, Figma, Node.js
+Doctype: HTML5
+IDE: Antigravity

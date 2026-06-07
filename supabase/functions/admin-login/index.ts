@@ -1,10 +1,21 @@
 // @ts-nocheck
 import { serve } from 'https://deno.land/std@0.224.0/http/server.ts';
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
+const baseCorsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
+};
+
+const getCorsHeaders = (req: Request) => {
+  const origin = req.headers.get('Origin') ?? '';
+  const allowedRaw = Deno.env.get('ALLOWED_ORIGINS') ?? '';
+  const allowed = allowedRaw.split(',').map((s) => s.trim()).filter(Boolean);
+  const allowOrigin = allowed.length ? (allowed.includes(origin) ? origin : allowed[0]) : '*';
+  return {
+    ...baseCorsHeaders,
+    'Access-Control-Allow-Origin': allowOrigin,
+    Vary: 'Origin',
+  };
 };
 
 const textEncoder = new TextEncoder();
@@ -37,6 +48,7 @@ const signToken = async (payload: Record<string, unknown>, secret: string) => {
 };
 
 serve(async (req) => {
+  const corsHeaders = getCorsHeaders(req);
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
   }

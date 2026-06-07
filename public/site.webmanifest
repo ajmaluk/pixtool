@@ -1,21 +1,45 @@
 {
-  "name": "PixTool - All in One Platform",
+  "name": "PixTool - Free AI, Image, PDF & Productivity Tools",
   "short_name": "PixTool",
+  "description": "Free online AI, image, PDF, math, and productivity tools that run in your browser with privacy-first processing.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f172a",
+  "orientation": "any",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["productivity", "utilities", "tools", "developer"],
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "maskable any"
     },
     {
       "src": "/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "maskable any"
     }
   ],
-  "theme_color": "#6366f1",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  "screenshots": [
+    {
+      "src": "/screenshots/home.webp",
+      "sizes": "1280x720",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "PixTool Home Page"
+    },
+    {
+      "src": "/screenshots/pixtool-all-in-one-productivity-suite.webp",
+      "sizes": "1280x720",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "PixTool Mobile View"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
 }

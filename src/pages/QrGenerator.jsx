@@ -177,19 +177,6 @@ export default function QrGenerator() {
     </div>
   )
 
-  const qrGeneratorFaqs = [
-    { q: "Is registration required for this free QR code generator?", a: "No, you can generate unlimited QR codes without creating any account. Our service is a professional-grade alternative to paid QR tools, providing high-fidelity results with no signup required." },
-    { q: "Do these QR codes expire or have scan limits?", a: "The QR codes we generate are 'static', meaning they encode data directly. They never expire, have no scan limits, and will work forever as long as your destination link or data is active." },
-    { q: "What scale of PNG resolution can I download?", a: "We support downloads up to 400x400 pixels, which is perfect for business cards, brochures, posters, and digital displays. Our high-resolution output ensures sharp edges for reliable scanning." },
-    { q: "How do I create a WiFi QR code for my business?", a: "Select the 'WiFi' tab, enter your network SSID and password, then download the code. Customers can simply point their phone camera at the code to connect instantly without typing." },
-    { q: "Can I customize the QR code colors?", a: "Yes! You can change both the QR dots (foreground) and the background to match your brand colors. Pro tip: Always use a dark foreground on a light background for the best scan reliability." },
-    { q: "What is QR Code error correction (ECC)?", a: "ECC allows a QR code to be scanned even if it's slightly damaged or obscured. 'High (30%)' is safest for printed materials that might get scratched, while 'Low (7%)' creates a cleaner-looking code." },
-    { q: "Is this QR generator safe for private data?", a: "Yes. Unlike cloud-based generators that log your links and data, PixTool generates everything locally in your browser. Your sensitive URLs and WiFi passwords are never transmitted to our servers." },
-    { q: "Can I add my logo to the QR code?", a: "This feature is currently in development. For now, we focus on providing the cleanest, most scannable standard QR codes possible." },
-    { q: "Does this work on iPhone and Android?", a: "Absolutely. Our generator is fully responsive, allowing you to create and download QR codes directly on your mobile device." },
-    { q: "Can I use these QR codes for commercial purposes?", a: "Yes, 100%. All QR codes generated here are yours to use for any personal or commercial project with no licensing fees or attribution required." }
-  ]
-
   return (
     <>
       <SEO

@@ -175,6 +175,7 @@ export default function BlogPost() {
                 articleAuthor={post.author}
                 articleSection="Technology"
                 articleTags={post.tags}
+                readingTime={post.readingTime || 5}
             />
 
             {/* Article Hero */}

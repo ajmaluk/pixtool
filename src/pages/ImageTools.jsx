@@ -329,8 +329,8 @@ export default function ImageTools() {
 
   const activeToolData = activeTool ? ALL_TOOLS_MAP[`/image-tools/${activeTool}`] : (ALL_TOOLS_MAP['/image-tools'] || null)
   const seoContent = {
-    title: '',
-    description: '',
+    title: activeToolData?.title || 'Free Online Image Tools',
+    description: activeToolData?.description || 'Resize, crop, convert, compress, flip, and enhance images in your browser with privacy-first processing.',
     benefits: [],
     howTo: [],
     faq: [],
@@ -967,7 +967,7 @@ export default function ImageTools() {
         schema={imageHubSchema}
         toolName={activeToolData?.title}
         toolSteps={seoContent?.howTo}
-        screenshot={activeToolData?.screenshot ? `${import.meta.env.VITE_SITE_URL}/screenshots/${activeToolData.screenshot}` : null}
+        screenshot={activeToolData?.screenshot ? `/screenshots/${activeToolData.screenshot}` : null}
         imageAlt={activeToolData?.imageAlt}
         imageTitle={activeToolData?.imageTitle}
         breadcrumbs={[

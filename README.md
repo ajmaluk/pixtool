@@ -71,9 +71,9 @@ supabase functions deploy public-metrics
 
 ```bash
 # Run these in your terminal after linking your project:
-supabase secrets set ADMIN_USERNAME=ajmal
-supabase secrets set ADMIN_PASSWORD=Ajmal@123
-supabase secrets set ADMIN_SESSION_SECRET=ajmaluk123pixtool.in-2026
+supabase secrets set ADMIN_USERNAME=<your-admin-username>
+supabase secrets set ADMIN_PASSWORD=<your-strong-admin-password>
+supabase secrets set ADMIN_SESSION_SECRET=<your-long-random-secret>
 ```
 
 6. (Recommended) Schedule periodic rate-limit cleanup in Postgres:

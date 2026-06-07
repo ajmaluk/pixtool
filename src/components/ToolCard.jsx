@@ -12,6 +12,8 @@ export default function ToolCard({ tool }) {
         id={`tool-card-link-${tool.id || tool.path?.split('/').pop()}`}
         to={tool.path}
         className="tool-card-premium"
+        title={`Use ${tool.title} - ${tool.description}`}
+        aria-label={`Open ${tool.title} tool`}
       >
         <div className="tool-card-glow" style={{ background: tool.color || 'var(--accent-primary)' }} />
         

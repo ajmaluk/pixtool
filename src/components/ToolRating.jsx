@@ -12,7 +12,7 @@ export default function ToolRating({ toolSlug }) {
   const [selectedStar, setSelectedStar] = useState(0);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
-  const [stats, setStats] = useState({ avgRating: 4.9, totalVotes: 124, distribution: [0, 0, 0, 0, 0] });
+  const [stats, setStats] = useState({ avgRating: 0, totalVotes: 0, distribution: [0, 0, 0, 0, 0] });
   const [alreadyRated, setAlreadyRated] = useState(false);
 
   useEffect(() => {
@@ -43,7 +43,8 @@ export default function ToolRating({ toolSlug }) {
   }, [toolSlug]);
 
   const avgText = useMemo(() => {
-    return Number(stats.avgRating || 4.9).toFixed(1);
+    if (Number(stats.totalVotes || 0) <= 0) return '—';
+    return Number(stats.avgRating || 0).toFixed(1);
   }, [stats]);
 
   const currentStar = hoveredStar || selectedStar;

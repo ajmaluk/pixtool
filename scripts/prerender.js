@@ -63,9 +63,8 @@ const routes = [...new Set([...staticRoutes, ...toolRoutes, ...blogRoutes])];
 async function prerender() {
   console.log('🚀 Starting Prerender...');
 
-  // Skip early in CI-like environments where Chromium may not be available.
-  if (process.env.SKIP_PRERENDER || process.env.CF_PAGES || process.env.NETLIFY) {
-    console.log('⏩ Skipping prerender (CI/Environment detected inside script)');
+  if (process.env.SKIP_PRERENDER) {
+    console.log('⏩ Skipping prerender (SKIP_PRERENDER enabled)');
     return;
   }
 
@@ -146,9 +145,7 @@ async function prerender() {
         await new Promise(r => setTimeout(r, 2000));
 
         let content = await page.content();
-
-        // Replace the script src with the built main script
-        content = content.replace('/src/main.jsx', '/assets/index-CJA7XKzz.js');
+        content = content.replace(/<script[^>]*src="[^"]*puppeteer[^"]*"[^>]*><\/script>/gi, '');
 
         // Save as pretty URL (route/index.html)
         const outputDir = path.join(DIST_DIR, route === '/' ? '' : route);

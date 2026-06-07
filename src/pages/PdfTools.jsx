@@ -295,8 +295,8 @@ export default function PdfTools() {
 
   const activeToolData = activeTool ? ALL_TOOLS_MAP[`/pdf-tools/${activeTool}`] : (ALL_TOOLS_MAP['/pdf-tools'] || null)
   const seoContent = {
-    title: '',
-    description: '',
+    title: activeToolData?.title || 'Free Online PDF Tools',
+    description: activeToolData?.description || 'Merge, split, compress, protect, unlock, and convert PDF files locally in your browser without uploads.',
     benefits: [],
     howTo: [],
     faq: [],
@@ -971,7 +971,7 @@ export default function PdfTools() {
                     {renderSidebarSettings()}
                   </aside>
 
-                  <main className="preview-main">
+                  <section className="preview-main">
                     {processing && (
                       <div className="processing-overlay">
                         <div className="processing-loader"></div>
@@ -1109,7 +1109,7 @@ export default function PdfTools() {
                         </div>
                       ))}
                     </div>
-                  </main>
+                  </section>
                 </div>
               )}
 

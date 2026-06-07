@@ -20,17 +20,24 @@ export default function AiAdCopy() {
   ]
 
   const customPromptBuilder = (text) => {
+    const selectedPlatform = platforms.find((p) => p.id === platform)
+    const selectedObjective = objectives.find((o) => o.id === objective)
+    const normalizedProduct = product.trim() || 'the product described by the user'
+    const normalizedContext = text.trim() || 'No extra context provided.'
+
     return `You are a world-class Direct Response Copywriter. 
-Generate a high-converting ad copy suite for ${product} specifically architected for the ${platform} platform.
+Generate a high-converting ad copy suite for ${normalizedProduct} specifically architected for ${selectedPlatform?.name || platform}.
 
 CAMPAIGN ARCHITECTURE:
-- Platform: ${platform}
-- Objective: ${objective}
-- Additional Context: ${text}
+- Platform: ${selectedPlatform?.name || platform}
+- Objective: ${selectedObjective?.label || objective}
+- Additional Context: ${normalizedContext}
 
 OUTPUT REQUIREMENTS:
 - Provide 3 distinct variations (Hook-based, Benefit-based, Story-based).
-- Include appropriate ${platform === 'meta' ? 'Emoji and Hashtags' : 'Headline/Sitelink extensions'}.
+- For each variation include: Primary Text, Headline, CTA, and 3 audience-fit keywords.
+- Keep copy scannable: short lines, clear benefit-first language, and one concrete proof point.
+- Include appropriate ${platform === 'meta' ? 'emoji and hashtags' : 'headline and extension-friendly phrasing'}.
 - Maintain a highly professional yet persuasive authority.`
   }
 

@@ -8,6 +8,9 @@ const REQUIRED_FILES = [
   'index.html',
   'robots.txt',
   'sitemap.xml',
+  'rss.xml',
+  'atom.xml',
+  '.well-known/security.txt',
 ];
 
 const REQUIRED_HEADERS = [

@@ -112,13 +112,12 @@ export default function Home() {
       "@type": "ItemList",
       "name": "Free Online Tools",
       "description": "Complete list of free online tools available at PixTool",
-      "url": `${SITE_URL}/sitemap`,
+      "url": `${SITE_URL}/`,
       "itemListElement": allTools.map((t, idx) => ({
-        "@type": "ListItem",
-        "position": idx + 1,
-        "name": t.title,
-        "url": `${SITE_URL}${t.path}`,
-        "description": t.description
+                    "@type": "ListItem",
+                    "position": idx + 1,
+                    "name": t.title,
+                    "url": `${SITE_URL}${t.path}`,
       }))
     }
   ]
