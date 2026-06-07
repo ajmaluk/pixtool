@@ -63,6 +63,8 @@ const resolveImagePath = (rawPath, { allowDefault = true } = {}) => {
 function generateSitemap() {
   console.log('Starting sitemap generation...');
 
+  const seenPaths = new Set();
+
   let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
@@ -79,6 +81,9 @@ function generateSitemap() {
   </url>`;
 
   const addUrl = (relPath, priority = '0.8', freq = 'weekly', imagePath = null, imageTitle = null, imageCaption = null) => {
+    if (seenPaths.has(relPath)) return;
+    seenPaths.add(relPath);
+
     const resolvedImagePath = resolveImagePath(imagePath);
     const fullUrl = `${SITE_URL}${relPath}`;
 
@@ -178,26 +183,7 @@ function generateSitemap() {
     '/support-us', '/promotions', '/hire-me', '/showcase', '/thank-you',
     '/code-diff', '/json-formatter', '/unit-converter', '/password-generator',
     '/qr-scanner', '/qr-generator', '/typing-test',
-    '/temp-mail', '/temp-mail/10-minute-mail', '/temp-mail/change-email',
-    '/temp-mail/fake-email', '/temp-mail/disposable-email', '/temp-mail/throwaway-email',
-    '/identity-forge', '/burner-inbox', '/ghost-inbox',
-    '/fake-email', '/disposable-email', '/throwaway-email',
-    '/10-minute-mail', '/change-email',
-    '/apps/kallan-cop-privacy',
-    '/ai-tools/chat', '/ai-tools/content-generator', '/ai-tools/grammar-fixer',
-    '/ai-tools/resume-generator', '/ai-tools/coding-chat', '/ai-tools/email-writer',
-    '/ai-tools/ad-copy-generator', '/ai-tools/caption-generator', '/ai-tools/paraphraser',
-    '/ai-tools/summarizer', '/ai-tools/translator', '/ai-tools/keyword-generator',
-    '/ai-tools/hashtag-generator', '/ai-tools/story-generator',
-    '/math-tools/scientific-calculator', '/math-tools/graph-visualizer',
-    '/math-tools/matrix-solver', '/math-tools/statistics-visualizer',
-    '/math-tools/equation-solver', '/math-tools/unit-circle',
-    '/math-tools/financial-calculator', '/math-tools/number-theory',
-    '/math-tools/fraction-calculator', '/math-tools/vector-calculator',
-    '/productivity-tools/todo', '/productivity-tools/kanban',
-    '/productivity-tools/notepad', '/productivity-tools/drawing-board',
-    '/productivity-tools/file-manager', '/productivity-tools/pomodoro',
-    '/productivity-tools/sticky-notes', '/productivity-tools/habit-tracker'
+    '/apps/kallan-cop-privacy'
   ];
 
   otherPages.forEach(pagePath => {

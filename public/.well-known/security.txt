@@ -1,0 +1,8 @@
+Contact: mailto:support@pixtool.in
+Contact: mailto:security@uthakkan.com
+Expires: 2027-04-25T00:00:00.000Z
+Acknowledgments: https://www.pixtool.in/security-hall-of-fame
+Preferred-Languages: en
+Canonical: https://www.pixtool.in/.well-known/security.txt
+Policy: https://www.pixtool.in/privacy-policy
+Hiring: https://www.pixtool.in/careers

@@ -18,6 +18,8 @@
     "check:llms": "node scripts/check-llms-integrity.js",
     "check:sitemap": "node scripts/check-sitemap-integrity.js",
     "ci:check": "npm run lint && SKIP_PRERENDER=1 npm run build && npm run check:llms && npm run check:sitemap",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "eslint .",
     "preview": "vite preview",
     "screenshots": "node scripts/generate-screenshots.js",
@@ -52,6 +54,7 @@
     "sharp": "^0.34.5",
     "supabase": "^2.91.0",
     "terser": "^5.46.1",
-    "vite": "^7.3.2"
+    "vite": "^7.3.2",
+    "vitest": "^4.1.8"
   }
 }
