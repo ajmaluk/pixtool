@@ -125,7 +125,7 @@ export default function FAQ() {
 
             <section className="hero" style={{ padding: '6rem 2rem 4rem' }}>
                 <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-                    <div style={{ display: 'inline-flex', padding: '12px', background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', borderRadius: '50%', marginBottom: '1.5rem' }}>
+                    <div style={{ display: 'inline-flex', padding: '12px', background: 'var(--accent-orange-50)', color: 'var(--accent-orange)', borderRadius: '50%', marginBottom: '1.5rem' }}>
                         <HelpCircle size={32} />
                     </div>
                     <h1 className="hero-title" style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '1.5rem' }}>Common Questions</h1>

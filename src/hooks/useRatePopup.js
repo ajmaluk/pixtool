@@ -31,13 +31,11 @@ export const useRatePopup = () => {
     }
 
     // Dispatch custom event to trigger the overlay
+    // The overlay will set sessionStorage flag if it actually renders
     const event = new CustomEvent('trigger-pix-rating', {
       detail: { toolSlug: normalized }
     });
     window.dispatchEvent(event);
-    
-    // Mark as seen in session so it doesn't pop again during this visit
-    sessionStorage.setItem('pix_global_rating_shown', 'true');
   }, []);
 
   return { triggerRating };

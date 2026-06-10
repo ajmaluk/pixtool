@@ -47,7 +47,7 @@ OUTPUT REQUIREMENTS:
       <div className="social-workspace" style={{ marginBottom: '1.5rem' }}>
         {/* Visual Topic */}
         <div style={{ marginBottom: '3rem' }}>
-          <label htmlFor="ai-caption-topic" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+          <label htmlFor="ai-caption-topic" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
             Visual Narrative or Topic
           </label>
           <input 
@@ -55,7 +55,7 @@ OUTPUT REQUIREMENTS:
             name="topic"
             type="text"
             className="dalam-input-field"
-            style={{ width: '100%', padding: '1.5rem 2rem', borderRadius: '24px', fontSize: '1.2rem', backgroundColor: '#fdfdfd', border: '1px solid #f4f4f5', outline: 'none', color: '#1a1a1a' }}
+            style={{ width: '100%', padding: '1.5rem 2rem', borderRadius: '24px', fontSize: '1.2rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', outline: 'none', color: 'var(--text-primary)' }}
             placeholder="e.g., A panoramic view of the Alps at sunset"
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
@@ -65,7 +65,7 @@ OUTPUT REQUIREMENTS:
         {/* Platform & Aura Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem', marginBottom: '1.5rem' }}>
           <div className="platform-grid">
-            <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+            <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
               Target Ecosystem
             </label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.75rem' }}>
@@ -77,8 +77,8 @@ OUTPUT REQUIREMENTS:
                             padding: '1.25rem', 
                             borderRadius: '20px', 
                             border: '2px solid', 
-                            borderColor: platform === p.id ? '#8b5cf6' : '#f4f4f5',
-                            background: platform === p.id ? '#fff' : '#fafafa',
+                            borderColor: platform === p.id ? 'var(--accent-purple)' : 'var(--border-color)',
+                            background: platform === p.id ? 'var(--bg-primary)' : 'var(--bg-secondary)',
                             cursor: 'pointer',
                             display: 'flex',
                             flexDirection: 'column',
@@ -87,18 +87,18 @@ OUTPUT REQUIREMENTS:
                             transition: 'all 0.2s'
                         }}
                     >
-                        <p.icon size={22} color={platform === p.id ? '#8b5cf6' : '#d4d4d8'} strokeWidth={1.5} />
-                        <span style={{ fontSize: '0.8rem', fontWeight: 800, color: platform === p.id ? '#09090b' : '#a1a1aa' }}>{p.name}</span>
+                        <p.icon size={22} color={platform === p.id ? 'var(--accent-purple)' : 'var(--text-muted)'} strokeWidth={1.5} />
+                        <span style={{ fontSize: '0.8rem', fontWeight: 800, color: platform === p.id ? 'var(--text-primary)' : 'var(--text-muted)' }}>{p.name}</span>
                     </button>
                 ))}
             </div>
           </div>
 
           <div className="aura-grid">
-            <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+            <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
               Linguistic Aura
             </label>
-            <div style={{ display: 'flex', background: '#f4f4f5', padding: '0.5rem', borderRadius: '24px' }}>
+            <div style={{ display: 'flex', background: 'var(--bg-secondary)', padding: '0.5rem', borderRadius: '24px' }}>
                 {tones.map(t => (
                     <button
                         key={t.id}
@@ -108,13 +108,13 @@ OUTPUT REQUIREMENTS:
                             padding: '1rem', 
                             borderRadius: '18px', 
                             border: 'none', 
-                            background: tone === t.id ? '#fff' : 'transparent',
-                            color: tone === t.id ? '#09090b' : '#71717a',
+                            background: tone === t.id ? 'var(--bg-primary)' : 'transparent',
+                            color: tone === t.id ? 'var(--text-primary)' : 'var(--text-muted)',
                             fontWeight: 800,
                             fontSize: '0.9rem',
                             cursor: 'pointer',
                             transition: 'all 0.2s',
-                            boxShadow: tone === t.id ? '0 5px 15px rgba(0,0,0,0.03)' : 'none'
+                            boxShadow: tone === t.id ? 'var(--shadow-sm)' : 'none'
                         }}
                     >
                         {t.label}

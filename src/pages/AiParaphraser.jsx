@@ -38,12 +38,12 @@ ${text}`
       <div className="paraphrase-workspace" style={{ marginBottom: '1.5rem' }}>
         {/* Source Manuscript */}
         <div style={{ marginBottom: '3rem' }}>
-          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
             Source Manuscript
           </label>
           <textarea 
             className="dalam-textarea"
-            style={{ width: '100%', minHeight: '280px', padding: '2rem', fontSize: '1.2rem', background: '#fdfdfd', borderRadius: '32px', border: '1px solid #f4f4f5', outline: 'none', color: '#1a1a1a', lineHeight: 1.6 }}
+            style={{ width: '100%', minHeight: '280px', padding: '2rem', fontSize: '1.2rem', background: 'var(--bg-primary)', borderRadius: '32px', border: '1px solid var(--border-color)', outline: 'none', color: 'var(--text-primary)', lineHeight: 1.6 }}
             placeholder="Paste your text here for stylistic re-architecture..."
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
@@ -52,10 +52,10 @@ ${text}`
 
         {/* Tone Architecture */}
         <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
             Target Tone Architecture
           </label>
-          <div style={{ display: 'flex', background: '#f4f4f5', padding: '0.5rem', borderRadius: '24px', maxWidth: '600px' }}>
+          <div style={{ display: 'flex', background: 'var(--bg-secondary)', padding: '0.5rem', borderRadius: '24px', maxWidth: '600px' }}>
               {tones.map(t => (
                   <button
                       key={t.id}
@@ -65,13 +65,13 @@ ${text}`
                           padding: '1.25rem 1rem', 
                           borderRadius: '20px', 
                           border: 'none', 
-                          background: tone === t.id ? '#fff' : 'transparent',
-                          color: tone === t.id ? '#09090b' : '#71717a',
+                          background: tone === t.id ? 'var(--bg-primary)' : 'transparent',
+                          color: tone === t.id ? 'var(--text-primary)' : 'var(--text-muted)',
                           fontWeight: 800,
                           fontSize: '0.95rem',
                           cursor: 'pointer',
                           transition: 'all 0.2s',
-                          boxShadow: tone === t.id ? '0 5px 15px rgba(0,0,0,0.03)' : 'none'
+                          boxShadow: tone === t.id ? 'var(--shadow-sm)' : 'none'
                       }}
                   >
                       {t.label}
@@ -81,9 +81,9 @@ ${text}`
           </div>
         </div>
 
-        <div style={{ marginTop: '3rem', padding: '2rem', background: '#fafafa', borderRadius: '28px', border: '1px solid #f4f4f5', display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
-            <div style={{ color: '#8b5cf6' }}><Sparkles size={28} strokeWidth={1.5} /></div>
-            <div style={{ fontSize: '1rem', color: '#71717a', lineHeight: 1.5 }}>
+        <div style={{ marginTop: '3rem', padding: '2rem', background: 'var(--bg-secondary)', borderRadius: '28px', border: '1px solid var(--border-color)', display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
+            <div style={{ color: 'var(--accent-purple)' }}><Sparkles size={28} strokeWidth={1.5} /></div>
+            <div style={{ fontSize: '1rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
                 Prose refinement in progress. The AI will optimize sentence structure and semantic flow for maximum resonance.
             </div>
         </div>

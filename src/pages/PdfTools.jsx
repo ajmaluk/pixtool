@@ -381,7 +381,7 @@ export default function PdfTools() {
 
             <button
               className="btn btn-secondary"
-              style={{ width: '100%', color: '#ef4444', borderColor: '#fee2e2' }}
+              style={{ width: '100%', color: 'var(--accent-red)', borderColor: 'var(--accent-red-50)' }}
               onClick={() => setFiles([])}
             >
               Clear All Files
@@ -401,7 +401,7 @@ export default function PdfTools() {
             <select
               className="select"
               value={settings.compressionLevel}
-              onChange={(e) => setSettings({ ...settings, compressionLevel: e.target.value })}
+              onChange={(e) => setSettings(s => ({ ...s, compressionLevel: e.target.value }))}
             >
               <option value="extreme">Extreme (Smallest size, lower quality)</option>
               <option value="recommended">Recommended (Good size, high quality)</option>
@@ -511,7 +511,7 @@ export default function PdfTools() {
               />
             </div>
             {settings.password && settings.confirmPassword && settings.password !== settings.confirmPassword && (
-              <p style={{ color: '#ef4444', fontSize: '0.8rem' }}>Passwords do not match</p>
+              <p style={{ color: 'var(--accent-red)', fontSize: '0.8rem' }}>Passwords do not match</p>
             )}
           </div>
         )}
@@ -815,19 +815,11 @@ export default function PdfTools() {
             <div className="landing-center">
               <div className="page-hero">
                 <div className="page-hero-content">
-                  <h1 className="page-title" style={{ fontFamily: '"Manrope", sans-serif', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
+                  <h1 className="page-title">
                     Professional <br/>
-                    <span style={{ 
-                      background: 'linear-gradient(135deg, #b5161e 0%, #8930b0 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundSize: '200% auto',
-                      animation: 'gradient-flow 6s linear infinite',
-                      display: 'inline-block',
-                      padding: '0.1em 0'
-                    }}>PDF Management</span>
+                    <span className="gradient-text-red">PDF Management</span>
                   </h1>
-                  <p className="page-subtitle" style={{ fontFamily: '"Inter", sans-serif', fontSize: '1.25rem', opacity: 0.9, marginTop: '1rem', lineHeight: 1.6 }}>
+                  <p className="page-subtitle" style={{ fontSize: '1.25rem', opacity: 0.9, marginTop: '1rem' }}>
                     The most efficient way to manage your PDF workflows. Merge, split, compress, and convert documents locally for ultimate security.
                   </p>
                 </div>
@@ -1007,7 +999,7 @@ export default function PdfTools() {
                              type: 'danger'
                            });
                            if(ok) { setFiles([]); setSelectedIndex(0); } 
-                         }} style={{ padding: '0.6rem 1rem', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderColor: 'transparent' }}>
+                         }} style={{ padding: '0.6rem 1rem', background: 'var(--accent-red-50)', color: 'var(--accent-red)', borderColor: 'transparent' }}>
                            <X size={18} /> Clear
                          </button>
                          <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.6rem 1.25rem' }} aria-label="Upload more PDF files">
@@ -1120,8 +1112,8 @@ export default function PdfTools() {
                     title={activeToolData?.title || 'Professional PDF Studio'}
                     description={activeToolData?.description || hubMetadata.description}
                     toolId={activeTool}
-                    benefits={activeToolData?.features || ["100% Privacy — files stay on your device", "No registration or signup required", "Local client-side processing", "High-fidelity results"]}
-                    howTo={activeToolData?.howItWorks || ["Upload your PDF files via drag & drop", "Pick your desired settings", "Process instantly in your browser", "Download the secured results"]}
+                    benefits={activeToolData?.benefits || ["100% Privacy — files stay on your device", "No registration or signup required", "Local client-side processing", "High-fidelity results"]}
+                    howTo={activeToolData?.howTo || ["Upload your PDF files via drag & drop", "Pick your desired settings", "Process instantly in your browser", "Download the secured results"]}
                     relatedTools={activeToolData?.relatedTools || [
                       { name: 'Image Compressor', path: '/image-tools/compress' },
                       { name: 'QR Generator', path: '/qr-generator' },

@@ -63,6 +63,7 @@ export default function ToolRating({ toolSlug }) {
     } catch (error) {
       const msg = error.message || 'Unable to submit rating right now.';
       setMessage(msg);
+      setSelectedStar(0);
       if (/already rated/i.test(msg)) {
         setAlreadyRated(true);
       }
@@ -115,7 +116,7 @@ export default function ToolRating({ toolSlug }) {
         <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>You already rated this tool.</div>
       )}
       {message && (
-        <div style={{ fontSize: '0.8rem', marginTop: '0.4rem', color: /Thanks/.test(message) ? '#10b981' : '#ef4444' }}>
+        <div style={{ fontSize: '0.8rem', marginTop: '0.4rem', color: /Thanks/.test(message) ? 'var(--accent-emerald)' : 'var(--accent-red)' }}>
           {message}
         </div>
       )}

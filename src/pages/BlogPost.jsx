@@ -172,10 +172,15 @@ export default function BlogPost() {
                 imageAlt={post.imageAlt}
                 schema={blogPostSchema}
                 articlePublishedTime={post.dateISO || post.date}
+                articleModifiedTime={post.updatedISO || post.dateISO || post.date}
                 articleAuthor={post.author}
                 articleSection="Technology"
                 articleTags={post.tags}
                 readingTime={post.readingTime || 5}
+                breadcrumbs={[
+                    { name: 'Blog', item: '/blog' },
+                    { name: post.title, item: `/blog/${post.slug}` }
+                ]}
             />
 
             {/* Article Hero */}

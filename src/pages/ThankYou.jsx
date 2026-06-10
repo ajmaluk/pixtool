@@ -17,11 +17,11 @@ export default function ThankYou() {
 
             <section className="hero" style={{ padding: '8rem 2rem', textAlign: 'center' }}>
                 <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-                    <div style={{ display: 'inline-flex', padding: '16px', background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-primary)', borderRadius: '50%', marginBottom: '2rem' }}>
+                    <div style={{ display: 'inline-flex', padding: '16px', background: 'var(--accent-blue-50)', color: 'var(--accent-primary)', borderRadius: '50%', marginBottom: '2rem' }}>
                         <PartyPopper size={48} />
                     </div>
 
-                    <h1 className="hero-title" style={{ fontSize: '4.5rem', fontWeight: 900, marginBottom: '1.5rem', background: 'var(--accent-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                    <h1 className="hero-title">
                         Thank You!
                     </h1>
 
@@ -50,7 +50,7 @@ export default function ThankYou() {
                     </div>
 
                     <div style={{ marginTop: '6rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '1.1rem', fontWeight: 600 }}>
-                        Made with <Heart size={20} style={{ color: '#ef4444' }} /> by UTHAKKAN
+                        Made with <Heart size={20} style={{ color: 'var(--accent-red)' }} /> by UTHAKKAN
                     </div>
                 </div>
             </section>

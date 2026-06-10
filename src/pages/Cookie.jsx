@@ -13,7 +13,7 @@ export default function Cookie() {
 
             <section className="hero" style={{ padding: '6rem 2rem 3rem', background: 'var(--bg-secondary)' }}>
                 <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-                    <div style={{ display: 'inline-flex', padding: '12px', background: 'rgba(239, 68, 68, 0.1)', color: '#fbbf24', borderRadius: '50%', marginBottom: '1.5rem' }}>
+                    <div style={{ display: 'inline-flex', padding: '12px', background: 'var(--accent-red-50)', color: 'var(--accent-orange)', borderRadius: '50%', marginBottom: '1.5rem' }}>
                         <Database size={32} />
                     </div>
                     <h1 className="hero-title" style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '1rem' }}>Cookie Policy</h1>

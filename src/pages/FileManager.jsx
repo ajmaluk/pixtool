@@ -170,7 +170,7 @@ export default function FileManager() {
         </div>
 
         {errorMessage && (
-          <div style={{ maxWidth: '1200px', margin: '0 auto 1.5rem', padding: '1rem 1.25rem', borderRadius: '16px', background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.2)', color: 'var(--accent-red)', fontWeight: 700 }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto 1.5rem', padding: '1rem 1.25rem', borderRadius: '16px', background: 'rgba(var(--accent-red-rgb), 0.08)', border: '1px solid rgba(var(--accent-red-rgb), 0.2)', color: 'var(--accent-red)', fontWeight: 700 }}>
             {errorMessage}
           </div>
         )}

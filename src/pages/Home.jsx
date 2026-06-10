@@ -13,6 +13,10 @@ import { SITE_URL } from '../config/app.config'
 import { IMAGE_TOOLS, PDF_TOOLS, UTILITY_TOOLS, AI_TOOLS, MATH_TOOLS, PRODUCTIVITY_TOOLS } from '../data/tools'
 import { GLOBAL_FAQS } from '../data/faqs'
 import { Calculator } from 'lucide-react'
+import { motion } from 'framer-motion'
+import ScrollReveal from '../components/ScrollReveal'
+import CategorySection from '../components/CategorySection'
+import { SectionSkeleton } from '../components/Skeleton'
 
 // Lazy Load subsections for performance
 const BlogSection = lazy(() => import('../components/BlogSection'))
@@ -27,6 +31,79 @@ const aiTools = AI_TOOLS.filter(t => !t.status);
 const mathTools = MATH_TOOLS.filter(t => !t.status);
 const productivityTools = PRODUCTIVITY_TOOLS;
 
+const categoryConfig = [
+  {
+    key: 'new-trending',
+    icon: Sparkles,
+    iconBg: 'rgba(168, 85, 247, 0.08)',
+    iconColor: '#a855f7',
+    title: 'New & Trending',
+    subtitle: '(Latest Tools)',
+    tools: communicationTools.filter(t => ['json-formatter', 'unit-converter', 'password-generator'].includes(t.id)),
+    initialCount: 3,
+  },
+  {
+    key: 'math',
+    icon: Calculator,
+    iconBg: 'rgba(59, 130, 246, 0.1)',
+    iconColor: '#3b82f6',
+    title: 'Advanced Mathematics',
+    subtitle: `(${mathTools.length} Tools)`,
+    tools: mathTools,
+    initialCount: mathTools.length,
+  },
+  {
+    key: 'image',
+    icon: Image,
+    iconBg: 'rgba(59, 130, 246, 0.1)',
+    iconColor: '#3b82f6',
+    title: 'Image Processing',
+    subtitle: `(${imageTools.length} Tools)`,
+    tools: imageTools,
+    hasShowMore: true,
+  },
+  {
+    key: 'pdf',
+    icon: FileText,
+    iconBg: 'rgba(239, 68, 68, 0.1)',
+    iconColor: '#ef4444',
+    title: 'PDF Management',
+    subtitle: `(${pdfTools.length} Tools)`,
+    tools: pdfTools,
+    hasShowMore: true,
+  },
+  {
+    key: 'utility',
+    icon: Zap,
+    iconBg: 'rgba(16, 185, 129, 0.1)',
+    iconColor: '#10b981',
+    title: 'Professional Utilities',
+    subtitle: `(${communicationTools.length} Tools)`,
+    tools: communicationTools,
+    initialCount: communicationTools.length,
+  },
+  {
+    key: 'ai',
+    icon: Sparkles,
+    iconBg: 'rgba(139, 92, 246, 0.1)',
+    iconColor: '#8b5cf6',
+    title: 'Next-Gen AI',
+    subtitle: `(${aiTools.length} Tools)`,
+    tools: aiTools,
+    hasShowMore: true,
+  },
+  {
+    key: 'productivity',
+    icon: FileText,
+    iconBg: 'rgba(107, 114, 128, 0.1)',
+    iconColor: '#6366f1',
+    title: 'Productivity Suite',
+    subtitle: `(${productivityTools.length} Tools)`,
+    tools: productivityTools,
+    initialCount: productivityTools.length,
+  },
+]
+
 export default function Home() {
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
@@ -37,12 +114,15 @@ export default function Home() {
   const [showAllImageTools, setShowAllImageTools] = useState(false)
   const [showAllPdfTools, setShowAllPdfTools] = useState(false)
   const [showAllAiTools, setShowAllAiTools] = useState(false)
+  const [toolCount, setToolCount] = useState(121)
+
+  useEffect(() => {
+    setToolCount(imageTools.length + pdfTools.length + communicationTools.length + aiTools.length + mathTools.length + productivityTools.length)
+  }, [])
 
   useEffect(() => {
     const q = searchParams.get('q') || ''
     if (q !== searchTerm) {
-      // Sync search input when URL query changes from outside this page.
-
       setSearchTerm(q)
     }
   }, [searchParams, searchTerm])
@@ -61,7 +141,6 @@ export default function Home() {
 
   const handleKeyDown = (e) => {
     if (!showSuggestions || filteredTools.length === 0) return
-
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       setSelectedIndex(prev => (prev < filteredTools.length - 1 ? prev + 1 : prev))
@@ -86,17 +165,6 @@ export default function Home() {
     ...productivityTools.map(t => ({ ...t, typeLabel: 'Productivity' }))
   ]
 
-  // Interleave tools from different categories to mix them one after one
-  const mixedTools = [];
-  const maxLen = Math.max(imageTools.length, pdfTools.length, communicationTools.length, aiTools.length, mathTools.length, productivityTools.length);
-  for (let i = 0; i < maxLen; i++) {
-    if (i < imageTools.length) mixedTools.push({ ...imageTools[i], typeLabel: 'Image Tool' });
-    if (i < pdfTools.length) mixedTools.push({ ...pdfTools[i], typeLabel: 'PDF Tool' });
-    if (i < communicationTools.length) mixedTools.push({ ...communicationTools[i], typeLabel: 'Utility' });
-    if (i < aiTools.length) mixedTools.push({ ...aiTools[i], typeLabel: 'AI Tool' });
-    if (i < mathTools.length) mixedTools.push({ ...mathTools[i], typeLabel: 'Math Tool' });
-    if (i < productivityTools.length) mixedTools.push({ ...productivityTools[i], typeLabel: 'Productivity' });
-  }
   const filteredTools = allTools.filter(tool =>
     tool.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     tool.description.toLowerCase().includes(searchTerm.toLowerCase())
@@ -114,13 +182,25 @@ export default function Home() {
       "description": "Complete list of free online tools available at PixTool",
       "url": `${SITE_URL}/`,
       "itemListElement": allTools.map((t, idx) => ({
-                    "@type": "ListItem",
-                    "position": idx + 1,
-                    "name": t.title,
-                    "url": `${SITE_URL}${t.path}`,
+        "@type": "ListItem",
+        "position": idx + 1,
+        "name": t.title,
+        "url": `${SITE_URL}${t.path}`,
       }))
     }
   ]
+
+  const showMoreMap = {
+    'Image Processing': showAllImageTools,
+    'PDF Management': showAllPdfTools,
+    'Next-Gen AI': showAllAiTools,
+  }
+
+  const toggleMap = {
+    'Image Processing': () => setShowAllImageTools(!showAllImageTools),
+    'PDF Management': () => setShowAllPdfTools(!showAllPdfTools),
+    'Next-Gen AI': () => setShowAllAiTools(!showAllAiTools),
+  }
 
   return (
     <>
@@ -143,10 +223,20 @@ export default function Home() {
 
           <div className="category-hub">
             <div className="hero-hub-container">
-              <div className="hero-content-wrapper">
-                <div className="hero-status-badge">
+              <motion.div
+                className="hero-content-wrapper"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <motion.div
+                  className="hero-status-badge"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.15 }}
+                >
                   <span style={{ marginRight: '8px' }}>🚀</span> 2026 AI Innovation Suite
-                </div>
+                </motion.div>
                 <h1 className="hero-main-title">
                   Best Free Online <br />
                   <span className="hero-title-highlight">
@@ -159,8 +249,13 @@ export default function Home() {
                     />
                   </span>
                 </h1>
-                <p className="hero-text-description">
-                  The world's most powerful browser-native AI suite. 121+ professional tools for
+                <motion.p
+                  className="hero-text-description"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.25 }}
+                >
+                  {toolCount}+ professional browser-native tools for
                   <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> task management </span>,
                   <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> content generation </span>,
                   <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}> secure PDF management </span>,
@@ -185,20 +280,30 @@ export default function Home() {
                     <span style={{ opacity: 0.6 }}>|</span>
                     <span>✦ High-Fidelity Output</span>
                   </span>
-                </p>
+                </motion.p>
 
-                <div style={{ marginBottom: '1.25rem' }}>
+                <motion.div
+                  style={{ marginBottom: '1.25rem' }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.35 }}
+                >
                   <OverallRatingBadge />
-                </div>
+                </motion.div>
 
-                <div className="search-container hero-search-wrapper">
+                <motion.div
+                  className="search-container hero-search-wrapper"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
                   <div className="search-icon-wrapper" style={{ left: '24px', opacity: 0.7 }}>
                     <Search size={28} aria-hidden="true" />
                   </div>
                   <input
                     type="text"
                     className="search-input"
-                    placeholder="Search 121+ professional tools..."
+                    placeholder={`Search ${toolCount}+ professional tools...`}
                     value={searchTerm}
                     onChange={handleSearchChange}
                     onKeyDown={handleKeyDown}
@@ -267,9 +372,14 @@ export default function Home() {
                       ))}
                     </div>
                   )}
-                </div>
+                </motion.div>
 
-                <div className="hero-feature-tags">
+                <motion.div
+                  className="hero-feature-tags"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: 'var(--text-secondary)' }} aria-label="100% Private Tool">
                     <Shield size={18} style={{ color: 'var(--accent-green)' }} aria-hidden="true" /> 100% Private
                   </div>
@@ -279,67 +389,69 @@ export default function Home() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: 'var(--text-secondary)' }} aria-label="Secure Data Management">
                     <Lock size={18} style={{ color: 'var(--accent-purple)' }} aria-hidden="true" /> Secure
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </div>
           </div>
 
-          <section className="mission-block-premium" style={{
-            padding: '4rem 0',
-            borderBottom: '1px solid var(--border-color)',
-            background: 'rgba(255,255,255,0.01)'
-          }}>
-            <div className="container-pro">
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
-                <div>
-                  <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1.5rem', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
-                    The <span style={{ color: 'var(--accent-primary)' }}>PixTool</span> Privacy Paradigm
-                  </h2>
-                  <div style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: 1.8 }}>
-                    <p style={{ marginBottom: '1.25rem' }}>
-                      In 2026, data privacy isn't just a feature—it's a human right. Traditional "free online tools" operate on a dangerous model: they require you to upload your sensitive PDFs, private photos, and corporate documents to their cloud servers before processing them.
+          <ScrollReveal direction="up" delay={0.1}>
+            <section className="mission-block-premium" style={{
+              padding: '4rem 0',
+              borderBottom: '1px solid var(--border-color)',
+              background: 'rgba(255,255,255,0.01)'
+            }}>
+              <div className="container-pro">
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
+                  <div>
+                    <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1.5rem', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
+                      The <span style={{ color: 'var(--accent-primary)' }}>PixTool</span> Privacy Paradigm
+                    </h2>
+                    <div style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: 1.8 }}>
+                      <p style={{ marginBottom: '1.25rem' }}>
+                        In 2026, data privacy isn't just a feature—it's a human right. Traditional "free online tools" operate on a dangerous model: they require you to upload your sensitive PDFs, private photos, and corporate documents to their cloud servers before processing them.
+                      </p>
+                      <p style={{ marginBottom: '1.25rem' }}>
+                        <strong>PixTool is different.</strong> Our entire suite is re-engineered from the ground up using <strong>WebAssembly (WASM)</strong> and high-performance browser-native APIs. When you click 'Compress', 'Merge', or 'Translate', the underlying algorithms are delivered to your device, and the actual processing happens entirely within your <strong>local CPU and RAM</strong>.
+                      </p>
+                      <p>
+                        Your files <strong>never leave your machine</strong>. This results in 100% data sovereignty, zero upload latency, and absolute immunity from server-side data breaches.
+                      </p>
+                    </div>
+                  </div>
+                  <div style={{
+                    background: 'var(--bg-secondary)',
+                    padding: '3rem',
+                    borderRadius: '32px',
+                    border: '1px solid var(--border-color)',
+                    boxShadow: 'var(--shadow-premium)'
+                  }}>
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                      <Shield size={24} style={{ color: 'var(--accent-primary)' }} /> Enterprise-Grade Compliance
+                    </h3>
+                    <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '0.95rem' }}>
+                      Because PixTool never "collects" or "transfers" your data to a third party, we are inherently compliant with the world's strictest data regulations:
                     </p>
-                    <p style={{ marginBottom: '1.25rem' }}>
-                      <strong>PixTool is different.</strong> Our entire suite is re-engineered from the ground up using <strong>WebAssembly (WASM)</strong> and high-performance browser-native APIs. When you click 'Compress', 'Merge', or 'Translate', the underlying algorithms are delivered to your device, and the actual processing happens entirely within your <strong>local CPU and RAM</strong>.
-                    </p>
-                    <p>
-                      Your files <strong>never leave your machine</strong>. This results in 100% data sovereignty, zero upload latency, and absolute immunity from server-side data breaches.
-                    </p>
+                    <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: 0, listStyle: 'none' }}>
+                      {[
+                        { title: 'GPDR Ready', desc: 'No data controller to data processor transfer occurs.' },
+                        { title: 'HIPAA Compliant', desc: 'Medical records stay strictly on your local hardware.' },
+                        { title: 'CCPA/CPRA', desc: 'Your personal information is never harvested or sold.' },
+                        { title: 'Air-Gapped Safety', desc: 'Once loaded, tools work entirely without internet access.' }
+                      ].map((item, i) => (
+                        <li key={i} style={{ display: 'flex', gap: '12px' }}>
+                          <div style={{ color: 'var(--accent-primary)', fontWeight: 900 }}>✓</div>
+                          <div>
+                            <div style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text-primary)' }}>{item.title}</div>
+                            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{item.desc}</div>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
-                <div style={{
-                  background: 'var(--bg-secondary)',
-                  padding: '3rem',
-                  borderRadius: '32px',
-                  border: '1px solid var(--border-color)',
-                  boxShadow: 'var(--shadow-premium)'
-                }}>
-                  <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <Shield size={24} style={{ color: 'var(--accent-primary)' }} /> Enterprise-Grade Compliance
-                  </h3>
-                  <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '0.95rem' }}>
-                    Because PixTool never "collects" or "transfers" your data to a third party, we are inherently compliant with the world's strictest data regulations:
-                  </p>
-                  <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: 0, listStyle: 'none' }}>
-                    {[
-                      { title: 'GPDR Ready', desc: 'No data controller to data processor transfer occurs.' },
-                      { title: 'HIPAA Compliant', desc: 'Medical records stay strictly on your local hardware.' },
-                      { title: 'CCPA/CPRA', desc: 'Your personal information is never harvested or sold.' },
-                      { title: 'Air-Gapped Safety', desc: 'Once loaded, tools work entirely without internet access.' }
-                    ].map((item, i) => (
-                      <li key={i} style={{ display: 'flex', gap: '12px' }}>
-                        <div style={{ color: 'var(--accent-primary)', fontWeight: 900 }}>✓</div>
-                        <div>
-                          <div style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text-primary)' }}>{item.title}</div>
-                          <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{item.desc}</div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </ScrollReveal>
 
           <section className="content-section" style={{ paddingBottom: 'clamp(4rem, 10vw, 10rem)' }}>
             <div className="container-pro">
@@ -359,11 +471,9 @@ export default function Home() {
                     </button>
                   </div>
                   {filteredTools.length > 0 ? (
-                    <div
-                      className="tools-grid"
-                    >
-                      {filteredTools.map((tool) => (
-                        <ToolCard key={tool.path} tool={tool} />
+                    <div className="tools-grid">
+                      {filteredTools.map((tool, index) => (
+                        <ToolCard key={tool.path} tool={tool} index={index} />
                       ))}
                     </div>
                   ) : (
@@ -381,399 +491,149 @@ export default function Home() {
                 </div>
               ) : (
                 <>
-                  {/* New & Trending Category */}
-                  {!isSearching && (
-                    <section style={{ marginBottom: '6rem', position: 'relative' }}>
-                      <div style={{
-                        position: 'sticky',
-                        top: '80px',
-                        zIndex: 10,
-                        background: 'rgba(var(--bg-primary-rgb), 0.7)',
-                        backdropFilter: 'blur(24px)',
-                        WebkitBackdropFilter: 'blur(24px)',
-                        padding: '1.5rem 0',
-                        marginBottom: '3rem',
-                        boxShadow: '0 4px 40px rgba(0, 0, 0, 0.05)',
-                        borderBottom: '1px solid rgba(255,255,255,0.05)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '1.2rem',
-                        borderRadius: '0 0 24px 24px'
-                      }}>
-                        <div style={{ padding: '0.6rem', background: 'rgba(168, 85, 247, 0.08)', borderRadius: '12px', color: '#a855f7' }}>
-                          <Sparkles size={24} />
-                        </div>
-                        <div>
-                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', margin: 0, letterSpacing: '-0.02em' }}>New & Trending <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, fontFamily: '"Inter", sans-serif', marginLeft: '0.5rem' }}>(Latest Tools)</span></h2>
-                        </div>
-                      </div>
-                      <div className="tools-grid">
-                        {communicationTools.filter(t => ['json-formatter', 'unit-converter', 'password-generator'].includes(t.id)).map(tool => (
-                          <ToolCard key={tool.path} tool={tool} />
-                        ))}
-                      </div>
-                    </section>
-                  )}
-
-                  {/* Math Tools Category */}
-                  {!isSearching && (
-                    <section style={{ marginBottom: '6rem', position: 'relative' }}>
-                      <div style={{
-                        position: 'sticky',
-                        top: '80px',
-                        zIndex: 10,
-                        background: 'rgba(var(--bg-primary-rgb), 0.7)',
-                        backdropFilter: 'blur(24px)',
-                        WebkitBackdropFilter: 'blur(24px)',
-                        padding: '1.5rem 0',
-                        marginBottom: '3rem',
-                        boxShadow: '0 4px 40px rgba(0, 0, 0, 0.05)',
-                        borderBottom: '1px solid rgba(255,255,255,0.05)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '1.2rem',
-                        borderRadius: '0 0 24px 24px'
-                      }}>
-                        <div style={{ padding: '0.6rem', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '12px', color: '#3b82f6' }}>
-                          <Calculator size={24} />
-                        </div>
-                        <div>
-                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', margin: 0, letterSpacing: '-0.02em' }}>Advanced Mathematics <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, fontFamily: '"Inter", sans-serif', marginLeft: '0.5rem' }}>({mathTools.length} Tools)</span></h2>
-                        </div>
-                      </div>
-                      <div className="tools-grid">
-                        {mathTools.map((tool) => (
-                          <ToolCard
-                            key={tool.path}
-                            tool={tool}
-                          />
-                        ))}
-                      </div>
-                    </section>
-                  )}
-                  {/* Image Tools Category */}
-                  {!isSearching && (
-                    <section style={{ marginBottom: '6rem', position: 'relative' }}>
-                      <div style={{
-                        position: 'sticky',
-                        top: '80px',
-                        zIndex: 10,
-                        background: 'rgba(var(--bg-primary-rgb), 0.7)',
-                        backdropFilter: 'blur(24px)',
-                        WebkitBackdropFilter: 'blur(24px)',
-                        padding: '1.5rem 0',
-                        marginBottom: '3rem',
-                        boxShadow: '0 4px 40px rgba(0, 0, 0, 0.05)',
-                        borderBottom: '1px solid rgba(255,255,255,0.05)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '1.2rem',
-                        borderRadius: '0 0 24px 24px'
-                      }}>
-                        <div style={{ padding: '0.6rem', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '12px', color: '#3b82f6' }}>
-                          <Image size={24} />
-                        </div>
-                        <div>
-                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', margin: 0, letterSpacing: '-0.02em' }}>Image Processing <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, fontFamily: '"Inter", sans-serif', marginLeft: '0.5rem' }}>({imageTools.length} Tools)</span></h2>
-                        </div>
-                      </div>
-                      <div className="tools-grid">
-                        {(showAllImageTools ? imageTools : imageTools.slice(0, 6)).map((tool) => (
-                          <ToolCard
-                            key={tool.path}
-                            tool={tool}
-                          />
-                        ))}
-                      </div>
-                      {imageTools.length > 6 && (
-                        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-                          <button
-                            onClick={() => setShowAllImageTools(!showAllImageTools)}
-                            className="btn btn-secondary"
-                            style={{ minWidth: '120px' }}
-                          >
-                            {showAllImageTools ? 'Show Less' : `Show ${imageTools.length - 6} More`}
-                          </button>
-                        </div>
-                      )}
-                    </section>
-                  )}
-
-                  {/* PDF Tools Category */}
-                  {!isSearching && (
-                    <section style={{ marginBottom: '6rem', position: 'relative' }}>
-                      <div style={{
-                        position: 'sticky',
-                        top: '80px',
-                        zIndex: 10,
-                        background: 'rgba(var(--bg-primary-rgb), 0.7)',
-                        backdropFilter: 'blur(24px)',
-                        WebkitBackdropFilter: 'blur(24px)',
-                        padding: '1.5rem 0',
-                        marginBottom: '3rem',
-                        boxShadow: '0 4px 40px rgba(0, 0, 0, 0.05)',
-                        borderBottom: '1px solid rgba(255,255,255,0.05)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '1.2rem',
-                        borderRadius: '0 0 24px 24px'
-                      }}>
-                        <div style={{ padding: '0.6rem', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '12px', color: '#ef4444' }}>
-                          <FileText size={24} />
-                        </div>
-                        <div>
-                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', margin: 0, letterSpacing: '-0.02em' }}>PDF Management <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, fontFamily: '"Inter", sans-serif', marginLeft: '0.5rem' }}>({pdfTools.length} Tools)</span></h2>
-                        </div>
-                      </div>
-                      <div className="tools-grid">
-                        {(showAllPdfTools ? pdfTools : pdfTools.slice(0, 6)).map((tool) => (
-                          <ToolCard key={tool.path} tool={tool} />
-                        ))}
-                      </div>
-                      {pdfTools.length > 6 && (
-                        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-                          <button
-                            onClick={() => setShowAllPdfTools(!showAllPdfTools)}
-                            className="btn btn-secondary"
-                            style={{ minWidth: '120px' }}
-                          >
-                            {showAllPdfTools ? 'Show Less' : `Show ${pdfTools.length - 6} More`}
-                          </button>
-                        </div>
-                      )}
-                    </section>
-                  )}
-
-                  {/* Utility Tools Category */}
-                  {!isSearching && (
-                    <section style={{ marginBottom: '6rem', position: 'relative' }}>
-                      <div style={{
-                        position: 'sticky',
-                        top: '80px',
-                        zIndex: 10,
-                        background: 'rgba(var(--bg-primary-rgb), 0.7)',
-                        backdropFilter: 'blur(24px)',
-                        WebkitBackdropFilter: 'blur(24px)',
-                        padding: '1.5rem 0',
-                        marginBottom: '3rem',
-                        boxShadow: '0 4px 40px rgba(0, 0, 0, 0.05)',
-                        borderBottom: '1px solid rgba(255,255,255,0.05)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '1.2rem',
-                        borderRadius: '0 0 24px 24px'
-                      }}>
-                        <div style={{ padding: '0.6rem', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '12px', color: '#10b981' }}>
-                          <Zap size={24} />
-                        </div>
-                        <div>
-                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', margin: 0, letterSpacing: '-0.02em' }}>Professional Utilities <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, fontFamily: '"Inter", sans-serif', marginLeft: '0.5rem' }}>({communicationTools.length} Tools)</span></h2>
-                        </div>
-                      </div>
-                      <div className="tools-grid">
-                        {communicationTools.map((tool) => (
-                          <ToolCard
-                            key={tool.path}
-                            tool={tool}
-                          />
-                        ))}
-                      </div>
-                    </section>
-                  )}
-
-                  {/* AI Tools Category */}
-                  {!isSearching && (
-                    <section style={{ marginBottom: '6rem', position: 'relative' }}>
-                      <div style={{
-                        position: 'sticky',
-                        top: '80px',
-                        zIndex: 10,
-                        background: 'rgba(var(--bg-primary-rgb), 0.7)',
-                        backdropFilter: 'blur(24px)',
-                        WebkitBackdropFilter: 'blur(24px)',
-                        padding: '1.5rem 0',
-                        marginBottom: '3rem',
-                        boxShadow: '0 4px 40px rgba(0, 0, 0, 0.05)',
-                        borderBottom: '1px solid rgba(255,255,255,0.05)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '1.2rem',
-                        borderRadius: '0 0 24px 24px'
-                      }}>
-                        <div style={{ padding: '0.6rem', background: 'rgba(139, 92, 246, 0.1)', borderRadius: '12px', color: '#8b5cf6' }}>
-                          <Sparkles size={24} />
-                        </div>
-                        <div>
-                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', margin: 0, letterSpacing: '-0.02em' }}>Next-Gen AI <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, fontFamily: '"Inter", sans-serif', marginLeft: '0.5rem' }}>({aiTools.length} Tools)</span></h2>
-                        </div>
-                      </div>
-                      <div className="tools-grid">
-                        {(showAllAiTools ? aiTools : aiTools.slice(0, 6)).map((tool) => (
-                          <ToolCard
-                            key={tool.path}
-                            tool={tool}
-                          />
-                        ))}
-                      </div>
-                      {aiTools.length > 6 && (
-                        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-                          <button
-                            onClick={() => setShowAllAiTools(!showAllAiTools)}
-                            className="btn btn-secondary"
-                            style={{ minWidth: '120px' }}
-                          >
-                            {showAllAiTools ? 'Show Less' : `Show ${aiTools.length - 6} More`}
-                          </button>
-                        </div>
-                      )}
-                    </section>
-                  )}
-
-                  {/* Productivity Tools Category */}
-                  {!isSearching && (
-                    <section style={{ marginBottom: '6rem', position: 'relative' }}>
-                      <div style={{
-                        position: 'sticky',
-                        top: '80px',
-                        zIndex: 10,
-                        background: 'rgba(var(--bg-primary-rgb), 0.7)',
-                        backdropFilter: 'blur(24px)',
-                        WebkitBackdropFilter: 'blur(24px)',
-                        padding: '1.5rem 0',
-                        marginBottom: '3rem',
-                        boxShadow: '0 4px 40px rgba(0, 0, 0, 0.05)',
-                        borderBottom: '1px solid rgba(255,255,255,0.05)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '1.2rem',
-                        borderRadius: '0 0 24px 24px'
-                      }}>
-                        <div style={{ padding: '0.6rem', background: 'rgba(107, 114, 128, 0.1)', borderRadius: '12px', color: '#6366f1' }}>
-                          <FileText size={24} />
-                        </div>
-                        <div>
-                          <h2 style={{ fontSize: '1.8rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', margin: 0, letterSpacing: '-0.02em' }}>Productivity Suite <span style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 500, fontFamily: '"Inter", sans-serif', marginLeft: '0.5rem' }}>({productivityTools.length} Tools)</span></h2>
-                        </div>
-                      </div>
-                      <div className="tools-grid">
-                        {productivityTools.map((tool) => (
-                          <ToolCard
-                            key={tool.path}
-                            tool={tool}
-                          />
-                        ))}
-                      </div>
-                    </section>
-                  )}
+                  {categoryConfig.map((cat) => {
+                    const sectionShowMore = showMoreMap[cat.title]
+                    const sectionToggle = toggleMap[cat.title]
+                    return (
+                      <CategorySection
+                        key={cat.key}
+                        icon={cat.icon}
+                        iconBg={cat.iconBg}
+                        iconColor={cat.iconColor}
+                        title={cat.title}
+                        subtitle={cat.subtitle}
+                        tools={cat.tools}
+                        initialCount={cat.initialCount}
+                        showMore={sectionShowMore}
+                        onToggleShowMore={sectionToggle}
+                      />
+                    )
+                  })}
                 </>
               )}
             </div>
 
-            <section className="container-pro" style={{
-              marginTop: '4rem',
-              marginBottom: '4rem',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              textAlign: 'center'
-            }}>
-              <h2 style={{ fontSize: '2.5rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
-                See PixTool in <span style={{ color: 'var(--accent-blue)' }}>Action</span>
-              </h2>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '600px', marginBottom: '3rem' }}>
-                Watch our quick 60-second tour showcasing the incredible speed and privacy of our 121+ professional browser tools.
-              </p>
-
-              <div style={{
-                position: 'relative',
-                width: '100%',
-                maxWidth: '400px',
-                borderRadius: '32px',
-                overflow: 'hidden',
-                boxShadow: '0 20px 80px rgba(139, 92, 246, 0.15)',
-                border: '1px solid rgba(255,255,255,0.05)',
-                aspectRatio: '9/16',
-                background: 'var(--bg-secondary)'
+            <ScrollReveal direction="up">
+              <section className="container-pro" style={{
+                marginTop: '4rem',
+                marginBottom: '4rem',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                textAlign: 'center'
               }}>
-                <LazyYouTubeEmbed
-                  videoId="fzIhPN-gv_E"
-                  title="PixTool Productivity Suite Demo"
-                  rounded="32px"
-                />
-              </div>
-            </section>
+                <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
+                  See PixTool in <span style={{ color: 'var(--accent-blue)' }}>Action</span>
+                </h2>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '600px', marginBottom: '3rem' }}>
+                  Watch our quick 60-second tour showcasing the incredible speed and privacy of our 121+ professional browser tools.
+                </p>
 
-            <div className="container-pro" style={{
-              marginTop: 'clamp(2rem, 5vw, 4rem)',
-              padding: 'clamp(3rem, 5vw, 5rem) 2rem',
-              background: 'linear-gradient(180deg, rgba(247, 249, 251, 0.02) 0%, rgba(107, 56, 212, 0.02) 100%)',
-              borderRadius: '40px',
-              border: '1px solid rgba(255,255,255,0.05)',
-              textAlign: 'left'
-            }}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '4rem' }}>
-                <div>
-                  <h2 style={{ fontSize: '2rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
-                    <span style={{ color: 'var(--accent-blue)' }}>1.</span> Why Choose PixTool?
-                  </h2>
-                  <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem', fontFamily: '"Inter", sans-serif' }}>
-                    Unlike other platforms that require you to upload your files to their servers,
-                    PixTool processes almost everything <b style={{ color: 'var(--text-primary)' }}>locally in your browser</b>.
-                    This means your sensitive images and PDFs never leave your device, ensuring
-                    <b style={{ color: 'var(--text-primary)' }}> 100% privacy</b> and extreme speed. Whether you need to resize a photo
-                    for social media or merge documents, PixTool has you covered with professional-grade results.
-                  </p>
+                <motion.div
+                  style={{
+                    position: 'relative',
+                    width: '100%',
+                    maxWidth: '400px',
+                    borderRadius: '32px',
+                    overflow: 'hidden',
+                    boxShadow: '0 20px 80px rgba(139, 92, 246, 0.15)',
+                    border: '1px solid rgba(255,255,255,0.05)',
+                    aspectRatio: '9/16',
+                    background: 'var(--bg-secondary)'
+                  }}
+                  whileHover={{ scale: 1.02, boxShadow: '0 30px 100px rgba(139, 92, 246, 0.25)' }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <LazyYouTubeEmbed
+                    videoId="fzIhPN-gv_E"
+                    title="PixTool Productivity Suite Demo"
+                    rounded="32px"
+                  />
+                </motion.div>
+              </section>
+            </ScrollReveal>
+
+            <ScrollReveal direction="up">
+              <div className="container-pro" style={{
+                marginTop: 'clamp(2rem, 5vw, 4rem)',
+                padding: 'clamp(3rem, 5vw, 5rem) 2rem',
+                background: 'linear-gradient(180deg, rgba(247, 249, 251, 0.02) 0%, rgba(107, 56, 212, 0.02) 100%)',
+                borderRadius: '40px',
+                border: '1px solid rgba(255,255,255,0.05)',
+                textAlign: 'left'
+              }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '4rem' }}>
+                  <div>
+                    <h2 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
+                      <span style={{ color: 'var(--accent-blue)' }}>1.</span> Why Choose PixTool?
+                    </h2>
+                    <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem' }}>
+                      Unlike other platforms that require you to upload your files to their servers,
+                      PixTool processes almost everything <b style={{ color: 'var(--text-primary)' }}>locally in your browser</b>.
+                      This means your sensitive images and PDFs never leave your device, ensuring
+                      <b style={{ color: 'var(--text-primary)' }}> 100% privacy</b> and extreme speed. Whether you need to resize a photo
+                      for social media or merge documents, PixTool has you covered with professional-grade results.
+                    </p>
+                  </div>
+                  <div>
+                    <h2 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
+                      <span style={{ color: 'var(--accent-purple)' }}>2.</span> 100% Free Forever
+                    </h2>
+                    <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem' }}>
+                      Our mission is to provide high-quality productivity tools without the high-end
+                      subscription costs. There are no hidden fees, no credit cards, and no "Pro"
+                      tiers that lock away essential features. Every tool on PixTool is completely
+                      free — from our advanced image resizer to our scientific calculators.
+                      Essential logic should be accessible to everyone.
+                    </p>
+                  </div>
+                  <div>
+                    <h2 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
+                      <span style={{ color: 'var(--accent-emerald)' }}>3.</span> Zero Latency Speed
+                    </h2>
+                    <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem' }}>
+                      Time is money. Our tools are optimized to be lightweight and infinitely fast.
+                      Whether you're compiling code patterns or resizing a high-resolution 4K image,
+                      you'll get results in milliseconds. No server queues. Our
+                      browser-based processing engine leverages WebAssembly and Web Workers to deliver desktop-class performance directly in your tab.
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h2 style={{ fontSize: '2rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
-                    <span style={{ color: '#8b5cf6' }}>2.</span> 100% Free Forever
-                  </h2>
-                  <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem', fontFamily: '"Inter", sans-serif' }}>
-                    Our mission is to provide high-quality productivity tools without the high-end
-                    subscription costs. There are no hidden fees, no credit cards, and no "Pro"
-                    tiers that lock away essential features. Every tool on PixTool is completely
-                    free — from our advanced image resizer to our scientific calculators.
-                    Essential logic should be accessible to everyone.
-                  </p>
-                </div>
-                <div>
-                  <h2 style={{ fontSize: '2rem', fontWeight: 900, fontFamily: '"Manrope", sans-serif', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
-                    <span style={{ color: '#10b981' }}>3.</span> Zero Latency Speed
-                  </h2>
-                  <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.05rem', fontFamily: '"Inter", sans-serif' }}>
-                    Time is money. Our tools are optimized to be lightweight and infinitely fast.
-                    Whether you're compiling code patterns or resizing a high-resolution 4K image,
-                    you'll get results in milliseconds. No server queues. Our
-                    browser-based processing engine leverages WebAssembly and Web Workers to deliver desktop-class performance directly in your tab.
-                  </p>
+
+                <div style={{ marginTop: '4rem', paddingTop: '4rem', borderTop: '1px solid var(--border-color)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    <h3 style={{ fontWeight: 700, fontSize: '1.1rem' }}>Secure Processing</h3>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Browser-based logic ensures your data stays on your machine. No server uploads ever.</p>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    <h3 style={{ fontWeight: 700, fontSize: '1.1rem' }}>No Registration</h3>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Start using our tools immediately. No accounts, no emails, no tracking.</p>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    <h3 style={{ fontWeight: 700, fontSize: '1.1rem' }}>Cross-Platform</h3>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Works perfectly on Mac, Windows, Linux, iOS, and Android. Any modern browser.</p>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    <h3 style={{ fontWeight: 700, fontSize: '1.1rem' }}>High Resolution</h3>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>We preserve the quality of your files during every operation. No compression artifacts.</p>
+                  </div>
                 </div>
               </div>
+            </ScrollReveal>
 
-              <div style={{ marginTop: '4rem', paddingTop: '4rem', borderTop: '1px solid var(--border-color)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <h3 style={{ fontWeight: 700, fontSize: '1.1rem' }}>Secure Processing</h3>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Browser-based logic ensures your data stays on your machine. No server uploads ever.</p>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <h3 style={{ fontWeight: 700, fontSize: '1.1rem' }}>No Registration</h3>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Start using our tools immediately. No accounts, no emails, no tracking.</p>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <h3 style={{ fontWeight: 700, fontSize: '1.1rem' }}>Cross-Platform</h3>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Works perfectly on Mac, Windows, Linux, iOS, and Android. Any modern browser.</p>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <h3 style={{ fontWeight: 700, fontSize: '1.1rem' }}>High Resolution</h3>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>We preserve the quality of your files during every operation. No compression artifacts.</p>
-                </div>
-              </div>
-            </div>
-
-            <Suspense fallback={<div style={{ minHeight: '400px', background: 'var(--bg-secondary)', borderRadius: '40px', margin: '2rem 0' }} />}>
-              <div style={{ minHeight: '600px' }}><UseCaseSection /></div>
-              <div style={{ minHeight: '800px' }}><FAQSection /></div>
-              <div style={{ minHeight: '1200px' }}><TechnicalAuthority /></div>
-              <div style={{ minHeight: '600px' }}><BlogSection /></div>
+            <Suspense fallback={<SectionSkeleton height="400px" />}>
+              <ScrollReveal direction="up">
+                <UseCaseSection />
+              </ScrollReveal>
+              <ScrollReveal direction="up">
+                <FAQSection />
+              </ScrollReveal>
+              <ScrollReveal direction="up">
+                <TechnicalAuthority />
+              </ScrollReveal>
+              <ScrollReveal direction="up">
+                <BlogSection />
+              </ScrollReveal>
             </Suspense>
           </section>
         </div>

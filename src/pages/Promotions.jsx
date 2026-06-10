@@ -34,7 +34,7 @@ export default function Promotions() {
 
             <section className="hero" style={{ padding: '6rem 2rem 4rem' }}>
                 <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-                    <div style={{ display: 'inline-flex', padding: '12px', background: 'rgba(168, 85, 247, 0.1)', color: '#a855f7', borderRadius: '50%', marginBottom: '1.5rem' }}>
+                    <div style={{ display: 'inline-flex', padding: '12px', background: 'var(--accent-purple-50)', color: 'var(--accent-purple)', borderRadius: '50%', marginBottom: '1.5rem' }}>
                         <Tag size={32} />
                     </div>
                     <h1 className="hero-title" style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '1.5rem' }}>Exclusive Offers</h1>

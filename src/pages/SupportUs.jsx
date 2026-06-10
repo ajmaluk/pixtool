@@ -56,7 +56,7 @@ export default function SupportUs() {
                         <h2 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '2rem', textAlign: 'center' }}>Where does your money go?</h2>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
                             <div style={{ display: 'flex', gap: '1rem' }}>
-                                <ShieldCheck style={{ color: '#10b981', flexShrink: 0 }} />
+                                <ShieldCheck style={{ color: 'var(--accent-emerald)', flexShrink: 0 }} />
                                 <div>
                                     <h3 style={{ fontWeight: 800, marginBottom: '0.5rem' }}>Server Costs</h3>
                                     <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Keeping our high-speed global infrastructure running 24/7.</p>
@@ -70,7 +70,7 @@ export default function SupportUs() {
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '1rem' }}>
-                                <Heart style={{ color: '#ef4444', flexShrink: 0 }} />
+                                <Heart style={{ color: 'var(--accent-red)', flexShrink: 0 }} />
                                 <div>
                                     <h3 style={{ fontWeight: 800, marginBottom: '0.5rem' }}>Open Source</h3>
                                     <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Supporting the open-source libraries that make our work possible.</p>

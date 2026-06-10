@@ -28,16 +28,7 @@ export default function ImageTools() {
   const { triggerRating } = useRatePopup()
   const confirm = useConfirm()
   const alert = useAlert()
-  const initialTool = tools.find(t => t.id === toolId)?.id || null
-  const [activeTool, setActiveTool] = useState(initialTool)
-
-  useEffect(() => {
-    if (toolId && tools.find(t => t.id === toolId)) {
-      setActiveTool(toolId)
-    } else {
-      setActiveTool(null)
-    }
-  }, [toolId])
+  const [activeTool, setActiveTool] = useState(null)
   const { files, setFiles, preview, handleFiles, handleDrop, removeFile } = useFileDrop(['image/'])
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [processedPreview, setProcessedPreview] = useState(null)
@@ -884,7 +875,7 @@ export default function ImageTools() {
             <select
               className="select"
               value={settings.format}
-              onChange={(e) => setSettings({ ...settings, format: e.target.value })}
+              onChange={(e) => setSettings(s => ({ ...s, format: e.target.value }))}
             >
               <option value="original">Original Format</option>
               <option value="png">PNG</option>
@@ -911,7 +902,7 @@ export default function ImageTools() {
               height: 600,
               quality: 80,
               rotation: 0,
-              maintainAspect: true,
+              maintainAspect: false,
               format: 'original',
               convertTo: 'png',
               watermarkText: 'PixTool',
@@ -1028,19 +1019,11 @@ export default function ImageTools() {
             <div className="landing-center">
               <div className="page-hero">
                 <div className="page-hero-content">
-                  <h1 className="page-title" style={{ fontFamily: '"Manrope", sans-serif', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
+                  <h1 className="page-title">
                     Studio-Grade <br/>
-                    <span style={{ 
-                      background: 'linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundSize: '200% auto',
-                      animation: 'gradient-flow 6s linear infinite',
-                      display: 'inline-block',
-                      padding: '0.1em 0'
-                    }}>Image Processing</span>
+                    <span className="gradient-text-purple">Image Processing</span>
                   </h1>
-                  <p className="page-subtitle" style={{ fontFamily: '"Inter", sans-serif', fontSize: '1.25rem', opacity: 0.9, marginTop: '1rem', lineHeight: 1.6 }}>
+                  <p className="page-subtitle" style={{ fontSize: '1.25rem', opacity: 0.9, marginTop: '1rem' }}>
                     The most powerful way to process images online. Professional-grade scaling, compression, and editing tools that run 100% locally in your browser.
                   </p>
                 </div>
@@ -1192,7 +1175,7 @@ export default function ImageTools() {
                               type: 'danger'
                             });
                             if (ok) { setFiles([]); setSelectedIndex(0); }
-                          }} style={{ padding: '0.6rem 1rem', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderColor: 'transparent' }}>
+                          }} style={{ padding: '0.6rem 1rem', background: 'var(--accent-red-50)', color: 'var(--accent-red)', borderColor: 'transparent' }}>
                             <X size={18} /> Clear
                           </button>
                           <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.6rem 1.25rem' }} aria-label="Upload more images">
@@ -1326,14 +1309,14 @@ export default function ImageTools() {
                     title={activeToolData?.title || 'Professional Image Studio'}
                     description={activeToolData?.description || hubMetadata.description}
                     toolId={activeTool}
-                    benefits={activeToolData?.features || [
+                    benefits={activeToolData?.benefits || [
                       "Zero-Upload Privacy: Files are processed 100% in your browser using WASM technology.",
                       "Universal Format Support: Seamlessly work with JPEG, PNG, WebP, AVIF, and HEIC.",
                       "Enterprise-Grade Speed: Instant processing with sub-second response times.",
                       "No Data Scraping: We don't train AI models on your photos or store metadata.",
                       "Lossless Optimization: Reduce file sizes by up to 80% without visible quality loss."
                     ]}
-                    howTo={activeToolData?.howItWorks || [
+                    howTo={activeToolData?.howTo || [
                       "Select a tool from the Image Studio sidebar (e.g., Compressor, Resizer, or Cropper).",
                       "Drag and drop your images into the secure processing zone.",
                       "Use the settings sidebar to configure dimensions, quality, and rotation.",

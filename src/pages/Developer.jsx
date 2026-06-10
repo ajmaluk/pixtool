@@ -99,7 +99,7 @@ export default function Developer() {
 
                         {/* Expertise */}
                         <div className="info-card">
-                            <div className="info-card-icon" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
+                            <div className="info-card-icon" style={{ background: 'var(--accent-emerald-50)', color: 'var(--accent-emerald)' }}>
                                 <Cpu size={32} />
                             </div>
                             <h2 style={{ fontSize: '1.75rem', fontWeight: 850, marginBottom: '1.5rem', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>Expertise</h2>
@@ -120,7 +120,7 @@ export default function Developer() {
 
                         {/* Location */}
                         <div className="info-card">
-                            <div className="info-card-icon" style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444' }}>
+                            <div className="info-card-icon" style={{ background: 'var(--accent-red-50)', color: 'var(--accent-red)' }}>
                                 <Globe size={32} />
                             </div>
                             <h2 style={{ fontSize: '1.75rem', fontWeight: 850, marginBottom: '1.5rem', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>Location</h2>

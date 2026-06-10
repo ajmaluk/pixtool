@@ -23,19 +23,11 @@ export default function MathTools() {
                 <div className="landing-center">
                     <div className="page-hero">
                         <div className="page-hero-content">
-                            <h1 className="page-title" style={{ fontFamily: '"Manrope", sans-serif', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
+                            <h1 className="page-title">
                               Advanced <br/>
-                              <span style={{ 
-                                background: 'linear-gradient(135deg, #3b82f6 0%, #10b981 100%)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                backgroundSize: '200% auto',
-                                animation: 'gradient-flow 6s linear infinite',
-                                display: 'inline-block',
-                                padding: '0.1em 0'
-                              }}>Mathematics</span>
+                              <span className="gradient-text-blue-green">Mathematics</span>
                             </h1>
-                            <p className="page-subtitle" style={{ fontFamily: '"Inter", sans-serif', fontSize: '1.25rem', opacity: 0.9, marginTop: '1rem', lineHeight: 1.6 }}>
+                            <p className="page-subtitle" style={{ fontSize: '1.25rem', opacity: 0.9, marginTop: '1rem' }}>
                               A high-authority suite of 10 specialized intelligence tools engineered for scientific precision, interactive visualization, and topological analysis.
                             </p>
                         </div>

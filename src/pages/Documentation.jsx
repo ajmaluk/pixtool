@@ -36,7 +36,7 @@ export default function Documentation() {
 
             <section className="hero" style={{ padding: 'clamp(5rem, 15vh, 8rem) 1.5rem 5rem', background: 'var(--bg-secondary)', marginBottom: '4rem' }}>
                 <div style={{ maxWidth: '100%', margin: '0 auto', textAlign: 'center' }}>
-                    <div style={{ display: 'inline-flex', padding: '12px', background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-primary)', borderRadius: '50%', marginBottom: '1.5rem' }}>
+                    <div style={{ display: 'inline-flex', padding: '12px', background: 'var(--accent-blue-50)', color: 'var(--accent-primary)', borderRadius: '50%', marginBottom: '1.5rem' }}>
                         <Book size={32} />
                     </div>
                     <h1 className="hero-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>Full Documentation</h1>
@@ -58,7 +58,7 @@ export default function Documentation() {
                     <div className="page-grid">
                         {docSections.map((section, i) => (
                             <div key={i} className="info-card" style={{ padding: '2.5rem' }}>
-                                <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
+                                <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'var(--accent-blue-50)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
                                     <section.icon size={24} />
                                 </div>
                                 <h2 style={{ fontSize: '1.35rem', fontWeight: 900, marginBottom: '1rem', color: 'var(--text-primary)' }}>{section.title}</h2>

@@ -888,9 +888,9 @@ export default function TempMail({
                 <h2 style={{ fontSize: '1.75rem', fontWeight: 900, marginBottom: '2rem' }}>Related Tools</h2>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
                   {[
-                    { title: 'Fake Email Generator', desc: 'Random fake emails', path: '/fake-email' },
-                    { title: 'Disposable Email', desc: 'One-time use inbox', path: '/disposable-email' },
-                    { title: 'Throwaway Email', desc: 'Privacy protection', path: '/throwaway-email' },
+                    { title: 'Fake Email Generator', desc: 'Random fake emails', path: '/identity-forge' },
+                    { title: 'Disposable Email', desc: 'One-time use inbox', path: '/burner-inbox' },
+                    { title: 'Throwaway Email', desc: 'Privacy protection', path: '/ghost-inbox' },
                     { title: '10 Minute Mail', desc: 'Auto-expiring inbox', path: '/temp-mail/10-minute-mail' }
                   ].map((tool, i) => (
                     <a key={i} href={tool.path} className="tool-card" style={{ padding: '1.5rem' }}>

@@ -13,7 +13,7 @@ export default function Terms() {
 
             <section className="hero" style={{ padding: '6rem 2rem 3rem', background: 'var(--bg-secondary)' }}>
                 <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-                    <div style={{ display: 'inline-flex', padding: '12px', background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-primary)', borderRadius: '50%', marginBottom: '1.5rem' }}>
+                    <div style={{ display: 'inline-flex', padding: '12px', background: 'var(--accent-blue-50)', color: 'var(--accent-primary)', borderRadius: '50%', marginBottom: '1.5rem' }}>
                         <Scale size={32} />
                     </div>
                     <h1 className="hero-title" style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '1rem' }}>Terms of Service</h1>
@@ -35,7 +35,7 @@ export default function Terms() {
                         </p>
                         <div style={{ background: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: '12px', marginBottom: '2rem', border: '1px solid var(--border-color)' }}>
                             <p style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '0.5rem' }}>
-                                <AlertCircle size={18} style={{ color: '#ef4444' }} /> Prohibited Actions:
+                                <AlertCircle size={18} style={{ color: 'var(--accent-red)' }} /> Prohibited Actions:
                             </p>
                             <ul style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', paddingLeft: '1.25rem' }}>
                                 <li>Attempting to bypass security or reverse-engineer the tools.</li>

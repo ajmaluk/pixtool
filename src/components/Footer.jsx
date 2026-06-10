@@ -103,24 +103,6 @@ export default function Footer() {
         </div>
 
         <div className="footer-links-group">
-          <h3 className="footer-heading">Site Links</h3>
-          <ul className="footer-links">
-            <li><Link to="/" title="Go to the PixTool home page">Home</Link></li>
-            <li><Link to="/blog" title="Browse the PixTool blog">Blog</Link></li>
-            <li><Link to="/about" title="Learn more about PixTool">About</Link></li>
-            <li><Link to="/contact" title="Contact PixTool support">Contact</Link></li>
-            <li><Link to="/faq" title="Read frequently asked questions">FAQ</Link></li>
-            <li><Link to="/status" title="View site status and updates">Status</Link></li>
-            <li><Link to="/showcase" title="See product screenshots and demos">Showcase</Link></li>
-            <li><Link to="/documentation" title="Read platform documentation">Documentation</Link></li>
-            <li><Link to="/news" title="Read PixTool news and updates">News</Link></li>
-            <li><Link to="/testimonials" title="See customer testimonials">Testimonials</Link></li>
-            <li><Link to="/careers" title="Explore career opportunities">Careers</Link></li>
-            <li><Link to="/case-studies" title="Read customer case studies">Case Studies</Link></li>
-          </ul>
-        </div>
-
-        <div className="footer-links-group">
           <h3 className="footer-heading">Legal & Privacy</h3>
           <ul className="footer-links">
             <li><Link id="footer-link-legal-privacy" to="/privacy-policy" title="Read our strict zero-data collection policy">Privacy Policy</Link></li>

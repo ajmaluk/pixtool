@@ -1,6 +1,5 @@
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
-import { fileURLToPath, URL } from 'node:url'
 import process from 'node:process'
 
 export default defineConfig(({ mode }) => {
@@ -9,9 +8,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     resolve: {
-      alias: {
-        'framer-motion': fileURLToPath(new URL('./src/lib/motionShim.js', import.meta.url))
-      }
+      alias: {}
     },
     build: {
       target: 'esnext',
@@ -27,7 +24,7 @@ export default defineConfig(({ mode }) => {
           drop_console: true,
           drop_debugger: true,
           passes: 3,
-          pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn']
+          pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn', 'console.error']
         },
         mangle: {
           safari10: true
@@ -90,7 +87,7 @@ export default defineConfig(({ mode }) => {
     },
     optimizeDeps: {
       include: ['react', 'react-dom', 'react-router-dom', 'lucide-react'],
-      exclude: ['pdfjs-dist', 'tesseract.js']
+      exclude: ['pdfjs-dist']
     },
     server: {
       port: 5173,

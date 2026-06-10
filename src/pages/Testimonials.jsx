@@ -197,8 +197,8 @@ export default function Testimonials() {
                   <button className="btn btn-primary" type="submit" disabled={status === 'loading'}>
                     {status === 'loading' ? 'Submitting...' : 'Submit for review'}
                   </button>
-                  {status === 'success' && <div style={{ color: '#10b981' }}>Thanks. Your testimonial was submitted for moderation.</div>}
-                  {status === 'error' && <div style={{ color: '#ef4444' }}>{errorMessage || 'Unable to submit now. Please retry.'}</div>}
+                  {status === 'success' && <div style={{ color: 'var(--accent-emerald)' }}>Thanks. Your testimonial was submitted for moderation.</div>}
+                  {status === 'error' && <div style={{ color: 'var(--accent-red)' }}>{errorMessage || 'Unable to submit now. Please retry.'}</div>}
                 </form>
               </div>
             </>

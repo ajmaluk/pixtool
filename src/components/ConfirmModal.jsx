@@ -14,16 +14,16 @@ export default function ConfirmModal({
 }) {
   const getIcon = () => {
     switch (type) {
-      case 'danger': return <div style={{ color: '#ef4444', background: 'rgba(239, 68, 68, 0.1)', padding: '12px', borderRadius: '16px' }}><AlertCircle size={28} /></div>;
-      case 'warning': return <div style={{ color: '#f59e0b', background: 'rgba(245, 158, 11, 0.1)', padding: '12px', borderRadius: '16px' }}><AlertCircle size={28} /></div>;
+      case 'danger': return <div style={{ color: 'var(--accent-red)', background: 'var(--accent-red-50)', padding: '12px', borderRadius: '16px' }}><AlertCircle size={28} /></div>;
+      case 'warning': return <div style={{ color: 'var(--accent-orange)', background: 'var(--accent-orange-50)', padding: '12px', borderRadius: '16px' }}><AlertCircle size={28} /></div>;
       default: return <div style={{ color: 'var(--accent-primary)', background: 'var(--accent-glow)', padding: '12px', borderRadius: '16px' }}><AlertCircle size={28} /></div>;
     }
   };
 
   const getConfirmBtnStyle = () => {
     switch (type) {
-      case 'danger': return { background: '#ef4444', color: 'white' };
-      case 'warning': return { background: '#f59e0b', color: 'white' };
+      case 'danger': return { background: 'var(--accent-red)', color: 'white' };
+      case 'warning': return { background: 'var(--accent-orange)', color: 'white' };
       default: return { background: 'var(--accent-primary)', color: 'white' };
     }
   };

@@ -1,12 +1,14 @@
-import { Suspense, lazy, Component } from 'react'
+import { Suspense, lazy } from 'react'
 import { Routes, Route, Outlet, useLocation, Link, Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import CookieConsent from './components/CookieConsent'
 import ScrollToTop from './components/ScrollToTop'
 import RatingOverlay from './components/RatingOverlay'
 import PixAiOverlay from './components/PixAiOverlay'
+import ErrorBoundary from './components/ErrorBoundary'
 import { ALL_TOOLS_MAP } from './data/tools'
 import { ConfirmProvider } from './context/ConfirmContext'
 
@@ -95,15 +97,19 @@ const KallanCopPrivacy = lazy(() => import('./pages/apps/KallanCopPrivacy'))
 
 // Loading component — stays visible inside the layout
 const PageLoader = () => (
-  <div style={{
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '60vh',
-    color: 'var(--accent-primary)',
-    flexDirection: 'column',
-    gap: '1rem'
-  }}>
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '60vh',
+      flexDirection: 'column',
+      gap: '1rem'
+    }}
+  >
     <div className="loader" style={{
       width: '40px',
       height: '40px',
@@ -112,95 +118,18 @@ const PageLoader = () => (
       borderRadius: '50%',
       animation: 'spin 0.8s linear infinite'
     }} />
-    <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Loading...</span>
-  </div>
+    <div className="skeleton-shimmer" style={{
+      width: '200px',
+      height: '16px',
+      borderRadius: '8px',
+      background: 'var(--bg-secondary)',
+      position: 'relative',
+      overflow: 'hidden'
+    }} />
+  </motion.div>
 )
 
-// Error Boundary to catch render errors and prevent blank pages
-class ErrorBoundary extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { hasError: false, error: null }
-  }
 
-  static getDerivedStateFromError(error) {
-    return { hasError: true, error }
-  }
-
-  componentDidCatch(error, errorInfo) {
-    console.error('Page render error:', error, errorInfo)
-
-    // Check if it's a chunk loading error (common in production during new deployments)
-    if (error?.name === 'ChunkLoadError' || /loading.*chunk/i.test(error?.message || '')) {
-      this.setState({ isChunkError: true })
-    }
-  }
-
-  render() {
-    if (this.state.hasError) {
-      const isChunk = this.state.isChunkError || /chunk/i.test(this.state.error?.message || '')
-
-      return (
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '60vh',
-          flexDirection: 'column',
-          gap: '1.5rem',
-          padding: '2rem',
-          textAlign: 'center'
-        }}>
-          <div style={{
-            width: '64px',
-            height: '64px',
-            borderRadius: '50%',
-            background: isChunk ? 'var(--accent-emerald-50, #ecfdf5)' : 'var(--accent-red-50, #fef2f2)',
-            color: isChunk ? 'var(--accent-emerald, #10b981)' : 'var(--accent-red, #ef4444)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '1.5rem',
-            fontWeight: 700
-          }}>{isChunk ? '↺' : '!'}</div>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>
-            {isChunk ? 'New Version Available' : 'Something went wrong'}
-          </h2>
-          <p style={{ color: 'var(--text-secondary)', maxWidth: '400px', lineHeight: 1.6 }}>
-            {isChunk
-              ? 'We have just updated PixTool. Please refresh your browser to load the latest version.'
-              : 'This page encountered an error. Please try refreshing or go back to the home page.'}
-          </p>
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <button
-              onClick={() => window.location.reload()}
-              className="btn btn-primary"
-              style={{ padding: '0.75rem 1.5rem', borderRadius: '12px' }}
-            >
-              Refresh & Reload
-            </button>
-            <button
-              onClick={() => { this.setState({ hasError: false, isChunkError: false }); window.location.href = '/' }}
-              className="btn"
-              style={{ padding: '0.75rem 1.5rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}
-            >
-              Go Home
-            </button>
-          </div>
-        </div>
-      )
-    }
-    return this.props.children
-  }
-}
-
-// Performance: Preconnect critical origins
-const PreconnectHints = () => (
-  <>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-  </>
-)
 
 // Layout wrapper — Suspense is INSIDE the layout so Navbar/Footer stay visible
 // Feature-rich Layout with Recent Tools tracking
@@ -277,11 +206,21 @@ const MainLayout = () => {
       <PixAiOverlay />
       {!isAdminPath && <Navbar />}
       <main className="main-content" style={isAdminPath ? { paddingTop: 0 } : {}}>
-        <ErrorBoundary key={location.pathname}>
-          <Suspense fallback={<PageLoader />}>
-            <Outlet />
-          </Suspense>
-        </ErrorBoundary>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={location.pathname}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <ErrorBoundary key={location.pathname}>
+              <Suspense fallback={<PageLoader />}>
+                <Outlet />
+              </Suspense>
+            </ErrorBoundary>
+          </motion.div>
+        </AnimatePresence>
 
         {!isAdminPath && !hideAuxWidgets && (
           <div className="container-pro" style={{ marginTop: '6rem', paddingBottom: '4rem' }}>
@@ -408,9 +347,18 @@ const URLNormalizer = () => {
   return null
 }
 
+// Performance: Preconnect critical origins
+const PreconnectHints = () => (
+  <>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+  </>
+)
+
 function App() {
   return (
     <ConfirmProvider>
+      <PreconnectHints />
       <URLNormalizer />
       <Routes>
         {/* All standard pages wrapped in MainLayout */}

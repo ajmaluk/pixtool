@@ -278,11 +278,11 @@ export default function Status() {
 
             {/* Enhanced Header Section */}
             <div style={{ textAlign: 'center', marginBottom: '3.5rem', paddingTop: '2rem' }}>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 0.9rem', borderRadius: '999px', background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(99, 102, 241, 0.1))', border: '1px solid rgba(79, 70, 229, 0.25)', color: 'var(--accent-primary)', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 0.9rem', borderRadius: '999px', background: 'linear-gradient(135deg, var(--accent-primary-transparent), rgba(99, 102, 241, 0.1))', border: '1px solid rgba(79, 70, 229, 0.25)', color: 'var(--accent-primary)', fontSize: '0.8rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem' }}>
                 <Rocket size={15} /> Live Development Status
               </div>
-              <h1 style={{ fontSize: 'clamp(2.4rem, 5vw, 4rem)', fontWeight: 900, letterSpacing: '-0.04em', marginBottom: '0.75rem', background: 'linear-gradient(135deg, #1f2937, #4f46e5)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                Status <span style={{ color: 'var(--accent-primary)' }}>& Changelog</span>
+              <h1 style={{ fontSize: 'clamp(2.4rem, 5vw, 4rem)', fontWeight: 900, letterSpacing: '-0.04em', marginBottom: '0.75rem' }}>
+                <span className="gradient-text-dark-indigo">Status</span> <span style={{ color: 'var(--accent-primary)' }}>& Changelog</span>
               </h1>
               <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '760px', margin: '0 auto', lineHeight: 1.7 }}>
                 Track PixTool's development progress in real-time. View performance metrics, recent commits, feature highlights, and comprehensive validation reports that ensure quality and reliability.
@@ -431,7 +431,7 @@ export default function Status() {
                   >
                     <div>
                       <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', marginBottom: '0.5rem' }}>
-                        <span style={{ fontSize: '0.85rem', fontWeight: 900, padding: '0.35rem 0.65rem', borderRadius: '6px', background: 'rgba(79, 70, 229, 0.1)', color: 'var(--accent-primary)' }}>{phase.phase}</span>
+                        <span style={{ fontSize: '0.85rem', fontWeight: 900, padding: '0.35rem 0.65rem', borderRadius: '6px', background: 'var(--accent-primary-transparent)', color: 'var(--accent-primary)' }}>{phase.phase}</span>
                         <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-secondary)' }}>{phase.duration}</span>
                       </div>
                       <div style={{ fontWeight: 800, marginBottom: '0.25rem', fontSize: '0.95rem' }}>{phase.focus}</div>
@@ -473,7 +473,7 @@ export default function Status() {
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'space-between' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <div style={{ width: '36px', height: '36px', borderRadius: '10px', display: 'grid', placeItems: 'center', background: 'rgba(79, 70, 229, 0.1)', color: 'var(--accent-primary)' }}>
+                        <div style={{ width: '36px', height: '36px', borderRadius: '10px', display: 'grid', placeItems: 'center', background: 'var(--accent-primary-transparent)', color: 'var(--accent-primary)' }}>
                           <feature.icon size={18} />
                         </div>
                         <div style={{ fontWeight: 800, fontSize: '0.95rem' }}>{feature.title}</div>
@@ -507,7 +507,7 @@ export default function Status() {
                       alignItems: 'start',
                     }}
                   >
-                    <div style={{ width: '42px', height: '42px', borderRadius: '12px', display: 'grid', placeItems: 'center', background: 'rgba(79, 70, 229, 0.08)', color: 'var(--accent-primary)', flexShrink: 0 }}>
+                    <div style={{ width: '42px', height: '42px', borderRadius: '12px', display: 'grid', placeItems: 'center', background: 'var(--accent-glow)', color: 'var(--accent-primary)', flexShrink: 0 }}>
                       <GitCommitHorizontal size={18} />
                     </div>
                     <div style={{ width: '100%' }}>
@@ -518,7 +518,7 @@ export default function Status() {
                       <p style={{ margin: '0.5rem 0 0.75rem 0', color: 'var(--text-primary)', lineHeight: 1.6, fontSize: '1rem', fontWeight: 700 }}>{commit.message}</p>
                       <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                         {commit.areas.map((area) => (
-                          <span key={area} style={{ fontSize: '0.7rem', fontWeight: 800, padding: '0.25rem 0.6rem', borderRadius: '6px', background: 'rgba(79, 70, 229, 0.1)', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                          <span key={area} style={{ fontSize: '0.7rem', fontWeight: 800, padding: '0.25rem 0.6rem', borderRadius: '6px', background: 'var(--accent-primary-transparent)', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                             {area}
                           </span>
                         ))}
@@ -565,7 +565,7 @@ export default function Status() {
                       <div style={{ fontSize: '1.25rem' }}>{item.emoji}</div>
                       <div>
                         <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', marginBottom: '0.35rem' }}>
-                          <span style={{ fontSize: '0.7rem', fontWeight: 800, padding: '0.2rem 0.5rem', borderRadius: '4px', background: 'rgba(79, 70, 229, 0.15)', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                          <span style={{ fontSize: '0.7rem', fontWeight: 800, padding: '0.2rem 0.5rem', borderRadius: '4px', background: 'var(--accent-primary-transparent)', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                             {item.category}
                           </span>
                           <CheckCircle2 size={14} color="var(--accent-emerald)" />

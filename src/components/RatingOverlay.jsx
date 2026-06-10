@@ -40,6 +40,9 @@ export default function RatingOverlay() {
         setRating(0);
         setIsSuccess(false);
         setError('');
+        // Mark as seen so it doesn't pop again this session
+        // Must be inside the overlay so it only fires when the overlay actually renders
+        sessionStorage.setItem('pix_global_rating_shown', 'true');
       }
     };
 
@@ -67,6 +70,7 @@ export default function RatingOverlay() {
       }, 3000);
     } catch (err) {
       setError(err.message || 'Failed to submit rating. Please try again.');
+      setRating(0);
       setIsSubmitting(false);
     }
   };

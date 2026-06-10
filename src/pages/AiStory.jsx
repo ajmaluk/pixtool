@@ -89,14 +89,14 @@ OUTPUT REQUIREMENTS:
     >
       <div className="story-workspace" style={{ marginBottom: '1.5rem' }}>
         <div style={{ marginBottom: '3rem' }}>
-          <label htmlFor="ai-story-premise" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+          <label htmlFor="ai-story-premise" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
             Core Narrative Premise
           </label>
           <textarea
             id="ai-story-premise"
             name="premise"
             className="dalam-textarea"
-            style={{ width: '100%', minHeight: '220px', padding: '2rem', fontSize: '1.2rem', background: '#fdfdfd', borderRadius: '32px', border: '1px solid #f4f4f5', outline: 'none', color: '#1a1a1a', lineHeight: 1.6 }}
+            style={{ width: '100%', minHeight: '220px', padding: '2rem', fontSize: '1.2rem', background: 'var(--bg-primary)', borderRadius: '32px', border: '1px solid var(--border-color)', outline: 'none', color: 'var(--text-primary)', lineHeight: 1.6 }}
             placeholder="e.g., A civilization living on the rings of a gas giant discovering a signal from a dead planet..."
             value={premise}
             onChange={(e) => setPremise(e.target.value)}

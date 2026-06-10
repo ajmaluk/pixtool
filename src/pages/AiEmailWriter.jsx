@@ -43,7 +43,7 @@ OUTPUT REQUIREMENTS:
         {/* Identity Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem', marginBottom: '3rem' }}>
           <div className="input-group">
-            <label htmlFor="ai-email-recipient" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+            <label htmlFor="ai-email-recipient" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
               Strategic Recipient
             </label>
             <input 
@@ -51,7 +51,7 @@ OUTPUT REQUIREMENTS:
               name="recipient"
               type="text"
               className="dalam-input-field"
-              style={{ width: '100%', padding: '1.5rem 2rem', borderRadius: '24px', fontSize: '1.2rem', backgroundColor: '#fdfdfd', border: '1px solid #f4f4f5', outline: 'none', color: '#1a1a1a' }}
+              style={{ width: '100%', padding: '1.5rem 2rem', borderRadius: '24px', fontSize: '1.2rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', outline: 'none', color: 'var(--text-primary)' }}
               placeholder="e.g., Hiring Manager, CEO, Potential Partner"
               value={recipient}
               onChange={(e) => setRecipient(e.target.value)}
@@ -59,7 +59,7 @@ OUTPUT REQUIREMENTS:
           </div>
 
           <div className="input-group">
-            <label htmlFor="ai-email-subject" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+            <label htmlFor="ai-email-subject" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
               Primary Narrative
             </label>
             <input 
@@ -67,7 +67,7 @@ OUTPUT REQUIREMENTS:
               name="subject"
               type="text"
               className="dalam-input-field"
-              style={{ width: '100%', padding: '1.5rem 2rem', borderRadius: '24px', fontSize: '1.2rem', backgroundColor: '#fdfdfd', border: '1px solid #f4f4f5', outline: 'none', color: '#1a1a1a' }}
+              style={{ width: '100%', padding: '1.5rem 2rem', borderRadius: '24px', fontSize: '1.2rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', outline: 'none', color: 'var(--text-primary)' }}
               placeholder="e.g., Collaboration Proposal, Follow-up after meeting"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
@@ -77,7 +77,7 @@ OUTPUT REQUIREMENTS:
 
         {/* Persona Selector */}
         <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
             Linguistic Persona
           </label>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
@@ -89,19 +89,19 @@ OUTPUT REQUIREMENTS:
                   padding: '1.75rem', 
                   borderRadius: '32px', 
                   border: '2px solid', 
-                  borderColor: tone === t.id ? '#8b5cf6' : '#f4f4f5', 
-                  background: tone === t.id ? '#fff' : '#fafafa',
+                  borderColor: tone === t.id ? 'var(--accent-purple)' : 'var(--border-color)', 
+                  background: tone === t.id ? 'var(--bg-primary)' : 'var(--bg-secondary)',
                   textAlign: 'left',
                   cursor: 'pointer',
                   transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                  boxShadow: tone === t.id ? '0 10px 25px rgba(139, 92, 246, 0.05)' : 'none'
+                  boxShadow: tone === t.id ? '0 10px 25px var(--accent-glow)' : 'none'
                 }}
               >
-                <div style={{ color: tone === t.id ? '#8b5cf6' : '#d4d4d8', marginBottom: '1rem' }}>
+                <div style={{ color: tone === t.id ? 'var(--accent-purple)' : 'var(--text-muted)', marginBottom: '1rem' }}>
                   <t.icon size={28} strokeWidth={1.5} />
                 </div>
-                <div style={{ fontWeight: 800, fontSize: '1.1rem', color: tone === t.id ? '#09090b' : '#3f3f46', marginBottom: '0.25rem' }}>{t.name}</div>
-                <div style={{ fontSize: '0.8rem', color: '#a1a1aa', lineHeight: 1.4 }}>{t.desc}</div>
+                <div style={{ fontWeight: 800, fontSize: '1.1rem', color: tone === t.id ? 'var(--text-primary)' : 'var(--text-secondary)', marginBottom: '0.25rem' }}>{t.name}</div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>{t.desc}</div>
               </button>
             ))}
           </div>

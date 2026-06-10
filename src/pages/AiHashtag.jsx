@@ -39,7 +39,7 @@ OUTPUT REQUIREMENTS:
       <div className="hashtag-workspace" style={{ marginBottom: '1.5rem' }}>
         {/* Core Topic */}
         <div style={{ marginBottom: '3rem' }}>
-          <label htmlFor="ai-hashtag-topic" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+          <label htmlFor="ai-hashtag-topic" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
             Core Topic or Post Description
           </label>
           <input 
@@ -47,7 +47,7 @@ OUTPUT REQUIREMENTS:
             name="topic"
             type="text"
             className="dalam-input-field"
-            style={{ width: '100%', padding: '1.5rem 2rem', borderRadius: '24px', fontSize: '1.2rem', backgroundColor: '#fdfdfd', border: '1px solid #f4f4f5', outline: 'none', color: '#1a1a1a' }}
+            style={{ width: '100%', padding: '1.5rem 2rem', borderRadius: '24px', fontSize: '1.2rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', outline: 'none', color: 'var(--text-primary)' }}
             placeholder="e.g., Minimalist sustainable architecture in Scandinavia"
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
@@ -56,7 +56,7 @@ OUTPUT REQUIREMENTS:
 
         {/* Density Architecture */}
         <div style={{ marginBottom: '3rem' }}>
-          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
             Density Architecture
           </label>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
@@ -68,24 +68,24 @@ OUTPUT REQUIREMENTS:
                           padding: '1.75rem', 
                           borderRadius: '28px', 
                           border: '2px solid', 
-                          borderColor: density === d.id ? '#8b5cf6' : '#f4f4f5', 
-                          background: density === d.id ? '#fff' : '#fafafa',
+                          borderColor: density === d.id ? 'var(--accent-purple)' : 'var(--border-color)', 
+                          background: density === d.id ? 'var(--bg-primary)' : 'var(--bg-secondary)',
                           textAlign: 'left',
                           cursor: 'pointer',
                           transition: 'all 0.2s',
-                          boxShadow: density === d.id ? '0 10px 25px rgba(139, 92, 246, 0.05)' : 'none'
+                          boxShadow: density === d.id ? 'var(--shadow-premium)' : 'none'
                       }}
                   >
-                      <div style={{ fontWeight: 800, fontSize: '1.1rem', color: density === d.id ? '#09090b' : '#3f3f46', marginBottom: '0.25rem' }}>{d.label}</div>
-                      <div style={{ fontSize: '0.8rem', color: '#a1a1aa' }}>{d.sub}</div>
+                      <div style={{ fontWeight: 800, fontSize: '1.1rem', color: density === d.id ? 'var(--text-primary)' : 'var(--text-secondary)', marginBottom: '0.25rem' }}>{d.label}</div>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{d.sub}</div>
                   </button>
               ))}
           </div>
         </div>
 
-        <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', padding: '1.5rem 2rem', background: '#fafafa', borderRadius: '24px', border: '1px solid #f4f4f5' }}>
-            <div style={{ color: '#8b5cf6' }}><TrendingUp size={24} /></div>
-            <div style={{ fontSize: '0.9rem', color: '#71717a', lineHeight: 1.5, fontWeight: 500 }}>
+        <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', padding: '1.5rem 2rem', background: 'var(--bg-secondary)', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
+            <div style={{ color: 'var(--accent-purple)' }}><TrendingUp size={24} /></div>
+            <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.5, fontWeight: 500 }}>
                 Synthesizing trending data points & semantic clusters for maximum algorithmic discoverability.
             </div>
         </div>

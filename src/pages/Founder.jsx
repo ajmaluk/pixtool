@@ -112,7 +112,7 @@ export default function Founder() {
 
                         {/* Freelancing */}
                         <div className="info-card">
-                            <div className="info-card-icon" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>
+                            <div className="info-card-icon" style={{ background: 'var(--accent-blue-50)', color: 'var(--accent-blue)' }}>
                                 <Sparkles size={32} />
                             </div>
                             <h2 style={{ fontSize: '1.75rem', fontWeight: 900, marginBottom: '1.5rem', color: 'var(--text-primary)' }}>Freelance Services</h2>
@@ -136,7 +136,7 @@ export default function Founder() {
 
                         {/* Vision */}
                         <div className="info-card">
-                            <div className="info-card-icon" style={{ background: 'rgba(168, 85, 247, 0.1)', color: '#a855f7' }}>
+                            <div className="info-card-icon" style={{ background: 'var(--accent-purple-50)', color: 'var(--accent-purple)' }}>
                                 <Cpu size={32} />
                             </div>
                             <h2 style={{ fontSize: '1.75rem', fontWeight: 900, marginBottom: '1.5rem', color: 'var(--text-primary)' }}>The Vision</h2>

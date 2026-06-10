@@ -34,7 +34,7 @@ export default function HireMe() {
 
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                                 <div style={{ display: 'flex', gap: '1.5rem' }}>
-                                    <div style={{ background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-primary)', padding: '12px', borderRadius: '12px', height: 'fit-content' }}>
+                                    <div style={{ background: 'var(--accent-blue-50)', color: 'var(--accent-primary)', padding: '12px', borderRadius: '12px', height: 'fit-content' }}>
                                         <Code size={24} />
                                     </div>
                                     <div>
@@ -44,7 +44,7 @@ export default function HireMe() {
                                 </div>
 
                                 <div style={{ display: 'flex', gap: '1.5rem' }}>
-                                    <div style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', padding: '12px', borderRadius: '12px', height: 'fit-content' }}>
+                                    <div style={{ background: 'var(--accent-emerald-50)', color: 'var(--accent-emerald)', padding: '12px', borderRadius: '12px', height: 'fit-content' }}>
                                         <Terminal size={24} />
                                     </div>
                                     <div>
@@ -54,7 +54,7 @@ export default function HireMe() {
                                 </div>
 
                                 <div style={{ display: 'flex', gap: '1.5rem' }}>
-                                    <div style={{ background: 'rgba(168, 85, 247, 0.1)', color: '#a855f7', padding: '12px', borderRadius: '12px', height: 'fit-content' }}>
+                                    <div style={{ background: 'var(--accent-purple-50)', color: 'var(--accent-purple)', padding: '12px', borderRadius: '12px', height: 'fit-content' }}>
                                         <Briefcase size={24} />
                                     </div>
                                     <div>
@@ -67,7 +67,7 @@ export default function HireMe() {
                             <div style={{ marginTop: '4rem', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
                                 {['React / Next.js', 'Node.js / Python', 'AI / LLM Integration', 'WebAssembly (WASM)', 'Cloud Architecture', 'UI/UX Design Thinking'].map((skill, i) => (
                                     <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)' }}>
-                                        <CheckCircle2 size={16} style={{ color: '#10b981' }} /> {skill}
+                                        <CheckCircle2 size={16} style={{ color: 'var(--accent-emerald)' }} /> {skill}
                                     </div>
                                 ))}
                             </div>

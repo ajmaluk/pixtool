@@ -12,8 +12,8 @@ class ErrorBoundary extends React.Component {
     this.state = { hasError: false, error: null, errorInfo: null }
   }
 
-  static getDerivedStateFromError(_error) {
-    return { hasError: true }
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error }
   }
 
   componentDidCatch(error, errorInfo) {
@@ -21,6 +21,12 @@ class ErrorBoundary extends React.Component {
     if (import.meta.env.DEV) {
       console.error('Error caught by boundary:', error, errorInfo)
     }
+
+    // Check if it's a chunk loading error (common in production during new deployments)
+    if (error?.name === 'ChunkLoadError' || /loading.*chunk/i.test(error?.message || '')) {
+      this.setState({ isChunkError: true })
+    }
+
     this.setState({ error, errorInfo })
   }
 
@@ -31,6 +37,7 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       const isDev = import.meta.env.DEV
+      const isChunk = this.state.isChunkError || /chunk/i.test(this.state.error?.message || '')
 
       return (
         <div
@@ -46,17 +53,37 @@ class ErrorBoundary extends React.Component {
             color: 'var(--text-primary)',
           }}
         >
-          <AlertCircle size={64} color="#ef4444" style={{ marginBottom: '1.5rem' }} />
+          {isChunk ? (
+            <div
+              style={{
+                width: '64px',
+                height: '64px',
+                borderRadius: '50%',
+                background: 'var(--accent-emerald-50, #ecfdf5)',
+                color: 'var(--accent-emerald, #10b981)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.5rem',
+                fontWeight: 700,
+                marginBottom: '1.5rem'
+              }}
+            >↺</div>
+          ) : (
+            <AlertCircle size={64} color="#ef4444" style={{ marginBottom: '1.5rem' }} />
+          )}
 
           <h1 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '0.5rem' }}>
-            Oops! Something went wrong
+            {isChunk ? 'New Version Available' : 'Something went wrong'}
           </h1>
 
           <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '600px' }}>
-            We encountered an unexpected error. Don't worry, our team has been notified. Please try refreshing the page or go back home.
+            {isChunk
+              ? 'We have just updated PixTool. Please refresh your browser to load the latest version.'
+              : 'We encountered an unexpected error. Please try refreshing the page or go back home.'}
           </p>
 
-          {isDev && this.state.error && (
+          {isDev && this.state.error && !isChunk && (
             <div
               style={{
                 background: 'var(--bg-card)',
@@ -76,14 +103,14 @@ class ErrorBoundary extends React.Component {
               <pre style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
                 {this.state.error.toString()}
                 {'\n\n'}
-                {this.state.errorInfo.componentStack}
+                {this.state.errorInfo?.componentStack || ''}
               </pre>
             </div>
           )}
 
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
             <button
-              onClick={this.resetError}
+              onClick={() => window.location.reload()}
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -102,7 +129,7 @@ class ErrorBoundary extends React.Component {
               onMouseLeave={(e) => (e.target.style.opacity = '1')}
             >
               <RefreshCw size={18} />
-              Try Again
+              {isChunk ? 'Refresh & Reload' : 'Try Again'}
             </button>
 
             <a

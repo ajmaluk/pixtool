@@ -52,19 +52,11 @@ export default function UtilityTools() {
                 <div className="landing-center">
                     <div className="page-hero">
                         <div className="page-hero-content">
-                            <h1 className="page-title" style={{ fontFamily: '"Manrope", sans-serif', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
+                            <h1 className="page-title">
                               Professional <br/>
-                              <span style={{ 
-                                background: 'linear-gradient(135deg, #10b981 0%, #f59e0b 100%)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                backgroundSize: '200% auto',
-                                animation: 'gradient-flow 6s linear infinite',
-                                display: 'inline-block',
-                                padding: '0.1em 0'
-                              }}>Dev Utilities</span>
+                              <span className="gradient-text-green-amber">Dev Utilities</span>
                             </h1>
-                            <p className="page-subtitle" style={{ fontFamily: '"Inter", sans-serif', fontSize: '1.25rem', opacity: 0.9, marginTop: '1rem', lineHeight: 1.6 }}>
+                            <p className="page-subtitle" style={{ fontSize: '1.25rem', opacity: 0.9, marginTop: '1rem' }}>
                                 Essential productivity and privacy tools for your daily digital life. Generate temp mail, scan QR codes, and practice your typing — 100% private and secure.
                             </p>
                         </div>

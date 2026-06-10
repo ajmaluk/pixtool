@@ -9,7 +9,7 @@ import { posts } from '../src/data/posts.js';
 const __filename = fileURLToPath(import.meta.url);
 void __filename;
 
-const PORT = 5174;
+const PORT = 0; // Use random available port to avoid conflicts
 const DIST_DIR = path.join(process.cwd(), 'dist');
 
 const staticRoutes = [
@@ -44,7 +44,19 @@ const staticRoutes = [
   '/math-tools',
   '/productivity-tools',
   '/sitemap',
-  '/showcase'
+  '/showcase',
+  '/temp-mail',
+  '/temp-mail/10-minute-mail',
+  '/temp-mail/change-email',
+  '/identity-forge',
+  '/burner-inbox',
+  '/ghost-inbox',
+  '/typing-test',
+  '/qr-scanner',
+  '/qr-generator',
+  '/unit-converter',
+  '/password-generator',
+  '/json-formatter'
 ];
 
 const toolRoutes = [
@@ -114,13 +126,14 @@ async function prerender() {
   });
 
   server.listen(PORT, async () => {
-    console.log(`📡 Temporary server running at http://localhost:${PORT}`);
+    const actualPort = server.address().port;
+    console.log(`📡 Temporary server running at http://localhost:${actualPort}`);
 
     let browser;
     try {
       browser = await puppeteer.launch({
-        headless: 'new',
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
       });
     } catch (e) {
       console.warn('⚠️  Could not launch Puppeteer. Prerendering will be skipped.');
@@ -132,7 +145,7 @@ async function prerender() {
     const failedRoutes = [];
 
     for (const route of routes) {
-      const url = `http://localhost:${PORT}${route}`;
+      const url = `http://localhost:${actualPort}${route}`;
       console.log(`🧶 Prerendering: ${route}`);
       let page;
 

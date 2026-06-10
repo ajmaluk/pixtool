@@ -126,7 +126,7 @@ export default function About() {
                         className="page-grid"
                     >
                         <motion.div variants={itemVariants} className="info-card">
-                            <div className="info-card-icon" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>
+                            <div className="info-card-icon" style={{ background: 'var(--accent-blue-50)', color: 'var(--accent-blue)' }}>
                                 <Target size={32} />
                             </div>
                             <h2 style={{ fontSize: '2rem', fontWeight: 850, marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>Our Mission</h2>
@@ -136,7 +136,7 @@ export default function About() {
                         </motion.div>
 
                         <motion.div variants={itemVariants} className="info-card">
-                            <div className="info-card-icon" style={{ background: 'rgba(168, 85, 247, 0.1)', color: '#a855f7' }}>
+                            <div className="info-card-icon" style={{ background: 'var(--accent-purple-50)', color: 'var(--accent-purple)' }}>
                                 <Eye size={32} />
                             </div>
                             <h2 style={{ fontSize: '2rem', fontWeight: 850, marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>Our Vision</h2>
@@ -146,7 +146,7 @@ export default function About() {
                         </motion.div>
 
                         <motion.div variants={itemVariants} className="info-card">
-                            <div className="info-card-icon" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
+                            <div className="info-card-icon" style={{ background: 'var(--accent-emerald-50)', color: 'var(--accent-emerald)' }}>
                                 <Rocket size={32} />
                             </div>
                             <h2 style={{ fontSize: '2rem', fontWeight: 850, marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>The Tech</h2>

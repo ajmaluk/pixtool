@@ -9,8 +9,10 @@
 // ========================================
 export const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://www.pixtool.in'
 export const SITE_NAME = 'PixTool'
+export const SITE_TAGLINE = 'The Private Browser-Based Productivity Suite'
 export const SITE_DESCRIPTION = 'Free online AI, image, PDF, math, and productivity tools that run in your browser with privacy-first processing.'
 export const TWITTER_HANDLE = '@pixtool_in'
+export const SITE_DOMAIN = 'pixtool.in'
 
 // ========================================
 // API ENDPOINTS & TIMEOUTS
@@ -98,6 +100,10 @@ export const isTest = import.meta.env.MODE === 'test'
 export default {
   SITE_URL,
   SITE_NAME,
+  SITE_TAGLINE,
+  SITE_DESCRIPTION,
+  SITE_DOMAIN,
+  TWITTER_HANDLE,
   API_TIMEOUTS,
   API_ENDPOINTS,
   ERROR_MESSAGES,

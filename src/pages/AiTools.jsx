@@ -28,19 +28,11 @@ export default function AiTools() {
                             <div className="badge-premium" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', mb: '1rem', background: 'var(--bg-glass)', padding: '0.5rem 1rem', borderRadius: '100px', border: '1px solid var(--border-color)', fontSize: '0.75rem', fontWeight: 900, color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                                 <Sparkles size={14} /> Neural Framework 2026
                             </div>
-                            <h1 className="page-title" style={{ fontFamily: '"Manrope", sans-serif', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1.1, marginTop: '1.5rem' }}>
+                            <h1 className="page-title" style={{ marginTop: '1.5rem' }}>
                               Next-Gen <br/>
-                              <span style={{ 
-                                background: 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                backgroundSize: '200% auto',
-                                animation: 'gradient-flow 6s linear infinite',
-                                display: 'inline-block',
-                                padding: '0.1em 0'
-                              }}>Artificial Intelligence</span>
+                              <span className="gradient-text-pink">Artificial Intelligence</span>
                             </h1>
-                            <p className="page-subtitle" style={{ fontFamily: '"Inter", sans-serif', fontSize: '1.25rem', opacity: 0.9, marginTop: '1.5rem', lineHeight: 1.6, maxWidth: '700px', margin: '1.5rem auto' }}>
+                            <p className="page-subtitle" style={{ fontSize: '1.25rem', opacity: 0.9, maxWidth: '700px', margin: '1.5rem auto' }}>
                                 A suite of precision-engineered AI models architected for high-authority reasoning, linguistic perfection, and technical synthesis.
                             </p>
                         </div>

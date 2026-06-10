@@ -111,22 +111,22 @@ INSTRUCTIONS:
       <div className="resume-wizard" style={{ marginBottom: '2.5rem' }}>
         {/* Progress Bar */}
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4rem', position: 'relative' }}>
-          <div style={{ position: 'absolute', top: '22px', left: '0', right: '0', height: '1px', background: '#f4f4f5', zIndex: 0 }}></div>
+          <div style={{ position: 'absolute', top: '22px', left: '0', right: '0', height: '1px', background: 'var(--border-color)', zIndex: 0 }}></div>
           {steps.map(s => (
             <div key={s.num} style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
               <div style={{ 
                 width: '44px', height: '44px', 
                 borderRadius: '50%', 
-                background: step >= s.num ? '#09090b' : '#fff', 
-                color: step >= s.num ? '#fff' : '#d4d4d8',
+                background: step >= s.num ? 'var(--text-primary)' : 'var(--bg-primary)', 
+                color: step >= s.num ? '#fff' : 'var(--text-muted)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                border: step >= s.num ? 'none' : '1.5px solid #f4f4f5',
-                boxShadow: step === s.num ? '0 10px 20px rgba(0,0,0,0.06)' : 'none',
+                border: step >= s.num ? 'none' : '1.5px solid var(--border-color)',
+                boxShadow: step === s.num ? 'var(--shadow-md)' : 'none',
                 transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
               }}>
                 <s.icon size={18} />
               </div>
-              <span style={{ fontSize: '0.7rem', fontWeight: 900, marginTop: '1rem', color: step >= s.num ? '#09090b' : '#d4d4d8', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{s.title}</span>
+              <span style={{ fontSize: '0.7rem', fontWeight: 900, marginTop: '1rem', color: step >= s.num ? 'var(--text-primary)' : 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{s.title}</span>
             </div>
           ))}
         </div>
@@ -146,13 +146,13 @@ INSTRUCTIONS:
                      { label: 'LinkedIn URL', field: 'linkedin', placeholder: 'e.g. linkedin.com/in/johndoe' }
                    ].map(f => (
                      <div key={f.field} className="form-group">
-                       <label htmlFor={`ai-resume-personal-${f.field}`} style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{f.label}</label>
+                       <label htmlFor={`ai-resume-personal-${f.field}`} style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{f.label}</label>
                        <input 
                          id={`ai-resume-personal-${f.field}`}
                          name={f.field}
                          type="text" 
                          className="dalam-input-field" 
-                         style={{ width: '100%', padding: '1.25rem 1.5rem', borderRadius: '18px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1.1rem', color: '#1a1a1a', outline: 'none' }}
+                         style={{ width: '100%', padding: '1.25rem 1.5rem', borderRadius: '18px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', fontSize: '1.1rem', color: 'var(--text-primary)', outline: 'none' }}
                          placeholder={f.placeholder}
                          value={formData.personal[f.field]}
                          onChange={(e) => updatePersonal(f.field, e.target.value)}
@@ -165,12 +165,12 @@ INSTRUCTIONS:
 
             {step === 2 && (
               <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-                 <label htmlFor="ai-resume-summary" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Philosophical Summary</label>
+                 <label htmlFor="ai-resume-summary" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Philosophical Summary</label>
                  <textarea 
                    id="ai-resume-summary"
                    name="summary"
                    className="dalam-textarea" 
-                   style={{ width: '100%', minHeight: '300px', padding: '2rem', borderRadius: '32px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1.2rem', color: '#18181b', outline: 'none', lineHeight: 1.6 }}
+                   style={{ width: '100%', minHeight: '300px', padding: '2rem', borderRadius: '32px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', fontSize: '1.2rem', color: 'var(--text-primary)', outline: 'none', lineHeight: 1.6 }}
                    placeholder="Describe your professional journey and key value propositions..."
                    value={formData.summary}
                    onChange={(e) => updateSummary(e.target.value)}
@@ -180,31 +180,31 @@ INSTRUCTIONS:
 
             {step === 3 && (
               <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-                 <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Professional Lineage</label>
+                 <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Professional Lineage</label>
                  {formData.experience.map((exp, idx) => (
-                   <div key={idx} style={{ padding: '2.5rem', borderRadius: '32px', border: '1px solid #f4f4f5', marginBottom: '2rem', background: '#fff', position: 'relative', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
-                     <button onClick={() => removeExperience(idx)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', color: '#d4d4d8', cursor: 'pointer', transition: 'color 0.2s' }} onMouseEnter={(e) => e.target.style.color = '#ef4444'} onMouseLeave={(e) => e.target.style.color = '#d4d4d8'}><Trash2 size={20} /></button>
+                   <div key={idx} style={{ padding: '2.5rem', borderRadius: '32px', border: '1px solid var(--border-color)', marginBottom: '2rem', background: 'var(--bg-card)', position: 'relative', boxShadow: 'var(--shadow-md)' }}>
+                     <button onClick={() => removeExperience(idx)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', transition: 'color 0.2s' }} onMouseEnter={(e) => e.target.style.color = '#ef4444'} onMouseLeave={(e) => e.target.style.color = 'var(--text-muted)'}><Trash2 size={20} /></button>
                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
                         <div className="form-group">
-                          <label htmlFor={`ai-resume-exp-company-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Company</label>
-                          <input id={`ai-resume-exp-company-${idx}`} name={`experienceCompany${idx}`} placeholder="e.g., SpaceX" className="dalam-input-field" value={exp.company} onChange={(e) => updateExperience(idx, 'company', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
+                          <label htmlFor={`ai-resume-exp-company-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Company</label>
+                          <input id={`ai-resume-exp-company-${idx}`} name={`experienceCompany${idx}`} placeholder="e.g., SpaceX" className="dalam-input-field" value={exp.company} onChange={(e) => updateExperience(idx, 'company', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', fontSize: '1rem', outline: 'none' }} />
                         </div>
                         <div className="form-group">
-                          <label htmlFor={`ai-resume-exp-role-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Role</label>
-                          <input id={`ai-resume-exp-role-${idx}`} name={`experienceRole${idx}`} placeholder="e.g., Propulsion Engineer" className="dalam-input-field" value={exp.role} onChange={(e) => updateExperience(idx, 'role', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
+                          <label htmlFor={`ai-resume-exp-role-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Role</label>
+                          <input id={`ai-resume-exp-role-${idx}`} name={`experienceRole${idx}`} placeholder="e.g., Propulsion Engineer" className="dalam-input-field" value={exp.role} onChange={(e) => updateExperience(idx, 'role', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', fontSize: '1rem', outline: 'none' }} />
                         </div>
                      </div>
                      <div style={{ marginBottom: '1.5rem' }}>
-                        <label htmlFor={`ai-resume-exp-duration-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Timeline</label>
-                        <input id={`ai-resume-exp-duration-${idx}`} name={`experienceDuration${idx}`} placeholder="e.g., 2020 - Present" className="dalam-input-field" value={exp.duration} onChange={(e) => updateExperience(idx, 'duration', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
+                        <label htmlFor={`ai-resume-exp-duration-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Timeline</label>
+                        <input id={`ai-resume-exp-duration-${idx}`} name={`experienceDuration${idx}`} placeholder="e.g., 2020 - Present" className="dalam-input-field" value={exp.duration} onChange={(e) => updateExperience(idx, 'duration', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', fontSize: '1rem', outline: 'none' }} />
                      </div>
                      <div>
-                        <label htmlFor={`ai-resume-exp-impact-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Legacy & Impact</label>
-                        <textarea id={`ai-resume-exp-impact-${idx}`} name={`experienceImpact${idx}`} placeholder="Bullet points of achievements..." className="dalam-input-pane" value={exp.description} onChange={(e) => updateExperience(idx, 'description', e.target.value)} style={{ width: '100%', minHeight: '120px', padding: '1.25rem', borderRadius: '18px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none', lineHeight: 1.6 }} />
+                        <label htmlFor={`ai-resume-exp-impact-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Legacy & Impact</label>
+                        <textarea id={`ai-resume-exp-impact-${idx}`} name={`experienceImpact${idx}`} placeholder="Bullet points of achievements..." className="dalam-input-pane" value={exp.description} onChange={(e) => updateExperience(idx, 'description', e.target.value)} style={{ width: '100%', minHeight: '120px', padding: '1.25rem', borderRadius: '18px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', fontSize: '1rem', outline: 'none', lineHeight: 1.6 }} />
                      </div>
                    </div>
                  ))}
-                 <button onClick={addExperience} style={{ width: '100%', padding: '2rem', border: '1.5px dashed #f4f4f5', color: '#a1a1aa', borderRadius: '32px', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', fontWeight: 800, fontSize: '0.9rem', transition: 'all 0.2s' }} className="add-btn-hover">
+                 <button onClick={addExperience} style={{ width: '100%', padding: '2rem', border: '1.5px dashed var(--border-color)', color: 'var(--text-muted)', borderRadius: '32px', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', fontWeight: 800, fontSize: '0.9rem', transition: 'all 0.2s' }} className="add-btn-hover">
                     <Plus size={20} /> Append Experience Node
                  </button>
               </motion.div>
@@ -212,27 +212,27 @@ INSTRUCTIONS:
 
             {step === 4 && (
               <motion.div key="step4" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-                 <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Academic Foundation</label>
+                 <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Academic Foundation</label>
                  {formData.education.map((edu, idx) => (
-                    <div key={idx} style={{ padding: '2.5rem', borderRadius: '32px', border: '1px solid #f4f4f5', marginBottom: '2rem', background: '#fff', position: 'relative', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
-                      <button onClick={() => removeEducation(idx)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', color: '#d4d4d8', cursor: 'pointer' }}><Trash2 size={20} /></button>
+                    <div key={idx} style={{ padding: '2.5rem', borderRadius: '32px', border: '1px solid var(--border-color)', marginBottom: '2rem', background: 'var(--bg-card)', position: 'relative', boxShadow: 'var(--shadow-md)' }}>
+                      <button onClick={() => removeEducation(idx)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}><Trash2 size={20} /></button>
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
                          <div className="form-group">
-                           <label htmlFor={`ai-resume-edu-school-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Institution</label>
-                           <input id={`ai-resume-edu-school-${idx}`} name={`educationSchool${idx}`} placeholder="e.g., MIT" className="dalam-input-field" value={edu.school} onChange={(e) => updateEducation(idx, 'school', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
+                           <label htmlFor={`ai-resume-edu-school-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Institution</label>
+                           <input id={`ai-resume-edu-school-${idx}`} name={`educationSchool${idx}`} placeholder="e.g., MIT" className="dalam-input-field" value={edu.school} onChange={(e) => updateEducation(idx, 'school', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', fontSize: '1rem', outline: 'none' }} />
                          </div>
                          <div className="form-group">
-                           <label htmlFor={`ai-resume-edu-degree-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Degree</label>
-                           <input id={`ai-resume-edu-degree-${idx}`} name={`educationDegree${idx}`} placeholder="e.g., MS Computer Science" className="dalam-input-field" value={edu.degree} onChange={(e) => updateEducation(idx, 'degree', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
+                           <label htmlFor={`ai-resume-edu-degree-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Degree</label>
+                           <input id={`ai-resume-edu-degree-${idx}`} name={`educationDegree${idx}`} placeholder="e.g., MS Computer Science" className="dalam-input-field" value={edu.degree} onChange={(e) => updateEducation(idx, 'degree', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', fontSize: '1rem', outline: 'none' }} />
                          </div>
                       </div>
                       <div>
-                        <label htmlFor={`ai-resume-edu-year-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: '#d4d4d8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Year of Completion</label>
-                        <input id={`ai-resume-edu-year-${idx}`} name={`educationYear${idx}`} placeholder="e.g., 2018" className="dalam-input-field" value={edu.year} onChange={(e) => updateEducation(idx, 'year', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1rem', outline: 'none' }} />
+                        <label htmlFor={`ai-resume-edu-year-${idx}`} style={{ display: 'block', fontSize: '0.7rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Year of Completion</label>
+                        <input id={`ai-resume-edu-year-${idx}`} name={`educationYear${idx}`} placeholder="e.g., 2018" className="dalam-input-field" value={edu.year} onChange={(e) => updateEducation(idx, 'year', e.target.value)} style={{ width: '100%', padding: '1rem 1.25rem', borderRadius: '14px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', fontSize: '1rem', outline: 'none' }} />
                       </div>
                     </div>
                  ))}
-                 <button onClick={addEducation} style={{ width: '100%', padding: '2rem', border: '1.5px dashed #f4f4f5', color: '#a1a1aa', borderRadius: '32px', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', fontWeight: 800, fontSize: '0.9rem', transition: 'all 0.2s' }}>
+                 <button onClick={addEducation} style={{ width: '100%', padding: '2rem', border: '1.5px dashed var(--border-color)', color: 'var(--text-muted)', borderRadius: '32px', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', fontWeight: 800, fontSize: '0.9rem', transition: 'all 0.2s' }}>
                     <Plus size={20} /> Append Education Node
                  </button>
               </motion.div>
@@ -240,19 +240,19 @@ INSTRUCTIONS:
 
             {step === 5 && (
               <motion.div key="step5" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-                 <label htmlFor="ai-resume-skills" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: '#a1a1aa', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Core Architectures & Skills</label>
+                 <label htmlFor="ai-resume-skills" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Core Architectures & Skills</label>
                  <textarea 
                    id="ai-resume-skills"
                    name="skills"
                    className="dalam-textarea" 
-                   style={{ width: '100%', minHeight: '250px', padding: '2rem', borderRadius: '32px', border: '1px solid #f4f4f5', background: '#fdfdfd', fontSize: '1.2rem', color: '#18181b', outline: 'none', lineHeight: 1.6 }}
+                   style={{ width: '100%', minHeight: '250px', padding: '2rem', borderRadius: '32px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', fontSize: '1.2rem', color: 'var(--text-primary)', outline: 'none', lineHeight: 1.6 }}
                    placeholder="e.g. JavaScript, React, System Architecture, Team Leadership..."
                    value={formData.skills}
                    onChange={(e) => updateSkills(e.target.value)}
                  />
-                 <div style={{ marginTop: '3rem', padding: '2rem', background: '#fafafa', borderRadius: '28px', border: '1px solid #f4f4f5', display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
-                    <div style={{ color: '#8b5cf6' }}><Sparkles size={28} strokeWidth={1.5} /></div>
-                    <div style={{ fontSize: '0.95rem', color: '#71717a', lineHeight: 1.5 }}>
+                 <div style={{ marginTop: '3rem', padding: '2rem', background: 'var(--bg-secondary)', borderRadius: '28px', border: '1px solid var(--border-color)', display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
+                    <div style={{ color: 'var(--accent-purple)' }}><Sparkles size={28} strokeWidth={1.5} /></div>
+                    <div style={{ fontSize: '0.95rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
                        Final preparation complete. The AI will now synthesize your professional data into a high-authority, ATS-optimized manuscript.
                     </div>
                  </div>
@@ -266,10 +266,10 @@ INSTRUCTIONS:
                        <CheckCircle size={36} />
                     </div>
                     <h2 style={{ fontSize: '2.5rem', fontWeight: 950, marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>Manuscript Built</h2>
-                    <p style={{ color: '#71717a', fontSize: '1.1rem' }}>The architectural synthesis of your professional profile is complete.</p>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>The architectural synthesis of your professional profile is complete.</p>
                   </div>
                   
-                  <div style={{ background: '#fafafa', border: '1px solid #f4f4f5', borderRadius: '40px', padding: '3.5rem', minHeight: '500px', whiteSpace: 'pre-wrap', fontFamily: 'Inter, sans-serif', fontSize: '1.1rem', color: '#18181b', position: 'relative', lineHeight: 1.8 }}>
+                  <div style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '40px', padding: '3.5rem', minHeight: '500px', whiteSpace: 'pre-wrap', fontFamily: 'Inter, sans-serif', fontSize: '1.1rem', color: 'var(--text-primary)', position: 'relative', lineHeight: 1.8 }}>
                      <button onClick={handleDownload} style={{ position: 'absolute', top: '2rem', right: '2rem', display: 'flex', gap: '0.6rem', alignItems: 'center', padding: '0.75rem 1.25rem', fontSize: '0.9rem', fontWeight: 800, borderRadius: '16px', background: '#18181b', color: '#fff', border: 'none', cursor: 'pointer', boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }}>
                         <Download size={18} /> Export Document
                      </button>
@@ -277,7 +277,7 @@ INSTRUCTIONS:
                   </div>
                   
                   <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-                     <button onClick={() => setStep(1)} style={{ background: 'transparent', color: '#a1a1aa', border: 'none', fontWeight: 800, cursor: 'pointer', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                     <button onClick={() => setStep(1)} style={{ background: 'transparent', color: 'var(--text-muted)', border: 'none', fontWeight: 800, cursor: 'pointer', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                         Start New Architecture Phase
                      </button>
                   </div>
@@ -292,7 +292,7 @@ INSTRUCTIONS:
             <button 
               onClick={() => setStep(prev => prev - 1)} 
               disabled={step === 1}
-              style={{ width: '64px', height: '64px', borderRadius: '50%', border: '1.5px solid #f4f4f5', background: '#fff', color: '#09090b', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', opacity: step === 1 ? 0 : 1, transition: 'all 0.2s' }}
+              style={{ width: '64px', height: '64px', borderRadius: '50%', border: '1.5px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', opacity: step === 1 ? 0 : 1, transition: 'all 0.2s' }}
             >
               <ArrowLeft size={24} />
             </button>

@@ -1,7 +1,7 @@
 # PixTool Full AI Tool Index
 
 This file is auto-generated from source data.
-Generated At: 2026-06-07T13:56:35.114Z
+Generated At: 2026-06-10T18:24:13.237Z
 Canonical URL: https://www.pixtool.in
 Sitemap: https://www.pixtool.in/sitemap.xml
 
@@ -93,7 +93,7 @@ Total Blog Posts: 27
 
 - Free Temp Mail 2026 [Safe]
   - URL: https://www.pixtool.in/temp-mail
-  - Description: The PixTool Temp Mail service is a high-authority privacy utility engineered for secure, anonymous communication in an era of aggressive data harvesting. Unlike standard disposable services, our studio provides a zero-upload 'Privacy-First' inbox experience. All temporary addresses are generated using high-reputation domains to ensure maximum deliverability for OTPs and trial signups.
+  - Description: The PixTool Temp Mail service is a high-authority privacy utility engineered for secure, anonymous communication in an era of aggressive. Secure your files.
 - 10 Minute Mail
   - URL: https://www.pixtool.in/temp-mail/10-minute-mail
   - Description: Create a high-authority disposable inbox that automatically self-destructs in 10 minutes. Absolute zero-log privacy engineered for quick verification codes and high-stakes privacy signing.
@@ -101,13 +101,13 @@ Total Blog Posts: 27
   - URL: https://www.pixtool.in/temp-mail/change-email
   - Description: Generate a new high-authority temporary email address instantly. Rotate identities to bypass rate limits and maintain a clean digital footprint across multiple platforms.
 - Fake Email Generator
-  - URL: https://www.pixtool.in/temp-mail/fake-email
+  - URL: https://www.pixtool.in/identity-forge
   - Description: Generate high-quality fake email addresses for testing, registration, and privacy. Secure, anonymous, and completely browser-controlled burner inboxes.
 - Disposable Email Address
-  - URL: https://www.pixtool.in/temp-mail/disposable-email
+  - URL: https://www.pixtool.in/burner-inbox
   - Description: Create a secure, one-time disposable email address instantly. Perfect for protecting your primary inbox from marketing spam and trackers during one-off signups.
 - Throwaway Email Inbox
-  - URL: https://www.pixtool.in/temp-mail/throwaway-email
+  - URL: https://www.pixtool.in/ghost-inbox
   - Description: Get an instant throwaway email inbox for secure and anonymous communication. Bypassing registration forms and protecting your privacy has never been easier.
 - Typing Master
   - URL: https://www.pixtool.in/typing-test
@@ -117,7 +117,7 @@ Total Blog Posts: 27
   - Description: The definitive high-authority QR decoding studio. Scan from live camera feeds or upload high-resolution images instantly across all device architectures. No app required, 100% private.
 - Free QR Code Generator [Pro]
   - URL: https://www.pixtool.in/qr-generator
-  - Description: Professional ISO-standard QR code generator engineered for high-fidelity marketing and localized data sovereignty. PixTool generates QR codes entirely within your browser's local sandbox, ensuring your URLs, credentials, and WiFi passwords never leave your machine or persist on a server.
+  - Description: Professional ISO-standard QR code generator engineered for high-fidelity marketing and localized data sovereignty. Secure your files.
 - Identity Forge
   - URL: https://www.pixtool.in/identity-forge
   - Description: Generate a high-authority fake email identity for deep-layer privacy and industrial testing. Shield your primary digital footprint by using localized identity tokens that stay 100% private.

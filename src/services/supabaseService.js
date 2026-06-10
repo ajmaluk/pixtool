@@ -11,6 +11,10 @@ const PUBLIC_METRICS_CACHE_TTL_MS = 5 * 60 * 1000;
 const toolSlugCache = new Map();
 let sessionIpHash = null;
 
+let supabaseUnreachable = false;
+const markSupabaseUnreachable = () => { supabaseUnreachable = true; };
+const isSupabaseAvailable = () => hasSupabaseConfig && !!supabase && !supabaseUnreachable;
+
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_FETCH_TIMEOUT_MS = 12000;
 
@@ -207,7 +211,7 @@ export const hasRatedToolLocally = (toolSlug) => getRatedToolsSet().has(normaliz
 
 const getToolBySlug = async (toolSlug) => {
   const normalized = normalizeToolSlug(toolSlug);
-  if (!normalized) return null;
+  if (!normalized || !isSupabaseAvailable()) return null;
   const now = Date.now();
   const cached = toolSlugCache.get(normalized);
   if (cached && now - cached.ts < TOOL_CACHE_TTL_MS) {
@@ -229,7 +233,7 @@ const getToolBySlug = async (toolSlug) => {
 
 export const getToolRatingStats = async (toolSlug) => {
   const normalized = normalizeToolSlug(toolSlug);
-  if (!hasSupabaseConfig || !normalized) {
+  if (!isSupabaseAvailable() || !normalized) {
     return { avgRating: 0, totalVotes: 0, distribution: [0, 0, 0, 0, 0] };
   }
 
@@ -269,7 +273,7 @@ export const getToolRatingStats = async (toolSlug) => {
 
 export const submitToolRating = async ({ toolSlug, rating }) => {
   const normalized = normalizeToolSlug(toolSlug);
-  if (!hasSupabaseConfig) {
+  if (!isSupabaseAvailable()) {
     throw new Error('Supabase is not configured.');
   }
   if (!normalized) {
@@ -331,7 +335,7 @@ export const submitToolRating = async ({ toolSlug, rating }) => {
 };
 
 export const getOverallRating = async () => {
-  if (!hasSupabaseConfig) {
+  if (!isSupabaseAvailable()) {
     return { avgRating: 0, totalVotes: 0 };
   }
 
@@ -344,36 +348,14 @@ export const getOverallRating = async () => {
       };
     }
   } catch {
-    // Fallback to direct view query when endpoint is unavailable.
+    // Edge function unavailable — return defaults instead of hitting the DB directly
   }
 
-  try {
-    const { data, error } = await supabase
-      .from('overall_tool_rating')
-      .select('avg_rating, total_votes')
-      .maybeSingle();
-
-    if (error) {
-      // Silently return default values instead of throwing
-      return { avgRating: 0, totalVotes: 0 };
-    }
-
-    if (!data) {
-      return { avgRating: 0, totalVotes: 0 };
-    }
-
-    return {
-      avgRating: data.avg_rating || 0,
-      totalVotes: data.total_votes || 0,
-    };
-  } catch {
-    // Return default values on any error
-    return { avgRating: 0, totalVotes: 0 };
-  }
+  return { avgRating: 0, totalVotes: 0 };
 };
 
 export const getPublicSeoMetrics = async ({ forceRefresh = false } = {}) => {
-  if (!hasSupabaseConfig) {
+  if (!isSupabaseAvailable()) {
     return null;
   }
 
@@ -408,13 +390,13 @@ export const getPublicSeoMetrics = async ({ forceRefresh = false } = {}) => {
     setStoredJson(PUBLIC_METRICS_CACHE_KEY, { ts: Date.now(), value: metrics });
     return metrics;
   } catch {
-    // Silently fail - the caller will use fallback
+    markSupabaseUnreachable();
     return null;
   }
 };
 
 export const getApprovedTestimonials = async ({ toolSlug = null, page = 1, pageSize = DEFAULT_PAGE_SIZE } = {}) => {
-  if (!hasSupabaseConfig) {
+  if (!isSupabaseAvailable()) {
     return { rows: [], count: 0 };
   }
 
@@ -442,7 +424,7 @@ export const getApprovedTestimonials = async ({ toolSlug = null, page = 1, pageS
 };
 
 export const submitTestimonial = async ({ name, message, toolSlug = null }) => {
-  if (!hasSupabaseConfig) {
+  if (!isSupabaseAvailable()) {
     throw new Error('Supabase is not configured.');
   }
   enforceClientRateLimit('testimonial', 10000);
@@ -464,7 +446,7 @@ export const submitTestimonial = async ({ name, message, toolSlug = null }) => {
 };
 
 export const submitContactMessage = async ({ name, email, message }) => {
-  if (!hasSupabaseConfig) {
+  if (!isSupabaseAvailable()) {
     throw new Error('Supabase is not configured.');
   }
 
@@ -496,7 +478,7 @@ export const adminLogout = () => {
 };
 
 export const adminLogin = async ({ username, password }) => {
-  if (!hasSupabaseConfig) {
+  if (!isSupabaseAvailable()) {
     throw new Error('Supabase is not configured.');
   }
 
@@ -531,7 +513,7 @@ export const adminLogin = async ({ username, password }) => {
 };
 
 export const adminApi = async (action, payload = {}) => {
-  if (!hasSupabaseConfig) {
+  if (!isSupabaseAvailable()) {
     throw new Error('Supabase is not configured.');
   }
 

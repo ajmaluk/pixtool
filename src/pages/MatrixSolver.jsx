@@ -170,7 +170,7 @@ export default function MatrixSolver() {
                     </div>
 
                     {error && (
-                        <div style={{ color: 'var(--accent-red)', textAlign: 'center', marginBottom: '1.5rem', fontWeight: 800, fontSize: '0.9rem', padding: '1rem', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '12px', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
+                        <div style={{ color: 'var(--accent-red)', textAlign: 'center', marginBottom: '1.5rem', fontWeight: 800, fontSize: '0.9rem', padding: '1rem', background: 'rgba(var(--accent-red-rgb), 0.1)', borderRadius: '12px', border: '1px solid rgba(var(--accent-red-rgb), 0.3)' }}>
                             {error}
                         </div>
                     )}

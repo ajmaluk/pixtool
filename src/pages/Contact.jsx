@@ -61,7 +61,7 @@ export default function Contact() {
             Have a question, feedback, or business proposal? We'd love to hear from you.
           </p>
           {!hasSupabaseConfig && (
-            <p style={{ marginTop: '0.75rem', color: '#f59e0b', fontWeight: 600 }}>
+            <p style={{ marginTop: '0.75rem', color: 'var(--accent-orange)', fontWeight: 600 }}>
               Contact storage is disabled until Supabase env variables are configured.
             </p>
           )}
@@ -74,7 +74,7 @@ export default function Contact() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div className="info-card" style={{ padding: '1.2rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{ background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-primary)', padding: '10px', borderRadius: '10px' }}>
+                  <div style={{ background: 'var(--accent-blue-50)', color: 'var(--accent-primary)', padding: '10px', borderRadius: '10px' }}>
                     <Mail size={20} />
                   </div>
                   <div>
@@ -86,7 +86,7 @@ export default function Contact() {
 
               <div className="info-card" style={{ padding: '1.2rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', padding: '10px', borderRadius: '10px' }}>
+                  <div style={{ background: 'var(--accent-emerald-50)', color: 'var(--accent-emerald)', padding: '10px', borderRadius: '10px' }}>
                     <MessageSquare size={20} />
                   </div>
                   <div>
@@ -102,7 +102,7 @@ export default function Contact() {
 
               <div className="info-card" style={{ padding: '1.2rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', padding: '10px', borderRadius: '10px' }}>
+                  <div style={{ background: 'var(--accent-red-50)', color: 'var(--accent-red)', padding: '10px', borderRadius: '10px' }}>
                     <MapPin size={20} />
                   </div>
                   <div>
@@ -172,12 +172,12 @@ export default function Contact() {
                 </button>
 
                 {status === 'success' && (
-                  <p style={{ color: '#10b981', fontSize: '0.95rem', fontWeight: 700 }}>
+                  <p style={{ color: 'var(--accent-emerald)', fontSize: '0.95rem', fontWeight: 700 }}>
                     Message sent. Our admin team can now review it in the dashboard.
                   </p>
                 )}
                 {status === 'error' && (
-                  <p style={{ color: '#ef4444', fontSize: '0.95rem', fontWeight: 700 }}>
+                  <p style={{ color: 'var(--accent-red)', fontSize: '0.95rem', fontWeight: 700 }}>
                     {errorMessage || 'Unable to send now. Please retry in a few seconds.'}
                   </p>
                 )}
@@ -194,10 +194,10 @@ export default function Contact() {
 
             <div className="page-grid">
               {[
-                { to: '/pdf-tools', icon: <FileText size={24} />, label: 'PDF Tools', desc: 'Merge, Split, Compress & Convert', color: 'rgba(59, 130, 246, 0.1)', textColor: '#3b82f6' },
-                { to: '/image-tools', icon: <Image size={24} />, label: 'Image Tools', desc: 'Resize, Crop & AI Optimization', color: 'rgba(168, 85, 247, 0.1)', textColor: '#a855f7' },
-                { to: '/testimonials', icon: <Star size={24} />, label: 'Testimonials', desc: 'Read what our users are saying', color: 'rgba(245, 158, 11, 0.1)', textColor: '#f59e0b' },
-                { to: '/temp-mail', icon: <Zap size={24} />, label: 'Temp Mail', desc: 'Secure disposable email inbox', color: 'rgba(16, 185, 129, 0.1)', textColor: '#10b981' },
+                { to: '/pdf-tools', icon: <FileText size={24} />, label: 'PDF Tools', desc: 'Merge, Split, Compress & Convert', color: 'var(--accent-blue-50)', textColor: 'var(--accent-blue)' },
+                { to: '/image-tools', icon: <Image size={24} />, label: 'Image Tools', desc: 'Resize, Crop & AI Optimization', color: 'var(--accent-purple-50)', textColor: 'var(--accent-purple)' },
+                { to: '/testimonials', icon: <Star size={24} />, label: 'Testimonials', desc: 'Read what our users are saying', color: 'var(--accent-orange-50)', textColor: 'var(--accent-orange)' },
+                { to: '/temp-mail', icon: <Zap size={24} />, label: 'Temp Mail', desc: 'Secure disposable email inbox', color: 'var(--accent-emerald-50)', textColor: 'var(--accent-emerald)' },
               ].map((item, idx) => (
                 <Link
                   key={idx}

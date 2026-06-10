@@ -56,7 +56,7 @@ export default function CaseStudies() {
 
                                     <div style={{ display: 'flex', gap: '2rem' }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                            <CheckCircle2 style={{ color: '#10b981' }} size={20} />
+                                            <CheckCircle2 style={{ color: 'var(--accent-emerald)' }} size={20} />
                                             <span style={{ fontWeight: 700 }}>{cs.impact}</span>
                                         </div>
                                     </div>

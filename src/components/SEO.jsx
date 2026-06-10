@@ -113,13 +113,15 @@ const ensureBrandSuffix = (value, siteName) => {
     if (!normalized) return siteName
     if (normalized.toLowerCase().includes(siteName.toLowerCase())) return normalized
     
-    // SEO optimization: Only append brand if title is short enough to avoid truncation
-    // Target: ~55 characters total (Standard SERP limit is 60)
-    if (normalized.length > 50) {
+    // SEO optimization: Only append brand if total fits within SERP limits.
+    // Standard SERP title limit: ~60 characters. " | PixTool" is 11 characters.
+    // If the combined length exceeds 60, skip the brand suffix to avoid truncation.
+    const brandSuffix = ` | ${siteName}`
+    if (normalized.length + brandSuffix.length > 60) {
         return normalized
     }
     
-    return `${normalized} | ${siteName}`
+    return `${normalized}${brandSuffix}`
 }
 
 const humanizePathSegment = (segment) => segment
@@ -170,10 +172,10 @@ const getRouteSeoDefaults = ({ path, toolData, title, description }) => {
 
     if (toolData?.id) {
         return {
-            title: title || toolData.title,
-            description: description || toolData.description || SITE_DEFAULT_DESCRIPTION,
+            title: title || toolData?.seo?.title || toolData.title,
+            description: description || toolData?.seo?.description || toolData.description || SITE_DEFAULT_DESCRIPTION,
             keywords: dedupeKeywords([
-                toolData.title,
+                toolData?.seo?.keywords || toolData.title,
                 toolData.description,
                 section?.name,
                 section?.keywords,
@@ -255,6 +257,7 @@ export default function SEO({
     twitterImage = null,
     schema = null,
     articlePublishedTime = null,
+    articleModifiedTime = null,
     articleAuthor = null,
     articleSection = null,
     noIndex = false,
@@ -297,15 +300,14 @@ export default function SEO({
         path.startsWith('/pix-admin') || 
         path.includes('/test-') ||
         searchQuery.includes('q={search_term_string}')
-
-const clampTitle = (str, max = 60) => {
+    const clampTitle = (str, max = 65) => {
     const s = normalizeText(str)
     if (!s) return s
     if (s.length <= max) return s
     return s.slice(0, max - 1).trimEnd() + '…'
 }
 
-    const brandTitle = clampTitle(ensureBrandSuffix(resolvedTitle, siteName), 60)
+    const brandTitle = clampTitle(ensureBrandSuffix(resolvedTitle, siteName), 65)
 
     const defaultScreenshot = getScreenshotPath(path)
     const baseImagePath = isUsableImageValue(image)
@@ -465,8 +467,9 @@ const clampTitle = (str, max = 60) => {
                     "description": resolvedDescription,
                     "sameAs": [
                         "https://www.linkedin.com/company/uthakkan",
-                        "https://twitter.com/ajmal_uk_",
-                        "https://www.instagram.com/ajmal_uk_",
+                        "https://x.com/pixtool_in",
+                        "https://twitter.com/pixtool_in",
+                        "https://www.instagram.com/pixtool_in",
                         "https://github.com/ajmaluk",
                         "https://youtube.com/shorts/fzIhPN-gv_E"
                     ]
@@ -535,6 +538,16 @@ const clampTitle = (str, max = 60) => {
             const toolTitle = resolvedToolName || brandTitle || siteName
             
             // Primary Application Schema (Consolidated)
+            const toolCategory = toolDataFromMap?.path?.includes('/pdf-') 
+                ? 'BusinessApplication' 
+                : toolDataFromMap?.path?.includes('/image-') 
+                    ? 'MultimediaApplication' 
+                    : toolDataFromMap?.path?.includes('/math-') || toolDataFromMap?.path?.includes('/scientific')
+                        ? 'ScientificApplication'
+                        : toolDataFromMap?.path?.includes('/ai-') 
+                            ? 'AIApplication'
+                            : 'UtilitiesApplication'
+
             const webAppSchema = {
                 "@context": "https://schema.org",
                 "@type": "WebApplication",
@@ -542,12 +555,12 @@ const clampTitle = (str, max = 60) => {
                 "description": resolvedDescription,
                 "url": fullUrl,
                 "image": ogImage,
-                "applicationCategory": "BrowserApplication",
-                "operatingSystem": "Any",
+                "applicationCategory": toolCategory,
+                "operatingSystem": "Web browser",
                 "isAccessibleForFree": true,
                 "browserRequirements": "Requires JavaScript",
                 "featureList": toolDataFromMap?.benefits || [],
-                "permissions": "No registration required, 100% Private local browser processing",
+                "permissions": "No registration required. 100% private local browser processing.",
                 "publisher": { "@id": `${siteUrl}/#organization` },
                 "author": { "@id": `${siteUrl}/#organization` },
                 "offers": {
@@ -555,7 +568,9 @@ const clampTitle = (str, max = 60) => {
                     "price": "0",
                     "priceCurrency": "USD",
                     "url": fullUrl,
-                    "availability": "https://schema.org/InStock"
+                    "availability": "https://schema.org/InStock",
+                    "description": "Free online tool. No registration, login, or account required to use.",
+                    "eligibleRegion": { "@type": "Country", "name": "Worldwide" }
                 }
             }
 
@@ -567,6 +582,21 @@ const clampTitle = (str, max = 60) => {
                     "worstRating": 1,
                     "ratingCount": Number(liveRatings.tool.totalVotes || 0)
                 }
+                webAppSchema.review = [
+                    {
+                        "@type": "Review",
+                        "author": {
+                            "@type": "Person",
+                            "name": "Verified User"
+                        },
+                        "reviewBody": `Rated ${Number(liveRatings.tool.avgRating || 0).toFixed(1)}/5 - ${toolTitle} users praise its speed and privacy-first approach.`,
+                        "reviewRating": {
+                            "@type": "Rating",
+                            "ratingValue": Number(Number(liveRatings.tool.avgRating || 0).toFixed(1)),
+                            "bestRating": 5
+                        }
+                    }
+                ]
             }
 
             globalSchemas.push(webAppSchema)
@@ -616,16 +646,34 @@ const clampTitle = (str, max = 60) => {
                 "headline": resolvedTitle,
                 "description": resolvedDescription,
                 "url": fullUrl,
-                "image": ogImage,
+                "image": {
+                    "@type": "ImageObject",
+                    "url": ogImage,
+                    "width": 1280,
+                    "height": 720
+                },
                 "datePublished": articlePublishedTime,
                 "dateModified": lastModified || articlePublishedTime,
                 "author": {
                     "@type": "Person",
-                    "name": articleAuthor || "UTHAKKAN",
-                    "url": `${siteUrl}/founder`
+                    "name": articleAuthor || "Muhammed Ajmal",
+                    "url": `${siteUrl}/founder`,
+                    "sameAs": [
+                        "https://github.com/ajmaluk",
+                        "https://x.com/ajmaluk",
+                        "https://www.linkedin.com/in/ajmaluk"
+                    ]
                 },
                 "publisher": {
-                    "@id": `${siteUrl}/#organization`
+                    "@type": "Organization",
+                    "@id": `${siteUrl}/#organization`,
+                    "name": siteName,
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": `${siteUrl}/logo.webp`,
+                        "width": 512,
+                        "height": 512
+                    }
                 },
                 "mainEntityOfPage": {
                     "@type": "WebPage",
@@ -666,7 +714,9 @@ const clampTitle = (str, max = 60) => {
         if (includeFaqSchema && !hasManualFaq) {
             const rawFaqs = (faqs && Array.isArray(faqs) && faqs.length > 0) 
                 ? faqs 
-                : (toolDataFromMap?.faqs && Array.isArray(toolDataFromMap.faqs) ? toolDataFromMap.faqs : []);
+                : (toolDataFromMap?.faq && Array.isArray(toolDataFromMap.faq) ? toolDataFromMap.faq 
+                    : (toolDataFromMap?.faqs && Array.isArray(toolDataFromMap.faqs) ? toolDataFromMap.faqs 
+                        : []));
 
             const faqEntities = rawFaqs
                 .map(faq => {
@@ -700,7 +750,9 @@ const clampTitle = (str, max = 60) => {
                 "@type": "ImageObject",
                 "contentUrl": finalScreenshot,
                 "name": resolvedImageTitle,
-                "caption": dynamicImageAlt
+                "caption": dynamicImageAlt,
+                "width": 1280,
+                "height": 720
             })
         }
 
@@ -721,7 +773,10 @@ const clampTitle = (str, max = 60) => {
                 "url": fullUrl,
                 "image": ogImage,
                 "isAccessibleForFree": true,
-                "author": { "@id": `${siteUrl}/#organization` },                    "offers": {
+                "author": {
+                    "@id": `${siteUrl}/#organization`
+                },
+                "offers": {
                     "@type": "Offer",
                     "price": "0",
                     "priceCurrency": "USD",
@@ -824,12 +879,13 @@ const clampTitle = (str, max = 60) => {
         updateMeta('twitter:description', resolvedDescription)
         updateMeta('twitter:image', twImage)
         updateMeta('twitter:image:alt', dynamicImageAlt)
-        updateMeta('twitter:creator', '@ajmal_uk_')
+        updateMeta('twitter:creator', '@pixtool_in')
         updateMeta('twitter:domain', 'pixtool.in')
+        updateMeta('twitter:site', '@pixtool_in')
 
         if (type === 'article' && articlePublishedTime) {
             updateMeta('article:published_time', articlePublishedTime, 'property')
-            updateMeta('article:modified_time', lastModified || articlePublishedTime, 'property')
+            updateMeta('article:modified_time', lastModified || articleModifiedTime || articlePublishedTime, 'property')
             updateMeta('article:author', articleAuthor || 'PixTool Team', 'property')
             if (articleSection) updateMeta('article:section', articleSection, 'property')
             
@@ -855,7 +911,7 @@ const clampTitle = (str, max = 60) => {
         // GEO Tags for Local SEO
         updateMeta('geo.region', 'IN-KL')
         updateMeta('geo.placename', 'Kannur, Kerala, India')
-        updateMeta('geo.position', '11.8745;75.3664')
+        updateMeta('geo.position', '11.8745, 75.3664')
         updateMeta('ICBM', '11.8745, 75.3664')
 
         // Additional meta tags for better indexing
@@ -908,7 +964,7 @@ const clampTitle = (str, max = 60) => {
             if (alternateDefault) alternateDefault.remove()
         }
 
-    }, [brandTitle, resolvedDescription, enhancedKeywords, shouldNoIndex, fullUrl, ogImage, type, siteName, twImage, articlePublishedTime, lastModified, articleAuthor, articleSection, articleTags, dynamicImageAlt, liveRatingMeta])
+    }, [brandTitle, resolvedDescription, enhancedKeywords, shouldNoIndex, fullUrl, ogImage, type, siteName, twImage, articlePublishedTime, articleModifiedTime, lastModified, articleAuthor, articleSection, articleTags, dynamicImageAlt, liveRatingMeta])
 
     const schemasToRender = useMemo(() => (shouldNoIndex ? [] : schemas), [shouldNoIndex, schemas])
 

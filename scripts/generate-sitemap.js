@@ -160,19 +160,9 @@ function generateSitemap() {
     addUrl(`/blog/${post.slug}`, '0.7', 'monthly', post.imageWebp || post.image, post.title, post.excerpt);
   });
 
-  // Blog Tag Pages - Generate tag pages for SEO
-  const allTags = Array.from(new Set(posts.flatMap(p => p.tags || [])));
-  allTags.forEach(tag => {
-    const slugifiedTag = tag.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    addUrl(`/blog/tag/${slugifiedTag}`, '0.6', 'weekly');
-  });
-
-  // Blog Category Pages
-  const allCategories = Array.from(new Set(posts.map(p => p.category).filter(Boolean)));
-  allCategories.forEach(category => {
-    const slugifiedCategory = category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    addUrl(`/blog/category/${slugifiedCategory}`, '0.6', 'weekly');
-  });
+  // Note: Blog tag and category pages intentionally excluded from sitemap.
+  // These are thin-content filter pages; excluding them prevents dilution of crawl budget
+  // and avoids potential 'thin content' SEO penalties.
 
   // Company & Legal & Others
   const otherPages = [
@@ -183,6 +173,7 @@ function generateSitemap() {
     '/support-us', '/promotions', '/hire-me', '/showcase', '/thank-you',
     '/code-diff', '/json-formatter', '/unit-converter', '/password-generator',
     '/qr-scanner', '/qr-generator', '/typing-test',
+    '/identity-forge', '/burner-inbox', '/ghost-inbox',
     '/apps/kallan-cop-privacy'
   ];
 

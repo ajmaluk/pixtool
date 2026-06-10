@@ -14,7 +14,7 @@ export default function Careers() {
 
             <section className="hero" style={{ padding: 'clamp(5rem, 15vh, 8rem) 1.5rem 5rem', background: 'var(--bg-secondary)', marginBottom: '4rem' }}>
                 <div style={{ maxWidth: '100%', margin: '0 auto', textAlign: 'center' }}>
-                    <div className="status-badge" style={{ margin: '0 auto 1.5rem', width: 'fit-content', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', fontWeight: 800, border: '1px solid rgba(239, 68, 68, 0.2)' }}>
+                    <div className="status-badge" style={{ margin: '0 auto 1.5rem', width: 'fit-content', background: 'var(--accent-red-50)', color: 'var(--accent-red)', fontWeight: 800, border: '1px solid var(--accent-red-50)' }}>
                         NOT CURRENTLY HIRING
                     </div>
                     <h1 className="hero-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 950, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>Careers at PixTool</h1>
@@ -28,21 +28,21 @@ export default function Careers() {
                 <div style={{ width: '100%' }}>
                     <div className="careers-perks-grid" style={{ marginBottom: '8rem' }}>
                         <div className="info-card" style={{ padding: '2.5rem', textAlign: 'center' }}>
-                            <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
+                            <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'var(--accent-blue-50)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
                                 <Globe size={26} />
                             </div>
                             <h3 style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.25rem' }}>Remote First</h3>
                             <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.5 }}>Work from anywhere in the world. We value output over office hours.</p>
                         </div>
                         <div className="info-card" style={{ padding: '2.5rem', textAlign: 'center' }}>
-                            <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
+                            <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'var(--accent-red-50)', color: 'var(--accent-red)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
                                 <Heart size={26} />
                             </div>
                             <h3 style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.25rem' }}>Impact matters</h3>
                             <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.5 }}>Your code and designs will be used by thousands of people every day.</p>
                         </div>
                         <div className="info-card" style={{ padding: '2.5rem', textAlign: 'center' }}>
-                            <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
+                            <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'var(--accent-orange-50)', color: 'var(--accent-orange)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
                                 <Coffee size={26} />
                             </div>
                             <h3 style={{ fontWeight: 900, marginBottom: '0.75rem', fontSize: '1.25rem' }}>Growth Mindset</h3>
@@ -74,8 +74,8 @@ export default function Careers() {
                             <div style={{ 
                                 width: '80px', 
                                 height: '80px', 
-                                background: 'rgba(239, 68, 68, 0.05)', 
-                                color: '#ef4444', 
+                                background: 'var(--accent-red-50)', 
+                                color: 'var(--accent-red)', 
                                 borderRadius: '24px', 
                                 display: 'flex', 
                                 alignItems: 'center', 
