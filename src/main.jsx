@@ -4,8 +4,24 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 
-// Auto-recovery for stale dynamic module imports and new deployments
+export const APP_VERSION = '2.2.0'
+
+// Auto-recovery for stale dynamic module imports and version cache bust
 if (typeof window !== 'undefined') {
+  try {
+    const savedVersion = localStorage.getItem('pixtool_app_version')
+    if (savedVersion && savedVersion !== APP_VERSION) {
+      if ('caches' in window) {
+        caches.keys().then((names) => {
+          names.forEach((name) => caches.delete(name))
+        })
+      }
+    }
+    localStorage.setItem('pixtool_app_version', APP_VERSION)
+  } catch {
+    // Ignore localStorage access errors in restricted iframe/browser modes
+  }
+
   window.addEventListener('vite:preloadError', (event) => {
     event.preventDefault()
     window.location.reload()
