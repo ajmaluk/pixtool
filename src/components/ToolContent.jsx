@@ -89,7 +89,11 @@ export default function ToolContent({
                 </div>
             </div>
 
-            <div className="content-grid-tool">
+            <div className="content-grid-tool" itemScope itemType="https://schema.org/SoftwareApplication">
+                <meta itemProp="name" content={title} />
+                <meta itemProp="applicationCategory" content="UtilitiesApplication" />
+                <meta itemProp="operatingSystem" content="Web Browser" />
+                <meta itemProp="isAccessibleForFree" content="true" />
                 <div className="content-main">
                     <header style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem', color: 'var(--accent-primary)' }}>
                         <Info size={24} />
@@ -97,6 +101,26 @@ export default function ToolContent({
                             About Our {title} Tool
                         </h2>
                     </header>
+
+                    {/* AEO / AI Direct Answer Box */}
+                    <div className="aeo-direct-answer" style={{
+                        marginBottom: '2rem',
+                        padding: '1.25rem 1.5rem',
+                        background: 'var(--bg-secondary)',
+                        borderRadius: '16px',
+                        border: '1px solid var(--border-color)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '0.5rem'
+                    }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontWeight: 800, fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                            <Sparkles size={16} />
+                            <span>Quick Answer & Key Takeaways</span>
+                        </div>
+                        <p itemProp="description" style={{ color: 'var(--text-primary)', margin: 0, fontSize: '1.02rem', lineHeight: 1.6, fontWeight: 500 }}>
+                            {description}
+                        </p>
+                    </div>
                     
                     {alternativeTo.length > 0 && (
                         <div style={{
@@ -113,10 +137,6 @@ export default function ToolContent({
                              PixTool provides a professional-grade browser-based alternative to <b>{alternativeTo.join(', ')}</b>.
                         </div>
                     )}
-                    
-                    <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '2.5rem' }}>
-                        {description}
-                    </p>
 
                     <section id="tool-features" className="content-section-premium">
                         <h3 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -125,7 +145,7 @@ export default function ToolContent({
                         </h3>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: '1.25rem' }}>
                             {benefits.map((benefit, i) => (
-                                <div key={i} style={{ color: 'var(--text-secondary)', display: 'flex', alignItems: 'start', gap: '0.75rem', fontSize: '0.95rem' }}>
+                                <div key={i} itemProp="featureList" style={{ color: 'var(--text-secondary)', display: 'flex', alignItems: 'start', gap: '0.75rem', fontSize: '0.95rem' }}>
                                     <span style={{ color: 'var(--accent-primary)', fontWeight: 900, marginTop: '-2px' }}>✓</span>
                                     <span>{benefit}</span>
                                 </div>

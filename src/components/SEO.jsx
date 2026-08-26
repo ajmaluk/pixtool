@@ -572,13 +572,24 @@ export default function SEO({
                 "url": fullUrl,
                 "image": ogImage,
                 "applicationCategory": toolCategory,
-                "operatingSystem": "Web browser",
+                "operatingSystem": "Web browser (All platforms)",
+                "softwareRequirements": "HTML5, WebAssembly, and JavaScript capable browser",
                 "isAccessibleForFree": true,
                 "browserRequirements": "Requires JavaScript",
                 "featureList": toolDataFromMap?.benefits || [],
                 "permissions": "No registration required. 100% private local browser processing.",
                 "publisher": { "@id": `${siteUrl}/#organization` },
                 "author": { "@id": `${siteUrl}/#organization` },
+                "creator": {
+                    "@type": "Person",
+                    "name": "Ajmal U K",
+                    "url": "https://ajmal.uthakkan.in"
+                },
+                "provider": {
+                    "@type": "Organization",
+                    "name": "UTHAKKAN",
+                    "url": "https://uthakkan.in"
+                },
                 "offers": {
                     "@type": "Offer",
                     "price": "0",

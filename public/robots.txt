@@ -13,45 +13,67 @@ Disallow: /*?category=*
 Disallow: /*?page=*
 Disallow: /blog/tag/*
 
-# Googlebot - full access
+# Search Engines - Full Access
 User-agent: Googlebot
 Allow: /
 
-# Bingbot - full access
 User-agent: Bingbot
 Allow: /
 
-# Yandex - full access
 User-agent: Yandex
 Allow: /
 
-# AdSense partner
+User-agent: Applebot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# AdSense Partner
 User-agent: Mediapartners-Google
 Allow: /
 
-# AI Crawlers - allow for AI search features
+# AI Crawlers & Answer Engines - Allowed for AI Discovery & Citations
 User-agent: GPTBot
 Allow: /
 Disallow: /api/
 Disallow: /pix-admin/
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
 
 User-agent: Google-Extended
 Allow: /
 Disallow: /api/
 Disallow: /pix-admin/
 
-User-agent: CCBot
+User-agent: GoogleOther
 Allow: /
-Disallow: /api/
-Disallow: /pix-admin/
 
-User-agent: Anthropic-ai
+User-agent: ClaudeBot
 Allow: /
 
 User-agent: Claude-Web
 Allow: /
 
-# Social crawlers
+User-agent: Anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+Disallow: /api/
+Disallow: /pix-admin/
+
+# Social Crawlers
 User-agent: FacebookBot
 Allow: /
 
@@ -61,4 +83,7 @@ Allow: /
 User-agent: Twitterbot
 Allow: /
 
+# Sitemaps & Feeds
 Sitemap: https://www.pixtool.in/sitemap.xml
+Sitemap: https://www.pixtool.in/rss.xml
+Sitemap: https://www.pixtool.in/atom.xml
