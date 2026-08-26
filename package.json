@@ -24,7 +24,7 @@
     "preview": "vite preview",
     "screenshots": "node scripts/generate-screenshots.js",
     "keepalive": "node scripts/supabase-keepalive.js",
-    "postbuild": "if [ -n \"$SKIP_PRERENDER\" ]; then echo \"Skipping prerender (SKIP_PRERENDER enabled)\"; else node scripts/prerender.js; fi"
+    "postbuild": "if [ -n \"$SKIP_PRERENDER\" ]; then echo \"Skipping prerender (SKIP_PRERENDER enabled)\"; else node scripts/prerender.js; fi && cp dist/index.html dist/404.html && echo \"Created dist/404.html for SPA fallback\""
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.99.3",
