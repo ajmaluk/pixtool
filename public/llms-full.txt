@@ -1,8 +1,10 @@
-# PixTool Full AI Tool Index
+# PixTool Full AI Tool & Ecosystem Index
 
-This file is auto-generated from source data.
-Generated At: 2026-06-10T18:24:13.237Z
+PixTool is built by UTHAKKAN (founder: Ajmal U K). Fast, private browser-based suite with zero cloud uploads.
+Generated At: 2026-08-26T11:49:45.919Z
 Canonical URL: https://www.pixtool.in
+Publisher: UTHAKKAN (https://uthakkan.in)
+Founder: Ajmal U K (https://ajmal.uthakkan.in)
 Sitemap: https://www.pixtool.in/sitemap.xml
 
 Total Tools: 73
@@ -93,7 +95,7 @@ Total Blog Posts: 27
 
 - Free Temp Mail 2026 [Safe]
   - URL: https://www.pixtool.in/temp-mail
-  - Description: The PixTool Temp Mail service is a high-authority privacy utility engineered for secure, anonymous communication in an era of aggressive. Secure your files.
+  - Description: Get instant disposable temporary email addresses with auto-generated secure passwords. Receive OTP verification codes in real time with 100% zero-log privacy.
 - 10 Minute Mail
   - URL: https://www.pixtool.in/temp-mail/10-minute-mail
   - Description: Create a high-authority disposable inbox that automatically self-destructs in 10 minutes. Absolute zero-log privacy engineered for quick verification codes and high-stakes privacy signing.
@@ -114,10 +116,10 @@ Total Blog Posts: 27
   - Description: Achieve professional-grade typing speed with our industrial typing studio. Track WPM, accuracy, and detailed error analysis with high-fidelity analytics.
 - Universal QR Scanner
   - URL: https://www.pixtool.in/qr-scanner
-  - Description: The definitive high-authority QR decoding studio. Scan from live camera feeds or upload high-resolution images instantly across all device architectures. No app required, 100% private.
+  - Description: Scan and decode QR codes instantly from your webcam, mobile camera, or uploaded image files (JPG, PNG, WebP). 100% free with no app download required.
 - Free QR Code Generator [Pro]
   - URL: https://www.pixtool.in/qr-generator
-  - Description: Professional ISO-standard QR code generator engineered for high-fidelity marketing and localized data sovereignty. Secure your files.
+  - Description: Generate custom ISO-standard high-resolution QR codes for websites, WiFi networks, vCards, text, and emails with custom colors and zero watermark.
 - Identity Forge
   - URL: https://www.pixtool.in/identity-forge
   - Description: Generate a high-authority fake email identity for deep-layer privacy and industrial testing. Shield your primary digital footprint by using localized identity tokens that stay 100% private.
@@ -237,7 +239,7 @@ Total Blog Posts: 27
   - Description: Browser-native file manager for secure local storage and organization of virtual files in a zero-knowledge environment.
 - Focus Clock
   - URL: https://www.pixtool.in/productivity-tools/pomodoro
-  - Description: Aesthetic Pomodoro timer engine designed to boost deep work through scientifically proven neuro-focus intervals.
+  - Description: Minimalist Pomodoro timer with customizable focus intervals, ambient soundscapes, and streak accountability.
 - Sticky Notes
   - URL: https://www.pixtool.in/productivity-tools/sticky-notes
   - Description: Digital brainstorming board with auto-save and spatial grouping logic for organizing chaotic ideas.

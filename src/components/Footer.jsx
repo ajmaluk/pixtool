@@ -92,7 +92,9 @@ export default function Footer() {
         <div className="footer-links-group">
           <h3 className="footer-heading">Company</h3>
           <ul className="footer-links">
-            <li><Link id="footer-link-about" to="/about" title="Learn about the mission and technology of PixTool">About Our Mission</Link></li>
+            <li><Link id="footer-link-about" to="/about" title="Learn about the mission and technology of PixTool and UTHAKKAN">About UTHAKKAN</Link></li>
+            <li><Link id="footer-link-founder" to="/founder" title="Meet the founder, Ajmal U K">Founder Profile</Link></li>
+            <li><Link id="footer-link-products" to="/products" title="Explore the software ecosystem and apps built by UTHAKKAN">Products & Ecosystem</Link></li>
             <li><Link id="footer-link-guides" to="/blog" title="Read our latest productivity tutorials and guides">Expert Guides</Link></li>
             <li><Link id="footer-link-status" to="/status" title="Review the current PixTool status, changelog, and implementation notes">Status & Changelog</Link></li>
             <li><Link id="footer-link-showcase" to="/showcase" title="View screenshots of our professional tool interfaces">Visual Showcase</Link></li>
@@ -125,24 +127,24 @@ export default function Footer() {
           </p>
         </div>
         
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', flexWrap: 'wrap', gap: '1rem', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', flexWrap: 'wrap', gap: '1rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-color)' }}>
           <p className="copyright">
-            © {new Date().getFullYear()} PixTool by <a href="https://uthakkan.in" target="_blank" rel="noopener noreferrer">UTHAKKAN</a>. All rights reserved.
+            © {new Date().getFullYear()} PixTool by <a href="https://uthakkan.in" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-primary)', fontWeight: 700 }}>UTHAKKAN</a>. Founded by <Link to="/founder" style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Ajmal U K</Link>. All rights reserved.
           </p>
           <div className="footer-meta-links" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <span>Built for Professionals</span>
+            <span>Built for Speed & Privacy</span>
             <span className="dot-separator">•</span>
-            <span>Zero-Upload Technology</span>
+            <span>100% Client-Side</span>
             <span className="dot-separator">•</span>
-            <span              style={{ 
+            <span style={{ 
               fontSize: '0.75rem', 
               background: 'var(--bg-secondary)', 
-              padding: '2px 8px', 
+              padding: '3px 8px', 
               borderRadius: '6px', 
               border: '1px solid var(--border-color)',
               fontWeight: 800,
               color: 'var(--accent-primary)'
-            }}>v2.1.0</span>
+            }}>v2.6.0</span>
           </div>
         </div>
       </div>

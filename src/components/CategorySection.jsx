@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import ToolCard from './ToolCard'
 import { motion } from 'framer-motion'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 
 export default function CategorySection({
   icon: IconComponent,
-  iconBg = 'rgba(168, 85, 247, 0.08)',
-  iconColor = '#a855f7',
+  iconBg = 'rgba(168, 85, 247, 0.12)',
+  iconColor = '#c084fc',
   title,
   subtitle,
   tools = [],
@@ -21,53 +22,41 @@ export default function CategorySection({
 
   return (
     <motion.section
-      style={{ marginBottom: '6rem', position: 'relative' }}
-      initial={{ opacity: 0, y: 40 }}
+      style={{ marginBottom: '5rem', position: 'relative' }}
+      initial={{ opacity: 0, y: 25 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div
-        style={{
-          position: 'sticky',
-          top: '80px',
-          zIndex: 10,
-          background: 'rgba(var(--bg-primary-rgb), 0.7)',
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
-          padding: '1.5rem 0',
-          marginBottom: '3rem',
-          boxShadow: '0 4px 40px rgba(0, 0, 0, 0.05)',
-          borderBottom: '1px solid rgba(255,255,255,0.05)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '1.2rem',
-          borderRadius: '0 0 24px 24px'
-        }}
-      >
-        <div style={{ padding: '0.6rem', background: iconBg, borderRadius: '12px', color: iconColor }}>
-          {IconComponent && <IconComponent size={24} />}
+      <div className="category-sticky-header">
+        <div className="category-header-left">
+          <div 
+            className="category-icon-box"
+            style={{ background: iconBg, color: iconColor }}
+          >
+            {IconComponent && <IconComponent size={22} />}
+          </div>
+          <div>
+            <h2 className="category-title">
+              <span>{title}</span>
+              {subtitle && (
+                <span className="category-count-badge">
+                  {subtitle}
+                </span>
+              )}
+            </h2>
+          </div>
         </div>
-        <div>
-          <h2 style={{
-            fontSize: '1.8rem',
-            fontWeight: 900,
-            margin: 0,
-            letterSpacing: '-0.02em'
-          }}>
-            {title}
-            {subtitle && (
-              <span style={{
-                color: 'var(--text-muted)',
-                fontSize: '1rem',
-                fontWeight: 500,
-                marginLeft: '0.5rem'
-              }}>
-                {subtitle}
-              </span>
-            )}
-          </h2>
-        </div>
+
+        {hasMore && (
+          <button
+            onClick={toggle}
+            className="category-toggle-btn"
+          >
+            <span>{isExpanded ? 'Collapse' : `View All (${tools.length})`}</span>
+            {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+          </button>
+        )}
       </div>
 
       <motion.div
@@ -80,16 +69,15 @@ export default function CategorySection({
       </motion.div>
 
       {hasMore && (
-        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-          <motion.button
+        <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
+          <button
             onClick={toggle}
             className="btn btn-secondary"
-            style={{ minWidth: '120px' }}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+            style={{ padding: '0.65rem 1.75rem', borderRadius: '100px', fontSize: '0.85rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
           >
-            {isExpanded ? 'Show Less' : `Show ${tools.length - initialCount} More`}
-          </motion.button>
+            <span>{isExpanded ? 'Show Less' : `Show ${tools.length - initialCount} More Tools`}</span>
+            {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+          </button>
         </div>
       )}
     </motion.section>

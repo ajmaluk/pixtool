@@ -1,32 +1,39 @@
 import { useState } from 'react'
 import AiToolTemplate from '../components/AiToolTemplate'
-import { AtSign, User, ShieldCheck, Clock, Send, Mail } from 'lucide-react'
+import { AtSign, Briefcase, Zap, Heart, Clock } from 'lucide-react'
 
 export default function AiEmailWriter() {
   const [recipient, setRecipient] = useState('')
   const [subject, setSubject] = useState('')
-  const [tone, setTone] = useState('executive')
+  const [tone, setTone] = useState('professional')
 
   const tones = [
-    { id: 'executive', name: 'Executive', icon: ShieldCheck, desc: 'High-authority & direct' },
-    { id: 'collaborative', name: 'Collaborative', icon: User, desc: 'Warm & partnership-focused' },
-    { id: 'urgent', name: 'Urgent', icon: Clock, desc: 'Time-sensitive & impactful' }
+    { id: 'professional', name: 'Professional', icon: Briefcase, desc: 'Corporate, authoritative & respectful' },
+    { id: 'persuasive', name: 'Persuasive', icon: Zap, desc: 'High-converting sales or proposal pitch' },
+    { id: 'friendly', name: 'Friendly', icon: Heart, desc: 'Warm, collaborative, and approachable' },
+    { id: 'urgent', name: 'Urgent', icon: Clock, desc: 'Direct, action-driven deadline reminder' }
   ]
 
   const customPromptBuilder = (text) => {
-    return `You are a world-class Business Communications Consultant. 
-Draft a professional email to ${recipient} regarding "${subject}".
+    const selectedTone = tones.find(t => t.id === tone)
+    const normalizedRecipient = recipient.trim() || 'the intended recipient'
+    const normalizedSubject = subject.trim() || 'General Business Inquiry'
+    const normalizedContext = text.trim() || 'No additional bullet points provided.'
 
-STRATEGIC PARAMETERS:
-- Tone: ${tone}
-- Recipient Profile: ${recipient}
-- Core Objective: ${subject}
-- Context/Key Points: ${text}
+    return `You are an Executive Communications Specialist and Professional Copywriter.
+Draft a pristine, high-impact business email based on the following specifications:
+
+EMAIL SPECIFICATIONS:
+- Intended Recipient: ${normalizedRecipient}
+- Core Subject/Objective: ${normalizedSubject}
+- Tone / Persona: ${selectedTone?.name || tone} (${selectedTone?.desc || ''})
+- Key Talking Points & Context: ${normalizedContext}
 
 OUTPUT REQUIREMENTS:
-- Provide a compelling Subject Line.
-- Use an appropriate professional greeting and sign-off.
-- Ensure the body is concise, polished, and psychologically optimized for the ${tone} tone.`
+- Provide 2 compelling Subject Line options.
+- Provide the Full Email Draft (Salutation, Introduction, Value/Action Body, frictionless Call to Action, and Professional Sign-off).
+- Keep formatting scannable with concise paragraphs and bullet points where appropriate.
+- Maintain impeccable grammar, tone consistency, and professional etiquette.`
   }
 
   return (
@@ -36,75 +43,92 @@ OUTPUT REQUIREMENTS:
       icon={AtSign}
       path="/ai-tools/email-writer"
       buttonText="Draft Correspondence"
+      placeholder="Outline your key points, background context, specific meeting requests, or proposal details..."
       customPromptBuilder={customPromptBuilder}
       seoKeywords="ai email writer, professional business email, cold email generator, business communication tools"
     >
-      <div className="email-workspace" style={{ marginBottom: '1.5rem' }}>
-        {/* Identity Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem', marginBottom: '3rem' }}>
-          <div className="input-group">
-            <label htmlFor="ai-email-recipient" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-              Strategic Recipient
-            </label>
-            <input 
-              id="ai-email-recipient"
-              name="recipient"
-              type="text"
-              className="dalam-input-field"
-              style={{ width: '100%', padding: '1.5rem 2rem', borderRadius: '24px', fontSize: '1.2rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', outline: 'none', color: 'var(--text-primary)' }}
-              placeholder="e.g., Hiring Manager, CEO, Potential Partner"
-              value={recipient}
-              onChange={(e) => setRecipient(e.target.value)}
-            />
-          </div>
+      <div className="sidebar-group">
+        <label htmlFor="ai-email-recipient" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          Recipient
+        </label>
+        <input 
+          id="ai-email-recipient"
+          name="recipient"
+          type="text"
+          style={{ 
+            width: '100%', 
+            padding: '0.75rem 1rem', 
+            borderRadius: '12px', 
+            fontSize: '0.9rem', 
+            backgroundColor: 'var(--bg-secondary)', 
+            border: '1px solid var(--border-color)', 
+            outline: 'none', 
+            color: 'var(--text-primary)',
+            boxSizing: 'border-box'
+          }}
+          placeholder="e.g. Hiring Manager, Client, Partner"
+          value={recipient}
+          onChange={(e) => setRecipient(e.target.value)}
+        />
+      </div>
 
-          <div className="input-group">
-            <label htmlFor="ai-email-subject" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-              Primary Narrative
-            </label>
-            <input 
-              id="ai-email-subject"
-              name="subject"
-              type="text"
-              className="dalam-input-field"
-              style={{ width: '100%', padding: '1.5rem 2rem', borderRadius: '24px', fontSize: '1.2rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', outline: 'none', color: 'var(--text-primary)' }}
-              placeholder="e.g., Collaboration Proposal, Follow-up after meeting"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-            />
-          </div>
-        </div>
+      <div className="sidebar-group">
+        <label htmlFor="ai-email-subject" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          Subject / Goal
+        </label>
+        <input 
+          id="ai-email-subject"
+          name="subject"
+          type="text"
+          style={{ 
+            width: '100%', 
+            padding: '0.75rem 1rem', 
+            borderRadius: '12px', 
+            fontSize: '0.9rem', 
+            backgroundColor: 'var(--bg-secondary)', 
+            border: '1px solid var(--border-color)', 
+            outline: 'none', 
+            color: 'var(--text-primary)',
+            boxSizing: 'border-box'
+          }}
+          placeholder="e.g. Project Proposal & Next Steps"
+          value={subject}
+          onChange={(e) => setSubject(e.target.value)}
+        />
+      </div>
 
-        {/* Persona Selector */}
-        <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-            Linguistic Persona
-          </label>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
-            {tones.map(t => (
-              <button
-                key={t.id}
-                onClick={() => setTone(t.id)}
-                style={{ 
-                  padding: '1.75rem', 
-                  borderRadius: '32px', 
-                  border: '2px solid', 
-                  borderColor: tone === t.id ? 'var(--accent-purple)' : 'var(--border-color)', 
-                  background: tone === t.id ? 'var(--bg-primary)' : 'var(--bg-secondary)',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                  boxShadow: tone === t.id ? '0 10px 25px var(--accent-glow)' : 'none'
-                }}
-              >
-                <div style={{ color: tone === t.id ? 'var(--accent-purple)' : 'var(--text-muted)', marginBottom: '1rem' }}>
-                  <t.icon size={28} strokeWidth={1.5} />
-                </div>
-                <div style={{ fontWeight: 800, fontSize: '1.1rem', color: tone === t.id ? 'var(--text-primary)' : 'var(--text-secondary)', marginBottom: '0.25rem' }}>{t.name}</div>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>{t.desc}</div>
-              </button>
-            ))}
-          </div>
+      <div className="sidebar-group">
+        <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          Linguistic Persona
+        </label>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+          {tones.map(t => (
+            <button
+              key={t.id}
+              type="button"
+              onClick={() => setTone(t.id)}
+              style={{ 
+                width: '100%', 
+                padding: '0.65rem 0.85rem', 
+                borderRadius: '10px', 
+                border: '1.5px solid', 
+                borderColor: tone === t.id ? 'var(--accent-purple)' : 'var(--border-color)', 
+                background: tone === t.id ? 'var(--accent-glow)' : 'var(--bg-secondary)',
+                textAlign: 'left',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.65rem'
+              }}
+            >
+              <t.icon size={16} color={tone === t.id ? 'var(--accent-purple)' : 'var(--text-muted)'} strokeWidth={1.5} />
+              <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+                <span style={{ fontWeight: 800, fontSize: '0.82rem', color: tone === t.id ? 'var(--text-primary)' : 'var(--text-secondary)' }}>{t.name}</span>
+                <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{t.desc}</span>
+              </div>
+            </button>
+          ))}
         </div>
       </div>
     </AiToolTemplate>

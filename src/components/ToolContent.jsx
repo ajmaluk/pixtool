@@ -1,4 +1,4 @@
-import { HelpCircle, Info, CheckCircle2, ArrowRight, Shield, Zap, Lock } from 'lucide-react'
+import { HelpCircle, Info, CheckCircle2, ArrowRight, Shield, Zap, Lock, ShieldCheck, Cpu, HardDrive, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
@@ -72,7 +72,7 @@ export default function ToolContent({
     const resolvedRelatedArticles = relatedArticles.length > 0 ? relatedArticles : defaultRelatedArticles
 
     return (
-        <article className="tool-content-section" style={{ marginTop: '10rem', borderTop: '1px solid var(--border-color)', paddingTop: '6rem' }}>
+        <article className="tool-content-section" style={{ marginTop: '5rem', borderTop: '1px solid var(--border-color)', paddingTop: '4rem' }}>
             {/* SEO Trust Bar */}
             <div className="trust-badges-bar">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)' }}>
@@ -123,7 +123,7 @@ export default function ToolContent({
                             <CheckCircle2 size={24} style={{ color: 'var(--accent-primary)' }} />
                             {title} Features & Capabilities
                         </h3>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.25rem' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: '1.25rem' }}>
                             {benefits.map((benefit, i) => (
                                 <div key={i} style={{ color: 'var(--text-secondary)', display: 'flex', alignItems: 'start', gap: '0.75rem', fontSize: '0.95rem' }}>
                                     <span style={{ color: 'var(--accent-primary)', fontWeight: 900, marginTop: '-2px' }}>✓</span>
@@ -150,171 +150,162 @@ export default function ToolContent({
                         </section>
                     )}
 
-                    {readNext && readNext.length > 0 && (
-                        <nav id="expert-guides" style={{ marginTop: '5rem' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2rem' }}>
-                                <div style={{ padding: '8px', background: 'var(--accent-glow)', borderRadius: '12px', color: 'var(--accent-primary)' }}>
-                                    <HelpCircle size={24} />
+                    <section id="privacy-architecture" style={{
+                        marginTop: '2.5rem',
+                        padding: '1.75rem',
+                        background: 'var(--bg-secondary)',
+                        borderRadius: '20px',
+                        border: '1px solid var(--border-color)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '1.25rem'
+                    }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                            <div style={{
+                                width: '36px',
+                                height: '36px',
+                                borderRadius: '10px',
+                                background: 'rgba(99, 102, 241, 0.12)',
+                                color: 'var(--accent-primary)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                flexShrink: 0
+                            }}>
+                                <ShieldCheck size={20} />
+                            </div>
+                            <div>
+                                <h3 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>
+                                    Privacy & Security Architecture
+                                </h3>
+                                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0 }}>
+                                    100% Client-side sandbox isolation
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1rem' }}>
+                            <div style={{ padding: '1rem', background: 'var(--bg-primary)', borderRadius: '14px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--accent-primary)', fontWeight: 800, fontSize: '0.88rem' }}>
+                                    <HardDrive size={15} />
+                                    <span>Zero Uploads</span>
                                 </div>
-                                <h3 style={{ fontSize: '1.5rem', fontWeight: 900, letterSpacing: '-0.02em', margin: 0 }}>Expert Tutorials</h3>
+                                <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
+                                    Files & payloads execute directly in your local browser memory without remote storage.
+                                </p>
                             </div>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
-                                {readNext.map((item, i) => (
-                                    <Link key={i} to={item.path} style={{ textDecoration: 'none', color: 'inherit' }} className="expert-guide-card-wrapper">
-                                        <div
-                                            className="expert-guide-card"
-                                            style={{
-                                                background: 'var(--bg-glass)',
-                                                border: '1px solid var(--border-color)',
-                                                borderRadius: '24px',
-                                                padding: '1.75rem',
-                                                height: '100%',
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                transition: 'all 0.3s ease'
-                                            }}
-                                        >
-                                            <div style={{ fontSize: '0.7rem', fontWeight: 900, color: 'var(--accent-primary)', textTransform: 'uppercase', marginBottom: '1rem', letterSpacing: '0.1em' }}>
-                                                TUTORIAL & INSIGHTS
-                                            </div>
-                                            <div style={{ display: 'flex', alignItems: 'start', justifyContent: 'space-between', gap: '1rem' }}>
-                                                <h4 style={{ fontWeight: 800, fontSize: '1.15rem', margin: 0, lineHeight: 1.4 }}>{item.title}</h4>
-                                                <div style={{ minWidth: '36px', height: '36px', background: 'var(--bg-primary)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                                    <ArrowRight size={20} style={{ color: 'var(--accent-primary)' }} />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                ))}
+
+                            <div style={{ padding: '1rem', background: 'var(--bg-primary)', borderRadius: '14px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#10b981', fontWeight: 800, fontSize: '0.88rem' }}>
+                                    <Cpu size={15} />
+                                    <span>WASM Processing</span>
+                                </div>
+                                <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
+                                    High-performance WebAssembly engines deliver instant desktop-grade execution.
+                                </p>
                             </div>
-                        </nav>
-                    )}
+
+                            <div style={{ padding: '1rem', background: 'var(--bg-primary)', borderRadius: '14px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#ec4899', fontWeight: 800, fontSize: '0.88rem' }}>
+                                    <Shield size={15} />
+                                    <span>Zero Tracking</span>
+                                </div>
+                                <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
+                                    Zero behavioral profiling, session monitoring, or persistent cookies.
+                                </p>
+                            </div>
+
+                            <div style={{ padding: '1rem', background: 'var(--bg-primary)', borderRadius: '14px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#f59e0b', fontWeight: 800, fontSize: '0.88rem' }}>
+                                    <Sparkles size={15} />
+                                    <span>100% Free Forever</span>
+                                </div>
+                                <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
+                                    Full premium access with no subscriptions, export watermarks, or daily quotas.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
                 </div>
 
                 <aside className="content-sidebar">
-                    <section id="how-to-guide" style={{ marginBottom: '4rem' }}>
-                        <h3 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '2rem' }}>How to use {title}</h3>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    <section id="how-to-guide" style={{ marginBottom: '3rem' }}>
+                        <h3 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1.5rem' }}>How to use {title}</h3>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                             {howTo.map((step, i) => (
-                                <div key={i} style={{ display: 'flex', gap: '1.25rem' }}>
+                                <div key={i} style={{ display: 'flex', gap: '1rem', background: 'var(--bg-secondary)', padding: '1rem 1.25rem', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
                                     <div style={{
-                                        minWidth: '32px',
-                                        height: '32px',
+                                        minWidth: '28px',
+                                        height: '28px',
                                         background: 'var(--accent-primary)',
                                         color: 'white',
-                                        borderRadius: '10px',
+                                        borderRadius: '8px',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        fontSize: '0.95rem',
-                                        fontWeight: 800
+                                        fontSize: '0.85rem',
+                                        fontWeight: 800,
+                                        flexShrink: 0
                                     }}>
                                         {i + 1}
                                     </div>
-                                    <p style={{ color: 'var(--text-secondary)', margin: 0, fontSize: '1rem', lineHeight: 1.6, fontWeight: 500 }}>{step}</p>
+                                    <p style={{ color: 'var(--text-secondary)', margin: 0, fontSize: '0.95rem', lineHeight: 1.5, fontWeight: 500 }}>{step}</p>
                                 </div>
                             ))}
                         </div>
                     </section>
 
                     {useCases && useCases.length > 0 && (
-                        <section id="use-cases" style={{ marginBottom: '4rem' }}>
-                            <h3 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                                <CheckCircle2 size={24} style={{ color: 'var(--accent-primary)' }} />
+                        <section id="use-cases" style={{ marginBottom: '3rem' }}>
+                            <h3 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                                <CheckCircle2 size={22} style={{ color: 'var(--accent-primary)' }} />
                                 Best Practices
                             </h3>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                 {useCases.map((useCase, i) => (
-                                    <div key={i} style={{ padding: '1.5rem', background: 'var(--bg-secondary)', borderRadius: '20px', border: '1px solid var(--border-color)', transition: 'transform 0.2s ease' }}>
-                                        <h4 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '0.75rem', color: 'var(--text-primary)' }}>{useCase.title}</h4>
-                                        <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6 }}>{useCase.description}</p>
+                                    <div key={i} style={{ padding: '1.25rem', background: 'var(--bg-secondary)', borderRadius: '18px', border: '1px solid var(--border-color)' }}>
+                                        <h4 style={{ fontSize: '1rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>{useCase.title}</h4>
+                                        <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>{useCase.description}</p>
                                     </div>
-                                ))}
-                            </div>
-                        </section>
-                    )}
-
-                    {faq && faq.length > 0 && (
-                        <section id="faq-section" style={{ marginBottom: '4rem' }}>
-                            <h3 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                                <HelpCircle size={24} />
-                                Frequently Asked
-                            </h3>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                                {faq.map((item, i) => (
-                                    <div key={i} className="faq-item">
-                                        <h4 className="faq-question">{item.q}</h4>
-                                        <p className="faq-answer">{item.a}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </section>
-                    )}
-
-                    {resolvedRelatedArticles && resolvedRelatedArticles.length > 0 && (
-                        <section id="related-guides" style={{ marginBottom: '4rem' }}>
-                            <h3 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '2rem' }}>Related Guides</h3>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
-                                {resolvedRelatedArticles.map((article, i) => (
-                                    <Link key={i} to={article.path} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                        <motion.div
-                                            whileHover={{ y: -4, borderColor: 'var(--accent-primary)' }}
-                                            style={{
-                                                padding: '1.25rem',
-                                                background: 'var(--bg-secondary)',
-                                                border: '1px solid var(--border-color)',
-                                                borderRadius: '20px',
-                                                height: '100%'
-                                            }}
-                                        >
-                                            <div style={{ fontSize: '0.72rem', fontWeight: 900, color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.75rem' }}>
-                                                Blog Guide
-                                            </div>
-                                            <h4 style={{ fontSize: '1rem', fontWeight: 800, lineHeight: 1.4, margin: 0 }}>{article.title}</h4>
-                                            {article.description && (
-                                                <p style={{ margin: '0.75rem 0 0', color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.6 }}>{article.description}</p>
-                                            )}
-                                        </motion.div>
-                                    </Link>
                                 ))}
                             </div>
                         </section>
                     )}
 
                     {relatedTools && relatedTools.length > 0 && (
-                        <nav id="related-tools" style={{ padding: '2rem', background: 'var(--bg-glass)', border: '1px solid var(--border-color)', borderRadius: '24px' }}>
-                            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '1.5rem' }}>Discover More Tools</h3>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        <nav id="related-tools" style={{ padding: '1.5rem', background: 'var(--bg-glass)', border: '1px solid var(--border-color)', borderRadius: '20px' }}>
+                            <h3 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '1.25rem' }}>Discover More Tools</h3>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                                 {relatedTools.map((tool, i) => (
                                     <Link key={i} to={tool.path} style={{ textDecoration: 'none', color: 'inherit' }} title={`Try our ${tool.name} tool`}>
-                                        <motion.div 
-                                            whileHover={{ x: 5, color: 'var(--accent-primary)' }}
+                                        <div 
                                             style={{ 
                                                 borderBottom: '1px solid var(--border-color)', 
-                                                paddingBottom: '0.75rem', 
+                                                paddingBottom: '0.65rem', 
                                                 display: 'flex', 
                                                 alignItems: 'center', 
                                                 justifyContent: 'space-between',
                                                 fontWeight: 600,
-                                                fontSize: '0.95rem'
+                                                fontSize: '0.92rem',
+                                                color: 'var(--text-secondary)'
                                             }}
                                         >
                                             <span>{tool.name}</span>
-                                            <ArrowRight size={16} style={{ color: 'var(--accent-primary)', opacity: 0.6 }} />
-                                        </motion.div>
+                                            <ArrowRight size={15} style={{ color: 'var(--accent-primary)' }} />
+                                        </div>
                                     </Link>
                                 ))}
                             </div>
                             
                             {/* Category Hub Link for PageRank distribution */}
-                            <div style={{ marginTop: '2.5rem', paddingTop: '1.5rem', borderTop: '2px solid var(--accent-glow)' }}>
+                            <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid var(--border-color)' }}>
                                 <Link 
-                                    to={window.location.pathname.includes('pdf') ? '/pdf-tools' : window.location.pathname.includes('image') ? '/image-tools' : '/utility-tools'}
+                                    to={currentPath.includes('pdf') ? '/pdf-tools' : currentPath.includes('image') ? '/image-tools' : currentPath.includes('ai') ? '/ai-tools' : currentPath.includes('math') ? '/math-tools' : currentPath.includes('productivity') ? '/productivity-tools' : '/utility-tools'}
                                     style={{ 
                                         display: 'flex', 
                                         alignItems: 'center', 
                                         gap: '0.5rem', 
-                                        fontSize: '0.85rem', 
+                                        fontSize: '0.82rem', 
                                         fontWeight: 800, 
                                         color: 'var(--accent-primary)', 
                                         textDecoration: 'none', 
@@ -322,14 +313,163 @@ export default function ToolContent({
                                         letterSpacing: '0.05em' 
                                     }}
                                 >
-                                    Browse All {window.location.pathname.includes('pdf') ? 'PDF' : window.location.pathname.includes('image') ? 'Image' : 'Utility'} Tools
-                                    <ArrowRight size={14} />
+                                    Browse Full Category Suite
+                                    <ArrowRight size={13} />
                                 </Link>
                             </div>
                         </nav>
                     )}
                 </aside>
             </div>
+
+            {/* Full Width FAQ Section */}
+            {faq && faq.length > 0 && (
+                <section id="faq-section" style={{ marginTop: '3.5rem', paddingTop: '3rem', borderTop: '1px solid var(--border-color)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2.5rem' }}>
+                        <div style={{ padding: '10px', background: 'rgba(99, 102, 241, 0.1)', borderRadius: '14px', color: 'var(--accent-primary)', display: 'flex' }}>
+                            <HelpCircle size={24} />
+                        </div>
+                        <div>
+                            <h3 style={{ fontSize: '1.75rem', fontWeight: 900, letterSpacing: '-0.02em', margin: 0, color: 'var(--text-primary)' }}>
+                                Frequently Asked Questions
+                            </h3>
+                            <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', margin: '0.25rem 0 0' }}>
+                                Instant answers to common questions regarding security, performance, and usage.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style={{ 
+                        display: 'grid', 
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', 
+                        gap: '1.5rem' 
+                    }}>
+                        {faq.map((item, i) => (
+                            <div 
+                                key={i} 
+                                style={{
+                                    background: 'var(--bg-card)',
+                                    border: '1px solid var(--border-color)',
+                                    borderRadius: '20px',
+                                    padding: '1.75rem',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-between',
+                                    boxShadow: 'var(--shadow-sm)'
+                                }}
+                            >
+                                <div>
+                                    <h4 style={{ 
+                                        fontSize: '1.05rem', 
+                                        fontWeight: 800, 
+                                        lineHeight: 1.45, 
+                                        marginBottom: '0.85rem',
+                                        color: 'var(--text-primary)' 
+                                    }}>
+                                        {item.q}
+                                    </h4>
+                                    <p style={{ 
+                                        fontSize: '0.92rem', 
+                                        color: 'var(--text-secondary)', 
+                                        lineHeight: 1.65, 
+                                        margin: 0 
+                                    }}>
+                                        {item.a}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )}
+
+            {/* Full Width Related Guides Section */}
+            {((resolvedRelatedArticles && resolvedRelatedArticles.length > 0) || (readNext && readNext.length > 0)) && (
+                <section id="related-guides" style={{ marginTop: '5rem', paddingTop: '4rem', borderTop: '1px solid var(--border-color)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2.5rem' }}>
+                        <div style={{ padding: '10px', background: 'rgba(99, 102, 241, 0.1)', borderRadius: '14px', color: 'var(--accent-primary)', display: 'flex' }}>
+                            <Info size={24} />
+                        </div>
+                        <div>
+                            <h3 style={{ fontSize: '1.75rem', fontWeight: 900, letterSpacing: '-0.02em', margin: 0, color: 'var(--text-primary)' }}>
+                                Expert Guides & Insights
+                            </h3>
+                            <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', margin: '0.25rem 0 0' }}>
+                                Deep-dive tutorials, benchmarks, and privacy-first engineering breakdowns.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style={{ 
+                        display: 'grid', 
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', 
+                        gap: '1.5rem' 
+                    }}>
+                        {[
+                            ...(readNext || []),
+                            ...(resolvedRelatedArticles || []).filter(a => !(readNext || []).some(r => r.path === a.path))
+                        ].map((guide, i) => (
+                            <Link 
+                                key={i} 
+                                to={guide.path} 
+                                style={{ textDecoration: 'none', color: 'inherit' }}
+                            >
+                                <motion.div
+                                    whileHover={{ y: -4, borderColor: 'var(--accent-primary)' }}
+                                    style={{
+                                        background: 'var(--bg-card)',
+                                        border: '1px solid var(--border-color)',
+                                        borderRadius: '24px',
+                                        padding: '1.75rem',
+                                        height: '100%',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        justifyContent: 'space-between',
+                                        boxShadow: 'var(--shadow-sm)',
+                                        transition: 'all 0.25s ease'
+                                    }}
+                                >
+                                    <div>
+                                        <div style={{ 
+                                            fontSize: '0.72rem', 
+                                            fontWeight: 900, 
+                                            color: 'var(--accent-primary)', 
+                                            textTransform: 'uppercase', 
+                                            letterSpacing: '0.08em', 
+                                            marginBottom: '0.75rem' 
+                                        }}>
+                                            Tutorial & Insights
+                                        </div>
+                                        <h4 style={{ 
+                                            fontSize: '1.05rem', 
+                                            fontWeight: 800, 
+                                            lineHeight: 1.45, 
+                                            margin: 0,
+                                            color: 'var(--text-primary)' 
+                                        }}>
+                                            {guide.title}
+                                        </h4>
+                                        {guide.description && (
+                                            <p style={{ 
+                                                margin: '0.75rem 0 0', 
+                                                color: 'var(--text-secondary)', 
+                                                fontSize: '0.9rem', 
+                                                lineHeight: 1.6 
+                                            }}>
+                                                {guide.description}
+                                            </p>
+                                        )}
+                                    </div>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1.5rem', color: 'var(--accent-primary)', fontWeight: 700, fontSize: '0.85rem' }}>
+                                        <span>Read Full Guide</span>
+                                        <ArrowRight size={15} />
+                                    </div>
+                                </motion.div>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+            )}
         </article>
     )
 }

@@ -1,39 +1,43 @@
 import { useState } from 'react'
 import AiToolTemplate from '../components/AiToolTemplate'
-import { Search, Compass, Target, BarChart3, Fingerprint, Zap } from 'lucide-react'
+import { Search, Compass, ShoppingCart, Info, TrendingUp } from 'lucide-react'
 
 export default function AiKeyword() {
   const [topic, setTopic] = useState('')
   const [intent, setIntent] = useState('informational')
-  const [complexity, setComplexity] = useState('balanced')
+  const [complexity, setComplexity] = useState('standard')
 
   const intents = [
-    { id: 'informational', name: 'Information', icon: Compass, desc: 'Why & How questions' },
-    { id: 'transactional', name: 'Commercial', icon: Target, desc: 'Purchase & intent' },
-    { id: 'navigational', name: 'Identity', icon: Fingerprint, desc: 'Brand-focused' }
+    { id: 'informational', name: 'Info', icon: Info, desc: 'Educational & Guides' },
+    { id: 'commercial', name: 'Commercial', icon: Compass, desc: 'Comparison & Research' },
+    { id: 'transactional', name: 'Buy', icon: ShoppingCart, desc: 'High Intent Purchase' }
   ]
 
   const complexities = [
-    { id: 'broad', label: 'Broad', sub: 'High traffic' },
-    { id: 'balanced', label: 'Balanced', sub: 'Competitive' },
-    { id: 'longtail', label: 'Long-tail', sub: 'Niche focused' }
+    { id: 'standard', label: 'Standard', sub: 'Balanced long-tail' },
+    { id: 'deep', label: 'Deep Semantic', sub: 'Comprehensive clusters' }
   ]
 
   const customPromptBuilder = (text) => {
-    return `You are a Senior SEO Strategist and Semantic Search Expert. 
-Architect a comprehensive keyword hierarchy for the topic: "${topic}".
+    const selectedIntent = intents.find((i) => i.id === intent)
+    const normalizedTopic = topic.trim() || 'the domain provided by the user'
+    const normalizedContext = text.trim() || 'No extra constraints.'
+
+    return `You are a Senior Technical SEO Strategist and Semantic Search Architect.
+Generate an actionable, high-authority keyword matrix for: "${normalizedTopic}".
 
 STRATEGIC PARAMETERS:
-- Search Intent: ${intent}
-- Semantic Complexity: ${complexity}
-- Context/Objective: ${text}
+- Primary Target / Niche: ${normalizedTopic}
+- Primary Search Intent: ${selectedIntent?.name || intent} (${selectedIntent?.desc || ''})
+- Semantic Depth: ${complexity}
+- Context & Seed Ideas: ${normalizedContext}
 
 OUTPUT REQUIREMENTS:
-- Provide a Primary Seed Keyword.
-- List 10 High-Authority Long-tail Keywords.
-- Identify 5 LSI (Latent Semantic Indexing) entities.
-- Suggest a "Search Intent" score for each (Informational vs Transactional).
-- Propose a content structure (H1, H2s) optimized for these keywords.`
+- Primary Focus Keywords (High relevance, search volume targets).
+- Long-Tail Keyword Clusters (Question-based queries, comparison terms).
+- LSI / Semantic Entities (Related topical terms to boost page authority).
+- Search Intent score and Content Architecture recommendation (H1, H2s, and schema recommendations).
+- Format in structured, scannable Markdown tables and bullet lists.`
   }
 
   return (
@@ -43,96 +47,97 @@ OUTPUT REQUIREMENTS:
       icon={Search}
       path="/ai-tools/keyword-generator"
       buttonText="Architect SEO Strategy"
+      placeholder="Enter seed topics, competitor URLs, specific sub-niches, or target regions..."
       customPromptBuilder={customPromptBuilder}
       seoKeywords="ai keyword research, seo keyword generator, long tail keyword tool, semantic seo strategist"
     >
-      <div className="seo-workspace" style={{ marginBottom: '1.5rem' }}>
-        {/* Topic Forge */}
-        <div style={{ marginBottom: '3rem' }}>
-          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-            Primary Domain or Topic
-          </label>
-          <input 
-            type="text"
-            className="dalam-input-field"
-            style={{ width: '100%', padding: '1.5rem 2rem', borderRadius: '24px', fontSize: '1.2rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', outline: 'none', color: 'var(--text-primary)' }}
-            placeholder="e.g., Sustainable Green Hydrogen Technology"
-            value={topic}
-            onChange={(e) => setTopic(e.target.value)}
-          />
+      <div className="sidebar-group">
+        <label htmlFor="ai-keyword-topic" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          Domain or Niche
+        </label>
+        <input 
+          id="ai-keyword-topic"
+          name="topic"
+          type="text"
+          style={{ 
+            width: '100%', 
+            padding: '0.75rem 1rem', 
+            borderRadius: '12px', 
+            fontSize: '0.9rem', 
+            backgroundColor: 'var(--bg-secondary)', 
+            border: '1px solid var(--border-color)', 
+            outline: 'none', 
+            color: 'var(--text-primary)',
+            boxSizing: 'border-box'
+          }}
+          placeholder="e.g. Sustainable Solar Tech"
+          value={topic}
+          onChange={(e) => setTopic(e.target.value)}
+        />
+      </div>
+
+      <div className="sidebar-group">
+        <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          Search Intent
+        </label>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.4rem' }}>
+          {intents.map(i => (
+            <button
+              key={i.id}
+              type="button"
+              onClick={() => setIntent(i.id)}
+              style={{ 
+                padding: '0.65rem 0.35rem', 
+                borderRadius: '10px', 
+                border: '1.5px solid', 
+                borderColor: intent === i.id ? 'var(--accent-purple)' : 'var(--border-color)',
+                background: intent === i.id ? 'var(--accent-glow)' : 'var(--bg-secondary)',
+                cursor: 'pointer',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '0.3rem',
+                transition: 'all 0.2s'
+              }}
+            >
+              <i.icon size={16} color={intent === i.id ? 'var(--accent-purple)' : 'var(--text-muted)'} strokeWidth={1.5} />
+              <span style={{ fontSize: '0.72rem', fontWeight: 800, color: intent === i.id ? 'var(--text-primary)' : 'var(--text-secondary)' }}>{i.name}</span>
+            </button>
+          ))}
         </div>
+      </div>
 
-        {/* Intent & Complexity Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem', marginBottom: '1.5rem' }}>
-          
-          <div className="intent-selector">
-            <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-              Strategic Search Intent
-            </label>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.75rem' }}>
-                {intents.map(i => (
-                    <button
-                        key={i.id}
-                        onClick={() => setIntent(i.id)}
-                        style={{ 
-                            padding: '1.25rem 0.5rem', 
-                            borderRadius: '20px', 
-                            border: '2px solid', 
-                            borderColor: intent === i.id ? 'var(--accent-purple)' : 'var(--border-color)',
-                            background: intent === i.id ? 'var(--bg-primary)' : 'var(--bg-secondary)',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            gap: '0.5rem',
-                            transition: 'all 0.2s',
-                            boxShadow: intent === i.id ? 'var(--shadow-premium)' : 'none'
-                        }}
-                    >
-                        <i.icon size={22} color={intent === i.id ? 'var(--accent-purple)' : 'var(--text-muted)'} strokeWidth={1.5} />
-                        <span style={{ fontSize: '0.85rem', fontWeight: 800, color: intent === i.id ? 'var(--text-primary)' : 'var(--text-muted)' }}>{i.name}</span>
-                    </button>
-                ))}
-            </div>
-          </div>
-
-          <div className="complexity-selector">
-            <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-              Semantic Complexity
-            </label>
-            <div style={{ display: 'flex', background: 'var(--bg-secondary)', padding: '0.5rem', borderRadius: '24px' }}>
-                {complexities.map(c => (
-                    <button
-                        key={c.id}
-                        onClick={() => setComplexity(c.id)}
-                        style={{ 
-                            flex: 1, 
-                            padding: '1rem', 
-                            borderRadius: '18px', 
-                            border: 'none', 
-                            background: complexity === c.id ? 'var(--bg-primary)' : 'transparent',
-                            color: complexity === c.id ? 'var(--text-primary)' : 'var(--text-muted)',
-                            fontWeight: 800,
-                            fontSize: '0.9rem',
-                            cursor: 'pointer',
-                            transition: 'all 0.2s',
-                            boxShadow: complexity === c.id ? 'var(--shadow-sm)' : 'none'
-                        }}
-                    >
-                        {c.label}
-                        <span style={{ display: 'block', fontSize: '0.65rem', opacity: 0.6, fontWeight: 500 }}>{c.sub}</span>
-                    </button>
-                ))}
-            </div>
-          </div>
-
-        </div>
-
-        <div style={{ marginTop: '2.5rem', padding: '1.75rem', background: 'var(--bg-secondary)', borderRadius: '28px', border: '1px solid var(--border-color)', display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
-            <div style={{ color: 'var(--accent-purple)' }}><Zap size={24} strokeWidth={1.5} /></div>
-            <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-                Our intelligence engine will now reverse-engineer the semantic graph for this topic to ensure maximum rank potential.
-            </div>
+      <div className="sidebar-group">
+        <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          Semantic Depth
+        </label>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', background: 'var(--bg-secondary)', padding: '0.35rem', borderRadius: '10px' }}>
+          {complexities.map(c => (
+            <button
+              key={c.id}
+              type="button"
+              onClick={() => setComplexity(c.id)}
+              style={{ 
+                width: '100%', 
+                padding: '0.5rem 0.75rem', 
+                borderRadius: '8px', 
+                border: 'none', 
+                background: complexity === c.id ? 'var(--bg-card)' : 'transparent',
+                color: complexity === c.id ? 'var(--text-primary)' : 'var(--text-muted)',
+                fontWeight: 700,
+                fontSize: '0.78rem',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                boxShadow: complexity === c.id ? 'var(--shadow-sm)' : 'none',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}
+            >
+              <span>{c.label}</span>
+              <span style={{ fontSize: '0.65rem', opacity: 0.6 }}>{c.sub}</span>
+            </button>
+          ))}
         </div>
       </div>
     </AiToolTemplate>

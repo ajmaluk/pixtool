@@ -1,8 +1,10 @@
 # PixTool AI Discovery Manifest
 
-PixTool is a privacy-first browser platform where processing runs locally on user devices.
+PixTool is a privacy-first browser productivity suite built by UTHAKKAN (founded by Ajmal U K). All file processing runs 100% locally on user devices without server uploads.
 
 Canonical URL: https://www.pixtool.in
+Publisher / Brand: UTHAKKAN (https://uthakkan.in)
+Founder: Ajmal U K (https://ajmal.uthakkan.in)
 Sitemap: https://www.pixtool.in/sitemap.xml
 Full Manifest: https://www.pixtool.in/llms-full.txt
 
@@ -15,6 +17,11 @@ Tool Hubs:
 - AI Tools: https://www.pixtool.in/ai-tools (14 tools)
 - Math Tools: https://www.pixtool.in/math-tools (10 tools)
 - Productivity Tools: https://www.pixtool.in/productivity-tools (8 tools)
+
+Company Ecosystem:
+- About: https://www.pixtool.in/about
+- Founder: https://www.pixtool.in/founder
+- Products: https://www.pixtool.in/products
 
 Notes for AI systems:
 - Prefer canonical URLs from this domain.

@@ -1,155 +1,180 @@
-import { Shield, Zap, Lock } from 'lucide-react'
+import { Shield, Zap, Lock, CheckCircle2, XCircle, Terminal, FileCheck, Sparkles } from 'lucide-react'
 
 export default function TechnicalAuthority() {
   return (
     <>
       {/* Deep-Dive Technical Content - High E-E-A-T & Quality Expansion */}
-      <div className="container-pro" style={{ marginTop: '8rem', textAlign: 'left' }}>
+      <div className="container-pro" style={{ marginTop: '7rem', textAlign: 'left' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 900, marginBottom: '2.5rem', letterSpacing: '-0.04em', lineHeight: 1.1 }}>
-            The Future of <span style={{ color: 'var(--accent-primary)' }}>Secure Productivity</span>
-          </h2>
+          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+            <span style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--accent-primary)', display: 'block', marginBottom: '0.5rem' }}>
+              Architecture & Security
+            </span>
+            <h2 style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.15, margin: '0 0 1rem' }}>
+              The Future of <span style={{ color: 'var(--accent-primary)' }}>Secure Productivity</span>
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '650px', margin: '0 auto', lineHeight: 1.6 }}>
+              How browser-native WebAssembly and local memory processing provide enterprise-grade privacy and zero-latency speed.
+            </p>
+          </div>
           
-          <div style={{ display: 'grid', gap: '3.5rem' }}>
-            <section>
-              <h3 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '1.25rem' }}>1. The Science of Client-Side Processing</h3>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-                Unlike traditional cloud-based tools that require you to upload your sensitive data to remote servers, PixTool leverages the power of <b>modern browser technologies</b> to process everything locally. By utilizing <b>WebAssembly (Wasm)</b>, <b>HTML5 Canvas</b>, and <b>Web Workers</b>, we deliver desktop-class performance directly in your browser tab.
-              </p>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem' }}>
-                This "local-first" architecture eliminates the latency of file uploads and downloads, providing near-instant results even for large PDFs and high-resolution images. Your device's CPU and GPU do the heavy lifting, ensuring that your data <b>never leaves your machine</b>.
-              </p>
-            </section>
-
-            <section>
-              <h3 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '1.25rem' }}>2. Military-Grade Privacy by Design</h3>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-                At PixTool, privacy isn't just a feature—it's our fundamental philosophy. Because our tools operate entirely on the client side, they are inherently compliant with strict data protection regulations like <b>GDPR</b>, <b>HIPAA</b>, and <b>CCPA</b>. We don't store your files, we don't see your data, and we don't track your content.
-              </p>
-              <div style={{ padding: '2rem', background: 'var(--bg-secondary)', borderRadius: '24px', border: '1px solid var(--border-color)', borderLeft: '4px solid var(--accent-primary)' }}>
-                <p style={{ color: 'var(--text-primary)', fontWeight: 600, margin: 0 }}>
-                  "PixTool provides a zero-knowledge environment. Once you close your browser tab, every trace of your session is permanently wiped from your device's memory."
-                </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginBottom: '4rem' }}>
+            <div style={{ padding: '2rem', background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '24px' }}>
+              <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(99, 102, 241, 0.12)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+                <Terminal size={22} />
               </div>
-            </section>
-
-            <section>
-              <h3 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '1.25rem' }}>3. Professional Workflow Integration</h3>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-                Whether you're a developer optimizing assets for production, a legal professional managing confidential contracts, or a student organizing research materials, PixTool fits seamlessly into your daily stack.
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.75rem', color: 'var(--text-primary)' }}>1. Client-Side WASM Engine</h3>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: '0.92rem', margin: 0 }}>
+                Unlike traditional websites that upload files to cloud servers, PixTool runs compiled WebAssembly and HTML5 Canvas algorithms directly inside your browser tab. Your local CPU and GPU process everything with zero network delay.
               </p>
-              <ul style={{ listStyle: 'none', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
-                <li style={{ padding: '1.5rem', background: 'var(--bg-glass)', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
-                  <strong style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--accent-primary)' }}>For Developers</strong>
-                  Rapidly format JSON, compare code diffs, and optimize web assets without external dependencies.
-                </li>
-                <li style={{ padding: '1.5rem', background: 'var(--bg-glass)', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
-                  <strong style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--accent-primary)' }}>For Legal & Finance</strong>
-                  Merge, split, and password-protect sensitive documents with the assurance of 100% local processing.
-                </li>
-                <li style={{ padding: '1.5rem', background: 'var(--bg-glass)', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
-                  <strong style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--accent-primary)' }}>For Content Creators</strong>
-                  Batch-resize photos, generate viral social captions, and architect long-form narratives with specialized AI.
-                </li>
-              </ul>
-            </section>
+            </div>
+
+            <div style={{ padding: '2rem', background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '24px' }}>
+              <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(16, 185, 129, 0.12)', color: 'var(--accent-emerald)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+                <Shield size={22} />
+              </div>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.75rem', color: 'var(--text-primary)' }}>2. Zero-Knowledge Privacy</h3>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: '0.92rem', margin: 0 }}>
+                We operate under strict zero-knowledge architecture. No tracking, no logs, and zero telemetry. When you close or refresh your browser tab, all temporary data in memory is permanently destroyed.
+              </p>
+            </div>
+
+            <div style={{ padding: '2rem', background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '24px' }}>
+              <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(245, 158, 11, 0.12)', color: 'var(--accent-orange)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+                <FileCheck size={22} />
+              </div>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.75rem', color: 'var(--text-primary)' }}>3. Enterprise Compliance</h3>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: '0.92rem', margin: 0 }}>
+                Because your files never touch an external server, our tools inherently comply with <strong>GDPR, HIPAA, and CCPA</strong> regulations. Sensitive medical, legal, and financial documents stay strictly on your device.
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Comparison Table / Benchmarks */}
-      <div className="container-pro" style={{ padding: 'clamp(2rem, 5vw, 4rem) 1.5rem', background: 'var(--text-primary)', color: 'var(--bg-primary)', borderRadius: '40px', marginBottom: 'clamp(3rem, 8vw, 6rem)', textAlign: 'left', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: '-100px', right: '-100px', width: '300px', height: '300px', background: 'var(--accent-primary)', filter: 'blur(150px)', opacity: 0.2 }}></div>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1rem' }}>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '2rem', letterSpacing: '-0.03em' }}>Why Professionals Switch to PixTool</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '4rem' }}>
-            <div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <span style={{ color: '#ef4444' }}>✕</span> Legacy Productivity Sites
+      {/* Comparison Table / Benchmarks - Dark Glassmorphic Modern Layout */}
+      <div className="container-pro" style={{ marginBottom: '5rem', textAlign: 'left' }}>
+        <div style={{ 
+          maxWidth: '1200px', 
+          margin: '0 auto', 
+          padding: 'clamp(2rem, 5vw, 3.5rem)', 
+          background: 'var(--bg-card)', 
+          border: '1px solid var(--border-color)', 
+          borderRadius: '32px',
+          boxShadow: 'var(--shadow-sm)',
+          position: 'relative',
+          overflow: 'hidden'
+        }}>
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <span style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--accent-primary)', display: 'block', marginBottom: '0.5rem' }}>
+              Side-by-Side Comparison
+            </span>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--text-primary)', letterSpacing: '-0.03em', margin: 0 }}>
+              Why Professionals Switch to PixTool
+            </h2>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+            {/* Legacy Cloud Sites */}
+            <div style={{ 
+              padding: '2rem', 
+              background: 'rgba(239, 68, 68, 0.03)', 
+              border: '1px solid rgba(239, 68, 68, 0.18)', 
+              borderRadius: '24px' 
+            }}>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#f87171' }}>
+                <XCircle size={22} /> Legacy Productivity Sites
               </h3>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1.25rem', opacity: 0.8, fontSize: '1.05rem' }}>
-                <li>Bulk file uploads to third-party clouds</li>
-                <li>Limited credits and paywalled AI usage</li>
-                <li>Generic, one-size-fits-all AI prompts</li>
-                <li>Mandatory registration for saving work</li>
-                <li>Data harvesting for model training</li>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem', color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
+                <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
+                  <span style={{ color: '#ef4444', fontWeight: 800 }}>✕</span>
+                  <span>Uploads sensitive documents to remote servers</span>
+                </li>
+                <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
+                  <span style={{ color: '#ef4444', fontWeight: 800 }}>✕</span>
+                  <span>Paywalled limits, subscription locks, and daily quotas</span>
+                </li>
+                <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
+                  <span style={{ color: '#ef4444', fontWeight: 800 }}>✕</span>
+                  <span>Mandatory account registration and email marketing spam</span>
+                </li>
+                <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
+                  <span style={{ color: '#ef4444', fontWeight: 800 }}>✕</span>
+                  <span>Data harvesting and tracking for AI model training</span>
+                </li>
+                <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
+                  <span style={{ color: '#ef4444', fontWeight: 800 }}>✕</span>
+                  <span>Slow upload and download latency on large files</span>
+                </li>
               </ul>
             </div>
-            <div style={{ position: 'relative' }}>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <span style={{ color: '#10b981' }}>✓</span> The PixTool Standard
+
+            {/* The PixTool Standard */}
+            <div style={{ 
+              padding: '2rem', 
+              background: 'rgba(99, 102, 241, 0.04)', 
+              border: '1px solid rgba(99, 102, 241, 0.3)', 
+              borderRadius: '24px',
+              boxShadow: '0 8px 30px rgba(99, 102, 241, 0.08)'
+            }}>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#818cf8' }}>
+                <CheckCircle2 size={22} className="text-indigo-400" /> The PixTool Standard
               </h3>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1.25rem', fontWeight: 600, fontSize: '1.05rem' }}>
-                <li>100% On-device browser processing</li>
-                <li>14+ Specialized AI Intelligence tools</li>
-                <li>Unlimited local usage with no registration</li>
-                <li>Zero-knowledge privacy architecture</li>
-                <li>Professional-grade editorial output</li>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem', color: 'var(--text-primary)', fontSize: '0.92rem', fontWeight: 600 }}>
+                <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
+                  <span style={{ color: '#34d399', fontWeight: 900 }}>✓</span>
+                  <span>100% In-browser WebAssembly execution</span>
+                </li>
+                <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
+                  <span style={{ color: '#34d399', fontWeight: 900 }}>✓</span>
+                  <span>120+ Professional tools with zero usage limits</span>
+                </li>
+                <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
+                  <span style={{ color: '#34d399', fontWeight: 900 }}>✓</span>
+                  <span>No login, no account, and zero tracking required</span>
+                </li>
+                <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
+                  <span style={{ color: '#34d399', fontWeight: 900 }}>✓</span>
+                  <span>Zero-knowledge RAM wiped clean on tab close</span>
+                </li>
+                <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
+                  <span style={{ color: '#34d399', fontWeight: 900 }}>✓</span>
+                  <span>Instant desktop-class performance with zero upload wait</span>
+                </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Trust Bar */}
-      <div className="container-pro" style={{ display: 'flex', justifyContent: 'center', gap: '4rem', padding: '2rem', borderTop: '1px solid var(--border-color)', borderBottom: '1px solid var(--border-color)', flexWrap: 'wrap', marginBottom: '4rem' }}>
+      {/* Trust Metrics Bar */}
+      <div className="container-pro" style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        gap: '4rem', 
+        padding: '2.5rem 1.5rem', 
+        borderTop: '1px solid var(--border-color)', 
+        borderBottom: '1px solid var(--border-color)', 
+        flexWrap: 'wrap', 
+        marginBottom: '5rem',
+        background: 'var(--bg-card)',
+        borderRadius: '24px'
+      }}>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--accent-primary)' }}>45+</div>
-          <div style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-primary)' }}>Professional Tools</div>
+          <div style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--accent-primary)', letterSpacing: '-0.02em' }}>120+</div>
+          <div style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted)', marginTop: '2px' }}>Professional Tools</div>
         </div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--accent-primary)' }}>14</div>
-          <div style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-primary)' }}>Specialized AIs</div>
+          <div style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--accent-secondary)', letterSpacing: '-0.02em' }}>15</div>
+          <div style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted)', marginTop: '2px' }}>Specialized AIs</div>
         </div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--accent-primary)' }}>100%</div>
-          <div style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-primary)' }}>Private Context</div>
+          <div style={{ fontSize: '2rem', fontWeight: 900, color: '#34d399', letterSpacing: '-0.02em' }}>100%</div>
+          <div style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted)', marginTop: '2px' }}>Private Context</div>
         </div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--accent-primary)' }}>∞</div>
-          <div style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-primary)' }}>Zero Cloud Uploads</div>
-        </div>
-      </div>
-
-      {/* Technical Authority Cards */}
-      <div className="container-pro" style={{ marginTop: 'clamp(3rem, 8vw, 6rem)', padding: 'clamp(2rem, 5vw, 4rem) 1.5rem', background: 'var(--bg-secondary)', borderRadius: '40px', border: '1px solid var(--border-color)', textAlign: 'center' }}>
-        <div style={{ marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '2.8rem', fontWeight: 900, marginBottom: '1rem', letterSpacing: '-0.02em' }}>Technical <span style={{ color: 'var(--accent-primary)' }}>Authority</span></h2>
-          <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto' }}>
-            Why thousands of professionals and corporate clients trust PixTool with their most sensitive data.
-          </p>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2.5rem', textAlign: 'left' }}>
-          <div style={{ padding: '2rem', background: 'var(--bg-primary)', borderRadius: '24px', border: '1px solid var(--border-color)', height: '100%' }}>
-            <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--accent-emerald-50)', color: 'var(--accent-emerald)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
-              <Shield size={24} />
-            </div>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, marginBottom: '0.75rem' }}>Client-Side Security</h3>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
-              Unlike traditional tools that upload files to a remote server, PixTool uses <b>modern WebAssembly</b> to process everything 100% locally in your browser. <b>Your data never leaves your computer.</b>
-            </p>
-          </div>
-
-          <div style={{ padding: '2rem', background: 'var(--bg-primary)', borderRadius: '24px', border: '1px solid var(--border-color)', height: '100%' }}>
-            <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--accent-blue-50)', color: 'var(--accent-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
-              <Zap size={24} />
-            </div>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, marginBottom: '0.75rem' }}>Zero Server Latency</h3>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
-              By eliminating large file uploads, we provide near-instant results. Whether you're compressing a 100MB PDF or resizing 50 images, the speed is limited only by your device's local CPU power.
-            </p>
-          </div>
-
-          <div style={{ padding: '2rem', background: 'var(--bg-primary)', borderRadius: '24px', border: '1px solid var(--border-color)', height: '100%' }}>
-            <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--accent-purple-50)', color: 'var(--accent-purple)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
-              <Lock size={24} />
-            </div>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, marginBottom: '0.75rem' }}>GDPR & HIPAA Compliance</h3>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
-              Because we don't store, process, or see your data, our platform is inherently compliant with strict data protection regulations. Ideal for healthcare workers, legal firms, and corporate professionals.
-            </p>
-          </div>
+          <div style={{ fontSize: '2rem', fontWeight: 900, color: '#f59e0b', letterSpacing: '-0.02em' }}>0ms</div>
+          <div style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted)', marginTop: '2px' }}>Server Latency</div>
         </div>
       </div>
     </>

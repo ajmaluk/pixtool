@@ -83,6 +83,27 @@ export default function PdfTools() {
     return () => document.body.classList.remove('mobile-overlay-open')
   }, [showMobileSettings])
 
+  const [pageCounts, setPageCounts] = useState({})
+
+  useEffect(() => {
+    if (files.length > 0 && files[selectedIndex]) {
+      const file = files[selectedIndex];
+      file.arrayBuffer().then(buf => {
+        PDFDocument.load(buf, { ignoreEncryption: true }).then(pdf => {
+          const count = pdf.getPageCount();
+          setPageCounts(prev => {
+            if (prev[file.name] === count) return prev;
+            return { ...prev, [file.name]: count };
+          });
+          setSettings(s => ({
+            ...s,
+            endPage: s.endPage === 1 ? count : s.endPage
+          }));
+        }).catch(() => {});
+      }).catch(() => {});
+    }
+  }, [files, selectedIndex]);
+
   const [settings, setSettings] = useState({
     quality: 'medium',
     startPage: 1,
@@ -412,14 +433,21 @@ export default function PdfTools() {
 
         {activeTool === 'split' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            {pageCounts[files[selectedIndex]?.name] && (
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-secondary)', padding: '0.65rem 0.85rem', borderRadius: '10px', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                <span>Document Length:</span>
+                <span style={{ fontWeight: 800, color: 'var(--accent-primary)' }}>{pageCounts[files[selectedIndex]?.name]} Pages</span>
+              </div>
+            )}
             <div className="input-group">
               <label className="input-label">Start Page</label>
               <input
                 type="number"
                 className="input"
                 min={1}
+                max={pageCounts[files[selectedIndex]?.name] || 9999}
                 value={settings.startPage}
-                onChange={(e) => setSettings(s => ({ ...s, startPage: parseInt(e.target.value) || 1 }))}
+                onChange={(e) => setSettings(s => ({ ...s, startPage: Math.max(1, parseInt(e.target.value) || 1) }))}
               />
             </div>
             <div className="input-group">
@@ -427,11 +455,22 @@ export default function PdfTools() {
               <input
                 type="number"
                 className="input"
-                min={1}
+                min={settings.startPage}
+                max={pageCounts[files[selectedIndex]?.name] || 9999}
                 value={settings.endPage}
-                onChange={(e) => setSettings(s => ({ ...s, endPage: parseInt(e.target.value) || 1 }))}
+                onChange={(e) => setSettings(s => ({ ...s, endPage: Math.max(settings.startPage, parseInt(e.target.value) || 1) }))}
               />
             </div>
+            {pageCounts[files[selectedIndex]?.name] && (
+              <button
+                type="button"
+                className="btn btn-secondary"
+                style={{ padding: '0.5rem', fontSize: '0.78rem', borderRadius: '8px' }}
+                onClick={() => setSettings(s => ({ ...s, startPage: 1, endPage: pageCounts[files[selectedIndex]?.name] }))}
+              >
+                Select All ({pageCounts[files[selectedIndex]?.name]} Pages)
+              </button>
+            )}
           </div>
         )}
 
@@ -735,7 +774,7 @@ export default function PdfTools() {
 
       <button
         className="btn btn-primary"
-        style={{ width: '100%', marginTop: 'auto', background: 'var(--accent-blue)', borderColor: 'var(--accent-blue)' }}
+        style={{ width: '100%', marginTop: 'auto', background: 'var(--accent-gradient)', borderColor: 'transparent', boxShadow: 'var(--shadow-premium)', padding: '0.85rem', borderRadius: '12px', fontWeight: 800 }}
         onClick={processPdf}
         disabled={processing || files.length === 0}
       >
@@ -980,17 +1019,21 @@ export default function PdfTools() {
                       </div>
                     )}
 
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }} className="mobile-hide-header">
-                        <h1 style={{ fontSize: '1.25rem', fontWeight: 900, margin: 0, color: 'var(--accent-blue)' }}>
-                          {activeToolData?.title}
-                        </h1>
-                        <div style={{ width: '1px', height: '20px', background: 'var(--border-color)' }}></div>
-                        <h2 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text-secondary)' }}>
-                          Files ({files.length})
-                        </h2>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }} className="mobile-hide-header">
+                        <div style={{ padding: '0.5rem', borderRadius: '10px', background: 'var(--accent-glow)', color: 'var(--accent-primary)', display: 'flex' }}>
+                          <FileText size={18} />
+                        </div>
+                        <div>
+                          <h1 style={{ fontSize: '1.15rem', fontWeight: 900, margin: 0, color: 'var(--text-primary)', lineHeight: 1.2 }}>
+                            {activeToolData?.title}
+                          </h1>
+                          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)' }}>
+                            {files.length} {files.length === 1 ? 'file loaded' : 'files loaded'}
+                          </span>
+                        </div>
                       </div>
-                      <div style={{ display: 'flex', gap: '0.75rem' }}>
+                      <div style={{ display: 'flex', gap: '0.6rem', alignItems: 'center' }}>
                         <button className="btn btn-secondary" onClick={async () => { 
                            const ok = await confirm({
                              title: 'Clear All Files?',
@@ -999,14 +1042,15 @@ export default function PdfTools() {
                              type: 'danger'
                            });
                            if(ok) { setFiles([]); setSelectedIndex(0); } 
-                         }} style={{ padding: '0.6rem 1rem', background: 'var(--accent-red-50)', color: 'var(--accent-red)', borderColor: 'transparent' }}>
-                           <X size={18} /> Clear
+                         }} style={{ padding: '0.55rem 0.9rem', background: 'rgba(239, 68, 68, 0.08)', color: 'var(--accent-red)', borderColor: 'rgba(239, 68, 68, 0.2)', borderRadius: '10px', fontSize: '0.82rem', fontWeight: 700 }}>
+                           <X size={15} /> Clear
                          </button>
-                         <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.6rem 1.25rem' }} aria-label="Upload more PDF files">
-                           <Upload size={18} aria-hidden="true" /> Add More
+                         <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.55rem 1rem', borderRadius: '10px', fontSize: '0.82rem', fontWeight: 700 }} aria-label="Upload more PDF files">
+                           <Upload size={15} aria-hidden="true" /> Add More
                          </button>
-                        <button className="btn btn-primary" onClick={processPdf} style={{ padding: '0.6rem 2rem' }}>
-                          <Download size={18} /> {processing ? 'Processing...' : `${activeToolData?.title} Now`}
+                        <button className="btn btn-primary" onClick={processPdf} disabled={processing} style={{ padding: '0.55rem 1.5rem', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 800, background: 'var(--accent-gradient)', boxShadow: 'var(--shadow-premium)' }}>
+                          {processing ? <Loader size={16} className="spinning" /> : <Download size={16} />}
+                          {processing ? 'Processing...' : `${activeToolData?.title} Now`}
                         </button>
                       </div>
                     </div>
@@ -1014,54 +1058,76 @@ export default function PdfTools() {
                     {/* Main Large Preview Area */}
                     <div 
                       className="preview-display"
+                      style={{
+                        background: 'var(--bg-glass)',
+                        borderRadius: '20px',
+                        border: '1px solid var(--border-color)',
+                        padding: '3rem 2rem',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        position: 'relative',
+                        minHeight: '360px',
+                        boxShadow: 'var(--shadow-sm)'
+                      }}
                       onTouchStart={onTouchStart}
                       onTouchMove={onTouchMove}
                       onTouchEnd={onTouchEnd}
                     >
                       <div style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
                         <div style={{ 
-                          width: '120px', 
-                          height: '120px', 
-                          background: 'rgba(59, 130, 246, 0.05)', 
-                          borderRadius: '24px', 
+                          width: '90px', 
+                          height: '90px', 
+                          background: 'var(--accent-glow)', 
+                          borderRadius: '22px', 
                           display: 'flex', 
                           alignItems: 'center', 
                           justifyContent: 'center',
-                          margin: '0 auto 2rem',
-                          color: 'var(--accent-blue)'
+                          margin: '0 auto 1.25rem',
+                          color: 'var(--accent-primary)',
+                          border: '1px solid var(--accent-glow)'
                         }} aria-hidden="true">
-                          <FileText size={64} />
+                          <FileText size={48} strokeWidth={1.5} />
                         </div>
-                        <h2 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
+                        <h2 style={{ fontSize: '1.3rem', fontWeight: 900, marginBottom: '0.4rem', color: 'var(--text-primary)', maxWidth: '480px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                           {files[selectedIndex]?.name}
                         </h2>
-                        <p style={{ fontSize: '1rem', opacity: 0.7 }}>
-                          {(files[selectedIndex]?.size / 1024 / 1024).toFixed(2)} MB • PDF Document
-                        </p>
-                        <p style={{ marginTop: '2rem', fontSize: '0.9rem', color: 'var(--accent-blue)', fontWeight: 700 }}>
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', background: 'var(--bg-secondary)', padding: '0.3rem 0.85rem', borderRadius: '20px', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '1rem' }}>
+                          <span>{(files[selectedIndex]?.size / 1024 / 1024).toFixed(2)} MB</span>
+                          <span>•</span>
+                          <span>PDF Document</span>
+                          {pageCounts[files[selectedIndex]?.name] && (
+                            <>
+                              <span>•</span>
+                              <span>{pageCounts[files[selectedIndex]?.name]} Pages</span>
+                            </>
+                          )}
+                          <span>•</span>
+                          <span>File {selectedIndex + 1} of {files.length}</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', fontSize: '0.82rem', color: 'var(--accent-emerald)', fontWeight: 700 }}>
+                          <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent-emerald)', display: 'inline-block' }}></span>
                           Ready for processing
-                        </p>
+                        </div>
                       </div>
 
-                      <div className="preview-info" style={{ flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
-                        <span className="preview-badge" style={{ fontSize: '0.65rem', opacity: 0.8 }}>
-                          {files[selectedIndex]?.name}
-                        </span>
+                      <div className="preview-info" style={{ position: 'absolute', top: '1rem', right: '1rem', display: 'flex', gap: '0.4rem' }}>
                         {activeTool === 'merge' && (
-                          <div style={{ display: 'flex', gap: '0.5rem' }}>
+                          <div style={{ display: 'flex', gap: '0.4rem' }}>
                             <button
                               onClick={() => moveFile(selectedIndex, 'left')}
                               disabled={selectedIndex === 0}
-                              className="preview-badge"
-                              style={{ cursor: 'pointer', opacity: selectedIndex === 0 ? 0.3 : 1 }}
+                              className="btn btn-secondary"
+                              style={{ padding: '0.3rem 0.65rem', fontSize: '0.72rem', cursor: selectedIndex === 0 ? 'not-allowed' : 'pointer', opacity: selectedIndex === 0 ? 0.3 : 1 }}
                             >
                               Move Up
                             </button>
                             <button
                               onClick={() => moveFile(selectedIndex, 'right')}
                               disabled={selectedIndex === files.length - 1}
-                              className="preview-badge"
-                              style={{ cursor: 'pointer', opacity: selectedIndex === files.length - 1 ? 0.3 : 1 }}
+                              className="btn btn-secondary"
+                              style={{ padding: '0.3rem 0.65rem', fontSize: '0.72rem', cursor: selectedIndex === files.length - 1 ? 'not-allowed' : 'pointer', opacity: selectedIndex === files.length - 1 ? 0.3 : 1 }}
                             >
                               Move Down
                             </button>
@@ -1077,16 +1143,31 @@ export default function PdfTools() {
                       onTouchStart={onTouchStart}
                       onTouchMove={onTouchMove}
                       onTouchEnd={onTouchEnd}
+                      style={{ display: 'flex', gap: '0.75rem', overflowX: 'auto', padding: '0.75rem 0', marginTop: '1rem' }}
                     >
                       {files.map((file, i) => (
                         <div 
                           key={i} 
                           className={`gallery-thumb ${selectedIndex === i ? 'active' : ''}`}
                           onClick={() => setSelectedIndex(i)}
+                          style={{
+                            flex: '0 0 100px',
+                            height: '100px',
+                            borderRadius: '14px',
+                            border: selectedIndex === i ? '2px solid var(--accent-primary)' : '1.5px solid var(--border-color)',
+                            background: selectedIndex === i ? 'var(--accent-glow)' : 'var(--bg-card)',
+                            boxShadow: selectedIndex === i ? '0 0 0 3px var(--accent-glow)' : 'var(--shadow-sm)',
+                            cursor: 'pointer',
+                            position: 'relative',
+                            overflow: 'hidden',
+                            transition: 'all 0.2s ease'
+                          }}
                         >
-                          <div className="thumb-container">
-                            <FileText size={32} style={{ color: 'var(--accent-blue)', margin: 'auto' }} />
-                            <div className="thumb-label">{file.name}</div>
+                          <div className="thumb-container" style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0.4rem' }}>
+                            <FileText size={28} style={{ color: selectedIndex === i ? 'var(--accent-purple)' : 'var(--text-muted)' }} />
+                            <div className="thumb-label" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(15, 23, 42, 0.85)', backdropFilter: 'blur(6px)', color: '#fff', fontSize: '10px', padding: '3px 4px', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', fontWeight: 600 }}>
+                              {file.name}
+                            </div>
                           </div>
                           <button
                             onClick={(e) => {

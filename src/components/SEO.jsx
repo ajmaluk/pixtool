@@ -465,7 +465,23 @@ export default function SEO({
                     },
                     "image": ogImage,
                     "description": resolvedDescription,
+                    "parentOrganization": {
+                        "@type": "Organization",
+                        "name": "UTHAKKAN",
+                        "url": "https://uthakkan.in"
+                    },
+                    "founder": {
+                        "@type": "Person",
+                        "name": "Ajmal U K",
+                        "alternateName": "Muhammed Ajmal U K",
+                        "url": "https://ajmal.uthakkan.in",
+                        "sameAs": [
+                            "https://in.linkedin.com/in/ajmaluk",
+                            "https://github.com/ajmaluk"
+                        ]
+                    },
                     "sameAs": [
+                        "https://uthakkan.in",
                         "https://www.linkedin.com/company/uthakkan",
                         "https://x.com/pixtool_in",
                         "https://twitter.com/pixtool_in",

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import AiToolTemplate from '../components/AiToolTemplate'
-import { Megaphone, Facebook, Globe, Linkedin, Target, Activity } from 'lucide-react'
+import { Megaphone, Facebook, Globe, Linkedin, Sparkles } from 'lucide-react'
 
 export default function AiAdCopy() {
   const [product, setProduct] = useState('')
@@ -8,15 +8,15 @@ export default function AiAdCopy() {
   const [objective, setObjective] = useState('conversion')
 
   const platforms = [
-    { id: 'meta', name: 'Meta', icon: Facebook, desc: 'Instagram & Facebook' },
-    { id: 'google', name: 'Google', icon: Globe, desc: 'Search & Display' },
-    { id: 'linkedin', name: 'LinkedIn', icon: Linkedin, desc: 'B2B & Professional' }
+    { id: 'meta', name: 'Meta', icon: Facebook },
+    { id: 'google', name: 'Google', icon: Globe },
+    { id: 'linkedin', name: 'LinkedIn', icon: Linkedin }
   ]
 
   const objectives = [
-    { id: 'conversion', label: 'Conversion', sub: 'Direct sales' },
-    { id: 'awareness', label: 'Awareness', sub: 'Brand reach' },
-    { id: 'engagement', label: 'Engagement', sub: 'Social buzz' }
+    { id: 'conversion', label: 'Conversion', sub: 'Sales & Leads' },
+    { id: 'awareness', label: 'Awareness', sub: 'Reach & Views' },
+    { id: 'engagement', label: 'Engagement', sub: 'Clicks & Buzz' }
   ]
 
   const customPromptBuilder = (text) => {
@@ -29,16 +29,20 @@ export default function AiAdCopy() {
 Generate a high-converting ad copy suite for ${normalizedProduct} specifically architected for ${selectedPlatform?.name || platform}.
 
 CAMPAIGN ARCHITECTURE:
+- Product/Service: ${normalizedProduct}
 - Platform: ${selectedPlatform?.name || platform}
 - Objective: ${selectedObjective?.label || objective}
-- Additional Context: ${normalizedContext}
+- Audience & Extra Context: ${normalizedContext}
 
 OUTPUT REQUIREMENTS:
-- Provide 3 distinct variations (Hook-based, Benefit-based, Story-based).
-- For each variation include: Primary Text, Headline, CTA, and 3 audience-fit keywords.
-- Keep copy scannable: short lines, clear benefit-first language, and one concrete proof point.
-- Include appropriate ${platform === 'meta' ? 'emoji and hashtags' : 'headline and extension-friendly phrasing'}.
-- Maintain a highly professional yet persuasive authority.`
+- Provide 3 distinct variations (1: Hook-based / High urgency, 2: Feature & Benefit-based, 3: Storytelling / Social proof).
+- For each variation include:
+  1. Primary Ad Copy
+  2. Attention-Grabbing Headline
+  3. Call To Action (CTA)
+  4. 3 High-intent Audience Keywords / Hashtags
+- Keep copy scannable: short lines, clear value proposition, and frictionless call to action.
+- Maintain an authoritative, persuasive tone tailored to ${selectedPlatform?.name || platform}.`
   }
 
   return (
@@ -48,91 +52,97 @@ OUTPUT REQUIREMENTS:
       icon={Megaphone}
       path="/ai-tools/ad-copy-generator"
       buttonText="Launch Campaign Pulse"
+      placeholder="Describe your target audience, unique value proposition, key pain points, or discount offers..."
       customPromptBuilder={customPromptBuilder}
       seoKeywords="ai ad copy, meta ads generator, google search ads ai, professional copywriting tools"
     >
-      <div className="marketing-workspace" style={{ marginBottom: '1.5rem' }}>
-        {/* Core Identity */}
-        <div style={{ marginBottom: '3rem' }}>
-          <label htmlFor="ai-adcopy-product" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-            Product or Service Identity
-          </label>
-          <input 
-            id="ai-adcopy-product"
-            name="product"
-            type="text"
-            className="dalam-input-field"
-            style={{ width: '100%', padding: '1.5rem 2rem', borderRadius: '24px', fontSize: '1.2rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', outline: 'none', color: 'var(--text-primary)' }}
-            placeholder="e.g., PixTool AI Productivity Suite"
-            value={product}
-            onChange={(e) => setProduct(e.target.value)}
-          />
+      <div className="sidebar-group">
+        <label htmlFor="ai-adcopy-product" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          Product or Service
+        </label>
+        <input 
+          id="ai-adcopy-product"
+          name="product"
+          type="text"
+          style={{ 
+            width: '100%', 
+            padding: '0.75rem 1rem', 
+            borderRadius: '12px', 
+            fontSize: '0.9rem', 
+            backgroundColor: 'var(--bg-secondary)', 
+            border: '1px solid var(--border-color)', 
+            outline: 'none', 
+            color: 'var(--text-primary)',
+            boxSizing: 'border-box'
+          }}
+          placeholder="e.g. PixTool AI Productivity Suite"
+          value={product}
+          onChange={(e) => setProduct(e.target.value)}
+        />
+      </div>
+
+      <div className="sidebar-group">
+        <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          Advertising Platform
+        </label>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
+          {platforms.map(p => (
+            <button
+              key={p.id}
+              type="button"
+              onClick={() => setPlatform(p.id)}
+              style={{ 
+                padding: '0.75rem 0.4rem', 
+                borderRadius: '12px', 
+                border: '1.5px solid', 
+                borderColor: platform === p.id ? 'var(--accent-purple)' : 'var(--border-color)',
+                background: platform === p.id ? 'var(--accent-glow)' : 'var(--bg-secondary)',
+                cursor: 'pointer',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '0.35rem',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <p.icon size={18} color={platform === p.id ? 'var(--accent-purple)' : 'var(--text-muted)'} strokeWidth={1.5} />
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: platform === p.id ? 'var(--text-primary)' : 'var(--text-secondary)' }}>{p.name}</span>
+            </button>
+          ))}
         </div>
+      </div>
 
-        {/* Ecosystem & Objective */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem', marginBottom: '1.5rem' }}>
-          
-          <div className="platform-selector">
-            <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-              Advertising Ecosystem
-            </label>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.75rem' }}>
-                {platforms.map(p => (
-                    <button
-                        key={p.id}
-                        onClick={() => setPlatform(p.id)}
-                        style={{ 
-                            padding: '1.25rem 0.5rem', 
-                            borderRadius: '20px', 
-                            border: '2px solid', 
-                            borderColor: platform === p.id ? 'var(--accent-purple)' : 'var(--border-color)',
-                            background: platform === p.id ? 'var(--bg-primary)' : 'var(--bg-secondary)',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            gap: '0.5rem',
-                            transition: 'all 0.2s',
-                            boxShadow: platform === p.id ? 'var(--shadow-premium)' : 'none'
-                        }}
-                    >
-                        <p.icon size={22} color={platform === p.id ? 'var(--accent-purple)' : 'var(--text-muted)'} strokeWidth={1.5} />
-                        <span style={{ fontSize: '0.85rem', fontWeight: 800, color: platform === p.id ? 'var(--text-primary)' : 'var(--text-muted)' }}>{p.name}</span>
-                    </button>
-                ))}
-            </div>
-          </div>
-
-          <div className="objective-selector">
-            <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-              Campaign Objective
-            </label>
-            <div style={{ display: 'flex', background: 'var(--bg-secondary)', padding: '0.5rem', borderRadius: '24px' }}>
-                {objectives.map(o => (
-                    <button
-                        key={o.id}
-                        onClick={() => setObjective(o.id)}
-                        style={{ 
-                            flex: 1, 
-                            padding: '1rem', 
-                            borderRadius: '18px', 
-                            border: 'none', 
-                            background: objective === o.id ? 'var(--bg-primary)' : 'transparent',
-                            color: objective === o.id ? 'var(--text-primary)' : 'var(--text-muted)',
-                            fontWeight: 800,
-                            fontSize: '0.9rem',
-                            cursor: 'pointer',
-                            transition: 'all 0.2s',
-                            boxShadow: objective === o.id ? 'var(--shadow-sm)' : 'none'
-                        }}
-                    >
-                        {o.label}
-                        <span style={{ display: 'block', fontSize: '0.65rem', opacity: 0.6, fontWeight: 500 }}>{o.sub}</span>
-                    </button>
-                ))}
-            </div>
-          </div>
-
+      <div className="sidebar-group">
+        <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          Campaign Objective
+        </label>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', background: 'var(--bg-secondary)', padding: '0.4rem', borderRadius: '12px' }}>
+          {objectives.map(o => (
+            <button
+              key={o.id}
+              type="button"
+              onClick={() => setObjective(o.id)}
+              style={{ 
+                width: '100%', 
+                padding: '0.55rem 0.75rem', 
+                borderRadius: '8px', 
+                border: 'none', 
+                background: objective === o.id ? 'var(--bg-card)' : 'transparent',
+                color: objective === o.id ? 'var(--text-primary)' : 'var(--text-muted)',
+                fontWeight: 700,
+                fontSize: '0.8rem',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                boxShadow: objective === o.id ? 'var(--shadow-sm)' : 'none',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}
+            >
+              <span>{o.label}</span>
+              <span style={{ fontSize: '0.68rem', opacity: 0.6, fontWeight: 500 }}>{o.sub}</span>
+            </button>
+          ))}
         </div>
       </div>
     </AiToolTemplate>

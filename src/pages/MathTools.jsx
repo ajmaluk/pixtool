@@ -1,4 +1,4 @@
-import { Calculator, Zap, Lock, Compass } from 'lucide-react'
+import { Zap, Lock, Compass } from 'lucide-react'
 import ToolCard from '../components/ToolCard'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'

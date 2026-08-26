@@ -350,9 +350,7 @@ export default function QrGenerator() {
 
             <AdSpace type="bottom" />
 
-            <div className="editorial-container" style={{ marginTop: '6rem', padding: '3rem', background: 'var(--bg-glass)', borderRadius: '32px', border: '1px solid var(--border-color)', position: 'relative', overflow: 'hidden' }}>
-              <div style={{ position: 'absolute', top: '-50px', right: '-50px', width: '200px', height: '200px', background: 'var(--accent-glow)', filter: 'blur(100px)', opacity: 0.5, zIndex: 0 }}></div>
-              
+            <div className="editorial-container" style={{ marginTop: '6rem', padding: '3rem', background: 'var(--bg-glass)', borderRadius: '32px', border: '1px solid var(--border-color)', position: 'relative' }}>
               <div style={{ position: 'relative', zIndex: 1 }}>
                 <h2 style={{ fontSize: '2.25rem', fontWeight: 900, letterSpacing: '-0.03em', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
                   Professional Privacy-First <span style={{ color: 'var(--accent-primary)' }}>QR Suite</span>

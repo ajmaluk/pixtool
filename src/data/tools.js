@@ -801,7 +801,7 @@ export const PDF_TOOLS = [
     seo: {
       title: "Password Protect PDF 2026 | Secure PDF with AES-256 Encryption",
       keywords: "password protect pdf, encrypt pdf online, secure pdf with password, aes-256 pdf encryption, lock pdf file, private pdf security",
-      description: "Encrypt your PDF documents with military-grade AES-256 passwords. Prevent unauthorized viewing, printing, or copying. Secure your files."
+      description: "Encrypt your PDF documents with military-grade AES-256 passwords. Prevent unauthorized viewing, copying, and printing with complete browser-side privacy."
     },
     benefits: [
       'Military-grade AES-256 bit document encryption architecture',
@@ -1237,18 +1237,18 @@ export const PDF_TOOLS = [
 export const UTILITY_TOOLS = [
   { 
     id: 'temp-mail', title: 'Free Temp Mail 2026 [Safe]', icon: Mail, 
-    description: "The PixTool Temp Mail service is a high-authority privacy utility engineered for secure, anonymous communication in an era of aggressive. Secure your files.", 
+    description: "Get instant disposable temporary email addresses with auto-generated secure passwords. Receive OTP verification codes in real time with 100% zero-log privacy.", 
     color: '#ec4899', path: '/temp-mail', screenshot: 'disposable-temporary-email-generator.png',
     imageAlt: 'PixTool Secure Temp Mail 2026 - Instant Anonymous Disposable Email',
     imageTitle: 'Best Disposable Email Service Online',
     seo: {
-      title: "Temp Mail | Free Secure Disposable Email & Password",
-      keywords: "temp mail, temporary email, disposable email, free temp mail, temp mail generator, fake email, throwaway email, temp email, temporary email address, 10 minute mail, anonymous email, temp mail with password, temporary mail with password, temp mail for otp, fake email and password, temp mail login, one time email, fake email address, pixtool temp mail, tempmail, temp mail otp login, temp mail and password for login",
-      description: "Get instant free temporary email with auto-generated passwords for signups and OTP codes. Secure your files."
+      title: "Temp Mail — Free Disposable Email with Password & Instant OTP",
+      keywords: "temp mail, temporary email, disposable email, temp mail with password, fake email and password, temporary email and password, fake email with password, temp mail for otp, fake mail 2026, 10 minute mail with password, tool pix temp mail, temp mail generator, fake email address, temporary mail password, burner email with password, anonymous email, temp mail login, fake email and passwords, dummy emails with passwords",
+      description: "Create free temporary email addresses with passwords instantly. Receive verification codes and OTPs anonymously with 100% zero-log browser privacy."
     },
     benefits: [
       "Instant Email Generation in 1 Second",
-      "No Registration, No Names, No Passwords Required",
+      "Auto-Generated Secure Passwords for Easy Account Signups",
       "Automatic Message Expiration for Maximum Security",
       "Mobile-Ready Responsive Dashboard",
       "Military-Grade Complete Privacy Protection",
@@ -1272,9 +1272,9 @@ export const UTILITY_TOOLS = [
       'Use temp mail for "Free Trial" signups to prevent marketing spam in your primary inbox.'
     ],
     useCases: [
-      { title: "Bypass Forced Account Creation", description: "Use our burner email to securely access ebooks, whitepapers, and free trials without surrendering your personal primary email to marketing. Secure your files." },
-      { title: "Protect Against Data Breaches", description: "By using a unique anonymous email for different untrusted platforms, you guarantee that if a service is hacked, your primary email remains. Secure your files." },
-      { title: "Developer & QA Testing Workflow", description: "Software engineers and QA testers use our instant inboxes to rapidly verify signup flows, mass email delivery systems, and password reset. Secure your files." }
+      { title: "Bypass Forced Account Creation", description: "Use our burner email to securely access ebooks, whitepapers, and free trials without surrendering your personal primary email to marketing databases." },
+      { title: "Protect Against Data Breaches", description: "By using a unique anonymous email for different untrusted platforms, you guarantee that if a service is hacked, your primary email remains safe." },
+      { title: "Developer & QA Testing Workflow", description: "Software engineers and QA testers use our instant inboxes to rapidly verify signup flows, mass email delivery systems, and password reset workflows." }
     ],
     faq: [
       { q: "How long and reliable does a 10 minute mail last in 2026?", a: "Your generated burner address remains fully active as long as you keep the browser tab open. If you need it longer, you can easily click refresh to reset the inactivity timer up to a maximum of 24 hours. Once closed, the inbox is wiped permanently." },
@@ -1301,9 +1301,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool 10 Minute Mail - Secure Expiring Inbox for Rapid Verification',
     imageTitle: 'Best 10 Minute Disposable Email Service Online',
     seo: {
-      title: "10 Minute Mail | Anonymous Temporary Email & Password",
-      keywords: "10 minute mail, 10 min mail, 10minutemail, 10min mail, temporary email 10 minutes, 10 min temp mail, free 10 minute mail, disposable email 10 minutes, burner email 10 min, temp mail auto expiring, 10 minute mail alternative, 10minutemail one, free temp mail 10 min, 10 minute mail with password, 10 minute mail and password, temp mail password",
-      description: "Get a free 10-minute disposable email instantly with an auto-generated password. Secure your files."
+      title: "10 Minute Mail — Anonymous Temporary Email & Password [Free]",
+      keywords: "10 minute mail, 10 min mail, 10minutemail, 10min mail, temporary email 10 minutes, 10 min temp mail, free 10 minute mail, disposable email 10 minutes, burner email 10 min, temp mail auto expiring, 10 minute mail alternative, 10minutemail one, free temp mail 10 min, 10 minute mail with password, 10 minute mail and password, temp mail password, 5 minute email and password",
+      description: "Get a free 10-minute disposable email address instantly with an auto-generated password. Fast, anonymous, and perfect for OTP verification."
     },
     benefits: [
       "Precise 10-minute session management",
@@ -1421,7 +1421,7 @@ export const UTILITY_TOOLS = [
     seo: {
       title: "Fake Email and Password Generator — Instant Anonymous Inbox",
       keywords: "fake email, fake email generator, fake email and password, fake gmail, fake email with password, fake gmail password, fake email password generator, fake mail, fake email address, fake email id, free fake email, dummy email, disposable fake email, fake email for testing, fake email generator with password, create fake email, random email generator, fake email creator, fake email password, fake mail generator, fake mail creator, fake mail sender with attachment, tool pix",
-      description: "Generate fake email addresses with passwords instantly. Create anonymous email and password combos for testing, signups, and privacy. Secure your files."
+      description: "Generate fake email addresses with secure passwords instantly. Create anonymous email and password combinations for signups, testing, and spam prevention."
     },
     benefits: [
       "High-speed generation",
@@ -1473,7 +1473,7 @@ export const UTILITY_TOOLS = [
     seo: {
       title: "Disposable Email with Password — Free One-Time Temporary Mail",
       keywords: "disposable email, disposable email address, one time email, burner email, free disposable email, temporary email address, temp email, temporary disposable email, one-time email, anonymous email, mailinator alternative, disposable email generator, temp mail disposable, single use email, disposable email and password, disposable email login",
-      description: "Create a free one-time disposable email instantly with a secure password. Perfect for signups, verifications, and downloads. Secure your files."
+      description: "Create a free one-time disposable email instantly with an auto-generated password. Perfect for quick signups, OTP verifications, and download unlocks."
     },
     benefits: [
       "Instant one-click generation",
@@ -1628,14 +1628,14 @@ export const UTILITY_TOOLS = [
   },
   { 
     id: 'qr-scanner', title: 'Universal QR Scanner', icon: Smartphone, 
-    description: 'The definitive high-authority QR decoding studio. Scan from live camera feeds or upload high-resolution images instantly across all device architectures. No app required, 100% private.', 
+    description: 'Scan and decode QR codes instantly from your webcam, mobile camera, or uploaded image files (JPG, PNG, WebP). 100% free with no app download required.', 
     color: '#10b981', path: '/qr-scanner', screenshot: 'fast-online-qr-code-scanner-browser.png',
     imageAlt: 'PixTool Universal QR Scanner - Pro-Level Flash Decoding and Browser-Native Upload',
     imageTitle: 'Best Online QR Code Scanner - Secure & Fast',
     seo: {
-      title: "QR Code Scanner Online — Scan QR Code from Image & Camera Free",
-      keywords: "qr code scanner online, online scanner qr code, scan qr code online, scan qr code from image, qr scanner online, qr code scanner from image, free qr scanner, qr code scanner free, online qr reader, scan qr code from photo, qr scanner from image, qr code scanner browser, qr code scanner no app, scan qr image, qr reader online, qr scanner app alternative, qr code reader from image, read qr code from image, scan qr from photo, qr scanner photo, qr code scanner photo, scan any qr code online, qr scanner from image online, photo qr code scanner online, qr image reader online, online qr image reader, convert qr code to link, qr to link converter, tool pix scanner",
-      description: "Scan QR codes instantly from your camera or uploaded images. Free online QR code scanner with no app download required. Secure your files."
+      title: "QR Code Scanner Online — Scan QR from Image & Camera (Free, No App)",
+      keywords: "qr code scanner online, online qr scanner, scan qr code from image, qr scanner online from image, qr code scanner without app, universal qr code scanner, google qr scanner online, photo qr code scanner, scan qr code online, free qr scanner, scan qr without app, qr code reader online, qr code scanner photo, scan qr from photo, scan qr image, tool pix scanner, scanner qr code online, photo qr code scanner online",
+      description: "Scan QR codes online instantly from your webcam, mobile camera, or uploaded image files (JPG, PNG, WebP). 100% free, fast decoding, and no app download needed."
     },
     benefits: [
       "No App Download Required",
@@ -1648,8 +1648,8 @@ export const UTILITY_TOOLS = [
       "Secure and safe scanning"
     ],
     howTo: [
-      "Allow camera access when prompted",
-      "Point your camera at the QR code",
+      "Allow camera access when prompted or upload an image file",
+      "Point your camera at the QR code or select a photo",
       "Ensure the code is within the frame",
       "Click the detected link to open",
       "No data is sent to our servers"
@@ -1666,7 +1666,7 @@ export const UTILITY_TOOLS = [
       { title: 'Encrypted Message Access', description: 'Decode private text-strings or PGP public keys stored in QR formats securely.' }
     ],
     faq: [
-      { q: "How do I scan QR codes online free?", a: "Simply visit our QR scanner page, grant camera permissions, and point your device at any QR code. It decodes instantly without any cost or app download." },
+      { q: "How do I scan QR codes online free?", a: "Simply visit our QR scanner page, grant camera permissions or upload an image file, and point your device at any QR code. It decodes instantly without any cost or app download." },
       { q: "Do I need to download an app to scan QR codes?", a: "No! PixTool works directly in your web browser using modern HTML5 camera technology, so no installation is required." },
       { q: "Is it safe to scan unknown QR codes?", a: "Our scanner previews the URL for you, allowing you to see exactly where the link goes before you choose to visit it." },
       { q: "Does it work on iPhones and Androids?", a: "Yes, it is fully compatible with Safari on iOS, Chrome on Android, and all modern desktop browsers." },
@@ -1686,14 +1686,14 @@ export const UTILITY_TOOLS = [
   },
   { 
     id: 'qr-generator', title: 'Free QR Code Generator [Pro]', icon: QrCode, 
-    description: "Professional ISO-standard QR code generator engineered for high-fidelity marketing and localized data sovereignty. Secure your files.", 
+    description: "Generate custom ISO-standard high-resolution QR codes for websites, WiFi networks, vCards, text, and emails with custom colors and zero watermark.", 
     color: '#f59e0b', path: '/qr-generator', screenshot: 'best-free-qr-code-generator-online.png',
     imageAlt: 'PixTool Professional QR Generator - Custom Branded QR Codes',
     imageTitle: 'Create High-Res QR Codes Online Free',
     seo: {
-      title: "QR Code Generator | Free QR Maker (No Expiry)",
+      title: "QR Code Generator — Free Custom QR Maker (No Expiry & No Watermark)",
       keywords: "qr code generator, qr code generator free, create qr code, generate qr code, free qr code, qr code maker, qr code creator, qr generator, make qr code, online qr code generator, qr code generator no watermark, qr code generator unlimited, custom qr code, qr code for wifi, qr code for menu, qr code generator svg, free qr code online, free qr code generator no expiry",
-      description: "Create free QR codes instantly with no signup or watermarks. Generate QR codes for URLs, WiFi, text, and vCard. 100% private browser-based generator."
+      description: "Create custom high-resolution QR codes for URLs, WiFi, contact cards, and text with custom colors and logo embedding. 100% free with no expiry or watermarks."
     },
     benefits: [
       "Privacy-First Professional Performance — Secure, browser-native processing.",
@@ -1914,9 +1914,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Code Diff - Professional Line-by-Line Comparison',
     imageTitle: 'Online Code Diff Checker for Developers',
     seo: {
-      title: "Online Code Diff Checker: Compare Two Code Snippets [Secure]",
-      keywords: "code diff online 2026, compare code snippets browser, professional diff checker free, line by line code comparison tool, js diff checker online, unified diff generator free, secure code comparison no upload",
-      description: "Compare your code snippets side-by-side or in unified view instantly. Identify logic drift and generate unified patches without uploading. Create yours."
+      title: "Code Diff Checker — Compare Code Difference & Text Online Free",
+      keywords: "code diff, code difference, code difference checker, code compare, code matcher, compare code snippets, online diff checker, line by line code comparison, text compare online, git diff checker, code diff online 2026, js diff checker online",
+      description: "Compare two code snippets or text files side-by-side with line-by-line syntax diff, character highlights, and patch generation. 100% private in-browser tool."
     },
     benefits: [
       "High-velocity line-by-line comparison across 20+ languages",
@@ -1972,7 +1972,7 @@ export const UTILITY_TOOLS = [
     seo: {
       title: "Online JSON Formatter & Validator: Prettify or Minify [Secure]",
       keywords: "json formatter online 2026, free json validator professional, prettify json browser, minify json for production, best online json editor secure, validate json line by line, secure json formatter no upload",
-      description: "Format, validate, and minify your JSON data instantly. Real-time syntax error detection and one-click prettification. Start converting."
+      description: "Format, validate, and minify your JSON data instantly. Real-time syntax error detection and one-click prettification without server uploads."
     },
     benefits: [
       "Industrial-grade prettifying engine for chaotic raw JSON data",
@@ -2082,9 +2082,9 @@ export const UTILITY_TOOLS = [
     imageAlt: 'PixTool Password Generator - Cryptographically Secure Entropy-based Keys',
     imageTitle: 'Secure Random Password Generator for Privacy-Minded Users',
     seo: {
-      title: "Secure Random Password Generator: High-Entropy Keys [Free]",
-      keywords: "password generator 2026, secure random password maker, free high entropy password generator, best online password creator, generate strong passwords online, secure password for account signup, bypass weak password filters",
-      description: "Generate unbreakable, high-entropy random passwords instantly. 100% private browser-native password generator that ensures your keys never. Secure your files."
+      title: "Password Generator — Free Secure Random Password Creator",
+      keywords: "password generator, secure password generator, random password generator, strong password generator, password creator, create password, free password generator, password generator online, password generator with symbols",
+      description: "Generate unbreakable, high-entropy random passwords and passphrases instantly. 100% private browser-native generator that ensures your keys never touch a server."
     },
     benefits: [
       "Industrial-grade entropy generation using on-device random seeds",
@@ -2341,7 +2341,7 @@ export const AI_TOOLS = [
     seo: {
       title: "Code Intelligence — AI Coding Assistant [20+ Languages]",
       keywords: "ai coding assistant, code intelligence, free ai programmer, write code with ai, debug code ai, ai refactoring tool, programming assistant, github copilot alternative free, ai for developers",
-      description: "Get 24/7 senior developer AI assistance. Write, debug, and refactor code across 20+ languages with high-authority logic. Secure your files."
+      description: "Get 24/7 senior developer AI assistance. Write, debug, explain, and refactor code across 20+ languages with high-authority logic and complete code privacy."
     },
     benefits: [
       'Senior-level full-stack logic solving for modern framework architectures',
@@ -2682,9 +2682,9 @@ export const AI_TOOLS = [
     imageAlt: 'PixTool SEO Architect - Search Ranking Dominance',
     imageTitle: 'Find High-Intent SEO Keywords',
     seo: {
-      title: "SEO Keyword Generator — Free Keyword Tool",
-      keywords: "seo keyword generator, keyword generator, seo keywords, free keyword tool, keyword finder, keyword research tool",
-      description: "Generate high-intent SEO keywords for free instantly. Find keywords to rank higher in search results and boost your traffic. Create yours."
+      title: "AI Keyword Generator — Free SEO, Image, Art & Stock Keywords Tool",
+      keywords: "create keywords, keyword generator, seo keyword generator, image keyword generator free, photo keyword generator free, art keyword generator, technology keywords generator, best image keyword generator, generate keywords from image online, free keyword tool, keywording software",
+      description: "Generate high-intent SEO, technology, art, and stock image keywords with AI instantly. Find long-tail search terms and semantic clusters to boost rankings for free."
     },
     benefits: [
       'Latent Semantic Indexing discovery for broad topical authority',
@@ -3462,9 +3462,9 @@ export const PRODUCTIVITY_TOOLS = [
       'The auto-save works per-browser—your notes will be waiting even after a restart.'
     ],
     useCases: [
-      { title: "Technical Drafting", description: "Write READMEs and technical documentation with live markdown previews. Try it free." },
-      { title: "Linguistic Editing", description: "Refine manuscripts and blog posts in a distraction-free, zero-upload environment. Try it free." },
-      { title: "Temporary Scratchpad", description: "Securely store API keys or private snippets during a dev session without cloud exposure. Secure your files." }
+      { title: "Technical Drafting", description: "Write READMEs and technical documentation with live markdown previews in a clean browser workspace." },
+      { title: "Linguistic Editing", description: "Refine manuscripts and blog posts in a distraction-free, zero-upload environment with instant word counting." },
+      { title: "Temporary Scratchpad", description: "Securely store API keys or private snippets during a dev session without cloud exposure or permanent logs." }
     ],
     faq: [
       { q: "Is there an auto-save feature?", a: "Yes, every keystroke is saved to your browser's local storage automatically." },
@@ -3542,7 +3542,7 @@ export const PRODUCTIVITY_TOOLS = [
     seo: {
       title: "File Vault — Secure Local File Manager Online",
       keywords: "file manager online 2026, browser file explorer free, indexeddb storage manager, private file vault browser, secure local file storage online",
-      description: "Store, organize, and preview virtual files securely in your browser. IndexedDB-powered file management with zero server interaction. Secure your files."
+      description: "Store, organize, and preview virtual files securely in your browser. IndexedDB-powered file management with zero server interaction and complete local privacy."
     },
     benefits: [
       "IndexedDB Large-Scale Storage",
@@ -3558,47 +3558,46 @@ export const PRODUCTIVITY_TOOLS = [
       "Upload or create files within the virtual file system",
       "Organize files into custom folders",
       "Monitor your storage usage in the dashboard",
-      "Export your entire vault as a backup file"
+      "Preview documents and images locally",
+      "Export your directory tree as a structured archive"
     ],
-    alternativeTo: ["Google Drive (for local use)", "Dropbox (Local cache)", "Browser FS"],
+    alternativeTo: ["Google Drive (Local Mode)", "Dropbox", "Box", "Local File Explorer"],
     tips: [
-      'Keep your local storage under 500MB to ensure maximum browser performance.',
-      'Use the "Search" bar to locate files by name instantly—no server lag.',
-      'Remember: If you clear your browser cache/cookies, your local File Vault may be reset.'
+      'Create subfolders for different projects to keep your virtual workspace organized.',
+      'Check your browser quota periodically to ensure you have enough IndexedDB space available.',
+      'Export important archives to your physical hard drive before clearing browser cache.'
     ],
     useCases: [
-      { title: "Offline Asset Manager", description: "Store and manage project files locally for rapid access during offline working sessions. Get organized." },
-      { title: "Privacy Buffer", description: "Store sensitive documents locally without ever exposing them to third-party cloud servers. Try it free." },
-      { title: "Browser-Based Archiving", description: "Maintain a persistent local database of temporary working files without cluttering your OS desktop. Get started." }
+      { title: "Offline Document Sandbox", description: "Keep sensitive working drafts and temporary files organized without cloud exposure." },
+      { title: "Project Staging", description: "Stage assets, JSON payloads, and image mockups for fast local retrieval during development." },
+      { title: "Zero-Trace Workflow", description: "Manage documents on public or shared computers with instant local cache purge upon exit." }
     ],
     faq: [
-      { q: "Where are my files actually stored?", a: "Files are stored in your browser's 'IndexedDB' database, a secure sandboxed environment on your computer." },
-      { q: "Is there a file size limit?", a: "Most modern browsers allow up to 50% of your free disk space to be used for IndexedDB, though we recommend files under 50MB for best performance." }
+      { q: "Are files stored on PixTool servers?", a: "No. All files and folder hierarchies are stored inside your browser's IndexedDB storage. Zero bytes are uploaded." },
+      { q: "What happens if I clear my browser history?", a: "Clearing site data and IndexedDB will purge your virtual files. Always export your key archives first." }
     ],
     relatedTools: [
       { name: 'NotePad Pro', path: '/productivity-tools/notepad' },
-      { name: 'Kanban Board Pro', path: '/productivity-tools/kanban' },
-      { name: 'PDF Master Suite', path: '/pdf-tools' }
+      { name: 'Sticky Notes Board', path: '/productivity-tools/sticky-notes' },
+      { name: 'Drawing Board', path: '/productivity-tools/drawing-board' }
     ],
     readNext: [
       { title: 'The Ultimate Guide to Browser-Based Privacy', path: '/blog/browser-based-privacy' },
-      { title: 'Managing Large Sets of Digital Assets Private', path: '/blog/private-asset-management' }
+      { title: 'Local-First Software Architecture in 2026', path: '/blog/local-first-software-architecture' }
     ]
   },
   {
     id: 'pomodoro', title: 'Focus Clock', icon: Timer,
-    description: 'Aesthetic Pomodoro timer engine designed to boost deep work through scientifically proven neuro-focus intervals.',
+    description: 'Minimalist Pomodoro timer with customizable focus intervals, ambient soundscapes, and streak accountability.',
     color: '#ef4444', path: '/productivity-tools/pomodoro', screenshot: 'pixtool-all-in-one-productivity-suite.png',
-    imageAlt: 'PixTool Pomodoro Timer - Scientific Deep Work Focus Tool',
+    imageAlt: 'PixTool Focus Clock - Minimalist Pomodoro Timer for Deep Work',
     imageTitle: 'Free Online Pomodoro Timer with Custom Intervals',
     seo: {
-      title: "Focus Clock — Online Pomodoro Timer",
-      keywords: "pomodoro timer online 2026, free focus clock browser, best online study timer, productivity timer no ads, secure pomodoro clock online",
-      description: "Boost your productivity with an aesthetic Pomodoro Timer. Custom intervals, notifications, and progress tracking for deep work and. Get organized."
+      title: "Focus Clock — Online Pomodoro Timer for Deep Work",
+      keywords: "pomodoro timer online 2026, free focus clock browser, best online study timer, productivity timer no ads, secure pomodoro clock online, deep work timer",
+      description: "Boost productivity and maintain deep focus with a customizable Pomodoro timer. Work/break intervals, notifications, and zero tracking."
     },
     benefits: [
-      "Scientifically Proven Intervals",
-      "Aesthetic Minimalist Design",
       "Customizable Work/Rest Timers",
       "Browser Notification Alerts",
       "Visual Progress Tracking",
@@ -3645,9 +3644,9 @@ export const PRODUCTIVITY_TOOLS = [
     imageAlt: 'PixTool Sticky Notes - Digital Brainstorming Board with Grouping Logic',
     imageTitle: 'Online Virtual Sticky Notes Board for Teams',
     seo: {
-      title: "Sticky Notes — Online Virtual Brainstorming",
-      keywords: "sticky notes online 2026, virtual post-it notes free, online brainstorming board, secure sticky notes no signup, best digital notice board",
-      description: "Brainstorm and organize ideas with color-coded virtual sticky notes. Move notes freely, save your board locally. Start coding."
+      title: "Online Sticky Notes Board — Free Digital Post-it Notes & Brainstorming",
+      keywords: "sticky notes board online, online sticky notes, sticky note board online, virtual post it notes, online sticky notes board, interactive sticky notes, post it notes online, digital post it, online post its, digital sticky notes, sticky notes online, sticky board online, post it board online",
+      description: "Create and organize color-coded virtual sticky notes on an interactive digital board. Move notes freely with local auto-save and zero account signup required."
     },
     benefits: [
       "Movable Virtual Notes",
@@ -3762,7 +3761,7 @@ export const ALL_TOOLS_MAP = {
     },
     editorial: {
       title: "Utility & Privacy Suite",
-      description: "Protect your privacy and optimize your workflow with our local-first utility studio. Secure your files.",
+      description: "Protect your privacy and optimize your workflow with our local-first utility studio and privacy generators.",
       benefits: [
         "100% Browser-Based — absolute data privacy",
         "Zero Latency — instant results without server delay",

@@ -13,6 +13,13 @@ import { API_ENDPOINTS, API_TIMEOUTS } from '../config/app.config'
 
 const TEMPMAIL_DIRECT_BASE = 'https://api.mail.tm'
 
+function decodeHTML(text) {
+  if (!text || typeof text !== 'string') return ''
+  const temp = document.createElement('textarea')
+  temp.innerHTML = text
+  return temp.value
+}
+
 async function tempmailFetch(path, options = {}) {
   const urlDirect = `${TEMPMAIL_DIRECT_BASE}${path}`
   const timeoutMs = 12000
@@ -35,8 +42,8 @@ class TempMailReceiver {
     this.username = null
     this.domain = null
     this.password = null
+    this.service = null // 'Mail.tm' | 'GuerrillaMail'
     this.token = null
-    this.checkInterval = null
     this.currentMessages = []
     this.currentFilter = 'all'
     this.searchTerm = ''
@@ -48,19 +55,30 @@ class TempMailReceiver {
     const digits = '0123456789'
     const symbols = '!@#$%^&*()-_=+'
     const all = lower + upper + digits + symbols
-    const pick = (s) => s.charAt(Math.floor(Math.random() * s.length))
-    const required = [pick(lower), pick(upper), pick(digits), pick(symbols)]
+
+    const pickSecure = (s) => {
+      const array = new Uint32Array(1)
+      window.crypto.getRandomValues(array)
+      return s.charAt(array[0] % s.length)
+    }
+
+    const required = [pickSecure(lower), pickSecure(upper), pickSecure(digits), pickSecure(symbols)]
     let rest = ''
-    for (let i = 0; i < Math.max(0, length - required.length); i++) rest += pick(all)
+    for (let i = 0; i < Math.max(0, length - required.length); i++) {
+      rest += pickSecure(all)
+    }
+
     const combined = (required.join('') + rest).split('')
     for (let i = combined.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+      const array = new Uint32Array(1)
+      window.crypto.getRandomValues(array)
+      const j = array[0] % (i + 1);
       [combined[i], combined[j]] = [combined[j], combined[i]]
     }
     return combined.join('')
   }
 
-  randomString(length) {
+  randomString(length = 10) {
     const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
     let result = ''
     for (let i = 0; i < length; i++) {
@@ -70,50 +88,88 @@ class TempMailReceiver {
   }
 
   async authenticate() {
+    if (this.service === 'GuerrillaMail') {
+      return this.token
+    }
     if (!this.email || !this.password) throw new Error('Missing credentials')
     const authResponse = await tempmailFetch('/token', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({ address: this.email, password: this.password })
     })
-    if (!authResponse.ok) throw new Error('Authentication failed')
+    if (!authResponse.ok) {
+      throw new Error(`Authentication failed (${authResponse.status})`)
+    }
     const authData = await authResponse.json()
+    if (!authData || !authData.token) {
+      throw new Error('Invalid token received from mail service')
+    }
     this.token = authData.token
     return this.token
   }
 
   async generateEmail() {
     try {
-      const domainsResponse = await tempmailFetch('/domains')
-      if (!domainsResponse.ok) throw new Error('Failed to fetch domains')
-      const domainsData = await domainsResponse.json()
-      const domains = domainsData['hydra:member'] || []
-      const activeDomain = domains.find(d => d && d.isActive && d.domain) || domains.find(d => d && d.domain)
-      if (!activeDomain) throw new Error('No domains available')
-      this.domain = activeDomain.domain
-
-      const maxAttempts = 3
-      for (let attempt = 0; attempt < maxAttempts; attempt++) {
-        this.username = this.randomString(10)
-        this.email = `${this.username}@${this.domain}`
-        this.password = this.randomPassword(14)
-
-        const accountResponse = await tempmailFetch('/accounts', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ address: this.email, password: this.password })
-        })
-
-        if (accountResponse.status === 201) {
-          await this.authenticate()
-          return this.email
+      // 1. Try Mail.tm first
+      try {
+        this.service = 'Mail.tm'
+        const domainsResponse = await tempmailFetch('/domains')
+        if (!domainsResponse.ok) {
+          throw new Error(`Failed to fetch domains (${domainsResponse.status})`)
         }
-        if (accountResponse.status === 422 || accountResponse.status === 429 || accountResponse.status === 400) {
-          continue
+        const domainsData = await domainsResponse.json()
+        const domains = domainsData['hydra:member'] || []
+        const activeDomains = domains.filter(d => d && d.domain && d.isActive)
+        const availableDomains = activeDomains.length ? activeDomains : domains.filter(d => d && d.domain)
+        if (!availableDomains.length) throw new Error('No domains available on Mail.tm')
+        
+        const startIndex = Math.floor(Math.random() * availableDomains.length)
+        const maxAttempts = 3
+        for (let attempt = 0; attempt < maxAttempts; attempt++) {
+          this.domain = availableDomains[(startIndex + attempt) % availableDomains.length].domain
+          this.username = this.randomString(10)
+          this.email = `${this.username}@${this.domain}`
+          this.password = this.randomPassword(14)
+
+          const accountResponse = await tempmailFetch('/accounts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ address: this.email, password: this.password })
+          })
+
+          if (accountResponse.status === 201) {
+            await this.authenticate()
+            this.service = 'Mail.tm'
+            return this.email
+          }
+          if (accountResponse.status === 422 || accountResponse.status === 429 || accountResponse.status === 400) {
+            continue
+          }
+          break
         }
-        break
+        throw new Error('Mail.tm account creation failed')
+      } catch (mailTmError) {
+        console.warn('[TempMail] Mail.tm initialization failed, falling back to GuerrillaMail:', mailTmError)
+        
+        // 2. Fallback to GuerrillaMail
+        this.service = 'GuerrillaMail'
+        const response = await fetch('https://api.guerrillamail.com/ajax.php?f=get_email_address')
+        if (!response.ok) {
+          throw new Error(`GuerrillaMail initialization failed (${response.status})`)
+        }
+        const data = await response.json()
+        if (!data || !data.email_addr || !data.sid_token) {
+          throw new Error('Invalid response from GuerrillaMail')
+        }
+        
+        this.email = data.email_addr
+        const [username, domain] = this.email.split('@')
+        this.username = username
+        this.domain = domain
+        this.token = data.sid_token
+        this.password = data.sid_token
+        return this.email
       }
-      throw new Error('Account creation failed')
     } catch (error) {
       console.error('Error generating email:', error)
       return null
@@ -123,12 +179,47 @@ class TempMailReceiver {
   async checkInbox() {
     if (!this.token) return []
     try {
+      if (this.service === 'GuerrillaMail') {
+        const response = await fetch(`https://api.guerrillamail.com/ajax.php?f=get_email_list&offset=0&sid_token=${encodeURIComponent(this.token)}`)
+        if (response.ok) {
+          const data = await response.json()
+          if (!data || !data.list) return []
+          return (data.list || []).map(msg => {
+            const rawSubject = (msg.mail_subject !== undefined && msg.mail_subject !== null)
+              ? String(msg.mail_subject)
+              : (msg.subject || '')
+            const decodedSubject = decodeHTML(rawSubject).trim()
+            const rawFrom = msg.mail_from || msg.from || ''
+            const fromAddr = decodeHTML(String(rawFrom)).trim()
+
+            return {
+              id: String(msg.mail_id),
+              from: {
+                address: fromAddr,
+                name: fromAddr.split('@')[0] || 'Unknown'
+              },
+              subject: decodedSubject.length > 0 ? decodedSubject : 'No Subject',
+              intro: decodeHTML(String(msg.mail_excerpt || '')),
+              seen: Boolean(msg.mail_read),
+              createdAt: msg.mail_timestamp && Number(msg.mail_timestamp) > 0 
+                ? new Date(msg.mail_timestamp * 1000).toISOString() 
+                : new Date().toISOString()
+            }
+          })
+        }
+        return []
+      }
+
       const response = await tempmailFetch('/messages', {
         headers: { 'Authorization': `Bearer ${this.token}` }
       })
       if (response.ok) {
         const data = await response.json()
-        return data['hydra:member'] || []
+        const rawMsgs = data['hydra:member'] || []
+        return rawMsgs.map(m => ({
+          ...m,
+          subject: decodeHTML(String(m.subject || '')) || 'No Subject'
+        }))
       }
       return []
     } catch (error) {
@@ -139,6 +230,34 @@ class TempMailReceiver {
 
   async getMessageDetails(id) {
     try {
+      if (this.service === 'GuerrillaMail') {
+        const response = await fetch(`https://api.guerrillamail.com/ajax.php?f=fetch_email&email_id=${encodeURIComponent(id)}&sid_token=${encodeURIComponent(this.token)}`)
+        if (response.ok) {
+          const data = await response.json()
+          if (!data) return null
+          const rawSubject = data.mail_subject !== undefined ? String(data.mail_subject) : (data.subject || '')
+          const rawFrom = data.mail_from || ''
+          const fromAddr = decodeHTML(String(rawFrom)).trim()
+
+          return {
+            id: String(data.mail_id),
+            from: {
+              address: fromAddr,
+              name: fromAddr.split('@')[0] || 'Unknown'
+            },
+            subject: decodeHTML(rawSubject) || 'No Subject',
+            text: (data.mail_body || '').replace(/<[^>]*>/g, ''),
+            html: data.mail_body || '',
+            seen: true,
+            createdAt: data.mail_timestamp && Number(data.mail_timestamp) > 0 
+              ? new Date(data.mail_timestamp * 1000).toISOString() 
+              : new Date().toISOString(),
+            attachments: []
+          }
+        }
+        return null
+      }
+
       const response = await tempmailFetch(`/messages/${id}`, {
         headers: { 'Authorization': `Bearer ${this.token}` }
       })
@@ -154,6 +273,11 @@ class TempMailReceiver {
 
   async deleteMessage(id) {
     try {
+      if (this.service === 'GuerrillaMail') {
+        await fetch(`https://api.guerrillamail.com/ajax.php?f=del_email&email_ids[]=${encodeURIComponent(id)}&sid_token=${encodeURIComponent(this.token)}`)
+        return true
+      }
+
       const response = await tempmailFetch(`/messages/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${this.token}` }
@@ -240,6 +364,7 @@ export default function TempMail({
         tempMailRef.current.password = saved.password
         tempMailRef.current.domain = saved.domain
         tempMailRef.current.username = saved.username
+        tempMailRef.current.service = saved.service || (saved.email.includes('guerrillamail') || saved.email.includes('sharklasers') ? 'GuerrillaMail' : 'Mail.tm')
         tempMailRef.current.token = saved.token || null
         if (!tempMailRef.current.token) {
           try {
@@ -250,7 +375,8 @@ export default function TempMail({
                 password: tempMailRef.current.password,
                 domain: tempMailRef.current.domain,
                 username: tempMailRef.current.username,
-                token: tempMailRef.current.token
+                token: tempMailRef.current.token,
+                service: tempMailRef.current.service
               })
             }
           } catch (e) { void e }
@@ -272,7 +398,8 @@ export default function TempMail({
             password: tempMailRef.current.password,
             domain: tempMailRef.current.domain,
             username: tempMailRef.current.username,
-            token: tempMailRef.current.token
+            token: tempMailRef.current.token,
+            service: tempMailRef.current.service
           })
           localStorage.setItem(INBOX_PREFIX + tempMailRef.current.email, JSON.stringify([]))
         }
@@ -371,7 +498,8 @@ export default function TempMail({
         password: tempMailRef.current.password,
         domain: tempMailRef.current.domain,
         username: tempMailRef.current.username,
-        token: tempMailRef.current.token
+        token: tempMailRef.current.token,
+        service: tempMailRef.current.service
       })
       try { localStorage.setItem(INBOX_PREFIX + tempMailRef.current.email, JSON.stringify([])) } catch (e) { void e }
       setToast({ show: true, message: 'New email generated successfully!', type: 'success' })
@@ -621,7 +749,7 @@ export default function TempMail({
                       className="tempmail-address-card"
                     >
                       <div className="tempmail-icon-glow">
-                        <Mail size={28} />
+                        <Mail size={22} />
                       </div>
                       <div className="tempmail-address-wrapper">
                         <span className="tempmail-label">Your Secure Email Address</span>
@@ -630,38 +758,35 @@ export default function TempMail({
                         </span>
                       </div>
                       <div className={`tempmail-copy-btn ${copied ? 'copied' : ''}`}>
-                        {copied ? <CheckCircle2 size={24} /> : <Copy size={24} />}
+                        {copied ? <CheckCircle2 size={20} /> : <Copy size={20} />}
                       </div>
                     </div>
 
                     <div
                       onClick={() => setShowPassword(!showPassword)}
                       className="tempmail-address-card"
-                      style={{ padding: '1rem 1.5rem', minHeight: '80px', cursor: 'pointer' }}
                     >
-                      <div className="tempmail-icon-glow" style={{ width: '48px', height: '48px', padding: '12px' }}>
-                        <Key size={24} />
+                      <div className="tempmail-icon-glow">
+                        <Key size={20} />
                       </div>
                       <div className="tempmail-address-wrapper">
                         <span className="tempmail-label">Auto-Generated Password</span>
-                        <span className="tempmail-address" style={{ fontSize: '1.2rem', letterSpacing: showPassword ? 'normal' : '0.2em' }}>
+                        <span className="tempmail-address" style={{ letterSpacing: showPassword ? 'normal' : '0.15em' }}>
                           {password ? (showPassword ? password : '••••••••••••••') : 'Generating...'}
                         </span>
                       </div>
-                      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                      <div style={{ display: 'flex', gap: '0.35rem', alignItems: 'center', flexShrink: 0 }}>
                         <div
                           className="tempmail-copy-btn"
                           onClick={(e) => { e.stopPropagation(); setShowPassword(!showPassword) }}
-                          style={{ width: '40px', height: '40px' }}
                         >
-                          {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                          {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                         </div>
                         <div
                           className={`tempmail-copy-btn ${copiedPassword ? 'copied' : ''}`}
                           onClick={copyPassword}
-                          style={{ width: '40px', height: '40px' }}
                         >
-                          {copiedPassword ? <CheckCircle2 size={20} /> : <Copy size={20} />}
+                          {copiedPassword ? <CheckCircle2 size={18} /> : <Copy size={18} />}
                         </div>
                       </div>
                     </div>
@@ -818,19 +943,19 @@ export default function TempMail({
               )}
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2rem', marginTop: '4rem', marginBottom: '4rem' }}>
+            <div className="features-grid-4">
               {[
                 { icon: Shield, title: 'Privacy First', desc: 'No personal data required. No tracking or logging.', color: 'var(--accent-emerald)' },
                 { icon: Zap, title: 'Instant Setup', desc: 'Get a working email in under 2 seconds. Zero config.', color: 'var(--accent-orange)' },
                 { icon: Clock, title: 'Auto Refresh', desc: 'Inbox checks for new mail every 5 seconds automatically.', color: 'var(--accent-primary)' },
                 { icon: Mail, title: 'Real Emails', desc: 'Receive actual emails with attachments from any sender.', color: 'var(--accent-pink)' },
               ].map((feat, i) => (
-                <div key={i} className="tool-card" style={{ textAlign: 'center', padding: '2.5rem 2rem' }}>
-                  <div className="tool-card-icon" style={{ background: `${feat.color}15`, color: feat.color, margin: '0 auto' }}>
-                    <feat.icon size={26} />
+                <div key={i} className="tool-card" style={{ textAlign: 'center', margin: 0, boxSizing: 'border-box' }}>
+                  <div className="tool-card-icon" style={{ background: `${feat.color}15`, color: feat.color, margin: '0 auto 1rem' }}>
+                    <feat.icon size={24} />
                   </div>
-                  <h2 style={{ fontWeight: 900, marginBottom: '0.5rem', fontSize: '1.1rem' }}>{feat.title}</h2>
-                  <p className="tool-card-description" style={{ fontSize: '0.9rem' }}>{feat.desc}</p>
+                  <h3 style={{ fontWeight: 900, marginBottom: '0.35rem', fontSize: '1.05rem', color: 'var(--text-primary)' }}>{feat.title}</h3>
+                  <p className="tool-card-description" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0 }}>{feat.desc}</p>
                 </div>
               ))}
             </div>
@@ -841,22 +966,21 @@ export default function TempMail({
               <ToolContent {...toolData} />
             </div>
 
-
-            <section className="tool-panel" style={{ marginTop: '3rem' }} aria-labelledby="spam-mitigation-2026">
-              <h2 id="spam-mitigation-2026" style={{ fontSize: '1.9rem', fontWeight: 900, marginBottom: '1rem' }}>
+            <section className="tool-panel" style={{ marginTop: '4rem', textAlign: 'left' }} aria-labelledby="spam-mitigation-2026">
+              <h2 id="spam-mitigation-2026" style={{ fontSize: '1.75rem', fontWeight: 900, marginBottom: '1.25rem', color: 'var(--text-primary)' }}>
                 Spam Mitigation Strategy 2026
               </h2>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.75, marginBottom: '1.25rem' }}>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.75, marginBottom: '1.25rem', fontSize: '1rem' }}>
                 Modern spam systems do more than send junk email. They profile user behavior, correlate signups across domains,
                 and reuse leaked addresses for phishing and credential-stuffing campaigns. A disposable inbox strategy reduces
                 this exposure by separating low-trust signups from your primary identity.
               </p>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.75, marginBottom: '1.25rem' }}>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.75, marginBottom: '1.5rem', fontSize: '1rem' }}>
                 For best results, use dedicated temporary addresses per service category, rotate addresses after one-time OTP flows,
                 and never reuse disposable inboxes for banking, recovery, or long-term account ownership. This reduces spam volume,
                 limits cross-site profiling, and keeps high-value accounts isolated from breach fallout.
               </p>
-              <ul style={{ color: 'var(--text-secondary)', lineHeight: 1.7, paddingLeft: '1.2rem' }}>
+              <ul style={{ color: 'var(--text-secondary)', lineHeight: 1.8, paddingLeft: '1.5rem', margin: '0', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                 <li>Use one temp address per trial platform to identify future leak sources quickly.</li>
                 <li>Rotate addresses after verification to minimize retargeting and list resale spam.</li>
                 <li>Keep your primary mailbox only for trusted, long-term providers.</li>
@@ -864,66 +988,97 @@ export default function TempMail({
               </ul>
             </section>
 
-            <div className="tool-panel" style={{ marginTop: '3rem' }}>
-              <div id="free-temp-mail" style={{ marginBottom: '3rem' }}>
-                <h2 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '1rem' }}>Free Temporary Email</h2>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', lineHeight: 1.7 }}>
-                  Use your free temporary email for signups, verifications, and newsletters without sharing your real address. No registration required.
-                </p>
-              </div>
-              <div id="random-email" style={{ marginBottom: '3rem' }}>
-                <h2 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '1rem' }}>Random Email Address</h2>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', lineHeight: 1.7 }}>
-                  Generate a random email address instantly. Rotate to a new address anytime to keep signups clean and anonymous.
-                </p>
-              </div>
-              <div id="no-registration" style={{ marginBottom: '3rem' }}>
-                <h2 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '1rem' }}>No Registration Temp Mail</h2>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', lineHeight: 1.7 }}>
-                  Start using temp mail immediately with zero forms or accounts. Copy in one tap and receive messages in seconds.
-                </p>
+            <div className="tool-panel" style={{ marginTop: '3rem', textAlign: 'left' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>
+                <div id="free-temp-mail" style={{ padding: '1.5rem', background: 'var(--bg-secondary)', borderRadius: '18px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(236, 72, 153, 0.12)', color: 'var(--accent-pink)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <Shield size={20} />
+                    </div>
+                    <div>
+                      <span style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--accent-pink)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>100% Free & Private</span>
+                      <h3 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>Free Temporary Email</h3>
+                    </div>
+                  </div>
+                  <p style={{ color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6, fontSize: '0.9rem' }}>
+                    Use your free temporary email for signups, verifications, and newsletters without sharing your real address. No registration required.
+                  </p>
+                </div>
+
+                <div id="random-email" style={{ padding: '1.5rem', background: 'var(--bg-secondary)', borderRadius: '18px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(245, 158, 11, 0.12)', color: 'var(--accent-orange)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <RefreshCw size={20} />
+                    </div>
+                    <div>
+                      <span style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--accent-orange)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Instant Multi-Domain</span>
+                      <h3 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>Random Email Address</h3>
+                    </div>
+                  </div>
+                  <p style={{ color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6, fontSize: '0.9rem' }}>
+                    Generate a random email address instantly. Rotate to a new address anytime to keep signups clean and anonymous.
+                  </p>
+                </div>
+
+                <div id="no-registration" style={{ padding: '1.5rem', background: 'var(--bg-secondary)', borderRadius: '18px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(16, 185, 129, 0.12)', color: 'var(--accent-emerald)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <Zap size={20} />
+                    </div>
+                    <div>
+                      <span style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--accent-emerald)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Zero Friction Flow</span>
+                      <h3 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>No Registration Temp Mail</h3>
+                    </div>
+                  </div>
+                  <p style={{ color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6, fontSize: '0.9rem' }}>
+                    Start using temp mail immediately with zero forms or accounts. Copy in one tap and receive messages in seconds.
+                  </p>
+                </div>
               </div>
 
-              <div style={{ marginTop: '4rem' }}>
-                <h2 style={{ fontSize: '1.75rem', fontWeight: 900, marginBottom: '2rem' }}>Related Tools</h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
+              <div style={{ marginTop: '2.5rem' }}>
+                <h3 style={{ fontSize: '1.35rem', fontWeight: 800, marginBottom: '1.25rem', color: 'var(--text-primary)' }}>Related Privacy Tools</h3>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 240px), 1fr))', gap: '1rem' }}>
                   {[
-                    { title: 'Fake Email Generator', desc: 'Random fake emails', path: '/identity-forge' },
-                    { title: 'Disposable Email', desc: 'One-time use inbox', path: '/burner-inbox' },
-                    { title: 'Throwaway Email', desc: 'Privacy protection', path: '/ghost-inbox' },
-                    { title: '10 Minute Mail', desc: 'Auto-expiring inbox', path: '/temp-mail/10-minute-mail' }
+                    { title: 'Fake Email Generator', desc: 'Random temporary identities', path: '/identity-forge', badge: 'Generator' },
+                    { title: 'Disposable Email', desc: 'One-time use throwaway inbox', path: '/burner-inbox', badge: 'Burner' },
+                    { title: 'Throwaway Email', desc: 'Strict anti-spam privacy shield', path: '/ghost-inbox', badge: 'Ghost' },
+                    { title: '10 Minute Mail', desc: 'Auto-expiring timer mailbox', path: '/temp-mail/10-minute-mail', badge: 'Timer' }
                   ].map((tool, i) => (
-                    <a key={i} href={tool.path} className="tool-card" style={{ padding: '1.5rem' }}>
-                      <h3 style={{ fontWeight: 800, marginBottom: '0.5rem', fontSize: '1.1rem' }}>{tool.title}</h3>
-                      <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>{tool.desc}</p>
+                    <a key={i} href={tool.path} className="tool-card" style={{ padding: '1.25rem', textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: '0.4rem', border: '1px solid var(--border-color)', borderRadius: '16px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <h4 style={{ fontWeight: 800, fontSize: '1rem', margin: 0, color: 'var(--text-primary)' }}>{tool.title}</h4>
+                        <span style={{ fontSize: '0.68rem', fontWeight: 700, padding: '2px 8px', borderRadius: '6px', background: 'var(--bg-secondary)', color: 'var(--accent-pink)', border: '1px solid var(--border-color)' }}>{tool.badge}</span>
+                      </div>
+                      <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>{tool.desc}</p>
                     </a>
                   ))}
                 </div>
               </div>
 
-              <div style={{ marginTop: '4rem' }}>
-                <h2 style={{ fontSize: '1.75rem', fontWeight: 900, marginBottom: '2rem' }}>Alternatives Comparison</h2>
+              <div style={{ marginTop: '3rem' }}>
+                <h3 style={{ fontSize: '1.35rem', fontWeight: 800, marginBottom: '1.25rem', color: 'var(--text-primary)' }}>Alternatives Comparison</h3>
                 <div style={{ overflowX: 'auto', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
-                  <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '450px' }}>
                     <thead>
                       <tr style={{ background: 'var(--bg-secondary)' }}>
-                        <th style={{ padding: '1.25rem', borderBottom: '1px solid var(--border-color)', fontWeight: 800 }}>Service</th>
-                        <th style={{ padding: '1.25rem', borderBottom: '1px solid var(--border-color)', fontWeight: 800 }}>Registration</th>
-                        <th style={{ padding: '1.25rem', borderBottom: '1px solid var(--border-color)', fontWeight: 800 }}>Ads</th>
-                        <th style={{ padding: '1.25rem', borderBottom: '1px solid var(--border-color)', fontWeight: 800 }}>Auto-Refresh</th>
+                        <th style={{ padding: '1rem', borderBottom: '1px solid var(--border-color)', fontWeight: 800, fontSize: '0.85rem' }}>Service</th>
+                        <th style={{ padding: '1rem', borderBottom: '1px solid var(--border-color)', fontWeight: 800, fontSize: '0.85rem' }}>Registration</th>
+                        <th style={{ padding: '1rem', borderBottom: '1px solid var(--border-color)', fontWeight: 800, fontSize: '0.85rem' }}>Ads</th>
+                        <th style={{ padding: '1rem', borderBottom: '1px solid var(--border-color)', fontWeight: 800, fontSize: '0.85rem' }}>Auto-Refresh</th>
                       </tr>
                     </thead>
                     <tbody>
                       {[
-                        { s: 'PixTool Temp Mail', r: 'No', a: 'Minimal', f: 'Yes (5s)' },
-                        { s: 'TempMail.org alternative', r: 'Varies', a: 'High', f: 'Yes' },
-                        { s: '10MinuteMail alternative', r: 'No', a: 'Medium', f: 'Limited' }
+                        { s: 'PixTool Temp Mail', r: 'No (Instant)', a: 'Minimal', f: 'Yes (5s Auto)' },
+                        { s: 'TempMail.org Alternative', r: 'Varies', a: 'Heavy', f: 'Yes' },
+                        { s: '10MinuteMail Alternative', r: 'No', a: 'Medium', f: 'Limited' }
                       ].map((row, i) => (
-                        <tr key={i}>
-                          <td style={{ padding: '1.25rem', borderBottom: '1px solid var(--border-color)', fontWeight: 600 }}>{row.s}</td>
-                          <td style={{ padding: '1.25rem', borderBottom: '1px solid var(--border-color)' }}>{row.r}</td>
-                          <td style={{ padding: '1.25rem', borderBottom: '1px solid var(--border-color)' }}>{row.a}</td>
-                          <td style={{ padding: '1.25rem', borderBottom: '1px solid var(--border-color)' }}>{row.f}</td>
+                        <tr key={i} style={{ background: i === 0 ? 'rgba(236, 72, 153, 0.03)' : 'transparent' }}>
+                          <td style={{ padding: '0.9rem 1rem', borderBottom: '1px solid var(--border-color)', fontWeight: i === 0 ? 800 : 600, color: i === 0 ? 'var(--accent-pink)' : 'var(--text-primary)', fontSize: '0.88rem' }}>{row.s}</td>
+                          <td style={{ padding: '0.9rem 1rem', borderBottom: '1px solid var(--border-color)', fontSize: '0.85rem' }}>{row.r}</td>
+                          <td style={{ padding: '0.9rem 1rem', borderBottom: '1px solid var(--border-color)', fontSize: '0.85rem' }}>{row.a}</td>
+                          <td style={{ padding: '0.9rem 1rem', borderBottom: '1px solid var(--border-color)', fontSize: '0.85rem' }}>{row.f}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -936,23 +1091,26 @@ export default function TempMail({
           <AdSpace type="side" className="desktop-only" />
         </div>
 
-        <div className="tool-panel" style={{ marginTop: '3rem', marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '1rem', textAlign: 'center' }}>Why Use Temporary Email?</h2>
-          <p style={{ textAlign: 'center', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
-            Disposable email addresses are an essential privacy tool in today's digital landscape. Protect yourself from spam, phishing, and data harvesting.
-          </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+        <div className="tool-panel" style={{ marginTop: '2.5rem', marginBottom: '3rem', textAlign: 'left' }}>
+          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-pink)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Privacy Architecture</span>
+            <h2 style={{ fontSize: '1.75rem', fontWeight: 900, margin: '0.35rem 0 0.75rem', color: 'var(--text-primary)' }}>Why Use Temporary Email?</h2>
+            <p style={{ color: 'var(--text-secondary)', maxWidth: '650px', margin: '0 auto', lineHeight: 1.6, fontSize: '0.95rem' }}>
+              Disposable email addresses are an essential privacy shield in today's digital landscape. Protect yourself from spam, phishing, and continuous data harvesting.
+            </p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '1.25rem' }}>
             {[
-              { title: 'Avoid Spam & Junk Mail', desc: 'Keep your primary inbox clean by using disposable emails for newsletter signups, free trials, and one-time purchases. Never get unwanted marketing emails again.' },
-              { title: 'Protect Your Privacy', desc: 'Don\'t reveal your real email address to websites you don\'t trust. Stay fully anonymous online and prevent companies from building a profile on you.' },
-              { title: 'Prevent Data Breaches', desc: 'If a website gets hacked, your real email won\'t be exposed. Add an extra layer of security to your digital footprint with throwaway addresses.' },
-              { title: 'Quick Verifications & OTPs', desc: 'Get verification codes, OTPs, and confirmation links instantly without creating yet another permanent account on a service you may never use again.' },
-              { title: 'Test Apps & Services', desc: 'Developers and QA testers can create multiple test accounts quickly to verify signup flows, email notifications, and onboarding sequences.' },
-              { title: 'Bypass Email Walls', desc: 'Access gated content, free downloads, whitepapers, and educational resources hidden behind email registration forms without compromising your real inbox.' }
+              { title: 'Avoid Spam & Junk Mail', desc: 'Keep your primary inbox clean by using disposable emails for newsletter signups, free trials, and one-time purchases.' },
+              { title: 'Protect Your Privacy', desc: 'Don\'t reveal your real email address to websites you don\'t trust. Stay anonymous online and prevent tracking.' },
+              { title: 'Prevent Data Breaches', desc: 'If a third-party website gets breached, your real email won\'t be exposed in leaked databases or credential dumps.' },
+              { title: 'Quick Verifications & OTPs', desc: 'Get verification codes, OTPs, and confirmation links instantly without creating permanent accounts.' },
+              { title: 'Test Apps & Services', desc: 'Developers and QA testers can create multiple test accounts quickly to verify signup flows and notifications.' },
+              { title: 'Bypass Email Walls', desc: 'Access gated content, free downloads, whitepapers, and guides without polluting your primary inbox.' }
             ].map((item, i) => (
-              <div key={i} style={{ padding: '2rem', background: 'var(--bg-secondary)', borderRadius: '20px', border: '1px solid var(--border-color)' }}>
-                <h3 style={{ fontWeight: 800, marginBottom: '1rem', color: 'var(--accent-pink)' }}>{item.title}</h3>
-                <p style={{ color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6, fontSize: '0.95rem' }}>{item.desc}</p>
+              <div key={i} style={{ padding: '1.25rem', background: 'var(--bg-secondary)', borderRadius: '16px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+                <h4 style={{ fontWeight: 800, margin: 0, fontSize: '0.98rem', color: 'var(--text-primary)' }}>{item.title}</h4>
+                <p style={{ color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5, fontSize: '0.85rem' }}>{item.desc}</p>
               </div>
             ))}
           </div>
@@ -1075,107 +1233,132 @@ export default function TempMail({
               </div>
 
               {/* Right Pane: Email content */}
-              <div style={{ flex: 1, display: isMobile && mobilePane === 'list' ? 'none' : 'flex', flexDirection: 'column', background: 'var(--bg-primary)', minWidth: 0, overflow: 'hidden' }}>
+              <div style={{ flex: 1, display: isMobile && mobilePane === 'list' ? 'none' : 'flex', flexDirection: 'column', background: 'var(--bg-primary)', minWidth: 0, overflow: 'hidden', textAlign: 'left' }}>
                 <div className="modal-header" style={{
                   borderBottom: '1px solid var(--border-color)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  gap: '1rem',
-                  padding: '1.25rem 1.5rem',
-                  background: 'var(--bg-primary)'
+                  gap: '0.5rem',
+                  padding: isMobile ? '0.75rem 1rem' : '1.25rem 1.5rem',
+                  background: 'var(--bg-primary)',
+                  textAlign: 'left'
                 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', minWidth: 0, flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', minWidth: 0, flex: 1 }}>
                     {isMobile && (
-                      <button className="btn-icon" onClick={() => setMobilePane('list')} aria-label="Back to inbox"><ArrowLeft size={18} /></button>
+                      <button className="btn-icon" onClick={() => setMobilePane('list')} aria-label="Back to inbox" style={{ width: '32px', height: '32px', flexShrink: 0 }}><ArrowLeft size={16} /></button>
                     )}
-                    <h3 style={{ margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', fontSize: '1.1rem', fontWeight: 900 }}>
+                    <h3 style={{ margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', fontSize: isMobile ? '0.95rem' : '1.1rem', fontWeight: 800 }}>
                       {selectedMessage.subject || '(No Subject)'}
                     </h3>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                    <div style={{ display: 'flex', background: 'var(--bg-secondary)', borderRadius: '12px', padding: '2px' }}>
-                      <button className="btn-icon" onClick={navPrev} disabled={currentIndex <= 0} style={{ border: 'none' }} aria-label="Previous message"><ArrowLeft size={18} /></button>
-                      <button className="btn-icon" onClick={navNext} disabled={currentIndex < 0 || currentIndex >= displayed.length - 1} style={{ border: 'none' }} aria-label="Next message"><ArrowRight size={18} /></button>
-                    </div>
-                    <button className="btn-icon" onClick={toggleReadUnread} aria-label={selectedMessage.seen ? "Mark as unread" : "Mark as read"}>{selectedMessage.seen ? <EyeOff size={18} /> : <Eye size={18} />}</button>
-                    <button className="btn-icon" onClick={deleteCurrent} style={{ color: 'var(--accent-red)' }} aria-label="Delete message"><Trash2 size={18} /></button>
-                    <button className="btn-icon" onClick={() => setSelectedMessage(null)} style={{ background: 'var(--bg-secondary)', borderRadius: '50%' }} aria-label="Close message"><X size={18} /></button>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexShrink: 0 }}>
+                    {!isMobile && (
+                      <div style={{ display: 'flex', background: 'var(--bg-secondary)', borderRadius: '10px', padding: '2px' }}>
+                        <button className="btn-icon" onClick={navPrev} disabled={currentIndex <= 0} style={{ border: 'none', width: '30px', height: '30px' }} aria-label="Previous message"><ArrowLeft size={16} /></button>
+                        <button className="btn-icon" onClick={navNext} disabled={currentIndex < 0 || currentIndex >= displayed.length - 1} style={{ border: 'none', width: '30px', height: '30px' }} aria-label="Next message"><ArrowRight size={16} /></button>
+                      </div>
+                    )}
+                    <button className="btn-icon" onClick={toggleReadUnread} style={{ width: '32px', height: '32px' }} aria-label={selectedMessage.seen ? "Mark as unread" : "Mark as read"}>{selectedMessage.seen ? <EyeOff size={16} /> : <Eye size={16} />}</button>
+                    <button className="btn-icon" onClick={deleteCurrent} style={{ color: 'var(--accent-red)', width: '32px', height: '32px' }} aria-label="Delete message"><Trash2 size={16} /></button>
+                    <button className="btn-icon" onClick={() => setSelectedMessage(null)} style={{ background: 'var(--bg-secondary)', borderRadius: '50%', width: '32px', height: '32px' }} aria-label="Close message"><X size={16} /></button>
                   </div>
                 </div>
                 <div
                   className="modal-body"
-                  style={{ padding: isMobile ? '1.5rem' : '3rem', overflow: 'auto', background: 'var(--bg-primary)' }}
+                  style={{ padding: isMobile ? '0.85rem' : '2rem', overflow: 'auto', background: 'var(--bg-primary)', textAlign: 'left' }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '3rem', padding: '1.5rem', background: 'var(--bg-secondary)', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
-                    <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: 'var(--accent-pink)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: '1.5rem', boxShadow: '0 8px 30px rgba(236,72,153,0.2)' }}>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: isMobile ? '0.75rem' : '1.25rem',
+                    marginBottom: isMobile ? '0.85rem' : '1.5rem',
+                    padding: isMobile ? '0.75rem 1rem' : '1.25rem',
+                    background: 'var(--bg-secondary)',
+                    borderRadius: '16px',
+                    border: '1px solid var(--border-color)',
+                    textAlign: 'left'
+                  }}>
+                    <div style={{
+                      width: isMobile ? '38px' : '48px',
+                      height: isMobile ? '38px' : '48px',
+                      borderRadius: '12px',
+                      background: 'var(--accent-pink)',
+                      color: 'white',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontWeight: 900,
+                      fontSize: isMobile ? '1.1rem' : '1.35rem',
+                      flexShrink: 0
+                    }}>
                       {(selectedMessage.from?.address || '?').charAt(0).toUpperCase()}
                     </div>
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
-                        <div>
-                          {selectedMessage.from?.name || selectedMessage.from?.address?.split('@')?.[0] || 'Unknown Sender'}
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 600 }}>
-                            <span style={{ background: 'var(--bg-primary)', padding: '4px 12px', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
-                              From: {selectedMessage.from?.address}
-                            </span>
+                    <div style={{ flex: 1, minWidth: 0, textAlign: 'left' }}>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.25rem' }}>
+                        <div style={{ minWidth: 0, flex: 1, textAlign: 'left' }}>
+                          <div style={{ fontWeight: 800, fontSize: '0.95rem', color: 'var(--text-primary)', wordBreak: 'break-word', textAlign: 'left' }}>
+                            {selectedMessage.from?.name || selectedMessage.from?.address?.split('@')?.[0] || 'Unknown Sender'}
+                          </div>
+                          <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 500, wordBreak: 'break-all', marginTop: '2px', textAlign: 'left' }}>
+                            From: {selectedMessage.from?.address}
                           </div>
                         </div>
-                        <div style={{ textAlign: isMobile ? 'left' : 'right', color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: 700 }}>
-                          {detailsLoading && <Loader size={16} className="spinning" style={{ marginRight: '8px' }} />}
-                          <div>{new Date(selectedMessage.createdAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric' })}</div>
-                          <div>{new Date(selectedMessage.createdAt).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}</div>
+                        <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem', fontWeight: 600, flexShrink: 0, textAlign: isMobile ? 'left' : 'right', marginTop: isMobile ? '4px' : '0' }}>
+                          {detailsLoading && <Loader size={14} className="spinning" style={{ marginRight: '4px', verticalAlign: 'middle' }} />}
+                          <span>{new Date(selectedMessage.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}, {new Date(selectedMessage.createdAt).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
                   <div style={{
-                    padding: isMobile ? '1.5rem' : '2rem',
+                    padding: isMobile ? '1rem' : '1.5rem',
                     background: 'var(--bg-primary)',
-                    borderRadius: '24px',
-                    minHeight: '400px',
+                    borderRadius: '16px',
+                    minHeight: '260px',
                     border: '1px solid var(--border-color)',
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.02)',
+                    boxShadow: 'var(--shadow-sm)',
                     position: 'relative',
                     overflow: 'hidden',
-                    wordBreak: 'break-word',
-                    overflowWrap: 'break-word'
+                    textAlign: 'left'
                   }}>
-                    <button
-                      onClick={() => {
-                        const content = selectedMessage.text || selectedMessage.html?.replace(/<[^>]*>/g, '') || '';
-                        navigator.clipboard.writeText(content);
-                        showToast('Message copied!');
-                      }}
-                      style={{
-                        position: 'absolute',
-                        top: '1rem',
-                        right: '1rem',
-                        padding: '0.5rem 1rem',
-                        fontSize: '0.75rem',
-                        fontWeight: 700,
-                        borderRadius: '10px',
-                        background: 'var(--bg-secondary)',
-                        border: '1px solid var(--border-color)',
-                        color: 'var(--text-secondary)',
-                        cursor: 'pointer',
-                        zIndex: 10
-                      }}
-                    >
-                      <Copy size={12} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
-                      Copy Text
-                    </button>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '0.75rem' }}>
+                      <button
+                        onClick={() => {
+                          const content = selectedMessage.text || selectedMessage.html?.replace(/<[^>]*>/g, '') || '';
+                          navigator.clipboard.writeText(content);
+                          showToast('Message copied!');
+                        }}
+                        style={{
+                          padding: '0.35rem 0.75rem',
+                          fontSize: '0.75rem',
+                          fontWeight: 700,
+                          borderRadius: '8px',
+                          background: 'var(--bg-secondary)',
+                          border: '1px solid var(--border-color)',
+                          color: 'var(--text-secondary)',
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '4px'
+                        }}
+                      >
+                        <Copy size={12} />
+                        Copy Text
+                      </button>
+                    </div>
                     {selectedMessage.html ? (
                       <div
                         style={{
-                          lineHeight: 1.7,
-                          fontSize: '1rem',
+                          lineHeight: 1.65,
+                          fontSize: '0.92rem',
                           color: 'var(--text-primary)',
-                          fontFamily: 'system-ui, -apple-system, sans-serif',
+                          fontFamily: 'var(--font-sans)',
                           wordBreak: 'break-word',
                           overflowWrap: 'break-word',
-                          overflow: 'hidden'
+                          overflowX: 'auto',
+                          textAlign: 'left'
                         }}
                         dangerouslySetInnerHTML={{
                           __html: sanitizeHtml(selectedMessage.html || '')
@@ -1184,11 +1367,13 @@ export default function TempMail({
                     ) : (
                       <div style={{
                         whiteSpace: 'pre-wrap',
-                        lineHeight: 1.7,
-                        fontSize: '1rem',
+                        lineHeight: 1.65,
+                        fontSize: '0.92rem',
                         color: 'var(--text-primary)',
+                        fontFamily: 'var(--font-sans)',
                         wordBreak: 'break-word',
-                        overflowWrap: 'break-word'
+                        overflowWrap: 'break-word',
+                        textAlign: 'left'
                       }}>
                         {selectedMessage.text || 'No content'}
                       </div>

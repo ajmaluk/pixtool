@@ -26,7 +26,7 @@ export default function Refund() {
                     <div className="tool-card" style={{ padding: '3rem', fontSize: '1.05rem', lineHeight: 1.8 }}>
                         <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>1. Free Tools</h2>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-                            The vast majority of tools on the UTHAKKAN platform (PixTool, ToolPix, etc.) are currently <strong>100% free</strong> to use. Since no payment is required for these tools, no refunds are applicable.
+                            The vast majority of tools on the UTHAKKAN platform (PixTool, Byte AI, etc.) are currently <strong>100% free</strong> to use. Since no payment is required for these tools, no refunds are applicable.
                         </p>
 
                         <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>

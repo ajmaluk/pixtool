@@ -1,9 +1,7 @@
-import { Link } from 'react-router-dom'
 import { Mail, QrCode, Smartphone } from 'lucide-react'
 import ToolCard from '../components/ToolCard'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'
-import AdSpace from '../components/AdSpace'
 import { UTILITY_TOOLS, ALL_TOOLS_MAP } from '../data/tools'
 import { SITE_URL } from '../config/app.config'
 

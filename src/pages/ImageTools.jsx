@@ -938,7 +938,7 @@ export default function ImageTools() {
 
       <button
         className="btn btn-primary"
-        style={{ width: '100%', marginTop: 'auto' }}
+        style={{ width: '100%', marginTop: 'auto', background: 'var(--accent-gradient)', borderColor: 'transparent', boxShadow: 'var(--shadow-premium)', padding: '0.85rem', borderRadius: '12px', fontWeight: 800 }}
         onClick={processImage}
         disabled={processing || files.length === 0}
       >
@@ -1156,17 +1156,21 @@ export default function ImageTools() {
                         </div>
                       )}
 
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }} className="mobile-hide-header">
-                          <h1 style={{ fontSize: '1.25rem', fontWeight: 900, margin: 0, color: 'var(--accent-primary)' }}>
-                            {activeToolData?.title}
-                          </h1>
-                          <div style={{ width: '1px', height: '20px', background: 'var(--border-color)' }}></div>
-                          <h2 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text-secondary)' }}>
-                            Files ({files.length})
-                          </h2>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }} className="mobile-hide-header">
+                          <div style={{ padding: '0.5rem', borderRadius: '10px', background: 'var(--accent-glow)', color: 'var(--accent-primary)', display: 'flex' }}>
+                            <Maximize2 size={18} />
+                          </div>
+                          <div>
+                            <h1 style={{ fontSize: '1.15rem', fontWeight: 900, margin: 0, color: 'var(--text-primary)', lineHeight: 1.2 }}>
+                              {activeToolData?.title}
+                            </h1>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)' }}>
+                              {files.length} {files.length === 1 ? 'image loaded' : 'images loaded'}
+                            </span>
+                          </div>
                         </div>
-                        <div style={{ display: 'flex', gap: '0.75rem' }}>
+                        <div style={{ display: 'flex', gap: '0.6rem', alignItems: 'center' }}>
                           <button className="btn btn-secondary" onClick={async () => {
                             const ok = await confirm({
                               title: 'Clear All Files?',
@@ -1175,14 +1179,15 @@ export default function ImageTools() {
                               type: 'danger'
                             });
                             if (ok) { setFiles([]); setSelectedIndex(0); }
-                          }} style={{ padding: '0.6rem 1rem', background: 'var(--accent-red-50)', color: 'var(--accent-red)', borderColor: 'transparent' }}>
-                            <X size={18} /> Clear
+                          }} style={{ padding: '0.55rem 0.9rem', background: 'rgba(239, 68, 68, 0.08)', color: 'var(--accent-red)', borderColor: 'rgba(239, 68, 68, 0.2)', borderRadius: '10px', fontSize: '0.82rem', fontWeight: 700 }}>
+                            <X size={15} /> Clear
                           </button>
-                          <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.6rem 1.25rem' }} aria-label="Upload more images">
-                            <Upload size={18} aria-hidden="true" /> Add More
+                          <button className="btn btn-secondary" onClick={() => fileInputRef.current?.click()} style={{ padding: '0.55rem 1rem', borderRadius: '10px', fontSize: '0.82rem', fontWeight: 700 }} aria-label="Upload more images">
+                            <Upload size={15} aria-hidden="true" /> Add More
                           </button>
-                          <button className="btn btn-primary" onClick={processImage} style={{ padding: '0.6rem 2rem' }}>
-                            <Download size={18} /> Export All
+                          <button className="btn btn-primary" onClick={processImage} disabled={processing} style={{ padding: '0.55rem 1.5rem', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 800, background: 'var(--accent-gradient)', boxShadow: 'var(--shadow-premium)' }}>
+                            {processing ? <Loader size={16} className="spinning" /> : <Download size={16} />}
+                            {processing ? 'Processing...' : `Export All (${files.length})`}
                           </button>
                         </div>
                       </div>
@@ -1274,27 +1279,42 @@ export default function ImageTools() {
                         onTouchStart={onTouchStart}
                         onTouchMove={onTouchMove}
                         onTouchEnd={onTouchEnd}
+                        style={{ display: 'flex', gap: '0.75rem', overflowX: 'auto', padding: '0.75rem 0', marginTop: '1rem' }}
                       >
                         {files.map((file, i) => (
                           <div
                             key={i}
                             className={`gallery-thumb ${selectedIndex === i ? 'active' : ''}`}
                             onClick={() => setSelectedIndex(i)}
+                            style={{
+                              flex: '0 0 100px',
+                              height: '100px',
+                              borderRadius: '14px',
+                              border: selectedIndex === i ? '2px solid var(--accent-primary)' : '1.5px solid var(--border-color)',
+                              background: selectedIndex === i ? 'var(--accent-glow)' : 'var(--bg-card)',
+                              boxShadow: selectedIndex === i ? '0 0 0 3px var(--accent-glow)' : 'var(--shadow-sm)',
+                              cursor: 'pointer',
+                              position: 'relative',
+                              overflow: 'hidden',
+                              transition: 'all 0.2s ease'
+                            }}
                           >
-                            <div className="thumb-container">
-                              <img src={objectUrls[i] || null} alt={file.name} />
-                              <div className="thumb-label">{file.name}</div>
+                            <div className="thumb-container" style={{ width: '100%', height: '100%', position: 'relative' }}>
+                              <img src={objectUrls[i] || null} alt={file.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                              <div className="thumb-label" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(15, 23, 42, 0.85)', backdropFilter: 'blur(6px)', color: '#fff', fontSize: '10px', padding: '3px 4px', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', fontWeight: 600 }}>
+                                {file.name}
+                              </div>
                             </div>
                             <button
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              removeFile(i)
-                            }}
-                            className="gallery-thumb-remove"
-                            aria-label={`Remove ${file.name}`}
-                          >
-                            <X size={12} aria-hidden="true" />
-                          </button>
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                removeFile(i)
+                              }}
+                              className="gallery-thumb-remove"
+                              aria-label={`Remove ${file.name}`}
+                            >
+                              <X size={12} aria-hidden="true" />
+                            </button>
                           </div>
                         ))}
                       </div>

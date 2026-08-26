@@ -8,10 +8,10 @@ export default function ToolCard({ tool, index = 0 }) {
   return (
     <motion.div
       className="tool-card-container"
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.4, delay: index * 0.03, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, margin: '-30px' }}
+      transition={{ duration: 0.35, delay: Math.min(index * 0.02, 0.2), ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -4 }}
     >
       <Link
@@ -21,34 +21,38 @@ export default function ToolCard({ tool, index = 0 }) {
         title={`Use ${tool.title} - ${tool.description}`}
         aria-label={`Open ${tool.title} tool`}
       >
-        <div className="tool-card-glow" style={{ background: tool.color || 'var(--accent-primary)' }} />
+        <div 
+          className="tool-card-glow" 
+          style={{ background: tool.color || 'var(--accent-primary)' }} 
+        />
         
         <div className="tool-card-header">
-          <motion.div
+          <div
             className="tool-card-icon-wrapper"
             style={{
-              background: `${tool.color || 'var(--accent-primary)'}15`,
-              color: tool.color || 'var(--accent-primary)'
+              background: `${tool.color || 'var(--accent-primary)'}18`,
+              color: tool.color || 'var(--accent-primary)',
+              border: `1px solid ${tool.color || 'var(--accent-primary)'}30`
             }}
-            whileHover={{ scale: 1.1, rotate: -5 }}
-            transition={{ duration: 0.2 }}
           >
-            {tool.icon && <tool.icon size={24} strokeWidth={2.5} />}
-          </motion.div>
-          <motion.div
-            className="tool-card-arrow"
-            initial={{ opacity: 0, x: -5 }}
-            whileHover={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <ArrowUpRight size={20} />
-          </motion.div>
+            {tool.icon && <tool.icon size={22} strokeWidth={2.2} />}
+          </div>
+
+          <div className="tool-card-arrow">
+            <ArrowUpRight size={16} />
+          </div>
         </div>
 
         <div className="tool-card-body">
-          <div className="tool-card-category">{category}</div>
-          <h3 className="tool-card-title">{tool.title}</h3>
-          <p className="tool-card-description">{tool.description}</p>
+          <div className="tool-card-category">
+            {category}
+          </div>
+          <h3 className="tool-card-title">
+            {tool.title}
+          </h3>
+          <p className="tool-card-description">
+            {tool.description}
+          </p>
         </div>
       </Link>
     </motion.div>

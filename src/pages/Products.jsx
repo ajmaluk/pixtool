@@ -1,39 +1,95 @@
 import React from 'react';
 import SEO from '../components/SEO';
-import { ExternalLink, Sparkles, Layout, Mail, Gamepad2, Rocket } from 'lucide-react';
+import { ExternalLink, Sparkles, Layout, Mail, Gamepad2, Rocket, Code2, Smartphone, Globe, Shield, Terminal } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const products = [
     {
-        name: "ToolPix",
-        category: "AI Tools",
-        description: "Advanced image processing tool powered by AI. Resize, crop, compress, and enhance images with professional precision.",
-        url: "https://toolpix.pythonanywhere.com",
+        name: "PixTool",
+        category: "AI & Productivity Suite",
+        description: "Advanced browser-native workspace with 120+ tools for AI generation, PDF manipulation, and image editing with 100% local privacy and zero cloud uploads.",
+        url: "https://pixtool.online",
         icon: Sparkles,
-        color: "#a855f7"
+        color: "#818cf8",
+        badge: "Flagship Suite",
+        isInternal: true
     },
     {
-        name: "Byte AI",
-        category: "Developer Tools",
-        description: "Personal AI coding assistant designed to boost developer productivity with intelligent code suggestions and refactoring.",
-        url: "https://byteai.pythonanywhere.com",
+        name: "KallanCop",
+        category: "Mobile Game (Play Store)",
+        description: "Local multiplayer social deduction game published on Google Play Store with thousands of downloads and dynamic party gameplay.",
+        url: "https://play.google.com/store/apps/details?id=com.ajmal.kallancop",
+        icon: Smartphone,
+        color: "#34d399",
+        badge: "Google Play Store"
+    },
+    {
+        name: "CodePix",
+        category: "Developer Education",
+        description: "Interactive coding learning platform concept designed to teach modern computer science concepts with hands-on practice.",
+        url: "https://codepix.uthakkan.in",
+        icon: Code2,
+        color: "#38bdf8",
+        badge: "Developer Hub"
+    },
+    {
+        name: "Pixus",
+        category: "Digital Web Platform",
+        description: "Dynamic digital product platform delivering smart, scalable web solutions with sleek aesthetics.",
+        url: "https://pixus.uthakkan.in",
+        icon: Globe,
+        color: "#a78bfa",
+        badge: "Web Platform"
+    },
+    {
+        name: "Climbo",
+        category: "Productivity App",
+        description: "Interactive web productivity application engineered for modern workflows and digital tasks.",
+        url: "https://climbo.uthakkan.in",
+        icon: Rocket,
+        color: "#f472b6",
+        badge: "Productivity"
+    },
+    {
+        name: "Dalam",
+        category: "Creative Platform",
+        description: "Expressive web platform combining rich visual design with lightning-fast client-side execution.",
+        url: "https://dalam.uthakkan.in",
         icon: Layout,
-        color: "#3b82f6"
+        color: "#fbbf24",
+        badge: "Creative Web"
     },
     {
-        name: "Zymail",
-        category: "Email Services",
-        description: "Fast, secure, and intuitive email service built for modern communication needs.",
-        url: "https://zymail.pythonanywhere.com",
-        icon: Mail,
-        color: "#ec4899"
+        name: "JoyFul / Joyful Builder",
+        category: "AI Website Builder",
+        description: "AI-assisted website and web application generation engine that turns text prompts into structured code.",
+        icon: Terminal,
+        color: "#c084fc",
+        badge: "AI Platform"
     },
     {
-        name: "Zyrace",
-        category: "Gaming Platform",
-        description: "A high-octane racing and gaming platform delivering immersive digital entertainment experiences.",
-        url: "https://zyrace.pythonanywhere.com",
+        name: "Climbo",
+        category: "Browser Gaming",
+        description: "Web-based physics climbing game project with precision gameplay, dynamic obstacle mechanics, and modern UI.",
         icon: Gamepad2,
-        color: "#10b981"
+        color: "#10b981",
+        badge: "Web Game"
+    },
+    {
+        name: "ZyMail",
+        category: "Email Productivity",
+        description: "Disposable and productivity-focused email tool concept under the UTHAKKAN brand ecosystem.",
+        icon: Mail,
+        color: "#f87171",
+        badge: "Productivity"
+    },
+    {
+        name: "ByteAI",
+        category: "AI Developer Assistant",
+        description: "AI-powered coding intelligence and assistant tool designed to accelerate software development.",
+        icon: Shield,
+        color: "#60a5fa",
+        badge: "AI Assistant"
     }
 ];
 
@@ -42,8 +98,8 @@ export default function Products() {
         {
             "@context": "https://schema.org",
             "@type": "ItemList",
-            "name": "Innovation & AI Products by PixTool",
-            "description": "Explore our portfolio of AI-powered tools and digital ecosystems, including ToolPix and Byte AI.",
+            "name": "Products by UTHAKKAN & Ajmal U K",
+            "description": "Explore the official portfolio of AI tools, web apps, mobile games, and developer platforms built by UTHAKKAN.",
             "itemListElement": products.map((p, i) => ({
                 "@type": "ListItem",
                 "position": i + 1,
@@ -51,8 +107,17 @@ export default function Products() {
                     "@type": "SoftwareApplication",
                     "name": p.name,
                     "applicationCategory": p.category,
-                    "url": p.url,
+                    "url": p.url || "https://uthakkan.in",
                     "operatingSystem": "All",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Ajmal U K"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "UTHAKKAN",
+                        "url": "https://uthakkan.in"
+                    },
                     "offers": {
                         "@type": "Offer",
                         "price": "0",
@@ -64,100 +129,88 @@ export default function Products() {
     ];
 
     return (
-        <div className="products-page">
+        <div className="products-page page-container">
             <SEO
-                title="Our Products - Advanced AI Tools & Ecosystem | PixTool"
-                description="Innovative digital products including ToolPix AI and Byte AI assistant. Explore the software ecosystem built by UTHAKKAN for maximum productivity."
+                title="Products Ecosystem — UTHAKKAN & PixTool"
+                description="Explore the portfolio of AI tools, mobile games, web platforms, and developer solutions built by UTHAKKAN and Ajmal U K."
                 path="/products"
                 schema={productsSchema}
             />
 
-            <section className="hero" style={{ padding: 'clamp(5rem, 15vh, 8rem) 1.5rem 5rem', background: 'var(--bg-secondary)', marginBottom: '4rem' }}>
-                <div className="hero-content" style={{ maxWidth: '100%', margin: '0 auto', textAlign: 'center' }}>
-                    <div className="status-badge" style={{ margin: '0 auto 1.5rem', width: 'fit-content', background: 'var(--accent-glow)', color: 'var(--accent-primary)', fontWeight: 700 }}>
-                        BUILT BY US
+            <section className="hero" style={{ padding: 'clamp(5rem, 12vh, 7rem) 1.5rem 4rem', background: 'var(--bg-secondary)', marginBottom: '4rem', textAlign: 'center' }}>
+                <div className="container-pro" style={{ maxWidth: '850px', margin: '0 auto' }}>
+                    <div className="status-badge" style={{ margin: '0 auto 1.5rem', width: 'fit-content' }}>
+                        <Sparkles size={14} style={{ marginRight: '6px' }} />
+                        UTHAKKAN PORTFOLIO
                     </div>
-                    <h1 className="hero-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>Digital Ecosystem</h1>
-                    <p className="hero-subtitle" style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
-                        Smart, scalable solutions designed to simplify the digital world.
+                    <h1 className="hero-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, marginBottom: '1rem', letterSpacing: '-0.03em', color: 'var(--text-primary)' }}>
+                        Digital Ecosystem & Products
+                    </h1>
+                    <p className="hero-subtitle" style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', maxWidth: '680px', margin: '0 auto', lineHeight: 1.6 }}>
+                        A portfolio of practical, modern, and user-friendly software products built by <strong>Ajmal U K</strong> under the <strong>UTHAKKAN</strong> brand.
                     </p>
                 </div>
             </section>
 
-            <section style={{ padding: '0 1.5rem 10rem', width: '100%', overflowX: 'hidden' }}>
-                <div style={{ width: '100%' }}>
-                    <div className="products-grid">
+            <section style={{ padding: '0 1.5rem 8rem', width: '100%' }}>
+                <div className="container-pro">
+                    <div className="products-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
                         {products.map((product, index) => (
-                            <div key={index} className="info-card" style={{ padding: '2rem', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                                <div style={{
-                                    position: 'absolute',
-                                    top: '-15px',
-                                    right: '-15px',
-                                    width: '120px',
-                                    height: '120px',
-                                    background: `${product.color}05`,
-                                    borderRadius: '50%',
-                                    zIndex: 0
-                                }}></div>
-
-                                <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', height: '100%' }}>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
-                                        <div style={{
-                                            width: '52px',
-                                            height: '52px',
-                                            borderRadius: '14px',
-                                            background: `${product.color}15`,
-                                            color: product.color,
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            boxShadow: `0 8px 20px ${product.color}20`
-                                        }}>
-                                            <product.icon size={26} />
+                            <div
+                                key={index}
+                                className="info-card"
+                                style={{
+                                    padding: '2rem',
+                                    background: 'var(--bg-card)',
+                                    borderRadius: '24px',
+                                    border: '1px solid var(--border-color)',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-between',
+                                    position: 'relative',
+                                    overflow: 'hidden'
+                                }}
+                            >
+                                <div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                                        <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: `${product.color}15`, color: product.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                            <product.icon size={24} />
                                         </div>
-                                        <span style={{ padding: '4px 10px', background: 'var(--accent-glow)', border: '1px solid var(--border-color)', borderRadius: '100px', fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--accent-primary)' }}>
-                                            {product.category}
+                                        <span style={{ fontSize: '0.72rem', fontWeight: 700, padding: '0.25rem 0.7rem', borderRadius: '100px', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', color: 'var(--text-muted)' }}>
+                                            {product.badge}
                                         </span>
                                     </div>
 
-                                    <h2 style={{ fontSize: '1.5rem', fontWeight: 950, marginBottom: '0.75rem', color: 'var(--text-primary)', letterSpacing: '-0.03em' }}>{product.name}</h2>
-                                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '2rem', flex: 1 }}>
+                                    <div style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: product.color, marginBottom: '0.35rem' }}>
+                                        {product.category}
+                                    </div>
+
+                                    <h3 style={{ fontSize: '1.4rem', fontWeight: 900, marginBottom: '0.75rem', color: 'var(--text-primary)' }}>
+                                        {product.name}
+                                    </h3>
+
+                                    <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.65, margin: 0 }}>
                                         {product.description}
                                     </p>
+                                </div>
 
-                                    <a href={product.url} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ gap: '10px', width: '100%', padding: '0.85rem', borderRadius: '12px', fontWeight: 800, fontSize: '0.9rem' }}>
-                                        Visit Tool <ExternalLink size={16} />
-                                    </a>
+                                <div style={{ marginTop: '2rem', paddingTop: '1.25rem', borderTop: '1px solid var(--border-color)' }}>
+                                    {product.isInternal ? (
+                                        <Link to="/" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', fontSize: '0.88rem' }}>
+                                            Open PixTool
+                                        </Link>
+                                    ) : product.url ? (
+                                        <a href={product.url} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center', fontSize: '0.88rem' }}>
+                                            Visit {product.name} <ExternalLink size={14} style={{ marginLeft: '6px' }} />
+                                        </a>
+                                    ) : (
+                                        <div style={{ textAlign: 'center', fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                                            Internal Ecosystem Project
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         ))}
-                    </div>
-
-                    <style>{`
-                        .products-grid { 
-                            display: grid; 
-                            grid-template-columns: repeat(4, 1fr); 
-                            gap: 1rem; 
-                        }
-                        @media (max-width: 1200px) {
-                            .products-grid { grid-template-columns: repeat(3, 1fr); }
-                        }
-                        @media (max-width: 992px) {
-                            .products-grid { grid-template-columns: repeat(2, 1fr); }
-                        }
-                        @media (max-width: 640px) {
-                            .products-grid { grid-template-columns: 1fr; }
-                        }
-                    `}</style>
-
-                    <div style={{ marginTop: '10rem', textAlign: 'center', padding: '6rem 2rem', background: 'var(--bg-secondary)', borderRadius: '48px', border: '1px solid var(--border-color)' }}>
-                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem', color: 'var(--accent-primary)', fontWeight: 800, fontSize: '1.1rem' }}>
-                            <Rocket size={28} /> <span>Coming Soon</span>
-                        </div>
-                        <h2 style={{ fontSize: '3rem', fontWeight: 950, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>More innovation in the pipeline</h2>
-                        <p style={{ color: 'var(--text-secondary)', maxWidth: '650px', margin: '0 auto', fontSize: '1.2rem', lineHeight: 1.6 }}>
-                            We're constantly working on new tools and platforms to help you build, create, and grow faster. Stay tuned for our next big release.
-                        </p>
                     </div>
                 </div>
             </section>

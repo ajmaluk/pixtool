@@ -1,44 +1,55 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+
+const HORIZONTAL_AD = {
+    key: '69939246f506d825ab4aa777d70c3682',
+    format: 'iframe',
+    height: 90,
+    width: 728
+};
+
+const SIDE_AD = {
+    key: 'df591a46761792396f28a3f280662634',
+    format: 'iframe',
+    height: 600,
+    width: 160
+};
 
 const AD_UNITS = {
-    top: {
-        key: '69939246f506d825ab4aa777d70c3682',
-        format: 'iframe',
-        height: 90,
-        width: 728
-    },
-    bottom: {
-        key: '69939246f506d825ab4aa777d70c3682',
-        format: 'iframe',
-        height: 90,
-        width: 728
-    },
-    side: {
-        key: 'df591a46761792396f28a3f280662634',
-        format: 'iframe',
-        height: 600,
-        width: 160
-    }
+    top: HORIZONTAL_AD,
+    bottom: HORIZONTAL_AD,
+    horizontal: HORIZONTAL_AD,
+    banner: HORIZONTAL_AD,
+    side: SIDE_AD,
+    sidebar: SIDE_AD
 };
 
 export default function AdSpace({ type, className = '', style = {} }) {
     const showAds = true;
-    
-    if (!showAds || !AD_UNITS[type]) return null;
-
     const config = AD_UNITS[type];
+    const containerRef = useRef(null);
+    const [scale, setScale] = useState(1);
+    
+    const isSide = type === 'side' || type === 'sidebar';
 
-    const heights = {
-        top: '90px',
-        bottom: '90px',
-        side: '600px'
-    };
+    useEffect(() => {
+        if (isSide || !containerRef.current || !config?.width) return;
 
-    const styles = {
-        top: 'ad-region-top',
-        bottom: 'ad-region-bottom',
-        side: 'ad-region-side'
-    };
+        const updateScale = () => {
+            if (!containerRef.current) return;
+            const containerWidth = containerRef.current.clientWidth;
+            if (containerWidth > 0 && containerWidth < config.width) {
+                setScale(containerWidth / config.width);
+            } else {
+                setScale(1);
+            }
+        };
+
+        updateScale();
+        window.addEventListener('resize', updateScale);
+        return () => window.removeEventListener('resize', updateScale);
+    }, [isSide, config?.width]);
+
+    if (!showAds || !config) return null;
 
     // Construct the HTML for the iframe isolation
     // This gives the Adsterra script its own window object to prevent atOptions collisions
@@ -65,15 +76,19 @@ export default function AdSpace({ type, className = '', style = {} }) {
         </html>
     `;
 
+    const renderedHeight = isSide ? config.height : Math.round(config.height * scale);
+
     return (
         <div
+            ref={containerRef}
             key={`${type}-${config.key}`}
-            className={`${styles[type]} ${className}`}
+            className={`ad-region-${type} ${className}`}
             style={{
-                minHeight: heights[type],
-                width: type === 'side' ? '160px' : '100%',
-                maxWidth: type === 'side' ? '160px' : '728px',
-                margin: type === 'side' ? '0 auto' : (type === 'top' ? '0 auto 2rem' : '3rem auto 2rem'),
+                minHeight: `${renderedHeight}px`,
+                height: `${renderedHeight}px`,
+                width: isSide ? '160px' : '100%',
+                maxWidth: isSide ? '160px' : '100%',
+                margin: isSide ? '0 auto' : (type === 'top' ? '0 auto 1.5rem' : '2rem auto'),
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -83,21 +98,35 @@ export default function AdSpace({ type, className = '', style = {} }) {
                 border: '1px solid var(--border-color)',
                 position: 'relative',
                 flexShrink: 0,
+                boxSizing: 'border-box',
                 ...style
             }}
         >
-            <iframe
-                title={`Ad-${type}`}
-                srcDoc={iframeSrcDoc}
-                width={config.width}
-                height={config.height}
+            <div
                 style={{
-                    border: 'none',
-                    overflow: 'hidden',
-                    display: 'block'
+                    width: `${config.width}px`,
+                    height: `${config.height}px`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    transform: scale < 1 ? `scale(${scale})` : 'none',
+                    transformOrigin: 'center center',
+                    flexShrink: 0
                 }}
-                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-            />
+            >
+                <iframe
+                    title={`Ad-${type}`}
+                    srcDoc={iframeSrcDoc}
+                    width={config.width}
+                    height={config.height}
+                    style={{
+                        border: 'none',
+                        overflow: 'hidden',
+                        display: 'block'
+                    }}
+                    sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms"
+                />
+            </div>
             <div className="ad-label" style={{
                 position: 'absolute',
                 top: '4px',

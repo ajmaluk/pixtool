@@ -119,7 +119,7 @@ User: ${input}
   return (
     <>
       {/* Floating Action Button */}
-      <div className="pix-ai-fab-container" style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 9999 }}>
+      <div className="pix-ai-fab-container">
           {isOpen && (
             <div 
               className="pix-ai-window"

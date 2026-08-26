@@ -1,29 +1,45 @@
 import { useState } from 'react'
 import AiToolTemplate from '../components/AiToolTemplate'
-import { Code, RotateCcw } from 'lucide-react'
+import { Code, Bug, Zap, Sparkles, BookOpen } from 'lucide-react'
 
 export default function AiCodingChat() {
-  const [code, setCode] = useState('')
   const [language, setLanguage] = useState('javascript')
+  const [task, setTask] = useState('refactor')
 
   const languages = [
     { id: 'javascript', name: 'JavaScript' },
+    { id: 'typescript', name: 'TypeScript' },
     { id: 'python', name: 'Python' },
     { id: 'cpp', name: 'C++' },
     { id: 'go', name: 'Go' },
     { id: 'rust', name: 'Rust' },
-    { id: 'html', name: 'HTML/CSS' },
+    { id: 'html', name: 'HTML / CSS' },
     { id: 'sql', name: 'SQL' }
   ]
 
-  const customPromptBuilder = (inputCode) => {
-    return `You are a Senior Software Architect and Clean Code Expert. 
-Analyze the following ${language} code for bugs, security vulnerabilities, and performance bottlenecks. 
-Provide a refactored, optimized version. 
-Explain your changes briefly in a professional, technical tone.
-Format all code blocks clearly.
+  const tasks = [
+    { id: 'refactor', label: 'Refactor & Clean', sub: 'Best practices & DRY', icon: Sparkles },
+    { id: 'debug', label: 'Find Bugs & Fix', sub: 'Security & edge cases', icon: Bug },
+    { id: 'optimize', label: 'Boost Performance', sub: 'Time & space complexity', icon: Zap },
+    { id: 'explain', label: 'Explain & Document', sub: 'JSDoc / docstrings & walkthrough', icon: BookOpen }
+  ]
 
-CODE TO ANALYZE:
+  const customPromptBuilder = (inputCode) => {
+    const selectedTask = tasks.find(t => t.id === task)
+
+    return `You are a Principal Software Architect and Senior Code Reviewer.
+Perform a high-level ${selectedTask?.label || task} review on the following ${language} code.
+
+ANALYSIS OBJECTIVE:
+- Language: ${language}
+- Task Mode: ${selectedTask?.label || task} (${selectedTask?.sub || ''})
+
+OUTPUT REQUIREMENTS:
+1. Executive Summary: Quick overview of key issues, patterns, or optimization vectors found.
+2. Refactored Production Code: Complete, clean, well-formatted code block.
+3. Detailed Changes Breakdown: Bulleted explanations of architectural, performance, and security enhancements.
+
+SOURCE CODE:
 \`\`\`${language}
 ${inputCode}
 \`\`\``
@@ -36,60 +52,72 @@ ${inputCode}
       icon={Code}
       path="/ai-tools/coding-chat"
       buttonText="Analyze & Refactor"
+      placeholder="// Paste your code snippet, function, query, or script here for instant review..."
       customPromptBuilder={customPromptBuilder}
       seoKeywords="ai code analysis, refactor code online, debug assistant, software architect ai"
     >
-      <div className="coding-workspace" style={{ marginBottom: '1.5rem' }}>
-        {/* IDE Header */}
-        <div style={{ background: '#09090b', padding: '1rem 1.5rem', borderRadius: '32px 32px 0 0', border: '1px solid #18181b', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ display: 'flex', gap: '0.6rem' }}>
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ff5f56' }}></div>
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ffbd2e' }}></div>
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#27c93f' }}></div>
-          </div>
-          
-          <select 
-            value={language}
-            onChange={(e) => setLanguage(e.target.value)}
-            style={{ background: '#18181b', color: '#a1a1aa', border: '1px solid #27272a', borderRadius: '12px', padding: '0.5rem 1rem', fontSize: '0.8rem', fontWeight: 800, cursor: 'pointer', outline: 'none', textTransform: 'uppercase' }}
-          >
-            {languages.map(lang => (
-              <option key={lang.id} value={lang.id}>{lang.name}</option>
-            ))}
-          </select>
-        </div>
-
-        {/* Editor Area */}
-        <div style={{ position: 'relative', background: '#09090b', borderRadius: '0 0 32px 32px', border: '1px solid #18181b', borderTop: 'none', display: 'flex', overflow: 'hidden' }}>
-          {/* Simulated Line Numbers */}
-          <div style={{ padding: '2rem 1rem', color: '#3f3f46', textAlign: 'right', userSelect: 'none', background: '#020617', borderRight: '1px solid #0f172a', fontSize: '0.9rem', minWidth: '50px' }}>
-            {Array.from({ length: 15 }).map((_, i) => (
-              <div key={i} style={{ height: '1.6rem' }}>{i + 1}</div>
-            ))}
-          </div>
-
-          <textarea 
-            className="code-input"
-            style={{ width: '100%', minHeight: '400px', background: 'transparent', border: 'none', color: '#fafafa', padding: '2rem', fontSize: '1.1rem', fontFamily: '"JetBrains Mono", "Fira Code", monospace', resize: 'vertical', outline: 'none', lineHeight: '1.6rem' }}
-            placeholder="// Paste your code here for analysis..."
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-          />
-
-          <button 
-            onClick={() => setCode('')}
-            style={{ position: 'absolute', bottom: '2rem', right: '2rem', background: 'rgba(255,255,255,0.05)', color: '#52525b', border: 'none', padding: '0.75rem', borderRadius: '14px', cursor: 'pointer', transition: 'all 0.2s' }}
-            title="Clear Editor"
-          >
-            <RotateCcw size={18} />
-          </button>
-        </div>
+      <div className="sidebar-group">
+        <label htmlFor="ai-code-language" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          Programming Language
+        </label>
+        <select 
+          id="ai-code-language"
+          value={language}
+          onChange={(e) => setLanguage(e.target.value)}
+          style={{ 
+            width: '100%', 
+            padding: '0.75rem 1rem', 
+            borderRadius: '12px', 
+            fontSize: '0.9rem', 
+            backgroundColor: 'var(--bg-secondary)', 
+            border: '1px solid var(--border-color)', 
+            outline: 'none', 
+            color: 'var(--text-primary)',
+            boxSizing: 'border-box',
+            cursor: 'pointer',
+            fontWeight: 700
+          }}
+        >
+          {languages.map(lang => (
+            <option key={lang.id} value={lang.id}>{lang.name}</option>
+          ))}
+        </select>
       </div>
 
-      <style>{`
-        .code-input::placeholder { color: #475569; }
-        .code-input:focus { background: rgba(255,255,255,0.02); }
-      `}</style>
+      <div className="sidebar-group">
+        <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          Analysis Objective
+        </label>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+          {tasks.map(t => (
+            <button
+              key={t.id}
+              type="button"
+              onClick={() => setTask(t.id)}
+              style={{ 
+                width: '100%', 
+                padding: '0.6rem 0.75rem', 
+                borderRadius: '10px', 
+                border: '1.5px solid', 
+                borderColor: task === t.id ? 'var(--accent-purple)' : 'var(--border-color)', 
+                background: task === t.id ? 'var(--accent-glow)' : 'var(--bg-secondary)',
+                textAlign: 'left',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.6rem'
+              }}
+            >
+              <t.icon size={16} color={task === t.id ? 'var(--accent-purple)' : 'var(--text-muted)'} strokeWidth={1.5} />
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <span style={{ fontWeight: 800, fontSize: '0.8rem', color: task === t.id ? 'var(--text-primary)' : 'var(--text-secondary)' }}>{t.label}</span>
+                <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>{t.sub}</span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
     </AiToolTemplate>
   )
 }

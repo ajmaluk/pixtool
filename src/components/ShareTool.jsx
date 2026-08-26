@@ -32,26 +32,8 @@ export default function ShareTool({ title, url = window.location.href }) {
                 className="share-fab"
                 onClick={handleToggle}
                 aria-label="Share this tool"
-                style={{
-                    position: 'fixed',
-                    bottom: '2rem',
-                    right: '2rem',
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: '50%',
-                    background: 'var(--accent-primary)',
-                    color: 'white',
-                    border: 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    cursor: 'pointer',
-                    zIndex: 900,
-                    boxShadow: '0 4px 20px rgba(99, 102, 241, 0.4)',
-                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                }}
             >
-                <Share2 size={20} />
+                <Share2 size={18} />
             </button>
 
             {/* Share Menu Popup */}

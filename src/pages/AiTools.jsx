@@ -1,4 +1,4 @@
-import { Zap, ShieldCheck, Globe, Star, Sparkles, TrendingUp } from 'lucide-react'
+import { Star, Sparkles, TrendingUp, Zap, ShieldCheck, Globe } from 'lucide-react'
 import ToolCard from '../components/ToolCard'
 import SEO from '../components/SEO'
 import ToolContent from '../components/ToolContent'

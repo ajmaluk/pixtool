@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
-import { SITE_URL } from '../config/app.config'
-import { Target, Eye, Rocket, Shield, Zap, Heart } from 'lucide-react';
+import { SITE_URL } from '../config/app.config';
+import { Target, Eye, Rocket, Shield, Zap, Globe, Sparkles, ExternalLink, Code2, Smartphone, Gamepad2, Brain, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import uthakkanLogo from '../assets/uthakkan.webp';
 import LazyYouTubeEmbed from '../components/LazyYouTubeEmbed';
@@ -17,7 +17,7 @@ const containerVariants = {
 };
 
 const itemVariants = {
-    hidden: { opacity: 0, y: 8 },
+    hidden: { opacity: 0, y: 12 },
     visible: { opacity: 1, y: 0 }
 };
 
@@ -26,209 +26,367 @@ export default function About() {
         {
             "@context": "https://schema.org",
             "@type": "AboutPage",
-            "name": "About Uthakkan & PixTool",
-            "description": "Uthakkan is a software development company building fast, uncompromising digital products like PixTool, ToolPix, and Byte AI. Based in Kannur, Kerala.",
+            "name": "About UTHAKKAN & PixTool",
+            "description": "UTHAKKAN is a technology product brand founded by Ajmal U K, focused on building AI tools, web platforms, mobile apps, games, and developer solutions.",
+            "url": `${SITE_URL}/about`,
             "mainEntity": {
                 "@type": "Organization",
-                "name": "Uthakkan",
-                "url": "https://www.uthakkan.in",
+                "name": "UTHAKKAN",
+                "alternateName": "UTH AKKAN",
+                "url": "https://uthakkan.in",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": `${SITE_URL}/logo.webp`
+                    "url": `${SITE_URL}/uthakkan.webp`
                 },
-                "email": "contact@uthakkan.com",
-                "foundingDate": "2025",
+                "email": "contact@uthakkan.in",
+                "foundingLocation": {
+                    "@type": "Place",
+                    "name": "Kerala, India"
+                },
+                "sameAs": [
+                    "https://uthakkan.in",
+                    "https://uthakkan.in/about",
+                    "https://linkedin.com/company/uthakkan",
+                    "https://instagram.com/uthakkan_",
+                    "https://github.com/ajmaluk",
+                    "https://in.linkedin.com/in/ajmaluk"
+                ],
                 "founder": {
                     "@type": "Person",
                     "name": "Ajmal U K",
-                    "jobTitle": "Founder & Lead Engineer",
+                    "alternateName": "Muhammed Ajmal U K",
+                    "jobTitle": "Founder & Product Developer",
+                    "url": "https://ajmal.uthakkan.in",
                     "sameAs": [
-                        "https://linkedin.com/in/ajmaluk",
-                        "https://github.com/ajmaluk"
-                    ]
-                },
-                "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": "Kannur",
-                    "addressRegion": "Kerala",
-                    "addressCountry": "India"
+                        "https://in.linkedin.com/in/ajmaluk",
+                        "https://github.com/ajmaluk",
+                        "https://instagram.com/ajmaluk.me",
+                        "https://ajmal.uthakkan.in"
+                    ],
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "Kannur",
+                        "addressRegion": "Kerala",
+                        "addressCountry": "India"
+                    }
                 }
             }
+        }
+    ];
+
+    const coreAreas = [
+        { title: 'AI Tools & Automation', desc: 'Browser-native intelligence and specialized generative models.', icon: Brain, color: '#818cf8' },
+        { title: 'Full-Stack Web Apps', desc: 'Scalable cloud architectures, WebAssembly algorithms, and ultra-fast SPAs.', icon: Code2, color: '#38bdf8' },
+        { title: 'Mobile App Development', desc: 'Cross-platform mobile applications published globally on app stores.', icon: Smartphone, color: '#34d399' },
+        { title: 'Game Development', desc: 'Social deduction party games and browser-based physics game experiences.', icon: Gamepad2, color: '#fbbf24' }
+    ];
+
+    const uthakkanProducts = [
+        {
+            name: 'PixTool',
+            type: 'AI / Productivity Suite',
+            desc: 'A comprehensive web platform with 120+ tools for image editing, PDF manipulation, converters, math, and AI creation with 100% local browser privacy.',
+            url: 'https://pixtool.online',
+            badge: 'Flagship Platform',
+            isInternal: true
+        },
+        {
+            name: 'KallanCop',
+            type: 'Mobile Game (Play Store)',
+            desc: 'A wildly popular local multiplayer social deduction game published on Google Play Store with thousands of active players.',
+            url: 'https://play.google.com/store/apps/details?id=com.ajmal.kallancop',
+            badge: 'Google Play Store'
+        },
+        {
+            name: 'CodePix',
+            type: 'Coding Education Platform',
+            desc: 'An interactive developer learning platform designed to accelerate computer science concepts and coding workflows.',
+            url: 'https://codepix.uthakkan.in',
+            badge: 'Developer Hub'
+        },
+        {
+            name: 'Pixus',
+            type: 'Digital Experience Platform',
+            desc: 'A modern, dynamic digital product platform delivering smart web solutions under the UTHAKKAN ecosystem.',
+            url: 'https://pixus.uthakkan.in',
+            badge: 'Web App'
+        },
+        {
+            name: 'Climbo',
+            type: 'Interactive Platform',
+            desc: 'An engaging web application engineered for modern digital workflows and productivity.',
+            url: 'https://climbo.uthakkan.in',
+            badge: 'Productivity'
+        },
+        {
+            name: 'Dalam',
+            type: 'Creative Web Platform',
+            desc: 'An expressive, responsive web application combining rich design aesthetics with seamless performance.',
+            url: 'https://dalam.uthakkan.in',
+            badge: 'Creative Web'
+        },
+        {
+            name: 'JoyFul / Joyful Builder',
+            type: 'AI Website Builder',
+            desc: 'An AI-assisted website and app generation engine designed to transform prompts into production-ready web pages.',
+            badge: 'AI Innovation'
+        },
+        {
+            name: 'Climbo',
+            type: 'Browser Climbing Game',
+            desc: 'An immersive physics-based web climbing game project featuring realistic momentum mechanics and responsive controls.',
+            badge: 'Web Gaming'
         }
     ];
 
     return (
         <div className="page-container">
             <SEO
-                title="About PixTool — The Mission Behind Your Favorite Private Tools"
-                description="Our mission is to merge creativity with technology. Delivering fast, privacy-first online tools that process your data locally in your browser."
+                title="About UTHAKKAN & PixTool — Technology Brand by Ajmal U K"
+                description="UTHAKKAN is a technology product brand founded by Ajmal U K, focused on building AI tools, web platforms, mobile apps, games, and developer solutions."
                 path="/about"
                 schema={aboutSchema}
             />
 
-            <section className="page-hero">
+            {/* Hero Header */}
+            <section className="page-hero" style={{ background: 'var(--bg-secondary)', padding: 'clamp(5rem, 12vh, 7rem) 1.5rem 4rem' }}>
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
+                    initial={{ opacity: 0, scale: 0.96 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8 }}
+                    transition={{ duration: 0.6 }}
                     className="page-hero-content container-narrow"
+                    style={{ textAlign: 'center' }}
                 >
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="status-badge"
-                    >
-                        THE TEAM BEHIND THE TOOLS
-                    </motion.div>
-                    <motion.div
-                        initial={{ opacity: 0, rotate: -5 }}
-                        animate={{ opacity: 1, rotate: 0 }}
-                        transition={{ delay: 0.3, duration: 0.5 }}
-                        style={{ marginBottom: '2.5rem' }}
-                    >
+                    <div className="status-badge" style={{ margin: '0 auto 1.5rem', width: 'fit-content' }}>
+                        <Sparkles size={14} style={{ marginRight: '6px' }} />
+                        BRAND & INNOVATION ECOSYSTEM
+                    </div>
+
+                    <div style={{ marginBottom: '2rem' }}>
                         <img
                             src={uthakkanLogo}
-                            alt="Uthakkan - Professional Software Development Studio"
+                            alt="UTHAKKAN - Technology Brand by Ajmal U K"
                             width="200"
-                            height="100"
-                            style={{ height: '100px', width: 'auto', objectFit: 'contain' }}
-                            onError={(e) => { e.target.src = 'https://ui-avatars.com/api/?name=Uthakkan&background=3b82f6&color=fff'; }}
+                            height="90"
+                            style={{ height: '90px', width: 'auto', objectFit: 'contain', margin: '0 auto' }}
+                            onError={(e) => { e.target.src = 'https://ui-avatars.com/api/?name=UTHAKKAN&background=6366f1&color=fff'; }}
                         />
-                    </motion.div>
-                    <h1 className="page-title">
-                        Uthakkan
+                    </div>
+
+                    <h1 className="page-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', fontWeight: 900, letterSpacing: '-0.03em', marginBottom: '1rem' }}>
+                        UTHAKKAN
                     </h1>
-                    <p className="page-subtitle">
-                        We build <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}>fast, uncompromising software</span>. Focused on creating digital products that solve complex problems with elegant architecture.
+
+                    <p className="page-subtitle" style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '780px', margin: '0 auto 2.5rem', lineHeight: 1.6 }}>
+                        A technology-driven product brand founded by <strong>Ajmal U K</strong>, focused on creating practical, modern, and user-friendly digital products across AI tools, web platforms, mobile apps, and games.
                     </p>
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.5 }}
-                        style={{ marginTop: '2.5rem' }}
-                    >
-                        <a href="https://www.uthakkan.in" target="_blank" rel="noopener noreferrer"
-                            className="btn btn-secondary">
-                            Visit uthakkan.in
+
+                    <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                        <a href="https://uthakkan.in" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: '0.85rem 2rem', borderRadius: '14px' }}>
+                            Visit uthakkan.in <ExternalLink size={16} style={{ marginLeft: '6px' }} />
                         </a>
-                    </motion.div>
+                        <a href="https://uthakkan.in/about" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ padding: '0.85rem 2rem', borderRadius: '14px' }}>
+                            About UTHAKKAN
+                        </a>
+                    </div>
                 </motion.div>
             </section>
 
             <section className="section-padding">
-                <div className="container-wide">
+                <div className="container-pro">
+                    {/* Mission & Vision Bento */}
                     <motion.div
                         variants={containerVariants}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, margin: "-100px" }}
+                        viewport={{ once: true, margin: "-50px" }}
                         className="page-grid"
+                        style={{ marginBottom: '6rem' }}
                     >
                         <motion.div variants={itemVariants} className="info-card">
-                            <div className="info-card-icon" style={{ background: 'var(--accent-blue-50)', color: 'var(--accent-blue)' }}>
-                                <Target size={32} />
+                            <div className="info-card-icon" style={{ background: 'rgba(99, 102, 241, 0.12)', color: 'var(--accent-primary)' }}>
+                                <Target size={28} />
                             </div>
-                            <h2 style={{ fontSize: '2rem', fontWeight: 850, marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>Our Mission</h2>
-                            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8' }}>
-                                To merge creativity with technology — delivering clean, efficient, and AI-empowered digital products that simplify work, enhance productivity, and inspire innovation.
+                            <h2 style={{ fontSize: '1.6rem', fontWeight: 850, marginBottom: '1rem', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>Our Mission</h2>
+                            <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.7', margin: 0 }}>
+                                To build <strong>smart, useful, and accessible digital products</strong> using modern technologies, AI, and scalable software architecture that solve real-world problems with clean design.
                             </p>
                         </motion.div>
 
                         <motion.div variants={itemVariants} className="info-card">
-                            <div className="info-card-icon" style={{ background: 'var(--accent-purple-50)', color: 'var(--accent-purple)' }}>
-                                <Eye size={32} />
+                            <div className="info-card-icon" style={{ background: 'rgba(16, 185, 129, 0.12)', color: 'var(--accent-emerald)' }}>
+                                <Eye size={28} />
                             </div>
-                            <h2 style={{ fontSize: '2rem', fontWeight: 850, marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>Our Vision</h2>
-                            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8' }}>
-                                To innovate across AI, development, and design — shaping technology that inspires creativity and drives meaningful digital growth.
+                            <h2 style={{ fontSize: '1.6rem', fontWeight: 850, marginBottom: '1rem', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>Our Vision</h2>
+                            <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.7', margin: 0 }}>
+                                To become a strong independent technology brand that creates reliable AI tools, web platforms, mobile apps, and digital experiences for millions of global users.
                             </p>
                         </motion.div>
 
                         <motion.div variants={itemVariants} className="info-card">
-                            <div className="info-card-icon" style={{ background: 'var(--accent-emerald-50)', color: 'var(--accent-emerald)' }}>
-                                <Rocket size={32} />
+                            <div className="info-card-icon" style={{ background: 'rgba(56, 189, 248, 0.12)', color: 'var(--accent-blue)' }}>
+                                <Rocket size={28} />
                             </div>
-                            <h2 style={{ fontSize: '2rem', fontWeight: 850, marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>The Tech</h2>
-                            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8' }}>
-                                Built with <b>React 19, Framer Motion, and WebAssembly</b>. We leverage the full power of your modern browser to deliver sub-second response times for 121+ tools across Productivity, AI, Image, PDF, and Math suites.
+                            <h2 style={{ fontSize: '1.6rem', fontWeight: 850, marginBottom: '1rem', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>Local Privacy</h2>
+                            <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.7', margin: 0 }}>
+                                Leveraging <b>React 19, Framer Motion, and WebAssembly</b>. PixTool operates 100% locally in your browser memory, guaranteeing zero cloud uploads and instant execution.
                             </p>
                         </motion.div>
                     </motion.div>
 
-                    <section style={{ marginTop: '8rem' }}>
-                        <div style={{ marginBottom: '4rem' }}>
-                            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1rem', letterSpacing: '-0.02em' }}>Platform <span style={{ color: 'var(--accent-primary)' }}>Architecture</span></h2>
-                            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '600px' }}>
-                                Watch our technical overview to understand how PixTool leverages WebAssembly and browser-native processing to keep your data 100% private.
+                    {/* Core Areas */}
+                    <div style={{ marginBottom: '6rem' }}>
+                        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+                            <span style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--accent-primary)', display: 'block', marginBottom: '0.5rem' }}>
+                                Areas of Expertise
+                            </span>
+                            <h2 style={{ fontSize: '2.4rem', fontWeight: 900, letterSpacing: '-0.02em', color: 'var(--text-primary)', margin: 0 }}>
+                                What We Build at <span style={{ color: 'var(--accent-primary)' }}>UTHAKKAN</span>
+                            </h2>
+                        </div>
+
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
+                            {coreAreas.map((area, i) => (
+                                <div key={i} className="info-card" style={{ padding: '1.75rem', background: 'var(--bg-card)', borderRadius: '24px', border: '1px solid var(--border-color)' }}>
+                                    <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: `${area.color}15`, color: area.color, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+                                        <area.icon size={24} />
+                                    </div>
+                                    <h3 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>{area.title}</h3>
+                                    <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>{area.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Products / Projects Ecosystem */}
+                    <div style={{ marginBottom: '7rem' }}>
+                        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+                            <span style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--accent-primary)', display: 'block', marginBottom: '0.5rem' }}>
+                                Production Portfolio
+                            </span>
+                            <h2 style={{ fontSize: '2.4rem', fontWeight: 900, letterSpacing: '-0.02em', color: 'var(--text-primary)', margin: '0 0 1rem' }}>
+                                Products in the <span style={{ color: 'var(--accent-primary)' }}>UTHAKKAN Ecosystem</span>
+                            </h2>
+                            <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '650px', margin: '0 auto' }}>
+                                From browser utility suites and AI assistants to published mobile games and learning platforms.
                             </p>
                         </div>
-                        <div style={{ position: 'relative', width: '100%', borderRadius: '40px', overflow: 'hidden', aspectRatio: '16/9', boxShadow: 'var(--shadow-premium)', border: '1px solid var(--border-color)' }}>
-                            <LazyYouTubeEmbed
-                                videoId="fzIhPN-gv_E"
-                                title="PixTool Technical Overview"
-                                rounded="40px"
-                            />
+
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+                            {uthakkanProducts.map((prod, i) => (
+                                <div
+                                    key={i}
+                                    className="info-card"
+                                    style={{
+                                        padding: '2rem',
+                                        background: 'var(--bg-card)',
+                                        borderRadius: '24px',
+                                        border: '1px solid var(--border-color)',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        justifyContent: 'space-between'
+                                    }}
+                                >
+                                    <div>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
+                                            <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--accent-primary)' }}>
+                                                {prod.type}
+                                            </span>
+                                            <span style={{ fontSize: '0.7rem', fontWeight: 700, padding: '0.2rem 0.6rem', borderRadius: '100px', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', color: 'var(--text-muted)' }}>
+                                                {prod.badge}
+                                            </span>
+                                        </div>
+                                        <h3 style={{ fontSize: '1.35rem', fontWeight: 900, marginBottom: '0.75rem', color: 'var(--text-primary)' }}>
+                                            {prod.name}
+                                        </h3>
+                                        <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>
+                                            {prod.desc}
+                                        </p>
+                                    </div>
+
+                                    {prod.url && (
+                                        <div style={{ marginTop: '1.75rem', paddingTop: '1.25rem', borderTop: '1px solid var(--border-color)' }}>
+                                            {prod.isInternal ? (
+                                                <Link to="/" className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center', fontSize: '0.85rem' }}>
+                                                    Open PixTool
+                                                </Link>
+                                            ) : (
+                                                <a href={prod.url} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center', fontSize: '0.85rem' }}>
+                                                    Visit {prod.name} <ExternalLink size={14} style={{ marginLeft: '6px' }} />
+                                                </a>
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
                         </div>
-                    </section>
+                    </div>
 
-                    <section className="info-card" style={{ marginTop: '6rem', padding: '2.5rem' }}>
-                        <h2 style={{ fontSize: '1.9rem', fontWeight: 900, marginBottom: '1rem' }}>Editorial Standards</h2>
-                        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1rem' }}>
-                            PixTool content is written to prioritize practical accuracy, transparency, and user benefit. We avoid thin, auto-generated pages and focus on testable tutorials, clear comparisons, and actionable workflows.
-                        </p>
-                        <ul style={{ color: 'var(--text-secondary)', lineHeight: 1.7, paddingLeft: '1.2rem' }}>
-                            <li>Claims are reviewed against current product behavior and documented updates.</li>
-                            <li>Posts include concrete steps, examples, and links to relevant tools/pages.</li>
-                            <li>Outdated or ambiguous guidance is revised when tools or standards change.</li>
-                            <li>We label promotional context clearly and keep user trust above CTR tactics.</li>
-                        </ul>
-                    </section>
-
+                    {/* Founder Profile Box */}
                     <div
-                        style={{ marginTop: '8rem', padding: '5rem 3rem', background: 'var(--bg-secondary)', borderRadius: '48px', border: '1px solid var(--border-color)' }}
+                        style={{
+                            padding: 'clamp(2.5rem, 5vw, 4rem)',
+                            background: 'var(--bg-card)',
+                            borderRadius: '32px',
+                            border: '1px solid var(--border-color)',
+                            boxShadow: 'var(--shadow-sm)',
+                            marginBottom: '6rem'
+                        }}
                     >
-                        <div className="profile-flex">
+                        <div className="profile-flex" style={{ alignItems: 'center' }}>
                             <div className="profile-image-wrapper">
                                 <img
                                     src="/ajmaluk.png"
-                                    alt="Ajmal U K - Founder of PixTool & Lead Engineer at Uthakkan"
+                                    alt="Ajmal U K - Founder of UTHAKKAN and PixTool"
                                     className="profile-image"
                                     width="200"
                                     height="200"
                                     loading="lazy"
-                                    style={{ transform: 'rotate(2deg)', objectFit: 'cover' }}
-                                    onError={(e) => { e.target.src = 'https://ui-avatars.com/api/?name=Ajmal+UK&background=3b82f6&color=fff'; }}
+                                    style={{ borderRadius: '28px', border: '4px solid var(--bg-secondary)', objectFit: 'cover' }}
+                                    onError={(e) => { e.target.src = 'https://ui-avatars.com/api/?name=Ajmal+UK&background=6366f1&color=fff'; }}
                                 />
                             </div>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                                <div className="status-badge" style={{ width: 'fit-content' }}>THE ARCHITECT</div>
-                                <h2 style={{ fontSize: '3rem', fontWeight: 950, letterSpacing: '-0.03em' }}>Ajmal U K</h2>
-                                <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-                                    Ajmal is a full-stack developer and AI architect who builds products at the intersection of complex engineering and high-end design. Frustrated by bloated software, he founded <b>Uthakkan</b> to architect tools—like PixTool—that are as powerful under the hood as they are elegant on the surface.
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', textAlign: 'left' }}>
+                                <div className="status-badge" style={{ width: 'fit-content' }}>FOUNDER & LEAD DEVELOPER</div>
+                                <h2 style={{ fontSize: 'clamp(2.2rem, 4vw, 3rem)', fontWeight: 950, letterSpacing: '-0.03em', color: 'var(--text-primary)', margin: 0 }}>
+                                    Ajmal U K
+                                </h2>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--text-muted)', fontSize: '0.95rem' }}>
+                                    <Globe size={16} /> <span>Kerala, India • MCA Student, AI/Full-Stack Developer</span>
+                                </div>
+                                <p style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.7, margin: 0 }}>
+                                    Ajmal is the founder of <strong>UTHAKKAN</strong>. He specializes in <strong>Python, Flask, JavaScript, React, Firebase, Supabase, Flutter, and AI integration</strong>. Driven by a vision to turn ideas into production-ready software products, he architects tools that are simple, useful, and built for real-world users.
                                 </p>
-                                <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-                                    <a href="https://linkedin.com/in/ajmaluk" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">LinkedIn</a>
-                                    <a href="https://github.com/ajmaluk" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">GitHub</a>
+                                
+                                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '0.5rem' }}>
+                                    <a href="https://ajmal.uthakkan.in" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ fontSize: '0.85rem', padding: '0.65rem 1.4rem', borderRadius: '12px' }}>
+                                        Portfolio: ajmal.uthakkan.in
+                                    </a>
+                                    <a href="https://in.linkedin.com/in/ajmaluk" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ fontSize: '0.85rem', padding: '0.65rem 1.4rem', borderRadius: '12px' }}>
+                                        LinkedIn
+                                    </a>
+                                    <a href="https://github.com/ajmaluk" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ fontSize: '0.85rem', padding: '0.65rem 1.4rem', borderRadius: '12px' }}>
+                                        GitHub
+                                    </a>
+                                    <a href="https://instagram.com/ajmaluk.me" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ fontSize: '0.85rem', padding: '0.65rem 1.4rem', borderRadius: '12px' }}>
+                                        Instagram
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div
-                        className="page-cta"
-                        style={{ marginTop: '8rem' }}
-                    >
-                        <div style={{ position: 'absolute', top: '-100px', left: '-100px', width: '300px', height: '300px', background: 'var(--accent-primary)', filter: 'blur(150px)', opacity: 0.2 }}></div>
-                        <h2 className="page-cta-title">Ready to optimize your workflow?</h2>
+                    {/* CTA Section */}
+                    <div className="page-cta">
+                        <h2 className="page-cta-title">Explore the PixTool Suite</h2>
                         <p className="page-cta-text">
-                            Join thousands of professionals using our 100% private, browser-based tools every day. No signups, no fees.
+                            Experience 120+ client-side productivity, AI, and developer tools built by UTHAKKAN.
                         </p>
                         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                            <Link to="/productivity-tools" className="btn btn-primary" style={{ background: '#fff', color: '#000', border: 'none' }}>Productivity Suite</Link>
-                            <Link to="/ai-tools" className="btn btn-primary" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>AI Tools</Link>
-                            <Link to="/image-tools" className="btn btn-primary" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>Image Studio</Link>
-                            <Link to="/pdf-tools" className="btn btn-primary" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>PDF Expert</Link>
+                            <Link to="/ai-tools" className="btn btn-primary" style={{ background: '#fff', color: '#000', border: 'none' }}>AI Studio</Link>
+                            <Link to="/pdf-tools" className="btn btn-primary" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>PDF Tools</Link>
+                            <Link to="/image-tools" className="btn btn-primary" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>Image Lab</Link>
+                            <Link to="/utility-tools" className="btn btn-primary" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>Utilities</Link>
                         </div>
                     </div>
                 </div>

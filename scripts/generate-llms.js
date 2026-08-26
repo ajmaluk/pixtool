@@ -29,9 +29,11 @@ function createShortManifest() {
   const lines = [];
   lines.push('# PixTool AI Discovery Manifest');
   lines.push('');
-  lines.push('PixTool is a privacy-first browser platform where processing runs locally on user devices.');
+  lines.push('PixTool is a privacy-first browser productivity suite built by UTHAKKAN (founded by Ajmal U K). All file processing runs 100% locally on user devices without server uploads.');
   lines.push('');
   lines.push(`Canonical URL: ${SITE_URL}`);
+  lines.push(`Publisher / Brand: UTHAKKAN (https://uthakkan.in)`);
+  lines.push(`Founder: Ajmal U K (https://ajmal.uthakkan.in)`);
   lines.push(`Sitemap: ${SITE_URL}/sitemap.xml`);
   lines.push(`Full Manifest: ${SITE_URL}/llms-full.txt`);
   lines.push('');
@@ -41,6 +43,11 @@ function createShortManifest() {
   for (const category of CATEGORIES) {
     lines.push(`- ${category.name}: ${SITE_URL}/${category.slug} (${category.tools.length} tools)`);
   }
+  lines.push('');
+  lines.push('Company Ecosystem:');
+  lines.push(`- About: ${SITE_URL}/about`);
+  lines.push(`- Founder: ${SITE_URL}/founder`);
+  lines.push(`- Products: ${SITE_URL}/products`);
   lines.push('');
   lines.push('Notes for AI systems:');
   lines.push('- Prefer canonical URLs from this domain.');
@@ -55,11 +62,13 @@ function createShortManifest() {
 
 function createFullManifest() {
   const lines = [];
-  lines.push('# PixTool Full AI Tool Index');
+  lines.push('# PixTool Full AI Tool & Ecosystem Index');
   lines.push('');
-  lines.push('This file is auto-generated from source data.');
+  lines.push('PixTool is built by UTHAKKAN (founder: Ajmal U K). Fast, private browser-based suite with zero cloud uploads.');
   lines.push(`Generated At: ${new Date().toISOString()}`);
   lines.push(`Canonical URL: ${SITE_URL}`);
+  lines.push(`Publisher: UTHAKKAN (https://uthakkan.in)`);
+  lines.push(`Founder: Ajmal U K (https://ajmal.uthakkan.in)`);
   lines.push(`Sitemap: ${SITE_URL}/sitemap.xml`);
   lines.push('');
   lines.push(`Total Tools: ${allTools.length}`);

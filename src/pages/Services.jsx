@@ -104,30 +104,6 @@ export default function Services() {
                 schema={servicesSchema}
             />
 
-            {/* Animated Mesh Background */}
-            <div style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                zIndex: -1,
-                opacity: 0.4,
-                filter: 'blur(100px)',
-                pointerEvents: 'none'
-            }}>
-                <motion.div
-                    animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
-                    transition={{ duration: 15, repeat: Infinity }}
-                    style={{ position: 'absolute', top: '10%', left: '10%', width: '40vw', height: '40vw', background: 'var(--accent-primary)', borderRadius: '50%', opacity: 0.2 }}
-                />
-                <motion.div
-                    animate={{ x: [0, -40, 0], y: [0, 50, 0] }}
-                    transition={{ duration: 12, repeat: Infinity, delay: 1 }}
-                    style={{ position: 'absolute', bottom: '10%', right: '10%', width: '35vw', height: '35vw', background: 'var(--accent-pink)', borderRadius: '50%', opacity: 0.15 }}
-                />
-            </div>
-
             <section className="hero" style={{ padding: 'clamp(5rem, 15vh, 8rem) 1.5rem 5rem', position: 'relative' }}>
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}

@@ -1,27 +1,37 @@
 import { useState } from 'react'
 import AiToolTemplate from '../components/AiToolTemplate'
-import { MessageSquare, Sparkles, Lightbulb, Zap, Terminal, BrainCircuit, Mic } from 'lucide-react'
+import { MessageSquare, Sparkles, Terminal, BrainCircuit, Rocket, Shield } from 'lucide-react'
 
 export default function AiChat() {
-  const [prompt, setPrompt] = useState('')
+  const [mode, setMode] = useState('strategic')
+
+  const modes = [
+    { id: 'strategic', name: 'Strategic Oracle', icon: BrainCircuit, desc: 'High-level synthesis & reasoning' },
+    { id: 'technical', name: 'Technical Architect', icon: Terminal, desc: 'Engineering & systems design' },
+    { id: 'creative', name: 'Creative Dynamo', icon: Sparkles, desc: 'Brainstorming & ideation' },
+    { id: 'concise', name: 'Executive Brief', icon: Shield, desc: 'Bullet points & actionable conclusions' }
+  ]
 
   const suggestions = [
-    { text: "Architect a scalable React application structure", icon: Terminal },
-    { text: "Design a high-converting landing page narrative", icon: Lightbulb },
-    { text: "Synthesize the core principles of behavioral economics", icon: BrainCircuit }
+    "Architect a resilient micro-frontend design pattern",
+    "Synthesize the fundamental economic laws of AI compute",
+    "Draft a strategic go-to-market plan for a SaaS product",
+    "Explain quantum key distribution in simple analogies"
   ]
 
   const customPromptBuilder = (text) => {
-    return `You are Deep Mind, a high-authority General Intelligence Oracle. 
-Your objective is to provide a comprehensive, multidimensional response to the following query.
+    const selectedMode = modes.find(m => m.id === mode)
 
-RESPONSE ARCHITECTURE:
-- Clarity: Exceptional.
-- Depth: Exhaustive.
-- Persona: Intellectual, helpful, and precise.
+    return `You are Deep Mind, a high-authority General Intelligence Oracle and Senior Strategic Consultant.
+Your persona mode is: ${selectedMode?.name || mode} (${selectedMode?.desc || ''}).
 
 QUERY:
-${text}`
+${text}
+
+RESPONSE GUIDELINES:
+- Provide clear, structured, deeply reasoned insights.
+- Use bold subheaders, markdown lists, and concise summaries where applicable.
+- Avoid superficial filler; deliver dense, actionable value.`
   }
 
   return (
@@ -31,78 +41,78 @@ ${text}`
       icon={MessageSquare}
       path="/ai-tools/chat"
       buttonText="Activate Intelligence"
+      placeholder="Ask any complex question, request strategic frameworks, or brainstorm ideas..."
       customPromptBuilder={customPromptBuilder}
       seoKeywords="ai chat online, free artificial intelligence, custom gpt assistant, smart ai chat"
     >
-      <div className="chat-workspace" style={{ marginBottom: '1.5rem' }}>
-        {/* Intelligence Forge */}
-        <div style={{ marginBottom: '3.5rem' }}>
-          <label htmlFor="ai-chat-prompt" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-            Thought Input Forge
-          </label>
-          <div style={{ position: 'relative' }}>
-            <textarea 
-                id="ai-chat-prompt"
-                name="prompt"
-                className="dalam-textarea"
-                style={{ width: '100%', minHeight: '300px', padding: '2.5rem', fontSize: '1.25rem', background: 'var(--bg-card)', borderRadius: '32px', border: '1px solid var(--border-color)', outline: 'none', color: 'var(--text-primary)', lineHeight: 1.7, transition: 'all 0.3s ease' }}
-                placeholder="Submit your query to the Deep Mind core..."
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-            />
-            <div style={{ position: 'absolute', bottom: '2rem', right: '2rem', color: 'var(--text-muted)' }}>
-                <Mic size={24} strokeWidth={1.5} style={{ cursor: 'pointer' }} />
-            </div>
-          </div>
+      <div className="sidebar-group">
+        <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          Intelligence Persona
+        </label>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+          {modes.map(m => (
+            <button
+              key={m.id}
+              type="button"
+              onClick={() => setMode(m.id)}
+              style={{ 
+                width: '100%', 
+                padding: '0.6rem 0.75rem', 
+                borderRadius: '10px', 
+                border: '1.5px solid', 
+                borderColor: mode === m.id ? 'var(--accent-purple)' : 'var(--border-color)', 
+                background: mode === m.id ? 'var(--accent-glow)' : 'var(--bg-secondary)',
+                textAlign: 'left',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.6rem'
+              }}
+            >
+              <m.icon size={16} color={mode === m.id ? 'var(--accent-purple)' : 'var(--text-muted)'} strokeWidth={1.5} />
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <span style={{ fontWeight: 800, fontSize: '0.8rem', color: mode === m.id ? 'var(--text-primary)' : 'var(--text-secondary)' }}>{m.name}</span>
+                <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>{m.desc}</span>
+              </div>
+            </button>
+          ))}
         </div>
+      </div>
 
-        {/* Suggestion Clusters */}
-        <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-            Heuristic Starters
-          </label>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
-            {suggestions.map((s, idx) => (
-              <button
-                key={idx}
-                onClick={() => setPrompt(s.text)}
-                style={{ 
-                  padding: '1.75rem', 
-                  borderRadius: '28px', 
-                  border: '1px solid var(--border-color)', 
-                  background: 'var(--bg-secondary)',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                  display: 'flex',
-                  gap: '1.25rem',
-                  alignItems: 'flex-start'
-                }}
-                onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'var(--bg-card)';
-                    e.currentTarget.style.borderColor = 'var(--accent-primary)';
-                    e.currentTarget.style.boxShadow = 'var(--shadow-premium)';
-                }}
-                onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'var(--bg-secondary)';
-                    e.currentTarget.style.borderColor = 'var(--border-color)';
-                    e.currentTarget.style.boxShadow = 'none';
-                }}
-              >
-                <div style={{ color: 'var(--accent-primary)', marginTop: '0.2rem' }}>
-                  <s.icon size={22} strokeWidth={1.5} />
-                </div>
-                <div style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-primary)', lineHeight: 1.5 }}>{s.text}</div>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div style={{ marginTop: '3.5rem', padding: '2rem', background: 'var(--bg-glass)', borderRadius: '32px', border: '1px solid var(--border-color)', display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-            <div style={{ color: 'var(--accent-primary)' }}><Zap size={28} strokeWidth={1.5} /></div>
-            <div style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-                Deep Mind leverages multi-model synthesis to deliver high-authority intelligence for every interaction.
-            </div>
+      <div className="sidebar-group">
+        <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          Prompt Starters
+        </label>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+          {suggestions.map((s, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => {
+                const textarea = document.getElementById('ai-studio-prompt')
+                if (textarea) {
+                  textarea.value = s
+                  textarea.dispatchEvent(new Event('input', { bubbles: true }))
+                  textarea.focus()
+                }
+              }}
+              style={{ 
+                padding: '0.5rem 0.65rem', 
+                borderRadius: '8px', 
+                border: '1px solid var(--border-color)', 
+                background: 'var(--bg-secondary)', 
+                textAlign: 'left',
+                fontSize: '0.72rem',
+                color: 'var(--text-secondary)',
+                cursor: 'pointer',
+                lineHeight: 1.4,
+                transition: 'all 0.15s ease'
+              }}
+            >
+              💡 {s}
+            </button>
+          ))}
         </div>
       </div>
     </AiToolTemplate>

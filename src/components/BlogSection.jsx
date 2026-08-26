@@ -1,15 +1,19 @@
- 
 import { Link } from 'react-router-dom'
-import { Navigation } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { posts } from '../data/posts'
 
 export default function BlogSection() {
   return (
-    <div className="container-pro" style={{ marginTop: '8rem', textAlign: 'center' }}>
-      <div style={{ marginBottom: '4rem' }}>
-        <h2 style={{ fontSize: '2.8rem', fontWeight: 900, marginBottom: '1rem', letterSpacing: '-0.02em' }}>Professional <span style={{ color: 'var(--accent-primary)' }}>Insights</span></h2>
-        <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto' }}>
-          Educational guides, technical deep-dives, and productivity hacks from our expert team.
+    <div className="container-pro mt-32 text-center">
+      <div className="mb-12">
+        <span className="text-xs font-extrabold text-indigo-400 uppercase tracking-widest block mb-2">
+          Knowledge & Guides
+        </span>
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Professional <span className="text-[var(--accent-primary)]">Insights</span>
+        </h2>
+        <p className="text-slate-400 text-base max-w-xl mx-auto mt-2">
+          Technical deep-dives, privacy tutorials, and workflow optimization from our engineering team.
         </p>
       </div>
 
@@ -42,17 +46,19 @@ export default function BlogSection() {
               <p className="blog-card-excerpt">
                 {post.excerpt}
               </p>
-              <Link to={`/blog/${post.slug}`} className="blog-card-link" aria-label={`Read Article: ${post.title}`}>
-                Read Article <Navigation size={16} style={{ transform: 'rotate(90deg)' }} aria-hidden="true" />
+              <Link to={`/blog/${post.slug}`} className="blog-card-link inline-flex items-center gap-1.5 font-bold" aria-label={`Read Article: ${post.title}`}>
+                <span>Read Article</span>
+                <ArrowRight size={14} aria-hidden="true" />
               </Link>
             </div>
           </div>
         ))}
       </div>
 
-      <div style={{ marginTop: '4rem' }}>
-        <Link to="/blog" className="btn btn-secondary" style={{ padding: '1rem 3rem', borderRadius: '100px' }}>
-          View All Insights
+      <div className="mt-12">
+        <Link to="/blog" className="btn btn-secondary inline-flex items-center gap-2 py-3 px-8 rounded-full text-sm font-bold">
+          <span>Explore All Articles</span>
+          <ArrowRight size={16} />
         </Link>
       </div>
     </div>

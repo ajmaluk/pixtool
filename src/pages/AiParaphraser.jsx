@@ -1,27 +1,37 @@
 import { useState } from 'react'
 import AiToolTemplate from '../components/AiToolTemplate'
-import { AlignLeft, Zap, ShieldCheck, Sparkles } from 'lucide-react'
+import { AlignLeft, Sparkles, Feather, GraduationCap, ShieldCheck } from 'lucide-react'
 
 export default function AiParaphraser() {
-  const [inputText, setInputText] = useState('')
-  const [tone, setTone] = useState('polished') // polished, casual, academic
+  const [tone, setTone] = useState('polished')
+  const [goal, setGoal] = useState('clarity')
 
   const tones = [
-    { id: 'polished', label: 'Polished', sub: 'Executive flow' },
-    { id: 'creative', label: 'Creative', sub: 'Artistic flair' },
-    { id: 'academic', label: 'Academic', sub: 'Rigorous detail' }
+    { id: 'polished', label: 'Executive Flow', sub: 'Clean, crisp & professional', icon: ShieldCheck },
+    { id: 'creative', label: 'Creative Flare', sub: 'Engaging & vivid vocabulary', icon: Feather },
+    { id: 'academic', label: 'Academic Rigor', sub: 'Formal, precise & objective', icon: GraduationCap }
+  ]
+
+  const goals = [
+    { id: 'clarity', label: 'Maximum Clarity', sub: 'Streamline syntax & flow' },
+    { id: 'brevity', label: 'Concise & Short', sub: 'Eliminate filler & fluff' },
+    { id: 'persuasive', label: 'High Impact', sub: 'Strengthen verbs & rhetoric' }
   ]
 
   const customPromptBuilder = (text) => {
-    return `You are a Master Linguist and Stylistic Architect. 
-Your objective is to paraphrase the following text into a ${tone} masterpiece while preserving 100% of the original semantics.
+    const selectedTone = tones.find(t => t.id === tone)
+    const selectedGoal = goals.find(g => g.id === goal)
 
-STYLISTIC CONSTRAINTS:
-- Tone: ${tone}
-- Flow: Optimized for readability and impact.
-- Vocabulary: Sophisticated yet accessible.
+    return `You are a Master Linguist, Stylistic Editor, and Rhetoric Specialist. 
+Paraphrase and elevate the following manuscript based on these constraints:
 
-SOURCE TEXT:
+REWRITING CONSTRAINTS:
+- Target Tone: ${selectedTone?.label || tone} (${selectedTone?.sub || ''})
+- Optimization Goal: ${selectedGoal?.label || goal} (${selectedGoal?.sub || ''})
+- Retain 100% of the core factual meaning and technical nuance.
+- Output ONLY the polished paraphrased text, followed by a brief bullet list of key stylistic improvements.
+
+SOURCE MANUSCRIPT:
 ${text}`
   }
 
@@ -32,60 +42,76 @@ ${text}`
       icon={AlignLeft}
       path="/ai-tools/paraphraser"
       buttonText="Execute Stylistic Shift"
+      placeholder="Paste your paragraph, article draft, essay, or email here for stylistic re-architecture..."
       customPromptBuilder={customPromptBuilder}
       seoKeywords="ai paraphraser, rewrite text online, professional paraphrasing tool, article rewriter"
     >
-      <div className="paraphrase-workspace" style={{ marginBottom: '1.5rem' }}>
-        {/* Source Manuscript */}
-        <div style={{ marginBottom: '3rem' }}>
-          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-            Source Manuscript
-          </label>
-          <textarea 
-            className="dalam-textarea"
-            style={{ width: '100%', minHeight: '280px', padding: '2rem', fontSize: '1.2rem', background: 'var(--bg-primary)', borderRadius: '32px', border: '1px solid var(--border-color)', outline: 'none', color: 'var(--text-primary)', lineHeight: 1.6 }}
-            placeholder="Paste your text here for stylistic re-architecture..."
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-          />
+      <div className="sidebar-group">
+        <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          Target Tone
+        </label>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+          {tones.map(t => (
+            <button
+              key={t.id}
+              type="button"
+              onClick={() => setTone(t.id)}
+              style={{ 
+                width: '100%', 
+                padding: '0.6rem 0.75rem', 
+                borderRadius: '10px', 
+                border: '1.5px solid', 
+                borderColor: tone === t.id ? 'var(--accent-purple)' : 'var(--border-color)', 
+                background: tone === t.id ? 'var(--accent-glow)' : 'var(--bg-secondary)',
+                textAlign: 'left',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.6rem'
+              }}
+            >
+              <t.icon size={16} color={tone === t.id ? 'var(--accent-purple)' : 'var(--text-muted)'} strokeWidth={1.5} />
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <span style={{ fontWeight: 800, fontSize: '0.8rem', color: tone === t.id ? 'var(--text-primary)' : 'var(--text-secondary)' }}>{t.label}</span>
+                <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>{t.sub}</span>
+              </div>
+            </button>
+          ))}
         </div>
+      </div>
 
-        {/* Tone Architecture */}
-        <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 900, color: 'var(--text-muted)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-            Target Tone Architecture
-          </label>
-          <div style={{ display: 'flex', background: 'var(--bg-secondary)', padding: '0.5rem', borderRadius: '24px', maxWidth: '600px' }}>
-              {tones.map(t => (
-                  <button
-                      key={t.id}
-                      onClick={() => setTone(t.id)}
-                      style={{ 
-                          flex: 1, 
-                          padding: '1.25rem 1rem', 
-                          borderRadius: '20px', 
-                          border: 'none', 
-                          background: tone === t.id ? 'var(--bg-primary)' : 'transparent',
-                          color: tone === t.id ? 'var(--text-primary)' : 'var(--text-muted)',
-                          fontWeight: 800,
-                          fontSize: '0.95rem',
-                          cursor: 'pointer',
-                          transition: 'all 0.2s',
-                          boxShadow: tone === t.id ? 'var(--shadow-sm)' : 'none'
-                      }}
-                  >
-                      {t.label}
-                      <span style={{ display: 'block', fontSize: '0.7rem', opacity: 0.6, fontWeight: 500 }}>{t.sub}</span>
-                  </button>
-              ))}
-          </div>
-        </div>
-
-        <div style={{ marginTop: '3rem', padding: '2rem', background: 'var(--bg-secondary)', borderRadius: '28px', border: '1px solid var(--border-color)', display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
-            <div style={{ color: 'var(--accent-purple)' }}><Sparkles size={28} strokeWidth={1.5} /></div>
-            <div style={{ fontSize: '1rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-                Prose refinement in progress. The AI will optimize sentence structure and semantic flow for maximum resonance.
-            </div>
+      <div className="sidebar-group">
+        <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          Refinement Goal
+        </label>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', background: 'var(--bg-secondary)', padding: '0.35rem', borderRadius: '10px' }}>
+          {goals.map(g => (
+            <button
+              key={g.id}
+              type="button"
+              onClick={() => setGoal(g.id)}
+              style={{ 
+                width: '100%', 
+                padding: '0.5rem 0.75rem', 
+                borderRadius: '8px', 
+                border: 'none', 
+                background: goal === g.id ? 'var(--bg-card)' : 'transparent',
+                color: goal === g.id ? 'var(--text-primary)' : 'var(--text-muted)',
+                fontWeight: 700,
+                fontSize: '0.78rem',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                boxShadow: goal === g.id ? 'var(--shadow-sm)' : 'none',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}
+            >
+              <span>{g.label}</span>
+              <span style={{ fontSize: '0.65rem', opacity: 0.6 }}>{g.sub}</span>
+            </button>
+          ))}
         </div>
       </div>
     </AiToolTemplate>
