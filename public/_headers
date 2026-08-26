@@ -3,14 +3,11 @@
   Referrer-Policy: strict-origin-when-cross-origin
   X-Robots-Tag: index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1
   Access-Control-Allow-Origin: *
+  Cache-Control: no-cache, no-store, must-revalidate
 
-/pix-admin
-  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
-  Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
-
-/pix-admin/*
-  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
-  Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
 
 /healthz
   X-Robots-Tag: noindex, nofollow
@@ -22,110 +19,40 @@
   Cache-Control: no-store, no-cache, must-revalidate
   Access-Control-Allow-Origin: *
 
-/assets/*
-  Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
+/pix-admin
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
+  Cache-Control: no-store, no-cache, must-revalidate
 
-/*.jpg
-  Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
-  X-Robots-Tag: all, max-image-preview:large
-
-/*.jpeg
-  Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
-  X-Robots-Tag: all, max-image-preview:large
-
-/*.png
-  Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
-  X-Robots-Tag: all, max-image-preview:large
-
-/*.webp
-  Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
-  X-Robots-Tag: all, max-image-preview:large
-
-/*.svg
-  Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
-  X-Robots-Tag: all, max-image-preview:large
-
-/*.ico
-  Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
-
-/*.woff
-  Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
-
-/*.woff2
-  Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
-
-/*.js
-  Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
-
-/*.css
-  Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
-
-/*.html
-  Cache-Control: public, max-age=0, must-revalidate
-  X-Robots-Tag: index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1
-
-/
-  Cache-Control: public, max-age=0, must-revalidate
-  X-Robots-Tag: index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1
-
-/yandex_9add59f17faf30bc.html
-  Content-Type: text/html; charset=UTF-8
-  Cache-Control: public, max-age=0, must-revalidate
-  X-Robots-Tag: all
-
-/google83f8616f6a5b1974.html
-  Content-Type: text/html; charset=UTF-8
-  Cache-Control: public, max-age=0, must-revalidate
-  X-Robots-Tag: all
-
-/.well-known/security.txt
-  Cache-Control: public, max-age=86400
-  Content-Type: text/plain
-  Access-Control-Allow-Origin: *
+/pix-admin/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
+  Cache-Control: no-store, no-cache, must-revalidate
 
 /sitemap.xml
+  Content-Type: application/xml; charset=utf-8
   Cache-Control: public, max-age=3600
-  Content-Type: application/xml
   Access-Control-Allow-Origin: *
-  X-Robots-Tag: all
 
 /robots.txt
+  Content-Type: text/plain; charset=utf-8
   Cache-Control: public, max-age=3600
-  Content-Type: text/plain
   Access-Control-Allow-Origin: *
-  X-Robots-Tag: all
 
 /llms.txt
+  Content-Type: text/plain; charset=utf-8
   Cache-Control: public, max-age=3600
-  Content-Type: text/plain; charset=UTF-8
   Access-Control-Allow-Origin: *
-  X-Robots-Tag: all
 
 /llms-full.txt
+  Content-Type: text/plain; charset=utf-8
   Cache-Control: public, max-age=3600
-  Content-Type: text/plain; charset=UTF-8
   Access-Control-Allow-Origin: *
-  X-Robots-Tag: all
 
 /rss.xml
+  Content-Type: application/xml; charset=utf-8
   Cache-Control: public, max-age=3600
-  Content-Type: application/xml
   Access-Control-Allow-Origin: *
-  X-Robots-Tag: all
 
 /atom.xml
+  Content-Type: application/xml; charset=utf-8
   Cache-Control: public, max-age=3600
-  Content-Type: application/xml
   Access-Control-Allow-Origin: *
-  X-Robots-Tag: all

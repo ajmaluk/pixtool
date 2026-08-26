@@ -1,3 +1,13 @@
+<IfModule mod_mime.c>
+  AddType application/javascript .js .mjs .jsx
+  AddType text/css .css
+  AddType application/wasm .wasm
+  AddType font/woff2 .woff2
+  AddType font/woff .woff
+  AddType application/json .json .webmanifest
+  AddType image/svg+xml .svg
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
