@@ -1,0 +1,30 @@
+name: Supabase Inactivity Keep-Alive Cron
+
+on:
+  schedule:
+    # Runs every 3 days at 00:00 UTC (well within the 7-day inactivity pause window)
+    - cron: '0 0 */3 * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  keepalive:
+    name: Ping Supabase Database
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Execute Supabase Keepalive Ping
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL || 'https://sjhqxwrreasscvmzuyby.supabase.co' }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNqaHF4d3JyZWFzc2N2bXp1eWJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3MzYyMTYsImV4cCI6MjEwMzMxMjIxNn0.ccHkb-mFifAR41qsfP9m6xbO4ElDmPyZJmQfEdolkYY' }}
+        run: node scripts/supabase-keepalive.js

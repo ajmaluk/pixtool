@@ -1,20 +1,26 @@
 /*
-  X-Frame-Options: SAMEORIGIN
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Robots-Tag: index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1
-  Permissions-Policy: camera=(self), microphone=(), geolocation=(), accelerometer=(), gyroscope=(), magnetometer=(), clipboard-write=(self)
+  Access-Control-Allow-Origin: *
 
 /pix-admin
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
   Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
-  X-Frame-Options: DENY
 
 /pix-admin/*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
   Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate
-  X-Frame-Options: DENY
+
+/healthz
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store, no-cache, must-revalidate
+  Access-Control-Allow-Origin: *
+
+/api/healthz
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store, no-cache, must-revalidate
+  Access-Control-Allow-Origin: *
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
@@ -24,22 +30,27 @@
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
   X-Robots-Tag: all, max-image-preview:large
+
 /*.jpeg
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
   X-Robots-Tag: all, max-image-preview:large
+
 /*.png
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
   X-Robots-Tag: all, max-image-preview:large
+
 /*.webp
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
   X-Robots-Tag: all, max-image-preview:large
+
 /*.svg
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
   X-Robots-Tag: all, max-image-preview:large
+
 /*.ico
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
@@ -47,18 +58,18 @@
 /*.woff
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
+
 /*.woff2
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
 
 /*.js
   Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
 /*.css
   Cache-Control: public, max-age=31536000, immutable
-
-/assets/*.jsx
-  Content-Type: application/javascript
-  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
 
 /*.html
   Cache-Control: public, max-age=0, must-revalidate

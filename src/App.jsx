@@ -57,6 +57,7 @@ const JsonFormatter = lazy(() => import('./pages/JsonFormatter'))
 const UnitConverter = lazy(() => import('./pages/UnitConverter'))
 const PasswordGenerator = lazy(() => import('./pages/PasswordGenerator'))
 const PixAdmin = lazy(() => import('./pages/PixAdmin'))
+const Healthz = lazy(() => import('./pages/Healthz'))
 const AiTools = lazy(() => import('./pages/AiTools'))
 const AiChat = lazy(() => import('./pages/AiChat'))
 const AiContentGenerator = lazy(() => import('./pages/AiContentGenerator'))
@@ -451,6 +452,8 @@ function App() {
           <Route path="/hire-me" element={<HireMe />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/status" element={<Status />} />
+          <Route path="/healthz" element={<Healthz />} />
+          <Route path="/api/healthz" element={<Healthz />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/showcase" element={<Showcase />} />
           <Route path="/pix-admin" element={<PixAdmin />} />

@@ -1,19 +1,21 @@
- 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { submitToolRating } from '../services/supabaseService';
 import { hasSupabaseConfig } from '../lib/supabaseClient';
 
-const StarIcon = ({ size = 24, filled = false, active = false }) => (
+const StarIcon = ({ size = 32, filled = false, active = false }) => (
   <svg 
     width={size} 
     height={size} 
     viewBox="0 0 24 24" 
-    fill={filled ? "var(--accent-primary)" : "none"} 
-    stroke={active ? "var(--accent-primary)" : "var(--text-muted)"} 
+    fill={filled ? "#f59e0b" : "none"} 
+    stroke={active ? "#f59e0b" : "var(--text-muted)"} 
     strokeWidth="2" 
     strokeLinecap="round" 
     strokeLinejoin="round"
-    style={{ transition: 'all 0.2s ease' }}
+    style={{ 
+      transition: 'all 0.2s ease',
+      filter: filled ? 'drop-shadow(0 2px 6px rgba(245, 158, 11, 0.4))' : 'none'
+    }}
   >
     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
   </svg>
@@ -29,6 +31,10 @@ export default function RatingOverlay() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
 
+  const closeOverlay = useCallback(() => {
+    setIsVisible(false);
+  }, []);
+
   useEffect(() => {
     const handleTrigger = (event) => {
       const { toolSlug: slug } = event.detail;
@@ -41,14 +47,23 @@ export default function RatingOverlay() {
         setIsSuccess(false);
         setError('');
         // Mark as seen so it doesn't pop again this session
-        // Must be inside the overlay so it only fires when the overlay actually renders
         sessionStorage.setItem('pix_global_rating_shown', 'true');
       }
     };
 
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        closeOverlay();
+      }
+    };
+
     window.addEventListener('trigger-pix-rating', handleTrigger);
-    return () => window.removeEventListener('trigger-pix-rating', handleTrigger);
-  }, []);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('trigger-pix-rating', handleTrigger);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [closeOverlay]);
 
   const handleRate = async (value) => {
     if (isSubmitting || isSuccess) return;
@@ -73,10 +88,6 @@ export default function RatingOverlay() {
       setRating(0);
       setIsSubmitting(false);
     }
-  };
-
-  const closeOverlay = () => {
-    setIsVisible(false);
   };
 
   if (!hasSupabaseConfig) return null;
@@ -169,6 +180,7 @@ export default function RatingOverlay() {
                   {[1, 2, 3, 4, 5].map((value) => (
                     <button
                       key={value}
+                      aria-label={`Rate ${value} out of 5 stars`}
                       onMouseEnter={() => setHoveredRating(value)}
                       onMouseLeave={() => setHoveredRating(0)}
                       onClick={() => handleRate(value)}

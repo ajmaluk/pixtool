@@ -11,9 +11,14 @@ const PUBLIC_METRICS_CACHE_TTL_MS = 5 * 60 * 1000;
 const toolSlugCache = new Map();
 let sessionIpHash = null;
 
-let supabaseUnreachable = false;
-const markSupabaseUnreachable = () => { supabaseUnreachable = true; };
-const isSupabaseAvailable = () => hasSupabaseConfig && !!supabase && !supabaseUnreachable;
+let unreachableUntil = 0;
+const markSupabaseUnreachable = (durationMs = 15000) => {
+  unreachableUntil = Date.now() + durationMs;
+};
+const isSupabaseAvailable = () => {
+  if (!hasSupabaseConfig || !supabase) return false;
+  return Date.now() >= unreachableUntil;
+};
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_FETCH_TIMEOUT_MS = 12000;
@@ -218,10 +223,14 @@ const getToolBySlug = async (toolSlug) => {
     return cached.value;
   }
 
+  const dashed = normalized.replace(/\//g, '-');
+  const tail = normalized.split('/').pop();
+
   const { data, error } = await supabase
     .from('tools')
     .select('id, name, slug')
-    .eq('slug', normalized)
+    .or(`slug.eq.${normalized},slug.eq.${dashed},slug.eq.${tail}`)
+    .limit(1)
     .maybeSingle();
 
   if (error) throw new Error(formatSupabaseError(error, 'Unable to resolve tool.'));

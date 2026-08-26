@@ -23,6 +23,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "screenshots": "node scripts/generate-screenshots.js",
+    "keepalive": "node scripts/supabase-keepalive.js",
     "postbuild": "if [ -n \"$SKIP_PRERENDER\" ]; then echo \"Skipping prerender (SKIP_PRERENDER enabled)\"; else node scripts/prerender.js; fi"
   },
   "dependencies": {
